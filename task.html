@@ -8,6 +8,54 @@
     <script src="task.js"></script>
 </head>
 <body>
+    <h1>Add Task</h1>
     
+    <div>
+        <div id="add-task-first">
+            <div>
+                <h3>Title*</h3>
+                <input type="text">
+            </div>
+            <div>
+                <h3>Description</h3>
+                <textarea name="description" id="description"></textarea>
+            </div>
+            <div>
+                <h3>Assigned to</h3>
+                <input type="text">
+            </div>
+        </div>
+
+        <div id="add-task-second">
+            <div>
+                <h3>Due date*</h3>
+                <input type="date">
+            </div>
+            <div>
+                <h3>Prio</h3>
+                <div>
+                    <div>Urgent</div>
+                    <div>Medium</div>
+                    <div>Low</div>
+                </div>
+            </div>
+            <div>
+                <h3>Category*</h3>
+                <input type="text">
+            </div>
+            <div>
+                <h3>Subtasks</h3>
+                <input type="text">
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <span>* This field is required</span>
+        <div>
+            <button>Clear x</button>
+            <button>Create Task</button>
+        </div>
+    </div>
 </body>
 </html>
