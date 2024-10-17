@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    font-family: Inter;
+    font-size: 16px;
+}
+
+.form-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F6F7F8;
+}
+
+form {
+    padding: 40px;
+
+    max-width: 900px;
+}
+
+.add-task-form {
+    display: flex;
+    width: 100%;
+}
+
+#add-task-first {
+    flex-grow: 1;
+}
+
+#add-task-second {
+    flex-grow: 1;
+}
+
+.prio-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.prio-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.double-arrow-up {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    color: #FF3D00;
+    font-size: 14px;
+}
+
+.double-arrow-up i {
+    line-height: 0.3; /* Verringert den vertikalen Abstand zwischen den Icons */
+    transform: scaleY(0.8); /* Flacht die Pfeile ab */
+}
+
+.double-arrow-down {
+    display: flex;
+    flex-direction: column;
+    color: #7AE229;
+    font-size: 14px;
+}
+
+.double-arrow-down i {
+    line-height: 0.3; /* Verringert den vertikalen Abstand zwischen den Icons */
+    transform: scaleY(0.8); /* Flacht die Pfeile ab */
+}
+
+.double-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px; /* Abstand zwischen den Linien */
+    color: #FFA800;
+    font-size: 14px;
+}
+
+.double-line span {
+    width: 14px; /* Breite der Linien */
+    height: 2px; /* Höhe der Linien */
+    background-color: currentColor; /* Verwendet die aktuelle Textfarbe */
+}
+
+.add-task-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit-button {
+    background-color: #2A3647;
+}
