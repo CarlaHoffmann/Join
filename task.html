@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <div class="form-box-outer">
     <div class="form-box">
         <form onsubmit="addTask()" id="add-task">
+            <div class="upper-form">
             <h1>Add Task</h1>
 
             <div class="add-task-form">
@@ -36,7 +38,7 @@
                     </div>
                 </div>
 
-                <div class="add-task-divider"></div>
+                <div class="vertical-divider"></div>
 
                 <div id="add-task-second">
                     <div class="labled-box">
@@ -86,15 +88,17 @@
                     </div>
                 </div>
             </div>
+            </div>
 
             <div class="add-task-bottom">
                 <span>* This field is required</span>
-                <div>
-                    <button>Clear x</button>
-                    <button>Create Task</button>
+                <div class="bottom-buttons">
+                    <button class="clear-button">Clear <img src="./img/task/iconoir_cancel.svg" alt=""></button>
+                    <button class="submit-button">Create Task <img src="./img/task/check.svg" alt=""></button>
                 </div>
             </div>
         </form>
+    </div>
     </div>
 </body>
 </html>
