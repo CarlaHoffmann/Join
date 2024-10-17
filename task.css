@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: Inter;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .form-box {
@@ -13,22 +13,101 @@ body {
 
 form {
     padding: 40px;
+    /* max-width: 900px; */
+    flex-grow: 1;
+}
 
-    max-width: 900px;
+h3 {
+    margin: 0;
+    margin-top: 16px;
+    margin-bottom: 8px;
 }
 
 .add-task-form {
     display: flex;
     width: 100%;
+    gap: 8px;
 }
 
 #add-task-first {
     flex-grow: 1;
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+#add-task-divider {
+    width: 0;
+    height: 424px;
+    border: 1px;
+    Rotation: -0°;
 }
 
 #add-task-second {
     flex-grow: 1;
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
+
+.title {
+    padding: 12px 21px;
+}
+
+.description {
+    height: 120px;
+    padding: 18px 16px;
+}
+
+.form-field {
+    width: 440px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+}
+
+.pad-12-16 {
+    padding: 12px 16px;
+}
+
+label {
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.labled-box {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+}
+
+#contact-selection {
+    padding: 12px 16px 12px;
+}
+
+#contact-selection {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#contact-selection:hover {
+    cursor: pointer;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('./img/task/arrow_drop_downaa.svg');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 24px;
+    /* padding-right: 30px; */
+  }
 
 .prio-buttons {
     display: flex;
@@ -39,14 +118,32 @@ form {
     display: flex;
     align-items: center;
     gap: 8px;
+    padding: 10px 16px 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #FFFFFF;
+}
+
+/* .prio-button:hover {
+    animation: dissolve;
+    curve: ease in and out
+    duration: 100ms
+
+    onclick:
+    change to: Urgent
+    animate: instant
+} */
+
+.prio-button p {
+    margin: 0;
+    font-size: 20px;
 }
 
 .double-arrow-up {
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     color: #FF3D00;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .double-arrow-up i {
@@ -58,12 +155,12 @@ form {
     display: flex;
     flex-direction: column;
     color: #7AE229;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .double-arrow-down i {
     line-height: 0.3; /* Verringert den vertikalen Abstand zwischen den Icons */
-    transform: scaleY(0.8); /* Flacht die Pfeile ab */
+    transform: scaleY(0.7); /* Flacht die Pfeile ab */
 }
 
 .double-line {
@@ -72,12 +169,12 @@ form {
     align-items: center;
     gap: 2px; /* Abstand zwischen den Linien */
     color: #FFA800;
-    font-size: 14px;
+    font-size: 20px;
 }
 
 .double-line span {
-    width: 14px; /* Breite der Linien */
-    height: 2px; /* Höhe der Linien */
+    width: 18px; /* Breite der Linien */
+    height: 2.5px; /* Höhe der Linien */
     background-color: currentColor; /* Verwendet die aktuelle Textfarbe */
 }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,60 +15,74 @@
 
             <div class="add-task-form">
                 <div id="add-task-first">
-                    <div>
-                        <h3>Title*</h3>
-                        <input type="text">
+                    <div class="labled-box">
+                        <label>Title*</label>
+                        <input type="text" class="form-field title" placeholder="Enter a title">
                     </div>
-                    <div>
-                        <h3>Description</h3>
-                        <textarea name="description" id="description"></textarea>
+                    <div class="labled-box">
+                        <label>Description</label>
+                        <textarea name="description" id="description" class="form-field description" placeholder="Enter a description"></textarea>
                     </div>
-                    <div>
-                        <h3>Assigned to</h3>
-                        <input type="text">
+                    <div class="labled-box">
+                        <label>Assigned to</label>
+                        <select name="contact-selection" id="contact-selection" class="form-field pad-12-16" required><img src="./img/task/arrow_drop_downaa.svg" alt="">
+                            <option value="">Select contacts to assign</option>
+                            <option value="Sofia Müller">Sofia Müller (You)</option>
+                            <option value="Anton Mayer">Anton Mayer</option>
+                            <option value="Anja Schulz">Anja Schulz</option>
+                            <option value="Benedikt Ziegler">Benedikt Ziegler</option>
+                            <option value="David Eisenberg">David Eisenberg</option>
+                        </select>
                     </div>
                 </div>
 
+                <div class="add-task-divider"></div>
+
                 <div id="add-task-second">
-                    <div>
-                        <h3>Due date*</h3>
-                        <input type="date">
+                    <div class="labled-box">
+                        <label>Due date*</label>
+                        <input type="date" class="form-field pad-12-16">
                     </div>
 
-                    <div>
-                        <h3>Prio</h3>
+                    <div class="labled-box">
+                        <label>Prio</label>
                         <div class="prio-buttons">
-                            <div class="prio-button">
+                            <button class="prio-button">
                                 <p>Urgent</p>
                                 <div class="double-arrow-up">
                                     <i class="fas fa-chevron-up"></i>
                                     <i class="fas fa-chevron-up"></i>
                                 </div>
-                            </div>
-                            <div class="prio-button">
+                            </button>
+                            <button class="prio-button">
                                 <p>Medium</p>
                                 <div class="double-line">
                                     <span></span>
                                     <span></span>
                                 </div>
-                            </div>
-                            <div class="prio-button">
+                            </button>
+                            <button class="prio-button">
                                 <p>Low</p>
                                 <div class="double-arrow-down">
                                     <i class="fas fa-chevron-down"></i>
                                     <i class="fas fa-chevron-down"></i>
                                 </div>
-                            </div>
+                            </button>
                         </div>
                     </div>
 
-                    <div>
-                        <h3>Category*</h3>
-                        <input type="text">
+                    <div class="labled-box">
+                        <label>Category*</label>
+                        <select name="category-selection" id="category-selection" class="form-field pad-12-16" required><img src="./img/task/arrow_drop_downaa.svg" alt="">
+                            <option value="">Select task category <img src="./img/task/arrow_drop_downaa.svg" alt=""></option>
+                            <option value="technical">Technical Task</option>
+                            <option value="user">User Story</option>
+                        </select>
                     </div>
-                    <div>
-                        <h3>Subtasks</h3>
-                        <input type="text">
+
+                    <div class="labled-box">
+                        <label>Subtasks</label>
+                        <input type="text" class="form-field pad-12-16">
                     </div>
                 </div>
             </div>
