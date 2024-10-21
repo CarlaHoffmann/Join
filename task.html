@@ -18,8 +18,8 @@
                 <div class="add-task-form">
                     <div id="add-task-first">
                         <div class="labled-box">
-                            <label>Title*</label>
-                            <input type="text" class="form-field title" placeholder="Enter a title">
+                            <label>Title<span class="red-asterisk">*</span></label>
+                            <input type="text" class="form-field title" placeholder="Enter a title" required>
                         </div>
                         <div class="labled-box">
                             <label>Description</label>
@@ -27,9 +27,9 @@
                         </div>
 
                         <div class="labled-box">
-                            <label for="contact-selection">Assigned to</label>
-                            <div class="custom contact-selection">
-                                <div class="select-selected form-field pad-12-16"><p>Select contacts to assign</p><img src="./img/task/arrow_drop_downaa.svg" alt=""></div>
+                            <label>Assigned to</label>
+                            <div class="contact-selection">
+                                <div class="select-selected form-field pad-12-16"><p>Select contacts to assign</p><img class="symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt=""></div>
                                 <div class="select-items select-hide">
                                     <div class="selection-name"><label for="sofia">Sofia Müller (You)</label><input type="checkbox" id="sofia" value="Sofia Müller"></div>
                                     <div class="selection-name"><label for="anton">Anton Mayer</label><input type="checkbox" id="anton" value="Anton Mayer"></div>
@@ -46,9 +46,21 @@
 
                     <div id="add-task-second">
                         <div class="labled-box">
-                            <label>Due date*</label>
-                            <input type="date" class="form-field pad-12-16">
+                            <label>Due date<span class="red-asterisk">*</span></label>
+                            <div class="date-input-wrapper">
+                                <input type="text" id="datepicker" class="form-field pad-12-16 date-input" placeholder="dd/mm/yyyy" maxlength="10" required>
+                                <span class="calendar-icon">
+                                    <img src="./img/task/event.svg" alt="Calendar" class="calendar-icon">
+                                </span>
+                            </div>
+                            <div id="warning-dialog" class="dialog">
+                                <div class="dialog-content">
+                                    <p id="dialog-message"></p>
+                                    <button id="dialog-close">OK</button>
+                                </div>
+                            </div>                    
                         </div>
+                        
 
                         <div class="labled-box">
                             <label>Prio</label>
@@ -75,29 +87,35 @@
                         </div>
 
                         <div class="labled-box">
-                            <label>Category*</label>
-                            <div><img src="./img/task/arrow_drop_downaa.svg" alt=""></div>
-                            <select name="category-selection" id="category-selection" class="form-field pad-12-16" required>
-                                <option value="">Select task category </option>
-                                <option value="technical">Technical Task</option>
-                                <option value="user">User Story</option>
-                            </select>
+                            <label>Category<span class="red-asterisk">*</span></label>
+                            <div class="select-wrapper">
+                            <!-- <div><img src="./img/task/arrow_drop_downaa.svg" alt=""></div> -->
+                                <select name="category-selection" id="category-selection" class="form-field pad-12-16" required>
+                                    <option value="" disabled hidden>Select task category </option>
+                                    <option value="technical">Technical Task</option>
+                                    <option value="user">User Story</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="labled-box">
                             <label>Subtasks</label>
-                            <!-- <img src="./img/task/subtask.svg" alt="add subtask"> -->
-
-                            <input type="text" class="form-field pad-12-16" placeholder="Add new subtask" >
+                            <div class="subtask-input-wrapper">
+                                <input type="text" class="form-field pad-12-16" placeholder="Add new subtask" >
+                                <img class="add-subtask symbol-hover" src="./img/task/subtask.svg" alt="add subtask">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="add-task-bottom">
-                <span>* This field is required</span>
+                <span><span class="red-asterisk">*</span>This field is required</span>
                 <div class="bottom-buttons">
-                    <button class="clear-button">Clear <img src="./img/task/iconoir_cancel.svg" alt=""></button>
+                    <button class="clear-button">Clear 
+                        <img class="icon-normal" src="./img/task/iconoir_cancel.svg" alt="">
+                        <img class="icon-hover" src="./img/task/iconoir_cancel_hover.svg" alt="">
+                    </button>
                     <button class="submit-button">Create Task <img src="./img/task/check.svg" alt=""></button>
                 </div>
             </div>
