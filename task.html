@@ -20,13 +20,13 @@
                         <div class="labled-box">
                             <label>
                                 <div>Title<span class="red-asterisk">*</span></div>
-                                <input type="text" class="form-field title" placeholder="Enter a title" required>
+                                <input type="text" class="form-field margin-bottom title" placeholder="Enter a title" minlength="3" required>
                             </label>
                         </div>
                         <div class="labled-box">
                             <label>
                                 Description
-                                <textarea name="description" id="description" class="form-field description" placeholder="Enter a description"></textarea>
+                                <textarea name="description" id="description" class="form-field margin-bottom description" placeholder="Enter a description"></textarea>
                             </label>
                         </div>
 
@@ -55,7 +55,7 @@
                             <label>
                                 <div>Due date<span class="red-asterisk">*</span></div>
                                 <div class="date-input-wrapper">
-                                    <input type="text" id="datepicker" class="form-field pad-12-16 date-input" placeholder="dd/mm/yyyy" maxlength="10" required>
+                                    <input type="text" id="datepicker" class="form-field margin-bottom pad-12-16 date-input" placeholder="dd/mm/yyyy" maxlength="10" required>
                                     <span class="calendar-icon">
                                         <img src="./img/task/event.svg" alt="Calendar" class="calendar-icon">
                                     </span>
@@ -71,32 +71,32 @@
                         
 
                         <div class="labled-box">
-                            <label>
+                            <div class="button-box">
                                 Prio
                                 <div class="prio-buttons">
-                                    <button class="prio-button">
+                                    <button onclick="priority(1)" class="prio-button hover-button" id="prio-1">
                                         <p>Urgent</p>
                                         <div class="double-arrow-up">
                                             <img src="./img/task/prio_high.svg" alt="">
                                         </div>
                                     </button>
-                                    <button class="prio-button">
+                                    <button onclick="priority(2)" class="prio-button hover-button" id="prio-2">
                                         <p>Medium</p>
                                         <div class="double-line">
                                             <img src="./img/task/prio_med.svg" alt="">
                                         </div>
                                     </button>
-                                    <button class="prio-button">
+                                    <button onclick="priority(3)" class="prio-button hover-button" id="prio-3">
                                         <p>Low</p>
                                         <div class="double-arrow-down">
                                             <img src="./img/task/prio_low.svg" alt="">
                                         </div>
                                     </button>
                                 </div>
-                            </label>
+                            </div>
                         </div>
 
-                        <div class="labled-box">
+                        <!-- <div class="labled-box">
                             <label>
                                 <div>Category<span class="red-asterisk">*</span></div>
                                 <div class="select-wrapper">
@@ -105,6 +105,16 @@
                                         <option value="technical">Technical Task</option>
                                         <option value="user">User Story</option>
                                     </select>
+                                    <img class="dropdown-icon symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
+                                </div>
+                            </label>
+                        </div> -->
+
+                        <div class="labled-box">
+                            <label>
+                                <div>Category<span class="red-asterisk">*</span></div>
+                                <div class="select-wrapper">
+                                    <div id="category-selection" class="form-field pad-12-16">Select task category</div>
                                     <img class="dropdown-icon symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
                                 </div>
                             </label>
@@ -124,13 +134,13 @@
             </div>
 
             <div class="add-task-bottom">
-                <span><span class="red-asterisk">*</span>This field is required</span>
+                <span class="font-16"><span class="red-asterisk">*</span>This field is required</span>
                 <div class="bottom-buttons">
-                    <button class="clear-button">Clear 
+                    <button class="clear-button hover-button">Clear 
                         <img class="icon-normal" src="./img/task/iconoir_cancel.svg" alt="">
                         <img class="icon-hover" src="./img/task/iconoir_cancel_hover.svg" alt="">
                     </button>
-                    <button class="submit-button">Create Task <img src="./img/task/check.svg" alt=""></button>
+                    <button class="submit-button hover-button">Create Task <img src="./img/task/check.svg" alt=""></button>
                 </div>
             </div>
         </form>

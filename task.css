@@ -61,38 +61,11 @@ form {
     gap: 24px;
 }
 
-.red-asterisk {
-    content: "*";
-    color: red;
-}
-
-.title {
-    padding: 12px 21px;
-}
- .title::placeholder {
-    color: #D1D1D1;
- }
-
-
-/* Description */
-.description {
-    box-sizing: border-box;
-    height: 120px;
-    padding: 18px 16px;
-    /* width: 100%;  */
-    resize: none;
-}
-
-.description::placeholder {
-    color: #D1D1D1;
-    font-family: "Inter", sans-serif;
-}
-
 .form-field {
     font-size: 20px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
-    margin-bottom: 16px;
+    background-color: #FFFFFF;
 }
 
 .form-field:focus {
@@ -103,6 +76,10 @@ form {
 .form-field:hover {
     cursor: pointer;
     border-color: #A8A8A8;
+}
+
+.margin-bottom {
+    margin-bottom: 16px;
 }
 
 .pad-12-16 {
@@ -129,38 +106,49 @@ label {
     border-radius: 12px;
 }
 
+.red-asterisk {
+    content: "*";
+    color: red;
+}
+
+.font-16 {
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 61px;
+}
+
+/* Title */
+.title {
+    padding: 12px 21px;
+}
+ .title::placeholder {
+    color: #D1D1D1;
+ }
+
+
+/* Description */
+.description {
+    box-sizing: border-box;
+    height: 120px;
+    padding: 18px 16px;
+    resize: vertical;
+    font-family: "Inter", sans-serif;
+}
+
+.description::placeholder {
+    color: #D1D1D1;
+}
+
+
 
 /* Contact Selection*/
-
-/* #contact-selection {
-    padding: 12px 16px 12px;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-} */
-
-/* #contact-selection:hover {
-    cursor: pointer;
-} */
-
-/* select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url('./img/task/arrow_drop_downaa.svg');
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-} */
-
-
 .custom-select {
     position: relative;
 }
 
 .select-selected {
-    background-color: white;
-    border: 1px solid #D1D1D1;
-    border-radius: 10px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -314,6 +302,12 @@ label {
     width: 100%;
 }
 
+.button-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 button {
     display: flex;
     align-items: center;
@@ -324,13 +318,13 @@ button {
     font-size: 20px;
 }
 
-button:hover {
+.hover-button:hover {
     cursor: pointer;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .prio-button {
-    flex-grow: 1 1 0;
+    flex: 1 1 0;
     /* width: calc((100% - 32px) / 3); */
     width: 100%;
     gap: 8px;    
@@ -340,13 +334,8 @@ button:hover {
 }
 
 /* .prio-button:hover {
-    animation: dissolve;
-    curve: ease in and out
-    duration: 100ms
-
-    onclick:
-    change to: Urgent
-    animate: instant
+    cursor: pointer;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 } */
 
 .prio-button p {
@@ -369,6 +358,33 @@ button:hover {
     align-items: center;
 }
 
+.active-button {
+    font-size: 21px;
+    font-weight: 700;
+    color: #FFFFFF
+}
+
+.urgent {
+    background-color: #FF3D00;
+    font-size: 21px;
+    font-weight: 700;
+    color: #FFFFFF
+}
+
+.med {
+    background-color: #FFA800;
+    font-size: 21px;
+    font-weight: 700;
+    color: #FFFFFF
+}
+
+.low {
+    background-color: #7AE229;
+    font-size: 21px;
+    font-weight: 700;
+    color: #FFFFFF
+}
+
 
 /* Category*/
 .select-wrapper {
@@ -379,17 +395,20 @@ button:hover {
 .dropdown-icon {
     position: absolute;
     right: 16px;
-    top: 20%;
-    pointer-events: none; 
+    top: 25%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+
+    /* pointer-events: none;  */
     /* Verhindert, dass das Bild die Interaktion mit dem Select-Feld blockiert */
 }
 
 #category-selection {
-    width: 100%;
+    /* width: 100%; */
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    /* background-color: white; Verhindert, dass der Browser-Standard-Pfeil durchscheint */
 }
 
 #category-selection:invalid {
@@ -399,7 +418,6 @@ button:hover {
 #category-selection:focus {
     outline: none;
 }
-
 
 
 
