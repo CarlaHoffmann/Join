@@ -9,34 +9,105 @@
             margin:0;
             padding:0;
         }
+        html, body{
+            height:100%;
+        }
+        /*sidebar*/
         nav{
             background:#2A3647;
-            color:white;
+            color:#CDCDCD;
             display:flex;
             justify-content:space-around;
             align-items:center;
             flex-direction:column;
-            list-style:none;
             height:100vh;
-            width:15vw;
+            width:232px;/*16.11vw;*/
+            font-size:16px;
+        }
+        nav div{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items:center;
+            gap:60px;
         }
         nav ul{
             list-style:none;
         }
+        nav ul{
+            display:flex;
+            justify-content:center;
+            align-items:flex-start;
+            gap:20px;
+            flex-direction:column;
+        }
+        nav ul li a{
+            display:flex;
+            justify-content: flex-start;
+            align-items: center;
+            color:#CDCDCD;
+            text-decoration:none;
+            gap:10px;
+            font-size:16px;
+        }
+        nav ul li a:hover{
+            cursor:pointer;
+        }
+        /*mobile navigation*/
+
+        #mobileNav {
+            display: flex;
+            flex-direction: row;
+            height: 100px;
+            width: 100vw;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            bottom: 0;
+            background-color: #2A3647;
+        }
+        #mobileNav ul {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height:50px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /*media queries*/
+        @media (max-width: 600px) {
+            #mobileNav{
+                display:flex;
+            }
+            #sideBar{
+                display:none;
+            }
+        }
     </style>
 </head>
 <body>
-    <nav>
-        <img src="img/nav/logo.svg">
-        <ul>
-            <li><a><img src="img/nav/summary.svg">Summary</a></li>
-            <li><a><img src="img/nav/addTasks.svg">Add Task</a></li>
-            <li><a><img src="img/nav/board.svg">Board</a></li>
-            <li><a><img src="img/nav/contacts.svg">Contacts</a></li>
-        </ul>
+    <nav id="sideBar">
+        <div id="topPart">
+            <a href="summary.html"><img src="img/nav/logo.svg"></a>
+            <ul>
+                <li><a href="summary.html"><img src="img/nav/summary.svg">Summary</a></li>
+                <li><a href="addTasks.html"><img src="img/nav/addTasks.svg">Add Tasks</a></li>
+                <li><a href="board.html"><img src="img/nav/board.svg">Board</a></li>
+                <li><a href="contacts.html"><img src="img/nav/contacts.svg">Contacts</a></li>
+            </ul>
+        </div>
         <ul>
             <li><a href="privacyPolicy.html">Privacy Policy</a></li>
             <li><a href="legalNotice.html">Legal notice</a></li>
+        </ul>
+    </nav>
+    <nav id="mobileNav">
+        <ul>
+            <li><a><img src="img/nav/summaryMobile.svg">Summary</a></li>
+            <li><a><img src="img/nav/addTasksMobile.svg">Add Task</a></li>
+            <li><a><img src="img/nav/boardMobile.svg">Board</a></li>
+            <li><a><img src="img/nav/contactsMobile.svg">Contacts</a></li>
         </ul>
     </nav>
 </body>
