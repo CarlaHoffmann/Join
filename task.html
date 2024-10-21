@@ -18,26 +18,32 @@
                 <div class="add-task-form">
                     <div id="add-task-first">
                         <div class="labled-box">
-                            <label>Title<span class="red-asterisk">*</span></label>
-                            <input type="text" class="form-field title" placeholder="Enter a title" required>
+                            <label>
+                                <div>Title<span class="red-asterisk">*</span></div>
+                                <input type="text" class="form-field title" placeholder="Enter a title" required>
+                            </label>
                         </div>
                         <div class="labled-box">
-                            <label>Description</label>
-                            <textarea name="description" id="description" class="form-field description" placeholder="Enter a description"></textarea>
+                            <label>
+                                Description
+                                <textarea name="description" id="description" class="form-field description" placeholder="Enter a description"></textarea>
+                            </label>
                         </div>
 
                         <div class="labled-box">
-                            <label>Assigned to</label>
-                            <div class="contact-selection">
-                                <div class="select-selected form-field pad-12-16"><p>Select contacts to assign</p><img class="symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt=""></div>
-                                <div class="select-items select-hide">
-                                    <div class="selection-name"><label for="sofia">Sofia Müller (You)</label><input type="checkbox" id="sofia" value="Sofia Müller"></div>
-                                    <div class="selection-name"><label for="anton">Anton Mayer</label><input type="checkbox" id="anton" value="Anton Mayer"></div>
-                                    <div class="selection-name"><label for="anja">Anja Schulz</label><input type="checkbox" id="anja" value="Anja Schulz"></div>
-                                    <div class="selection-name"><label for="benedikt">Benedikt Ziegler</label><input type="checkbox" id="benedikt" value="Benedikt Ziegler"></div>
-                                    <div class="selection-name"><label for="david">David Eisenberg</label><input type="checkbox" id="david" value="David Eisenberg"></div>
+                            <label>
+                                Assigned to
+                                <div class="contact-selection">
+                                    <div class="select-selected form-field pad-12-16"><p>Select contacts to assign</p><img class="symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt=""></div>
+                                    <div class="select-items select-hide">
+                                        <div class="selection-name"><label for="sofia">Sofia Müller (You)</label><input type="checkbox" id="sofia" value="Sofia Müller"></div>
+                                        <div class="selection-name"><label for="anton">Anton Mayer</label><input type="checkbox" id="anton" value="Anton Mayer"></div>
+                                        <div class="selection-name"><label for="anja">Anja Schulz</label><input type="checkbox" id="anja" value="Anja Schulz"></div>
+                                        <div class="selection-name"><label for="benedikt">Benedikt Ziegler</label><input type="checkbox" id="benedikt" value="Benedikt Ziegler"></div>
+                                        <div class="selection-name"><label for="david">David Eisenberg</label><input type="checkbox" id="david" value="David Eisenberg"></div>
+                                    </div>
                                 </div>
-                            </div>
+                            </label>
                             <div class="selected-contacts"></div>
                         </div>
                     </div>
@@ -46,64 +52,72 @@
 
                     <div id="add-task-second">
                         <div class="labled-box">
-                            <label>Due date<span class="red-asterisk">*</span></label>
-                            <div class="date-input-wrapper">
-                                <input type="text" id="datepicker" class="form-field pad-12-16 date-input" placeholder="dd/mm/yyyy" maxlength="10" required>
-                                <span class="calendar-icon">
-                                    <img src="./img/task/event.svg" alt="Calendar" class="calendar-icon">
-                                </span>
-                            </div>
-                            <div id="warning-dialog" class="dialog">
-                                <div class="dialog-content">
-                                    <p id="dialog-message"></p>
-                                    <button id="dialog-close">OK</button>
+                            <label>
+                                <div>Due date<span class="red-asterisk">*</span></div>
+                                <div class="date-input-wrapper">
+                                    <input type="text" id="datepicker" class="form-field pad-12-16 date-input" placeholder="dd/mm/yyyy" maxlength="10" required>
+                                    <span class="calendar-icon">
+                                        <img src="./img/task/event.svg" alt="Calendar" class="calendar-icon">
+                                    </span>
                                 </div>
-                            </div>                    
+                                <div id="warning-dialog" class="dialog">
+                                    <div class="dialog-content">
+                                        <p id="dialog-message"></p>
+                                        <button id="dialog-close">OK</button>
+                                    </div>
+                                </div>
+                            </label>                    
                         </div>
                         
 
                         <div class="labled-box">
-                            <label>Prio</label>
-                            <div class="prio-buttons">
-                                <button class="prio-button">
-                                    <p>Urgent</p>
-                                    <div class="double-arrow-up">
-                                        <img src="./img/task/prio_high.svg" alt="">
-                                    </div>
-                                </button>
-                                <button class="prio-button">
-                                    <p>Medium</p>
-                                    <div class="double-line">
-                                        <img src="./img/task/prio_med.svg" alt="">
-                                    </div>
-                                </button>
-                                <button class="prio-button">
-                                    <p>Low</p>
-                                    <div class="double-arrow-down">
-                                        <img src="./img/task/prio_low.svg" alt="">
-                                    </div>
-                                </button>
-                            </div>
+                            <label>
+                                Prio
+                                <div class="prio-buttons">
+                                    <button class="prio-button">
+                                        <p>Urgent</p>
+                                        <div class="double-arrow-up">
+                                            <img src="./img/task/prio_high.svg" alt="">
+                                        </div>
+                                    </button>
+                                    <button class="prio-button">
+                                        <p>Medium</p>
+                                        <div class="double-line">
+                                            <img src="./img/task/prio_med.svg" alt="">
+                                        </div>
+                                    </button>
+                                    <button class="prio-button">
+                                        <p>Low</p>
+                                        <div class="double-arrow-down">
+                                            <img src="./img/task/prio_low.svg" alt="">
+                                        </div>
+                                    </button>
+                                </div>
+                            </label>
                         </div>
 
                         <div class="labled-box">
-                            <label>Category<span class="red-asterisk">*</span></label>
-                            <div class="select-wrapper">
-                            <!-- <div><img src="./img/task/arrow_drop_downaa.svg" alt=""></div> -->
-                                <select name="category-selection" id="category-selection" class="form-field pad-12-16" required>
-                                    <option value="" disabled hidden>Select task category </option>
-                                    <option value="technical">Technical Task</option>
-                                    <option value="user">User Story</option>
-                                </select>
-                            </div>
+                            <label>
+                                <div>Category<span class="red-asterisk">*</span></div>
+                                <div class="select-wrapper">
+                                    <select name="category-selection" id="category-selection" class="form-field pad-12-16" required>
+                                        <option value="" disabled hidden>Select task category </option>
+                                        <option value="technical">Technical Task</option>
+                                        <option value="user">User Story</option>
+                                    </select>
+                                    <img class="dropdown-icon symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
+                                </div>
+                            </label>
                         </div>
 
                         <div class="labled-box">
-                            <label>Subtasks</label>
-                            <div class="subtask-input-wrapper">
-                                <input type="text" class="form-field pad-12-16" placeholder="Add new subtask" >
-                                <img class="add-subtask symbol-hover" src="./img/task/subtask.svg" alt="add subtask">
-                            </div>
+                            <label>
+                                Subtasks
+                                <div class="subtask-input-wrapper">
+                                    <input type="text" class="form-field pad-12-16" placeholder="Add new subtask" >
+                                    <img class="add-subtask symbol-hover" src="./img/task/subtask.svg" alt="add subtask">
+                                </div>
+                            </label>
                         </div>
                     </div>
                 </div>
