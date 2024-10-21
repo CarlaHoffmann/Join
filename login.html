@@ -5,82 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <title>Log in</title>
 </head>
 
 <body>
-
-    <img src="./img/login/Logo for Favicon construction.svg">
-
-    <!-- LOGIN BEREICH -->
-    <h1>Log in</h1>
-    <div>
-        <div>
-            <p>Not a Join User?</p>
-            <button>Sign up</button>
-        </div>
-
-        <div>
-            <input type="email" placeholder="Email" required>
-            <img src="./img/login/mail.png">
-        </div>
-
-        <div>
-            <input type="password" placeholder="Password" required>
-            <img src="./img/login/lock.png">
-        </div>
+    <!-- USER SIGN UP SECTION -->
+    <div class="signup-container">
+        <p>Not a Join User?</p>
+        <a href="/signUp.html" class="signup-button">Sign up</a>
     </div>
 
-    <div>
-        <img src="./img/login/Property 1=Default.png">
-        <p>Remember Me</p>
+    <!-- LOGIN SECTION -->
+    <div class="login-container">
+        <form>
+            <h2>Log in</h2>
+            <div class="login-input-group">
+                <div class="input-wrapper">
+                    <input class="input-email" type="email" placeholder="Email" required>
+                    <img src="/img/login/mail.png" alt="Email Icon">
+                </div>
+                <div class="input-wrapper">
+                    <input class="input-password" type="password" placeholder="Password" required>
+                    <img src="/img/login/lock.png" alt="Password Icon">
+                </div>
+            </div>
+
+            <div class="remember-me">
+                <img src="/img/login/Property 1=Default.png" alt="Checkbox">
+                <p>Remember Me</p>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-login" type="submit">Log in</button>
+                <button class="btn-guest">Guest Log in</button>
+            </div>
+        </form>
     </div>
-
-    <div>
-        <button>Log in</button>
-        <button>Guest Log in</button>
-    </div>
-    </div>
-
-
-    <!-- SIGN UP BEREICH -->
-    <h1>Sign Up</h1>
-
-    <div>
-        <div>
-            <input type="name" placeholder="Name" required>
-            <img src="/img/login/person.png">
-        </div>
-
-        <div>
-            <input type="email" placeholder="Email" required>
-            <img src="/img/login/mail.png">
-        </div>
-
-        <div>
-            <input type="password" placeholder="Password" required>
-            <img src="/img/login/lock.png">
-        </div>
-
-        <div>
-            <input type="password" placeholder="Confirm Password" required>
-            <img src="/img/login/lock.png">
-        </div>
-    </div>
-
-    <div>
-        <img src="/img/login/Property 1=Default.png">
-        <p>I accept the</p>
-        <a href="/privacyPolicy.html">Privacy policy</a>
-    </div>
-
-    <button>Sign Up</button>
-    </div>
-
 
     <footer>
-        <a href="/privacyPolicy.html">Privacy policy</a>
-        <a href="/legalNotice.html">Privacy policy</a>
+        <a href="privacyPolicy.html">Privacy Policy</a>
+        <a href="legalNotice.html">Legal notice</a>
     </footer>
 </body>
 
