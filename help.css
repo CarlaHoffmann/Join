@@ -1,0 +1,55 @@
+/* Global styles 
+    
+-----------------------
+IN ARBEIT 
+-----------------------
+
+*/
+body {
+    font-family: "Inter", sans-serif;
+    margin: 0px;
+    background-color: #f6f7f8;
+}
+
+a {
+    color: #29ABE2;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.how-to-use h2 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.how-to-use p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Steps styling */
+.step {
+    margin-top: 20px;
+}
+
+.step h3 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.step p {
+    margin-top: 10px;
+}
+
+.reminder {
+    margin-top: 30px;
+    font-style: italic;
+}
+
+.footer {
+    margin-top: 20px;
+}

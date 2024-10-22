@@ -1,23 +1,30 @@
+/* Global Styles */
 body {
     background-color: #F0F0F0;
     font-family: "Inter", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
     margin: 0;
 }
 
-.login-container {
-    display: flex;
-    align-items: center;
-    height: 100vh;
+/* JOIN Logo Styling */
+.logo {
+    position: absolute;
+    top: 60px;
+    left: 60px;
 }
 
-/* Signup Button */
+.logo img {
+    width: 80px;
+}
+
+/* Sign-Up Section */
 .signup-container {
     position: absolute;
-    top: 80px;
-    right: 77px;
+    top: 60px;
+    right: 60px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -30,6 +37,9 @@ body {
 }
 
 .signup-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
     height: 49px;
     width: 91px;
@@ -43,10 +53,16 @@ body {
 .signup-button:hover {
     cursor: pointer;
     background-color: #29ABE2;
-    box-shadow: 0 4px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 /* Login Section */
+.login-container {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+
 .login-container form {
     border-radius: 30px;
     background-color: white;
@@ -57,7 +73,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 32px;
-    box-shadow: 0px 0px 14px 3px #0000000A;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 h2 {
@@ -107,20 +123,24 @@ h2::after {
     padding: 5px;
 }
 
+.input-wrapper input::placeholder {
+    color: #D1D1D1;
+    opacity: 1; 
+}
+
 .input-wrapper img {
     margin-left: 10px;
     width: 20px;
     height: 20px;
 }
 
+
+
+
 .remember-me {
     display: flex;
     align-items: center;
     gap: 10px;
-}
-
-.remember-me p {
-    color: #A8A8A8;
 }
 
 /* Button Section */
@@ -144,7 +164,7 @@ h2::after {
 .btn-login:hover {
     cursor: pointer;
     background-color: #29ABE2;
-    box-shadow: 0 4px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .btn-guest {
@@ -162,15 +182,15 @@ h2::after {
     cursor: pointer;
     color: #29ABE2;
     border: 2px solid #29ABE2;
-    box-shadow: 0 4px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 /* Footer */
 footer {
     position: absolute;
-    bottom: 0;
     display: flex;
-    gap: 30px;
+    bottom: 100px;
+    gap: 60px;
 }
 
 footer a {
@@ -180,7 +200,8 @@ footer a {
 }
 
 footer a:hover {
-    cursor: pointer;
     color: #29ABE2;
     font-weight: 700;
+    cursor: pointer;
 }
+
