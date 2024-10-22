@@ -3,7 +3,7 @@ const currentUrl = window.location.href;
 const url = "https://example.com/path/to/resource";
 const lastSlashIndex = url.lastIndexOf("/");
 const lastPart = url.substring(lastSlashIndex + 1);
-const sideBarLinks = document.querySelectorAll('.sideBarLinks');
+const sideBarLinks = document.querySelectorAll('#sideBarNavigation li a');
 
 function markActiveMenuPoint(){
     sideBarLinks.forEach(link => {

@@ -16,6 +16,8 @@
         #wrapper{
             display:flex;
             justify-content: flex-end;
+            display: flex;
+            justify-content: flex-end;
         }
         header{
             height:50px;
@@ -52,6 +54,9 @@
             height:100vh;
             width:232px;/*16.11vw;*/
             font-size:16px;
+            position:absolute;
+            top:0;
+            left:0;
         }
         nav div{
             display:flex;
@@ -131,7 +136,7 @@
     <nav id="sideBar">
         <div id="topPart">
             <a href="summary.html"><img src="img/nav/logo.svg"></a>
-            <ul>
+            <ul id="sideBarNavigation">
                 <li><a href="summary.html"><img src="img/nav/summary.svg">Summary</a></li>
                 <li><a href="addTasks.html"><img src="img/nav/addTasks.svg">Add Tasks</a></li>
                 <li><a href="board.html"><img src="img/nav/board.svg">Board</a></li>
