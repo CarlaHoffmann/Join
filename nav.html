@@ -12,7 +12,36 @@
         html, body{
             height:100%;
         }
+        /*header*/
+        #wrapper{
+            display:flex;
+            justify-content: flex-end;
+        }
+        header{
+            height:50px;
+            display:flex;
+            justify-content: space-around;
+            align-items: center;
+            width:calc(100% - 232px);
+            background:blue;
+        }
+        #headerControls{
+            display:flex;
+            align-items: center;
+            gap:15px;
+        }
+        #firstLetter{
+            border-radius:100%;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            padding:5px;
+            border:1px solid black;
+        }
         /*sidebar*/
+        .activeMenuPoint{
+            color:red;
+        }
         nav{
             background:#2A3647;
             color:#CDCDCD;
@@ -56,7 +85,7 @@
         /*mobile navigation*/
 
         #mobileNav {
-            display: flex;
+            display: none;
             flex-direction: row;
             height: 100px;
             width: 100vw;
@@ -83,10 +112,22 @@
             #sideBar{
                 display:none;
             }
+            header{
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
+    <div id="wrapper">
+        <header>
+            <span>Kanban Project Management Tool</span>
+            <div id="headerControls">
+                <span>?</span>
+                <span id="firstLetter">G</span>
+            </div>
+        </header>
+    </div>
     <nav id="sideBar">
         <div id="topPart">
             <a href="summary.html"><img src="img/nav/logo.svg"></a>
@@ -110,5 +151,6 @@
             <li><a><img src="img/nav/contactsMobile.svg">Contacts</a></li>
         </ul>
     </nav>
+    <script src="nav.js"></script>
 </body>
 </html>
