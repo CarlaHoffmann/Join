@@ -11,7 +11,7 @@
 <body>
     <div class="form-box-outer">
     <div class="form-box">
-        <form onsubmit="addTask()" id="add-task">
+        <form onsubmit="return validateForm()" id="add-task" novalidate>
             <div class="upper-form">
                 <h1>Add Task</h1>
 
@@ -20,9 +20,14 @@
                         <div class="labled-box">
                             <label>
                                 <div>Title<span class="red-asterisk">*</span></div>
-                                <input type="text" class="form-field margin-bottom title" placeholder="Enter a title" minlength="3" required>
+                                <div id="titel-wrapper">
+                                    <input type="text" id="title" class="form-field margin-bottom title" placeholder="Enter a title" minlength="3" required>
+                                    <div id="title-error" class="error-message d-none">This field is required.</div>
+                                    <div id="title-minlength-error" class="error-message d-none">Please enter at least 3 characters.</div>
+                                </div>
                             </label>
                         </div>
+
                         <div class="labled-box">
                             <label>
                                 Description
@@ -59,13 +64,9 @@
                                     <span class="calendar-icon">
                                         <img src="./img/task/event.svg" alt="Calendar" class="calendar-icon">
                                     </span>
+                                    <div id="due-date-error" class="error-message d-none">This field is required.</div>
                                 </div>
-                                <div id="warning-dialog" class="dialog">
-                                    <div class="dialog-content">
-                                        <p id="dialog-message"></p>
-                                        <button id="dialog-close">OK</button>
-                                    </div>
-                                </div>
+                                
                             </label>                    
                         </div>
                         
@@ -96,26 +97,28 @@
                             </div>
                         </div>
 
-                        <!-- <div class="labled-box">
-                            <label>
-                                <div>Category<span class="red-asterisk">*</span></div>
-                                <div class="select-wrapper">
-                                    <select name="category-selection" id="category-selection" class="form-field pad-12-16" required>
-                                        <option value="" disabled hidden>Select task category </option>
-                                        <option value="technical">Technical Task</option>
-                                        <option value="user">User Story</option>
-                                    </select>
-                                    <img class="dropdown-icon symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
-                                </div>
-                            </label>
-                        </div> -->
-
                         <div class="labled-box">
                             <label>
                                 <div>Category<span class="red-asterisk">*</span></div>
-                                <div class="select-wrapper">
-                                    <div id="category-selection" class="form-field pad-12-16">Select task category</div>
-                                    <img class="dropdown-icon symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
+                                <div id="select-wrapper" class="select-wrapper">
+                                    <div  id="category">
+                                        <div onclick="showCategory()" class="select-field">
+                                            <div id="category-selection" class="form-field pad-12-16">Select task category</div>
+                                            <img class="dropdown-icon symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
+                                        </div>
+                                    </div>
+                                    <div id="error-message" class="error-message d-none">This field is required.</div>
+
+                                    <div id="opened-category" class="d-none">
+                                        <div onclick="showCategory()" class="select-field">
+                                            <div class="form-field pad-12-16">Select task category</div>
+                                            <img id="dropdown-icon1" class="dropdown-icon symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
+                                        </div>
+                                        <div class="selection-drop-down">
+                                            <div onclick="categorySelected('Technical Task')" class="drop-down-field">Technical Task</div>
+                                            <div onclick="categorySelected('User Story')" class="drop-down-field">User Story</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </label>
                         </div>
@@ -136,7 +139,7 @@
             <div class="add-task-bottom">
                 <span class="font-16"><span class="red-asterisk">*</span>This field is required</span>
                 <div class="bottom-buttons">
-                    <button class="clear-button hover-button">Clear 
+                    <button  type="reset" class="clear-button hover-button">Clear 
                         <img class="icon-normal" src="./img/task/iconoir_cancel.svg" alt="">
                         <img class="icon-hover" src="./img/task/iconoir_cancel_hover.svg" alt="">
                     </button>

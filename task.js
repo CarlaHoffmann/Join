@@ -1,3 +1,91 @@
+document.getElementById('title').addEventListener('input', function() {
+    const title = this.value.trim();  // trim für Leerzeichen am Anfang/Ende
+    const titleError = document.getElementById('title-error');
+    const titleMinlengthError = document.getElementById('title-minlength-error');
+
+    // Wenn das Feld leer ist
+    if (title === '') {
+        titleError.classList.remove('d-none');  
+        // titleMinlengthError.classList.add('d-none'); 
+    } 
+    // Wenn die Eingabe weniger als 3 Zeichen hat
+    else if (title.length < 3) {
+        titleError.classList.add('d-none'); 
+        titleMinlengthError.classList.remove('d-none');
+    } 
+    // Wenn die Eingabe korrekt ist
+    else {
+        titleError.classList.add('d-none'); 
+        titleMinlengthError.classList.add('d-none');
+    }
+});
+
+document.getElementById('datepicker').addEventListener('input', function() {
+    const dueDate = this.value;
+    const dueDateError = document.getElementById('due-date-error');
+    
+    if (dueDate.trim() === '') {
+        dueDateError.classList.remove('d-none');
+    } else {
+        dueDateError.classList.add('d-none');
+    }
+});
+
+document.getElementById('category-selection').addEventListener('click', function() {
+    const categorySelection = this.textContent;
+    const errorMessage = document.getElementById('error-message');
+    
+    if (categorySelection === 'Select task category') {
+        errorMessage.classList.remove('d-none');
+    } else {
+        errorMessage.classList.add('d-none');
+    }
+});
+
+function validateForm() {
+    let isValid = true;
+
+    // Validierung für das Title-Feld
+    const title = document.getElementById('title').value;
+    const titleError = document.getElementById('title-error');
+    const titleMinlengthError = document.getElementById('title-minlength-error');
+    
+    if (title.trim() === '') {
+        titleError.classList.remove('d-none');
+        titleMinlengthError.classList.add('d-none');
+        isValid = false;
+    } else if (title.length < 3) {
+        titleError.classList.add('d-none');
+        titleMinlengthError.classList.remove('d-none');
+        isValid = false;
+    } else {
+        titleError.classList.add('d-none');
+        titleMinlengthError.classList.add('d-none');
+    }
+
+    // Validierung für das Due Date-Feld
+    const dueDate = document.getElementById('datepicker').value;
+    const dueDateError = document.getElementById('due-date-error');
+    if (dueDate.trim() === '') {
+        dueDateError.classList.remove('d-none');
+        isValid = false;
+    } else {
+        dueDateError.classList.add('d-none');
+    }
+
+    // Validierung für Category
+    const categorySelection = document.getElementById('category-selection').textContent;
+    const errorMessage = document.getElementById('error-message');
+    if (categorySelection === 'Select task category') {
+        errorMessage.classList.remove('d-none');
+        isValid = false;
+    } else {
+        errorMessage.classList.add('d-none');
+    }
+
+    return isValid;
+}
+
 // Title
 
 
@@ -215,23 +303,64 @@ function getButtonContent(priority, isActive) {
 }
 
 // Category
-document.addEventListener('DOMContentLoaded', function() {
-    const categorySelect = document.getElementById('category-selection');
-    
-    // Setze initial den Platzhaltertext
-    categorySelect.value = '';
-    
-    categorySelect.addEventListener('change', function() {
-        if (this.value !== '') {
-            // Entferne die leere Option, wenn eine Auswahl getroffen wurde
-            this.querySelector('option[value=""]').remove();
-        }
-    });
+function showCategory() {
+    const dropdown = document.getElementById('opened-category');
+    const icon = document.querySelector('#dropdown-icon1');
 
-    categorySelect.addEventListener('focus', function() {
-        if (this.value === '') {
-            // Wenn keine Auswahl getroffen wurde, wähle die leere Option
-            this.querySelector('option[value=""]').selected = true;
-        }
-    });
-});
+    dropdown.classList.toggle('d-none'); // Dropdown anzeigen oder verbergen
+    icon.classList.toggle('dropdown-icon-mirrored'); 
+}
+
+function categorySelected(category) {
+    // Das Element mit der ID "category-selection" abrufen
+    const categorySelection = document.getElementById('category-selection');
+    const errorMessage = document.getElementById('error-message');
+
+    // Den Text des ausgewählten Eintrags in das Feld übertragen
+    categorySelection.textContent = category; 
+
+    // Fehlermeldung ausblenden
+    errorMessage.classList.add('d-none');
+
+    // Das Dropdown-Menü wieder schließen, nachdem eine Auswahl getroffen wurde
+    document.getElementById('opened-category').classList.add('d-none'); 
+}
+
+
+
+// Optionale Funktion zur Überprüfung der Auswahl vor dem Absenden des Formulars
+function validateForm() {
+    let isValid = true;
+
+    // Validierung für das Title-Feld
+    const title = document.getElementById('title').value;
+    const titleError = document.getElementById('title-error');
+    if (title.trim() === '') {
+        titleError.classList.remove('d-none');
+        isValid = false;
+    } else {
+        titleError.classList.add('d-none');
+    }
+
+    // Validierung für das Due Date-Feld
+    const dueDate = document.getElementById('datepicker').value;
+    const dueDateError = document.getElementById('due-date-error');
+    if (dueDate.trim() === '') {
+        dueDateError.classList.remove('d-none');
+        isValid = false;
+    } else {
+        dueDateError.classList.add('d-none');
+    }
+
+    // Validierung für Category (dein bereits vorhandener Code)
+    const categorySelection = document.getElementById('category-selection').textContent;
+    const errorMessage = document.getElementById('error-message');
+    if (categorySelection === 'Select task category') {
+        errorMessage.classList.remove('d-none'); // Fehlermeldung anzeigen
+        isValid = false;
+    } else {
+        errorMessage.classList.add('d-none'); // Fehlermeldung ausblenden
+    }
+
+    return isValid; // Formular nur absenden, wenn alle Felder korrekt sind
+}

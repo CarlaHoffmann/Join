@@ -115,14 +115,26 @@ label {
     font-size: 16px;
 }
 
+.d-none {
+    display: none;
+}
+
+/* Add Task*/
 h1 {
     font-size: 61px;
 }
 
 /* Title */
+#titel-wrapper {
+    position: relative;
+}
+
 .title {
     padding: 12px 21px;
+    box-sizing: border-box;
+    width: 440px;
 }
+
  .title::placeholder {
     color: #D1D1D1;
  }
@@ -333,11 +345,6 @@ button {
     min-width: 0;
 }
 
-/* .prio-button:hover {
-    cursor: pointer;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-} */
-
 .prio-button p {
     margin: 0;
     font-size: 20px;
@@ -390,6 +397,22 @@ button {
 .select-wrapper {
     position: relative;
     display: inline-block;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+
+#opened-category {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    z-index: 10; 
+    background-color: #FFFFFF; 
+    border-radius: 10px; 
+}
+
+.select-field {
+    position: relative;
 }
 
 .dropdown-icon {
@@ -399,13 +422,9 @@ button {
     width: 24px;
     height: 24px;
     cursor: pointer;
-
-    /* pointer-events: none;  */
-    /* Verhindert, dass das Bild die Interaktion mit dem Select-Feld blockiert */
 }
 
 #category-selection {
-    /* width: 100%; */
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -417,6 +436,39 @@ button {
 
 #category-selection:focus {
     outline: none;
+}
+
+.selection-drop-down {
+    /* position: absolute;
+    z-index: 10;  */
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+.drop-down-field {
+    box-sizing: border-box;
+    height: 48px;
+    padding: 7px 16px;
+    display: flex;
+    align-items: center;
+}
+
+.drop-down-field:hover {
+    background-color: #efefef;
+    border-radius: 10px;
+}
+
+.dropdown-icon-mirrored {
+    transform: scaleY(-1);
+    transition: transform 0.3s; /* Sanfter Übergang beim Spiegeln */
+}
+
+.error-message {
+    position: absolute;
+    color: red;
+    top: 52px; 
+    left: 0;
+    font-size: 12px;
 }
 
 
