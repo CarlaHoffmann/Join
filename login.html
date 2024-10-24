@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/login.css">
+    <link rel="stylesheet" href="/login.css">  
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <title>Log in</title>
 </head>
 
 <body>
+    <div class="overlay" id="overlay"></div>
+
     <!-- JOIN LOGO -->
-    <div class="logo">
+    <div class="logo" id="logo">
         <img src="/img/login/Logo for Favicon construction.svg" alt="JOIN Logo">
     </div>
 
@@ -36,10 +38,12 @@
                 </div>
             </div>
 
+
             <div class="remember-me">
-                <img src="/img/login/Property 1=Default.png" alt="Checkbox">
+                <img id="checkbox-img" src="img/login/Property 1=Default.png" alt="Checkbox">
                 <p>Remember Me</p>
             </div>
+            
 
             <div class="button-group">
                 <button class="btn-login" type="submit">Log in</button>
@@ -52,6 +56,8 @@
         <a href="privacyPolicy.html">Privacy Policy</a>
         <a href="legalNotice.html">Legal notice</a>
     </footer>
+
+    <script src="/login.js"></script>
 </body>
 
 </html>

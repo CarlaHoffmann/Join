@@ -27,8 +27,8 @@ body {
     cursor: pointer;
     position: absolute;
     top: 60px;
-    left: 40px; 
-    width: 30px; 
+    left: 40px;
+    width: 30px;
 }
 
 h2 {
@@ -37,6 +37,7 @@ h2 {
     margin: 0;
     position: relative;
 }
+
 /* Blaue Trennlinie */
 h2::after {
     content: "";
@@ -70,17 +71,22 @@ h2::after {
     border: none;
     outline: none;
     flex: 1;
-    padding-left: 10px;
+    margin-left: 10px;
 }
 
 .input-container img {
+    width: 24px;
+    height: 24px;
     margin-right: 10px;
-    width: 20px;
-    height: 20px;
+    padding: 0px;
 }
 
 .input-container input::placeholder {
     color: #D1D1D1;
+}
+
+.registerInput {
+    margin-top: 24px;
 }
 
 /* Checkbox-Sektion */
@@ -128,7 +134,6 @@ h2::after {
     margin-top: 20px;
     color: white;
     font-size: 21px;
-    font-weight: 700;
     width: 340px;
     height: 60px;
     margin-top: 20px;
