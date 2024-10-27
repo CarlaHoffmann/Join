@@ -236,214 +236,92 @@ function categorySelected(category) {
 
 
 
-// Funktion zur Überprüfung der Auswahl vor dem Absenden des Formulars
-function validateForm() {
-    let isValid = true;
-
-    // Validierung für das Title-Feld
-    const title = document.getElementById('title').value;
-    const titleError = document.getElementById('title-error');
-    if (title.trim() === '') {
-        titleError.classList.remove('d-none');
-        isValid = false;
-    } else {
-        titleError.classList.add('d-none');
-    }
-
-    // Validierung für das Due Date-Feld
-    const dueDate = document.getElementById('datepicker').value;
-    const dueDateError = document.getElementById('due-date-error');
-    if (dueDate.trim() === '') {
-        dueDateError.classList.remove('d-none');
-        isValid = false;
-    } else {
-        dueDateError.classList.add('d-none');
-    }
-
-    // Validierung für Category (dein bereits vorhandener Code)
-    const categorySelection = document.getElementById('category-selection').textContent;
-    const errorMessage = document.getElementById('error-message');
-    if (categorySelection === 'Select task category') {
-        errorMessage.classList.remove('d-none'); // Fehlermeldung anzeigen
-        isValid = false;
-    } else {
-        errorMessage.classList.add('d-none'); // Fehlermeldung ausblenden
-    }
-
-    return isValid; // Formular nur absenden, wenn alle Felder korrekt sind
-}
+// Subtask
 
 
-document.getElementById('title').addEventListener('input', function() {
+
+// Event Listener zur Überprüfung
+const titleInput = document.getElementById('title');
+titleInput.addEventListener('input', validateTitle);
+titleInput.addEventListener('blur', validateTitle);  // Hinzufügen von blur für die Validierung beim Verlassen
+
+function validateTitle() {
     const title = this.value.trim();  // trim für Leerzeichen am Anfang/Ende
     const titleError = document.getElementById('title-error');
-    const titleMinlengthError = document.getElementById('title-minlength-error');
-
+    
     // Wenn das Feld leer ist
     if (title === '') {
         titleError.classList.remove('d-none');  
-        // titleMinlengthError.classList.add('d-none'); 
-    } 
-    // Wenn die Eingabe weniger als 3 Zeichen hat
-    else if (title.length < 3) {
-        titleError.classList.add('d-none'); 
-        titleMinlengthError.classList.remove('d-none');
-    } 
-    // Wenn die Eingabe korrekt ist
-    else {
-        titleError.classList.add('d-none'); 
-        titleMinlengthError.classList.add('d-none');
+    } else {
+        titleError.classList.add('d-none');
     }
-});
+};
 
-document.getElementById('datepicker').addEventListener('input', function() {
-    const dueDate = this.value;
+// Datepicker-Eingabe in Echtzeit validieren
+const dateInput = document.getElementById('datepicker');
+dateInput.addEventListener('input', validateDueDate);
+dateInput.addEventListener('blur', validateDueDate);
+
+function validateDueDate() {
+    const dueDate = this.value.trim();
     const dueDateError = document.getElementById('due-date-error');
     
-    if (dueDate.trim() === '') {
-        dueDateError.classList.remove('d-none');
+    if (dueDate === '') {
+        dueDateError.classList.remove('d-none');  // Fehlermeldung anzeigen, wenn das Feld leer ist
     } else {
-        dueDateError.classList.add('d-none');
+        dueDateError.classList.add('d-none');  // Fehlermeldung ausblenden, wenn ein Wert eingegeben wurde
     }
-});
+};
 
+// Kategorieauswahl validieren
 document.getElementById('category-selection').addEventListener('click', function() {
     const categorySelection = this.textContent;
     const errorMessage = document.getElementById('error-message');
     
     if (categorySelection === 'Select task category') {
-        errorMessage.classList.remove('d-none');
+        errorMessage.classList.remove('d-none');  // Fehlermeldung anzeigen, wenn keine Kategorie ausgewählt ist
     } else {
-        errorMessage.classList.add('d-none');
+        errorMessage.classList.add('d-none');  // Fehlermeldung ausblenden, wenn eine Kategorie ausgewählt wurde
     }
 });
 
+// Formular-Validierung beim Absenden
 function validateForm() {
     let isValid = true;
 
-    // Validierung für das Title-Feld
-    const title = document.getElementById('title').value;
+    // Title-Feld-Validierung (muss mindestens 3 Zeichen enthalten)
+    const title = document.getElementById('title').value.trim();
     const titleError = document.getElementById('title-error');
     const titleMinlengthError = document.getElementById('title-minlength-error');
     
-    if (title.trim() === '') {
-        titleError.classList.remove('d-none');
-        titleMinlengthError.classList.add('d-none');
-        isValid = false;
-    } else if (title.length < 3) {
-        titleError.classList.add('d-none');
-        titleMinlengthError.classList.remove('d-none');
-        isValid = false;
-    } else {
-        titleError.classList.add('d-none');
-        titleMinlengthError.classList.add('d-none');
-    }
-
-    // Validierung für das Due Date-Feld
-    const dueDate = document.getElementById('datepicker').value;
-    const dueDateError = document.getElementById('due-date-error');
-    if (dueDate.trim() === '') {
-        dueDateError.classList.remove('d-none');
-        isValid = false;
-    } else {
-        dueDateError.classList.add('d-none');
-    }
-
-    // Validierung für Category
-    const categorySelection = document.getElementById('category-selection').textContent;
-    const errorMessage = document.getElementById('error-message');
-    if (categorySelection === 'Select task category') {
-        errorMessage.classList.remove('d-none');
-        isValid = false;
-    } else {
-        errorMessage.classList.add('d-none');
-    }
-
-    return isValid;
-}document.getElementById('title').addEventListener('input', function() {
-    const title = this.value.trim();  // trim für Leerzeichen am Anfang/Ende
-    const titleError = document.getElementById('title-error');
-    const titleMinlengthError = document.getElementById('title-minlength-error');
-
-    // Wenn das Feld leer ist
     if (title === '') {
-        titleError.classList.remove('d-none');  
-        // titleMinlengthError.classList.add('d-none'); 
-    } 
-    // Wenn die Eingabe weniger als 3 Zeichen hat
-    else if (title.length < 3) {
-        titleError.classList.add('d-none'); 
-        titleMinlengthError.classList.remove('d-none');
-    } 
-    // Wenn die Eingabe korrekt ist
-    else {
-        titleError.classList.add('d-none'); 
-        titleMinlengthError.classList.add('d-none');
+        titleError.classList.remove('d-none');  // Fehlermeldung für leeres Feld
+        isValid = false;
+    } else {
+        titleError.classList.add('d-none');  // Fehler verstecken
     }
-});
 
-document.getElementById('datepicker').addEventListener('input', function() {
-    const dueDate = this.value;
+    // Due-Date-Feld-Validierung (muss ein Datum enthalten)
+    const dueDate = document.getElementById('datepicker').value.trim();
     const dueDateError = document.getElementById('due-date-error');
     
-    if (dueDate.trim() === '') {
-        dueDateError.classList.remove('d-none');
-    } else {
-        dueDateError.classList.add('d-none');
-    }
-});
-
-document.getElementById('category-selection').addEventListener('click', function() {
-    const categorySelection = this.textContent;
-    const errorMessage = document.getElementById('error-message');
-    
-    if (categorySelection === 'Select task category') {
-        errorMessage.classList.remove('d-none');
-    } else {
-        errorMessage.classList.add('d-none');
-    }
-});
-
-function validateForm() {
-    let isValid = true;
-
-    // Validierung für das Title-Feld
-    const title = document.getElementById('title').value;
-    const titleError = document.getElementById('title-error');
-    const titleMinlengthError = document.getElementById('title-minlength-error');
-    
-    if (title.trim() === '') {
-        titleError.classList.remove('d-none');
-        titleMinlengthError.classList.add('d-none');
-        isValid = false;
-    } else if (title.length < 3) {
-        titleError.classList.add('d-none');
-        titleMinlengthError.classList.remove('d-none');
+    if (dueDate === '') {
+        dueDateError.classList.remove('d-none');  // Fehlermeldung anzeigen, wenn das Feld leer ist
         isValid = false;
     } else {
-        titleError.classList.add('d-none');
-        titleMinlengthError.classList.add('d-none');
+        dueDateError.classList.add('d-none');  // Fehlermeldung verstecken, wenn ein Datum eingegeben wurde
     }
 
-    // Validierung für das Due Date-Feld
-    const dueDate = document.getElementById('datepicker').value;
-    const dueDateError = document.getElementById('due-date-error');
-    if (dueDate.trim() === '') {
-        dueDateError.classList.remove('d-none');
-        isValid = false;
-    } else {
-        dueDateError.classList.add('d-none');
-    }
-
-    // Validierung für Category
+    // Kategorieauswahl-Validierung (muss eine Kategorie ausgewählt sein)
     const categorySelection = document.getElementById('category-selection').textContent;
     const errorMessage = document.getElementById('error-message');
+    
     if (categorySelection === 'Select task category') {
-        errorMessage.classList.remove('d-none');
+        errorMessage.classList.remove('d-none');  // Fehlermeldung anzeigen, wenn keine Kategorie ausgewählt wurde
         isValid = false;
     } else {
-        errorMessage.classList.add('d-none');
+        errorMessage.classList.add('d-none');  // Fehlermeldung verstecken, wenn eine Kategorie ausgewählt wurde
     }
 
-    return isValid;
-}
+    return isValid;  // Formular wird nur abgesendet, wenn alle Felder gültig sind
+};

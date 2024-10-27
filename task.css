@@ -476,23 +476,57 @@ button {
 /* Subtask*/
 .subtask-input-wrapper {
     position: relative;
+}
+
+#subtask {
+    position: relative;
     display: flex;
     align-items: center;
 }
 
-.subtask-input-wrapper input::placeholder {
+#subtask input::placeholder {
     color: #D1D1D1;
 }
 
-.subtask-input-wrapper input[type="text"] {
+#subtask input[type="text"] {
     width: 100%;
 }
 
-.add-subtask {
+.subtask-img {
     position: absolute;
     right: 16px;
     top: 12px;
 }
+
+#opened-subtask {
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+#opened-subtask-icons {
+    position: absolute;
+    right: 16px;
+    top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+#opened-subtask input[type="text"] {
+    width: 100%;
+}
+
+.opened-subtask-icon-box {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /* Bottom*/
 .add-task-bottom {
