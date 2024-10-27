@@ -237,7 +237,14 @@ function categorySelected(category) {
 
 
 // Subtask
+const subtask = document.getElementById('subtask');
 
+// Event-Listener hinzufügen, um auf Klick zu reagieren
+subtask.addEventListener('click', function() {
+    // "subtask" verstecken und "opened-subtask" anzeigen
+    subtask.classList.add('d-none');
+    document.getElementById('opened-subtask').classList.remove('d-none');
+});
 
 
 // Event Listener zur Überprüfung
