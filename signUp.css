@@ -89,6 +89,10 @@ h2::after {
     margin-top: 24px;
 }
 
+.input-container:focus-within {
+    outline: 2px solid #29ABE2; 
+}
+
 /* Checkbox-Sektion */
 .checkboxLogin {
     display: flex;
@@ -133,7 +137,7 @@ h2::after {
 .successBtn {
     margin-top: 20px;
     color: white;
-    font-size: 21px;
+    font-size: 20px;
     width: 340px;
     height: 60px;
     margin-top: 20px;

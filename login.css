@@ -150,18 +150,23 @@ h2::after {
     opacity: 1;
 }
 
+.input-wrapper:focus-within {
+    outline: 2px solid #29ABE2; 
+}
+
 .input-wrapper img {
     margin-right: 10px;
     width: 24px;
     height: 24px;
 }
 
+
 .remember-me {
     display: flex;
     align-items: center;
     gap: 8px;
     position: relative;
-    left: -100px; /* Verschiebt das Element nach links */
+    left: -100px;
 }
 
 /* Button Section */
