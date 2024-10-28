@@ -20,36 +20,60 @@ a:hover {
     text-decoration: underline;
 }
 
-.how-to-use h2 {
-    font-size: 32px;
+.join-blue {
+    color: #29ABE2;
+}
+
+#help-content {
+    margin-top: 110px;
+    margin-bottom: 30px;
+    margin-left: 96px;
+    width: 1014px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.textfield {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+h1 {
+    font-size: 61px;
+    margin: 0;
+}
+
+h2 {
+    font-size: 27px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin: 0;
 }
 
-.how-to-use p {
-    font-size: 16px;
-    line-height: 1.5;
+h3 {
+    font-size: 20px;
+    font-weight: 700px;
+    margin: 0;
 }
 
-/* Steps styling */
+p {
+    margin: 0;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
 .step {
-    margin-top: 20px;
-}
-
-.step h3 {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.step p {
-    margin-top: 10px;
-}
-
-.reminder {
-    margin-top: 30px;
-    font-style: italic;
-}
-
-.footer {
-    margin-top: 20px;
+    display: flex;
+    gap: 30px;
 }
