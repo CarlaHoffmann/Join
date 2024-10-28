@@ -95,7 +95,10 @@
         }
 
         /* Media Queries */
-        @media (max-width: 599px) {
+        @media (max-width: 599px) { /*unter 600*/
+            header{
+                height:96px;
+            }
             #headerText{
                 display:none;
             }
@@ -132,7 +135,7 @@
             }
         }
 
-        @media (min-width: 600px) {
+        @media (min-width: 600px) { /*über 600*/
             #headerText{
                 display:flex;
             }
