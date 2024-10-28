@@ -17,8 +17,9 @@
             width:100%;
         }
         #contactList{
-            
+            height:calc(100vh - 96px);
             width:453px;
+            box-shadow: 4px 0px 6px 0px #00000014;
         }
         hr{
             border:1px solid #D1D1D1;
@@ -42,6 +43,13 @@
             border:2px solid white;
             border-radius:100%;
             color:white;
+        }
+        
+        @media (max-width: 599px) { /*unter 600*/
+            #contactList{
+                height:calc(100vh - (80px + 80px));
+                width:100%;
+            }
         }
     </style>
 </head>
