@@ -7,11 +7,16 @@ body {
 #help-overlay {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: 0;
+    width: calc(100% - 232px);
     height: calc(100vh - 96px);
     background-color: #f6f7f8;
     overflow-y: auto;
+    scrollbar-width: none;
+}
+
+#help-overlay::-webkit-scrollbar {
+    display: none; /* Chrome, Safari und Edge */
 }
 
 a {
