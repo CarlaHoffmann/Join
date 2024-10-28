@@ -67,6 +67,7 @@
             display:flex;
             justify-content:flex-start;
             align-items:center;
+            gap:20px;
         }
         #sidebar ul li a {
             color: #CDCDCD;
@@ -74,8 +75,6 @@
             font-size: 16px;
         }
         #content {
-            margin-left: 232px; /* Platz für die Sidebar */
-            padding: 20px;
             flex-grow: 1;
             transition: margin-left 0.3s ease;
         }
@@ -141,6 +140,9 @@
             }
             #mobileNav{
                 display: none; /* Mobile Navigation ausblenden */
+            }
+            #content {
+            margin-left: 232px; /* Platz für die Sidebar */
             }
         }
     </style>

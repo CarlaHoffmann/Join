@@ -4,8 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+        #contacts{
+            display:flex;
+            justify-content:center;
+            align-items: center;
+            width:100%;
+        }
+        #contactList{
+            
+            width:453px;
+        }
+        hr{
+            border:1px solid #D1D1D1;
+            border-radius:2px;
+        }
+        .contact{
+            height:78px;
+            width: 352px;
+            display:flex;
+            justify-content: flex-start;
+            align-items:center;
+            gap:35px;
+        }
+        .circle{
+            height:42px;
+            width:42px;
+            display:flex;
+            justify-content: center;
+            align-items:center;
+            background:rgb(70,47,138);
+            border:2px solid white;
+            border-radius:100%;
+            color:white;
+        }
+    </style>
 </head>
 <body>
-    
+    <div id="contacts">
+        <section id="contactList">
+            <hr>
+            <div class="contact">
+                <div class="circle">MB</div>
+                <div class="contactInformation">
+                    <h3>Marcel Bauer</h3>
+                    <p>bauer@gmail.com</p>
+                </div>
+            </div>
+            <div class="contact">
+                <div class="circle">MM</div>
+                <div class="contactInformation">
+                    <h3>Martin Meier</h3>
+                    <p>meierM@gmail.com</p>
+                </div>
+            </div>
+            <hr>
+        </section>
+        <section id="selectedContact">
+        </section>
+    </div>
 </body>
 </html>
