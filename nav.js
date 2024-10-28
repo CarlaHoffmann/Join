@@ -1,19 +1,18 @@
 // Die aktuelle URL abrufen
 const currentUrl = window.location.href;
-const url = "https://example.com/path/to/resource";
+let url = currentUrl;
 const lastSlashIndex = url.lastIndexOf("/");
 const lastPart = url.substring(lastSlashIndex + 1);
-const sideBarLinks = document.querySelectorAll('#sideBarNavigation li a');
+const navigationLinks = document.querySelectorAll('#sideBarNavigation li a, #mobileNav ul li a, .naviLink');
+const content = document.getElementById('content');
 
 function markActiveMenuPoint(){
-    sideBarLinks.forEach(link => {
-        const linkHref = link.getAttribute('href');
-        console.log(linkHref);
-        console.log(lastPart);
-        if (linkHref !== lastPart) {
-            link.classList.remove('activeMenuPoint');
-        } else{
-            link.classList.add('activeMenuPoint');
+    navigationLinks.forEach(link => {
+        link.onclick= function (event){
+            event.preventDefault();
+            urlToLoad = link.getAttribute('href');
+            content.setAttribute('w3-include-html', urlToLoad);
+            w3.includeHTML();
         }
     });
 }
