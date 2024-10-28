@@ -1,14 +1,17 @@
-/* Global styles 
-    
------------------------
-IN ARBEIT 
------------------------
-
-*/
 body {
     font-family: "Inter", sans-serif;
     margin: 0px;
     background-color: #f6f7f8;
+}
+
+#help-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 96px);
+    background-color: #f6f7f8;
+    overflow-y: auto;
 }
 
 a {
@@ -32,6 +35,28 @@ a:hover {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    position: relative;
+}
+
+#back {
+    position: fixed;
+    top: 96px;
+    right: 96px;
+    width: 37px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#back:hover {
+    background-color: #efefef;
+    border-radius: 19px;
+    cursor: pointer;
+}
+
+#back:hover img {
+    transform: scale(1.1);
 }
 
 .textfield {
@@ -76,4 +101,9 @@ p {
 .step {
     display: flex;
     gap: 30px;
+}
+
+.counter {
+    font-size: 27px;
+    font-weight: 700px;
 }
