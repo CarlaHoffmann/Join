@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navigation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            height: 80px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content:space-around;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        #headerControls{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            gap:25px;
+        }
+        #firstLetter {
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width:35px;
+            height:35px;
+            border: 1px solid black;
+            color: #29ABE2;
+        }
+        #sidebar {
+            width: 232px;
+            background: #2A3647;
+            color: #CDCDCD;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            position: fixed;
+            top: 50px; /* unter dem Header */
+            bottom: 0;
+            transition: transform 0.3s ease;
+        }
+        #sideBarNavigation {
+            padding-top:150px;
+            list-style: none;
+            display:flex;
+            flex-direction:column;
+            justify-content:flex-start;
+            gap:15px;
+        }
+        #sideBarNavigation li a{
+            display:flex;
+            justify-content:flex-start;
+            align-items:center;
+        }
+        #sidebar ul li a {
+            color: #CDCDCD;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        #content {
+            margin-left: 232px; /* Platz für die Sidebar */
+            padding: 20px;
+            flex-grow: 1;
+            transition: margin-left 0.3s ease;
+        }
+        #mobileNav {
+            display: none; /* Standardmäßig ausblenden */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: #2A3647;
+            color: #CDCDCD;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+            height:80px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 599px) {
+            #headerText{
+                display:none;
+            }
+            #headerLogo{
+                display:flex;
+            }
+            #sidebar {
+                transform: translateX(-100%); /* Sidebar ausblenden */
+            }
+            #mobileNav ul{
+                width:100%;
+                list-style:none;
+                display:flex;
+                justify-content: space-around;
+            }
+            #mobileNav {
+                display: flex; /* Mobile Navigation anzeigen */
+            }
+            #mobileNav ul li a{
+                display:flex;
+                justify-content: space-between;
+                width:100%;
+            }
+            #mobileNav ul{
+                display:flex;
+            }
+            #mobileNav img{
+                height:32px;
+            }
+            #mobileNav ul li a{
+                display:flex;
+                flex-direction:column;
+            }
+        }
+
+        @media (min-width: 600px) {
+            #headerText{
+                display:flex;
+            }
+            #headerLogo{
+                display:none;
+            }
+            #mobileNav{
+                display: none; /* Mobile Navigation ausblenden */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <span id="headerText">Kanban Project Management Tool</span>
+        <img id="headerLogo" src="img/nav/mobileLogo.svg">
+        <div id="headerControls">
+            <span>?</span>
+            <span id="firstLetter">G</span>
+        </div>
+    </header>
+    <nav id="sidebar">
+        <div id="topPart">
+            <a href="summary.html"><img src="img/nav/logo.svg"></a>
+            <ul id="sideBarNavigation">
+                <li><a href="summary.html"><img src="img/nav/summary.svg">Summary</a></li>
+                <li><a href="addTasks.html"><img src="img/nav/addTasks.svg">Add Tasks</a></li>
+                <li><a href="board.html"><img src="img/nav/board.svg">Board</a></li>
+                <li><a href="contacts.html"><img src="img/nav/contacts.svg">Contacts</a></li>
+            </ul>
+        </div>
+        <ul>
+            <li><a href="privacyPolicy.html">Privacy Policy</a></li>
+            <li><a href="legalNotice.html">Legal notice</a></li>
+        </ul>
+    </nav>
+    <div id="content" w3-include-html="task.html">
+        <h2>Inhalt</h2>
+        <p>Hier ist der Hauptinhalt der Seite.</p>
+    </div>
+    <nav id="mobileNav">
+        <ul>
+            <li><a><img src="img/nav/summaryMobile.svg"><span>Summary</span></a></li>
+            <li><a><img src="img/nav/addTasksMobile.svg">Add Task</a></li>
+            <li><a><img src="img/nav/boardMobile.svg">Board</a></li>
+            <li><a><img src="img/nav/contactsMobile.svg">Contacts</a></li>
+        </ul>
+    </nav>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script>
+        w3.includeHTML();
+    </script>
+</body>
+</html>

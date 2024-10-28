@@ -5,120 +5,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        *{
-            margin:0;
-            padding:0;
+        * {
+            margin: 0;
+            padding: 0;
         }
-        html, body{
-            height:100%;
+        html, body {
+            height: 100%;
+        }
+        body{
+            display:flex;
         }
         /*header*/
-        #wrapper{
-            display:flex;
-            justify-content: flex-end;
+        #wrapper {
             display: flex;
             justify-content: flex-end;
         }
-        header{
-            height:50px;
-            display:flex;
+        header {
+            height: 50px;
+            display: flex;
             justify-content: space-around;
             align-items: center;
-            width:calc(100% - 232px);
-            background:blue;
+            width: calc(100% - 232px);
+            background: blue;
         }
-        #headerControls{
-            display:flex;
+        #headerControls {
+            display: flex;
             align-items: center;
-            gap:15px;
+            gap: 15px;
         }
-        #firstLetter{
-            border-radius:100%;
-            display:flex;
+        #firstLetter {
+            border-radius: 100%;
+            display: flex;
             justify-content: center;
             align-items: center;
-            padding:5px;
-            border:1px solid black;
+            padding: 5px;
+            border: 1px solid black;
         }
         /*sidebar*/
-        .activeMenuPoint{
-            color:red;
+        .activeMenuPoint {
+            color: red;
         }
-        nav{
-            background:#2A3647;
-            color:#CDCDCD;
-            display:flex;
-            justify-content:space-around;
-            align-items:center;
-            flex-direction:column;
-            height:100vh;
-            width:232px;/*16.11vw;*/
-            font-size:16px;
-            position:absolute;
-            top:0;
-            left:0;
+        nav {
+            background: #2A3647;
+            color: #CDCDCD;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            width: 232px; /*16.11vw;*/
+            font-size: 16px;
         }
-        nav div{
-            display:flex;
+        nav div {
+            display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items:center;
-            gap:60px;
+            align-items: center;
+            gap: 60px;
         }
-        nav ul{
-            list-style:none;
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            flex-direction: column;
         }
-        nav ul{
-            display:flex;
-            justify-content:center;
-            align-items:flex-start;
-            gap:20px;
+        nav ul li a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            gap: 10px;
+            font-size: 16px;
             flex-direction:column;
         }
-        nav ul li a{
-            display:flex;
-            justify-content: flex-start;
-            align-items: center;
-            color:#CDCDCD;
-            text-decoration:none;
-            gap:10px;
-            font-size:16px;
+        nav ul li a:hover {
+            cursor: pointer;
         }
-        nav ul li a:hover{
-            cursor:pointer;
+        /*sidebar*/
+        #sidebar{
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            background:green;
         }
         /*mobile navigation*/
 
+
         #mobileNav {
-            display: none;
+            display: none; /* Standardmäßig ausblenden */
             flex-direction: row;
             height: 100px;
             width: 100vw;
             justify-content: center;
             align-items: center;
-            position: absolute;
+            position: fixed; /* Ändere von absolute auf fixed */
             bottom: 0;
             background-color: #2A3647;
-        }
+            }
         #mobileNav ul {
             display: flex;
             flex-direction: row;
             width: 100%;
-            height:50px;
+            height: 50px;
             justify-content: center;
             align-items: center;
         }
+        #mobileNav ul li {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #contentBox{
+            width:calc(100% - 232px);
+            background:green;
+        }
 
         /*media queries*/
-        @media (max-width: 600px) {
-            #mobileNav{
-                display:flex;
+        @media (max-width: 599px) {
+            #mobileNav {
+                display: flex;
             }
-            #sideBar{
-                display:none;
+            #sideBar {
+                display: none;
+            }
+            #wrapper{
+                justify-content:flex-start;
+                width:100%;
             }
             header{
-                width: 100%;
+                width:100%;
+            }
+        }
+
+        @media (min-width: 600px) {
+            #mobileNav {
+                display: none;
+            }
+            #sideBar {
+                display: flex;
             }
         }
     </style>
@@ -133,7 +160,8 @@
             </div>
         </header>
     </div>
-    <nav id="sideBar">
+    <nav
+     id="sideBar">
         <div id="topPart">
             <a href="summary.html"><img src="img/nav/logo.svg"></a>
             <ul id="sideBarNavigation">
@@ -150,12 +178,17 @@
     </nav>
     <nav id="mobileNav">
         <ul>
-            <li><a><img src="img/nav/summaryMobile.svg">Summary</a></li>
+            <li><a><img src="img/nav/summaryMobile.svg"><span>Summary</span></a></li>
             <li><a><img src="img/nav/addTasksMobile.svg">Add Task</a></li>
             <li><a><img src="img/nav/boardMobile.svg">Board</a></li>
             <li><a><img src="img/nav/contactsMobile.svg">Contacts</a></li>
         </ul>
     </nav>
     <script src="nav.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <div id="contentBox" w3-include-html="task.html"></div>
+    <script>
+        w3.includeHTML();
+    </script>
 </body>
 </html>
