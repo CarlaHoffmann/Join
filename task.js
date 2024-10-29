@@ -237,14 +237,16 @@ function categorySelected(category) {
 
 
 // Subtask
-const subtask = document.getElementById('subtask');
-
-// Event-Listener hinzufügen, um auf Klick zu reagieren
-subtask.addEventListener('click', function() {
-    // "subtask" verstecken und "opened-subtask" anzeigen
-    subtask.classList.add('d-none');
-    document.getElementById('opened-subtask').classList.remove('d-none');
-});
+function openSubtask() {
+    let subtaskButtons = document.getElementById('subtask-buttons');
+    subtaskButtons.innerHTML = `
+        <div id="opened-subtask-icons">
+            <div class="opened-subtask-icon-box"><img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt=""></div>
+            <div><img src="./img/task/vector-3.svg" alt=""></div>
+            <div class="opened-subtask-icon-box"><img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt=""></div>
+        </div>
+    `;
+}
 
 
 // Event Listener zur Überprüfung

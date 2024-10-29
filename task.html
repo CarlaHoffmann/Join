@@ -126,21 +126,32 @@
                         <div class="labled-box">
                             <label>
                                 Subtasks
-                                <div class="subtask-input-wrapper">
+                                <div onclick="openSubtask()" id="subtask-input-wrapper">
                                     <div id="subtask">
                                         <input onclick="openSubtask()" type="text" class="form-field pad-12-16" placeholder="Add new subtask">
-                                        <img class="subtask-img symbol-hover" src="./img/task/subtask.svg" alt="add subtask">
+                                        <div id="subtask-buttons">
+                                            <img class="subtask-img symbol-hover" src="./img/task/subtask.svg" alt="add subtask">
+                                        </div>
                                     </div>
-                                    <div id="opened-subtask" class="d-none">
+                                    <!-- <div id="opened-subtask" class="d-none">
                                         <input type="text" class="form-field pad-12-16">
                                         <div id="opened-subtask-icons">
                                             <div class="opened-subtask-icon-box"><img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt=""></div>
                                             <div><img src="./img/task/vector-3.svg" alt=""></div>
                                             <div class="opened-subtask-icon-box"><img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt=""></div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </label>
+                            <div class="added-subtask">
+                                Contact Form
+                                <div class="added-subtask-icons">
+                                    <div><img src="./img/task/subtask_add_pen.svg" alt=""></div>
+                                    <div><img src="./img/task/vector-3.svg" alt=""></div>
+                                    <div><img src="./img/task/subtask_add_bin.svg" alt=""></div>
+                                    
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
