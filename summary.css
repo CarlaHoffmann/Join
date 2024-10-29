@@ -1,0 +1,235 @@
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+}
+
+.outer-box {
+    width: 100vw;
+    height: 100vh;
+    background-color: #F6F7F8;
+}
+
+#summary-page {
+    padding-top: 110px;
+    padding-left: 96px;
+    /* padding-right: 96px; */
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+#title {
+    font-size: 61px;
+    font-weight: 700;
+}
+
+#headline {
+    font-size: 27px;
+}
+
+#page-content {
+    display: flex;
+    align-items: center;
+    gap: 96px;
+}
+
+#summary-content {
+    box-sizing: border-box;
+    width: 560px;
+    height: 562px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.box {
+    background-color: #FFFFFF;
+    border-radius: 30px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.box-row {
+    height: 168px;
+}
+
+.number {
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.symbol-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+#do-done-box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.todo {
+    box-sizing: border-box;
+    padding: 38px 58px;
+    width: 264px;
+}
+
+#deadline-box {
+    box-sizing: border-box;
+    height: 168px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 61px;
+    padding: 28px 48px;
+}
+
+#date-info {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.deadline-info {
+    font-size: 16px;
+}
+
+.deadline-date {
+    font-size: 21px;
+    font-weight: 700;
+}
+
+#deadline-divider-mobile {
+    display: none;
+}
+
+#sum-up-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sum-up {
+    box-sizing: border-box;
+    width: 168px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+}
+
+.description {
+    text-wrap: wrap;
+}
+
+
+#greeting-box {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+#greeting {
+    font-size: 47px;
+}
+
+#greet-name {
+    font-size: 64px;
+    font-weight: 700;
+    color: #29ABE2;
+}
+
+@media(max-width: 1125px) {
+    #greeting-box {
+        display: none;
+    }
+}
+
+@media(max-width: 765px) {
+    .outer-box {
+        display: flex;
+        justify-content: center;
+        /* align-items: center; */
+    }
+
+    #summary-page {
+        padding-left: 0;
+    }
+
+    #title {
+        font-size: 47px;
+    }
+
+    #headline {
+        font-size: 20px;
+    }
+
+    .box-row {
+        height: 110px;
+    }
+
+    .box {
+        border-radius: 20px;
+    }
+
+    .number {
+        font-size: 47px;
+    }
+
+    .description, .deadline-info {
+        font-size: 14px;
+    }
+
+    #summary-content {
+        width: 396px;
+        height: 384px;
+    }
+
+    .todo {
+        width: 186px;
+    }
+
+    #deadline-box {
+        height: 110px;
+        padding-top: 28px;
+        padding-bottom: 28px;
+        gap: 20px;
+    }
+
+    .deadline-date {
+        font-size: 16px;
+    }
+
+    #deadline-divider {
+        display: none;
+    }
+
+    #deadline-divider-mobile {
+        display: block;
+    }
+
+    .sum-up {
+        width: 116px;
+        height: 116px;
+    }
+}
+
+@media(max-width: 530px) {
+    #header {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #header img {
+        display: none;
+    }
+}
