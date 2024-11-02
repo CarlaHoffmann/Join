@@ -64,11 +64,44 @@ body {
     font-weight: 600;
 }
 
+.no-wrap {
+    text-wrap: nowrap !important;
+}
+
+.urgent {
+    background-color: #FF3D00;
+}
+
+.medium {
+    background-color: #FFA800;
+}
+
+.low {
+    background-color: #7AE229;
+}
+
 .symbol-box {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 18px;
+}
+
+.symbol {
+    height: 69px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mobile {
+    display: none;
 }
 
 #do-done-box {
@@ -93,6 +126,21 @@ body {
     padding: 28px 48px;
 }
 
+#deadline-symbol {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    /* background-color: #FF3D00; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#deadline-image {
+    width: 34.19px;
+    height: 25.12px;
+}
+
 #date-info {
     display: flex;
     flex-direction: column;
@@ -106,10 +154,6 @@ body {
 .deadline-date {
     font-size: 21px;
     font-weight: 700;
-}
-
-#deadline-divider-mobile {
-    display: none;
 }
 
 #sum-up-box {
@@ -177,6 +221,10 @@ body {
         height: 110px;
     }
 
+    .symbol-box {
+        gap: 10px;
+    }
+
     .box {
         border-radius: 20px;
     }
@@ -194,6 +242,14 @@ body {
         height: 384px;
     }
 
+    .mobile {
+        display: block;
+    }
+
+    .desktop {
+        display: none;
+    }
+
     .todo {
         width: 186px;
     }
@@ -207,14 +263,6 @@ body {
 
     .deadline-date {
         font-size: 16px;
-    }
-
-    #deadline-divider {
-        display: none;
-    }
-
-    #deadline-divider-mobile {
-        display: block;
     }
 
     .sum-up {

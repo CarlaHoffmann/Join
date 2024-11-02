@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="summary.css">
     <script src="summary.js"></script>
 </head>
-<body>
+<body onload="init()">
     <div class="outer-box">
         <div id="summary-page">
             <div id="header">
@@ -20,15 +20,21 @@
                 <div id="summary-content">
                     <div id="do-done-box" class="box-row">
                         <div class="box symbol-box todo">
-                            <div class="symbol">sym</div>
-                            <div>
+                            <div class="symbol">
+                                <img class="desktop" src="./img/summary/todo_pen.svg" alt="">
+                                <img class="mobile" src="./img/summary/todo_pen_mobile.svg" alt="">
+                            </div>
+                            <div class="info">
                                 <div class="number">1</div>
-                                <div class="description">To-do</div>
+                                <div class="description no-wrap">To-do</div>
                             </div>
                         </div>
                         <div class="box symbol-box todo">
-                            <div class="symbol">sym</div>
-                            <div>
+                            <div class="symbol">
+                                <img class="desktop" src="./img/summary/done_check.svg" alt="">
+                                <img class="mobile" src="./img/summary/done_check_mobile.svg" alt="">
+                            </div>
+                            <div class="info">
                                 <div class="number">1</div>
                                 <div class="description">Done</div>
                             </div>
@@ -38,14 +44,19 @@
                     <div class="box-row">
                         <div id="deadline-box" class="box">
                             <div class="symbol-box">
-                                <div>sym</div>
-                                <div>
+                                <div id="deadline-symbol">
+                                    <img id="deadline-image" alt="">
+                                </div>
+                                <div class="info">
                                     <div class="number">1</div>
-                                    <div class="deadline-info">Urgent</div>
+                                    <div id="deadline-prio" class="deadline-info">Urgent</div>
                                 </div>
                             </div>
-                            <img id="deadline-divider" src="./img/summary/summary_divider.svg" alt="">
-                            <img id="deadline-divider-mobile" src="./img/summary/summary_divider_moboile.svg" alt="">
+                            <div>
+                                <img id="deadline-divider" class="desktop" src="./img/summary/summary_divider.svg" alt="">
+                                <img id="deadline-divider-mobile" class="mobile" src="./img/summary/summary_divider_mobile.svg" alt="">
+                            </div>
+                            
                             <div id="date-info">
                                 <div class="deadline-date">October 16, 2022</div>
                                 <div class="deadline-info">Upcoming Deadline</div>
@@ -77,6 +88,6 @@
             </div>
         </div>
     </div>
-
+    
 </body>
 </html>
