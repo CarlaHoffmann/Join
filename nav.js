@@ -18,3 +18,5 @@ function markActiveMenuPoint(){
 }
 
 markActiveMenuPoint();
+content.setAttribute('w3-include-html', 'contact.html');
+w3.includeHTML();

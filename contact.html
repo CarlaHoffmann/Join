@@ -4,23 +4,41 @@
     padding: 0;
     box-sizing: border-box;
 }
+h2{
+    font-size:61px;
+}
+h3{
+    font-size:27px;
+}
+#contactsSiteContent{
+    display:flex;
+}
+#content{
+    align-items:flex-start;
+    justify-content: flex-start;
+}
+
+#addContactButton{
+    height:56px;
+    width:100%;
+    background: #2A3647;
+    color:white;
+}
 
 #contacts {
     display: flex;
     justify-content: center;
     align-items: center;
-    background:pink;
+    width:calc(31.66% + 232px);
+    box-shadow: 4px 0px 6px 0px #00000014;
 }
 
 #contactList {
-    height: calc(100vh - 96px);
-    width: 400px; /* Adjusted width */
-    box-shadow: 4px 0px 6px 0px #00000014;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background:white;
+    width:77.193%;
 }
 
 #contactList h3 {
@@ -28,24 +46,24 @@
 }
 
 hr {
+    width:100%;
+    height:0px;
     border: 1px solid #D1D1D1;
     border-radius: 2px;
 }
+.contact {
+    height: 78px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*gap: 35px;*/
+    /*margin-bottom: 10px;*/
+}
+.contact p{
+    color: #007CEE;
+}
 .contact div{
     display:flex;
-    
-    width:100%;
-
-}
-.contact {
-    height: 78px; /* Fixed height */
-    width: 80%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 35px;
-    padding: 10px; /* Added padding */
-    margin-bottom: 10px; /* Space between contacts */
 }
 
 .circle {
@@ -58,12 +76,22 @@ hr {
     border: 2px solid white;
     border-radius: 100%;
     color: white;
+    margin-right:10px;
 }
 
 .contactInformation {
     display: flex;
-    flex-direction: column; /* Stack name and email */
-    justify-content: center; /* Center them vertically */
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+}
+
+#contactView{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width: calc(100% - (31.66% + 232px));
+    padding-top:110px;
 }
 
 @media (max-width: 599px) {
@@ -73,43 +101,44 @@ hr {
     }
 }
 </style>
-<body>
-    <div id="contacts">
-        <section id="contactList">
-            <h3>M</h3>
-            <hr>
-            <div class="contact">
-                <div>
-                    <div class="circle">MB</div>
-                    <div class="contactInformation">
-                        <h3>Marcel Bauer</h3>
-                        <p>bauer@gmail.com</p>
+    <div id="contactsSiteContent">
+        <div id="contacts">
+            <section id="contactList">
+                <button id="addContactButton">Add a new contact *</button>
+                <h3>M</h3>
+                <hr>
+                <div class="contact">
+                    <div>
+                        <div class="circle">MB</div>
+                        <div class="contactInformation">
+                            <h3>Marcel Bauer</h3>
+                            <p>bauer@gmail.com</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="contact">
-                <div>
-                    <div class="circle">MM</div>
-                    <div class="contactInformation">
-                        <h3>Martin Meier</h3>
-                        <p>meierM@gmail.com</p>
+                <div class="contact">
+                    <div>
+                        <div class="circle">MM</div>
+                        <div class="contactInformation">
+                            <h3>Martin Meier</h3>
+                            <p>meierM@gmail.com</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <hr>
-            <div class="contact">
-                <div>
-                    <div class="circle">MM</div>
-                    <div class="contactInformation">
-                        <h3>Martin Meier</h3>
-                        <p>meierM@gmail.com</p>
+                <div class="contact">
+                    <div>
+                        <div class="circle">MM</div>
+                        <div class="contactInformation">
+                            <h3>Martin Meier</h3>
+                            <p>meierM@gmail.com</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <hr>
-        </section>
-        <section id="selectedContact">
-        </section>
+            </section>
+            <section id="selectedContact">
+            </section>
+        </div>
+        <div id="contactView">
+            <h2>Contacts</h2><h3>Better with a Team</h3>
+        </div>
     </div>
-</body>
-</html>
