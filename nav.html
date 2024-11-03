@@ -3,167 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Responsive Navigation</title>
     <style>
         * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        html, body {
-            height: 100%;
+        nav ul li a{
+            text-decoration: none;
+            color:#CDCDCD;
         }
-        body{
-            display:flex;
-        }
-        /*header*/
-        #wrapper {
+        body {
             display: flex;
-            justify-content: flex-end;
+            height: 100vh;
+            font-family: Arial, sans-serif;
         }
         header {
-            height: 50px;
+            height: 80px;
+            background: white;
             display: flex;
-            justify-content: space-around;
             align-items: center;
-            width: calc(100% - 232px);
-            background: blue;
+            justify-content:space-around;
+            position: fixed;
+            width:calc(100% - 232px);
+            top: 0;
+            z-index:1000;
+            left: 232px;
+            box-shadow: 0px 4px 4px 0px #0000001A;
         }
-        #headerControls {
-            display: flex;
+        #headerControls{
+            display:flex;
             align-items: center;
-            gap: 15px;
+            justify-content: center;
+            gap:25px;
         }
         #firstLetter {
             border-radius: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 5px;
+            width:35px;
+            height:35px;
             border: 1px solid black;
+            color: #29ABE2;
         }
-        /*sidebar*/
-        .activeMenuPoint {
-            color: red;
+        #sidebar {
+            width: 232px;
+            background: #2A3647;
+            color: #CDCDCD;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            position:fixed;
+            left:0;
+            height:100vh;
+            transition: transform 0.3s ease;
         }
-        nav {
+        #sideBarNavigation {
+            padding-top:150px;
+            list-style: none;
+            display:flex;
+            flex-direction:column;
+            justify-content:flex-start;
+            gap:15px;
+        }
+        #sideBarNavigation li a{
+            display:flex;
+            justify-content:flex-start;
+            align-items:center;
+            gap:20px;
+        }
+        #sidebar ul li a {
+            color: #CDCDCD;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        #content {
+            flex-grow: 1;
+            transition: margin-left 0.3s ease;
+            padding-top:80px;
+        }
+        #mobileNav {
+            display: none; /* Standardmäßig ausblenden */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
             background: #2A3647;
             color: #CDCDCD;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            flex-direction: column;
-            height: 100vh;
-            width: 232px; /*16.11vw;*/
-            font-size: 16px;
-        }
-        nav div {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 60px;
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 20px;
-            flex-direction: column;
-        }
-        nav ul li a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            gap: 10px;
-            font-size: 16px;
-            flex-direction:column;
-        }
-        nav ul li a:hover {
-            cursor: pointer;
-        }
-        /*sidebar*/
-        #sidebar{
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            background:green;
-        }
-        /*mobile navigation*/
-
-
-        #mobileNav {
-            display: none; /* Standardmäßig ausblenden */
-            flex-direction: row;
-            height: 100px;
-            width: 100vw;
-            justify-content: center;
-            align-items: center;
-            position: fixed; /* Ändere von absolute auf fixed */
-            bottom: 0;
-            background-color: #2A3647;
-            }
-        #mobileNav ul {
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-            height: 50px;
-            justify-content: center;
-            align-items: center;
-        }
-        #mobileNav ul li {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        #contentBox{
-            width:calc(100% - 232px);
-            background:green;
+            z-index: 1000;
+            height:80px;
         }
 
-        /*media queries*/
-        @media (max-width: 599px) {
-            #mobileNav {
-                display: flex;
-            }
-            #sideBar {
-                display: none;
-            }
-            #wrapper{
-                justify-content:flex-start;
-                width:100%;
-            }
+        /* Media Queries */
+        @media (max-width: 599px) { /*unter 600*/
             header{
+                height:96px;
+                width:100vw;
+                left:0;
+            }
+            #headerText{
+                display:none;
+            }
+            #headerLogo{
+                display:flex;
+            }
+            #sidebar {
+                transform: translateX(-100%); /* Sidebar ausblenden */
+            }
+            #mobileNav ul{
                 width:100%;
+                list-style:none;
+                display:flex;
+                justify-content: space-around;
+            }
+            #mobileNav {
+                display: flex; /* Mobile Navigation anzeigen */
+            }
+            #mobileNav ul li a{
+                display:flex;
+                justify-content: space-between;
+                width:100%;
+                font-size:14px;
+            }
+            #mobileNav ul{
+                display:flex;
+            }
+            #mobileNav img{
+                height:32px;
+            }
+            #mobileNav ul li a{
+                display:flex;
+                flex-direction:column;
+            }
+            #content{
+                padding-top:96px;
             }
         }
 
-        @media (min-width: 600px) {
-            #mobileNav {
-                display: none;
+        @media (min-width: 600px) { /*über 600*/
+            #headerText{
+                display:flex;
             }
-            #sideBar {
-                display: flex;
+            #headerLogo{
+                display:none;
+            }
+            #mobileNav{
+                display: none; /* Mobile Navigation ausblenden */
+            }
+            #content {
+            margin-left: 232px; /* Platz für die Sidebar */
             }
         }
     </style>
 </head>
 <body>
-    <div id="wrapper">
-        <header>
-            <span>Kanban Project Management Tool</span>
-            <div id="headerControls">
-                <span>?</span>
-                <span id="firstLetter">G</span>
-            </div>
-        </header>
-    </div>
-    <nav
-     id="sideBar">
+    <header>
+        <span id="headerText">Kanban Project Management Tool</span>
+        <a class="naviLink" href="summary.html"><img id="headerLogo" src="img/nav/mobileLogo.svg"></a>
+        <div id="headerControls">
+            <span>?</span>
+            <span id="firstLetter">G</span>
+        </div>
+    </header>
+    <nav id="sidebar">
         <div id="topPart">
-            <a href="summary.html"><img src="img/nav/logo.svg"></a>
+            <a class="naviLink" href="summary.html"><img src="img/nav/logo.svg"></a>
             <ul id="sideBarNavigation">
                 <li><a href="summary.html"><img src="img/nav/summary.svg">Summary</a></li>
                 <li><a href="task.html"><img src="img/nav/addTasks.svg">Add Tasks</a></li>
@@ -172,23 +183,26 @@
             </ul>
         </div>
         <ul>
-            <li><a href="privacyPolicy.html">Privacy Policy</a></li>
-            <li><a href="legalNotice.html">Legal notice</a></li>
+            <li><a class="naviLink" href="privacyPolicy.html">Privacy Policy</a></li>
+            <li><a class="naviLink" href="legalNotice.html">Legal notice</a></li>
         </ul>
     </nav>
+    <div id="content" w3-include-html="task.html">
+        <h2>Inhalt</h2>
+        <p>Hier ist der Hauptinhalt der Seite.</p>
+    </div>
     <nav id="mobileNav">
         <ul>
-            <li><a><img src="img/nav/summaryMobile.svg"><span>Summary</span></a></li>
-            <li><a><img src="img/nav/addTasksMobile.svg">Add Task</a></li>
-            <li><a><img src="img/nav/boardMobile.svg">Board</a></li>
-            <li><a><img src="img/nav/contactsMobile.svg">Contacts</a></li>
+            <li><a href="summary.html"><img src="img/nav/summaryMobile.svg"><span>Summary</span></a></li>
+            <li><a href="task.html"><img src="img/nav/addTasksMobile.svg">Add Task</a></li>
+            <li><a href="board.html"><img src="img/nav/boardMobile.svg">Board</a></li>
+            <li><a href="contact.html"><img src="img/nav/contactsMobile.svg">Contacts</a></li>
         </ul>
     </nav>
-    <script src="nav.js"></script>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <div id="contentBox" w3-include-html="task.html"></div>
     <script>
         w3.includeHTML();
     </script>
+    <script src="nav.js"></script>
 </body>
 </html>
