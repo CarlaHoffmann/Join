@@ -666,3 +666,9 @@ button {
         width: 360px;
     }
 }
+
+@media(max-width: 640px) {
+    .form-box-outer {
+        height: calc(100vh - 176px);
+    }
+}
