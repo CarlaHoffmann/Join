@@ -18,18 +18,24 @@ body {
     width: 100%;
 }
 
-form {
-    /* padding: 40px; */
+/* form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+} */
 
+.upper-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    gap: 30px;
 }
 
 .fill-in-part {
     overflow-y: auto; /* Scrollen aktivieren */
-    max-height: calc(900px - 400px);
+    max-height: calc(900px - 280px);
 }
 
 .fill-in-part::-webkit-scrollbar {
@@ -39,7 +45,6 @@ form {
 .add-task-form {
     width: 100%;
     display: flex;
-    /* justify-content: space-between; */
     gap: 40px;
     margin-bottom: 20px;
 }
@@ -56,10 +61,8 @@ form {
     width: 0px;
     height: 424px;
     border: 1px solid #D1D1D1; 
-    /* background-color: #D1D1D1;   */
-    /* Farbe des Strichs, anpassbar */
     display: inline-block;
-    /* margin: 20 20px; */
+    margin: 20px 20px;
 }
 
 #add-task-second {
@@ -568,7 +571,8 @@ button {
 .add-task-bottom {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
 
 .bottom-buttons {
@@ -624,20 +628,26 @@ button {
 @media(max-width: 1275px) {
     .add-task-form {
         flex-direction: column;
-        margin-bottom: 30px;
     }
 
     form {
         padding: 0px;
     }
 
-    h1 {
-        margin-bottom: 20px;
+    #add-task-first {
+        width: 396px; 
+    }
+
+    .title {
+        width: 396px;
+    }
+    
+    #add-task-second {
+        width: 396px;
     }
 
     .add-task-bottom {
         justify-content: end;
-        margin-top: 20px;
     }
 
     .bottom-buttons {
@@ -654,21 +664,44 @@ button {
 }
 
 @media(max-width:680px) {
+    .upper-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 12px 16px;
+    }
+
     #add-task-first {
-        width: 360px; 
+        width: 320px; 
     }
 
     .title {
-        width: 360px;
+        width: 320px;
     }
     
     #add-task-second {
-        width: 360px;
+        width: 320px;
+    }
+
+    .fill-in-part {
+        /* padding: 12px 16px; */
+        /* width: 440px; */
+        /* display: flex;
+        justify-content: center;
+        align-items: center; */
+    }
+
+    .add-task-bottom {
+        padding: 12px 16px;
     }
 }
 
 @media(max-width: 640px) {
     .form-box-outer {
-        height: calc(100vh - 176px);
+        height: calc(100vh - 160px);
+    }
+
+    .fill-in-part {
+        height: calc(900px - 312px);
     }
 }

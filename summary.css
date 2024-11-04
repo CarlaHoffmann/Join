@@ -384,6 +384,6 @@ body {
 
 @media(max-width: 640px) {
     .outer-box {
-        height: calc(100vh - 176px);
+        height: calc(100vh - 160px);
     }
 }
