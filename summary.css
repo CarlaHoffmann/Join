@@ -2,6 +2,7 @@ body {
     margin: 0;
     font-family: "Inter", sans-serif;
     font-size: 20px;
+    color: #2A3647;
 }
 
 .outer-box {
@@ -13,13 +14,12 @@ body {
 #summary-page {
     padding-top: 110px;
     padding-left: 96px;
-    /* padding-right: 96px; */
     display: flex;
     flex-direction: column;
     gap: 50px;
 }
 
-#header {
+#header-box {
     display: flex;
     align-items: center;
     gap: 30px;
@@ -53,6 +53,15 @@ body {
     background-color: #FFFFFF;
     border-radius: 30px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.box:hover {
+    transform: scale(1.1); /* Leichte Vergrößerung beim Hover */
+}
+
+#deadline-box:hover {
+    transform: scale(1.06);
 }
 
 .box-row {
@@ -62,6 +71,7 @@ body {
 .number {
     font-size: 64px;
     font-weight: 600;
+    color: #000000;
 }
 
 .no-wrap {
@@ -110,10 +120,42 @@ body {
     width: 100%;
 }
 
+.symbol-box-prio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
 .todo {
     box-sizing: border-box;
     padding: 38px 58px;
     width: 264px;
+}
+
+.todo:hover {
+    background-color: #2A3647;
+    color: #FFFFFF;
+}
+
+.todo:hover .number {
+    color: #FFFFFF;
+}
+
+.hover-show {
+    display: none;
+}
+
+.todo:hover .hover-hide {
+    display: none;
+}
+
+.todo:hover .hover-show {
+    display: block;
+}
+
+.todo:hover .mobile {
+    display: none;
 }
 
 #deadline-box {
@@ -124,6 +166,15 @@ body {
     justify-content: center;
     gap: 61px;
     padding: 28px 48px;
+}
+
+#deadline-box:hover {
+    background-color: #2A3647;
+    color: #FFFFFF;
+}
+
+#deadline-box:hover .number {
+    color: #FFFFFF;
 }
 
 #deadline-symbol {
@@ -171,6 +222,15 @@ body {
     padding: 25px;
 }
 
+.sum-up:hover {
+    background-color: #2A3647;
+    color: #FFFFFF;
+}
+
+.sum-up:hover .number {
+    color: #FFFFFF;
+}
+
 .description {
     text-wrap: wrap;
 }
@@ -198,15 +258,36 @@ body {
     }
 }
 
-@media(max-width: 765px) {
+@media(max-width: 720px) {
+    .outer-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }  
+
+    #summary-page {
+        padding-top: 0px;
+        padding-left: 40px;
+    }
+}
+
+@media(max-width: 640px) {
     .outer-box {
         display: flex;
         justify-content: center;
-        /* align-items: center; */
     }
 
     #summary-page {
         padding-left: 0;
+        padding-top: 0;
+        gap: 36px;
+    }    
+
+    #header-box {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
     }
 
     #title {
@@ -250,8 +331,24 @@ body {
         display: none;
     }
 
+    .todo:hover .desktop {
+        display: none;
+    }
+
+    .todo:hover .mobile.hover-show {
+        display: block;
+    }
+
+    .hover-show {
+        display: none;
+    }
+
     .todo {
         width: 186px;
+    }
+
+    .todo:hover {
+        background-color: #2A3647;
     }
 
     #deadline-box {
@@ -261,6 +358,21 @@ body {
         gap: 20px;
     }
 
+    #deadline-symbol {
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+    }
+
+    #deadline-image {
+        width: 22.79px;
+        height: 16.74px;
+    }
+
+    #date-info {
+        gap: 8px;
+    }
+
     .deadline-date {
         font-size: 16px;
     }
@@ -268,16 +380,5 @@ body {
     .sum-up {
         width: 116px;
         height: 116px;
-    }
-}
-
-@media(max-width: 530px) {
-    #header {
-        display: flex;
-        flex-direction: column;
-    }
-
-    #header img {
-        display: none;
     }
 }
