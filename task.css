@@ -9,7 +9,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #F6F7F8;
-    height: 1000px;
+    height: calc(100vh - 96px);
 }
 .form-box {
     display: flex;
@@ -19,12 +19,21 @@ body {
 }
 
 form {
-    padding: 40px;
-    /* flex-grow: 1; */
+    /* padding: 40px; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+
+}
+
+.fill-in-part {
+    overflow-y: auto; /* Scrollen aktivieren */
+    max-height: calc(900px - 400px);
+}
+
+.fill-in-part::-webkit-scrollbar {
+    display: none;
 }
 
 .add-task-form {
@@ -32,7 +41,7 @@ form {
     display: flex;
     /* justify-content: space-between; */
     gap: 40px;
-    margin-bottom: 160px;
+    margin-bottom: 20px;
 }
 
 #add-task-first {
@@ -559,6 +568,7 @@ button {
 .add-task-bottom {
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
 }
 
 .bottom-buttons {
@@ -607,4 +617,52 @@ button {
     background-color: #29ABE2;
 }
 
-/* @media {} */
+.hide-desktop {
+    display: none;
+}
+
+@media(max-width: 1275px) {
+    .add-task-form {
+        flex-direction: column;
+        margin-bottom: 30px;
+    }
+
+    form {
+        padding: 0px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .add-task-bottom {
+        justify-content: end;
+        margin-top: 20px;
+    }
+
+    .bottom-buttons {
+        gap: 32px;
+    }
+
+    .hide-mobile {
+        display: none;
+    }
+
+    .hide-desktop {
+        display: block;
+    }
+}
+
+@media(max-width:680px) {
+    #add-task-first {
+        width: 360px; 
+    }
+
+    .title {
+        width: 360px;
+    }
+    
+    #add-task-second {
+        width: 360px;
+    }
+}

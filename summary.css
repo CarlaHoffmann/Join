@@ -6,8 +6,8 @@ body {
 }
 
 .outer-box {
-    width: 100vw;
-    height: 100vh;
+    width: calc(100vw - 232px);
+    height: calc(100vh - 96px);
     background-color: #F6F7F8;
 }
 
@@ -252,26 +252,34 @@ body {
     color: #29ABE2;
 }
 
-@media(max-width: 1125px) {
+@media(max-width: 1375px) {
     #greeting-box {
         display: none;
     }
-}
 
-@media(max-width: 720px) {
     .outer-box {
         display: flex;
         align-items: center;
         justify-content: center;
-    }  
+    } 
 
     #summary-page {
         padding-top: 0px;
-        padding-left: 40px;
+        padding-left: 0px;
     }
 }
 
-@media(max-width: 640px) {
+/* @media(max-width: 830px) {
+    #title {
+        font-size: 47px;
+    }
+
+    #headline {
+        font-size: 20px;
+    }
+} */
+
+@media(max-width: 830px) {
     .outer-box {
         display: flex;
         justify-content: center;
