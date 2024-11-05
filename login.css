@@ -151,7 +151,7 @@ h2::after {
 }
 
 .input-wrapper:focus-within {
-    outline: 2px solid #29ABE2; 
+    outline: 1px solid #29ABE2; 
 }
 
 .input-wrapper img {
