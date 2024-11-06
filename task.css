@@ -34,7 +34,8 @@ body {
 }
 
 .fill-in-part {
-    overflow-y: auto; /* Scrollen aktivieren */
+    /* overflow-y: auto;  */
+    /* Scrollen aktivieren */
     max-height: calc(900px - 280px);
 }
 
@@ -131,6 +132,15 @@ label {
     display: none;
 }
 
+.blue-border {
+    border-color: #29ABE2;
+    cursor: pointer;
+}
+
+.blue-border:hover {
+    border-color: #29ABE2;
+}
+
 /* Add Task*/
 h1 {
     font-size: 61px;
@@ -168,60 +178,41 @@ h1 {
 
 
 /* Contact Selection*/
-.custom-select {
+#contact-selection {
     position: relative;
 }
 
-.select-selected {
+.selection-field {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
 }
 
-.select-selected p {
+.selection-field p {
     margin: 0;
 }
 
-/* .select-selected:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    width: 0;
-    height: 0;
-    border: 6px solid transparent;
-    border-color: #000 transparent transparent transparent;
-} */
-
-.select-items {
+#contact-drop-down {
     position: absolute;
     background-color: white;
-    top: 100%;
+    top: 0;
     left: 0;
     right: 0;
     z-index: 99;
     border: 1px solid #D1D1D1;
     border-top: none;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 10px;
 }
-
-.select-hide {
-    display: none;
-}
-
-/* .select-items div {
-    padding: 10px 16px;
-    cursor: pointer;
-} */
-
-/* .select-items div:hover {
-    background-color: #f1f1f1;
-} */
 
 .selection-name {
     display: flex;
     justify-content: space-between;
+    padding: 12px 16px;
+}
+
+.selection-name:hover {
+    background-color: #efefef;
+    border-radius: 10px;
 }
 
 .selected-contacts {
@@ -634,6 +625,10 @@ button {
         padding: 0px;
     }
 
+    .fill-in-part {
+        overflow-y: auto; 
+    }
+
     #add-task-first {
         width: 396px; 
     }
@@ -681,14 +676,6 @@ button {
     
     #add-task-second {
         width: 320px;
-    }
-
-    .fill-in-part {
-        /* padding: 12px 16px; */
-        /* width: 440px; */
-        /* display: flex;
-        justify-content: center;
-        align-items: center; */
     }
 
     .add-task-bottom {

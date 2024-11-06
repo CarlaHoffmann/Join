@@ -5,7 +5,30 @@
 
 
 // Assigned to
+function openAssigned() {
+    // let selectField = document.getElementById('select-field');
+    // selectField.classList.add('d-none');    
 
+    let contactSelection = document.getElementById('contact-selection');
+    contactSelection.innerHTML = `
+        <div id="contact-drop-down" class="select-items">
+            <div onclick="closeAssigned()" id="contact-dropped-down" class="selection-field form-field pad-12-16 blue-border"><p>Select contacts to assign</p><img class="symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt=""></div>
+            <div class="selection-name"><label for="sofia">Sofia Müller (You)</label><input type="checkbox" id="sofia" value="Sofia Müller"></div>
+            <div class="selection-name"><label for="anton">Anton Mayer</label><input type="checkbox" id="anton" value="Anton Mayer"></div>
+            <div class="selection-name"><label for="anja">Anja Schulz</label><input type="checkbox" id="anja" value="Anja Schulz"></div>
+            <div class="selection-name"><label for="benedikt">Benedikt Ziegler</label><input type="checkbox" id="benedikt" value="Benedikt Ziegler"></div>
+            <div class="selection-name"><label for="david">David Eisenberg</label><input type="checkbox" id="david" value="David Eisenberg"></div>
+        </div>
+    `;
+    // icon.classList.toggle('dropdown-icon-mirrored'); 
+}
+
+function closeAssigned() {
+    let contactSelection = document.getElementById('contact-selection');
+    contactSelection.innerHTML = `
+        <div onclick="openAssigned()" id="select-field" class="selection-field form-field pad-12-16"><p>Select contacts to assign</p><img class="symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt=""></div>
+    `;
+}
 
 
 
