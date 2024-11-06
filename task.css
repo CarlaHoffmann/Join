@@ -222,7 +222,7 @@ h1 {
     margin-top: 10px;
 }
 
-.contact-initials {
+.contact-initial {
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -231,7 +231,8 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
+    font-weight: 400;
+    font-size: 12px;
 }
 
 

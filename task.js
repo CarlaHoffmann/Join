@@ -1,3 +1,5 @@
+let selectedContacts = [];
+
 // Title
 
 
@@ -6,29 +8,82 @@
 
 // Assigned to
 function openAssigned() {
-    // let selectField = document.getElementById('select-field');
-    // selectField.classList.add('d-none');    
-
     let contactSelection = document.getElementById('contact-selection');
     contactSelection.innerHTML = `
         <div id="contact-drop-down" class="select-items">
-            <div onclick="closeAssigned()" id="contact-dropped-down" class="selection-field form-field pad-12-16 blue-border"><p>Select contacts to assign</p><img class="symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt=""></div>
-            <div class="selection-name"><label for="sofia">Sofia Müller (You)</label><input type="checkbox" id="sofia" value="Sofia Müller"></div>
-            <div class="selection-name"><label for="anton">Anton Mayer</label><input type="checkbox" id="anton" value="Anton Mayer"></div>
-            <div class="selection-name"><label for="anja">Anja Schulz</label><input type="checkbox" id="anja" value="Anja Schulz"></div>
-            <div class="selection-name"><label for="benedikt">Benedikt Ziegler</label><input type="checkbox" id="benedikt" value="Benedikt Ziegler"></div>
-            <div class="selection-name"><label for="david">David Eisenberg</label><input type="checkbox" id="david" value="David Eisenberg"></div>
+            <div onclick="closeAssigned()" id="contact-dropped-down" class="selection-field form-field pad-12-16 blue-border">
+                <p>Select contacts to assign</p><img class="symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
+            </div>
+            <div class="selection-name" onclick="toggleCheckbox('contact1', event)">
+                <label for="contact1">Sofia Müller (You)</label>
+                <input type="checkbox" id="contact1" value="Sofia Müller">
+            </div>
+            <div class="selection-name" onclick="toggleCheckbox('contact2', event)">
+                <label for="contact2">Anton Mayer</label>
+                <input type="checkbox" id="contact2" value="Anton Mayer">
+            </div>
+            <div class="selection-name" onclick="toggleCheckbox('contact3', event)">
+                <label for="contact3">Anja Schulz</label>
+                <input type="checkbox" id="contact3" value="Anja Schulz">
+            </div>
+            <div class="selection-name" onclick="toggleCheckbox('contact4', event)">
+                <label for="contact4">Benedikt Ziegler</label>
+                <input type="checkbox" id="contact4" value="Benedikt Ziegler">
+            </div>
+            <div class="selection-name" onclick="toggleCheckbox('contact5', event)">
+                <label for="contact5">David Eisenberg</label>
+                <input type="checkbox" id="contact5" value="David Eisenberg">
+            </div>
         </div>
     `;
-    // icon.classList.toggle('dropdown-icon-mirrored'); 
+
+    selectedContacts.forEach(name => {
+        let checkbox = Array.from(document.querySelectorAll('input[type="checkbox"]'))
+            .find(cb => cb.value === name);
+        if (checkbox) checkbox.checked = true;
+    });
+
+    updateSelectedContacts();
+}
+
+function toggleCheckbox(id, event) {
+    let checkbox = document.getElementById(id);
+    checkbox.checked = !checkbox.checked;
+
+    let contactName = checkbox.value;
+    if (checkbox.checked) {
+        if (!selectedContacts.includes(contactName)) {
+            selectedContacts.push(contactName);
+        }
+    } else {
+        selectedContacts = selectedContacts.filter(name => name !== contactName);
+    }
+    
+    updateSelectedContacts();
+    event.stopPropagation();
+}
+
+function updateSelectedContacts() {
+    let contactInitials = document.getElementById('selected-contacts');
+    contactInitials.innerHTML = '';
+    
+    selectedContacts.forEach(name => {
+        let initials = name.split(' ').map(word => word[0]).join('');
+        console.log(initials);
+        contactInitials.innerHTML += `<div class="contact-initial">${initials}</div>`;
+    });
 }
 
 function closeAssigned() {
     let contactSelection = document.getElementById('contact-selection');
     contactSelection.innerHTML = `
-        <div onclick="openAssigned()" id="select-field" class="selection-field form-field pad-12-16"><p>Select contacts to assign</p><img class="symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt=""></div>
+        <div onclick="openAssigned()" id="select-field" class="selection-field form-field pad-12-16">
+            <p>Select contacts to assign</p><img class="symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
+        </div>
     `;
 }
+
+
 
 
 
@@ -236,7 +291,7 @@ function getButtonContent(priority, isActive) {
 // Category
 function showCategory() {
     const dropdown = document.getElementById('opened-category');
-    const icon = document.querySelector('#dropdown-icon1');
+    const icon = document.querySelector('#dropdown-icon2');
 
     dropdown.classList.toggle('d-none'); // Dropdown anzeigen oder verbergen
     icon.classList.toggle('dropdown-icon-mirrored'); 
