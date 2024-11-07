@@ -18,19 +18,12 @@ body {
     width: 100%;
 }
 
-/* form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-} */
-
 .upper-form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    gap: 30px;
+    gap: 50px;
 }
 
 .fill-in-part {
@@ -63,7 +56,8 @@ body {
     height: 424px;
     border: 1px solid #D1D1D1; 
     display: inline-block;
-    margin: 20px 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 #add-task-second {
@@ -119,6 +113,10 @@ label {
     border-radius: 12px;
 }
 
+.icon-hover:hover {
+    transform: scale(1.1);
+}
+
 .red-asterisk {
     content: "*";
     color: red;
@@ -144,6 +142,8 @@ label {
 /* Add Task*/
 h1 {
     font-size: 61px;
+    margin: 0;
+
 }
 
 /* Title */
@@ -218,13 +218,14 @@ h1 {
 .selected-contacts {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 10px;
+    gap: 12px;
+    margin-top: 8px;
+    /* margin-left: 10px; */
 }
 
 .contact-initial {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background-color: #007bff;
     color: white;
@@ -233,6 +234,8 @@ h1 {
     justify-content: center;
     font-weight: 400;
     font-size: 12px;
+    /* margin-left: -10px;
+    z-index: 1; */
 }
 
 
@@ -515,7 +518,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px;
+    gap: 2px;
 }
 
 #opened-subtask input[type="text"] {
@@ -530,41 +533,89 @@ button {
     align-items: center;
 }
 
-.added-subtask {
+#subtasks {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+.subtask-box {
+    height: 22px;
     font-size: 16px;
     padding: 4px 16px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     position: relative;
 }
 
-.added-subtask:hover {
+.subtask-box:hover {
     background-color: rgb(239, 239, 239);
     border-radius: 10px;
-}
-
-.added-subtask:hover .added-subtask-icons {
-    display: inline;
     display: flex;
     flex-direction: row;
+}
+
+.subtask-box:hover .added-subtask-icons {
+    display: inline;
+    display: flex;
     gap: 4px;
+    position: absolute;
+    right: 16px;
+    top: 0px;
 }
 
 .added-subtask-icons {
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
+    /* display: flex;
+    gap: 4px; */
+    padding-top: 3px;
     display: none;
 }
+
+.edit-subtask-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.edit-subtask-input {
+    width: 100%;
+    height: 26px;
+    border: none;
+    border-bottom: 1px solid #29ABE2;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: 16px;
+    outline: none;
+}
+
+.edit-subtask-icons {
+    display: flex;
+    gap: 2px;
+    position: absolute;
+    right: 16px;
+    top: 3px;
+}
+
+.edit-subtask-icons img {
+    height: 22px;
+}
+
 
 
 /* Bottom*/
 .add-task-bottom {
     display: flex;
     justify-content: space-between;
+    align-items: end;
     padding-top: 12px;
     padding-bottom: 12px;
+    position: relative;
+    bottom: -40px;
 }
 
 .bottom-buttons {
@@ -644,6 +695,7 @@ button {
 
     .add-task-bottom {
         justify-content: end;
+        bottom: 0;
     }
 
     .bottom-buttons {
