@@ -70,7 +70,7 @@ function updateSelectedContacts() {
     
     selectedContacts.forEach(name => {
         let initials = name.split(' ').map(word => word[0]).join('');
-        contactInitials.innerHTML += `<div class="contact-initial">${initials}</div>`;
+        contactInitials.innerHTML += `<div class="contact-initial" value="${selectedContacts}">${initials}</div>`;
     });
 }
 
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const datepicker = document.getElementById('datepicker');
     const warningDialog = document.getElementById('warning-dialog');
     const dialogMessage = document.getElementById('dialog-message');
-    const dialogClose = document.getElementById('dialog-close');
+    // const dialogClose = document.getElementById('dialog-close');
 
     // Set current year and maximum allowed year
     const currentYear = new Date().getFullYear();
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listeners
     datepicker.addEventListener('input', handleDateInput);
     datepicker.addEventListener('blur', validateFullDate);
-    dialogClose.onclick = closeWarningDialog;
+    // dialogClose.onclick = closeWarningDialog;
     window.onclick = handleWindowClick;
 
     // Handle date input and formatting
@@ -195,115 +195,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
-// const CURRENT_YEAR = new Date().getFullYear();
-// const MAX_YEAR = CURRENT_YEAR + 5;
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     const datepicker = document.getElementById('datepicker');
-//     const warningDialog = document.getElementById('warning-dialog');
-//     const dialogMessage = document.getElementById('dialog-message');
-//     const dialogClose = document.getElementById('dialog-close');
-
-//     if (!datepicker || !warningDialog || !dialogMessage || !dialogClose) {
-//         console.error('One or more required elements are missing');
-//         return;
-//     }
-
-//     datepicker.addEventListener('input', handleDateInput);
-//     datepicker.addEventListener('blur', validateFullDate);
-//     dialogClose.addEventListener('click', closeWarningDialog);
-//     window.addEventListener('click', handleWindowClick);
-
-//     function handleDateInput(e) {
-//         let value = this.value.replace(/\D/g, '');
-//         let parts = [
-//             value.slice(0, 2),
-//             value.slice(2, 4),
-//             value.slice(4, 8)
-//         ];
-
-//         validateAndFormatParts(parts);
-//         this.value = formatDate(parts);
-//     }
-
-//     function validateAndFormatParts(parts) {
-//         validateDay(parts);
-//         validateMonth(parts);
-//         validateYear(parts);
-//     }
-
-//     function validateDay(parts) {
-//         if (parts[0].length === 2) {
-//             let day = parseInt(parts[0]);
-//             parts[0] = day < 1 ? '01' : day > 31 ? '31' : parts[0];
-//         }
-//     }
-
-//     function validateMonth(parts) {
-//         if (parts[1].length === 2) {
-//             let month = parseInt(parts[1]);
-//             parts[1] = month < 1 ? '01' : month > 12 ? '12' : parts[1];
-//         }
-//     }
-
-//     function validateYear(parts) {
-//         if (parts[2].length === 4) {
-//             let year = parseInt(parts[2]);
-//             if (year < CURRENT_YEAR) {
-//                 parts[2] = CURRENT_YEAR.toString();
-//                 showWarning(`Year must be ${CURRENT_YEAR} or later.`);
-//             } else if (year > MAX_YEAR) {
-//                 parts[2] = MAX_YEAR.toString();
-//                 showWarning(`Year cannot be later than ${MAX_YEAR}.`);
-//             }
-//         }
-//     }
-
-//     function formatDate(parts) {
-//         return parts.join('/').replace(/\/+$/, '');
-//     }
-
-//     function validateFullDate() {
-//         const parts = this.value.split('/');
-//         if (parts.length === 3 && parts[2].length === 4) {
-//             const day = parseInt(parts[0], 10);
-//             const month = parseInt(parts[1], 10);
-//             const year = parseInt(parts[2], 10);
-//             const date = new Date(year, month - 1, day);
-
-//             if (!isValidDate(date, day, month, year)) {
-//                 showWarning('Please enter a valid date.');
-//             }
-//         } else if (this.value !== '') {
-//             showWarning('Please enter the date in dd/mm/yyyy format.');
-//         }
-//     }
-
-//     function isValidDate(date, day, month, year) {
-//         return date.getDate() === day && date.getMonth() === month - 1 && date.getFullYear() === year;
-//     }
-
-//     function showWarning(message) {
-//         dialogMessage.textContent = message;
-//         warningDialog.style.display = 'block';
-//     }
-
-//     function closeWarningDialog() {
-//         warningDialog.style.display = 'none';
-//     }
-
-//     function handleWindowClick(event) {
-//         if (event.target == warningDialog) {
-//             closeWarningDialog();
-//         }
-//     }
-// });
 
 
 
 // Prio
 function priority(x) {
-    const currentPrio = document.getElementById(`prio-${x}`);
+    const currentPrio = document.getElementById(`prio${x}`);
     const allPrios = document.querySelectorAll('.prio-button');
 
     resetOtherButtons(allPrios, currentPrio);
@@ -361,7 +258,7 @@ function getPriorityClass(priority) {
 
 // Aktualisiert den Inhalt eines Buttons
 function updateButtonContent(button) {
-    const priority = button.id.split('-')[1];
+    const priority = button.id.replace('prio', '');
     const isActive = button.classList.contains('active-button');
     button.innerHTML = getButtonContent(priority, isActive);
 }

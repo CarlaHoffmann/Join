@@ -6,6 +6,7 @@
     <title>Add Task</title>
     <link rel="stylesheet" href="task.css">
     <script src="task.js"></script>
+    <script src="task_firebase.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -71,22 +72,22 @@
                                 <div class="button-box">
                                     Prio
                                     <div class="prio-buttons">
-                                        <button onclick="priority(1)" class="prio-button hover-button" id="prio-1">
+                                        <button onclick="priority(1)" class="prio-button hover-button" id="prio1">
                                             <p>Urgent</p>
                                             <div class="double-arrow-up">
-                                                <img src="./img/task/prio_high.svg" alt="">
+                                                <img src="./img/task/prio_high.svg" alt="high">
                                             </div>
                                         </button>
-                                        <button onclick="priority(2)" class="prio-button hover-button" id="prio-2">
+                                        <button onclick="priority(2)" class="prio-button hover-button" id="prio2">
                                             <p>Medium</p>
                                             <div class="double-line">
-                                                <img src="./img/task/prio_med.svg" alt="">
+                                                <img src="./img/task/prio_med.svg" alt="medium">
                                             </div>
                                         </button>
-                                        <button onclick="priority(3)" class="prio-button hover-button" id="prio-3">
+                                        <button onclick="priority(3)" class="prio-button hover-button" id="prio3">
                                             <p>Low</p>
                                             <div class="double-arrow-down">
-                                                <img src="./img/task/prio_low.svg" alt="">
+                                                <img src="./img/task/prio_low.svg" alt="low">
                                             </div>
                                         </button>
                                     </div>
@@ -149,7 +150,7 @@
                         <img class="icon-normal" src="./img/task/iconoir_cancel.svg" alt="">
                         <img class="icon-hover" src="./img/task/iconoir_cancel_hover.svg" alt="">
                     </button>
-                    <button class="submit-button hover-button">Create Task <img src="./img/task/check.svg" alt=""></button>
+                    <button onclick="createTask()" class="submit-button hover-button">Create Task <img src="./img/task/check.svg" alt=""></button>
                 </div>
             </div>
         </form>
