@@ -556,5 +556,4 @@ function clearForm() {
 // Diese Funktion beim Laden der Seite aufrufen
 document.addEventListener('DOMContentLoaded', setupFormValidation);
 
-
 document.addEventListener('DOMContentLoaded', initializePriority);

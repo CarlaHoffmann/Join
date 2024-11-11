@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="summary.css">
     <script src="summary.js"></script>
 </head>
-<body onload="init()">
+<body>
     <div class="outer-box">
         <div id="summary-page">
             <div id="header">
@@ -30,7 +30,7 @@
                                 <img class="mobile hover-show" src="./img/summary/todo_pen_mobile_hover.svg" alt="">
                             </div>
                             <div class="info">
-                                <div class="number">1</div>
+                                <div id="todo-counter" class="number">0</div>
                                 <div class="description no-wrap">To-do</div>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                                 <img class="mobile hover-show" src="./img/summary/done_check_mobile_hover.svg" alt="">
                             </div>
                             <div class="info">
-                                <div class="number">1</div>
+                                <div id="done-counter" class="number">0</div>
                                 <div class="description">Done</div>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                                     <img id="deadline-image" alt="">
                                 </div>
                                 <div class="info">
-                                    <div class="number">1</div>
+                                    <div is="deadline-counter" class="number">1</div>
                                     <div id="deadline-prio" class="deadline-info">Urgent</div>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                             </div>
                             
                             <div id="date-info">
-                                <div class="deadline-date">October 16, 2022</div>
+                                <div id="deadline-date" class="deadline-date">October 16, 2022</div>
                                 <div class="deadline-info">Upcoming Deadline</div>
                             </div>
                         </div>
@@ -73,15 +73,15 @@
 
                     <div id="sum-up-box" class="box-row">
                         <div class="box sum-up">
-                            <div class="number">5</div>
+                            <div id="tasks-counter" class="number">0</div>
                             <div class="description">Tasks in Board</div>
                         </div>
                         <div class="box sum-up">
-                            <div class="number">2</div>
+                            <div id="in-progress-counter" class="number">0</div>
                             <div class="description">Tasks in Progress</div>
                         </div>
                         <div class="box sum-up">
-                            <div class="number">2</div>
+                            <div id="feedback-awaiting-counter" class="number">0</div>
                             <div class="description">Awaiting Feedback</div>
                         </div>
                     </div>
