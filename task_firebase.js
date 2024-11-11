@@ -8,7 +8,7 @@ function checkForm() {
     createTask();
 }
 
-function createTask() {
+async function createTask() {
     let task = {
         title: takeTitle(),
         description: takeDescription(),
@@ -17,9 +17,11 @@ function createTask() {
         prio: takePrio(),
         category: takeCatergory(),
         subtasks: takeSubtask(),
-        }
-    
-    postData(task);
+    }
+    console.log("Task to be sent:", task);
+    await postData(task);
+    // clearForm(); // Hier wird das Formular geleert
+    // showTaskAddedOverlay();
 }
 
 async function postData(taskData) {

@@ -1,5 +1,8 @@
+const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
+
 function init() {
-    deadlineSymbol()
+    deadlineSymbol();
+    countToDo();
 }
 
 function deadlineSymbol() {
@@ -29,3 +32,10 @@ function deadlineSymbol() {
         symbol.src = "./img/summary/prio_low.svg";
     }
 }
+
+function countToDo() {}
+function countDone() {}
+
+function countTasksOnBoard() {}
+function countTasksInProgress() {}
+function countAwaitingFeedback() {}
