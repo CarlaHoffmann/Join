@@ -1,4 +1,5 @@
-/* Global Styles */
+/* Standard-Styling (Desktop) */
+
 body {
     background-color: #F0F0F0;
     font-family: "Inter", sans-serif;
@@ -10,7 +11,7 @@ body {
     overflow: hidden;
 }
 
-/*  Overlay Background */
+/* Hintergrundüberlagerung */
 .overlay {
     position: absolute;
     top: 0;
@@ -26,23 +27,22 @@ body {
     pointer-events: none; 
 }
 
-/* Overlay Logo */
+/* Logo */
 .logo {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: auto;
-    transform: translate(-50%, -50%) scale(3); /* DREI MAL GRÖßER! */
-    transition: all 1s ease;
+    transform: translate(-50%, -50%) scale(3);
+    transition: all 0.5s ease;
     z-index: 2;
 }
-/* Logo verkleinert */
 .logo.shrink {
     top: 60px;
     left: 60px;
-    transform: translate(0, 0) scale(1); 
+    transform: translate(0, 0) scale(1);
 }
 
+/* Anmeldecontainer */
 .signup-container {
     position: absolute;
     top: 60px;
@@ -158,8 +158,8 @@ h2::after {
     margin-right: 10px;
     width: 24px;
     height: 24px;
+    flex-shrink: 0; /* Verhindert, dass das Icon beim Skalieren verschwindet */
 }
-
 
 .remember-me {
     display: flex;
@@ -169,13 +169,14 @@ h2::after {
     left: -100px;
 }
 
-/* Button Section */
+/* Button-Bereich */
 .button-group {
     display: flex;
     flex-direction: row;
     gap: 35px;
     position: relative;
 }
+
 .btn-login {
     font-size: 21px;
     font-weight: 700;
@@ -211,14 +212,13 @@ h2::after {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-/* Checkbox Button */
+/* Checkbox */
 .remember-me img {
     cursor: pointer; 
 }
 .remember-me img:active {
     transform: scale(0.95); 
 }
-
 
 /* Footer */
 footer {
@@ -240,6 +240,106 @@ footer a:hover {
     cursor: pointer;
 }
 
-.overlay.mobile-overlay {
-    background-color: #2A3647;
+/* Responsive Styling */
+
+/* Tablet-Anpassungen */
+@media (max-width: 768px) {
+    .login-container form {
+        width: 90%;
+        height: auto;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .logo {
+        transform: translate(-50%, -50%) scale(1.5);
+        background-color: #e23829;
+
+    }
+
+    .signup-container {
+        top: 30px;
+        right: 30px;
+        gap: 15px;
+    }
+
+    .signup-container p {
+        font-size: 16px;
+    }
+
+    .signup-button {
+        height: 35px;
+        width: 70px;
+        font-size: 14px;
+    }
+
+    h2 {
+        font-size: 48px;
+    }
+
+    .input-wrapper {
+        width: 80%;
+        font-size: 16px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-login, .btn-guest {
+        width: 80%;
+    }
+}
+
+/* Mobile-Anpassungen */
+@media (max-width: 480px) {
+    .logo {
+        transform: translate(-50%, -50%) scale(1);
+        background-color: #29ABE2;
+    }
+
+    .signup-container {
+        top: 20px;
+        right: 20px;
+        gap: 10px;
+    }
+
+    .signup-container p {
+        font-size: 14px;
+    }
+
+    .signup-button {
+        height: 30px;
+        width: 60px;
+        font-size: 12px;
+    }
+
+    h2 {
+        font-size: 36px;
+    }
+
+    .input-wrapper {
+        width: 90%;
+        font-size: 14px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .btn-login, .btn-guest {
+        width: 90%;
+    }
+
+    footer {
+        flex-direction: column;
+        bottom: 20px;
+        gap: 20px;
+    }
+
+    footer a {
+        font-size: 14px;
+    }
 }
