@@ -1,12 +1,5 @@
 let selectedContacts = [];
 
-
-// Title
-
-
-// Description
-
-
 // Assigned to
 function openAssigned() {
     let contactSelection = document.getElementById('contact-selection');
@@ -84,117 +77,211 @@ function closeAssigned() {
 }
 
 
-
 //Date
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize date picker and warning dialog elements
+// document.addEventListener('DOMContentLoaded', function() {
+//     // Initialize date picker and warning dialog elements
+//     const datepicker = document.getElementById('datepicker');
+//     const warningDialog = document.getElementById('warning-dialog');
+//     const dialogMessage = document.getElementById('dialog-message');
+//     // const dialogClose = document.getElementById('dialog-close');
+
+//     // Set current year and maximum allowed year
+//     const currentYear = new Date().getFullYear();
+//     const maxYear = currentYear + 5;
+
+//     // Add event listeners
+//     datepicker.addEventListener('input', handleDateInput);
+//     datepicker.addEventListener('blur', validateFullDate);
+//     // dialogClose.onclick = closeWarningDialog;
+//     window.onclick = handleWindowClick;
+
+//     // Handle date input and formatting
+//     function handleDateInput(e) {
+//         let value = this.value.replace(/\D/g, '');
+//         let parts = [
+//             value.slice(0, 2),
+//             value.slice(2, 4),
+//             value.slice(4, 8)
+//         ];
+
+//         validateAndFormatParts(parts);
+//         this.value = formatDate(parts);
+//     }
+
+//     // Validate and format individual date parts
+//     function validateAndFormatParts(parts) {
+//         validateDay(parts);
+//         validateMonth(parts);
+//         validateYear(parts);
+//     }
+
+//     // Validate day (01-31)
+//     function validateDay(parts) {
+//         if (parts[0].length === 2) {
+//             let day = parseInt(parts[0]);
+//             if (day < 1) parts[0] = '01';
+//             if (day > 31) parts[0] = '31';
+//         }
+//     }
+
+//     // Validate month (01-12)
+//     function validateMonth(parts) {
+//         if (parts[1].length === 2) {
+//             let month = parseInt(parts[1]);
+//             if (month < 1) parts[1] = '01';
+//             if (month > 12) parts[1] = '12';
+//         }
+//     }
+
+//     // Validate year (currentYear-maxYear)
+//     function validateYear(parts) {
+//         if (parts[2].length === 4) {
+//             let year = parseInt(parts[2]);
+//             if (year < currentYear) parts[2] = currentYear.toString();
+//             if (year > maxYear) parts[2] = maxYear.toString();
+//         }
+//     }
+
+//     // Format date parts into a string
+//     function formatDate(parts) {
+//         return parts.join('/').replace(/\/+$/, '');
+//     }
+
+//     // Validate the full date on blur
+//     function validateFullDate() {
+//         const parts = this.value.split('/');
+//         if (parts.length === 3 && parts[2].length === 4) {
+//             const day = parseInt(parts[0], 10);
+//             const month = parseInt(parts[1], 10) - 1;
+//             const year = parseInt(parts[2], 10);
+//             const date = new Date(year, month, day);
+
+//             if (!isValidDate(date, day, month, year)) {
+//                 showWarning('Please enter a valid date.');
+//             }
+//         } else if (this.value !== '') {
+//             showWarning('Please enter the date in dd/mm/yyyy format.');
+//         }
+//     }
+
+//     // Check if the date is valid
+//     function isValidDate(date, day, month, year) {
+//         return date.getDate() === day && date.getMonth() === month && date.getFullYear() === year;
+//     }
+
+//     // Display warning message
+//     function showWarning(message) {
+//         dialogMessage.textContent = message;
+//         warningDialog.style.display = 'block';
+//     }
+
+//     // Close warning dialog
+//     function closeWarningDialog() {
+//         warningDialog.style.display = 'none';
+//     }
+
+//     // Handle clicks outside the dialog to close it
+//     function handleWindowClick(event) {
+//         if (event.target == warningDialog) {
+//             closeWarningDialog();
+//         }
+//     }
+// });
+
+document.addEventListener('DOMContentLoaded', initializeDatePicker);
+
+function initializeDatePicker() {
     const datepicker = document.getElementById('datepicker');
     const warningDialog = document.getElementById('warning-dialog');
     const dialogMessage = document.getElementById('dialog-message');
-    // const dialogClose = document.getElementById('dialog-close');
-
-    // Set current year and maximum allowed year
     const currentYear = new Date().getFullYear();
     const maxYear = currentYear + 5;
 
-    // Add event listeners
+    setupEventListeners(datepicker, warningDialog);
+    
+    return { datepicker, warningDialog, dialogMessage, currentYear, maxYear };
+}
+
+function setupEventListeners(datepicker, warningDialog) {
     datepicker.addEventListener('input', handleDateInput);
     datepicker.addEventListener('blur', validateFullDate);
-    // dialogClose.onclick = closeWarningDialog;
-    window.onclick = handleWindowClick;
+    window.onclick = (event) => handleWindowClick(event, warningDialog);
+}
 
-    // Handle date input and formatting
-    function handleDateInput(e) {
-        let value = this.value.replace(/\D/g, '');
-        let parts = [
-            value.slice(0, 2),
-            value.slice(2, 4),
-            value.slice(4, 8)
-        ];
+function handleDateInput(e) {
+    let value = this.value.replace(/\D/g, '');
+    let parts = [value.slice(0, 2), value.slice(2, 4), value.slice(4, 8)];
+    validateAndFormatParts(parts);
+    this.value = formatDate(parts);
+}
 
-        validateAndFormatParts(parts);
-        this.value = formatDate(parts);
+function validateAndFormatParts(parts) {
+    validateDay(parts);
+    validateMonth(parts);
+    validateYear(parts);
+}
+
+function validateDay(parts) {
+    if (parts[0].length === 2) {
+        let day = parseInt(parts[0]);
+        if (day < 1) parts[0] = '01';
+        if (day > 31) parts[0] = '31';
     }
+}
 
-    // Validate and format individual date parts
-    function validateAndFormatParts(parts) {
-        validateDay(parts);
-        validateMonth(parts);
-        validateYear(parts);
+function validateMonth(parts) {
+    if (parts[1].length === 2) {
+        let month = parseInt(parts[1]);
+        if (month < 1) parts[1] = '01';
+        if (month > 12) parts[1] = '12';
     }
+}
 
-    // Validate day (01-31)
-    function validateDay(parts) {
-        if (parts[0].length === 2) {
-            let day = parseInt(parts[0]);
-            if (day < 1) parts[0] = '01';
-            if (day > 31) parts[0] = '31';
+function validateYear(parts) {
+    const { currentYear, maxYear } = initializeDatePicker();
+    if (parts[2].length === 4) {
+        let year = parseInt(parts[2]);
+        if (year < currentYear) parts[2] = currentYear.toString();
+        if (year > maxYear) parts[2] = maxYear.toString();
+    }
+}
+
+function formatDate(parts) {
+    return parts.join('/').replace(/\/+$/, '');
+}
+
+function validateFullDate() {
+    const parts = this.value.split('/');
+    if (parts.length === 3 && parts[2].length === 4) {
+        const [day, month, year] = parts.map(part => parseInt(part, 10));
+        const date = new Date(year, month - 1, day);
+        if (!isValidDate(date, day, month - 1, year)) {
+            showWarning('Please enter a valid date.');
         }
+    } else if (this.value !== '') {
+        showWarning('Please enter the date in dd/mm/yyyy format.');
     }
+}
 
-    // Validate month (01-12)
-    function validateMonth(parts) {
-        if (parts[1].length === 2) {
-            let month = parseInt(parts[1]);
-            if (month < 1) parts[1] = '01';
-            if (month > 12) parts[1] = '12';
-        }
+function isValidDate(date, day, month, year) {
+    return date.getDate() === day && date.getMonth() === month && date.getFullYear() === year;
+}
+
+function showWarning(message) {
+    const { dialogMessage, warningDialog } = initializeDatePicker();
+    dialogMessage.textContent = message;
+    warningDialog.style.display = 'block';
+}
+
+function closeWarningDialog(warningDialog) {
+    warningDialog.style.display = 'none';
+}
+
+function handleWindowClick(event, warningDialog) {
+    if (event.target == warningDialog) {
+        closeWarningDialog(warningDialog);
     }
-
-    // Validate year (currentYear-maxYear)
-    function validateYear(parts) {
-        if (parts[2].length === 4) {
-            let year = parseInt(parts[2]);
-            if (year < currentYear) parts[2] = currentYear.toString();
-            if (year > maxYear) parts[2] = maxYear.toString();
-        }
-    }
-
-    // Format date parts into a string
-    function formatDate(parts) {
-        return parts.join('/').replace(/\/+$/, '');
-    }
-
-    // Validate the full date on blur
-    function validateFullDate() {
-        const parts = this.value.split('/');
-        if (parts.length === 3 && parts[2].length === 4) {
-            const day = parseInt(parts[0], 10);
-            const month = parseInt(parts[1], 10) - 1;
-            const year = parseInt(parts[2], 10);
-            const date = new Date(year, month, day);
-
-            if (!isValidDate(date, day, month, year)) {
-                showWarning('Please enter a valid date.');
-            }
-        } else if (this.value !== '') {
-            showWarning('Please enter the date in dd/mm/yyyy format.');
-        }
-    }
-
-    // Check if the date is valid
-    function isValidDate(date, day, month, year) {
-        return date.getDate() === day && date.getMonth() === month && date.getFullYear() === year;
-    }
-
-    // Display warning message
-    function showWarning(message) {
-        dialogMessage.textContent = message;
-        warningDialog.style.display = 'block';
-    }
-
-    // Close warning dialog
-    function closeWarningDialog() {
-        warningDialog.style.display = 'none';
-    }
-
-    // Handle clicks outside the dialog to close it
-    function handleWindowClick(event) {
-        if (event.target == warningDialog) {
-            closeWarningDialog();
-        }
-    }
-});
+}
 
 
 
@@ -317,8 +404,6 @@ function categorySelected(category) {
     document.getElementById('opened-category').classList.add('d-none'); 
 }
 
-
-
 // Subtask
 let subtasks = [];
 
@@ -381,7 +466,6 @@ function addSubtask() {
             </div>
         `;
     }
-
     closeSubtask();
 }
 
@@ -445,119 +529,15 @@ function updateSubtaskDisplay() {
     }
 }
 
-
-// Event Listener zur Überprüfung
-// document.addEventListener('DOMContentLoaded', function() {
-    // Titel-Validierung
-    // const titleInput = document.getElementById('title');
-    // if (titleInput) {
-    //     titleInput.addEventListener('input', validateTitle);
-    //     titleInput.addEventListener('blur', validateTitle);
-    // } else {
-    //     console.error('Element with id "title" not found');
-    // }
-    // Datums-Validierung
-    // const dateInput = document.getElementById('datepicker');
-    // if (dateInput) {
-    //     dateInput.addEventListener('input', validateDueDate);
-    //     dateInput.addEventListener('blur', validateDueDate);
-    // } else {
-    //     console.error('Element with id "datepicker" not found');
-    // }
-    // Kategorie-Validierung
-    // const categorySelection = document.getElementById('category-selection');
-    // const categoryErrorMessage = document.getElementById('category-error-message');
-    // if (categorySelection && categoryErrorMessage) {
-        // validateCategory(); // Initial check
-//         categorySelection.addEventListener('change', validateCategory);
-//     } else {
-//         console.error('Category selection or error message element not found');
-//     }
-// });
-
-// Validierungsfunktionen
-// function validateTitle() {
-//     const title = this.value.trim();  // trim für Leerzeichen am Anfang/Ende
-//     const titleError = document.getElementById('title-error');
-    
-//     // Wenn das Feld leer ist
-//     if (title === '') {
-//         titleError.classList.remove('d-none');  
-//     } else {
-//         titleError.classList.add('d-none');
-//     }
-// };
-
-// Datepicker-Eingabe in Echtzeit validieren
-// function validateDueDate() {
-//     const dueDate = this.value.trim();
-//     const dueDateError = document.getElementById('due-date-error');
-    
-//     if (dueDate === '') {
-//         dueDateError.classList.remove('d-none');  // Fehlermeldung anzeigen, wenn das Feld leer ist
-//     } else {
-//         dueDateError.classList.add('d-none');  // Fehlermeldung ausblenden, wenn ein Wert eingegeben wurde
-//     }
-// };
-
-// Kategorieauswahl validieren
-// function validateCategory() {
-//     const selectedValue = categorySelection.value;
-//     if (selectedValue === '' || selectedValue === 'Select task category') {
-//         categoryErrorMessage.classList.remove('d-none');
-//     } else {
-//         categoryErrorMessage.classList.add('d-none');
-//     }
-// }
-
-// Formular-Validierung beim Absenden
-// function validateForm() {
-//     let isValid = true;
-
-    // Title-Feld-Validierung (muss mindestens 3 Zeichen enthalten)
-    // const title = document.getElementById('title').value.trim();
-    // const titleError = document.getElementById('title-error');
-    // const titleMinlengthError = document.getElementById('title-minlength-error');
-    
-    // if (title === '') {
-        // titleError.classList.remove('d-none');  // Fehlermeldung für leeres Feld
-        // isValid = false;
-    // } else {
-        // titleError.classList.add('d-none');  // Fehler verstecken
-    // }
-
-    // Due-Date-Feld-Validierung (muss ein Datum enthalten)
-    // const dueDate = document.getElementById('datepicker').value.trim();
-    // const dueDateError = document.getElementById('due-date-error');
-    
-    // if (dueDate === '') {
-        // dueDateError.classList.remove('d-none');  // Fehlermeldung anzeigen, wenn das Feld leer ist
-        // isValid = false;
-    // } else {
-        // dueDateError.classList.add('d-none');  // Fehlermeldung verstecken, wenn ein Datum eingegeben wurde
-    // }
-
-    // Kategorieauswahl-Validierung (muss eine Kategorie ausgewählt sein)
-    // const categorySelection = document.getElementById('category-selection').textContent;
-    // const errorMessage = document.getElementById('error-message');
-    
-    // if (categorySelection === 'Select task category') {
-        // errorMessage.classList.remove('d-none');  // Fehlermeldung anzeigen, wenn keine Kategorie ausgewählt wurde
-        // isValid = false;
-    // } else {
-        // errorMessage.classList.add('d-none');  // Fehlermeldung verstecken, wenn eine Kategorie ausgewählt wurde
-    // }
-
-    // return isValid;  // Formular wird nur abgesendet, wenn alle Felder gültig sind
-// };
-
+// validation
 document.addEventListener('DOMContentLoaded', function() {
     const submitButton = document.querySelector('.submit-button');
     if (submitButton) {
         submitButton.addEventListener('click', function(event) {
             event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
             if (validateForm()) {
-                // Hier können Sie den Code zum Absenden des Formulars einfügen
+                showTaskAddedOverlay();
+                // createTask();
                 console.log('Form is valid. Submitting...');
             }
         });
@@ -569,47 +549,92 @@ document.addEventListener('DOMContentLoaded', function() {
 function validateForm() {
     let isValid = true;
 
-    // Title-Feld-Validierung
-    const title = document.getElementById('title').value.trim();
-    const titleError = document.getElementById('title-error');
-    const titleMinlengthError = document.getElementById('title-minlength-error');
-    
-    if (title === '') {
-        titleError.classList.remove('d-none');
-        isValid = false;
-    } else if (title.length < 3) {
-        titleMinlengthError.classList.remove('d-none');
-        isValid = false;
-    } else {
-        titleError.classList.add('d-none');
-        titleMinlengthError.classList.add('d-none');
-    }
-
-    // Due-Date-Feld-Validierung
-    const dueDate = document.getElementById('datepicker').value.trim();
-    const dueDateError = document.getElementById('due-date-error');
-    
-    if (dueDate === '') {
-        dueDateError.classList.remove('d-none');
-        isValid = false;
-    } else {
-        dueDateError.classList.add('d-none');
-    }
-
-    // Kategorieauswahl-Validierung
-    const categorySelection = document.getElementById('category-selection');
-    const errorMessage = document.getElementById('error-message');
-    
-    if (categorySelection.value === '' || categorySelection.value === 'Select task category') {
-        errorMessage.classList.remove('d-none');
-        isValid = false;
-    } else {
-        errorMessage.classList.add('d-none');
-    }
+    isValid = validateTitle() && isValid;
+    isValid = validateDueDate() && isValid;
+    isValid = validateCategory() && isValid;
 
     return isValid;
 }
 
+function validateTitle() {
+    const title = document.getElementById('title').value.trim();
+    const titleError = document.getElementById('title-error');
+    const titleMinlengthError = document.getElementById('title-minlength-error');
+    
+    titleError.classList.add('d-none');
+    titleMinlengthError.classList.add('d-none');
+
+    if (title === '') {
+        titleError.classList.remove('d-none');
+        return false;
+    } else if (title.length < 3) {
+        titleMinlengthError.classList.remove('d-none');
+        return false;
+    }
+    return true;
+}
+
+function validateDueDate() {
+    const dueDate = document.getElementById('datepicker').value.trim();
+    const dueDateError = document.getElementById('due-date-error');
+    
+    dueDateError.classList.add('d-none');
+
+    if (dueDate === '') {
+        dueDateError.classList.remove('d-none');
+        return false;
+    }
+    return true;
+}
+
+function validateCategory() {
+    const categorySelection = document.getElementById('category-selection');
+    const errorMessage = document.getElementById('error-message');
+    
+    errorMessage.classList.add('d-none');
+
+    if (categorySelection.value === '' || categorySelection.value === 'Select task category') {
+        errorMessage.classList.remove('d-none');
+        return false;
+    }
+    return true;
+}
+
+function showTaskAddedOverlay() {
+    const overlay = document.getElementById('task-added-overlay');
+    overlay.classList.remove('d-none');
+    setTimeout(() => {
+        overlay.classList.add('show');
+    }, 10); // Kleine Verzögerung für die Animation
+
+    // Automatisches Ausblenden nach 3 Sekunden
+    setTimeout(() => {
+        hideTaskAddedOverlay();
+    }, 3000);
+}
+
+function hideTaskAddedOverlay() {
+    const overlay = document.getElementById('task-added-overlay');
+    overlay.classList.remove('show');
+    setTimeout(() => {
+        overlay.classList.add('d-none');
+    }, 300); // Warten auf das Ende der Ausblend-Animation
+    goToBoard();
+}
+
+function goToBoard() {
+    window.location.href = 'board.html';
+}
+
+// Funktion zum Hinzufügen von Event-Listenern für die Echtzeit-Validierung
+function setupFormValidation() {
+    document.getElementById('title').addEventListener('input', validateTitle);
+    document.getElementById('datepicker').addEventListener('change', validateDueDate);
+    document.getElementById('category-selection').addEventListener('change', validateCategory);
+}
+
+// Diese Funktion beim Laden der Seite aufrufen
+document.addEventListener('DOMContentLoaded', setupFormValidation);
 
 
 document.addEventListener('DOMContentLoaded', initializePriority);

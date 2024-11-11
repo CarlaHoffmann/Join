@@ -69,18 +69,6 @@ function takeCatergory() {
     return category.innerHTML;
 }
 
-// function takeSubtask() {
-//     if (subtasks.length > 0) {
-//         let subtasksObject = {};
-//         subtasks.forEach((subtask, index) => {
-//             subtasksObject[index] = subtask;
-//         });
-//         return subtasksObject;
-//     } else {
-//         console.log("Keine Subtasks vorhanden");
-//         return '';
-//     }
-// }
 function takeSubtask() {
     if (subtasks.length > 0) {
         return subtasks; // Wir können das Array direkt zurückgeben
