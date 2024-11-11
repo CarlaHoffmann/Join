@@ -1,96 +1,109 @@
-
 <!DOCTYPE html>
 <html lang="de">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="board.css">  
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="board.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
     <title>board</title>
 </head>
 
 
+<main>
+<div class="header">
+    <div class="board-title-button">
+        <h1 class="board-title">Board</h1>
+        <button class="media-add-task" onclick="openAddTaskPopUp();">+</button>
+    </div>
 
-    <div class="header">
-        <div class="board-title-button">
-            <h1 class="board-title">Board</h1>
-            <button class="media-add-task" onclick="openAddTaskPopUp();">+</button>
+
+    <!-- SEARCH BAR UND ADD BUTTON-->
+    <div class="right-section">
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Find Task" />
+            <img src="/img/board/search.svg" alt="Search Icon" class="icon" />
         </div>
+        <button class="add-task">Add task&nbsp;<span>+</span></button>
+    </div>
+</div>
 
 
-        <!-- SEARCH BAR UND ADD BUTTON-->
-        <div class="right-section">
-            <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Find Task" />
-                <img src="/img/board/search.svg" alt="Search Icon" class="icon" />
-            </div>
-            <button class="add-task">Add task&nbsp;<span>+</span></button>
+<article>
+    <div class="section svgHover flex1450section">
+        <div class="text">
+            To do
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect onclick="openAddTaskPopUp('todo');" x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647"
+                    stroke-width="2" />
+                <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+                <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+            </svg>
+        </div>
+        <!-- BOARD TASK-->
+        <div class="task-box">No tasks To do</div>
+
+        <div class="task-smallview-container" id="todo-container" ondrop="moveTo('todo')"
+            ondragover="allowDrop(event); highlight('todo-container')" ondragleave="stopHighlight('todo-container')">
         </div>
     </div>
 
-    
-    <article>
-        <div class="section svgHover flex1450section">
-            <div class="text">
-                To do
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect onclick="openAddTaskPopUp('todo');" x="1" y="1" width="22" height="22" rx="7"
-                        stroke="#2A3647" stroke-width="2" />
-                    <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                    <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                </svg>
-            </div>
 
-
-            
-            <div class="task-smallview-container" id="todo-container" ondrop="moveTo('todo')"
-                ondragover="allowDrop(event); highlight('todo-container')"
-                ondragleave="stopHighlight('todo-container')"></div>
+    <div class="section svgHover flex1450section">
+        <div class="text">
+            In progress
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect onclick="openAddTaskPopUp('inprogress');" x="1" y="1" width="22" height="22" rx="7"
+                    stroke="#2A3647" stroke-width="2" />
+                <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+                <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+            </svg>
         </div>
 
-        <div class="section svgHover flex1450section">
-            <div class="text">
-                In progress
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect onclick="openAddTaskPopUp('inprogress');" x="1" y="1" width="22" height="22" rx="7"
-                        stroke="#2A3647" stroke-width="2" />
-                    <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                    <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                </svg>
-            </div>
+           <!-- BOARD TASK-->
+           <div class="task-box">No tasks To do</div>
+
+        <div id="inprogress-container" class="task-smallview-container" ondrop="moveTo('inprogress')"
+            ondragover="allowDrop(event); highlight('inprogress-container')"
+            ondragleave="stopHighlight('inprogress-container')"></div>
+    </div>
+
+
+    <div class="section svgHover flex1450section">
+        <div class="text">
+            Await feedback
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect onclick="openAddTaskPopUp('feedback');" x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647"
+                    stroke-width="2" />
+                <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+                <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+            </svg>
         </div>
 
-        <div class="section svgHover flex1450section">
-            <div class="text">
-                Await feedback
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect onclick="openAddTaskPopUp('feedback');" x="1" y="1" width="22" height="22" rx="7"
-                        stroke="#2A3647" stroke-width="2" />
-                    <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                    <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                </svg>
-            </div>
-            <div id="feedback-container" class="task-smallview-container" ondrop="moveTo('feedback')"
-                ondragover="allowDrop(event); highlight('feedback-container')"
-                ondragleave="stopHighlight('feedback-container')"></div>
-        </div>
+           <!-- BOARD TASK-->
+           <div class="task-box">No tasks To do</div>
 
-        <div class="section flex1450section">
-            <div class="text">Done</div>
-            <div id="done-container" class="task-smallview-container" ondrop="moveTo('done')"
-                ondragleave="stopHighlight('done-container')"
-                ondragover="allowDrop(event); highlight('done-container')"></div>
+        <div id="feedback-container" class="task-smallview-container" ondrop="moveTo('feedback')"
+            ondragover="allowDrop(event); highlight('feedback-container')"
+            ondragleave="stopHighlight('feedback-container')"></div>
+    </div>
+
+    <div class="section flex1450section">
+        <div class="text">Done</div>
+
+           <!-- BOARD TASK-->
+           <div class="task-box">No tasks To do</div>
+
+        <div id="done-container" class="task-smallview-container" ondrop="moveTo('done')"
+            ondragleave="stopHighlight('done-container')" ondragover="allowDrop(event); highlight('done-container')">
         </div>
-    </article>
+    </div>
+</article>
 </main>
 
 
 </body>
 
 </html>
-
-
-
-
-

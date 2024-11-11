@@ -239,3 +239,7 @@ footer a:hover {
     font-weight: 700;
     cursor: pointer;
 }
+
+.overlay.mobile-overlay {
+    background-color: #2A3647;
+}

@@ -1,0 +1,168 @@
+body {
+    font-family: "Inter";
+    background-color: #f1f1f1;
+}
+
+/* OVERLAY
+.task-overlay-content{
+    display:flex;
+    flex-direction: column;
+    gap:21px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 730px;
+    padding-right: 8px;
+}
+*/
+
+.taskOverlay {
+    width: 525px;
+    display: flex;
+    flex-direction: column;
+    padding: 48px 24px 48px 24px;
+    border-radius: 30px;
+    justify-content: space-between;
+    gap: 15px;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+
+/* Scrollbalkens */
+::-webkit-scrollbar {
+    width: 5px;
+
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: #f1f1f1;
+    border-radius: 8px;
+}
+
+.taskSelect {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.taskContainer {
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 4px 24px;
+    color: white;
+    font-size: 23px;
+    background-color: #0038FF;
+}
+
+
+.headline {
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 73.2px;
+    word-wrap: break-word;
+}
+
+
+.datePriority {
+    width: 130px;
+    color: rgb(7, 79, 202);
+}
+
+.textColor {
+    color: #2A3647;
+
+}
+
+.assigned {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 8px;
+    color: #ce6e1f;
+}
+
+.userContainer {
+    max-height: 161px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: black;
+}
+
+.userContainer div {
+    box-sizing: border-box;
+    padding: 7px 16px;
+}
+
+.user {
+    display: flex;
+}
+
+.userButton {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    border-radius: 50%;
+    color: white;
+    background-color: #1FD7C1;
+}
+
+.userName {
+    font-size: 19px;
+}
+
+
+/* BUTTON */
+.deleteEditBtnContainer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-right: 16px;
+}
+
+.deleteEditBtnContainer button {
+    font-size: 16px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+
+
+/* Media Queries */
+@media (max-width: 600px) {
+    .taskOverlay {
+        width: 80%; 
+        padding: 40px 20px;
+    }
+
+    .headline {
+        font-size: 45px;
+        line-height: 1.2;
+    }
+}
+
+/*
+@media (max-width: 1025px) {
+    .taskOverlay{
+        height: 750px;
+    }
+}
+
+@media (max-width: 525px) {
+    .taskOverlay{
+        height: 600px;
+    }
+}
+*/

@@ -4,29 +4,6 @@
     --menu-bar-color: rgb(42, 54, 71);
 }
 
-header {
-    background-color: #29abe2;
-    width: auto;
-    height: 96px;
-}
-
-nav {
-    background-color: #29abe2;
-    width: 232px;
-    height: 600px;
-}
-
-::placeholder,
-textarea,
-input {
-    font-family: var(--main-font);
-    border-radius: var(--border-radius);
-    font-size: 20px;
-}
-
-* {
-    margin: 0;
-}
 
 body {
     font-family: "Inter";
@@ -35,50 +12,37 @@ body {
 }
 
 main {
-    margin: 45px 90px 0 328px;
-    max-width: 1088px;
+    max-width: 1088px;   
+    margin-top: 20px;
+    margin-left: 60px;
 }
 
-.task-board-title-container {
-    display: flex;
-    justify-content: space-between;
-}
 
-.drop-down-menu-mobile-board {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 60px 16px 0 0;
-}
-
-.step-container-null-content {
-    width: 98%;
-    height: 50px;
-    background-color: rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    border: 2px dashed rgba(0, 0, 0, 0.2);
-    color: rgba(0, 0, 0, 0.3);
-}
 
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-right: 32px;
+    margin-right: 40px;
+    margin-bottom: 50px;
 }
 
 .board-title {
     font-size: 61px;
-    margin: 0;
     padding-right: 20px;
+}
+
+
+/* SEARCHBAR */
+::placeholder,
+textarea,
+input {
+    font-size: 20px;
+    margin-left: 15px;
 }
 
 .right-section {
     display: flex;
-    align-items: center;
     gap: 20px;
 }
 
@@ -109,68 +73,33 @@ main {
     height: 32px;
 }
 
-.text {
-    display: flex;
-    justify-content: space-between;
-    width: 252px;
-    font-weight: bold;
-}
-
-.moveToDropdown {
-    display: block;
-    background-color: rgb(209, 209, 209);
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 8px 15px;
-    width: 120px;
-    border-radius: 16px;
-}
-
-.moveToDropdown span {
-    padding-left: 5px;
-}
-
-.svg-board-container {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.moveToCatagory {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.moveToCatagory span {
-    padding: 5px;
-}
-
-.moveToCatagory span:hover {
-    background-color: rgba(9, 24, 47, 1);
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-}
-
+/* ADD TASK-BUTTON */ 
 .add-task {
-    display: flex;
+    background-color: #2a3647;
+    font-size: 21px;
+    font-weight: bold;display: flex;
     align-items: center;
     justify-content: center;
     width: 160px;
     height: 48px;
     padding: 8px 16px;
-    background-color: #2a3647;
-    border: 0;
     border-radius: 10px;
     color: white;
-    font-size: 21px;
-    font-weight: bold;
     cursor: pointer;
 }
+
+
+/* TODO, PROZESS, FEEDBACK, DONE */ 
+.text {
+    display: flex;
+    justify-content: space-between;
+    width: 252px;
+    font-weight: bold;
+    font-size: 21px;
+    color: #42526E;
+
+}
+
 
 .add-task:hover {
     background-color: #29abe2;
@@ -182,16 +111,29 @@ main {
     font-weight: lighter;
 }
 
+.task-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #888;
+    border: 2px dotted;
+    background-color: #A8A8A8;
+    background: #E7E7E7;
+    margin-top: 20px;
+    cursor: pointer;
+}
+  
+
+
 article {
     display: flex;
-    padding-top: 80px;
-    gap: 16px;
+    gap: 45px;
     box-sizing: border-box;
 }
 
-.section4 {
-    margin-right: 30px;
-}
 
 /* Nur der Hover-Effekt auf das SVG-Icon anwenden */
 .svgHover svg:hover rect,
@@ -205,7 +147,9 @@ article {
     width: 252px;
     min-height: 500px;
     font-size: 16px;
-    margin-top: 30px;
+    margin-top: 20px;
+    background-color: #dfdfdf8a;
+    border-radius: 10px;
 }
 
 .task-smallview {
@@ -296,9 +240,6 @@ article {
 
 
 
-
-
-
 /* --- MEDIA QUERY --- */
 @media (max-width: 1450px) {
     article {
@@ -360,7 +301,7 @@ article {
 
     .task-smallview-container {
         min-height: 30px;
-        margin: 0;
+        margin-top: 20px;
     }
 }
 
@@ -395,7 +336,6 @@ article {
     }
 
     .right-section {
-        padding-top: 32px;
         gap: 0px;
     }
 
