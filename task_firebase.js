@@ -1,5 +1,13 @@
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
+function submit() {
+    checkForm();
+}
+
+function checkForm() {
+    createTask();
+}
+
 function createTask() {
     let task = {
         title: takeTitle(),
@@ -11,7 +19,6 @@ function createTask() {
         subtasks: takeSubtask(),
         }
     
-    console.log(subtasks);
     postData(task);
 }
 
