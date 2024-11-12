@@ -11,9 +11,12 @@
 
 <body>
     <div id="help-overlay">
-        <div onclick="closeHelp()" id="back"><img src="./img/arrow-left-line.svg" alt=""></div>
+        <!-- <div onclick="closeHelp()" id="back"><img src="./img/arrow-left-line.svg" alt=""></div> -->
         <div id="help-content">
-            <h1>Help</h1>            
+            <div id="header">
+                <h1>Help</h1> 
+                <div onclick="closeHelp()" id="back"><img src="./img/arrow-left-line.svg" alt=""></div>
+            </div>           
             <div class="textfield">
                 <section>
                     <p>Welcome to the help page for <span class="join-blue">Join</span>, your guide to using our kanban project management tool.

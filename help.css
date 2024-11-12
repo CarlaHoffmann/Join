@@ -5,10 +5,9 @@ body {
 }
 
 #help-overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: calc(100% - 232px);
+    display: flex;
+    justify-content: center;
+    width: calc(100% - 156px);
     height: calc(100vh - 96px);
     background-color: #f6f7f8;
     overflow-y: auto;
@@ -40,6 +39,13 @@ a:hover {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    position: relative;
+}
+
+#header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
     position: relative;
 }
 
@@ -111,4 +117,35 @@ p {
 .counter {
     font-size: 27px;
     font-weight: 700px;
+}
+
+@media(max-width: 920px) {
+    #help-overlay {
+        width: calc(100% - 80px);
+    }
+
+    #help-content {
+        margin-left: 56px;
+    }
+
+    #back {
+        right: 56px;
+        width: 32px;
+    }
+}
+
+@media(max-width: 440px) {
+    #help-overlay {
+        width: calc(100% - 40px);
+    }
+
+    #help-content {
+        margin-top: 48px;
+        margin-left: 16px;
+    }
+
+    #back {
+        position: unset;
+        width: 32px;
+    }
 }
