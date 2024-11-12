@@ -33,13 +33,13 @@ function deadlineSymbol() {
     }
 }
 
-
 async function initSummary() {
     await countToDo();
     await countDone();
     await countTasksOnBoard();
     await countTasksInProgress();
     await countAwaitingFeedback();
+    await findHighestPriorityTask();
 }
 
 async function countToDo() {
@@ -83,114 +83,83 @@ function countTasksOnBoard() {
     tasksCounter.innerHTML = totalTasks;
 }
 
-async function getDeadline() {
-    let responseToDO = await fetch(base_url + "/tasks/toDo.json");
-    let responseInProgress = await fetch(base_url + "/tasks/inProgress.json");
-    let responseFeedback = await fetch(base_url + "/tasks/feedback.json");
-    let tasksToDO = await responseToDO.json();
-    let tasksInProgress = await responseInProgress.json();
-    let tasksFeedback = await responseFeedback.json();
+async function findHighestPriorityTask() {
+    try {
+        const categories = ['toDo', 'inProgress', 'feedback'];
+        let highestPriorityTasks = [];
+        let highestPriority = Infinity;
+        let earliestDate = null;
 
-    let allTasks = [...Object.values(tasksToDO || {}), ...Object.values(tasksInProgress || {}), ...Object.values(tasksFeedback || {})];
-    let priorityCount = countTasksByPriority(allTasks);
-    console.log(allTasks);
+        for (const category of categories) {
+            const response = await fetch(`${base_url}/tasks/${category}.json`);
+            const tasks = await response.json();
 
-    updateDeadlineCounter(priorityCount);
-    updateDeadlinePriority(priorityCount);
-    updateDeadlineDate(allTasks);
-}
+            for (const taskId in tasks) {
+                const task = tasks[taskId];
+                const taskPriority = parseInt(task.prio);
+                const taskDate = new Date(task.date);
 
-function countTasksByPriority(tasks) {
-    return tasks.reduce((counts, task) => {
-        if (task.prio === "1") counts.prio1++;
-        else if (task.prio === "2") counts.prio2++;
-        else if (task.prio === "3") counts.prio3++;
-        return counts;
-    }, { prio1: 0, prio2: 0, prio3: 0 });
-}
+                // if (!highestPriorityTask || taskPriority < parseInt(highestPriorityTask.prio) ||
+                //     (taskPriority === parseInt(highestPriorityTask.prio) && taskDate < earliestDate)) {
+                //     highestPriorityTask = task;
+                //     earliestDate = taskDate;
+                // }
+                if (taskPriority < highestPriority) {
+                    highestPriority = taskPriority;
+                    highestPriorityTasks = [task];
+                    earliestDate = taskDate;
+                } else if (taskPriority === highestPriority) {
+                    if (!earliestDate || taskDate < earliestDate) {
+                        earliestDate = taskDate;
+                        highestPriorityTasks = [task];
+                    } else if (taskDate.getTime() === earliestDate.getTime()) {
+                        highestPriorityTasks.push(task);
+                    }
+                }
+            }
+        }
 
-function updateDeadlineCounter(priorityCount) {
-    let counter = document.getElementById('deadline-counter');
-    if (counter) {
-        if (priorityCount.prio1 > 0) counter.innerHTML = priorityCount.prio1;
-        else if (priorityCount.prio2 > 0) counter.innerHTML = priorityCount.prio2;
-        else if (priorityCount.prio3 > 0) counter.innerHTML = priorityCount.prio3;
-        else counter.innerHTML = "0";
-    } else {
-        console.error("Element with ID 'deadline-counter' not found");
-    }
-}
-
-function updateDeadlinePriority(priorityCount) {
-    let priorityElement = document.getElementById('deadline-prio');
-    if (priorityElement) {
-        if (priorityCount.prio1 > 0) priorityElement.innerHTML = "Urgent";
-        else if (priorityCount.prio2 > 0) priorityElement.innerHTML = "Medium";
-        else if (priorityCount.prio3 > 0) priorityElement.innerHTML = "Low";
-        else priorityElement.innerHTML = "No tasks";
-    } else {
-        console.error("Element with ID 'deadline-prio' not found");
-    }
-}
-
-function updateDeadlineDate(tasks) {
-    let dateElement = document.getElementById('deadline-date');
-    if (dateElement) {
-        let nearestTask = tasks
-            .filter(task => task.date) // Filter tasks with a date
-            .sort((a, b) => {
-                // Sort by priority first, then by date
-                if (a.prio !== b.prio) return a.prio - b.prio;
-                return new Date(a.date) - new Date(b.date);
-            })[0]; // Get the first task (highest priority and nearest date)
-
-        if (nearestTask) {
-            dateElement.innerHTML = nearestTask.date;
+        if (highestPriorityTasks.length > 0) {
+            console.log("Höchste Priorität Tasks:", highestPriorityTasks);
+            updateUI(highestPriorityTasks);
         } else {
-            dateElement.innerHTML = "No upcoming deadlines";
+            console.log("Keine Aufgaben gefunden");
+            updateUI(null);
+        }
+    } catch (error) {
+        console.error("Fehler beim Abrufen der Aufgaben:", error);
+    }
+}
+
+function updateUI(tasks) {
+    const counterElement = document.getElementById('deadline-counter');
+    const prioElement = document.getElementById('deadline-prio');
+    const dateElement = document.getElementById('deadline-date');
+
+    if (counterElement && prioElement && dateElement) {
+        if (tasks && tasks.length > 0) {
+            counterElement.innerHTML = tasks.length.toString();
+            prioElement.innerHTML = getPriorityText(tasks[0].prio);
+            dateElement.innerHTML = tasks[0].date;
+            console.log(tasks.length.toString());
+        } else {
+            counterElement.innerHTML = "0";
+            prioElement.innerHTML = "None";
+            dateElement.innerHTML = "None";
         }
     } else {
-        console.error("Element with ID 'deadline-date' not found");
+        console.error("Eines oder mehrere erforderliche Elemente wurden nicht gefunden.");
     }
 }
-    // let counter = document.getElementById('deadline-counter');
-    // // counter.inner =
-    // if (counter) {
-    //     if (priorityCount.prio1 > 0) {
-    //         counter.innerHTML = priorityCount.prio1;
-    //     } else if (priorityCount.prio2 > 0) {
-    //         counter.innerHTML = priorityCount.prio2;
-    //     } else if (priorityCount.prio3 > 0) {
-    //         counter.innerHTML = priorityCount.prio3;
-    //     } else {
-    //         counter.innerHTML = "0";
-    //     }
-    // } else {
-    //     console.error("Element with ID 'deadline-counter' not found");
-    // }
-    // console.log(priorityCount.prio2);
-    // if() {}
-    // In der div id="deadline-prio" soll eingebunden werden: bei prio 1= Urgent, bei prio2 = medium, bei prio 3 = low.
-    // Bei id="deadline-date" soll das Datum der am nächsten fälligen task mit der höchsten Priorität ausgegeben werden.
 
-
-// function countTasksByPriority(tasksToDO, tasksInProgress, tasksFeedback) {
-//     let tasks = tasksToDO + tasksInProgress + tasksFeedback;
-//     let counts = { prio1: 0, prio2: 0, prio3: 0 };
-    
-//     for (let key in tasks) {
-//         let task = tasks[key];
-//         if (task.prio === "1") {
-//             counts.prio1++;
-//         } else if (task.prio === "2") {
-//             counts.prio2++;
-//         } else if (task.prio === "3") {
-//             counts.prio3++;
-//         }
-//     }
-    
-//     return counts;
-// }
+function getPriorityText(prio) {
+    switch (prio) {
+        case "1": return "Urgent";
+        case "2": return "Medium";
+        case "3": return "Low";
+        default: return "Unbekannt";
+    }
+}
 
 document.addEventListener('DOMContentLoaded', initSummary);
 document.addEventListener('DOMContentLoaded', deadlineSymbol);
