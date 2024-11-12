@@ -1,38 +1,5 @@
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
-// function init() {
-//     deadlineSymbol();
-//     countToDo();
-// }
-
-function deadlineSymbol() {
-    let deadlineInfo = document.getElementById('deadline-prio');
-    // Überprüfen, ob der Textinhalt von deadlineInfo 'Urgent' ist
-    if (deadlineInfo && deadlineInfo.textContent.trim() === 'Urgent') {
-        let symbolColor = document.getElementById('deadline-symbol');
-        symbolColor.classList.add('urgent');
-        // symbol.innerHTML = `<img src="./img/summary/prio_high.svg" alt="">`;
-        let symbol = document.getElementById('deadline-image');
-        symbol.src = "./img/summary/prio_high.svg";
-    }
-
-    if (deadlineInfo && deadlineInfo.textContent.trim() === 'Medium') {
-        let symbolColor = document.getElementById('deadline-symbol');
-        symbolColor.classList.add('medium');
-        // symbol.innerHTML = `<img src="./img/summary/prio_high.svg" alt="">`;
-        let symbol = document.getElementById('deadline-image');
-        symbol.src = "./img/summary/prio_mid.svg";
-    }
-
-    if (deadlineInfo && deadlineInfo.textContent.trim() === 'Low') {
-        let symbolColor = document.getElementById('deadline-symbol');
-        symbolColor.classList.add('low');
-        // symbol.innerHTML = `<img src="./img/summary/prio_high.svg" alt="">`;
-        let symbol = document.getElementById('deadline-image');
-        symbol.src = "./img/summary/prio_low.svg";
-    }
-}
-
 async function initSummary() {
     await countToDo();
     await countDone();
@@ -86,33 +53,8 @@ function countTasksOnBoard() {
 async function findHighestPriorityTask() {
     try {
         const categories = ['toDo', 'inProgress', 'feedback'];
-        let highestPriorityTasks = [];
-        let highestPriority = Infinity;
-        let earliestDate = null;
-
-        for (const category of categories) {
-            const response = await fetch(`${base_url}/tasks/${category}.json`);
-            const tasks = await response.json();
-
-            for (const taskId in tasks) {
-                const task = tasks[taskId];
-                const taskPriority = parseInt(task.prio);
-                const taskDate = parseDate(task.date);
-
-                if (taskPriority < highestPriority) {
-                    // Neue höchste Priorität gefunden
-                    highestPriority = taskPriority;
-                    highestPriorityTasks = [task];
-                    earliestDate = taskDate;
-                } else if (taskPriority === highestPriority) {
-                    // Neue höchste Priorität gefunden
-                    highestPriorityTasks.push(task);
-                    if (!earliestDate || taskDate < earliestDate) {
-                        earliestDate = taskDate;
-                    }
-                }
-            }
-        }
+        const allTasks = await fetchAllTasks(categories);
+        const { highestPriorityTasks, earliestDate } = findHighestPriorityAndEarliestDate(allTasks);
 
         if (highestPriorityTasks.length > 0) {
             console.log("Höchste Priorität Tasks:", highestPriorityTasks);
@@ -126,49 +68,122 @@ async function findHighestPriorityTask() {
     }
 }
 
+async function fetchAllTasks(categories) {
+    let allTasks = [];
+    for (const category of categories) {
+        const response = await fetch(`${base_url}/tasks/${category}.json`);
+        const tasks = await response.json();
+        allTasks = allTasks.concat(Object.values(tasks));
+    }
+    return allTasks;
+}
+
+function findHighestPriorityAndEarliestDate(tasks) {
+    const highestPriority = findHighestPriority(tasks);
+    const highestPriorityTasks = filterTasksByPriority(tasks, highestPriority);
+    const earliestDate = findEarliestDate(highestPriorityTasks);
+
+    return { highestPriorityTasks, earliestDate };
+}
+
+function findHighestPriority(tasks) {
+    return tasks.reduce((highestPriority, task) => {
+        const taskPriority = parseInt(task.prio);
+        return taskPriority < highestPriority ? taskPriority : highestPriority;
+    }, Infinity);
+}
+
+function filterTasksByPriority(tasks, priority) {
+    return tasks.filter(task => parseInt(task.prio) === priority);
+}
+
+function findEarliestDate(tasks) {
+    return tasks.reduce((earliestDate, task) => {
+        const taskDate = parseDate(task.date);
+        return !earliestDate || taskDate < earliestDate ? taskDate : earliestDate;
+    }, null);
+}
+
 function parseDate(dateString) {
     const [day, month, year] = dateString.split('/');
     return new Date(year, month - 1, day); // Monate in JavaScript sind 0-indexiert
 }
 
-function updateUI(tasks, earliestDate) {
-    const colorElement = document.getElementById('deadline-symbol');
-    const imageElement = document.getElementById('deadline-image');
-    const counterElement = document.getElementById('deadline-counter');
-    const prioElement = document.getElementById('deadline-prio');
-    const dateElement = document.getElementById('deadline-date');
+// function updateUI(tasks, earliestDate) {
+//     const colorElement = document.getElementById('deadline-symbol');
+//     const imageElement = document.getElementById('deadline-image');
+//     const counterElement = document.getElementById('deadline-counter');
+//     const prioElement = document.getElementById('deadline-prio');
+//     const dateElement = document.getElementById('deadline-date');
 
-    if (colorElement && imageElement && counterElement && prioElement && dateElement) {
+//     if (colorElement && imageElement && counterElement && prioElement && dateElement) {
+//         if (tasks && tasks.length > 0) {
+//             const highestPrioTask = tasks[0];
+//             colorElement.classList.add(getSymbolColor(highestPrioTask.prio));
+//             imageElement.src = getSymbol(highestPrioTask.prio);
+//             counterElement.innerHTML = tasks.length.toString();
+//             prioElement.innerHTML = getPriorityText(tasks[0].prio);
+//             dateElement.innerHTML = formatDate(earliestDate);
+//         } else {
+//             imageElement.src = "./img/summary/prio_high.svg";
+//             counterElement.innerHTML = "0";
+//             prioElement.innerHTML = "None";
+//             dateElement.innerHTML = "None";
+//         }
+//     } else {
+//         console.error("Eines oder mehrere erforderliche Elemente wurden nicht gefunden.");
+//     }
+// }
+function updateUI(tasks, earliestDate) {
+    const elements = getUIElements();
+    
+    if (areAllElementsPresent(elements)) {
         if (tasks && tasks.length > 0) {
-            const highestPrioTask = tasks[0];
-            colorElement.classList.add(getSymbolColor(highestPrioTask.prio));
-            imageElement.src = getSymbol(highestPrioTask.prio);
-            counterElement.innerHTML = tasks.length.toString();
-            prioElement.innerHTML = getPriorityText(tasks[0].prio);
-            dateElement.innerHTML = formatDate(earliestDate);
+            updateWithTasks(elements, tasks, earliestDate);
         } else {
-            imageElement.src = "./img/summary/prio_high.svg";
-            counterElement.innerHTML = "0";
-            prioElement.innerHTML = "None";
-            dateElement.innerHTML = "None";
+            updateWithoutTasks(elements);
         }
     } else {
         console.error("Eines oder mehrere erforderliche Elemente wurden nicht gefunden.");
     }
 }
 
-function formatDate(date) {
-    if (!date) return "None";
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
+function getUIElements() {
+    return {
+        color: document.getElementById('deadline-symbol'),
+        image: document.getElementById('deadline-image'),
+        counter: document.getElementById('deadline-counter'),
+        prio: document.getElementById('deadline-prio'),
+        date: document.getElementById('deadline-date')
+    };
 }
 
-function getPriorityText(prio) {
-    switch (prio) {
-        case "1": return "Urgent";
-        case "2": return "Medium";
-        case "3": return "Low";
-        default: return "Unknown";
+function areAllElementsPresent(elements) {
+    return Object.values(elements).every(element => element);
+}
+
+function updateWithTasks(elements, tasks, earliestDate) {
+    const task = tasks[0];
+    elements.color.classList.add(getSymbolColor(task.prio));
+    elements.image.src = getSymbol(task.prio);
+    elements.counter.innerHTML = tasks.length;
+    elements.prio.innerHTML = getPriorityText(task.prio);
+    elements.date.innerHTML = formatDate(earliestDate);
+}
+
+function updateWithoutTasks(elements) {
+    elements.image.src = "./img/summary/prio_high.svg";
+    elements.counter.innerHTML = "0";
+    elements.prio.innerHTML = "Urgent";
+    elements.date.innerHTML = "No upcoming Deadline";
+}
+
+function getSymbolColor(prio) {
+    switch(prio) {
+        case "1": return "urgent";
+        case "2": return "medium";
+        case "3": return "low";
+        default: return "urgent";
     }
 }
 
@@ -181,14 +196,19 @@ function getSymbol(prio) {
     }
 }
 
-function getSymbolColor(prio) {
-    switch(prio) {
-        case "1": return "urgent";
-        case "2": return "medium";
-        case "3": return "low";
-        default: return "urgent";
+function getPriorityText(prio) {
+    switch (prio) {
+        case "1": return "Urgent";
+        case "2": return "Medium";
+        case "3": return "Low";
+        default: return "Unknown";
     }
 }
 
+function formatDate(date) {
+    if (!date) return "None";
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+}
+
 document.addEventListener('DOMContentLoaded', initSummary);
-document.addEventListener('DOMContentLoaded', deadlineSymbol);
