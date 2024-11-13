@@ -1,137 +1,129 @@
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-h2{
-    font-size:61px;
-}
-h3{
-    font-size:27px;
-}
-#contactsSiteContent{
-    display:flex;
-}
-#content{
-    align-items:flex-start;
-    justify-content: flex-start;
-}
-
-#addContactButton{
-    height:56px;
-    width:100%;
-    background: #2A3647;
-    color:white;
-}
-
-#contacts {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width:calc(31.66% + 232px);
-    box-shadow: 4px 0px 6px 0px #00000014;
-}
-
-#contactList {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width:77.193%;
-}
-
-#contactList h3 {
-    font-size: 20px;
-}
-
-hr {
-    width:100%;
-    height:0px;
-    border: 1px solid #D1D1D1;
-    border-radius: 2px;
-}
-.contact {
-    height: 78px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /*gap: 35px;*/
-    /*margin-bottom: 10px;*/
-}
-.contact p{
-    color: #007CEE;
-}
-.contact div{
-    display:flex;
-}
-
-.circle {
-    height: 42px;
-    width: 42px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgb(70, 47, 138);
-    border: 2px solid white;
-    border-radius: 100%;
-    color: white;
-    margin-right:10px;
-}
-
-.contactInformation {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items:center;
-}
-
-#contactView{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    width: calc(100% - (31.66% + 232px));
-    padding-top:110px;
-}
-
-@media (max-width: 599px) {
-    #contactList {
-        height: calc(100vh - (80px + 80px));
-        width: 100%;
-    }
-}
-</style>
-    <div id="contactsSiteContent">
+<!doctype>
+<html>
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        h2{
+            font-size:61px;
+        }
+        h3{
+            font-size:27px;
+        }
+        body{
+            display:flex;
+        }
+        #addContactButton{
+            margin-top:22.5px;
+            height:56px;
+            width:352px;
+            background: #2A3647;
+            color:white;
+            border-radius:10px;
+            border:1px solid #2A3647;
+        }
+        
+        #contacts {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width:456px;
+            box-shadow: 4px 0px 6px 0px #00000014;
+        }
+        
+        #contactList {
+            display: flex;
+            flex-direction: column;
+            /*justify-content: center;*/
+            align-items: center;
+            width:400px;
+        }
+        
+        #contactList h3 {
+            font-size: 20px;
+        }
+        
+        hr {
+            width:100%;
+            height:0px;
+            border: 1px solid #D1D1D1;
+            border-radius: 2px;
+        }
+        .contact {
+            height: 78px;
+            width:352px;
+            display: flex;
+            cursor:pointer;
+            gap: 35px;
+        }
+        .contact p{
+            color: #007CEE;
+            display:flex;
+        }
+        .contact div{
+            display:flex;
+            flex-direction:column;
+        }
+        
+        .circle {
+            height: 42px;
+            width: 42px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgb(70, 47, 138);
+            border: 2px solid white;
+            border-radius: 100%;
+            color: white;
+            margin-right:10px;
+        }
+        
+        #contactView{
+            display:flex;
+            justify-content:flex-start;
+            align-items:center;
+            padding-top:110px;
+            gap:30px;
+            width:752px;
+            padding-left:50px;
+        }
+        
+        @media (max-width: 599px) {
+            #contactList {
+                height: calc(100vh - (80px + 80px));
+                width: 100%;
+            }
+        }
+        </style>
+</head>
+<body>
         <div id="contacts">
             <section id="contactList">
                 <button id="addContactButton">Add a new contact *</button>
                 <h3>M</h3>
                 <hr>
                 <div class="contact">
-                    <div>
                         <div class="circle">MB</div>
                         <div class="contactInformation">
                             <h3>Marcel Bauer</h3>
                             <p>bauer@gmail.com</p>
                         </div>
-                    </div>
                 </div>
                 <div class="contact">
-                    <div>
                         <div class="circle">MM</div>
                         <div class="contactInformation">
                             <h3>Martin Meier</h3>
                             <p>meierM@gmail.com</p>
                         </div>
-                    </div>
                 </div>
                 <div class="contact">
-                    <div>
-                        <div class="circle">MM</div>
-                        <div class="contactInformation">
-                            <h3>Martin Meier</h3>
-                            <p>meierM@gmail.com</p>
-                        </div>
+                    <div class="circle">MM</div>
+                    <div class="contactInformation">
+                        <h3>Martin MeierLangesWorrt</h3>
+                        <p>meierlangwortM@gmail.com</p>
                     </div>
                 </div>
             </section>
@@ -139,6 +131,7 @@ hr {
             </section>
         </div>
         <div id="contactView">
-            <h2>Contacts</h2><h3>Better with a Team</h3>
+            <h2>Contacts</h2><img src="img/contact/divider.svg"><h3>Better with a Team</h3>
         </div>
-    </div>
+</body>
+</html>
