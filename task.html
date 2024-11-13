@@ -37,6 +37,7 @@
                                     </label>
                                 </div>
 
+
                                 <div class="labled-box">
                                     <label>
                                         Assigned to
@@ -44,10 +45,28 @@
                                             <div onclick="openAssigned()" id="select-field" class="selection-field form-field pad-12-16">
                                                 <p>Select contacts to assign</p><img class="symbol-hover icon-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
                                             </div>
+                                            <div id="contact-drop-down" class="select-items" style="display: none;">
+                                                <div onclick="closeAssigned()" id="contact-dropped-down" class="selection-field form-field pad-12-16 blue-border">
+                                                    <p>Select contacts to assign</p><img class="symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
+                                                </div>
+                                                <div id="contacts-to-select"></div>
+                                            </div>
                                         </div>
                                     </label>
                                     <div id="selected-contacts" class="selected-contacts"></div>
                                 </div>
+                                <!-- <div class="labled-box">
+                                    <label>
+                                        Assigned to
+                                        <div id="contact-selection" class="contact-selection">
+                                            <div onclick="openAssigned()" id="select-field" class="selection-field form-field pad-12-16">
+                                                <p>Select contacts to assign</p><img class="symbol-hover icon-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
+                                            </div>
+                                            <div id="contacts-to-select"></div>
+                                        </div>
+                                    </label>
+                                    <div id="selected-contacts" class="selected-contacts"></div>
+                                </div> -->
                             </div>
 
                             <div class="vertical-divider hide-mobile"></div>
@@ -72,19 +91,19 @@
                                     <div class="button-box">
                                         Prio
                                         <div class="prio-buttons">
-                                            <button onclick="priority(1)" class="prio-button hover-button" id="prio1">
+                                            <button onclick="priority(1, event)" class="prio-button hover-button" id="prio1">
                                                 <p>Urgent</p>
                                                 <div class="double-arrow-up">
                                                     <img src="./img/task/prio_high.svg" alt="high">
                                                 </div>
                                             </button>
-                                            <button onclick="priority(2)" class="prio-button hover-button" id="prio2">
+                                            <button onclick="priority(2, event)" class="prio-button hover-button" id="prio2">
                                                 <p>Medium</p>
                                                 <div class="double-line">
                                                     <img src="./img/task/prio_med.svg" alt="medium">
                                                 </div>
                                             </button>
-                                            <button onclick="priority(3)" class="prio-button hover-button" id="prio3">
+                                            <button onclick="priority(3, event)" class="prio-button hover-button" id="prio3">
                                                 <p>Low</p>
                                                 <div class="double-arrow-down">
                                                     <img src="./img/task/prio_low.svg" alt="low">
@@ -146,7 +165,7 @@
                 <div class="add-task-bottom">
                     <span class="font-16 hide-mobile"><span class="red-asterisk">*</span>This field is required</span>
                     <div class="bottom-buttons">
-                        <button  type="reset" class="clear-button hover-button">Clear 
+                        <button onclick="clearForm()" type="reset" class="clear-button hover-button">Clear 
                             <img class="icon-normal" src="./img/task/iconoir_cancel.svg" alt="">
                             <img class="icon-hover" src="./img/task/iconoir_cancel_hover.svg" alt="">
                         </button>

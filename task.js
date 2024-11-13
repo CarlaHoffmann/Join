@@ -1,47 +1,158 @@
 let selectedContacts = [];
 
 // Assigned to
-function openAssigned() {
-    let contactSelection = document.getElementById('contact-selection');
-    contactSelection.innerHTML = `
-        <div id="contact-drop-down" class="select-items">
-            <div onclick="closeAssigned()" id="contact-dropped-down" class="selection-field form-field pad-12-16 blue-border">
-                <p>Select contacts to assign</p><img class="symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
-            </div>
-            <div class="selection-name" onclick="toggleCheckbox('contact1', event)">
-                <label for="contact1">Sofia Müller (You)</label>
-                <input type="checkbox" id="contact1" value="Sofia Müller">
-            </div>
-            <div class="selection-name" onclick="toggleCheckbox('contact2', event)">
-                <label for="contact2">Anton Mayer</label>
-                <input type="checkbox" id="contact2" value="Anton Mayer">
-            </div>
-            <div class="selection-name" onclick="toggleCheckbox('contact3', event)">
-                <label for="contact3">Anja Schulz</label>
-                <input type="checkbox" id="contact3" value="Anja Schulz">
-            </div>
-            <div class="selection-name" onclick="toggleCheckbox('contact4', event)">
-                <label for="contact4">Benedikt Ziegler</label>
-                <input type="checkbox" id="contact4" value="Benedikt Ziegler">
-            </div>
-            <div class="selection-name" onclick="toggleCheckbox('contact5', event)">
-                <label for="contact5">David Eisenberg</label>
-                <input type="checkbox" id="contact5" value="David Eisenberg">
-            </div>
-        </div>
-    `;
+// Funktion zum Laden der Kontakte aus Firebase
+async function loadContacts() {
+    try {
+        const response = await fetch(`${base_url}/users.json`);
+        const users = await response.json();
+        return Object.entries(users).map(([userId, userData]) => ({
+            id: userId,
+            name: userData.name
+        }));
+    } catch (error) {
+        console.error("Fehler beim Laden der Kontakte:", error);
+        return [];
+    }
+}
 
-    selectedContacts.forEach(name => {
-        let checkbox = Array.from(document.querySelectorAll('input[type="checkbox"]'))
-            .find(cb => cb.value === name);
-        if (checkbox) checkbox.checked = true;
-    });
+async function openAssigned() {
+    let contactDropDown = document.getElementById('contact-drop-down');
+    let contactsToSelect = document.getElementById('contacts-to-select');
+    
+    if (contactDropDown.style.display === 'none' || contactDropDown.style.display === '') {
+        // Laden der Kontakte
+        const contacts = await loadContacts();
+
+        // Erstellen des HTML für die Kontakte
+        let contactsHTML = '';
+
+        contacts.forEach((contact, index) => {
+            contactsHTML += `
+                <div class="selection-name" onclick="toggleCheckbox('${contact.id}', event)">
+                    <label for="${contact.id}">${contact.name}${index === 0 ? ' (You)' : ''}</label>
+                    <input type="checkbox" id="${contact.id}" value="${contact.name}">
+                </div>
+            `;
+        });
+
+        contactsToSelect.innerHTML = contactsHTML;
+
+        // Setzen der bereits ausgewählten Kontakte
+        selectedContacts.forEach(name => {
+            let checkbox = Array.from(document.querySelectorAll('input[type="checkbox"]'))
+                .find(cb => cb.value === name);
+            if (checkbox) checkbox.checked = true;
+        });
+
+        contactDropDown.style.display = 'block';
+    } else {
+        closeAssigned();
+    }
 
     updateSelectedContacts();
 }
+// Modifizierte openAssigned Funktion
+// async function openAssigned() {
+//     let contactSelection = document.getElementById('contact-selection');
+//     let contactsToSelect = document.getElementById('contacts-to-select');
+    
+//     // Laden der Kontakte
+//     const contacts = await loadContacts();
 
+//     // Erstellen des HTML für die Kontakte
+//     let contactsHTML = `
+//         <div id="contact-drop-down" class="select-items">
+//             <div onclick="closeAssigned()" id="contact-dropped-down" class="selection-field form-field pad-12-16 blue-border">
+//                 <p>Select contacts to assign</p><img class="symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
+//             </div>
+//     `;
+
+//     contacts.forEach((contact, index) => {
+//         contactsHTML += `
+//             <div class="selection-name" onclick="toggleCheckbox('${contact.id}', event)">
+//                 <label for="${contact.id}">${contact.name}${index === 0 ? ' (You)' : ''}</label>
+//                 <input type="checkbox" id="${contact.id}" value="${contact.name}">
+//             </div>
+//         `;
+//     });
+
+//     contactsHTML += `</div>`;
+
+//     contactsToSelect.innerHTML = contactsHTML;
+
+//     // Setzen der bereits ausgewählten Kontakte
+//     selectedContacts.forEach(name => {
+//         let checkbox = Array.from(document.querySelectorAll('input[type="checkbox"]'))
+//             .find(cb => cb.value === name);
+//         if (checkbox) checkbox.checked = true;
+//     });
+
+//     updateSelectedContacts();
+// }
+
+
+// function openAssigned() {
+//     let contactSelection = document.getElementById('contact-selection');
+//     contactSelection.innerHTML = `
+//         <div id="contact-drop-down" class="select-items">
+//             <div onclick="closeAssigned()" id="contact-dropped-down" class="selection-field form-field pad-12-16 blue-border">
+//                 <p>Select contacts to assign</p><img class="symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
+//             </div>
+//             <div class="selection-name" onclick="toggleCheckbox('contact1', event)">
+//                 <label for="contact1">Sofia Müller (You)</label>
+//                 <input type="checkbox" id="contact1" value="Sofia Müller">
+//             </div>
+//             <div class="selection-name" onclick="toggleCheckbox('contact2', event)">
+//                 <label for="contact2">Anton Mayer</label>
+//                 <input type="checkbox" id="contact2" value="Anton Mayer">
+//             </div>
+//             <div class="selection-name" onclick="toggleCheckbox('contact3', event)">
+//                 <label for="contact3">Anja Schulz</label>
+//                 <input type="checkbox" id="contact3" value="Anja Schulz">
+//             </div>
+//             <div class="selection-name" onclick="toggleCheckbox('contact4', event)">
+//                 <label for="contact4">Benedikt Ziegler</label>
+//                 <input type="checkbox" id="contact4" value="Benedikt Ziegler">
+//             </div>
+//             <div class="selection-name" onclick="toggleCheckbox('contact5', event)">
+//                 <label for="contact5">David Eisenberg</label>
+//                 <input type="checkbox" id="contact5" value="David Eisenberg">
+//             </div>
+//         </div>
+//     `;
+
+//     selectedContacts.forEach(name => {
+//         let checkbox = Array.from(document.querySelectorAll('input[type="checkbox"]'))
+//             .find(cb => cb.value === name);
+//         if (checkbox) checkbox.checked = true;
+//     });
+
+//     updateSelectedContacts();
+// }
+
+
+// function toggleCheckbox(id, event) {
+//     let checkbox = document.getElementById(id);
+//     checkbox.checked = !checkbox.checked;
+
+//     let contactName = checkbox.value;
+//     if (checkbox.checked) {
+//         if (!selectedContacts.includes(contactName)) {
+//             selectedContacts.push(contactName);
+//         }
+//     } else {
+//         selectedContacts = selectedContacts.filter(name => name !== contactName);
+//     }
+    
+//     updateSelectedContacts();
+//     event.stopPropagation();
+// }
 function toggleCheckbox(id, event) {
     let checkbox = document.getElementById(id);
+    let contactsToSelect = document.getElementById('contacts-to-select');
+    let scrollPosition = contactsToSelect.scrollTop; // Speichern der aktuellen Scrollposition
+
     checkbox.checked = !checkbox.checked;
 
     let contactName = checkbox.value;
@@ -54,7 +165,14 @@ function toggleCheckbox(id, event) {
     }
     
     updateSelectedContacts();
-    event.stopPropagation();
+
+    // Wiederherstellen der Scrollposition nach dem Update
+    setTimeout(() => {
+        contactsToSelect.scrollTop = scrollPosition;
+    }, 0);
+
+    event.preventDefault(); // Verhindert das Standardverhalten des Klicks
+    event.stopPropagation(); // Verhindert die Ausbreitung des Events
 }
 
 function updateSelectedContacts() {
@@ -67,14 +185,28 @@ function updateSelectedContacts() {
     });
 }
 
+// function closeAssigned() {
+//     let contactSelection = document.getElementById('contact-selection');
+//     contactSelection.innerHTML = `
+//         <div onclick="openAssigned()" id="select-field" class="selection-field form-field pad-12-16">
+//             <p>Select contacts to assign</p><img class="symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
+//         </div>
+//         <div id="contacts-to-select"></div>
+//     `;
+// }
 function closeAssigned() {
-    let contactSelection = document.getElementById('contact-selection');
-    contactSelection.innerHTML = `
-        <div onclick="openAssigned()" id="select-field" class="selection-field form-field pad-12-16">
-            <p>Select contacts to assign</p><img class="symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
-        </div>
-    `;
+    let contactDropDown = document.getElementById('contact-drop-down');
+    contactDropDown.style.display = 'none';
 }
+
+// Fügen Sie diesen Event-Listener hinzu, um das Dropdown zu schließen, wenn außerhalb geklickt wird
+document.addEventListener('click', function(event) {
+    let contactSelection = document.getElementById('contact-selection');
+    let contactDropDown = document.getElementById('contact-drop-down');
+    if (!contactSelection.contains(event.target) && contactDropDown.style.display === 'block') {
+        closeAssigned();
+    }
+});
 
 
 //Date
@@ -175,18 +307,19 @@ function handleWindowClick(event, warningDialog) {
 
 
 // Prio
-function priority(x) {
-    const currentPrio = document.getElementById(`prio${x}`);
-    const allPrios = document.querySelectorAll('.prio-button');
-
-    resetOtherButtons(allPrios, currentPrio);
-    toggleCurrentButton(currentPrio, x);
+function initializePriority() {
+    resetAllPriorityButtons();
+    setMediumPriority();
 }
 
-function initializePriority() {
-    priority(2);
-    // const mediumButton = document.getElementById('prio-2');
-    // activateButton(mediumButton, 2);
+function priority(x, event) {
+    if (event) {
+        event.preventDefault(); // Verhindert das Standardverhalten des Buttons, wenn ein Event übergeben wird
+    }
+    const currentPrio = document.getElementById(`prio${x}`);
+    const allPrios = document.querySelectorAll('.prio-button');
+    resetOtherButtons(allPrios, currentPrio);
+    toggleCurrentButton(currentPrio, x);
 }
 
 // Setzt alle anderen Buttons zurück
@@ -528,21 +661,16 @@ function clearForm() {
     document.getElementById('description').value = '';
     document.getElementById('datepicker').value = '';
 
-    // Zurücksetzen der Kategorie
-    const categorySelection = document.getElementById('category-selection');
-    categorySelection.value = 'Select task category';
-
-    // Zurücksetzen der Priorität
-    const priorityButtons = document.querySelectorAll('.prio-button');
-    priorityButtons.forEach(button => {
-        button.classList.remove('active-button', 'urgent', 'med', 'low');
-        button.classList.add('hover-button');
-    });
-    initializePriority(); // Setzt die Standard-Priorität
-
     // Leeren der Kontakte
     selectedContacts = [];
     updateSelectedContacts();
+
+    // Zurücksetzen der Priorität
+    resetAllPriorityButtons();
+    setMediumPriority();
+
+    // Zurücksetzen der Kategorie
+    resetCategory();
 
     // Leeren der Subtasks
     subtasks = [];
@@ -552,6 +680,29 @@ function clearForm() {
     const errorMessages = document.querySelectorAll('.error-message');
     errorMessages.forEach(msg => msg.classList.add('d-none'));
 }
+
+function resetAllPriorityButtons() {
+    const priorityButtons = document.querySelectorAll('.prio-button');
+    priorityButtons.forEach(button => {
+        resetButton(button);
+    });
+}
+
+function setMediumPriority() {
+    const mediumButton = document.getElementById('prio2');
+    if (mediumButton) {
+        activateButton(mediumButton, 2);
+    } else {
+        console.error('Medium priority button not found');
+    }
+}
+
+function resetCategory() {
+    const categorySelection = document.getElementById('category-selection');
+    categorySelection.textContent = 'Select task category';
+    document.getElementById('opened-category').classList.add('d-none');
+}
+
 
 // Diese Funktion beim Laden der Seite aufrufen
 document.addEventListener('DOMContentLoaded', setupFormValidation);

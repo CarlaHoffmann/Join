@@ -109,31 +109,6 @@ function parseDate(dateString) {
     return new Date(year, month - 1, day); // Monate in JavaScript sind 0-indexiert
 }
 
-// function updateUI(tasks, earliestDate) {
-//     const colorElement = document.getElementById('deadline-symbol');
-//     const imageElement = document.getElementById('deadline-image');
-//     const counterElement = document.getElementById('deadline-counter');
-//     const prioElement = document.getElementById('deadline-prio');
-//     const dateElement = document.getElementById('deadline-date');
-
-//     if (colorElement && imageElement && counterElement && prioElement && dateElement) {
-//         if (tasks && tasks.length > 0) {
-//             const highestPrioTask = tasks[0];
-//             colorElement.classList.add(getSymbolColor(highestPrioTask.prio));
-//             imageElement.src = getSymbol(highestPrioTask.prio);
-//             counterElement.innerHTML = tasks.length.toString();
-//             prioElement.innerHTML = getPriorityText(tasks[0].prio);
-//             dateElement.innerHTML = formatDate(earliestDate);
-//         } else {
-//             imageElement.src = "./img/summary/prio_high.svg";
-//             counterElement.innerHTML = "0";
-//             prioElement.innerHTML = "None";
-//             dateElement.innerHTML = "None";
-//         }
-//     } else {
-//         console.error("Eines oder mehrere erforderliche Elemente wurden nicht gefunden.");
-//     }
-// }
 function updateUI(tasks, earliestDate) {
     const elements = getUIElements();
     
@@ -209,6 +184,10 @@ function formatDate(date) {
     if (!date) return "None";
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return date.toLocaleDateString('en-US', options);
+}
+
+function goToBoard() {
+    window.location.href = 'board.html';
 }
 
 document.addEventListener('DOMContentLoaded', initSummary);

@@ -22,7 +22,7 @@
             <div id="page-content">
                 <div id="summary-content">
                     <div id="do-done-box" class="box-row">
-                        <div class="box symbol-box todo">
+                        <div onclick="goToBoard()" class="box symbol-box todo">
                             <div class="symbol">
                                 <img class="desktop hover-hide" src="./img/summary/todo_pen.svg" alt="">
                                 <img class="desktop hover-show" src="./img/summary/todo_pen_hover.svg" alt="">
@@ -34,7 +34,7 @@
                                 <div class="description no-wrap">To-do</div>
                             </div>
                         </div>
-                        <div class="box symbol-box todo">
+                        <div onclick="goToBoard()" class="box symbol-box todo">
                             <div class="symbol">
                                 <img class="desktop hover-hide" src="./img/summary/done_check.svg" alt="">
                                 <img class="desktop hover-show" src="./img/summary/done_check_hover.svg" alt="">
@@ -49,7 +49,7 @@
                     </div>
 
                     <div class="box-row">
-                        <div id="deadline-box" class="box">
+                        <div onclick="goToBoard()" id="deadline-box" class="box">
                             <div class="symbol-box-prio">
                                 <div id="deadline-symbol">
                                     <img id="deadline-image" alt="">
@@ -72,15 +72,15 @@
                     </div>
 
                     <div id="sum-up-box" class="box-row">
-                        <div class="box sum-up">
+                        <div onclick="goToBoard()" class="box sum-up">
                             <div id="tasks-counter" class="number">0</div>
                             <div class="description">Tasks in Board</div>
                         </div>
-                        <div class="box sum-up">
+                        <div onclick="goToBoard()" class="box sum-up">
                             <div id="in-progress-counter" class="number">0</div>
                             <div class="description">Tasks in Progress</div>
                         </div>
-                        <div class="box sum-up">
+                        <div onclick="goToBoard()" class="box sum-up">
                             <div id="feedback-awaiting-counter" class="number">0</div>
                             <div class="description">Awaiting Feedback</div>
                         </div>

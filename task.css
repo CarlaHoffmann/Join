@@ -180,6 +180,8 @@ h1 {
 /* Contact Selection*/
 #contact-selection {
     position: relative;
+    /* background-color: #FFFFFF;
+    border-radius: 10px; */
 }
 
 .selection-field {
@@ -199,9 +201,20 @@ h1 {
     left: 0;
     right: 0;
     z-index: 99;
-    border: 1px solid #D1D1D1;
-    border-top: none;
+    /* border: 1px solid #D1D1D1; */
+    /* border-top: none; */
+    border: none;
     border-radius: 10px;
+    max-height: 250px; /* Höhe für 5 Einträge plus etwas Platz für den Header */
+    overflow-y: auto; 
+}
+/* #contacts-to-select {
+    height: 50px;
+    overflow-y: scroll;
+} */
+#contacts-to-select {
+    max-height: 200px; /* Höhe für 5 Einträge (angenommen, jeder Eintrag ist 40px hoch) */
+    overflow-y: auto;
 }
 
 .selection-name {
@@ -236,6 +249,25 @@ h1 {
     font-size: 12px;
     /* margin-left: -10px;
     z-index: 1; */
+}
+
+/* Anpassung des Scrollbalkens für besseres Aussehen */
+#contacts-to-select::-webkit-scrollbar {
+    width: 8px;
+}
+
+#contacts-to-select::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+#contacts-to-select::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+#contacts-to-select::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 
