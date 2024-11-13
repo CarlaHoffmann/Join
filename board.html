@@ -1,109 +1,111 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="board.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-        rel="stylesheet">
-    <title>board</title>
+    <link rel="stylesheet" href="/board.css">
+
+    <title>Task Board</title>
 </head>
 
-
-<main>
-<div class="header">
-    <div class="board-title-button">
-        <h1 class="board-title">Board</h1>
-        <button class="media-add-task" onclick="openAddTaskPopUp();">+</button>
-    </div>
-
-
-    <!-- SEARCH BAR UND ADD BUTTON-->
-    <div class="right-section">
-        <div class="search-bar">
-            <input type="text" id="search-input" placeholder="Find Task" />
-            <img src="/img/board/search.svg" alt="Search Icon" class="icon" />
-        </div>
-        <button class="add-task">Add task&nbsp;<span>+</span></button>
-    </div>
-</div>
-
-
-<article>
-    <div class="section svgHover flex1450section">
-        <div class="text">
-            To do
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect onclick="openAddTaskPopUp('todo');" x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647"
-                    stroke-width="2" />
-                <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-            </svg>
-        </div>
-        <!-- BOARD TASK-->
-        <div class="task-box">No tasks To do</div>
-
-        <div class="task-smallview-container" id="todo-container" ondrop="moveTo('todo')"
-            ondragover="allowDrop(event); highlight('todo-container')" ondragleave="stopHighlight('todo-container')">
-        </div>
-    </div>
-
-
-    <div class="section svgHover flex1450section">
-        <div class="text">
-            In progress
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect onclick="openAddTaskPopUp('inprogress');" x="1" y="1" width="22" height="22" rx="7"
-                    stroke="#2A3647" stroke-width="2" />
-                <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-            </svg>
+<body>
+    <main>
+        <!-- Header mit Titel und Suchleiste -->
+        <div class="header">
+            <div class="board-title-button">
+                <h1 class="board-title">Board</h1>
+                <button class="media-add-task" onclick="openAddTaskOverlay('todo-container')">+</button>
+            </div>
+            <div class="right-section">
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Find Task" onkeyup="searchTasks()" />
+                    <img src="/img/board/search.svg" alt="Search Icon" class="icon" />
+                </div>
+                <button class="add-task" onclick="openAddTaskOverlay('todo-container')">Add task&nbsp;<span>+</span></button>
+            </div>
         </div>
 
-           <!-- BOARD TASK-->
-           <div class="task-box">No tasks To do</div>
+        <article>
+            <!-- Task-Bereiche (To Do, In Progress, Await Feedback, Done) -->
+            <div class="section" id="todo-section">
+                <div class="text">
+                    To do
+                    <!-- Button zum Hinzufügen neuer Aufgaben im To-Do-Bereich -->
+                    <svg width="24" height="24" onclick="openAddTaskOverlay('todo-container')" class="add-task-icon">
+                        <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"></rect>
+                        <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"></path>
+                        <path d="M16 12H8" stroke="#2A3647" stroke-width="2" stroke-linecap="round"></path>
+                    </svg>
+                </div>
+                <div id="todo-container" class="task-container" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="placeholder">No tasks To do</div>
+                </div>
+            </div>
 
-        <div id="inprogress-container" class="task-smallview-container" ondrop="moveTo('inprogress')"
-            ondragover="allowDrop(event); highlight('inprogress-container')"
-            ondragleave="stopHighlight('inprogress-container')"></div>
-    </div>
+            <!-- In Progress-Bereich -->
+            <div class="section" id="inprogress-section">
+                <div class="text">
+                    In progress
+                    <!-- Button zum Hinzufügen neuer Aufgaben im In Progress-Bereich -->
+                    <svg width="24" height="24" onclick="openAddTaskOverlay('inprogress-container')" class="add-task-icon">
+                        <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"></rect>
+                        <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"></path>
+                        <path d="M16 12H8" stroke="#2A3647" stroke-width="2" stroke-linecap="round"></path>
+                    </svg>
+                </div>
+                <div id="inprogress-container" class="task-container" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="placeholder">No tasks In progress</div>
+                </div>
+            </div>
 
+            <!-- Await Feedback-Bereich -->
+            <div class="section" id="feedback-section">
+                <div class="text">
+                    Await feedback
+                    <!-- Button zum Hinzufügen neuer Aufgaben im Await Feedback-Bereich -->
+                    <svg width="24" height="24" onclick="openAddTaskOverlay('feedback-container')" class="add-task-icon">
+                        <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"></rect>
+                        <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"></path>
+                        <path d="M16 12H8" stroke="#2A3647" stroke-width="2" stroke-linecap="round"></path>
+                    </svg>
+                </div>
+                <div id="feedback-container" class="task-container" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="placeholder">No tasks Await feedback</div>
+                </div>
+            </div>
 
-    <div class="section svgHover flex1450section">
-        <div class="text">
-            Await feedback
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect onclick="openAddTaskPopUp('feedback');" x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647"
-                    stroke-width="2" />
-                <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-            </svg>
+            <!-- Done-Bereich -->
+            <div class="section" id="done-section">
+                <div class="text">Done</div>
+                <div id="done-container" class="task-container" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="placeholder">No tasks Done</div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- Overlay für das Hinzufügen und Bearbeiten von Aufgaben -->
+    <div id="overlay" class="overlay">
+        <div class="overlay-content">
+            <button class="close-btn" onclick="closeOverlay()">X</button> <!-- Schließen-Button rechts oben -->
+            <h2 id="overlay-title">Add Task</h2>
+            <textarea id="task-text" placeholder="Task description"></textarea>
+
+            <!-- Fußzeile des Overlays mit Delete- und Edit-Links -->
+            <div class="overlay-footer">
+                <div class="action-link" onclick="deleteTask()">
+                    <span class="icon-placeholder">🗑️</span> <!-- Icon-Platzhalter für Delete -->
+                    <span>Delete</span>
+                </div>
+                <div class="action-link" onclick="saveTask()">
+                    <span class="icon-placeholder">✏️</span> <!-- Icon-Platzhalter für Edit -->
+                    <span>Edit</span>
+                </div>
+            </div>
         </div>
-
-           <!-- BOARD TASK-->
-           <div class="task-box">No tasks To do</div>
-
-        <div id="feedback-container" class="task-smallview-container" ondrop="moveTo('feedback')"
-            ondragover="allowDrop(event); highlight('feedback-container')"
-            ondragleave="stopHighlight('feedback-container')"></div>
     </div>
 
-    <div class="section flex1450section">
-        <div class="text">Done</div>
-
-           <!-- BOARD TASK-->
-           <div class="task-box">No tasks To do</div>
-
-        <div id="done-container" class="task-smallview-container" ondrop="moveTo('done')"
-            ondragleave="stopHighlight('done-container')" ondragover="allowDrop(event); highlight('done-container')">
-        </div>
-    </div>
-</article>
-</main>
-
-
+    <script src="script.js"></script>
 </body>
 
 </html>
