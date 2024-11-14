@@ -1,6 +1,30 @@
 let selectedContacts = [];
 
 // Assigned to
+async function openAssigned() {
+    let contactDropDown = document.getElementById('contact-drop-down');
+    let contactsToSelect = document.getElementById('contacts-to-select');
+    
+    const contacts = await loadContacts();
+
+    let contactsHTML = '';
+
+    contacts.forEach((contact, index) => {
+        const isSelected = selectedContacts.includes(contact.name);
+        contactsHTML += `
+                <label onclick="handleContactClick(event)" for="${contact.id}" class="selection-name contact-label">
+                    <div>${contact.name}${index === 0 ? ' (You)' : ''}</div>
+                    <input type="checkbox" id="${contact.id}" value="${contact.name}" ${isSelected ? 'checked' : ''}>
+                </label>
+        `;
+    });
+
+    contactsToSelect.innerHTML = contactsHTML;
+    contactDropDown.style.display = 'block';
+
+    updateSelectedContacts();
+}
+
 // Funktion zum Laden der Kontakte aus Firebase
 async function loadContacts() {
     try {
@@ -16,146 +40,17 @@ async function loadContacts() {
     }
 }
 
-async function openAssigned() {
-    let contactDropDown = document.getElementById('contact-drop-down');
-    let contactsToSelect = document.getElementById('contacts-to-select');
-    
-    if (contactDropDown.style.display === 'none' || contactDropDown.style.display === '') {
-        // Laden der Kontakte
-        const contacts = await loadContacts();
-
-        // Erstellen des HTML für die Kontakte
-        let contactsHTML = '';
-
-        contacts.forEach((contact, index) => {
-            contactsHTML += `
-                <div class="selection-name" onclick="toggleCheckbox('${contact.id}', event)">
-                    <label for="${contact.id}">${contact.name}${index === 0 ? ' (You)' : ''}</label>
-                    <input type="checkbox" id="${contact.id}" value="${contact.name}">
-                </div>
-            `;
-        });
-
-        contactsToSelect.innerHTML = contactsHTML;
-
-        // Setzen der bereits ausgewählten Kontakte
-        selectedContacts.forEach(name => {
-            let checkbox = Array.from(document.querySelectorAll('input[type="checkbox"]'))
-                .find(cb => cb.value === name);
-            if (checkbox) checkbox.checked = true;
-        });
-
-        contactDropDown.style.display = 'block';
-    } else {
-        closeAssigned();
-    }
-
-    updateSelectedContacts();
+function handleContactClick(event) {
+    event.stopPropagation(); // Verhindert die Ausbreitung des Events
+    const checkbox = event.currentTarget.querySelector('input[type="checkbox"]');
+    checkbox.checked = !checkbox.checked; // Toggle Checkbox
+    toggleContact({ target: checkbox }); // Aktualisiere den Kontaktstatus
 }
-// Modifizierte openAssigned Funktion
-// async function openAssigned() {
-//     let contactSelection = document.getElementById('contact-selection');
-//     let contactsToSelect = document.getElementById('contacts-to-select');
+
+function toggleContact(event) {
+    const checkbox = event.target;
+    const contactName = checkbox.value;
     
-//     // Laden der Kontakte
-//     const contacts = await loadContacts();
-
-//     // Erstellen des HTML für die Kontakte
-//     let contactsHTML = `
-//         <div id="contact-drop-down" class="select-items">
-//             <div onclick="closeAssigned()" id="contact-dropped-down" class="selection-field form-field pad-12-16 blue-border">
-//                 <p>Select contacts to assign</p><img class="symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
-//             </div>
-//     `;
-
-//     contacts.forEach((contact, index) => {
-//         contactsHTML += `
-//             <div class="selection-name" onclick="toggleCheckbox('${contact.id}', event)">
-//                 <label for="${contact.id}">${contact.name}${index === 0 ? ' (You)' : ''}</label>
-//                 <input type="checkbox" id="${contact.id}" value="${contact.name}">
-//             </div>
-//         `;
-//     });
-
-//     contactsHTML += `</div>`;
-
-//     contactsToSelect.innerHTML = contactsHTML;
-
-//     // Setzen der bereits ausgewählten Kontakte
-//     selectedContacts.forEach(name => {
-//         let checkbox = Array.from(document.querySelectorAll('input[type="checkbox"]'))
-//             .find(cb => cb.value === name);
-//         if (checkbox) checkbox.checked = true;
-//     });
-
-//     updateSelectedContacts();
-// }
-
-
-// function openAssigned() {
-//     let contactSelection = document.getElementById('contact-selection');
-//     contactSelection.innerHTML = `
-//         <div id="contact-drop-down" class="select-items">
-//             <div onclick="closeAssigned()" id="contact-dropped-down" class="selection-field form-field pad-12-16 blue-border">
-//                 <p>Select contacts to assign</p><img class="symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
-//             </div>
-//             <div class="selection-name" onclick="toggleCheckbox('contact1', event)">
-//                 <label for="contact1">Sofia Müller (You)</label>
-//                 <input type="checkbox" id="contact1" value="Sofia Müller">
-//             </div>
-//             <div class="selection-name" onclick="toggleCheckbox('contact2', event)">
-//                 <label for="contact2">Anton Mayer</label>
-//                 <input type="checkbox" id="contact2" value="Anton Mayer">
-//             </div>
-//             <div class="selection-name" onclick="toggleCheckbox('contact3', event)">
-//                 <label for="contact3">Anja Schulz</label>
-//                 <input type="checkbox" id="contact3" value="Anja Schulz">
-//             </div>
-//             <div class="selection-name" onclick="toggleCheckbox('contact4', event)">
-//                 <label for="contact4">Benedikt Ziegler</label>
-//                 <input type="checkbox" id="contact4" value="Benedikt Ziegler">
-//             </div>
-//             <div class="selection-name" onclick="toggleCheckbox('contact5', event)">
-//                 <label for="contact5">David Eisenberg</label>
-//                 <input type="checkbox" id="contact5" value="David Eisenberg">
-//             </div>
-//         </div>
-//     `;
-
-//     selectedContacts.forEach(name => {
-//         let checkbox = Array.from(document.querySelectorAll('input[type="checkbox"]'))
-//             .find(cb => cb.value === name);
-//         if (checkbox) checkbox.checked = true;
-//     });
-
-//     updateSelectedContacts();
-// }
-
-
-// function toggleCheckbox(id, event) {
-//     let checkbox = document.getElementById(id);
-//     checkbox.checked = !checkbox.checked;
-
-//     let contactName = checkbox.value;
-//     if (checkbox.checked) {
-//         if (!selectedContacts.includes(contactName)) {
-//             selectedContacts.push(contactName);
-//         }
-//     } else {
-//         selectedContacts = selectedContacts.filter(name => name !== contactName);
-//     }
-    
-//     updateSelectedContacts();
-//     event.stopPropagation();
-// }
-function toggleCheckbox(id, event) {
-    let checkbox = document.getElementById(id);
-    let contactsToSelect = document.getElementById('contacts-to-select');
-    let scrollPosition = contactsToSelect.scrollTop; // Speichern der aktuellen Scrollposition
-
-    checkbox.checked = !checkbox.checked;
-
-    let contactName = checkbox.value;
     if (checkbox.checked) {
         if (!selectedContacts.includes(contactName)) {
             selectedContacts.push(contactName);
@@ -165,14 +60,6 @@ function toggleCheckbox(id, event) {
     }
     
     updateSelectedContacts();
-
-    // Wiederherstellen der Scrollposition nach dem Update
-    setTimeout(() => {
-        contactsToSelect.scrollTop = scrollPosition;
-    }, 0);
-
-    event.preventDefault(); // Verhindert das Standardverhalten des Klicks
-    event.stopPropagation(); // Verhindert die Ausbreitung des Events
 }
 
 function updateSelectedContacts() {
@@ -185,28 +72,32 @@ function updateSelectedContacts() {
     });
 }
 
-// function closeAssigned() {
-//     let contactSelection = document.getElementById('contact-selection');
-//     contactSelection.innerHTML = `
-//         <div onclick="openAssigned()" id="select-field" class="selection-field form-field pad-12-16">
-//             <p>Select contacts to assign</p><img class="symbol-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
-//         </div>
-//         <div id="contacts-to-select"></div>
-//     `;
-// }
-function closeAssigned() {
+function closeAssigned(event) {
+    event.stopPropagation();
     let contactDropDown = document.getElementById('contact-drop-down');
     contactDropDown.style.display = 'none';
 }
 
-// Fügen Sie diesen Event-Listener hinzu, um das Dropdown zu schließen, wenn außerhalb geklickt wird
-document.addEventListener('click', function(event) {
-    let contactSelection = document.getElementById('contact-selection');
-    let contactDropDown = document.getElementById('contact-drop-down');
-    if (!contactSelection.contains(event.target) && contactDropDown.style.display === 'block') {
-        closeAssigned();
+document.addEventListener('DOMContentLoaded', function() {
+    const selectField = document.getElementById('select-field');
+    const contactDroppedDown = document.getElementById('contact-dropped-down');
+    
+    if (selectField) {
+        selectField.addEventListener('click', openAssigned);
+    }
+    if (contactDroppedDown) {
+        contactDroppedDown.addEventListener('click', closeAssigned);
+    }
+
+    const contactDropDown = document.getElementById('contact-drop-down');
+    if (contactDropDown) {
+        contactDropDown.addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
     }
 });
+
+
 
 
 //Date
@@ -405,10 +296,10 @@ function getButtonContent(priority, isActive) {
 // Category
 function showCategory() {
     const dropdown = document.getElementById('opened-category');
-    const icon = document.querySelector('#dropdown-icon2');
+    // const icon = document.querySelector('#dropdown-icon2');
 
     dropdown.classList.toggle('d-none'); // Dropdown anzeigen oder verbergen
-    icon.classList.toggle('dropdown-icon-mirrored'); 
+    // icon.classList.toggle('dropdown-icon-mirrored'); 
 }
 
 function categorySelected(category) {
