@@ -81,6 +81,13 @@
             color: white;
             margin-right:10px;
         }
+
+        #contactViewHeader{
+            display:flex;
+            gap:30px;
+            align-items:center;
+            justify-content:center;
+        }
         
         #contactView{
             display:flex;
@@ -90,8 +97,42 @@
             gap:30px;
             width:752px;
             padding-left:50px;
+            flex-direction:column;
         }
-        
+
+        /*contact details*/
+        #contactDetails{
+            display:flex;
+            gap:20px;
+            flex-direction:column;
+        }
+
+        .contactHeader{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            gap:54px;
+            font-size:47px;
+        }
+        .contactHeader .circle{
+            width:120px;
+            height:120px;
+            border:1px solid white;
+            background: #FF7A00;
+            color:white;
+        }
+        .contactHeader span{
+            font-size:16px;
+        }
+        .contactItemControls{
+            display:flex;
+            justify-content:flex-start;
+            align-items: center;
+            gap:8px;
+        }
+        .contactFooter{
+            font-size:20px;
+        }
         @media (max-width: 599px) {
             #contactList {
                 height: calc(100vh - (80px + 80px));
@@ -107,14 +148,13 @@
             </section>
         </div>
         <div id="contactView">
-            <h2>Contacts</h2><img src="img/contact/divider.svg"><h3>Better with a Team</h3>
+            <div id="contactViewHeader"><h2>Contacts</h2><img src="img/contact/divider.svg"><h3>Better with a Team</h3></div>
             <div id="contactDetails">
             </div>
         </div>
         <script>
             const base_url = 'https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app/';
             let contactList = document.getElementById('contactList');
-            let contactView = document.getElementById('contactView');
             let contactDetails = document.getElementById('contactDetails');
 
             function getNameInitials(name) {
@@ -125,16 +165,29 @@
             function returnContactTemplate(name, email, phone){
                 return `
                     <div>
-                        <div class="circle">${name}</div>
-                        ${email}
-                        ${phone}
-                        test
+                        <div class="contactHeader">
+                            <div class="circle">${(getNameInitials(name))}</div>
+                            <div>
+                                <p>${name}</p>
+                                <div class="contactItemControls">
+                                <img src="img/contact/edit.svg"><span>Edit</span>
+                                <img src="img/contact/delete.svg"><span>Delete</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contactFooter">
+                            <p>Contact Information</p>
+                            <b>Email</b>
+                            <p>${email}</p>
+                            <b>Phone</b>
+                            ${phone}
+                        </div>
                     </div>
                 `;
             }
 
             function showContact(name, email, phone){
-                contactView.innerHTML = returnContactTemplate(name, email, phone);
+                contactDetails.innerHTML = returnContactTemplate(name, email, phone);
             }
 
 
