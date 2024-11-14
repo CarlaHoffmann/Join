@@ -31,10 +31,11 @@
                 <div class="text">
                     To do
                     <!-- Button zum Hinzufügen neuer Aufgaben im To-Do-Bereich -->
-                    <svg width="24" height="24" onclick="openAddTaskOverlay('todo-container')" class="add-task-icon">
-                        <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"></rect>
-                        <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"></path>
-                        <path d="M16 12H8" stroke="#2A3647" stroke-width="2" stroke-linecap="round"></path>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect onclick="openAddTaskOverlay('inprogress');" x="1" y="1" width="22" height="22" rx="7"
+                            stroke="#2A3647" stroke-width="2" />
+                        <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+                        <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
                     </svg>
                 </div>
                 <div id="todo-container" class="task-container" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -47,10 +48,11 @@
                 <div class="text">
                     In progress
                     <!-- Button zum Hinzufügen neuer Aufgaben im In Progress-Bereich -->
-                    <svg width="24" height="24" onclick="openAddTaskOverlay('inprogress-container')" class="add-task-icon">
-                        <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"></rect>
-                        <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"></path>
-                        <path d="M16 12H8" stroke="#2A3647" stroke-width="2" stroke-linecap="round"></path>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect onclick="openAddTaskOverlay('inprogress');" x="1" y="1" width="22" height="22" rx="7"
+                            stroke="#2A3647" stroke-width="2" />
+                        <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+                        <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
                     </svg>
                 </div>
                 <div id="inprogress-container" class="task-container" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -68,6 +70,14 @@
                         <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"></path>
                         <path d="M16 12H8" stroke="#2A3647" stroke-width="2" stroke-linecap="round"></path>
                     </svg>
+
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect onclick="openAddTaskOverlay('inprogress');" x="1" y="1" width="22" height="22" rx="7"
+                            stroke="#2A3647" stroke-width="2" />
+                        <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+                        <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                    
                 </div>
                 <div id="feedback-container" class="task-container" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <div class="placeholder">No tasks Await feedback</div>
@@ -104,6 +114,7 @@
             </div>
         </div>
     </div>
+    
 
     <script src="script.js"></script>
 </body>
