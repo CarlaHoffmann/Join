@@ -24,6 +24,7 @@
             color:white;
             border-radius:10px;
             border:1px solid #2A3647;
+            cursor:pointer;
         }
         
         #contacts {
@@ -103,29 +104,6 @@
         <div id="contacts">
             <section id="contactList">
                 <button id="addContactButton">Add a new contact *</button>
-                <h3>M</h3>
-                <hr>
-                <div class="contact">
-                        <div class="circle">MB</div>
-                        <div class="contactInformation">
-                            <h3>Marcel Bauer</h3>
-                            <p>bauer@gmail.com</p>
-                        </div>
-                </div>
-                <div class="contact">
-                        <div class="circle">MM</div>
-                        <div class="contactInformation">
-                            <h3>Martin Meier</h3>
-                            <p>meierM@gmail.com</p>
-                        </div>
-                </div>
-                <div class="contact">
-                    <div class="circle">MM</div>
-                    <div class="contactInformation">
-                        <h3>Martin MeierLangesWorrt</h3>
-                        <p>meierlangwortM@gmail.com</p>
-                    </div>
-                </div>
             </section>
             <section id="selectedContact">
             </section>
@@ -133,5 +111,32 @@
         <div id="contactView">
             <h2>Contacts</h2><img src="img/contact/divider.svg"><h3>Better with a Team</h3>
         </div>
+        <script>
+            const base_url = 'https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app/';
+            let contactList = document.getElementById('contactList');
+            async function loadContactData(){
+                
+                let response = await fetch(base_url + ".json");
+                let responseToJson = await response.json();
+                let users = await responseToJson.users;
+                let numberOfUser = Object.keys(users).length;
+                let userKeys = Object.keys(users);
+                
+                for(let i = 0; i < numberOfUser; i++){
+                    let key = userKeys[i];
+                    let name = users[key].name;
+                    contactList.innerHTML += `
+                        <div class="contact">
+                            <div class="circle">MB</div>
+                            <div class="contactInformation">
+                                <h3>${name}</h3>
+                                <p></p>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+            loadContactData();
+        </script>
 </body>
 </html>
