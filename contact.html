@@ -25,22 +25,22 @@
             border-radius:10px;
             border:1px solid #2A3647;
             cursor:pointer;
+            margin-bottom:15px;
         }
         
         #contacts {
-            display: flex;
-            justify-content: center;
-            align-items: center;
             width:456px;
             box-shadow: 4px 0px 6px 0px #00000014;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
         }
         
         #contactList {
             display: flex;
             flex-direction: column;
-            /*justify-content: center;*/
             align-items: center;
-            width:400px;
+            width:100%;
         }
         
         #contactList h3 {
@@ -100,18 +100,44 @@
         }
         </style>
 </head>
-<body> <!--100vh - header button drüber alles was drüber frei bleiben soll-->
-        <div id="contacts">
-            <section id="contactList" style="overflow-y:auto;">
-                <button id="addContactButton">Add a new contact *</button>
+<body>
+        <div id="contacts" style="height:100vh">
+            <button id="addContactButton">Add a new contact *</button>
+            <section id="contactList" style="height: 80vh; overflow-y:auto;">
             </section>
         </div>
         <div id="contactView">
             <h2>Contacts</h2><img src="img/contact/divider.svg"><h3>Better with a Team</h3>
+            <div id="contactDetails">
+            </div>
         </div>
         <script>
             const base_url = 'https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app/';
             let contactList = document.getElementById('contactList');
+            let contactView = document.getElementById('contactView');
+            let contactDetails = document.getElementById('contactDetails');
+
+            function getNameInitials(name) {
+                let nameParts = name.split(' ');
+                return nameParts[0].charAt(0) + nameParts[nameParts.length - 1].charAt(0);
+            }
+
+            function returnContactTemplate(name, email, phone){
+                return `
+                    <div>
+                        <div class="circle">${name}</div>
+                        ${email}
+                        ${phone}
+                        test
+                    </div>
+                `;
+            }
+
+            function showContact(name, email, phone){
+                contactView.innerHTML = returnContactTemplate(name, email, phone);
+            }
+
+
             async function loadContactData(){
                 
                 let response = await fetch(base_url + ".json");
@@ -122,13 +148,15 @@
                 
                 for(let i = 0; i < numberOfUser; i++){
                     let key = userKeys[i];
+                    let user = users[key];
                     let name = users[key].name;
+                    let mail = users[key].mail;
+                    let phone = users[key].phone;
                     contactList.innerHTML += `
-                        <div class="contact">
-                            <div class="circle">MB</div>
+                        <div class="contact" onclick="showContact('${name}', '${mail}', '${phone}')")>
+                            <div class="circle">${getNameInitials(name)}</div>
                             <div class="contactInformation">
                                 <h3>${name}</h3>
-                                <p></p>
                             </div>
                         </div>
                     `;
