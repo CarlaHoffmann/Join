@@ -47,6 +47,9 @@ main {
     outline: none;
     flex-grow: 1;
 }
+.search-icon {
+    width: 60px;
+}
 
 #search-input {
     width: 100%;
@@ -54,10 +57,10 @@ main {
     padding-left: 15px;
 }
 
-.search-bar .icon {
-    margin-left: 0px;
+.search-bar .search-icon {
     width: 32px;
     height: 32px;
+    padding-right: 15px;
 }
 
 .text {
@@ -229,6 +232,14 @@ main {
     font-size: 18px;
 }
 
+.add-task {
+    display: flex; /* Standardmäßig für größere Bildschirme */
+}
+
+.media-add-task {
+    display: none; /* Standardmäßig ausgeblendet */
+}
+
 
 .media-add-task {
     background-color: #2a3647;
@@ -245,6 +256,16 @@ main {
     font-weight: lighter;
     display: none;
 }
+.media-add-task:hover {
+    background-color: #29ABE2;
+}
+
+
+.section svg:hover rect,
+.section svg:hover path {
+    stroke: #29ABE2;
+    cursor: pointer;
+}
 
 /* Styling für das Textarea im Overlay */
 textarea {
@@ -259,6 +280,53 @@ textarea {
         width: 100%;
         margin-bottom: 20px;
     }
+/* Standard Styling */
+.add-task {
+    display: flex; /* Standardmäßig für größere Bildschirme */
+}
+
+.media-add-task {
+    display: none; /* Standardmäßig ausgeblendet */
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .section {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .add-task {
+        display: none; /* Versteckt den großen "Add task"-Button */
+    }
+
+    .media-add-task {
+        display: flex; /* Zeigt das kompakte "+" Icon an */
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        width: 48px;
+        height: 48px;
+        background-color: #2a3647;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .right-section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
 
     /* Horizontaler Scrollbalken für kleine Bildschirme */
     .task-container {

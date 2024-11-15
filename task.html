@@ -20,7 +20,7 @@
                         <div class="add-task-form">
                             <div id="add-task-first">
                                 <div class="labled-box">
-                                    <label>
+                                    <label class="form-label">
                                         <div>Title<span class="red-asterisk">*</span></div>
                                         <div id="titel-wrapper">
                                             <input type="text" id="title" class="form-field margin-bottom title" placeholder="Enter a title" minlength="3" required>
@@ -31,7 +31,7 @@
                                 </div>
 
                                 <div class="labled-box">
-                                    <label>
+                                    <label class="form-label">
                                         Description
                                         <textarea name="description" id="description" class="form-field margin-bottom description" placeholder="Enter a description"></textarea>
                                     </label>
@@ -39,14 +39,14 @@
 
 
                                 <div class="labled-box">
-                                    <label>
+                                    <label class="form-label">
                                         Assigned to
                                         <div id="contact-selection" class="contact-selection">
                                             <div onclick="openAssigned()" id="select-field" class="selection-field form-field pad-12-16">
                                                 <p>Select contacts to assign</p><img class="symbol-hover icon-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
                                             </div>
-                                            <div id="contact-drop-down" class="select-items" style="display: none;">
-                                                <div onclick="closeAssigned()" id="contact-dropped-down" class="selection-field form-field pad-12-16 blue-border">
+                                            <div onclick="closeAssigned()" id="contact-drop-down" class="select-items" style="display: none;">
+                                                <div id="contact-dropped-down" class="selection-field form-field pad-12-16 blue-border">
                                                     <p>Select contacts to assign</p><img class="symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
                                                 </div>
                                                 <div id="contacts-to-select"></div>
@@ -73,7 +73,7 @@
 
                             <div id="add-task-second">
                                 <div class="labled-box">
-                                    <label>
+                                    <label class="form-label">
                                         <div>Due date<span class="red-asterisk">*</span></div>
                                         <div class="date-input-wrapper">
                                             <input type="text" id="datepicker" class="form-field margin-bottom pad-12-16 date-input" placeholder="dd/mm/yyyy" maxlength="10" required>
@@ -114,7 +114,7 @@
                                 </div>
 
                                 <div class="labled-box">
-                                    <label>
+                                    <div class="form-label">
                                         <div>Category<span class="red-asterisk">*</span></div>
                                         <div id="select-wrapper" class="select-wrapper">
                                             <div  id="category">
@@ -128,7 +128,7 @@
                                             <div id="opened-category" class="d-none">
                                                 <div onclick="showCategory()" class="select-field">
                                                     <div class="form-field pad-12-16 blue-border">Select task category</div>
-                                                    <img id="dropdown-icon2" class="dropdown-icon symbol-hover icon-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
+                                                    <img id="dropdown-icon2" class="dropdown-icon symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
                                                 </div>
                                                 <div class="selection-drop-down">
                                                     <div onclick="categorySelected('Technical Task')" class="drop-down-field">Technical Task</div>
@@ -136,11 +136,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </label>
+                                    </div>
                                 </div>
 
                                 <div class="labled-box">
-                                    <label>
+                                    <label class="form-label">
                                         Subtasks
                                         <div onclick="openSubtask()" id="subtask-input-wrapper">
                                             <div id="subtask">
