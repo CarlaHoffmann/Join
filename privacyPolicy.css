@@ -4,15 +4,113 @@ body {
     font-family: "Inter", sans-serif;
 }
 
+#privacyPolicy-page {
+    display: flex;
+    justify-content: center;
+    /* width: calc(100% - 156px); */
+    height: calc(100vh - 96px);
+    background-color: #f6f7f8;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
 
-h1 {
+#privacyPolicy-content {
+    margin-top: 110px;
+    margin-bottom: 30px;
+    margin-left: 96px;
+    margin-right: 96px;
+    max-width: 1014px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+#back {
+    /* position: fixed; */
+    /* top: 96px; */
+    /* right: 96px; */
+    width: 37px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#back:hover {
+    background-color: #efefef;
+    border-radius: 19px;
+    cursor: pointer;
+}
+
+#back:hover img {
+    transform: scale(1.1);
+}
+
+.textfield {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+h1, h2, h3 {
     margin: 0;
 }
 
+h1 {
+    font-size: 61px;
+}
 
-.textfield {
-    top: 206px;
-    right: 328px;
-    margin-left: 96px;
-    margin-top: 110px;
+.marked {
+    color: #29ABE2;
+}
+
+p {
+    margin: 0;
+    /* padding-bottom: 30px; */
+}
+
+@media(max-width: 1200px) {
+    #back {
+        position: unset;
+    }
+}
+
+@media(max-width: 920px) {
+    #privacyPolicy-page {
+        width: calc(100% - 80px);
+    }
+
+    #privacyPolicy-content {
+        margin-left: 56px;
+    }
+
+    #back {
+        right: 56px;
+        width: 32px;
+    }
+}
+
+@media(max-width: 440px) {
+    #privacyPolicy-page {
+        width: calc(100% - 40px);
+    }
+
+    #privacyPolicy-content {
+        margin-top: 48px;
+        margin-left: 16px;
+    }
+
+    #back {
+        position: unset;
+        width: 32px;
+    }
 }
