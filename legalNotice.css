@@ -4,12 +4,22 @@ body {
     font-family: "Inter", sans-serif;
 }
 
+#legalNotice-page {
+    display: flex;
+    justify-content: center;
+    /* width: calc(100% - 156px); */
+    height: calc(100vh - 96px);
+    background-color: #f6f7f8;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
 #legalNotice-content {
     margin-top: 110px;
     margin-bottom: 30px;
     margin-left: 96px;
     margin-right: 96px;
-    /* width: 1014px; */
+    max-width: 1014px;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -18,16 +28,16 @@ body {
 
 #header {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     align-items: center;
     position: relative;
 }
 
 #back {
-    /* position: fixed;
-    top: 96px;
-    right: 96px; */
+    /* position: fixed; */
+    /* top: 96px; */
+    /* right: 96px; */
     width: 37px;
     height: 37px;
     display: flex;
@@ -65,5 +75,42 @@ h1 {
 
 p {
     margin: 0;
-    padding-bottom: 30px;
+    /* padding-bottom: 30px; */
+}
+
+@media(max-width: 1200px) {
+    #back {
+        position: unset;
+    }
+}
+
+@media(max-width: 920px) {
+    #legalNotice-page {
+        width: calc(100% - 80px);
+    }
+
+    #legalNotice-content {
+        margin-left: 56px;
+    }
+
+    #back {
+        right: 56px;
+        width: 32px;
+    }
+}
+
+@media(max-width: 440px) {
+    #legalNotice-page {
+        width: calc(100% - 40px);
+    }
+
+    #legalNotice-content {
+        margin-top: 48px;
+        margin-left: 16px;
+    }
+
+    #back {
+        position: unset;
+        width: 32px;
+    }
 }

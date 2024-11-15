@@ -7,7 +7,7 @@ body {
 #help-overlay {
     display: flex;
     justify-content: center;
-    width: calc(100% - 156px);
+    /* width: calc(100% - 156px); */
     height: calc(100vh - 96px);
     background-color: #f6f7f8;
     overflow-y: auto;
@@ -35,7 +35,8 @@ a:hover {
     margin-top: 110px;
     margin-bottom: 30px;
     margin-left: 96px;
-    width: 1014px;
+    margin-right: 96px;
+    max-width: 1014px;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -44,15 +45,15 @@ a:hover {
 
 #header {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     position: relative;
 }
 
 #back {
-    position: fixed;
+    /* position: fixed;
     top: 96px;
-    right: 96px;
+    right: 96px; */
     width: 37px;
     height: 37px;
     display: flex;
@@ -119,6 +120,12 @@ p {
     font-weight: 700px;
 }
 
+@media(max-width: 1200px) {
+    #back {
+        position: unset;
+    }
+}
+
 @media(max-width: 920px) {
     #help-overlay {
         width: calc(100% - 80px);
@@ -129,6 +136,7 @@ p {
     }
 
     #back {
+        position: unset;
         right: 56px;
         width: 32px;
     }

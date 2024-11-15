@@ -112,3 +112,6 @@ function closeHelp() {
     let helpOverlay = document.getElementById('additional-content');
     helpOverlay.innerHTML = '';
 }
+
+function openLegalNotice() {}
+function closeLegalNotice() {}
