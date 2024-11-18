@@ -130,6 +130,11 @@
             align-items: center;
             gap:8px;
         }
+        .contactItemControls div{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
         .contactFooter{
             font-size:20px;
         }
@@ -162,7 +167,7 @@
                 return nameParts[0].charAt(0) + nameParts[nameParts.length - 1].charAt(0);
             }
 
-            function returnContactTemplate(name, email, phone){
+            function returnContactTemplate(key, name, email, phone){
                 return `
                     <div>
                         <div class="contactHeader">
@@ -170,8 +175,8 @@
                             <div>
                                 <p>${name}</p>
                                 <div class="contactItemControls">
-                                <img src="img/contact/edit.svg"><span>Edit</span>
-                                <img src="img/contact/delete.svg"><span>Delete</span>
+                                    <div><img src="img/contact/edit.svg"><span>Edit</span></div>
+                                    <div id="deleteContainer" onclick="deleteContact('${key}')"><img src="img/contact/delete.svg"><span>Delete</span></div>
                                 </div>
                             </div>
                         </div>
@@ -186,8 +191,8 @@
                 `;
             }
 
-            function showContact(name, email, phone){
-                contactDetails.innerHTML = returnContactTemplate(name, email, phone);
+            function showContact(key, name, email, phone){
+                contactDetails.innerHTML = returnContactTemplate(key, name, email, phone);
             }
 
 
@@ -206,7 +211,7 @@
                     let mail = users[key].mail;
                     let phone = users[key].phone;
                     contactList.innerHTML += `
-                        <div class="contact" onclick="showContact('${name}', '${mail}', '${phone}')")>
+                        <div class="contact" onclick="showContact('${key}', '${name}', '${mail}', '${phone}')")>
                             <div class="circle">${getNameInitials(name)}</div>
                             <div class="contactInformation">
                                 <h3>${name}</h3>
@@ -216,6 +221,11 @@
                 }
             }
             loadContactData();
+            async function deleteContact(key){
+                const deleteLink = base_url + "users" + "/" + key;
+                const response = await fetch(deleteLink + ".json", {method:'DELETE'});
+                return await response.json();
+            }
         </script>
 </body>
 </html>
