@@ -78,7 +78,13 @@ function closeAssigned() {
 }
 
 //Date
-document.addEventListener('DOMContentLoaded', initializeDatePicker);
+// document.addEventListener('DOMContentLoaded', initializeDatePicker);
+document.addEventListener('DOMContentLoaded', function() {
+    // Überprüfen, ob der Titel der Seite "Add Task" ist
+    if (document.title === 'Add Task') {
+        initializeDatePicker();
+    }
+});
 
 function initializeDatePicker() {
     const datepicker = document.getElementById('datepicker');
@@ -92,10 +98,18 @@ function initializeDatePicker() {
     return { datepicker, warningDialog, dialogMessage, currentYear, maxYear };
 }
 
+// function setupEventListeners(datepicker, warningDialog) {
+//     datepicker.addEventListener('input', handleDateInput);
+//     datepicker.addEventListener('blur', validateFullDate);
+//     window.onclick = (event) => handleWindowClick(event, warningDialog);
+// }
 function setupEventListeners(datepicker, warningDialog) {
-    datepicker.addEventListener('input', handleDateInput);
-    datepicker.addEventListener('blur', validateFullDate);
-    window.onclick = (event) => handleWindowClick(event, warningDialog);
+    // Überprüfen, ob der Titel der Seite "Add Task" ist
+    if (document.title === 'Add Task') {
+        datepicker.addEventListener('input', handleDateInput);
+        datepicker.addEventListener('blur', validateFullDate);
+        window.onclick = (event) => handleWindowClick(event, warningDialog);
+    }
 }
 
 function handleDateInput(e) {
@@ -436,19 +450,37 @@ function updateSubtaskDisplay() {
 }
 
 // validation
+// document.addEventListener('DOMContentLoaded', function() {
+//     const submitButton = document.querySelector('.submit-button');
+//     if (submitButton) {
+//         submitButton.addEventListener('click', async function(event) {
+//             event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
+//             if (validateForm()) {
+//                 await createTask();
+//                 console.log('Form is valid. Submitting...');
+//             }
+//         });
+//     } else {
+//         console.error('Submit button not found');
+//     }
+// });
 document.addEventListener('DOMContentLoaded', function() {
-    const submitButton = document.querySelector('.submit-button');
-    if (submitButton) {
-        submitButton.addEventListener('click', async function(event) {
-            event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
-            if (validateForm()) {
-                // showTaskAddedOverlay();
-                await createTask();
-                console.log('Form is valid. Submitting...');
-            }
-        });
-    } else {
-        console.error('Submit button not found');
+    // Überprüfen, ob der Titel der Seite "Add Task" ist
+    if (document.title === 'Add Task') {
+        const submitButton = document.querySelector('.submit-button');
+
+        if (submitButton) {
+            submitButton.addEventListener('click', async function(event) {
+                event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
+
+                if (validateForm()) {
+                    await createTask();
+                    console.log('Form is valid. Submitting...');
+                }
+            });
+        } else {
+            console.error('Submit button not found');
+        }
     }
 });
 
@@ -588,6 +620,12 @@ function resetCategory() {
 }
 
 // Diese Funktion beim Laden der Seite aufrufen
-document.addEventListener('DOMContentLoaded', setupFormValidation);
+// document.addEventListener('DOMContentLoaded', setupFormValidation);
 
-document.addEventListener('DOMContentLoaded', initializePriority);
+// document.addEventListener('DOMContentLoaded', initializePriority);
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.title === 'Add Task') { 
+        initializePriority();
+        setupFormValidation();
+    }
+});

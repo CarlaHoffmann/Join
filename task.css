@@ -11,7 +11,7 @@ body {
     align-items: center;
     background-color: #F6F7F8;
     height: 100%;
-    /* height: calc(100vh - 96px); */
+    min-height: calc(100vh - 96px);
     /* top: 96px; */
 }
 .form-box {

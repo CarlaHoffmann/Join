@@ -190,4 +190,9 @@ function goToBoard() {
     window.location.href = 'board.html';
 }
 
-document.addEventListener('DOMContentLoaded', initSummary);
+// document.addEventListener('DOMContentLoaded', initSummary);
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.title === 'Summary') { // Ersetze 'Summary Page Title' durch den tatsächlichen Titel
+        initSummary();
+    }
+});
