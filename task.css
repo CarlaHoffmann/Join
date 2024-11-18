@@ -2,6 +2,7 @@ body {
     margin: 0;
     font-family: "Inter", sans-serif;
     font-size: 20px;
+    position: relative;
 }
 
 .form-box-outer {
@@ -9,7 +10,9 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #F6F7F8;
-    height: calc(100vh - 96px);
+    height: 100%;
+    /* height: calc(100vh - 96px); */
+    /* top: 96px; */
 }
 .form-box {
     display: flex;

@@ -77,9 +77,6 @@ function closeAssigned() {
     contactsToSelect.innerHTML = '';
 }
 
-
-
-
 //Date
 document.addEventListener('DOMContentLoaded', initializeDatePicker);
 
@@ -176,11 +173,11 @@ function handleWindowClick(event, warningDialog) {
     }
 }
 
-
 // Prio
 function initializePriority() {
     resetAllPriorityButtons();
     setMediumPriority();
+    // activateButton(mediumButton, 2);
 }
 
 function priority(x, event) {
@@ -270,6 +267,22 @@ function getButtonContent(priority, isActive) {
             `;
         default:
             return '';
+    }
+}
+
+function resetAllPriorityButtons() {
+    const priorityButtons = document.querySelectorAll('.prio-button');
+    priorityButtons.forEach(button => {
+        resetButton(button);
+    });
+}
+
+function setMediumPriority() {
+    const mediumButton = document.getElementById('prio2');
+    if (mediumButton) {
+        activateButton(mediumButton, 2);
+    } else {
+        console.error('Medium priority button not found');
     }
 }
 
@@ -552,28 +565,27 @@ function clearForm() {
     errorMessages.forEach(msg => msg.classList.add('d-none'));
 }
 
-function resetAllPriorityButtons() {
-    const priorityButtons = document.querySelectorAll('.prio-button');
-    priorityButtons.forEach(button => {
-        resetButton(button);
-    });
-}
+// function resetAllPriorityButtons() {
+//     const priorityButtons = document.querySelectorAll('.prio-button');
+//     priorityButtons.forEach(button => {
+//         resetButton(button);
+//     });
+// }
 
-function setMediumPriority() {
-    const mediumButton = document.getElementById('prio2');
-    if (mediumButton) {
-        activateButton(mediumButton, 2);
-    } else {
-        console.error('Medium priority button not found');
-    }
-}
+// function setMediumPriority() {
+//     const mediumButton = document.getElementById('prio2');
+//     if (mediumButton) {
+//         activateButton(mediumButton, 2);
+//     } else {
+//         console.error('Medium priority button not found');
+//     }
+// }
 
 function resetCategory() {
     const categorySelection = document.getElementById('category-selection');
     categorySelection.textContent = 'Select task category';
     document.getElementById('opened-category').classList.add('d-none');
 }
-
 
 // Diese Funktion beim Laden der Seite aufrufen
 document.addEventListener('DOMContentLoaded', setupFormValidation);
