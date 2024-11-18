@@ -18,11 +18,9 @@ async function openAssigned() {
                 </label>
         `;
     });
-
+    
     contactsToSelect.innerHTML = contactsHTML;
     contactDropDown.style.display = 'block';
-
-    updateSelectedContacts();
 }
 
 // Funktion zum Laden der Kontakte aus Firebase
@@ -43,7 +41,6 @@ async function loadContacts() {
 function handleContactClick(event) {
     event.stopPropagation(); // Verhindert die Ausbreitung des Events
     const checkbox = event.currentTarget.querySelector('input[type="checkbox"]');
-    checkbox.checked = !checkbox.checked; // Toggle Checkbox
     toggleContact({ target: checkbox }); // Aktualisiere den Kontaktstatus
 }
 
@@ -68,34 +65,17 @@ function updateSelectedContacts() {
     
     selectedContacts.forEach(name => {
         let initials = name.split(' ').map(word => word[0]).join('');
-        contactInitials.innerHTML += `<div class="contact-initial" value="${selectedContacts}">${initials}</div>`;
+        contactInitials.innerHTML += `<div class="contact-initial" value="">${initials}</div>`;
     });
+    console.log("selectedContacts beim schließen:", selectedContacts);
 }
 
-function closeAssigned(event) {
-    event.stopPropagation();
+function closeAssigned() {
     let contactDropDown = document.getElementById('contact-drop-down');
+    let contactsToSelect = document.getElementById('contacts-to-select');
     contactDropDown.style.display = 'none';
+    contactsToSelect.innerHTML = '';
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    const selectField = document.getElementById('select-field');
-    const contactDroppedDown = document.getElementById('contact-dropped-down');
-    
-    if (selectField) {
-        selectField.addEventListener('click', openAssigned);
-    }
-    if (contactDroppedDown) {
-        contactDroppedDown.addEventListener('click', closeAssigned);
-    }
-
-    const contactDropDown = document.getElementById('contact-drop-down');
-    if (contactDropDown) {
-        contactDropDown.addEventListener('click', function(event) {
-            event.stopPropagation();
-        });
-    }
-});
 
 
 

@@ -20,8 +20,8 @@ async function createTask() {
     }
     console.log("Task to be sent:", task);
     await postData(task);
-    // clearForm(); // Hier wird das Formular geleert
-    // showTaskAddedOverlay();
+    clearForm(); // Hier wird das Formular geleert
+    showTaskAddedOverlay();
 }
 
 async function postData(taskData) {
