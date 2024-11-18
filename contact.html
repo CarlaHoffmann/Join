@@ -27,7 +27,48 @@
             cursor:pointer;
             margin-bottom:15px;
         }
-        
+
+        #addContactBox{
+            width:80%;
+            height:50%;
+            background:white;
+            z-index:100;
+            position:absolute;
+            top:25%;
+            width:80%;
+            right:10%;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            /*border:15px solid transparent;*/
+            border:15px solid #2A3647;
+            border-radius:15px;
+        }
+        #addContactBox div{
+            height:calc(100%);
+            width:100%;
+            background:#2A3647;
+            flex-direction:column;
+            display:flex;
+            justify-content: center;
+            align-items: flex-start;
+            color:white;
+            padding-left:48px;
+        }
+        #addContactBox div h2{
+            font-size:61px;
+        }
+        #addContactBox form{
+            height:calc(100%);
+            background:white;
+            border:1px solid black;
+            width:67.67%;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            gap:8px;
+        }
         #contacts {
             width:456px;
             box-shadow: 4px 0px 6px 0px #00000014;
@@ -147,6 +188,18 @@
         </style>
 </head>
 <body>
+        <div id="addContactBox">
+            <div>
+                <img src="img/contact/logo.svg">
+                <h2>Add Contact</h2>
+                <p>Tasks are better with a team!</p>
+            </div>
+            <form>
+                <input id="name" placeholder="Name" type="text">
+                <input id="email" placeholder="Email" type="email">
+                <input id="phone" placeholder="Phone" type="text">
+            </form>
+        </div>
         <div id="contacts" style="height:100vh">
             <button id="addContactButton">Add a new contact *</button>
             <section id="contactList" style="height: 80vh; overflow-y:auto;">
