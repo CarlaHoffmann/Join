@@ -191,7 +191,6 @@ function handleWindowClick(event, warningDialog) {
 function initializePriority() {
     resetAllPriorityButtons();
     setMediumPriority();
-    // activateButton(mediumButton, 2);
 }
 
 function priority(x, event) {
