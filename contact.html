@@ -41,7 +41,6 @@
             justify-content: center;
             align-items: center;
             /*border:15px solid transparent;*/
-            border:15px solid #2A3647;
             border-radius:15px;
         }
         #addContactBox div{
@@ -194,10 +193,12 @@
                 <h2>Add Contact</h2>
                 <p>Tasks are better with a team!</p>
             </div>
-            <form>
+            <form method="post" id="addContactForm" action="contact.html">
                 <input id="name" placeholder="Name" type="text">
                 <input id="email" placeholder="Email" type="email">
                 <input id="phone" placeholder="Phone" type="text">
+                <input type="submit">
+                <input type="reset">
             </form>
         </div>
         <div id="contacts" style="height:100vh">
@@ -214,6 +215,20 @@
             const base_url = 'https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app/';
             let contactList = document.getElementById('contactList');
             let contactDetails = document.getElementById('contactDetails');
+            let addContactForm = document.getElementById('addContactForm');
+
+            addContactForm.addEventListener('submit', (event)=>{
+                event.preventDefault();
+                let name = document.getElementById('name').value;
+                let email = document.getElementById('email').value;
+                let phone = document.getElementById('phone').value;
+                let uploadData = {
+                    'name':name,
+                    'email':email,
+                    'phone':phone,
+                }
+                createNewContact('/users', uploadData);
+            });
 
             function getNameInitials(name) {
                 let nameParts = name.split(' ');
@@ -273,12 +288,26 @@
                     `;
                 }
             }
+            
             loadContactData();
+            
             async function deleteContact(key){
                 const deleteLink = base_url + "users" + "/" + key;
                 const response = await fetch(deleteLink + ".json", {method:'DELETE'});
                 return await response.json();
             }
+
+            async function createNewContact(path = "", data={}){
+                let response = await fetch(base_url + path + ".json", {
+                    method:"POST",
+                    header:{
+                        "Content-Type":"application/json",
+                    },
+                    body:JSON.stringify(data)
+                });
+                return responseToJson = await response.json();
+            }
+            
         </script>
 </body>
 </html>
