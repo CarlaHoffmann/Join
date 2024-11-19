@@ -178,6 +178,9 @@
         .contactFooter{
             font-size:20px;
         }
+        .hidden{
+            display:none !important;
+        }
         @media (max-width: 599px) {
             #contactList {
                 height: calc(100vh - (80px + 80px));
@@ -187,7 +190,7 @@
         </style>
 </head>
 <body>
-        <div id="addContactBox">
+        <div id="addContactBox" class="hidden">
             <div>
                 <img src="img/contact/logo.svg">
                 <h2>Add Contact</h2>
@@ -215,8 +218,12 @@
             const base_url = 'https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app/';
             let contactList = document.getElementById('contactList');
             let contactDetails = document.getElementById('contactDetails');
-            let addContactForm = document.getElementById('addContactForm');
+            let addContactButton = document.getElementById('addContactButton');
+            let addContactBox = document.getElementById('addContactBox');
 
+            addContactButton.addEventListener('click', ()=>{
+                addContactBox.classList.toggle('hidden');
+            });
             addContactForm.addEventListener('submit', (event)=>{
                 event.preventDefault();
                 let name = document.getElementById('name').value;
