@@ -3,7 +3,7 @@ const currentUrl = window.location.href;
 let url = currentUrl;
 const lastSlashIndex = url.lastIndexOf("/");
 const lastPart = url.substring(lastSlashIndex + 1);
-const navigationLinks = document.querySelectorAll('#sideBarNavigation li a, #mobileNav ul li a, .naviLink');
+const navigationLinks = document.querySelectorAll('#sideBarNavigation li a, #mobileNav ul li a, .naviLink, #help-link');
 const content = document.getElementById('content');
 
 function markActiveMenuPoint(){

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -87,6 +87,12 @@
             flex-grow: 1;
             transition: margin-left 0.3s ease;
             padding-top:96px;
+            position: relative;
+        }
+        #info-content {
+            position: absolute;
+            top: 0;
+            left: 0;
         }
         #mobileNav {
             display: none; /* Standardmäßig ausblenden */
@@ -165,18 +171,23 @@
             }
         }
     </style>
-    <script src="summary.js"></script>
     <script src="task.js"></script>
+    <script src="summary.js"></script>
+    <script src="board.js"></script>
+    <!-- <script src="contact.js"></script> -->
+    <script src="text_pages.js"></script>
 </head>
 <body>
     <header>
         <span id="headerText">Kanban Project Management Tool</span>
         <a class="naviLink" href="summary.html"><img id="headerLogo" src="img/nav/mobileLogo.svg"></a>
         <div id="headerControls">
-            <span>?</span>
+            <a id="help-link" href="help.html"><span>?</span></a>
+            
             <span id="firstLetter">G</span>
         </div>
     </header>
+
     <nav id="sidebar">
         <div id="topPart">
             <a class="naviLink" href="summary.html"><img src="img/nav/logo.svg"></a>
@@ -187,13 +198,16 @@
                 <li><a href="contact.html"><img src="img/nav/contacts.svg">Contacts</a></li>
             </ul>
         </div>
+
         <ul>
             <li><a class="naviLink" href="privacyPolicy.html">Privacy Policy</a></li>
             <li><a class="naviLink" href="legalNotice.html">Legal notice</a></li>
         </ul>
     </nav>
-    <div id="content" w3-include-html="task.html">
+
+    <div id="content" w3-include-html="summary.html">
     </div>
+
     <nav id="mobileNav">
         <ul>
             <li><a href="summary.html"><img src="img/nav/summaryMobile.svg"><span>Summary</span></a></li>
