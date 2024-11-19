@@ -86,16 +86,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-function initializeDatePicker() {
-    const datepicker = document.getElementById('datepicker');
-    const warningDialog = document.getElementById('warning-dialog');
-    const dialogMessage = document.getElementById('dialog-message');
-    const currentYear = new Date().getFullYear();
-    const maxYear = currentYear + 5;
+// function initializeDatePicker() {
+//     const datepicker = document.getElementById('datepicker');
+//     const warningDialog = document.getElementById('warning-dialog');
+//     const dialogMessage = document.getElementById('dialog-message');
+//     const currentYear = new Date().getFullYear();
+//     const maxYear = currentYear + 5;
 
-    setupEventListeners(datepicker, warningDialog);
+//     setupEventListeners(datepicker, warningDialog);
     
-    return { datepicker, warningDialog, dialogMessage, currentYear, maxYear };
+//     return { datepicker, warningDialog, dialogMessage, currentYear, maxYear };
+// }
+function initializeDatePicker() {
+    // Überprüfen, ob der Titel der Seite "Add Task" ist
+    if (document.title === 'Add Task') {
+        const datepicker = document.getElementById('datepicker');
+        const warningDialog = document.getElementById('warning-dialog');
+        const dialogMessage = document.getElementById('dialog-message');
+        const currentYear = new Date().getFullYear();
+        const maxYear = currentYear + 5;
+
+        setupEventListeners(datepicker, warningDialog);
+
+        return { datepicker, warningDialog, dialogMessage, currentYear, maxYear };
+    }
 }
 
 // function setupEventListeners(datepicker, warningDialog) {
@@ -242,7 +256,7 @@ function getPriorityClass(priority) {
         case 1: return 'urgent';
         case 2: return 'med';
         case 3: return 'low';
-        default: return '';
+        // default: return 'med';
     }
 }
 
@@ -326,32 +340,52 @@ function categorySelected(category) {
 // Subtask
 let subtasks = [];
 
+// function openSubtask() {
+//     let subtaskButtons = document.getElementById('subtask-buttons');
+//     subtaskButtons.innerHTML = `
+//         <div id="opened-subtask-icons">
+//             <div class="opened-subtask-icon-box icon-hover" onclick="closeSubtask()">
+//                 <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt="">
+//             </div>
+//             <div><img src="./img/task/vector-3.svg" alt="seperator"></div>
+//             <div class="opened-subtask-icon-box icon-hover"  onclick="addSubtask()">
+//                 <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt="">
+//             </div>
+//         </div>
+//     `;
+//     document.addEventListener('click', closeSubtaskOnOutsideClick);
+// }
 function openSubtask() {
-    let subtaskButtons = document.getElementById('subtask-buttons');
-    subtaskButtons.innerHTML = `
-        <div id="opened-subtask-icons">
-            <div class="opened-subtask-icon-box icon-hover" onclick="closeSubtask()">
-                <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt="">
+    // Überprüfen, ob der Titel der Seite "Add Task" ist
+    if (document.title === 'Add Task') {
+        let subtaskButtons = document.getElementById('subtask-buttons');
+        subtaskButtons.innerHTML = `
+            <div id="opened-subtask-icons">
+                <div class="opened-subtask-icon-box icon-hover" onclick="closeSubtask()">
+                    <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt="">
+                </div>
+                <div><img src="./img/task/vector-3.svg" alt="seperator"></div>
+                <div class="opened-subtask-icon-box icon-hover" onclick="addSubtask()">
+                    <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt="">
+                </div>
             </div>
-            <div><img src="./img/task/vector-3.svg" alt="seperator"></div>
-            <div class="opened-subtask-icon-box icon-hover"  onclick="addSubtask()">
-                <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt="">
-            </div>
-        </div>
-    `;
-    document.addEventListener('click', closeSubtaskOnOutsideClick);
+        `;
+        document.addEventListener('click', closeSubtaskOnOutsideClick);
+    }
 }
 
 function closeSubtask() {
-    let subtaskButtons = document.getElementById('subtask-buttons');
-    let subtaskInput = document.getElementById('subtaskInput');
+    if (document.title === 'Add Task') {
+        let subtaskButtons = document.getElementById('subtask-buttons');
+        let subtaskInput = document.getElementById('subtaskInput');
 
-    // Setze die Ansicht auf den ursprünglichen Zustand zurück
-    subtaskButtons.innerHTML = `
-        <img class="subtask-img symbol-hover icon-hover" src="./img/task/subtask.svg" alt="add subtask">
-    `;
-    subtaskInput.value = '';
-    document.removeEventListener('click', closeSubtaskOnOutsideClick);
+        // Setze die Ansicht auf den ursprünglichen Zustand zurück
+        subtaskButtons.innerHTML = `
+            <img class="subtask-img symbol-hover icon-hover" src="./img/task/subtask.svg" alt="add subtask">
+        `;
+        subtaskInput.value = '';
+        document.removeEventListener('click', closeSubtaskOnOutsideClick);
+    }
 }
 
 function closeSubtaskOnOutsideClick(event) {
@@ -463,6 +497,7 @@ function updateSubtaskDisplay() {
 //         console.error('Submit button not found');
 //     }
 // });
+
 document.addEventListener('DOMContentLoaded', function() {
     // Überprüfen, ob der Titel der Seite "Add Task" ist
     if (document.title === 'Add Task') {
@@ -565,9 +600,11 @@ function goToBoard() {
 
 // Funktion zum Hinzufügen von Event-Listenern für die Echtzeit-Validierung
 function setupFormValidation() {
-    document.getElementById('title').addEventListener('input', validateTitle);
-    document.getElementById('datepicker').addEventListener('change', validateDueDate);
-    document.getElementById('category-selection').addEventListener('change', validateCategory);
+    if (document.title === 'Add Task') {
+        document.getElementById('title').addEventListener('input', validateTitle);
+        document.getElementById('datepicker').addEventListener('change', validateDueDate);
+        document.getElementById('category-selection').addEventListener('change', validateCategory);
+    }
 }
 
 function clearForm() {

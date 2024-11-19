@@ -115,3 +115,45 @@ function closeHelp() {
 
 function openLegalNotice() {}
 function closeLegalNotice() {}
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     if (document.title === 'Help' || document.title === 'Privacy Policy' || document.title === 'Legal notice') {
+//         const backButton = document.getElementById('back');
+        
+//         backButton.addEventListener('click', function(e) {
+//         e.preventDefault();
+        
+//         // Zur vorherigen Seite zurückgehen
+//         window.history.back();
+        
+//         // Seite neu laden nach kurzer Verzögerung
+//         setTimeout(function() {
+//             window.location.reload(true);
+//         }, 100);
+//         });
+//     }
+//   });
+  (function() {
+    function initBackButton() {
+        const backButtons = document.getElementsByClassName('back');
+        
+        Array.from(backButtons).forEach(function(backButton) {
+            backButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Zur vorherigen Seite zurückgehen
+                window.history.back();
+                
+                // Seite neu laden nach kurzer Verzögerung
+                setTimeout(function() {
+                    window.location.reload(true);
+                }, 100);
+            });
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initBackButton);
+    } else {
+        initBackButton();
+    }
+})();

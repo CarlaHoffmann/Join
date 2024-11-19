@@ -4,7 +4,7 @@ body {
     font-family: "Inter", sans-serif;
 }
 
-#legalNotice-page {
+.legalNotice-page {
     display: flex;
     justify-content: center;
     /* width: calc(100% - 156px); */
@@ -14,9 +14,9 @@ body {
     scrollbar-width: none;
 }
 
-#legalNotice-content {
+.legalNotice-content {
     margin-top: 110px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     margin-left: 96px;
     margin-right: 96px;
     max-width: 1014px;
@@ -26,7 +26,7 @@ body {
     position: relative;
 }
 
-#header {
+.header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -34,7 +34,7 @@ body {
     position: relative;
 }
 
-#back {
+.back {
     /* position: fixed; */
     /* top: 96px; */
     /* right: 96px; */
@@ -45,13 +45,13 @@ body {
     justify-content: center;
 }
 
-#back:hover {
+.back:hover {
     background-color: #efefef;
     border-radius: 19px;
     cursor: pointer;
 }
 
-#back:hover img {
+.back:hover img {
     transform: scale(1.1);
 }
 
@@ -59,6 +59,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 24px;
+    padding-bottom: 80px;
 }
 
 h1, h2, h3 {
@@ -75,41 +76,34 @@ h1 {
 
 p {
     margin: 0;
-    /* padding-bottom: 30px; */
 }
 
 @media(max-width: 1200px) {
-    #back {
+    .back {
         position: unset;
     }
 }
 
 @media(max-width: 920px) {
-    #legalNotice-page {
-        width: calc(100% - 80px);
-    }
-
-    #legalNotice-content {
+    .legalNotice-content {
         margin-left: 56px;
+        margin-right: 56px;
     }
 
-    #back {
+    .back {
         right: 56px;
         width: 32px;
     }
 }
 
 @media(max-width: 440px) {
-    #legalNotice-page {
-        width: calc(100% - 40px);
-    }
-
-    #legalNotice-content {
+    .legalNotice-content {
         margin-top: 48px;
         margin-left: 16px;
+        margin-right: 16px;
     }
 
-    #back {
+    .back {
         position: unset;
         width: 32px;
     }
