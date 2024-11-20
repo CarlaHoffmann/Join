@@ -213,7 +213,7 @@
                 <h2>Add Contact</h2>
                 <p>Tasks are better with a team!</p>
             </div>
-            <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); addContact()">
+            <form method="post" id="addContactForm" action="contact.html" onsubmit="event.preventDefault(); addContact()">
                 <input required id="name" placeholder="Name" type="text">
                 <input required id="email" placeholder="Email" type="email">
                 <input required id="phone" placeholder="Phone" type="text">
@@ -223,7 +223,7 @@
         </div>
         <!--edit contact box-->
         <div id="editContactBox" class="hidden">
-            <button id="closeEditContactBox" class="close-button" onclick="toggleView('editContactBox', '${key}')">×</button>
+            <button id="closeEditContactBox" class="close-button" onclick="toggleView('editContactBox', '${key}', true)">×</button>
             <div>
                 <img src="img/contact/logo.svg">
                 <h2>Edit Contact</h2>
@@ -283,7 +283,7 @@
                             <div>
                                 <p>${name}</p>
                                 <div class="contactItemControls">
-                                    <div id="editContainer" onclick="toggleView('editContactBox', '${key}')"><img src="img/contact/edit.svg"><span>Edit</span></div>
+                                    <div id="editContainer" onclick="toggleView('editContactBox', '${key}', ${true})"><img src="img/contact/edit.svg"><span>Edit</span></div>
                                     <div id="deleteContainer" onclick="deleteContact('${key}')"><img src="img/contact/delete.svg"><span>Delete</span></div>
                                 </div>
                             </div>
@@ -348,30 +348,30 @@
                 return responseToJson = await response.json();
             }
             
-            function toggleView(elementId, key=null){
+            async function toggleView(elementId, key=null, edit=false){
                 editKey = key;
                 document.getElementById(elementId).classList.toggle('hidden');
+                if(edit){
+                    const editLink = base_url + "users" + "/" + editKey;
+                    console.log(editLink);
+                    
+
+                    let response = await fetch(editLink + ".json");
+                    let user = await response.json();
+                    console.log(user.name + " " + user.mail + " " + user.phone);
+
+                    document.getElementById('changedName').value = user.name;
+                    document.getElementById('changedEmail').value = user.mail;
+                    document.getElementById('changedPhone').value = user.phone;
+                }
             };
             
             async function editContact(){
-                event.preventDefault();
-                let changedNameValue = document.getElementById('changedName').value;
-                let changedEmailValue = document.getElementById('changedEmail').value;
-                let changedPhoneValue = document.getElementById('changedPhone').value;
 
-                const editLink = base_url + "users" + "/" + editKey;
-                console.log(editLink);
-                
 
-                let user = await fetch(editLink + ".json");
 
-                let userKeys = Object.keys(user);
-                let numberOfEditKeys = Object.keys(user).length;
-                console.log(numberOfEditKeys);
 
-                console.log(user[0].name);
-
-                for(let i = 0; i < numberOfEditKeys; i++){
+                //for(let i = 0; i < numberOfEditKeys; i++){
                     /*
                     let user = users[key];
                     let name = users[key].name;
@@ -380,14 +380,14 @@
                     */
 
 
-                    let key = userKeys[i];
+                    //let key = userKeys[i];
                     
                     /*
                     changedNameValue = editLink.name;
                     changedEmailValue = editLink.mail;
                     changedPhoneValue = editLink.phone;
                     */
-                }
+                //}
             }
 
         </script>
