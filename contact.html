@@ -43,6 +43,21 @@
             /*border:15px solid transparent;*/
             border-radius:15px;
         }
+
+        #addContactBox .close-button, #editContactBox .close-button{
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            color: #2A3647;
+            cursor: pointer;
+            z-index: 101;
+            font-weight: bold;
+            line-height: 1;
+        }
+
         #addContactBox div, #editContactBox div{
             height:calc(100%);
             width:100%;
@@ -192,12 +207,13 @@
 <body>
         <!--add contact box-->
         <div id="addContactBox" class="hidden">
+            <button id="closeAddContactBox" class="close-button" onclick="toggleView('addContactBox')">×</button>
             <div>
                 <img src="img/contact/logo.svg">
                 <h2>Add Contact</h2>
                 <p>Tasks are better with a team!</p>
             </div>
-            <form method="post" id="addContactForm" action="contact.html">
+            <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); addContact()">
                 <input required id="name" placeholder="Name" type="text">
                 <input required id="email" placeholder="Email" type="email">
                 <input required id="phone" placeholder="Phone" type="text">
@@ -207,21 +223,23 @@
         </div>
         <!--edit contact box-->
         <div id="editContactBox" class="hidden">
+            <button id="closeEditContactBox" class="close-button" onclick="toggleView('editContactBox', '${key}')">×</button>
             <div>
                 <img src="img/contact/logo.svg">
-                <h2>Add Contact</h2>
+                <h2>Edit Contact</h2>
                 <p>Tasks are better with a team!</p>
             </div>
-            <form method="post" id="editContactForm" action="contact.html">
+            <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); editContact('${key}');">
                 <input required id="changedName" placeholder="Name" type="text">
                 <input required id="changedEmail" placeholder="Email" type="email">
                 <input required id="changedPhone" placeholder="Phone" type="text">
+                <input type="hidden" value="'${key}'">
                 <input type="submit">
                 <input type="reset">
             </form>
         </div>
         <div id="contacts" style="height:100vh">
-            <button id="addContactButton">Add a new contact *</button>
+            <button id="addContactButton" onclick="toggleView('addContactBox')">Add a new contact *</button>
             <section id="contactList" style="height: 80vh; overflow-y:auto;">
             </section>
         </div>
@@ -231,17 +249,16 @@
             </div>
         </div>
         <script>
+
+            let editKey = null;
+
             const base_url = 'https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app/';
             let contactList = document.getElementById('contactList');
             let contactDetails = document.getElementById('contactDetails');
             let addContactButton = document.getElementById('addContactButton');
             let addContactBox = document.getElementById('addContactBox');
 
-            addContactButton.addEventListener('click', ()=>{
-                addContactBox.classList.toggle('hidden');
-            });
-            addContactForm.addEventListener('submit', (event)=>{
-                event.preventDefault();
+            function addContact(){
                 let name = document.getElementById('name').value;
                 let email = document.getElementById('email').value;
                 let phone = document.getElementById('phone').value;
@@ -251,7 +268,7 @@
                     'phone':phone,
                 }
                 createNewContact('/users', uploadData);
-            });
+            }
 
             function getNameInitials(name) {
                 let nameParts = name.split(' ');
@@ -266,7 +283,7 @@
                             <div>
                                 <p>${name}</p>
                                 <div class="contactItemControls">
-                                    <div id="editContainer" onclick="editContact('${key}')"><img src="img/contact/edit.svg"><span>Edit</span></div>
+                                    <div id="editContainer" onclick="toggleView('editContactBox', '${key}')"><img src="img/contact/edit.svg"><span>Edit</span></div>
                                     <div id="deleteContainer" onclick="deleteContact('${key}')"><img src="img/contact/delete.svg"><span>Delete</span></div>
                                 </div>
                             </div>
@@ -331,6 +348,48 @@
                 return responseToJson = await response.json();
             }
             
+            function toggleView(elementId, key=null){
+                editKey = key;
+                document.getElementById(elementId).classList.toggle('hidden');
+            };
+            
+            async function editContact(){
+                event.preventDefault();
+                let changedNameValue = document.getElementById('changedName').value;
+                let changedEmailValue = document.getElementById('changedEmail').value;
+                let changedPhoneValue = document.getElementById('changedPhone').value;
+
+                const editLink = base_url + "users" + "/" + editKey;
+                console.log(editLink);
+                
+
+                let user = await fetch(editLink + ".json");
+
+                let userKeys = Object.keys(user);
+                let numberOfEditKeys = Object.keys(user).length;
+                console.log(numberOfEditKeys);
+
+                console.log(user[0].name);
+
+                for(let i = 0; i < numberOfEditKeys; i++){
+                    /*
+                    let user = users[key];
+                    let name = users[key].name;
+                    let mail = users[key].mail;
+                    let phone = users[key].phone;
+                    */
+
+
+                    let key = userKeys[i];
+                    
+                    /*
+                    changedNameValue = editLink.name;
+                    changedEmailValue = editLink.mail;
+                    changedPhoneValue = editLink.phone;
+                    */
+                }
+            }
+
         </script>
 </body>
 </html>
