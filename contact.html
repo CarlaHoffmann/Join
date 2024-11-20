@@ -28,7 +28,7 @@
             margin-bottom:15px;
         }
 
-        #addContactBox{
+        #addContactBox, #editContactBox{
             width:80%;
             height:50%;
             background:white;
@@ -43,7 +43,7 @@
             /*border:15px solid transparent;*/
             border-radius:15px;
         }
-        #addContactBox div{
+        #addContactBox div, #editContactBox div{
             height:calc(100%);
             width:100%;
             background:#2A3647;
@@ -54,10 +54,10 @@
             color:white;
             padding-left:48px;
         }
-        #addContactBox div h2{
+        #addContactBox div h2, #editContactBox div h2{
             font-size:61px;
         }
-        #addContactBox form{
+        #addContactBox form, #editContactBox form{
             height:calc(100%);
             background:white;
             border:1px solid black;
@@ -190,6 +190,7 @@
         </style>
 </head>
 <body>
+        <!--add contact box-->
         <div id="addContactBox" class="hidden">
             <div>
                 <img src="img/contact/logo.svg">
@@ -200,6 +201,21 @@
                 <input required id="name" placeholder="Name" type="text">
                 <input required id="email" placeholder="Email" type="email">
                 <input required id="phone" placeholder="Phone" type="text">
+                <input type="submit">
+                <input type="reset">
+            </form>
+        </div>
+        <!--edit contact box-->
+        <div id="editContactBox" class="hidden">
+            <div>
+                <img src="img/contact/logo.svg">
+                <h2>Add Contact</h2>
+                <p>Tasks are better with a team!</p>
+            </div>
+            <form method="post" id="editContactForm" action="contact.html">
+                <input required id="changedName" placeholder="Name" type="text">
+                <input required id="changedEmail" placeholder="Email" type="email">
+                <input required id="changedPhone" placeholder="Phone" type="text">
                 <input type="submit">
                 <input type="reset">
             </form>
@@ -250,7 +266,7 @@
                             <div>
                                 <p>${name}</p>
                                 <div class="contactItemControls">
-                                    <div><img src="img/contact/edit.svg"><span>Edit</span></div>
+                                    <div id="editContainer" onclick="editContact('${key}')"><img src="img/contact/edit.svg"><span>Edit</span></div>
                                     <div id="deleteContainer" onclick="deleteContact('${key}')"><img src="img/contact/delete.svg"><span>Delete</span></div>
                                 </div>
                             </div>
