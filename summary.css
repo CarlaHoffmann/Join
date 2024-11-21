@@ -3,15 +3,20 @@ body {
     font-family: "Inter", sans-serif;
     font-size: 20px;
     color: #2A3647;
+    background-color: #F6F7F8;
 }
 
 .outer-box {
-    /* height: calc(100vh - 96px); */
-    height: 100%;
+    height: calc(100vh - 96px);
+    /* height: 100%; */
     background-color: #F6F7F8;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: calc(100vw - 232px);
 }
 
 #summary-page {
@@ -381,5 +386,7 @@ body {
 @media(max-width: 640px) {
     .outer-box {
         height: calc(100vh - 160px);
+        width: 100vw;
+        bottom: 80px;
     }
 }

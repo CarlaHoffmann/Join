@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Summary</title>
     <link rel="stylesheet" href="test_summary.css">
-    <!-- <script src="test_summary.js"></script> -->
-    <script src="test_nav.js"></script>
+    <script src="test_summary.js"></script>
+    <!-- <script src="test_nav.js"></script> -->
 </head>
-<body onload="loadNavBar()">
-    <div class="header"></div>
-    <div class="nav-bar"></div>
+<body>
+    <header>
+        <div class="nav-bar" w3-include-html="test_nav.html"></div>
+    </header>
+    
     <div class="outer-box">
         <div id="summary-page">
             <div id="header">
@@ -98,6 +100,10 @@
             </div>
         </div>
     </div>
-    
+
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script>
+    w3.includeHTML();
+    </script>
 </body>
 </html>

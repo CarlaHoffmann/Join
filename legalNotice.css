@@ -7,11 +7,14 @@ body {
 .legalNotice-page {
     display: flex;
     justify-content: center;
-    /* width: calc(100% - 156px); */
+    width: calc(100vw - 232px);
     height: calc(100vh - 96px);
     background-color: #f6f7f8;
     overflow-y: auto;
     scrollbar-width: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 
 .legalNotice-content {

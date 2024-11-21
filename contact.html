@@ -205,6 +205,10 @@
         </style>
 </head>
 <body>
+    <header>
+        <div class="nav-bar" w3-include-html="nav.html"></div>
+    </header>
+
         <!--add contact box-->
         <div id="addContactBox" class="hidden">
             <button id="closeAddContactBox" class="close-button" onclick="toggleView('addContactBox')">×</button>
@@ -248,6 +252,11 @@
             <div id="contactDetails">
             </div>
         </div>
+
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <script>
+        w3.includeHTML();
+        </script>
         <script>
 
             let editKey = null;

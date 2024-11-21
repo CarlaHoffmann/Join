@@ -1,7 +1,6 @@
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
 async function initSummary() {
-
     await countToDo();
     await countDone();
     await countTasksOnBoard();
@@ -189,7 +188,6 @@ function formatDate(date) {
 
 function goToBoard() {
     window.location.href = 'board.html';
-    // href = 'board.html';
 }
 
 document.addEventListener('DOMContentLoaded', initSummary);

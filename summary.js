@@ -190,18 +190,18 @@ function goToBoard() {
     window.location.href = 'board.html';
 }
 
-// document.addEventListener('DOMContentLoaded', initSummary);
+document.addEventListener('DOMContentLoaded', initSummary);
 // document.addEventListener('DOMContentLoaded', function() {
 //     let content = document.getElementById('content');
 //     if (content = "summary.html") {
 //         initSummary();
 //     }
 // });
-document.addEventListener('DOMContentLoaded', function() {
-    let content = document.getElementById('content');
+// document.addEventListener('DOMContentLoaded', function() {
+//     let content = document.getElementById('content');
 
-    // Überprüfen, ob der Inhalt von 'content' den Namen 'summary.html' enthält
-    if (content && content.innerHTML.includes("summary.html")) {
-        initSummary();
-    }
-});
+//     // Überprüfen, ob der Inhalt von 'content' den Namen 'summary.html' enthält
+//     if (content && content.innerHTML.includes("summary.html")) {
+//         initSummary();
+//     }
+// });

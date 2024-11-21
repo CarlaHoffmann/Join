@@ -58,8 +58,10 @@
             align-items: center;
             position:fixed;
             left:0;
+            top: 0;
             height:100vh;
             transition: transform 0.3s ease;
+
         }
         #sideBarNavigation {
             padding-top:150px;
@@ -100,7 +102,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 50px;
+            /* height: 50px; */
             background: #2A3647;
             color: #CDCDCD;
             display: flex;
@@ -111,7 +113,7 @@
         }
 
         /* Media Queries */
-        @media (max-width: 599px) { /*unter 600*/
+        @media (max-width: 640px) { /*unter 640*/
             header{
                 height:80px;
                 width:100vw;
@@ -133,6 +135,7 @@
                 justify-content: space-around;
             }
             #mobileNav {
+                /* display: block !important; */
                 display: flex; /* Mobile Navigation anzeigen */
             }
             #mobileNav ul li a{
@@ -156,7 +159,8 @@
             }
         }
 
-        @media (min-width: 600px) { /*über 600*/
+        @media (min-width: 641px) { 
+            /*über 641*/
             #headerText{
                 display:flex;
             }
@@ -164,18 +168,16 @@
                 display:none;
             }
             #mobileNav{
-                display: none; /* Mobile Navigation ausblenden */
+                display: none; 
+                /* Mobile Navigation ausblenden */
             }
             #content {
-            margin-left: 232px; /* Platz für die Sidebar */
+            margin-left: 232px; 
+            /* Platz für die Sidebar */
             }
         }
     </style>
-    <script src="task.js"></script>
-    <script src="summary.js"></script>
-    <script src="board.js"></script>
-    <!-- <script src="contact.js"></script> -->
-    <script src="text_pages.js"></script>
+
 </head>
 <body>
     <header>
@@ -205,8 +207,8 @@
         </ul>
     </nav>
 
-    <div id="content" w3-include-html="summary.html">
-    </div>
+    <!-- <div id="content" w3-include-html="summary.html">
+    </div> -->
 
     <nav id="mobileNav">
         <ul>
@@ -223,6 +225,6 @@
     <script>
         w3.includeHTML();
     </script>
-    <script src="nav.js"></script>
+    <!-- <script src="nav.js"></script> -->
 </body>
 </html>
