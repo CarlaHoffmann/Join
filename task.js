@@ -78,52 +78,24 @@ function closeAssigned() {
 }
 
 //Date
-// document.addEventListener('DOMContentLoaded', initializeDatePicker);
-document.addEventListener('DOMContentLoaded', function() {
-    // Überprüfen, ob der Titel der Seite "Add Task" ist
-    if (document.title === 'Add Task') {
-        initializeDatePicker();
-    }
-});
+document.addEventListener('DOMContentLoaded', initializeDatePicker);
 
-// function initializeDatePicker() {
-//     const datepicker = document.getElementById('datepicker');
-//     const warningDialog = document.getElementById('warning-dialog');
-//     const dialogMessage = document.getElementById('dialog-message');
-//     const currentYear = new Date().getFullYear();
-//     const maxYear = currentYear + 5;
-
-//     setupEventListeners(datepicker, warningDialog);
-    
-//     return { datepicker, warningDialog, dialogMessage, currentYear, maxYear };
-// }
 function initializeDatePicker() {
-    // Überprüfen, ob der Titel der Seite "Add Task" ist
-    if (document.title === 'Add Task') {
-        const datepicker = document.getElementById('datepicker');
-        const warningDialog = document.getElementById('warning-dialog');
-        const dialogMessage = document.getElementById('dialog-message');
-        const currentYear = new Date().getFullYear();
-        const maxYear = currentYear + 5;
+    const datepicker = document.getElementById('datepicker');
+    const warningDialog = document.getElementById('warning-dialog');
+    const dialogMessage = document.getElementById('dialog-message');
+    const currentYear = new Date().getFullYear();
+    const maxYear = currentYear + 5;
 
-        setupEventListeners(datepicker, warningDialog);
-
-        return { datepicker, warningDialog, dialogMessage, currentYear, maxYear };
-    }
+    setupEventListeners(datepicker, warningDialog);
+    
+    return { datepicker, warningDialog, dialogMessage, currentYear, maxYear };
 }
 
-// function setupEventListeners(datepicker, warningDialog) {
-//     datepicker.addEventListener('input', handleDateInput);
-//     datepicker.addEventListener('blur', validateFullDate);
-//     window.onclick = (event) => handleWindowClick(event, warningDialog);
-// }
 function setupEventListeners(datepicker, warningDialog) {
-    // Überprüfen, ob der Titel der Seite "Add Task" ist
-    if (document.title === 'Add Task') {
-        datepicker.addEventListener('input', handleDateInput);
-        datepicker.addEventListener('blur', validateFullDate);
-        window.onclick = (event) => handleWindowClick(event, warningDialog);
-    }
+    datepicker.addEventListener('input', handleDateInput);
+    datepicker.addEventListener('blur', validateFullDate);
+    window.onclick = (event) => handleWindowClick(event, warningDialog);
 }
 
 function handleDateInput(e) {
@@ -340,38 +312,20 @@ function categorySelected(category) {
 // Subtask
 let subtasks = [];
 
-// function openSubtask() {
-//     let subtaskButtons = document.getElementById('subtask-buttons');
-//     subtaskButtons.innerHTML = `
-//         <div id="opened-subtask-icons">
-//             <div class="opened-subtask-icon-box icon-hover" onclick="closeSubtask()">
-//                 <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt="">
-//             </div>
-//             <div><img src="./img/task/vector-3.svg" alt="seperator"></div>
-//             <div class="opened-subtask-icon-box icon-hover"  onclick="addSubtask()">
-//                 <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt="">
-//             </div>
-//         </div>
-//     `;
-//     document.addEventListener('click', closeSubtaskOnOutsideClick);
-// }
 function openSubtask() {
-    // Überprüfen, ob der Titel der Seite "Add Task" ist
-    if (document.title === 'Add Task') {
-        let subtaskButtons = document.getElementById('subtask-buttons');
-        subtaskButtons.innerHTML = `
-            <div id="opened-subtask-icons">
-                <div class="opened-subtask-icon-box icon-hover" onclick="closeSubtask()">
-                    <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt="">
-                </div>
-                <div><img src="./img/task/vector-3.svg" alt="seperator"></div>
-                <div class="opened-subtask-icon-box icon-hover" onclick="addSubtask()">
-                    <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt="">
-                </div>
+    let subtaskButtons = document.getElementById('subtask-buttons');
+    subtaskButtons.innerHTML = `
+        <div id="opened-subtask-icons">
+            <div class="opened-subtask-icon-box icon-hover" onclick="closeSubtask()">
+                <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt="">
             </div>
-        `;
-        document.addEventListener('click', closeSubtaskOnOutsideClick);
-    }
+            <div><img src="./img/task/vector-3.svg" alt="seperator"></div>
+            <div class="opened-subtask-icon-box icon-hover"  onclick="addSubtask()">
+                <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt="">
+            </div>
+        </div>
+    `;
+    document.addEventListener('click', closeSubtaskOnOutsideClick);
 }
 
 function closeSubtask() {
@@ -483,38 +437,20 @@ function updateSubtaskDisplay() {
 }
 
 // validation
-// document.addEventListener('DOMContentLoaded', function() {
-//     const submitButton = document.querySelector('.submit-button');
-//     if (submitButton) {
-//         submitButton.addEventListener('click', async function(event) {
-//             event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
-//             if (validateForm()) {
-//                 await createTask();
-//                 console.log('Form is valid. Submitting...');
-//             }
-//         });
-//     } else {
-//         console.error('Submit button not found');
-//     }
-// });
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Überprüfen, ob der Titel der Seite "Add Task" ist
-    if (document.title === 'Add Task') {
-        const submitButton = document.querySelector('.submit-button');
+    const submitButton = document.querySelector('.submit-button');
 
-        if (submitButton) {
-            submitButton.addEventListener('click', async function(event) {
-                event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
+    if (submitButton) {
+        submitButton.addEventListener('click', async function(event) {
+            event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
 
-                if (validateForm()) {
-                    await createTask();
-                    console.log('Form is valid. Submitting...');
-                }
-            });
-        } else {
-            console.error('Submit button not found');
-        }
+            if (validateForm()) {
+                await createTask();
+                console.log('Form is valid. Submitting...');
+            }
+        });
+    } else {
+        console.error('Submit button not found');
     }
 });
 
@@ -600,11 +536,9 @@ function goToBoard() {
 
 // Funktion zum Hinzufügen von Event-Listenern für die Echtzeit-Validierung
 function setupFormValidation() {
-    if (document.title === 'Add Task') {
-        document.getElementById('title').addEventListener('input', validateTitle);
-        document.getElementById('datepicker').addEventListener('change', validateDueDate);
-        document.getElementById('category-selection').addEventListener('change', validateCategory);
-    }
+    document.getElementById('title').addEventListener('input', validateTitle);
+    document.getElementById('datepicker').addEventListener('change', validateDueDate);
+    document.getElementById('category-selection').addEventListener('change', validateCategory);
 }
 
 function clearForm() {
@@ -660,8 +594,6 @@ function resetCategory() {
 
 // document.addEventListener('DOMContentLoaded', initializePriority);
 document.addEventListener('DOMContentLoaded', function() {
-    if (document.title === 'Add Task') { 
-        initializePriority();
-        setupFormValidation();
-    }
+    initializePriority();
+    setupFormValidation();
 });

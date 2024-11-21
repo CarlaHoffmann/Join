@@ -191,8 +191,17 @@ function goToBoard() {
 }
 
 // document.addEventListener('DOMContentLoaded', initSummary);
+// document.addEventListener('DOMContentLoaded', function() {
+//     let content = document.getElementById('content');
+//     if (content = "summary.html") {
+//         initSummary();
+//     }
+// });
 document.addEventListener('DOMContentLoaded', function() {
-    if (document.title === 'Summary') { // Ersetze 'Summary Page Title' durch den tatsächlichen Titel
+    let content = document.getElementById('content');
+
+    // Überprüfen, ob der Inhalt von 'content' den Namen 'summary.html' enthält
+    if (content && content.innerHTML.includes("summary.html")) {
         initSummary();
     }
 });
