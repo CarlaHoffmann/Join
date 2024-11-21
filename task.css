@@ -3,6 +3,7 @@ body {
     font-family: "Inter", sans-serif;
     font-size: 20px;
     position: relative;
+    /* background-color: #F6F7F8; */
 }
 
 .form-box-outer {
@@ -18,11 +19,11 @@ body {
 }
 
 .form-box {
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
 }
 
 .upper-form {
@@ -33,10 +34,22 @@ body {
     gap: 50px;
 }
 
+.scroll-container {
+    width: 100%;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    max-height: calc(900px - 280px);
+}
+
+.scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
 .fill-in-part {
     /* overflow-y: auto;  */
     /* Scrollen aktivieren */
-    max-height: calc(900px - 280px);
+    /* max-height: calc(900px - 280px); */
 }
 
 .fill-in-part::-webkit-scrollbar {
@@ -52,7 +65,7 @@ body {
 
 #add-task-first {
     flex-grow: 1;
-    width: 440px;
+    /* width: 440px; */
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -69,7 +82,7 @@ body {
 
 #add-task-second {
     flex-grow: 1;
-    width: 440px;
+    /* width: 440px; */
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -94,6 +107,10 @@ body {
 
 .margin-bottom {
     margin-bottom: 16px;
+}
+
+.width-440 {
+    width: 440px;
 }
 
 .pad-12-16 {
@@ -691,6 +708,7 @@ button {
 
 .bottom-buttons {
     display: flex;
+    justify-content: end;
     gap: 16px;
 }
 
@@ -811,7 +829,8 @@ button {
     }
 
     .add-task-bottom {
-        justify-content: end;
+        /* justify-content: end; */
+        justify-content: flex-end;
         bottom: 0;
     }
 
@@ -826,6 +845,11 @@ button {
     .hide-desktop {
         display: block;
     }
+
+    .width-440 {
+        box-sizing: border-box;
+        width: 396px;
+    }
 }
 
 @media(max-width:680px) {
@@ -833,7 +857,7 @@ button {
         display: flex;
         flex-direction: column;
         gap: 20px;
-        padding: 12px 16px;
+        /* padding: 12px 16px; */
     }
     
     #add-task-first {
@@ -848,10 +872,6 @@ button {
         width: 320px;
     }
 
-    .add-task-bottom {
-        padding: 12px 16px;
-    }
-
     .prio-button {
         height: 41px;
     }
@@ -859,9 +879,14 @@ button {
     .prio-button p {
         font-size: 16px;
     }
+
+    .width-440 {
+        box-sizing: border-box;
+        width: 320px;
+    }
 }
 
-@media(max-width: 640px) {
+@media(max-width: 680px) {
     .form-box-outer {
         width: 100vw;
         height: calc(100vh - 160px);

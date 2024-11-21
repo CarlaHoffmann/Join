@@ -12,10 +12,18 @@ body {
     background-color: #f6f7f8;
     overflow-y: auto;
     scrollbar-width: none;
-    padding-bottom: 30px;
     position: absolute;
     right: 0;
     bottom: 0;
+}
+
+
+.scroll-container {
+    overflow-y: auto;
+}
+
+.scroll-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari und Edge */
 }
 
 .privacyPolicy-content {
@@ -63,7 +71,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    padding-bottom: 80px;
 }
 
 h1, h2, h3 {
@@ -100,7 +107,13 @@ p {
     }
 }
 
-@media(max-width: 440px) {
+@media(max-width: 680px) {
+    .privacyPolicy-page {
+        width: 100%;
+        height: calc(100vh - 160px);
+        bottom: 80px;
+    }
+
     .privacyPolicy-content {
         margin-top: 48px;
         margin-left: 16px;

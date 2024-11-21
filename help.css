@@ -10,15 +10,17 @@ body {
     width: calc(100vw - 232px);
     height: calc(100vh - 96px);
     background-color: #f6f7f8;
-    overflow-y: auto;
     scrollbar-width: none;
     position: absolute;
     right: 0;
     bottom: 0;
-    margin-bottom: 30px;
 }
 
-.help-page::-webkit-scrollbar {
+.scroll-container {
+    overflow-y: auto;
+}
+
+.scroll-container::-webkit-scrollbar {
     display: none; /* Chrome, Safari und Edge */
 }
 
@@ -37,7 +39,7 @@ a:hover {
 
 .help-content {
     margin-top: 110px;
-    margin-bottom: 30px;
+    margin-bottom: 80px;
     margin-left: 96px;
     margin-right: 96px;
     max-width: 1014px;
@@ -143,7 +145,11 @@ p {
     }
 }
 
-@media(max-width: 440px) {
+@media(max-width: 680px) {
+    .help-page {
+        width: 100%;
+    }
+
     .help-content {
         margin-top: 48px;
         margin-left: 16px;

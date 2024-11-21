@@ -18,12 +18,12 @@
         <div class="form-box">
             <form onsubmit="return validateForm()" id="add-task" novalidate>
                 <div class="upper-form">
-                    <h1>Add Task</h1>
+                    <h1 class="width-440">Add Task</h1>
 
                     <div class="scroll-container">
                         <div class="fill-in-part">
                             <div class="add-task-form">
-                                <div id="add-task-first">
+                                <div id="add-task-first" class="width-440">
                                     <div class="labled-box">
                                         <label class="form-label">
                                             <div>Title<span class="red-asterisk">*</span></div>
@@ -76,7 +76,7 @@
 
                                 <div class="vertical-divider hide-mobile"></div>
 
-                                <div id="add-task-second">
+                                <div id="add-task-second" class="width-440">
                                     <div class="labled-box">
                                         <label class="form-label">
                                             <div>Due date<span class="red-asterisk">*</span></div>
@@ -170,7 +170,7 @@
 
                 <div class="add-task-bottom">
                     <span class="font-16 hide-mobile"><span class="red-asterisk">*</span>This field is required</span>
-                    <div class="bottom-buttons">
+                    <div class="bottom-buttons width-440">
                         <button onclick="clearForm()" type="reset" class="clear-button hover-button">Clear 
                             <img class="icon-normal" src="./img/task/iconoir_cancel.svg" alt="">
                             <img class="icon-hover" src="./img/task/iconoir_cancel_hover.svg" alt="">
@@ -179,6 +179,7 @@
                     </div>
                 </div>
             </form>
+
             <div id="task-added-overlay" class="dialog d-none">
                 <div id="task-added-confirmation">
                     <div class="confirmation-text">Task added to board</div>

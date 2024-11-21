@@ -383,7 +383,7 @@ body {
     }
 }
 
-@media(max-width: 640px) {
+@media(max-width: 680px) {
     .outer-box {
         height: calc(100vh - 160px);
         width: 100vw;
