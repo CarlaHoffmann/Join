@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Navigation</title>
     <link rel="stylesheet" href="nav.css">
-    <script src="./nav.js"></script>
 
 </head>
 <body>
@@ -15,7 +14,7 @@
         <div id="headerControls">
             <a id="help-link" href="help.html"><img src="./img/nav/help.svg" alt=""></a>
             
-            <div onclick="toggleHelpMenu()" >
+            <div onclick="toggleHelpMenu()">
                 <div id="firstLetter">G</div>
             </div>
         </div>
@@ -28,36 +27,31 @@
     </header>
 
     <nav id="sidebar">
-        <div id="topPart">
-            <a class="naviLink" href="summary.html"><img src="img/nav/logo.svg"></a>
-            <ul id="sideBarNavigation">
-                <li><a href="summary.html"><img src="img/nav/summary.svg">Summary</a></li>
-                <li><a href="task.html"><img src="img/nav/addTasks.svg">Add Tasks</a></li>
-                <li><a href="board.html"><img src="img/nav/board.svg">Board</a></li>
-                <li><a href="contact.html"><img src="img/nav/contacts.svg">Contacts</a></li>
-            </ul>
+        <div id="logo" class="sidebar-element">
+            <a href="./summary.html"><img src="img/nav/logo.svg"></a>
         </div>
-
-        <ul>
-            <li><a class="naviLink" href="privacyPolicy.html">Privacy Policy</a></li>
-            <li><a class="naviLink" href="legalNotice.html">Legal Notice</a></li>
-        </ul>
+        <div id="sideBarNavigation" class="sidebar-element">
+            <a id="summary-link" class="link-element" href="summary.html"><img src="img/nav/summary.svg">Summary</a>
+            <a id="task-link" class="link-element" href="task.html"><img src="img/nav/addTasks.svg">Add Tasks</a>
+            <a id="board-link" class="link-element" href="board.html"><img src="img/nav/board.svg">Board</a>
+            <a id="contact-link" class="link-element" href="contact.html"><img src="img/nav/contacts.svg">Contacts</a>
+        </div>
+        <div id="info-sidebar" class="sidebar-element">
+            <a id="privacy-link" class="link-element info-link" href="privacyPolicy.html">Privacy Policy</a>
+            <a id="legal-link" class="link-element info-link" href="legalNotice.html">Legal Notice</a>
+        </div>
     </nav>
 
-    <!-- <div id="content" w3-include-html="summary.html">
-    </div> -->
-
     <nav id="mobileNav">
-        <ul>
-            <li><a href="summary.html"><img src="img/nav/summaryMobile.svg"><span>Summary</span></a></li>
-            <li><a href="task.html"><img src="img/nav/addTasksMobile.svg">Add Task</a></li>
-            <li><a href="board.html"><img src="img/nav/boardMobile.svg">Board</a></li>
-            <li><a href="contact.html"><img src="img/nav/contactsMobile.svg">Contacts</a></li>
-        </ul>
+        <a href="summary.html"><img src="img/nav/summaryMobile.svg"><span>Summary</span></a>
+        <a href="task.html"><img src="img/nav/addTasksMobile.svg">Add Task</a>
+        <a href="board.html"><img src="img/nav/boardMobile.svg">Board</a>
+        <a href="contact.html"><img src="img/nav/contactsMobile.svg">Contacts</a>
     </nav>
     <!--
     <script src="firebase.js" type="module"></script>
     -->
+    <script src="./nav.js"></script>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script>
         w3.includeHTML();

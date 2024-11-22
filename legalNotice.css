@@ -105,7 +105,13 @@ p {
     }
 }
 
-@media(max-width: 440px) {
+@media(max-width: 680px) {
+    .legalNotice-page {
+        width: 100vw;
+        height: calc(100vh - 160px);
+        bottom: 80px;
+    }
+
     .legalNotice-content {
         margin-top: 48px;
         margin-left: 16px;

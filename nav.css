@@ -33,7 +33,7 @@ header {
     display:flex;
     align-items: center;
     justify-content: center;
-    gap:25px;
+    gap:16px;
 }
 
 #help-link {
@@ -49,11 +49,12 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    width:35px;
-    height:35px;
+    width:48px;
+    height:48px;
     border: 3px solid black;
     color: #29ABE2;
-    /* font-size: 20px; */
+    font-weight: 600;
+    font-size: 22px;
 }
 
 #firstLetter:hover {
@@ -96,7 +97,6 @@ header {
     color: #CDCDCD;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
     position:fixed;
     left:0;
@@ -105,59 +105,63 @@ header {
     transition: transform 0.3s ease;
 }
 
-#sideBarNavigation {
-    padding-top:150px;
-    list-style: none;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
-    gap:15px;
-}
-
-#sideBarNavigation li a{
-    display:flex;
-    justify-content:flex-start;
-    align-items:center;
-    gap:20px;
-}
-
-#sidebar ul{
-    list-style:none;
-}
-
-#sidebar ul li a {
+#sidebar a {
     color: #CDCDCD;
     text-decoration: none;
     font-size: 16px;
 }
 
-#content {
-    flex-grow: 1;
-    transition: margin-left 0.3s ease;
-    padding-top:96px;
-    position: relative;
+.sidebar-element {
+    padding-top: 64px;
+    padding-bottom: 64px;
 }
 
-#info-content {
-    position: absolute;
-    top: 0;
-    left: 0;
+#sideBarNavigation {
+    list-style: none;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    gap:20px;
+    /* width: 232px; */
+}
+
+#sideBarNavigation a{
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    gap:8px;
+    width: 232px;
+    padding: 8px 56px;
+}
+
+#sideBarNavigation a:hover{
+    background: #263c5c;
+}
+
+#info-sidebar {
+    width: 232px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    flex-grow: 1;
+    gap: 4px;
+}
+
+#info-sidebar a {
+    padding: 8px 56px;
+}
+
+#info-sidebar a:hover{
+    color: #29ABE2;
+}
+
+.active-link {
+    background-color: #091931;
+    color: #FFFFFF !important;
 }
 
 #mobileNav {
     display: none; /* Standardmäßig ausblenden */
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    /* height: 50px; */
-    background: #2A3647;
-    color: #CDCDCD;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    z-index: 1000;
-    height:80px;
 }
 
 /* Media Queries */
@@ -195,36 +199,41 @@ header {
         transform: translateX(-100%); /* Sidebar ausblenden */
     }
 
-    #mobileNav ul{
-        width:100%;
-        list-style:none;
-        display:flex;
-        justify-content: space-around;
-    }
-
     #mobileNav {
-        /* display: block !important; */
-        display: flex; /* Mobile Navigation anzeigen */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #2A3647;
+        
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 1000;
+        height:80px;
+
+        /* width:100%; */
     }
 
-    #mobileNav ul li a{
+    #mobileNav a{
         display:flex;
-        justify-content: space-between;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
         width:100%;
         font-size:14px;
-    }
-
-    #mobileNav ul{
-        display:flex;
+        height: 76px;
+        width: 80px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        gap: 10px;
+        color: #CDCDCD;
+        text-decoration: none;
+        border-radius: 16px;
     }
 
     #mobileNav img{
         height:32px;
-    }
-
-    #mobileNav ul li a{
-        display:flex;
-        flex-direction:column;
     }
 
     #content{
@@ -233,7 +242,7 @@ header {
 }
 
 @media (min-width: 681px) { 
-    /*über 641*/
+    /*über 681px*/
     #headerText{
         display:flex;
     }
@@ -245,10 +254,5 @@ header {
     #mobileNav{
         display: none; 
         /* Mobile Navigation ausblenden */
-    }
-
-    #content {
-    margin-left: 232px; 
-    /* Platz für die Sidebar */
     }
 }
