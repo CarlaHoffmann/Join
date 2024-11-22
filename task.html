@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Task</title>
     <link rel="stylesheet" href="task.css">
-    <!-- <script src="task.js"></script> -->
+
     <script src="task_firebase.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -18,150 +18,136 @@
         <div class="form-box">
             <form onsubmit="return validateForm()" id="add-task" novalidate>
                 <div class="upper-form">
-                    <h1 class="width-440">Add Task</h1>
+                    <h1 class="headline">Add Task</h1>
 
-                    <div class="scroll-container">
-                        <div class="fill-in-part">
-                            <div class="add-task-form">
-                                <div id="add-task-first" class="width-440">
-                                    <div class="labled-box">
-                                        <label class="form-label">
-                                            <div>Title<span class="red-asterisk">*</span></div>
-                                            <div id="titel-wrapper">
-                                                <input type="text" id="title" class="form-field margin-bottom title" placeholder="Enter a title" minlength="3" required>
-                                                <div id="title-error" class="error-message d-none">This field is required.</div>
-                                                <div id="title-minlength-error" class="error-message d-none">Please enter at least 3 characters.</div>
+                    <div class="scroll-container fill-in-part">
+                        <div class="add-task-form">
+                            <div id="add-task-first" class="width-440">
+                                <div class="labled-box">
+                                    <label class="form-label">
+                                        <div>Title<span class="red-asterisk">*</span></div>
+                                        <div id="titel-wrapper">
+                                            <input type="text" id="title" class="form-field margin-bottom title" placeholder="Enter a title" minlength="3" required>
+                                            <div id="title-error" class="error-message d-none">This field is required.</div>
+                                            <div id="title-minlength-error" class="error-message d-none">Please enter at least 3 characters.</div>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="labled-box">
+                                    <label class="form-label">
+                                        Description
+                                        <textarea name="description" id="description" class="form-field margin-bottom description" placeholder="Enter a description"></textarea>
+                                    </label>
+                                </div>
+
+
+                                <div class="labled-box">
+                                    <label class="form-label">
+                                        Assigned to
+                                        <div id="contact-selection" class="contact-selection">
+                                            <div onclick="openAssigned()" id="select-field" class="selection-field form-field pad-12-16">
+                                                <p>Select contacts to assign</p><img class="symbol-hover icon-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
                                             </div>
-                                        </label>
-                                    </div>
-
-                                    <div class="labled-box">
-                                        <label class="form-label">
-                                            Description
-                                            <textarea name="description" id="description" class="form-field margin-bottom description" placeholder="Enter a description"></textarea>
-                                        </label>
-                                    </div>
-
-
-                                    <div class="labled-box">
-                                        <label class="form-label">
-                                            Assigned to
-                                            <div id="contact-selection" class="contact-selection">
-                                                <div onclick="openAssigned()" id="select-field" class="selection-field form-field pad-12-16">
-                                                    <p>Select contacts to assign</p><img class="symbol-hover icon-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
-                                                </div>
-                                                <div onclick="closeAssigned()" id="contact-drop-down" class="select-items" style="display: none;">
-                                                    <div id="contact-dropped-down" class="selection-field form-field pad-12-16 blue-border">
-                                                        <p>Select contacts to assign</p><img class="symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
-                                                    </div>
-                                                    <div id="contacts-to-select"></div>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <div id="selected-contacts" class="selected-contacts"></div>
-                                    </div>
-                                    <!-- <div class="labled-box">
-                                        <label>
-                                            Assigned to
-                                            <div id="contact-selection" class="contact-selection">
-                                                <div onclick="openAssigned()" id="select-field" class="selection-field form-field pad-12-16">
-                                                    <p>Select contacts to assign</p><img class="symbol-hover icon-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
+                                            <div onclick="closeAssigned()" id="contact-drop-down" class="select-items" style="display: none;">
+                                                <div id="contact-dropped-down" class="selection-field form-field pad-12-16 blue-border">
+                                                    <p>Select contacts to assign</p><img class="symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
                                                 </div>
                                                 <div id="contacts-to-select"></div>
                                             </div>
-                                        </label>
-                                        <div id="selected-contacts" class="selected-contacts"></div>
-                                    </div> -->
+                                        </div>
+                                    </label>
+                                    <div id="selected-contacts" class="selected-contacts"></div>
+                                </div>
+                            </div>
+
+                            <div class="vertical-divider hide-mobile"></div>
+
+                            <div id="add-task-second" class="width-440">
+                                <div class="labled-box">
+                                    <label class="form-label">
+                                        <div>Due date<span class="red-asterisk">*</span></div>
+                                        <div class="date-input-wrapper">
+                                            <input type="text" id="datepicker" class="form-field margin-bottom pad-12-16 date-input" placeholder="dd/mm/yyyy" maxlength="10" required>
+                                            <span class="calendar-icon">
+                                                <img src="./img/task/event.svg" alt="Calendar" class="calendar-icon">
+                                            </span>
+                                            <div id="due-date-error" class="error-message d-none">This field is required.</div>
+                                        </div>
+                                        
+                                    </label>                    
+                                </div>
+                                
+
+                                <div class="labled-box">
+                                    <div class="button-box">
+                                        Prio
+                                        <div class="prio-buttons">
+                                            <button onclick="priority(1, event)" class="prio-button hover-button" id="prio1">
+                                                <p>Urgent</p>
+                                                <div class="double-arrow-up">
+                                                    <img src="./img/task/prio_high.svg" alt="high">
+                                                </div>
+                                            </button>
+                                            <button onclick="priority(2, event)" class="prio-button hover-button" id="prio2">
+                                                <p>Medium</p>
+                                                <div class="double-line">
+                                                    <img src="./img/task/prio_med.svg" alt="medium">
+                                                </div>
+                                            </button>
+                                            <button onclick="priority(3, event)" class="prio-button hover-button" id="prio3">
+                                                <p>Low</p>
+                                                <div class="double-arrow-down">
+                                                    <img src="./img/task/prio_low.svg" alt="low">
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="vertical-divider hide-mobile"></div>
-
-                                <div id="add-task-second" class="width-440">
-                                    <div class="labled-box">
-                                        <label class="form-label">
-                                            <div>Due date<span class="red-asterisk">*</span></div>
-                                            <div class="date-input-wrapper">
-                                                <input type="text" id="datepicker" class="form-field margin-bottom pad-12-16 date-input" placeholder="dd/mm/yyyy" maxlength="10" required>
-                                                <span class="calendar-icon">
-                                                    <img src="./img/task/event.svg" alt="Calendar" class="calendar-icon">
-                                                </span>
-                                                <div id="due-date-error" class="error-message d-none">This field is required.</div>
-                                            </div>
-                                            
-                                        </label>                    
-                                    </div>
-                                    
-
-                                    <div class="labled-box">
-                                        <div class="button-box">
-                                            Prio
-                                            <div class="prio-buttons">
-                                                <button onclick="priority(1, event)" class="prio-button hover-button" id="prio1">
-                                                    <p>Urgent</p>
-                                                    <div class="double-arrow-up">
-                                                        <img src="./img/task/prio_high.svg" alt="high">
-                                                    </div>
-                                                </button>
-                                                <button onclick="priority(2, event)" class="prio-button hover-button" id="prio2">
-                                                    <p>Medium</p>
-                                                    <div class="double-line">
-                                                        <img src="./img/task/prio_med.svg" alt="medium">
-                                                    </div>
-                                                </button>
-                                                <button onclick="priority(3, event)" class="prio-button hover-button" id="prio3">
-                                                    <p>Low</p>
-                                                    <div class="double-arrow-down">
-                                                        <img src="./img/task/prio_low.svg" alt="low">
-                                                    </div>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="labled-box">
-                                        <div class="form-label">
-                                            <div>Category<span class="red-asterisk">*</span></div>
-                                            <div id="select-wrapper" class="select-wrapper">
-                                                <div  id="category">
-                                                    <div onclick="showCategory()" class="select-field">
-                                                        <div id="category-selection" class="form-field margin-bottom pad-12-16">Select task category</div>
-                                                        <img class="dropdown-icon symbol-hover icon-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
-                                                    </div>
+                                <div class="labled-box">
+                                    <div class="form-label">
+                                        <div>Category<span class="red-asterisk">*</span></div>
+                                        <div id="select-wrapper" class="select-wrapper">
+                                            <div  id="category">
+                                                <div onclick="showCategory()" class="select-field">
+                                                    <div id="category-selection" class="form-field margin-bottom pad-12-16">Select task category</div>
+                                                    <img class="dropdown-icon symbol-hover icon-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
                                                 </div>
-                                                <div id="category-error-message" class="error-message d-none">This field is required.</div>
+                                            </div>
+                                            <div id="error-message" class="error-message d-none">This field is required.</div>
 
-                                                <div id="opened-category" class="d-none">
-                                                    <div onclick="showCategory()" class="select-field">
-                                                        <div class="form-field pad-12-16 blue-border">Select task category</div>
-                                                        <img id="dropdown-icon2" class="dropdown-icon symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
-                                                    </div>
-                                                    <div class="selection-drop-down">
-                                                        <div onclick="categorySelected('Technical Task')" class="drop-down-field">Technical Task</div>
-                                                        <div onclick="categorySelected('User Story')" class="drop-down-field">User Story</div>
-                                                    </div>
+                                            <div id="opened-category" class="d-none">
+                                                <div onclick="showCategory()" class="select-field">
+                                                    <div class="form-field pad-12-16 blue-border">Select task category</div>
+                                                    <img id="dropdown-icon2" class="dropdown-icon symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
+                                                </div>
+                                                <div class="selection-drop-down">
+                                                    <div onclick="categorySelected('Technical Task')" class="drop-down-field">Technical Task</div>
+                                                    <div onclick="categorySelected('User Story')" class="drop-down-field">User Story</div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="labled-box">
-                                        <label class="form-label">
-                                            Subtasks
-                                            <div onclick="openSubtask()" id="subtask-input-wrapper">
-                                                <div id="subtask">
-                                                    <input onclick="openSubtask()" id="subtaskInput" type="text" class="form-field pad-12-16" placeholder="Add new subtask">
-                                                    <div id="subtask-buttons">
-                                                        <img class="subtask-img symbol-hover icon-hover" src="./img/task/subtask.svg" alt="add subtask">
-                                                    </div>
+                                <div class="labled-box">
+                                    <label class="form-label">
+                                        Subtasks
+                                        <div onclick="openSubtask()" id="subtask-input-wrapper">
+                                            <div id="subtask">
+                                                <input onclick="openSubtask()" id="subtaskInput" type="text" class="form-field pad-12-16" placeholder="Add new subtask">
+                                                <div id="subtask-buttons">
+                                                    <img class="subtask-img symbol-hover icon-hover" src="./img/task/subtask.svg" alt="add subtask">
                                                 </div>
                                             </div>
-                                        </label>
-                                        <div>
-                                            <div id="subtasks">
-                                            </div>
                                         </div>
-                                        <span class="font-16 hide-desktop"><span class="red-asterisk">*</span>This field is required</span>
+                                    </label>
+                                    <div>
+                                        <div id="subtasks">
+                                        </div>
                                     </div>
+                                    <span class="font-16 hide-desktop"><span class="red-asterisk">*</span>This field is required</span>
                                 </div>
                             </div>
                         </div>

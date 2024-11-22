@@ -6,7 +6,7 @@ async function openAssigned() {
     let contactsToSelect = document.getElementById('contacts-to-select');
     
     const contacts = await loadContacts();
-
+    console.log(contacts);
     let contactsHTML = '';
 
     contacts.forEach((contact, index) => {
@@ -567,22 +567,6 @@ function clearForm() {
     errorMessages.forEach(msg => msg.classList.add('d-none'));
 }
 
-// function resetAllPriorityButtons() {
-//     const priorityButtons = document.querySelectorAll('.prio-button');
-//     priorityButtons.forEach(button => {
-//         resetButton(button);
-//     });
-// }
-
-// function setMediumPriority() {
-//     const mediumButton = document.getElementById('prio2');
-//     if (mediumButton) {
-//         activateButton(mediumButton, 2);
-//     } else {
-//         console.error('Medium priority button not found');
-//     }
-// }
-
 function resetCategory() {
     const categorySelection = document.getElementById('category-selection');
     categorySelection.textContent = 'Select task category';
@@ -590,9 +574,6 @@ function resetCategory() {
 }
 
 // Diese Funktion beim Laden der Seite aufrufen
-// document.addEventListener('DOMContentLoaded', setupFormValidation);
-
-// document.addEventListener('DOMContentLoaded', initializePriority);
 document.addEventListener('DOMContentLoaded', function() {
     initializePriority();
     setupFormValidation();

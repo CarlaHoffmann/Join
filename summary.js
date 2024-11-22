@@ -3,9 +3,9 @@ const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedataba
 async function initSummary() {
     await countToDo();
     await countDone();
-    await countTasksOnBoard();
     await countTasksInProgress();
     await countAwaitingFeedback();
+    await countTasksOnBoard();
     await findHighestPriorityTask();
 }
 
@@ -147,6 +147,7 @@ function updateWithTasks(elements, tasks, earliestDate) {
 }
 
 function updateWithoutTasks(elements) {
+    elements.color.classList.add(getSymbolColor(1));
     elements.image.src = "./img/summary/prio_high.svg";
     elements.counter.innerHTML = "0";
     elements.prio.innerHTML = "Urgent";
@@ -191,17 +192,3 @@ function goToBoard() {
 }
 
 document.addEventListener('DOMContentLoaded', initSummary);
-// document.addEventListener('DOMContentLoaded', function() {
-//     let content = document.getElementById('content');
-//     if (content = "summary.html") {
-//         initSummary();
-//     }
-// });
-// document.addEventListener('DOMContentLoaded', function() {
-//     let content = document.getElementById('content');
-
-//     // Überprüfen, ob der Inhalt von 'content' den Namen 'summary.html' enthält
-//     if (content && content.innerHTML.includes("summary.html")) {
-//         initSummary();
-//     }
-// });

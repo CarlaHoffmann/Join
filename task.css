@@ -3,7 +3,7 @@ body {
     font-family: "Inter", sans-serif;
     font-size: 20px;
     position: relative;
-    /* background-color: #F6F7F8; */
+    background-color: #F6F7F8;
 }
 
 .form-box-outer {
@@ -18,18 +18,17 @@ body {
     bottom: 0;
 }
 
-.form-box {
-    /* display: flex;
+/* .form-box {
+    display: flex;
     justify-content: center;
-    align-items: center; */
+    align-items: center;
     width: 100%;
-    /* height: 100%; */
-}
+    height: 100%;
+} */
 
 .upper-form {
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
     position: relative;
     gap: 50px;
 }
@@ -37,19 +36,12 @@ body {
 .scroll-container {
     width: 100%;
     display: flex;
-    /* align-items: center; */
     justify-content: center;
     max-height: calc(900px - 280px);
 }
 
 .scroll-container::-webkit-scrollbar {
     display: none;
-}
-
-.fill-in-part {
-    /* overflow-y: auto;  */
-    /* Scrollen aktivieren */
-    /* max-height: calc(900px - 280px); */
 }
 
 .fill-in-part::-webkit-scrollbar {
@@ -65,7 +57,7 @@ body {
 
 #add-task-first {
     flex-grow: 1;
-    /* width: 440px; */
+    width: 440px;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -82,7 +74,7 @@ body {
 
 #add-task-second {
     flex-grow: 1;
-    /* width: 440px; */
+    width: 440px;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -195,7 +187,6 @@ h1 {
     color: #D1D1D1;
  }
 
-
 /* Description */
 .description {
     box-sizing: border-box;
@@ -209,13 +200,9 @@ h1 {
     color: #D1D1D1;
 }
 
-
-
 /* Contact Selection*/
 #contact-selection {
     position: relative;
-    /* background-color: #FFFFFF;
-    border-radius: 10px; */
 }
 
 .selection-field {
@@ -235,19 +222,14 @@ h1 {
     left: 0;
     right: 0;
     z-index: 99;
-    /* border: 1px solid #D1D1D1; */
-    /* border-top: none; */
     border: none;
     border-radius: 10px;
-    max-height: 250px; /* Höhe für 5 Einträge plus etwas Platz für den Header */
+    max-height: 250px;
     overflow-y: auto; 
 }
-/* #contacts-to-select {
-    height: 50px;
-    overflow-y: scroll;
-} */
+
 #contacts-to-select {
-    max-height: 200px; /* Höhe für 5 Einträge (angenommen, jeder Eintrag ist 40px hoch) */
+    max-height: 200px; 
     overflow-y: auto;
 }
 
@@ -265,7 +247,6 @@ h1 {
 }
 
 .contact-label{
-    /* width: 100%; */
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -281,7 +262,6 @@ h1 {
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 8px;
-    /* margin-left: 10px; */
 }
 
 .contact-initial {
@@ -295,8 +275,6 @@ h1 {
     justify-content: center;
     font-weight: 400;
     font-size: 12px;
-    /* margin-left: -10px;
-    z-index: 1; */
 }
 
 /* Anpassung des Scrollbalkens für besseres Aussehen */
@@ -305,19 +283,23 @@ h1 {
 }
 
 #contacts-to-select::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    /* background: #f1f1f1; */
+    background: #ffffff;
     border-radius: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 #contacts-to-select::-webkit-scrollbar-thumb {
-    background: #888;
+    /* background: #888; */
+    background: #D1D1D1;
     border-radius: 10px;
 }
 
 #contacts-to-select::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    /* background: #555; */
+    background: #A8A8A8;
 }
-
 
 /* Date*/
 .date-input-wrapper {
