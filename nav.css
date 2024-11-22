@@ -132,10 +132,12 @@ header {
     gap:8px;
     width: 232px;
     padding: 8px 56px;
+    /* transition: transform 0.3s ease; */
 }
 
 #sideBarNavigation a:hover{
     background: #263c5c;
+
 }
 
 #info-sidebar {
@@ -149,10 +151,12 @@ header {
 
 #info-sidebar a {
     padding: 8px 56px;
+    transition: transform 0.3s ease;
 }
 
 #info-sidebar a:hover{
     color: #29ABE2;
+    transform: scale(1.07); 
 }
 
 .active-link {
