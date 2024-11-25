@@ -662,8 +662,9 @@
 }
 
 .no-search-result {
-  color: var(--errorRed);
+  color: red;
   text-align: center;
-  font-size: 24px;
+  font-size: 12px;
   margin-top: 8px;
+
 }
