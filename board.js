@@ -1,3 +1,17 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let editingTask = null; // Speichert die zu bearbeitende Aufgabe
 let targetContainer = null; // Speichert das Ziel für die Aufgabe
 
