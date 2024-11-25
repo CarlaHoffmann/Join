@@ -234,11 +234,10 @@
                 <h2>Edit Contact</h2>
                 <p>Tasks are better with a team!</p>
             </div>
-            <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); editContact('${key}');">
+            <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); editContact('${editKey}');">
                 <input required id="changedName" placeholder="Name" type="text">
                 <input required id="changedEmail" placeholder="Email" type="email">
                 <input required id="changedPhone" placeholder="Phone" type="text">
-                <input type="hidden" value="'${key}'">
                 <input type="submit">
                 <input type="reset">
             </form>
@@ -326,7 +325,7 @@
                     let key = userKeys[i];
                     let user = users[key];
                     let name = users[key].name;
-                    let mail = users[key].mail;
+                    let mail = users[key].email;
                     let phone = users[key].phone;
                     contactList.innerHTML += `
                         <div class="contact" onclick="showContact('${key}', '${name}', '${mail}', '${phone}')")>
@@ -362,13 +361,10 @@
                 editKey = key;
                 document.getElementById(elementId).classList.toggle('hidden');
                 if(edit){
-                    const editLink = base_url + "users" + "/" + editKey;
-                    console.log(editLink);
-                    
 
+                    const editLink = base_url + "users" + "/" + editKey;
                     let response = await fetch(editLink + ".json");
                     let user = await response.json();
-                    console.log(user.name + " " + user.mail + " " + user.phone);
 
                     document.getElementById('changedName').value = user.name;
                     document.getElementById('changedEmail').value = user.mail;
@@ -377,27 +373,24 @@
             };
             
             async function editContact(){
-
-
-
-
-                //for(let i = 0; i < numberOfEditKeys; i++){
-                    /*
-                    let user = users[key];
-                    let name = users[key].name;
-                    let mail = users[key].mail;
-                    let phone = users[key].phone;
-                    */
-
-
-                    //let key = userKeys[i];
-                    
-                    /*
-                    changedNameValue = editLink.name;
-                    changedEmailValue = editLink.mail;
-                    changedPhoneValue = editLink.phone;
-                    */
-                //}
+                const changedName = document.getElementById('changedName').value;
+                const changedEmail = document.getElementById('changedEmail').value;
+                const changedPhone = document.getElementById('changedPhone').value;
+                const data = {
+                    'name':changedName,
+                    'email':changedEmail,
+                    'phone':changedPhone,
+                };
+                const editLink = base_url + "users" + "/" + editKey + '.json';
+                const response = await fetch(editLink, 
+                {
+                    method:'PUT',
+                    headers: {
+                        "Content-Type":"application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+                return await response.json();
             }
 
         </script>
