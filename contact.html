@@ -29,6 +29,11 @@
             border:1px solid #2A3647;
             cursor:pointer;
             margin-bottom:15px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            gap:16px;
+            font-size:21px;
         }
 
         #addContactBox, #editContactBox{
@@ -251,7 +256,7 @@
                 </form>
             </div>
             <div id="contacts" style="height:100vh">
-                <button id="addContactButton" onclick="toggleView('addContactBox')">Add a new contact *</button>
+                <button id="addContactButton" onclick="toggleView('addContactBox')">Add new contact <img src="img/contact/person_add.svg"></button>
                 <section id="contactList" style="height: 80vh; overflow-y:auto;">
                 </section>
             </div>
