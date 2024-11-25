@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="./css/board.css" />
     <link rel="stylesheet" href="./css/mediaQuery.css" />
     <link rel="stylesheet" href="./css/addTasks.css" />
+    
+    <link rel="stylesheet" href="task.css">
+    
 </head>
 
 <body class="flex_dir_c" onload="includeHTML(); loadTasks();">
@@ -58,6 +61,8 @@
         </div>
         <!-- End Task Boxes -->
 
+        <!-- Overlay -->
+         <div id="task-overlay"></div>
         
 
         <!-- Board Section -->
@@ -85,7 +90,7 @@
                             </div>
                             <!--<div onclick="showDialog('.dialog_addTask_bg', 'd-none', '.dialog_addTask', 'show_dialog_addTask', 50)" class="add-task-button">-->
 
-                            <div onclick="" class="add-task-button">
+                            <div onclick="addTask()" class="add-task-button">
                                 <p>Add task</p>
                                 <img src="/assets/img/board/add_white.svg" />
                             </div>
@@ -103,7 +108,7 @@
                             ondragover="allowDrop(event); highlight('column-open')">
                             <div class="board-headline">
                                 <h2 class="text_board_headline">To do</h2>
-                                <a onclick="" href="" class="column-plus-button"></a>
+                                <a onclick="addTask()" href="" class="column-plus-button"></a>
                             </div>
                             <div id="openTasks" class="tasks-container"></div>
                         </div>
@@ -145,6 +150,7 @@
         </div>
         <!-- End Board Section -->
     </div>
+    <script src="task.js"></script>
 </body>
 
 </html>

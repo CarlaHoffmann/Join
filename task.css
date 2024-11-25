@@ -335,49 +335,7 @@ h1 {
 
 .date-input::placeholder {
     color: #D1D1D1;
-}
-
-
-
-/* .dialog {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.4);
-}
-
-.dialog-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 300px;
-    border-radius: 5px;
-    text-align: center;
-}
-
-#dialog-close {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-}
-
-#dialog-close:hover {
-    background-color: #45a049;
-} */
-
-
-
-  
+}  
 
 /* Prio*/
 .prio-buttons {
@@ -539,7 +497,6 @@ button {
     border-radius: 10px;
 }
 
-
 .error-message {
     position: absolute;
     color: red;
@@ -547,8 +504,6 @@ button {
     left: 0;
     font-size: 12px;
 }
-
-
 
 /* Subtask*/
 #subtask-input-wrapper {
@@ -609,6 +564,7 @@ button {
     gap: 4px;
     margin-top: 4px;
     margin-bottom: 8px;
+    min-height: 50px;
 }
 
 .subtask-box {
@@ -685,7 +641,7 @@ button {
     padding-top: 12px;
     padding-bottom: 12px;
     position: relative;
-    bottom: -40px;
+    /* bottom: -40px; */
 }
 
 .bottom-buttons {

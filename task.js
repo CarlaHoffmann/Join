@@ -402,6 +402,16 @@ function addSubtask() {
     }
     closeSubtask();
 }
+// function addSubtask() {
+//     const subtaskInput = document.getElementById('subtaskInput');
+
+//     if (subtaskInput.value.trim()) {
+//         subtasks.push(subtaskInput.value.trim());
+//         updateSubtasksDisplay();
+//     }
+
+//     closeSubtask();
+// }
 
 function editSubtask(index) {
     let subtaskElement = document.getElementById(`subtask${index}`);
@@ -423,6 +433,27 @@ function editSubtask(index) {
     input.focus();
     input.setSelectionRange(input.value.length, input.value.length);
 }
+// function editSubtask(index) {
+//     const subtaskElement = document.getElementById(`subtask${index}`);
+
+//     if (subtasks[index]) {
+//         const currentText = subtasks[index];
+//         subtaskElement.innerHTML = `
+//             <div class="edit-subtask-wrapper">
+//                 <input type="text" class="edit-subtask-input" value="${currentText}">
+//                 <div class="edit-subtask-icons">
+//                     <div><img onclick="deleteSubtask(${index})" class="icon-hover" src="./img/task/subtask_add_bin.svg" alt="Delete"></div>
+//                     <div><img src="./img/task/vector-3.svg" alt="Separator"></div>
+//                     <div><img onclick="replaceSubtask(${index})" class="icon-hover" src="./img/task/subtask_check.svg" alt="Confirm"></div>
+//                 </div>
+//             </div>`;
+
+//         // Fokussiere das Eingabefeld und setze den Cursor ans Ende
+//         const input = subtaskElement.querySelector('.edit-subtask-input');
+//         input.focus();
+//         input.setSelectionRange(input.value.length, input.value.length);
+//     }
+// }
 
 function replaceSubtask(index) {
     let subtaskElement = document.getElementById(`subtask${index}`);
@@ -462,6 +493,21 @@ function updateSubtaskDisplay() {
         `;
     }
 }
+// function updateSubtasksDisplay() {
+//     const addedSubtasksContainer = document.getElementById('subtasks');
+
+//     addedSubtasksContainer.innerHTML = subtasks.map((element, i) => `
+//         <div id="subtask${i}">
+//             <div onclick="editSubtask(${i})" class="subtask-box">
+//                 <div>• ${element}</div>
+//                 <div class="added-subtasks-icons">
+//                     <div><img onclick="editSubtask(${i})" class="icon-hover" src="./img/task/subtask_add_pen.svg" alt=""></div>
+//                     <div><img src="./img/task/vector-3.svg" alt=""></div>
+//                     <div><img onclick="deleteSubtask(${i})" class="icon-hover" src="./img/task/subtask_add_bin.svg" alt=""></div>
+//                 </div>
+//             </div>
+//         </div>`).join('');
+// }
 
 // validation
 document.addEventListener('DOMContentLoaded', function() {

@@ -1,3 +1,36 @@
+#board-add-task-overlay {
+  width: calc(100vw - 232px);
+  height: calc(100vh - 96px);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  background-color: #F6F7F8;
+}
+
+#overlay-content {
+  /* width: 1200px; */
+  /* height: 700px; */
+  /* border: 1px solid black; */
+  background-color: #a8a8a8;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #F6F7F8; */
+  width: calc(100vw - 432px);
+  height: calc(100vh - 196px);
+    /* position: absolute;
+    right: 0;
+    bottom: 0; */
+}
+
+
+
+
 /* Board - Dialog add Task */
 .dialog_addTask_bg {
   position: fixed;
@@ -6,7 +39,7 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.2);
   inset: 0;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 .dialog_addTask {
