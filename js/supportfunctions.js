@@ -53,27 +53,6 @@ async function getTasksJson() {
     return tasks;
 }
 
-// Schneidet die Mitgliederliste auf maximal 7 Mitglieder für die Anzeige
-function truncateMember(memberArray, task) {
-    let memberContainer = document.getElementById(`task-all-member${task['id']}`);
-    memberContainer.innerHTML = '';
-    for (let i = 0; i < 7; i++) {
-        let member = memberArray[i]['letters'];
-        let taskId = task['id'];
-        let memberId = taskId + task['assigned member'][i]['name'];
-        memberContainer.innerHTML += generateMemberTaskBox(member, memberId);
-        setColorMember(task, i, memberId);
-    };
-    let furtherMember = memberArray.length - 7;
-    memberContainer.innerHTML += generateFurtherMemberNumber(furtherMember);
-}
-
-// Kürzt den Beschreibungstext einer Task auf 50 Zeichen
-function truncateText(task) {
-    let description = document.getElementById(`task-description${task['id']}`).innerHTML;
-    let truncated = description.substring(0, 50) + "...";
-    document.getElementById(`task-description${task['id']}`).innerHTML = truncated;
-}
 
 // Fügt Farbe zu den Status-Buttons basierend auf dem Status hinzu
 function addStatusButtonColor(status, event) {
