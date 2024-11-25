@@ -145,6 +145,8 @@
             margin-right:10px;
         }
 
+        /*contact view*/
+
         #contactViewHeader{
             display:flex;
             gap:30px;
@@ -210,9 +212,15 @@
                 width: 100%;
             }
         }
-        @media (max-width: 680px) { /*unter 640*/
+        @media (max-width: 680px) { /*unter 680*/
             #contactContent{
                 left:0;
+            }
+            #contactView{
+                display:none !important;
+                position:absolute;
+                width:100vw;
+                z-index:999;
             }
         }
         </style>
@@ -276,6 +284,7 @@
 
             const base_url = 'https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app/';
             let contactList = document.getElementById('contactList');
+            let contact = document.querySelectorAll('.contact');
             let contactDetails = document.getElementById('contactDetails');
             let addContactButton = document.getElementById('addContactButton');
             let addContactBox = document.getElementById('addContactBox');
@@ -299,7 +308,7 @@
 
             function returnContactTemplate(key, name, email, phone){
                 return `
-                    <div>
+                    <div class='contact'>
                         <div class="contactHeader">
                             <div class="circle">${(getNameInitials(name))}</div>
                             <div>
