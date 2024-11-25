@@ -1,0 +1,1390 @@
+@media (min-width: 801px) {
+  /* Header */
+  .border_profile:hover { /* just the hover effect that will only trigger at 801px and up */
+    background-color: #0c2e621f;
+  }
+  /* Side Menu */
+  .menu_icon_text:not(.activeLink):hover,
+  .submenu_header_style a:not(.activeLink):hover {
+    background-color: var(--hoverMenuBlue);
+  }
+}
+
+@media (max-width: 1110px) {
+  /* Header */
+  #header {
+    height: 80px;
+    padding: 20px 40px 20px 52px;
+  }
+
+  #main_container {
+    height: calc(100vh - 80px);
+}
+/* Contacts - Dialog add & edit Contact */
+#content_contacts {
+  width: 100%;
+  height: 100%;
+}
+
+.main_contacts {
+  display: block;
+}
+
+.head_overview {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 48px;
+  padding-right: 16px;
+}
+
+.left_part_overview {
+  padding-top: 0px;
+}
+
+.add_person_more_icon {
+  width: 32px;
+  height: 32px;
+}
+
+.right_part_overview {
+  display: flex;
+  width: 32px;
+  height: 32px;
+}
+
+.floating_contact {
+  transform: translateX(0px);
+}
+
+.head_floating_content {
+  gap: 20px;
+}
+}
+
+@media (max-width: 800px) {
+  .summaryText {
+    opacity: 1;
+    display: flex;  
+    position: absolute;
+    background-color: #F5F5F5;
+    width: 100% !important;
+    height: calc(100% - 83px);
+    transition: all 1500ms ease-in;
+    margin: 0 !important;
+  }
+
+  .fade-out {
+    opacity: 0;
+  }
+
+  .display-none{
+    display: none;
+  }
+
+  /* Header */
+  #header {
+    padding: 20px 16px;
+  }
+
+  .headline {
+    display: none;
+  }
+
+  .logo_header_mobile {
+    display: flex;
+    width: 32px;
+    height: 39.02px;
+  }
+
+  .header_help_icon {
+    display: none;
+  }
+
+  .border_profile {
+    width: 40px;
+    height: 40px;
+  }
+
+  .text_profile_header {
+    font-weight: 400;
+  }
+
+  /* side menu bottom */
+  #side_menu_desktop {
+    display: none;
+  }
+
+  #side_menu {
+    background-color: var(--menuButtonDarkblue);
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 16px;
+  }
+
+  .side_menu_sticky {
+    position: sticky;
+    bottom: 0;
+  }
+
+  .menu_icon_text {
+    flex-direction: column;
+    padding: 15px 0px;
+    width: 80px;
+    gap: 10px;
+  }
+
+  .menu_icon_image {
+    width: 24px;
+    height: 24px;
+  }
+
+  .link_style {
+    font-size: 14px;
+    font-family: "Open Sans";
+  }
+
+  .activeLink {
+    border-radius: 16px;
+  }
+
+  .wrapped_maxWidth {
+    flex-direction: column;
+}
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+  
+  ::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+    }
+  
+    ::-webkit-scrollbar-thumb:horizontal {
+      display: none;
+    }
+
+  #main_container {
+      height: calc(100vh - 80px - 83px);
+  }
+
+  /* Contacts - Dialog add & edit Contact */
+  .dialog_add_contact,
+  .dialog_edit_contact {
+    transform: translateY(calc(100% + 90px));
+    transition: all 300ms ease-out;
+  }
+
+  .show_dialog_add_contact,
+  .show_dialog_edit_contact {
+    transform: translateY(0);
+  }
+
+  /* Contact options */
+  .delete_content:hover .contact_delete_icon,
+  .delete_content:hover p,
+  .edit_content:hover .contact_edit_icon,
+  .edit_content:hover p {
+    filter: initial;
+    color: unset;
+    font-weight: 400;
+  }
+
+  /* Contact created */
+  .create_contact_done {
+    left: calc((100% - 315.27px) / 2);
+    bottom: 200px;
+    transform: translateY(314px);
+    transition: all 300ms ease-out;
+  }
+
+  .show_create_contact_done {
+    transform: translateY(0px);
+  }
+
+  /* Contacts */
+  .main_contacts {
+    flex-direction: column;
+  }
+
+  .add_change_btn_mobile {
+    position: absolute;
+    bottom: 109px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    box-shadow: 0px 4px 4px 0px #00000040;
+  }
+
+  #contact_view {
+    height: calc(100vh - 80px - 83px);
+  }
+
+  .text_add_contact {
+    display: none;
+  }
+
+  /* Contact Overview*/
+  .head_overview {
+    padding: 48px 16px;
+  }
+
+  .hide_desktop {
+    display: flex;
+    z-index: 1;
+  }
+
+  .left_part_overview {
+    padding: 0px;
+  }
+
+  .headline_contacts {
+    font-size: 47px;
+  }
+
+  .text_contacts {
+    font-size: 20px;
+  }
+
+  .floating_contact {
+    padding: 0px 16px;
+    height: calc(100% - 132px);
+  }
+
+  .name_overview {
+    font-weight: bold;
+  }
+
+  .editable_content {
+    display: none;
+  }
+
+  .create_contact_input {
+    max-width: 364px;
+  }
+
+  /* AddTask */
+  .footer {
+    bottom: 100px;
+  }
+
+  /* Board */
+  .background-big-task{
+    height: calc(100% - 83px);
+}
+
+.right_section{
+  width: 100%;
+}
+
+.status_edit{
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    display: block;
+}
+
+/* formal-content */
+.container-navi-content{
+  flex-direction: column-reverse;
+}
+
+/* style-login */
+.password_container {
+  width: 364px;
+}
+.frame153 {
+  padding: 32px 24px;
+}
+.imglogo {
+  width: 64px;
+  padding: 37px 38px;
+}
+.frame153 {
+  width: 80%;
+  padding: 32px 24px;
+}
+.headline_logIn {
+  font-size: 47px;
+}
+.logIn-btns {
+  display: flex;
+  flex-direction: column;
+}
+.mobile_login_btn {
+  width: 180px;
+  padding: 16px 0px;
+}
+.text_login_btn {
+  font-size: 16px;
+}
+.arrow_signUp {
+  margin-left: -100px;
+}
+}
+
+/* Contacts */
+
+@media (min-width: 801px) {
+
+  .add_change_btn_mobile {
+    margin-bottom: 16px;
+  }
+
+  .add_change_btn_mobile:hover {
+    background-color: var(--lightblue);
+  }
+
+  .contact:not(.active_contact):hover {
+    border-radius: 10px;
+    background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);
+  }
+
+  /* Contacts - Dialog add & edit Contact */
+  .cancel_create_contact_edit_btn:hover,
+  .cancel_create_contact_btn:hover {
+    box-shadow: 0px 4px 4px 0px #00000040;
+    border: 1px solid var(--lightblue);
+    color: var(--lightblue);
+  }
+
+  .cancel_create_contact_btn:hover .img_cancel_checked_btn {
+    filter: invert(52%) sepia(91%) saturate(455%) hue-rotate(155deg)
+      brightness(96%) contrast(84%);
+  }
+
+  .blue_btn:hover {
+    background-color: var(--lightblue);
+  }
+}
+
+
+/* Contact Overview*/
+
+@media (min-width: 1111px) {
+
+  #contact_view {
+    display: block;
+  }
+
+  #content_contacts {
+    min-width: 456px;
+    max-width: 456px;
+  }
+}
+
+@media (max-width: 1280px) {
+  /* Contacts - Dialog add & edit Contact */
+  .dialog_content {
+    flex-direction: column;
+  }
+
+  .create_contact_short_name_edit,
+  .create_contact_short_name {
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .dialog_add_contact,
+  .dialog_edit_contact {
+    flex-direction: column;
+    width: 450px;
+    max-height: 842px;
+  }
+
+  .top_dialog_add_edit {
+    padding-left: 24px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: unset;
+    min-height: 378px;
+  }
+
+  .img_logo {
+    display: none;
+  }
+
+  .wrapper_close_add_edit_contact {
+    right: 18px;
+    top: 24px;
+  }
+  .close_add_edit_contact {
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(61deg)
+      brightness(105%) contrast(103%);
+  }
+
+  .wrapper_close_add_edit_contact:hover {
+    background-color: initial;
+  }
+
+  .headline_add_edit_contact {
+    font-size: 47px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .text_add_edit_contact_dialog {
+    font-size: 20px;
+  }
+
+  .bottom_dialog_add_edit {
+    min-height: 443px;
+    border-bottom-left-radius: 30px;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+  }
+  .create_contact_form {
+    gap: 10px;
+    align-items: center;
+  }
+
+  .create_contact_input {
+    padding: 10px 21px;
+  }
+
+  .cancel_create_contact_btn {
+    display: none;
+  }
+
+  .create_contact_btn {
+    padding: 18px 10px;
+  }
+
+  .edit_content,
+  .delete_content {
+    gap: 8px;
+    padding: 13px;
+  }
+}
+
+@media (max-width: 1220px) {
+  .left_part_overview {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .left_part_overview_second {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .seperator_line_content {
+    height: 3px;
+    width: 90px;
+  }
+
+  .short_name_overview {
+    min-width: 80px;
+    min-height: 80px;
+  }
+
+  .name_overview {
+    font-size: 36px;
+  }
+
+  .short_name_text_overview {
+    font-size: 27px;
+    font-weight: 400;
+  }
+}
+
+@media screen and (max-width: 1150px) and (min-width: 1111px) {
+
+  .left_part_overview,
+  .floating_contact {
+    padding-left: 20px;
+  }
+
+  .floating_contact {
+    padding: 32px 20px;
+  }
+  .name_overview {
+    max-width: 240px;
+    word-break: break-all;
+  }
+
+  /* Contact created */
+  .create_contact_done {
+    left: 708px;
+  }
+}
+
+@media screen and (max-width: 1110px) and (min-width: 800px) {
+  /* Contacts */
+  .contact {
+    width: 352px;
+  }
+
+  /* Contact created */
+  .create_contact_done {
+    left: 287px;
+  }
+}
+
+@media screen and (max-width: 800px) and (min-width: 460px) {
+  .contacts {
+    padding-left: calc((100% - 352px) / 2);
+  }
+}
+
+@media (max-width: 460px) {
+  /* Contacts - Dialog add & edit Contact */
+  .dialog_add_contact,
+  .dialog_edit_contact {
+    width: 93%;
+    height: calc(100vh - 90px - 86px);
+  }
+
+  /* sign-up */
+  .password_container {
+    width: 90%;
+}
+.password_container input {
+    width: 90%;
+}
+.arrow_signUp {
+    margin-left: -60px;
+}
+}
+
+@media (max-width: 450px) {
+  /* Contacts */
+  #content_contacts {
+    padding: 32px 16px;
+  }
+
+  .horizontal_line_content {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  /* Contacts - Dialog add & edit Contact */
+  .create_contact_input {
+    width: 100%;
+  }
+
+  /* board */
+  .board-column{
+    width: 100%;
+  }
+}
+
+@media (max-width: 370px) {
+  /* Contacts */
+  #content_contacts {
+    padding: 32px 0px;
+    align-items: unset;
+  }
+
+  .contact {
+    gap: 20px;
+  }
+
+  .add_change_btn_mobile {
+    right: 24px;
+  }
+
+  .contact_fullName,
+  .contact_mail {
+    word-break: break-all;
+  }
+
+  .letter_content {
+    padding: 0px 8px;
+  }
+
+  .name_overview {
+    font-size: 24px;
+  }
+}
+
+/* AddTasks-start */
+@media (max-width: 1260px) {
+  .mainAddTasks,
+  .headlineAddTasks,
+  .footerAddTasks {
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+
+  /* summary */
+  .containerHeadline {
+    width: 580px;
+  }
+
+  .marginSummary {
+    margin-left: 70px;
+  }
+
+  .summaryText {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .buttonPrio {
+    font-size: 18px;
+    padding: 14px 8px 14px 8px;
+    width: 100px;
+    gap: 4px;
+  }
+
+  /* summary */
+
+  .containerHeadline {
+    width: 625px;
+  }
+
+  .containerSummary {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1100px) {
+  .mainAddTasks,
+  .footerAddTasks {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .buttonPrio {
+    font-size: 16px;
+    padding: 12px 6px 12px 6px;
+    width: 90px;
+    height: 50px;
+    gap: 4px;
+  }
+
+  .buttonPrio img {
+    height: 16px;
+    width: 16px;
+  }
+
+  .mainAddTasks {
+    justify-content: center;
+  }
+
+  .spacerAddTasks {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  #title,
+  #date,
+  #description,
+  #assignedTo,
+  #category,
+  #subtask {
+    font-size: 18px;
+    padding: 8px 17px 8px 17px;
+  }
+
+  .fontUnderHeadlinesAddTasks {
+    font-size: 18px;
+  }
+
+  .footerAddTasks {
+    margin-left: 55px;
+    margin-right: 55px;
+  }
+
+  .createButtonAddTasks {
+    width: 163px;
+    padding: 14px;
+    gap: 4px;
+    font-size: 19px;
+  }
+
+  .clearButtonAddTasks {
+    width: 95px;
+    height: 56px;
+    padding: 13px;
+    gap: 4px;
+    font-size: 18px;
+  }
+
+  .addSubtask {
+    top: 43px;
+    right: 10px;
+  }
+
+  /* formal-content */
+  .content {
+    margin-left: 80px;
+    margin-right: 80px;
+}
+}
+
+@media (max-width: 900px) {
+  .spacerAddTasks,
+  .footerAddTasks {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+
+  .mainAddTasks {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .clearButtonAddTasks {
+    margin-right: 6px;
+  }
+
+  /* sign-up */
+  .destop-login {
+    display: none;
+}
+.join-logo {
+    background-color: #2A3647;
+}
+.img-animaschen {
+    height: 121.97px;
+    width: 100.03px;
+    background: url(../assets/img/logIn_SignUp/Capa2.svg);
+    background-repeat: no-repeat;
+}
+.limitation {
+    width: 100%;
+}
+}
+
+/* Mobil */
+@media (max-width: 950px) {
+  .widthHalf {
+    width: unset !important;
+  }
+
+  .selectedMembersNone,
+  .subtaskAreaNone {
+    display: none !important;
+  }
+
+  .footerNone {
+    display: none;
+  }
+
+  .footer {
+    margin-top: 0;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .clearButtonAddTasks {
+    display: none;
+  }
+
+  .headlineAddTasks {
+    font-size: 47px !important;
+    margin-left: 16px !important;
+    margin-top: 40px !important;
+  }
+
+  .mainAddTasks {
+    margin-left: 16px !important;
+    flex-direction: column;
+    margin-right: 16px !important;
+  }
+
+  .addTasksLeft {
+    display: flex;
+    flex-direction: column;
+    height: unset;
+    width: 100%;
+  }
+
+  .addTasksRight {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+  }
+
+  .spacerAddTasks {
+    display: none;
+  }
+
+  .fontUnderHeadlinesAddTasks {
+    font-size: 18px;
+  }
+
+  #title,
+  #date {
+    font-size: 16px;
+    width: 100%;
+    height: 40px;
+    padding: 10px 21px 10px 21px;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  #description {
+    font-size: 16px;
+    width: 100%;
+    height: 88px;
+    padding: 18px 21px 18px 21px;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  #assignedTo,
+  #category,
+  #subtask {
+    font-size: 16px;
+    width: 100%;
+    height: 48px;
+    padding: 12px 16px 12px 16px;
+    margin-top: 8px;
+  }
+
+  #subtask {
+    margin-bottom: 12px;
+  }
+
+  .prio {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .buttonPrio {
+    width: 160px;
+    height: 41px;
+    gap: 8px;
+    font-size: 16px;
+    padding: 18px 10px 18px 10px;
+  }
+
+  .buttonPrio:hover {
+    cursor: pointer;
+    box-shadow: -1px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .createButtonAddTasks {
+    width: 183px;
+    height: 56px;
+    border-radius: 10px;
+    padding: 16px;
+    gap: 4px;
+    background-color: var(--menuButtonDarkblue);
+    font-size: 21px;
+    color: white;
+    border: none;
+  }
+
+  .createButtonAddTasks img {
+    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(266deg)
+      brightness(500%);
+  }
+
+  select {
+    appearance: none;
+    background-image: url(/assets/img/board/arrow_drop_down_down.svg);
+    background-repeat: no-repeat;
+    background-position: right 16px top 50%;
+    background-size: 10px auto;
+  }
+  
+  #date {
+    appearance: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .buttonPrio {
+    width: 100px;
+    padding: 14px 8px 14px 8px;
+    gap: 4px;
+  }
+
+  .createButtonAddTasks {
+    padding: 10px;
+    width: 163px;
+  }
+}
+/* Mobil-end */
+/* AddTasks-end   */
+
+/* Summary - start   */
+@media (max-width: 1360px) {
+  .goodMorningSummary {
+    font-size: 39px;
+  }
+
+  .nameSummary {
+    font-size: 56px;
+  }
+
+  .summaryText {
+    width: 310px;
+    margin-right: 10px;
+  }
+
+  .marginSummary {
+    margin-left: 80px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .containerHeadline {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 120px;
+    width: 320px;
+    margin-bottom: 40px;
+  }
+
+  .spacerHeadline {
+    display: none;
+  }
+
+  .spacerHeadlineMobil {
+    width: 90px;
+    margin-top: 10px;
+    height: 3px;
+    background-color: var(--lightblue);
+  }
+
+  .containerSummary {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .marginSummary {
+    margin-left: 0;
+  }
+
+  .mainSummary {
+    width: 535px;
+    height: 535px;
+  }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 800px){
+  .summaryText {
+    display: none;
+  }
+}
+
+@media (max-width: 840px) {
+  .headlineSummary,
+  .sizeNumbersSummary {
+    font-size: 47px;
+  }
+
+  .fontSizeMobil {
+    font-size: 20px;
+  }
+
+  .mainSummary {
+    width: 396px;
+    height: 384px;
+  }
+
+  .toDo,
+  .done {
+    width: 186px;
+    height: 110px;
+    padding: 38px 19px 38px 19px;
+    gap: 10px;
+  }
+
+  .imgAndIcon,
+  .iconUrgent {
+    width: 40px;
+    height: 40px;
+  }
+
+  .iconSummary {
+    height: 20px;
+    width: 20px;
+  }
+
+  .sizeTextSummary,
+  .deadlineTextMobil {
+    font-size: 14px;
+  }
+
+  .urgent {
+    height: 110px;
+    padding: 28px 0px 28px 0px;
+    gap: 20px;
+  }
+
+  .container {
+    width: 108px;
+    height: 73px;
+  }
+
+  .spacer {
+    height: 68px;
+    width: 2px;
+  }
+
+  .deadline {
+    height: 44px;
+    gap: 8px;
+  }
+
+  .deadlineMobil {
+    font-size: 16px;
+  }
+
+  .bottomCard {
+    height: 116px;
+    width: 116px;
+    padding: 25px 0px 25px 0px;
+    gap: 0;
+  }
+}
+
+@media (max-width: 410px) {
+  .marginSummary {
+    width: 100%;
+  }
+
+  .containerHeadline {
+    width: auto;
+    margin-bottom: 20px;
+  }
+
+  .mainSummary {
+    width: 100%;
+    height: 350px;
+  }
+
+  .toDo,
+  .done {
+    width: 170px;
+    height: 110px;
+    padding: 38px 19px 38px 19px;
+    gap: 10px;
+  }
+
+  .imgAndIcon,
+  .iconUrgent {
+    width: 35px;
+    height: 35px;
+  }
+
+  .iconSummary {
+    height: 15px;
+    width: 15px;
+  }
+
+  .sizeNumbersSummary {
+    font-size: 40px;
+  }
+
+  .sizeTextSummary,
+  .deadlineTextMobil {
+    font-size: 14px;
+  }
+
+  .urgent {
+    height: 110px;
+    padding: 28px 0px 28px 0px;
+    gap: 20px;
+  }
+
+  .container {
+    width: 108px;
+    height: 73px;
+    padding-left: 19px;
+  }
+
+  .bottomCard {
+    height: 110px;
+    width: 110px;
+    padding: 25px 0px 25px 0px;
+    gap: 0;
+  }
+}
+
+@media (max-width: 375px) {
+  .toDo,
+  .done {
+    width: 140px;
+    height: 110px;
+  }
+
+  .bottomCard {
+    height: 90px;
+    width: 90px;
+  }
+
+  .mainSummary {
+    width: 100%;
+    height: 340px;
+  }
+}
+/* Summary - end     */
+
+/* Board - start     */
+
+@media(max-width: 1423px){
+  .tasks-container{
+    overflow-y: hidden;
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    height: unset;
+  }
+
+  .d-flex-start{
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .board-column{
+    width: 100%;
+    margin-bottom: 0;
+    height: unset;
+  }
+}
+
+@media(max-width: 1136px){
+  .tasks-container{
+    overflow-y: hidden;
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    height: unset;
+  }
+
+  .d-flex-start{
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .board-column{
+    width: 100%;
+    margin-bottom: 0;
+    height: unset;
+  }
+  
+  .small-add-button{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background-color: var(--activeClickMenuBlue);
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+  }
+
+  .small-add-button:hover{
+      background-color: var(--lightblue);
+  }
+
+  .add-task-button{
+      display: none;
+  }
+
+  .h1-container{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      width: 100%;
+  }
+
+  h1 {
+    font-size: 47px;
+  }
+
+  .headline-container{
+      flex-direction: column;
+      align-items: baseline;
+  }
+
+  .board-search-add{
+      width: 100%;
+  }
+
+  .search-field{
+      width: 100%;
+  }
+
+  .content-board{
+      margin-top: 50px;
+  }
+
+  .text_board_headline {
+    font-size: 27px;
+ }
+
+  .column-plus-button{
+    width: 30px;
+    height: 30px;
+    background-size: contain
+ }
+
+  .dialog_addTask_bg {
+    display: none!important;
+  } 
+}
+
+@media(max-width: 500px){
+
+  h1{
+      margin-bottom: 16px;
+      font-size: 61px;
+      font-weight: 700;
+      line-height: 73.2px;
+  }
+
+  .board-search-add{
+      width: 100%;
+  }
+
+  .search-field{
+      width: 100vw;
+  }
+
+  .d-flex-start{
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .board-headline{
+      width: 100%;
+  }
+
+  .plus-button{
+      cursor: pointer;
+  }
+
+  .plus-button:hover{
+      src: url(/assets/img/board/plus_button_blue.svg);
+  }
+
+  .content-board{
+      margin-top: 32px;
+      margin-left: 16px;
+      margin-right: 16px;
+      margin-bottom: 8px;
+  }
+
+  .task-description-big{
+      font-size: 16px;
+  }
+
+  .task-box-big h2{
+      font-size: 24px;        
+  }
+
+  .task-box-big{
+      padding-top: 16px;
+      padding-bottom: 16px;
+      padding-left: 16px;
+      padding-right: 16px;
+      width: calc(100vw - 16px);
+      margin: 16px;
+  }
+
+  .wrapper_close_edit_task {
+     background-color: var(--white);
+  }
+
+  .d-flex p{
+      font-size: 16px;
+  }
+
+  .margin-top-16px{
+      font-size: 16px;
+  }
+
+  .container-member-big-task p{
+      font-size: 16px;
+  }
+
+  .container-subtasks p{
+      font-size: 12px;
+  }
+
+  .subtasks{
+      justify-content: flex-start;
+      padding-left: 0px;
+      padding-right: 0px;
+      gap: 8px;
+  }
+
+  .subtask-checkbox{
+      padding-right: 16px;
+  }
+  
+  .prio_edit_buttons,
+  .status_edit_buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .buttonPrio_edit {
+    width: 100% !important;
+  }
+}
+
+/* Board - End     */
+/* formal-content - Start     */
+@media(max-width: 500px){
+  h1{
+      font-size: 40px;
+  }
+
+  .content{
+      margin-left: 16px;
+      margin-right: 16px;
+      margin-top: 40px;
+  }
+
+  /* style-login */
+.password_container {
+    width: 95%;
+}
+.frame153 {
+    padding: 32px 24px;
+}
+}
+/* formal-content - End     */
+/* style_login - Start     */
+@media (min-width: 900px) {
+  .mobile-login {
+      display: none;
+      height: 80px;
+  }
+  .butten-mobile {
+      display: none;
+      width: 150px;
+  }
+}
+
+@media (max-width: 380px) {
+   .imglogo {
+      padding: 24px;
+      height: 40px;
+  }
+  .imglogo {
+      width: 56px;
+      padding: 30px;
+  }
+  .frame153 {
+      padding: 24px;
+      
+  }
+}
+/* style_login - End     */

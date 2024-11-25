@@ -1,0 +1,470 @@
+/* Contacts - Dialog add & edit Contact */
+
+.dialog_add_contact_bg,
+.dialog_edit_contact_bg{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    inset: 0;
+    z-index: 3;
+}
+
+
+.dialog_add_contact,
+.dialog_edit_contact {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1211px;
+    max-height: 835px;
+    width: 85%;
+    height: 75%;
+    border-radius: 30px;
+    background-color: var(--white);
+    transform: translateX(100%);
+    transition: all 300ms ease-out;
+    overflow: hidden; 
+}
+
+.dialog_content {
+    position: relative;
+    display: flex;
+    justify-content: space-between;  
+    flex: 1;
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    scrollbar-width: none;
+}
+
+.dialog_edit_contact {
+    transition: all 100ms ease-in-out;
+}
+
+.show_dialog_add_contact,
+.show_dialog_edit_contact {
+    transform: translateX(0);
+}
+
+.top_dialog_add_edit {
+    padding: 66px 48px;
+    background-color: var(--menuButtonDarkblue);
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    justify-content: center;
+}
+
+.head_top_dialog_add_edit {
+    gap: 16px;
+    padding-left: 16px;
+}
+
+.img_logo {
+    width: 55.6px;
+    height: 66.48px;
+}
+
+.seperator_line_content_contact {
+    height: 3px;
+    width: 90px;
+    background-color: var(--lightblue);
+}
+
+.wrapper_close_add_edit_contact {
+    position: absolute;
+    right: 48px;
+    top: 48px;
+    width: 32px;
+    height: 32px;
+    z-index: 1;
+}
+
+.close_add_edit_contact {
+    filter: invert(21%) sepia(15%) saturate(944%) hue-rotate(176deg) brightness(93%) contrast(97%);
+}
+
+.wrapper_close_add_edit_contact:hover {
+    background-color: #EEEEEE;
+}
+
+.headline_add_edit_contact {
+    font-size: 61px;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.text_add_edit_contact_dialog {
+    font-size: 27px;
+    color: var(--white);
+}
+
+.short_name_container {
+    position: relative;
+    align-self: center;
+}
+
+.create_contact_short_name_edit,
+.create_contact_short_name {
+    background-color: var(--backgroundSpacer);
+    width: 120px;
+    height: 120px;
+    color: var(--white);
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    border: 3px solid var(--white);
+}
+
+.create_contact_short_name_edit {
+    background-color: var(--tagOrange);
+}
+
+.create_contact_add_edit_person_img {
+    width: 64px;
+    height: 64px;;
+}
+
+.bottom_dialog_add_edit {
+    align-items: center;
+    display: flex;
+    background-color: var(--white);
+    padding: 66px 0px;
+    padding-right: 48px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    position: relative;
+}
+
+.create_contact_form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.create_contact_input {
+    width: 422px;
+    padding: 13px 21px;
+    border: 1px solid var(--backgroundSpacer);
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-position: center right 21px;
+    background-size: 24px;
+    padding-left: 21px;
+    outline: none;
+    font-size: 20px;
+}
+
+.create_contact_input:focus {
+    border: 1px solid var(--lightblue);
+}
+
+#fullName,
+#fullName_edit {
+    background-image: url(../assets/img/contacts/person.svg);
+}
+
+#mail,
+#mail_edit {
+    background-image: url(../assets/img/contacts/mail.svg);
+}
+
+#telNumber,
+#telNumber_edit {
+    background-image: url(../assets/img/contacts/call.svg);
+}
+
+.create_contact_input::placeholder {
+    font-size: 20px;
+    color: var(--backgroundSpacer);
+}
+
+.contact_btn {
+    display: flex;
+    gap: 4px;
+    padding: 18px 10px;
+    border-radius: 10px;
+}
+
+.container_button {
+    margin-top: 15px;
+    display: flex;
+    gap: 24px;
+}
+
+.cancel_create_contact_edit_btn,
+.cancel_create_contact_btn {
+    border: 1px solid var(--menuButtonDarkblue);
+    color: var(--menuButtonDarkblue);
+    background-color: var(--white);
+}
+
+.text_cancel_create_contact_edit_btn,
+.text_cancel_create_contact_btn {
+    font-size: 20px;
+}
+
+.img_cancel_checked_btn {
+    filter: invert(21%) sepia(15%) saturate(944%) hue-rotate(176deg) brightness(93%) contrast(97%);
+}
+
+.img_checked_btn {
+    filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(238deg) brightness(104%) contrast(101%);
+}
+
+/* Contact options */
+
+.contact_options_mobile {
+    z-index: 2;
+    border-radius: 20px 20px 0px 20px;
+    background-color: var(--white);
+    box-shadow: 0px 4px 4px 0px #00000040;
+    bottom: 100px;
+    right: 10px;
+    position: absolute;
+    padding: 10px;
+    transform: translateX(137px);
+    transition: all 300ms ease-out;
+}
+
+.show_contact_options_mobile {
+    transform: translateX(0px);
+}
+
+/* Contact created */
+
+.create_contact_done {
+    position: absolute;
+    bottom: 50px;
+    left: 743px;
+    background-color: var(--menuButtonDarkblue);
+    border-radius: 20px;
+    padding: 20px;
+    z-index: 1;
+    transform: translateX(1000%);
+    transition: all 300ms ease-out;
+}
+
+.show_create_contact_done {
+    transform: translateX(0px);
+  }
+
+.text_create_contact_done {
+    color: var(--white);
+    font-size: 20px;
+}
+
+/* Contacts */
+
+.main_contacts {
+    display: flex;
+    box-shadow: 4px 0px 6px 0px #00000014;
+}
+
+#content_contacts {
+    box-shadow: 4px 0px 6px 0px #00000014;
+    background-color: var(--white);
+    padding: 32px 52px;
+    width: 456px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.add_change_btn_mobile {
+    background-color: var(--menuButtonDarkblue);
+    width: 352px;
+    padding: 12px 0px;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.text_add_contact {
+    font-size: 21px;
+    color: var(--white);
+}
+
+.add_person_more_icon {
+    width: 32px;
+    height: 32px;
+}
+
+.letter_names {
+    padding: 17px 36px;
+}
+
+.head_letters {
+    font-size: 20px;
+}
+
+.horizontal_line_content {
+    width: 352px;
+    padding: 8px 0px;
+}
+
+.horizontal_line {
+    border: 1px solid var(--backgroundSpacer);
+}
+
+.contact {
+    display: flex;
+    gap: 35px;
+    padding: 15px 24px;
+}
+
+.short_name {
+    min-width: 42px;
+    height: 42px;
+    color: var(--white);
+    border: 2px solid var(--white);
+}
+
+.short_name_text {
+    font-size: 12px;
+}
+
+.name_data {
+    gap: 5px;
+}
+
+.contact_fullName {
+    font-size: 20px;
+    word-break: break-all;
+}
+
+.contact_mail,
+.overview_mail {
+    color: var(--fontColorMail);
+    word-break: break-all;
+}
+
+/* Contact Overview*/
+
+#contact_view {
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+}
+
+.active_contact {
+    background-color: var(--menuButtonDarkblue);
+    color: var(--white);
+    border-radius: 10px;
+}
+
+.hide_desktop {
+    display: none;
+}
+
+.left_part_overview {
+    display: flex;
+    align-items: center;
+    padding-top: 110px;
+    padding-left: 55px;
+    gap: 30px;
+}
+
+.left_part_overview_second {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 30px;
+    align-items: center;
+}
+
+.headline_contacts {
+    font-size: 61px;
+}  
+
+.text_contacts {
+    font-size: 27px;
+} 
+
+.seperator_line_content {
+    height: 90px;
+    width: 3px;
+    background-color: var(--lightblue);
+}
+
+.floating_contact {
+    padding: 32px 55px;
+    gap: 21px;
+    transform: translateX(120%);
+    transition: all 100ms ease-in-out;
+}
+
+.show_floating_contact_desktop {
+    transform: translateX(0px);
+}
+
+.head_floating_content {
+    display: flex;
+    gap: 54px;
+    align-items: center;
+}
+
+.short_name_overview {
+    border: 3px solid var(--white);
+    min-width: 120px;
+    min-height: 120px;
+    color: var(--white);
+}
+
+.short_name_text_overview_edit,
+.short_name_text_overview {
+    font-size: 47px;
+    font-weight: 500;
+}
+
+.name_overview {
+    font-size: 47px;
+    font-weight: 500;
+}
+
+.editable_content {
+    display: flex;
+    gap: 13px;
+    margin-top: 8px;
+}
+
+.edit_content {
+    width: 62px;
+}
+
+.edit_content,
+.delete_content {
+    display: flex;
+    gap: 13px;
+    align-items: center;
+}
+
+.delete_content:hover .contact_delete_icon,
+.delete_content:hover p,
+.edit_content:hover .contact_edit_icon,
+.edit_content:hover p {
+    filter: invert(52%) sepia(91%) saturate(455%) hue-rotate(155deg) brightness(96%) contrast(84%);
+    color: var(--lightblue);
+    font-weight: 700;
+}
+
+
+.text_information {
+    font-size: 20px;
+    padding: 25px 0px;
+}
+.contact_information {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+.contact_overview_mail,
+.contact_overview_phone {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+
+
+
+

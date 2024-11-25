@@ -1,0 +1,132 @@
+[
+    {
+      "id": 0,
+      "title": "UI für Produktliste",
+      "description": "Erstelle ein benutzerfreundliches Design für die Produktliste.",
+      "due date": "15.11.2024",
+      "prio": "hoch",
+      "category": "User Story",
+      "status": "offen",
+      "assigned member": [
+        {
+            "id": 0,
+            "name": "Levi Ackermann",
+            "color": "var(--tagDarkPurple)",
+            "letters": "LA"
+        },
+        {
+            "id": 1,
+            "name": "Michael Scott",
+            "color": "var(--tagLightBlue)",
+            "letters": "MS"
+        }
+      ],
+      "subtask": [
+        {
+          "id": 0,
+          "description": "HTML-Markup erstellen",
+          "isDone": false
+        },
+        {
+          "id": 1,
+          "description": "CSS-Styles entwickeln",
+          "isDone": false
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "title": "Datenbank einrichten",
+      "description": "Lege das Schema für die Online-Shop-Datenbank an.",
+      "due date": "22.11.2024",
+      "prio": "mittel",
+      "category": "Technical Task",
+      "status": "in Bearbeitung",
+      "assigned member": [
+        {
+            "id": 0,
+            "name": "Homer Simpson",
+            "color": "var(--tagMediumYellow)",
+            "letters": "HS"
+        }
+      ],
+      "subtask": []
+    },
+    {
+      "id": 2,
+      "title": "Design überprüfen",
+      "description": "Prüfe das Design der Produktliste und kläre Fragen.",
+      "due date": "05.12.2024",
+      "prio": "dringend",
+      "category": "Technical Task",
+      "status": "Feedback erwartet",
+      "assigned member": [
+        {
+            "id": 0,
+            "name": "Daenerys Targaryen",
+            "color": "var(--tagOrange)",
+            "letters": "DT"
+        },
+        {
+            "id": 1,
+            "name": "Kathryn Janeway",
+            "color": "var(--tagLightPink)",
+            "letters": "KJ"
+        },
+        {
+            "id": 2,
+            "name": "Geralt of Rivia",
+            "color": "var(--tagTurquoise)",
+            "letters": "GR"
+        }
+      ],
+      "subtask": []
+    },
+    {
+      "id": 3,
+      "title": "Anforderungskatalog erstellen",
+      "description": "Erstelle eine Übersicht aller Anforderungen.",
+      "due date": "18.12.2024",
+      "prio": "niedrig",
+      "category": "User Story",
+      "status": "abgeschlossen",
+      "assigned member": [
+        {
+            "id": 0,
+            "name": "Geralt of Rivia",
+            "color": "var(--tagTurquoise)",
+            "letters": "GR"
+        },
+        {
+            "id": 1,
+            "name": "Zelda of Hyrule",
+            "color": "var(--tagApricot)",
+            "letters": "ZH"
+        },
+        {
+            "id": 2,
+            "name": "Ash Ketchum",
+            "color": "var(--tagRed)",
+            "letters": "AK"
+        },
+        {
+            "id": 3,
+            "name": "Bulma Brief",
+            "color": "var(--tagBlue)",
+            "letters": "BB"
+        }
+      ],
+      "subtask": [
+        {
+          "id": 0,
+          "description": "Anforderungen strukturieren",
+          "isDone": false
+        },
+        {
+          "id": 1,
+          "description": "Dokument überprüfen",
+          "isDone": false
+        }
+      ]
+    }
+]

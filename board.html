@@ -1,131 +1,253 @@
 <!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/board.css">
-    <script src="./nav.js"></script>
+<html lang="en">
 
-    <title>Task Board</title>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Board | Join</title>
+
+    <!-- Scripts -->
+    <script defer src="./js/script.js"></script>
+    <script defer src="./js/supportfunctions.js"></script>
+    <script defer src="./js/summary.js"></script>
+    <script defer src="./js/board.js"></script>
+    <script defer src="./js/login.js"></script>
+    <script defer src="./js/add_tasks.js"></script>
+    <script defer src="./js/generateHTML.js"></script>
+    <script defer src="./js/remoteStorage.js"></script>
+    <script defer src="./js/contacts.js"></script>
+    <!-- Stylesheets -->
+    <link rel="icon" href="/img/general/logo_favicon.svg" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="./css/colors.css" />
+    <link rel="stylesheet" href="./css/board.css" />
+    <link rel="stylesheet" href="./css/mediaQuery.css" />
+    <link rel="stylesheet" href="./css/addTasks.css" />
 </head>
 
-<body>
-    <main>
-        <header>
-            <div class="nav-bar" w3-include-html="nav.html"></div>
-        </header>
-        
-        <!-- Header mit Titel und Suchleiste -->
-        <div class="header">
-            <div class="board-title-button">
-                <h1 class="board-title">Board</h1>
-                <button class="media-add-task" onclick="openAddTaskOverlay('todo-container')">+</button>
-            </div>
-            <div class="right-section">
-                <div class="search-bar">
-                    <input type="text" id="search-input" placeholder="Find Task" onkeyup="searchTasks()" />
-                    <img src="/img/board/search.svg" alt="Search Icon" class="icon" />
+<body class="flex_dir_c" onload="includeHTML(); loadTasks(); initAddTasks()">
+
+    <!-- Dialogbox Add Task -->
+    <div class="dialog_addTask_bg d-none" onclick="closeDialog('.dialog_addTask', 'show_dialog_addTask', '.dialog_addTask_bg', 'd-none', 250)">
+        <div class="dialog_addTask" onclick="doNotClose(event)">
+
+            <!-- Desktop Version -->
+            <section id="main_container" class="main_addTasks">
+                <div class="desktopAddTask">
+                    <div class="d-flex">
+                        <h1 class="headlineAddTasks">Add Tasks</h1>
+                    </div>
+
+                    <div class="mainAddTasks dialogMainTasks">
+                        <form class="addTasksLeft" onsubmit="return validateForm()">
+                            <!-- Left Section -->
+                            <div class="widthHalf">
+                                <label class="fontUnderHeadlinesAddTasks" for="title">Title<span style="color: red">*</span></label>
+                                <input type="text" id="title" name="title" placeholder="Enter a title" required />
+
+                                <div style="margin-top: 16px">
+                                    <label class="fontUnderHeadlinesAddTasks" for="description">Description</label>
+                                    <textarea id="description" name="description" rows="4" cols="50" placeholder="Enter a Description"></textarea>
+                                </div>
+
+                                <div style="margin-top: 16px">
+                                    <label class="fontUnderHeadlinesAddTasks" for="assigned">Assigned to</label>
+                                    <select onclick="renderContactsInAddTasks()" name="assigned" id="assignedTo"></select>
+                                </div>
+
+                                <div id="selectedMembers" class="selectedMembersNone"></div>
+                                <div id="isSelected" class="none-display">Has already been selected</div>
+                                <div id="hoverNameMembers" class="hoverName"></div>
+
+                                <p class="footer footerNone">
+                                    <span style="color: red">*</span>This field is required
+                                </p>
+                            </div>
+
+                            <!-- Right Section -->
+                            <div class="spacerAddTasks"></div>
+                            <div class="addTasksRight">
+                                <div>
+                                    <label class="fontUnderHeadlinesAddTasks" for="date">Due date<span style="color: red">*</span></label><br />
+                                    <input type="date" id="date" name="date" placeholder="dd/mm/yyyy" required />
+                                </div>
+
+                                <div class="prio fontUnderHeadlinesAddTasks">
+                                    Prio
+                                    <div style="margin-top: 8px; display: flex; justify-content: space-between;">
+                                        <button id="buttonUrgent" onclick="addPrioButtonColor('urgent', event)" class="buttonPrio">
+                                            Urgent
+                                            <img id="buttonImg1" src="/assets/img/add_task/prio_urgent.svg" alt="" />
+                                        </button>
+                                        <button id="buttonMedium" onclick="addPrioButtonColor('medium', event)" class="buttonPrio">
+                                            Medium
+                                            <img id="buttonImg2" src="/assets/img/add_task/prio_medium.svg" alt="" />
+                                        </button>
+                                        <button id="buttonLow" onclick="addPrioButtonColor('low', event)" class="buttonPrio">
+                                            Low
+                                            <img id="buttonImg3" src="/assets/img/add_task/prio_low.svg" alt="" />
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 16px">
+                                    <label class="fontUnderHeadlinesAddTasks" for="category">Category<span style="color: red">*</span>
+                                        <span id="warnTextCategory" class="none-display">Please choose a category</span>
+                                    </label><br />
+                                    <select name="category" id="category" required>
+                                        <option disabled selected>Select task category</option>
+                                        <option value="User Story">User Story</option>
+                                        <option value="Technical Task">Technical Task</option>
+                                    </select>
+                                </div>
+
+                                <div style="margin-top: 16px; position: relative">
+                                    <label class="fontUnderHeadlinesAddTasks" for="subtask">Subtasks
+                                        <span id="textSubtask">Please enter a text</span>
+                                    </label><br />
+                                    <input id="subtask" type="text" placeholder="Add new subtask" maxlength="30" onkeydown="handleEnterKey(event)" />
+                                    <img onclick="addNewSubtask()" class="addSubtask" src="/assets/img/add_task/add.svg" alt="" />
+                                </div>
+
+                                <div class="subtaskAreaContainer">
+                                    <div id="subtaskArea" class="subtaskAreaNone"></div>
+                                    <div class="footerButton flexEnd">
+                                        <button onclick="clearDialogAddTask()" class="clearButtonAddTasks">
+                                            Clear
+                                            <img src="/assets/img/board/close.svg" alt="" />
+                                        </button>
+                                        <button id="submitButton" class="createButtonAddTasks">
+                                            Create Task
+                                            <img src="assets/img/add_task/check.svg" alt="" />
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <button class="add-task" onclick="openAddTaskOverlay('todo-container')">Add task&nbsp;<span>+</span></button>
-            </div>
+            </section>
         </div>
-
-        <article>
-            <!-- Task-Bereiche (To Do, In Progress, Await Feedback, Done) -->
-            <div class="section" id="todo-section">
-                <div class="text">
-                    To do
-                    <!-- Button zum Hinzufügen neuer Aufgaben im To-Do-Bereich -->
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect onclick="openAddTaskOverlay('inprogress');" x="1" y="1" width="22" height="22" rx="7"
-                            stroke="#2A3647" stroke-width="2" />
-                        <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                        <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                </div>
-                <div id="todo-container" class="task-container" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <div class="placeholder">No tasks To do</div>
-                </div>
-            </div>
-
-            <!-- In Progress-Bereich -->
-            <div class="section" id="inprogress-section">
-                <div class="text">
-                    In progress
-                    <!-- Button zum Hinzufügen neuer Aufgaben im In Progress-Bereich -->
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect onclick="openAddTaskOverlay('inprogress');" x="1" y="1" width="22" height="22" rx="7"
-                            stroke="#2A3647" stroke-width="2" />
-                        <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                        <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                </div>
-                <div id="inprogress-container" class="task-container" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <div class="placeholder">No tasks In progress</div>
-                </div>
-            </div>
-
-            <!-- Await Feedback-Bereich -->
-            <div class="section" id="feedback-section">
-                <div class="text">
-                    Await feedback
-                    <!-- Button zum Hinzufügen neuer Aufgaben im Await Feedback-Bereich -->
-                    <svg width="24" height="24" onclick="openAddTaskOverlay('feedback-container')" class="add-task-icon">
-                        <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"></rect>
-                        <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"></path>
-                        <path d="M16 12H8" stroke="#2A3647" stroke-width="2" stroke-linecap="round"></path>
-                    </svg>
-
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect onclick="openAddTaskOverlay('inprogress');" x="1" y="1" width="22" height="22" rx="7"
-                            stroke="#2A3647" stroke-width="2" />
-                        <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                        <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                    
-                </div>
-                <div id="feedback-container" class="task-container" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <div class="placeholder">No tasks Await feedback</div>
-                </div>
-            </div>
-
-            <!-- Done-Bereich -->
-            <div class="section" id="done-section">
-                <div class="text">Done</div>
-                <div id="done-container" class="task-container" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <div class="placeholder">No tasks Done</div>
-                </div>
-            </div>
-        </article>
-    </main>
-
-    <!-- Overlay für das Hinzufügen und Bearbeiten von Aufgaben -->
-    <div id="overlay" class="overlay">
-        <div class="overlay-content">
-            <button class="close-btn" onclick="closeOverlay()">X</button> <!-- Schließen-Button rechts oben -->
-            <h2 id="overlay-title">Add Task</h2>
-            <textarea id="task-text" placeholder="Task description"></textarea>
-
-            <!-- Fußzeile des Overlays mit Delete- und Edit-Links -->
-            <div class="overlay-footer">
-                <div class="action-link" onclick="deleteTask()">
-                    <span class="icon-placeholder">🗑️</span> <!-- Icon-Platzhalter für Delete -->
-                    <span>Delete</span>
-                </div>
-                <div class="action-link" onclick="saveTask()">
-                    <span class="icon-placeholder">✏️</span> <!-- Icon-Platzhalter für Edit -->
-                    <span>Edit</span>
-                </div>
-            </div>
-        </div>
+        <div id="dialogboxTask" class="dialogboxCreateTask none-display">Task added to Board</div>
     </div>
-    
+    <!-- End Dialogbox Add Task -->
 
-    <script src="script.js"></script>
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <script>
-    w3.includeHTML();
-    </script>
+    <!-- Header -->
+    <header>
+        <div class="nav-bar" w3-include-html="nav.html"></div>
+    </header>
+
+    <div class="wrapped_maxWidth" onclick="closeSubmenuHeader(event)">
+
+        <!-- Task Boxes -->
+        <div id="task-box-small" class="task-box d-none">
+            <p class="task-type">Task Type</p>
+            <p class="task-headline">Task Headline</p>
+            <p class="task-description">Task Description</p>
+            <div class="progress-section">
+                <div class="progress">
+                    <div class="progress-bar" style="width: 50%"></div>
+                </div>
+                <p class="amount-subtask">1/2 Subtasks</p>
+            </div>
+            <div class="member-prio-section">
+                <div class="task-all-member">
+                    <div class="member">AM</div>
+                    <div class="member">EM</div>
+                </div>
+                <img src="/img/task/prio_low.svg" />
+            </div>
+        </div>
+
+        <div class="background-big-task d-none" onclick="closeDialogTask()">
+            <div id="task-box-big" class="task-box-big" onclick="doNotClose(event)"></div>
+        </div>
+        <!-- End Task Boxes -->
+
+        <!-- Board Section -->
+        <div class="right_section flex_dir_c">
+            <section id="main_container" class="main_maxWidth">
+                <div id="content-board" class="content-board">
+                    <div class="headline-container margin-bottom-32px">
+                        <div class="h1-container">
+                            <h1>Board</h1>
+                            <a href="add_tasks.html" class="small-add-button">
+                                <img src="/assets/img/board/add_white.svg" />
+                            </a>
+                        </div>
+                        <div class="board-search-add">
+                            <div class="search-field">
+                                <div class="search-container">
+                                    <input id="searchField" type="text" placeholder="Find Task" oninput="addSearchTask()" />
+                                    <div id="delete-search" class="delete-search d-none" onclick="deleteSearch()">
+                                        <img class="delete-search-img" src="/assets/img/add_task/close.svg" />
+                                    </div>
+                                </div>
+                                <div class="container-search-icon">
+                                    <img class="search-icon" src="/assets/img/board/search.svg" />
+                                </div>
+                            </div>
+                            <div onclick="showDialog('.dialog_addTask_bg', 'd-none', '.dialog_addTask', 'show_dialog_addTask', 50)" class="add-task-button">
+                                <p>Add task</p>
+                                <img src="/assets/img/board/add_white.svg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="no-search-result" class="no-search-result d-none">
+                        <p>No Tasks found</p>
+                    </div>
+
+                    <div class="d-flex-start">
+                        <!-- Board Columns -->
+                        <div id="column-open" class="board-column"
+                            ondrop="moveTo('open'); removeHighlightEnd('column-open')"
+                            ondragleave="removeHighlightLeave('column-open')"
+                            ondragover="allowDrop(event); highlight('column-open')">
+                            <div class="board-headline">
+                                <h2 class="text_board_headline">To do</h2>
+                                <a onclick="addSubtaskStatus('todo')" href="/add_task.html" class="column-plus-button"></a>
+                            </div>
+                            <div id="openTasks" class="tasks-container"></div>
+                        </div>
+
+                        <div id="column-inProgress" class="board-column"
+                            ondrop="moveTo('in progress'); removeHighlightEnd('column-inProgress')"
+                            ondragleave="removeHighlightLeave('column-inProgress')"
+                            ondragover="allowDrop(event); highlight('column-inProgress')">
+                            <div class="board-headline">
+                                <h2 class="text_board_headline">In progress</h2>
+                                <a onclick="addSubtaskStatus('in_progress')" href="add_tasks.html" class="column-plus-button"></a>
+                            </div>
+                            <div id="inProgressTasks" class="tasks-container"></div>
+                        </div>
+
+                        <div id="column-awaitFeedback" class="board-column"
+                            ondrop="moveTo('await feedback'); removeHighlightEnd('column-awaitFeedback')"
+                            ondragleave="removeHighlightLeave('column-awaitFeedback')"
+                            ondragover="allowDrop(event); highlight('column-awaitFeedback')">
+                            <div class="board-headline">
+                                <h2 class="text_board_headline">Await Feedback</h2>
+                                <a onclick="addSubtaskStatus('feedback')" href="add_tasks.html" class="column-plus-button"></a>
+                            </div>
+                            <div id="awaitFeedbackTasks" class="tasks-container"></div>
+                        </div>
+
+                        <div id="column-done" class="board-column"
+                            ondrop="moveTo('done'); removeHighlightEnd('column-done')"
+                            ondragleave="removeHighlightLeave('column-done')"
+                            ondragover="allowDrop(event); highlight('column-done')">
+                            <div class="board-headline">
+                                <h2 class="text_board_headline">Done</h2>
+                            </div>
+                            <div id="doneTasks" class="tasks-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- End Board Section -->
+    </div>
 </body>
 
 </html>

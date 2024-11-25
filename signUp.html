@@ -1,69 +1,100 @@
 <!DOCTYPE html>
-<html lang="de">
+
+
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/signUp.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <title>Sign up</title>
+    <title>Join</title>
+    <link rel="icon" type="image/x-icon" href="/img/">
+    <link rel="stylesheet" href="./css/colors.css">
+    <link rel="stylesheet" href="./css/style_login.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/mediaQuery.css">
+    <script defer src="./js/remoteStorage.js"></script>
+    <script defer src="./js/login.js"></script>
+    <script defer src="./js/contacts.js"></script>
+    <script defer src="./js/register.js"></script>
+    <script defer src="./js/script.js"></script>
 </head>
 
-<body>
-    <!-- Sign-Up Form Section -->
-    <div class="signUp-container">
+<body onload="setPreviousPageParams()" class="display-fc">
+    <div class="limitation">
+        <header class="d-center-space-betwen">
+            <img src="./assets/img/logIn_SignUp/Capa1.svg" alt="" class="imglogo">
 
-        <!-- Pfeil-Icon -->
-        <a href="login.html">
-            <img src="/img/login/arrow-left-line.png" class="arrow-left" alt="Zurück zu Login">
-        </a>
+        </header>
+        <div class="display-fcc">
+            <div class="frame153 display-fccc">
 
-        <!-- Header -->
-        <div class="header">
-            <h2>Sign Up</h2>
+                <div class="display-f arrow_header_signUp">
+                    <a href="./index.html">
+                        <img src="./img/login/arrow-left-line.png" class="arrow_signUp" alt="arrow left">
+                    </a>
+                    <div class="header_LogIn">
+                        <h1 class="headline_logIn">Sign up</h1>
+                        <div class="vector_login"></div>
+                    </div>
+                </div>
+
+                <form onsubmit="addUser(); return false;" class="display-fccc gap">
+                    <div id="nameContainer" class="password_container">
+                        <input id="name" placeholder="Name" type="text" class="input-with-image b-img-email"
+                            onclick="changeName()" required>
+                        <img src="/img/login/person.png" alt="">
+                    </div>
+
+                    <div id="emailContainer" class="password_container">
+                        <input id="email" placeholder="Email" type="email" class="input-with-image b-img-email"
+                            onclick="changeEmail()" required>
+                        <img src="/img/login/mail.png" alt="">
+                    </div>
+
+                    <div id="passwordButten" class="password_container">
+                        <input id="password" placeholder="Password" type="password" onclick="changePassword()" required>
+                        <img src="/img/login/lock.png" alt="" id="passwordLock" class="password_lock">
+                        <a role="button" class="password_butten" onclick="togglePasswordVisibility()">
+                            <img src="/img/login/visibility_off.svg" alt="" id="notSee" class="hidden">
+                            <img src="/img/login/visibility.svg" alt="" id="lock" class="hidden">
+                        </a>
+
+                    </div>
+                    <div id="confirmPasswordButten" class="password_container">
+                        <input id="confirmPassword" placeholder="Password" type="password"
+                            onclick="changeConfirmPassword()" required>
+                        <img src="/img/login/lock.png" alt="" id="confirmpPasswordLock"
+                            class="password_lock">
+                        <a role="button" class="password_butten" onclick="toggleConfirmPasswordVisibility()">
+                            <img src="/img/login/visibility_off.svg" alt="" id="notSeeConfirm"
+                                class="hidden">
+                            <img src="/img/login/visibility.svg" alt="" id="seeConfirm" class="hidden">
+                        </a>
+                    </div>
+
+                    <span id="singupError" class="password-error hidden">Ups! Your password don´t match</span>
+                    <span id="mailError" class="password-error hidden">Ups! The email Address is already taken.</span>
+                    <div class="accept_box">
+                        <input type="checkbox" class="style_checkbox" required> <span class="gray"> I accept the
+                        </span><a href="privacyPolicy.html" class="link-checkbox" target="_blank">Privacy policy</a>
+                    </div>
+
+                    <div>
+                        <button id="signupButton" class="button-login-blue button-p text_login_btn mobile_login_btn hover">Sign up</button>
+                    </div>
+
+                </form>
+                
+                <span id="successMessage" class="login_successful hidden">You Signed Up successfully</span>
+            </div>
         </div>
 
-        <!-- Form Inputs -->
-        <div class="registerInput">
-            <div class="input-container">
-                <input class="inputName" type="text" placeholder="Name" required>
-                <img src="/img/login/person.png" alt="Name Icon">
-            </div>
-            <div class="input-container">
-                <input class="inputmail" type="email" placeholder="Email" required>
-                <img src="/img/login/mail.png" alt="Email Icon">
-            </div>
-            <div class="input-container">
-                <input class="inputPassword" type="password" placeholder="Password" required>
-                <img src="/img/login/lock.png" alt="Password Icon">
-            </div>
-            <div class="input-container">
-                <input class="inputPassword" type="password" placeholder="Confirm Password" required>
-                <img src="/img/login/lock.png" alt="Confirm Password Icon">
-            </div>
-        </div>
+        <footer class="display-fcc gap gray">
+            <a href="privacyPolicy.html" class="pointer-coler link_visited" target="_blank">Privacy policy</a>
+            <a href="legalNotice.html" class="pointer-coler link_visited" target="_blank">Legal notice</a>
+        </footer>
 
-        <!-- Checkbox u. Policy -->
-        <div class="checkboxLogin">
-            <img src="/img/login/Property 1=Default.png" alt="Checkbox" style="width: 24px; height: 24px;">
-            <p>I accept the</p>
-            <a class="checkbox" href="privacyPolicy.html">Privacy policy</a>
-        </div>
-
-        <!-- Sign-Up Button -->
-        <button class="signBtn" type="submit">Sign Up</button>
     </div>
-
-    <!-- Footer -->
-    <footer>
-        <a href="privacyPolicy.html">Privacy Policy</a>
-        <a href="legalNotice.html">Legal notice</a>
-    </footer>
-
-    <!-- Success Message Button -->
-    <div class="success-container">
-        <button class="successBtn">You Signed Up Successfully</button>
-    </div>
-
 </body>
 
 </html>

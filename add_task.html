@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AddTasks</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="assets/img/general/logo_favicon.svg"
+    />
+    <script defer src="/js/remoteStorage.js"></script>
+    <script defer src="/js/script.js"></script>
+    <script defer src=./js/template.js></script>
+    <script defer src="/js/login.js"></script>
+    <script defer src="/js/generateHTML.js"></script>
+    <script defer src="/js/add_tasks.js"></script>
+    <link rel="stylesheet" href="/css/colors.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/template.css" />
+    <link rel="stylesheet" href="/css/addTasks.css" />
+    <link rel="stylesheet" href="/css/mediaQuery.css" />
+  </head>
+
+  <body class="flex_dir_c" onload="includeHTML(); initAddTasks()">
+    <div onclick="closeSubmenuHeader(event)" class="wrapped_maxWidth">
+      <div class="right_section flex_dir_c">
+
+
+        <section id="main_container" class="main_addTasks main_maxWidth">
+          <div class="desktopAddTask">
+            <div class="d-flex">
+              <h1 class="headlineAddTasks">Add Tasks</h1>
+            </div>
+
+            <div class="mainAddTasks">
+              <form class="addTasksLeft" onsubmit="return validateForm()">
+                <div class="widthHalf">
+                  <label class="fontUnderHeadlinesAddTasks" for="title"
+                    >Title<span style="color: red">*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="Enter a title"
+                    required
+                  />
+
+                  <div style="margin-top: 16px">
+                    <label class="fontUnderHeadlinesAddTasks" for="description"
+                      >Description</label
+                    >
+                    <textarea
+                      id="description"
+                      name="description"
+                      rows="4"
+                      cols="50"
+                      placeholder="Enter a Description"
+                    ></textarea>
+                  </div>
+
+                  <div style="margin-top: 16px">
+                    <label class="fontUnderHeadlinesAddTasks" for="assigned"
+                      >Assigned to</label
+                    >
+
+                    <select
+                      onclick="renderContactsInAddTasks()"
+                      name="assigned"
+                      id="assignedTo"
+                    ></select>
+                  </div>
+
+                  <div class="selectedMembersNone" id="selectedMembers"></div>
+                  <div class="none-display" id="isSelected">
+                    Has already been selected
+                  </div>
+                  <div class="hoverName" id="hoverNameMembers"></div>
+
+                  <p class="footer footerNone">
+                    <span style="color: red">*</span>This field is required
+                  </p>
+                </div>
+
+                <div class="spacerAddTasks"></div>
+
+                <div class="addTasksRight">
+                  <div>
+                    <label class="fontUnderHeadlinesAddTasks" for="date"
+                      >Due date<span style="color: red">*</span></label
+                    >
+                    <br />
+                    <input
+                      type="date"
+                      id="date"
+                      name="date"
+                      placeholder="dd/mm/yyyy"
+                      min=""
+                      required
+                    />
+                  </div>
+
+                  <div class="prio fontUnderHeadlinesAddTasks">
+                    Prio
+                    <div
+                      style="
+                        margin-top: 8px;
+                        display: flex;
+                        justify-content: space-between;
+                      "
+                    >
+                      <button
+                        id="buttonUrgent"
+                        onclick="addPrioButtonColor('urgent', event)"
+                        class="buttonPrio"
+                      >
+                        Urgent
+                        <img
+                          id="buttonImg1"
+                          src="assets/img/add_task/prio_urgent.svg"
+                          alt=""
+                        />
+                      </button>
+                      <button
+                        id="buttonMedium"
+                        onclick="addPrioButtonColor('medium', event)"
+                        class="buttonPrio"
+                      >
+                        Medium
+                        <img
+                          id="buttonImg2"
+                          src="assets/img/add_task/prio_medium.svg"
+                          alt=""
+                        />
+                      </button>
+                      <button
+                        id="buttonLow"
+                        onclick="addPrioButtonColor('low', event)"
+                        class="buttonPrio"
+                      >
+                        Low
+                        <img
+                          id="buttonImg3"
+                          src="assets/img/add_task/prio_low.svg"
+                          alt=""
+                        />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div style="margin-top: 16px">
+                    <label class="fontUnderHeadlinesAddTasks" for="category"
+                      >Category<span style="color: red">*</span>
+                      <span id="warnTextCategory" class="none-display"
+                        >Please choose a category</span
+                      ></label
+                    >
+                    <br />
+
+                    <select name="category" id="category" required>
+                      <option disabled selected>Select task category</option>
+                      <option value="User Story">User Story</option>
+                      <option value="Technical Task">Technical Task</option>
+                    </select>
+                  </div>
+
+                  <div style="margin-top: 16px; position: relative">
+                    <label class="fontUnderHeadlinesAddTasks" for="subtask"
+                      >Subtasks
+                      <span id="textSubtask">Please enter a text</span></label
+                    ><br />
+                    <input
+                      onkeydown="handleEnterKey(event)"
+                      id="subtask"
+                      type="text"
+                      placeholder="Add new subtask"
+                      maxlength="30"
+                    />
+                    <img
+                      onclick="addNewSubtask()"
+                      class="addSubtask"
+                      src="assets/img/add_task/add.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <div class="subtaskAreaContainer">
+                      <div class="subtaskAreaNone" id="subtaskArea"></div>
+                      <div class="footerButton flexEnd">
+                        <button
+                          onclick="clearDialogAddTask()"
+                          class="clearButtonAddTasks"
+                        >
+                          Clear
+                          <img src="assets/img/add_task/close.svg" alt="" />
+                        </button>
+                        <button class="createButtonAddTasks" id="submitButton">
+                          Create Task
+                          <img src="assets/img/add_task/check.svg" alt="" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!--      Dialogbox Create Task   -->
+      <div class="dialogboxContainer">
+        <div
+          id="dialogboxTask"
+          class="dialogboxCreateTask dialogboxAddedToBoardTransform"
+        >
+          Task added to Board
+        </div>
+      </div>
+      <!--      Dialogbox Create Task   -->
+
+    </div>
+  </body>
+</html>

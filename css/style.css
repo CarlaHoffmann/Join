@@ -1,0 +1,136 @@
+h1 {
+    margin: 0;
+    gap: 30px;
+    opacity: 0px;
+    font-size: 50px;
+  }
+  
+  .pointer {
+    cursor: pointer;
+  }
+  
+  * {
+    font-family: "Inter", sans-serif;
+    margin: 0px;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+  
+  .d_none {
+    display: none;
+  }
+  
+
+  
+  .round_div {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .blue_btn {
+    background-color: var(--menuButtonDarkblue);
+    border-radius: 10px;
+    border: none;
+    color: var(--white);
+    font-size: 21px;
+    font-weight: 700;
+  }
+  
+  .img_white_btn {
+    filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(238deg) brightness(104%) contrast(101%);
+  }
+  
+  .img_width16 {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .img_width24 {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--grey);
+    border-radius: 8px;
+  }
+  
+  #content_contacts::-webkit-scrollbar-button,
+  .scroll_EditTasks::-webkit-scrollbar-button {
+    display: block;
+    background-repeat: no-repeat;
+  }
+  
+  /* Up arrow*/
+  #content_contacts::-webkit-scrollbar-button:vertical:start:decrement,
+  .scroll_EditTasks::-webkit-scrollbar-button:vertical:start:decrement {
+    height: 14px;
+    background-position: center -1px;
+    background-image: url("../assets/img/general/arrow_up_grey.png");
+  }
+  
+  /* Down arrow*/
+  #content_contacts::-webkit-scrollbar-button:vertical:end:increment,
+  .scroll_EditTasks::-webkit-scrollbar-button:vertical:end:decrement {
+    height: 14px;
+    background-position: center -7px;
+    background-image: url("../assets/img/general/arrow_down_grey.png");
+  }
+  
+  .task-box-big::-webkit-scrollbar-track,
+  .dialog_addTask::-webkit-scrollbar-track,
+  .scroll_EditTasks::-webkit-scrollbar-track {
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  a:visited {
+    text-decoration: none;
+  }
+  
+  body {
+    align-items: center;
+    height: 100vh;
+    background-color: var(--backgroundblue);
+  }
+  
+  .wrapped_maxWidth {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  
+  .right_section {
+    flex: 1;
+    margin-left: 232px;
+    margin-top: 60px;
+  }
+    
+  
+  
+  #main_container {
+    height: calc(100vh - 96px);
+    overflow-y: auto;
+    /*background-color: aqua;*/
+  }
+  
+  .main_maxWidth {
+    max-width: 1208px;
+  }
+  

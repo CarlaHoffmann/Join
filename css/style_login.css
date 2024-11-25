@@ -1,0 +1,380 @@
+body {
+    background: rgb(246, 247, 248);
+    align-items: center;
+    height: 100vh;
+  }
+  
+  * {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+  }
+  
+  a {
+    text-decoration: none;
+    color: var(--grey);
+  }
+  
+  .link_visited:visited {
+    color: var(--grey);
+  }
+  
+  .gray {
+    color: var(--grey);
+  }
+  
+  .limitation {
+      max-width: 1440px;
+      width: 100%;
+      height: 100vh;
+      margin: auto;
+  }
+  
+
+  .hidden {
+    display: none;
+  }
+  
+  .display-f {
+    display: flex;
+  }
+  
+  .display-fjc {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .d-center-space-betwen {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .display-fc {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .display-ac {
+    display: flex;
+    align-items: center;
+  }
+  
+  .display-fccc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .display-fcc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .display-fsecc {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  
+  .padding {
+    padding: 80px;
+  }
+  
+  .join-logo {
+    width: 100%;
+    height: 100%;
+    background-color: #F0F0F0;
+    z-index: 1;
+    position: fixed;
+  }
+  
+  .img-animaschen {
+    height: 334.07px;
+    width: 274px;
+    background: url(/img/login/Logo\ for\ Favicon\ construction.svg);
+    background-repeat: no-repeat;
+  }
+  
+  .animated-image {
+      position: absolute;
+      top: 80%;
+      left: 45%;
+      transform: translate(-50%, -50%) scale(2); /* Logo 2x größer als normal */
+      animation: slideToLeftTop 700ms linear;
+  }
+
+  @keyframes slideToLeftTop {
+      0% {
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+      } 
+      100% {
+        width: 100px;
+        height: 122px;
+        top: 80px;
+        left: 77px;
+        transform: none;
+      }
+  }
+  
+  .login_successful {
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-weight: 700;
+    background-color: var(--menuButtonDarkblue);
+    color: var(--white);
+    border-radius: 8px;
+    padding: 15px 24px;
+    border: none;
+  }
+  @keyframes moveSpan {
+    0% {
+      bottom: -100px;
+    }
+    100% {
+      bottom: 30%;
+    }
+  }
+  .animate {
+    display: block;
+    animation: moveSpan 2s linear forwards;
+  }
+  
+  .show {
+    display: block;
+    bottom: 100px;
+    animation: slideIn 0.5s forwards;
+  }
+  
+  @keyframes slideIn {
+    from {
+      bottom: -100px;
+    }
+    to {
+      bottom: 50%;
+    }
+  }
+  
+  .cover-button {
+      visibility: hidden;
+      background-color: var(--lightblue);
+      box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  .button_color {
+      background-color: var(--lightblue);
+      box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  .gap {
+    gap: 32px;
+  }
+  
+  .imglogo {
+    padding: 80px 77px;
+  }
+  
+  .destop-login,
+  .padding {
+    padding-right: 77px;
+  }
+  
+  .logo-login {
+    height: 100vh;
+    background-color: var(--white);
+  }
+  
+  .frame153 {
+    padding: 48px 115px;
+    gap: 32px;
+    border-radius: 30px;
+    background-color: var(--white);
+  }
+  
+  .frame153-singup {
+    padding: 48px 115px;
+    gap: 32px;
+    border-radius: 30px;
+    background-color: var(--white);
+  }
+  
+  .button-p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .button-login-blue {
+    font-weight: 700;
+    background-color: var(--menuButtonDarkblue);
+    color: var(--white);
+    border-radius: 8px;
+    padding: 15px 24px;
+    border: none;
+  }
+  
+  .button-login-blue:hover {
+    background-color: var(--lightblue);
+    box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  .button-login-white {
+    border: 1px solid var(--menuButtonDarkblue);
+    font-style: normal;
+    font-weight: 700;
+    background-color: var(--white);
+    color: var(--menuButtonDarkblue);
+    border-radius: 8px;
+    padding: 15px 24px;
+  }
+  
+  .arrow_header_signUp {
+    align-items: baseline;
+  }
+  
+  .arrow_signUp {
+    margin-left: -175px;
+  }
+  
+  .arrow_signUp:hover {
+    border-radius: 42px;
+    background-color: var(--backgroundHoverArrow);
+  }
+  
+  .text_login_btn {
+    font-size: 21px;
+  }
+  
+  .button-login-white:hover {
+    border-color: var(--lightblue);
+    color: var(--lightblue);
+    box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  .header_LogIn {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .headline_logIn {
+    font-size: 61px;
+  }
+  
+  .vector_login {
+    border: 3px solid;
+    border-top: 150px;
+    border-color: var(--lightblue);
+  }
+  
+  .link-checkbox {
+    color: var(--lightblue);
+  }
+  
+  .link-checkbox:hover {
+    text-decoration: underline;
+    font-weight: bold;
+  }
+  
+  .password_container {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--backgroundSpacer);
+    padding: 5px;
+    border-radius: 10px;
+    width: fit-content;
+    width: 422px;
+    background-color: var(--white);
+  }
+  
+  .password_container_border {
+    border: 1px solid var(--lightblue);
+  }
+  
+  .password_container input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    flex: 1;
+    background-color: var(--white);
+    font-size: 20px;
+  }
+  
+  .password_container img {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  
+  .password_container:hover {
+    border: 1px solid var(--lightblue);
+  }
+  
+  .password_lock,
+  .password_show,
+  .password_hide {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .password_hide {
+    display: none;
+  }
+  
+  .input-border {
+    border-color: var(--errorRed);
+  }
+  
+  .password_container input::placeholder {
+    font-size: 20px;
+    color: var(--backgroundSpacer);
+  }
+  
+  .padding {
+    padding: 8px;
+  }
+  
+  input:hover,
+  .hover,
+  .pointer-coler:hover {
+    cursor: pointer;
+  }
+  
+  .rememberMe_box {
+    align-self: baseline;
+    padding-left: 48px;
+  }
+  
+  .accept_box,
+  .rememberMe_box {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .style_checkbox {
+    height: 16px;
+    width: 16px;
+  }
+  
+  .password-error {
+    flex: 1;
+    color: var(--errorPink);
+  }
+  
+  footer {
+    padding: 16px;
+    bottom: 40px;
+  }
+  
+  .pointer-coler:hover {
+    color: var(--lightblue);
+  }
+  
