@@ -266,7 +266,7 @@ function editTask(index, event) {
     bigTaskBox.classList.add('edit-mode');
     bigTaskBox.innerHTML = generateEditTaskBox(index);
     renderContactsInAddTasks();
-    showSavedTasksData(index);
+    /*showSavedTasksData(index);*/
     let taskData = allTasks[index][1];
     addPrioButtonColor(taskData.prio, event);
     addStatusButtonColor(taskData.status, event);

@@ -19,14 +19,13 @@
     <!-- Stylesheets -->
     <link rel="icon" href="/img/general/logo_favicon.svg" />
     <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="./css/colors.css" />
     <link rel="stylesheet" href="./css/board.css" />
     <link rel="stylesheet" href="./css/mediaQuery.css" />
     <link rel="stylesheet" href="./css/addTasks.css" />
 </head>
 
-<body class="flex_dir_c" onload="includeHTML(); loadTasks(); initAddTasks()">
+<body class="flex_dir_c" onload="includeHTML(); loadTasks();">
 
     <!-- Dialogbox Add Task -->
     <div class="dialog_addTask_bg d-none" onclick="closeDialog('.dialog_addTask', 'show_dialog_addTask', '.dialog_addTask_bg', 'd-none', 250)">
@@ -138,8 +137,9 @@
         <div class="nav-bar" w3-include-html="nav.html"></div>
     </header>
 
+    <!--
     <div class="wrapped_maxWidth" onclick="closeSubmenuHeader(event)">
-
+    -->
         <!-- Task Boxes -->
         <div id="task-box-small" class="task-box d-none">
             <p class="task-type">Task Type</p>
@@ -188,7 +188,9 @@
                                     <img class="search-icon" src="/assets/img/board/search.svg" />
                                 </div>
                             </div>
-                            <div onclick="showDialog('.dialog_addTask_bg', 'd-none', '.dialog_addTask', 'show_dialog_addTask', 50)" class="add-task-button">
+                            <!--<div onclick="showDialog('.dialog_addTask_bg', 'd-none', '.dialog_addTask', 'show_dialog_addTask', 50)" class="add-task-button">-->
+
+                            <div onclick="" class="add-task-button">
                                 <p>Add task</p>
                                 <img src="/assets/img/board/add_white.svg" />
                             </div>
@@ -206,7 +208,7 @@
                             ondragover="allowDrop(event); highlight('column-open')">
                             <div class="board-headline">
                                 <h2 class="text_board_headline">To do</h2>
-                                <a onclick="addSubtaskStatus('todo')" href="/add_task.html" class="column-plus-button"></a>
+                                <a onclick="" href="" class="column-plus-button"></a>
                             </div>
                             <div id="openTasks" class="tasks-container"></div>
                         </div>
@@ -217,7 +219,7 @@
                             ondragover="allowDrop(event); highlight('column-inProgress')">
                             <div class="board-headline">
                                 <h2 class="text_board_headline">In progress</h2>
-                                <a onclick="addSubtaskStatus('in_progress')" href="add_tasks.html" class="column-plus-button"></a>
+                                <a onclick="" href="" class="column-plus-button"></a>
                             </div>
                             <div id="inProgressTasks" class="tasks-container"></div>
                         </div>
@@ -228,7 +230,7 @@
                             ondragover="allowDrop(event); highlight('column-awaitFeedback')">
                             <div class="board-headline">
                                 <h2 class="text_board_headline">Await Feedback</h2>
-                                <a onclick="addSubtaskStatus('feedback')" href="add_tasks.html" class="column-plus-button"></a>
+                                <a onclick="" href="" class="column-plus-button"></a>
                             </div>
                             <div id="awaitFeedbackTasks" class="tasks-container"></div>
                         </div>

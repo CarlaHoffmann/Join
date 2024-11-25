@@ -44,6 +44,7 @@ function updatePrioButton(prio, buttonId, imgId, bgColorClass) {
     selectedPrio = prio;
 }
 
+/*
 function initAddTasks() {
     renderContactsInAddTasks();
     initJSONaddTasks();
@@ -52,6 +53,7 @@ function initAddTasks() {
     dateValidation();
     abledButton();
 }
+*/
 
 function removeClasses(elements, classes) {
     elements.forEach(id => document.getElementById(id)?.classList.remove(...classes));

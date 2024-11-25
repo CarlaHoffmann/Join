@@ -37,10 +37,10 @@ async function includeHTML() {
 
 function loadTemplateFunctions() {
     changeClassToActive();
-    hideHelpIcon();
+    /*hideHelpIcon();*/
     checkUser();
     loadUser();
-    showLetters();
+    /*showLetters();*/
     if (window.location.pathname == '/privacyPolicy.html' || window.location.pathname == '/legalNotice.html' || window.location.pathname == '/Join/legalNotice.html' || window.location.pathname == '/Join/privacyPolicy.html') {
         if (!isUserLoggedIn()) {
         removeElements();
