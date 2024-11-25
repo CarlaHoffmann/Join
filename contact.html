@@ -13,8 +13,11 @@
         h3{
             font-size:27px;
         }
-        body{
+        #contactContent{
             display:flex;
+            position:absolute;
+            left:232px;
+            top:80px;
         }
         #addContactButton{
             margin-top:22.5px;
@@ -26,6 +29,11 @@
             border:1px solid #2A3647;
             cursor:pointer;
             margin-bottom:15px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            gap:16px;
+            font-size:21px;
         }
 
         #addContactBox, #editContactBox{
@@ -202,6 +210,14 @@
                 width: 100%;
             }
         }
+        @media (max-width: 680px) { /*unter 640*/
+            #contactContent{
+                left:0;
+            }
+            #contactView{
+                display:none;
+            }
+        }
         </style>
         <script src="./nav.js"></script>
 </head>
@@ -209,50 +225,50 @@
     <header>
         <div class="nav-bar" w3-include-html="nav.html"></div>
     </header>
-
-        <!--add contact box-->
-        <div id="addContactBox" class="hidden">
-            <button id="closeAddContactBox" class="close-button" onclick="toggleView('addContactBox')">×</button>
-            <div>
-                <img src="img/contact/logo.svg">
-                <h2>Add Contact</h2>
-                <p>Tasks are better with a team!</p>
+        <div id="contactContent">
+            <!--add contact box-->
+            <div id="addContactBox" class="hidden">
+                <button id="closeAddContactBox" class="close-button" onclick="toggleView('addContactBox')">×</button>
+                <div>
+                    <img src="img/contact/logo.svg">
+                    <h2>Add Contact</h2>
+                    <p>Tasks are better with a team!</p>
+                </div>
+                <form method="post" id="addContactForm" action="contact.html" onsubmit="event.preventDefault(); addContact()">
+                    <input required id="name" placeholder="Name" type="text">
+                    <input required id="email" placeholder="Email" type="email">
+                    <input required id="phone" placeholder="Phone" type="text">
+                    <input type="submit">
+                    <input type="reset">
+                </form>
             </div>
-            <form method="post" id="addContactForm" action="contact.html" onsubmit="event.preventDefault(); addContact()">
-                <input required id="name" placeholder="Name" type="text">
-                <input required id="email" placeholder="Email" type="email">
-                <input required id="phone" placeholder="Phone" type="text">
-                <input type="submit">
-                <input type="reset">
-            </form>
-        </div>
-        <!--edit contact box-->
-        <div id="editContactBox" class="hidden">
-            <button id="closeEditContactBox" class="close-button" onclick="toggleView('editContactBox', '${key}', true)">×</button>
-            <div>
-                <img src="img/contact/logo.svg">
-                <h2>Edit Contact</h2>
-                <p>Tasks are better with a team!</p>
+            <!--edit contact box-->
+            <div id="editContactBox" class="hidden">
+                <button id="closeEditContactBox" class="close-button" onclick="toggleView('editContactBox', '${key}', true)">×</button>
+                <div>
+                    <img src="img/contact/logo.svg">
+                    <h2>Edit Contact</h2>
+                    <p>Tasks are better with a team!</p>
+                </div>
+                <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); editContact('${editKey}');">
+                    <input required id="changedName" placeholder="Name" type="text">
+                    <input required id="changedEmail" placeholder="Email" type="email">
+                    <input required id="changedPhone" placeholder="Phone" type="text">
+                    <input type="submit">
+                    <input type="reset">
+                </form>
             </div>
-            <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); editContact('${editKey}');">
-                <input required id="changedName" placeholder="Name" type="text">
-                <input required id="changedEmail" placeholder="Email" type="email">
-                <input required id="changedPhone" placeholder="Phone" type="text">
-                <input type="submit">
-                <input type="reset">
-            </form>
-        </div>
-        <div id="contacts" style="height:100vh">
-            <button id="addContactButton" onclick="toggleView('addContactBox')">Add a new contact *</button>
-            <section id="contactList" style="height: 80vh; overflow-y:auto;">
-            </section>
-        </div>
-        <div id="contactView">
-            <div id="contactViewHeader"><h2>Contacts</h2><img src="img/contact/divider.svg"><h3>Better with a Team</h3></div>
-            <div id="contactDetails">
+            <div id="contacts" style="height:100vh">
+                <button id="addContactButton" onclick="toggleView('addContactBox')">Add new contact <img src="img/contact/person_add.svg"></button>
+                <section id="contactList" style="height: 80vh; overflow-y:auto;">
+                </section>
+            </div>
+            <div id="contactView">
+                <div id="contactViewHeader"><h2>Contacts</h2><img src="img/contact/divider.svg"><h3>Better with a Team</h3></div>
+                <div id="contactDetails">
+                </div>
             </div>
         </div>
-
         <script src="https://www.w3schools.com/lib/w3.js"></script>
         <script>
         w3.includeHTML();
