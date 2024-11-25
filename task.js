@@ -4,7 +4,6 @@ let selectedContacts = [];
 async function openAssigned() {
     let contactDropDown = document.getElementById('contact-drop-down');
     let contactsToSelect = document.getElementById('contacts-to-select');
-    
     const contacts = await loadContacts();
     console.log(contacts);
     let contactsHTML = '';
@@ -26,15 +25,43 @@ async function openAssigned() {
 // Funktion zum Laden der Kontakte aus Firebase
 async function loadContacts() {
     try {
+        const loggedInUser = await getUser(); // Hole den eingeloggten User
         const response = await fetch(`${base_url}/users.json`);
         const users = await response.json();
-        return Object.entries(users).map(([userId, userData]) => ({
-            id: userId,
-            name: userData.name
-        }));
+
+        // Erstelle ein Array von Kontakten
+        const contactsArray = Object.entries(users).map(([userId, userData]) => ({ id: userId, name: userData.name }));
+
+        // Finde den eingeloggten User und entferne ihn aus dem Array
+        const loggedInContactIndex = contactsArray.findIndex(contact => contact.name === loggedInUser.name);
+        if (loggedInContactIndex !== -1) {
+            const [loggedInContact] = contactsArray.splice(loggedInContactIndex, 1); // Entferne den User aus dem Array
+
+            // Sortiere die restlichen Kontakte alphabetisch nach Namen
+            contactsArray.sort((a, b) => a.name.localeCompare(b.name));
+
+            return [loggedInContact, ...contactsArray]; // Füge ihn an erster Stelle wieder hinzu
+        }
+
+        // Wenn kein eingeloggter User gefunden wurde, gebe das ursprüngliche Array zurück und sortiere es
+        return contactsArray.sort((a, b) => a.name.localeCompare(b.name));
+        
     } catch (error) {
         console.error("Fehler beim Laden der Kontakte:", error);
         return [];
+    }
+}
+
+// Funktion zum Abrufen des aktuell eingeloggten Benutzers
+async function getUser() {
+    try {
+        const response = await fetch(`${base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
+        const loggedInData = await response.json();
+
+        return { name: loggedInData.name }; // Rückgabe des Namens des eingeloggten Users
+    } catch (error) {
+        console.error("Fehler beim Abrufen des Benutzers:", error);
+        return null;
     }
 }
 
