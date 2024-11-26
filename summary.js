@@ -21,23 +21,23 @@ async function countTasksInProgress() {
     let response = await fetch(base_url + "/tasks/inProgress" + ".json");
     let responseToJson = await response.json();
     let count = Object.keys(responseToJson).length;
-    let todoCounter = document.getElementById('in-progress-counter');
-    todoCounter.innerHTML = await count;
+    let progressCounter = document.getElementById('in-progress-counter');
+    progressCounter.innerHTML = await count;
 }
 async function countAwaitingFeedback() {
     let response = await fetch(base_url + "/tasks/feedback" + ".json");
     let responseToJson = await response.json();
     let count = Object.keys(responseToJson).length;
-    let todoCounter = document.getElementById('feedback-awaiting-counter');
-    todoCounter.innerHTML = await count;
+    let feedbackCounter = document.getElementById('feedback-awaiting-counter');
+    feedbackCounter.innerHTML = await count;
 }
 
 async function countDone() {
     let response = await fetch(base_url + "/tasks/done" + ".json");
     let responseToJson = await response.json();
     let count = Object.keys(responseToJson).length;
-    let todoCounter = document.getElementById('done-counter');
-    todoCounter.innerHTML = await count;
+    let doneCounter = document.getElementById('done-counter');
+    doneCounter.innerHTML = await count;
 }
 
 function countTasksOnBoard() {
@@ -111,7 +111,7 @@ function parseDate(dateString) {
 
 function updateUI(tasks, earliestDate) {
     const elements = getUIElements();
-    
+    console.log(elements);
     if (areAllElementsPresent(elements)) {
         if (tasks && tasks.length > 0) {
             updateWithTasks(elements, tasks, earliestDate);
