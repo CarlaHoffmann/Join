@@ -90,35 +90,9 @@ body {
     position: fixed;
   }
   
-  .img-animaschen {
-    height: 334.07px;
-    width: 274px;
-    background: url(/img/login/Logo\ for\ Favicon\ construction.svg);
-    background-repeat: no-repeat;
-  }
-  
-  .animated-image {
-      position: absolute;
-      top: 80%;
-      left: 45%;
-      transform: translate(-50%, -50%) scale(2); /* Logo 2x größer als normal */
-      animation: slideToLeftTop 700ms linear;
-  }
 
-  @keyframes slideToLeftTop {
-      0% {
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-      } 
-      100% {
-        width: 100px;
-        height: 122px;
-        top: 80px;
-        left: 77px;
-        transform: none;
-      }
-  }
+
+
   
   .login_successful {
     position: absolute;
@@ -177,12 +151,12 @@ body {
   }
   
   .imglogo {
-    padding: 80px 77px;
+    margin: 30px 0px 50px 60px;
   }
   
   .destop-login,
   .padding {
-    padding-right: 77px;
+    padding-right: 70px;
   }
   
   .logo-login {
@@ -191,17 +165,19 @@ body {
   }
   
   .frame153 {
-    padding: 48px 115px;
+    padding: 50px;
     gap: 32px;
     border-radius: 30px;
     background-color: var(--white);
+    width: 652px;
+    height: auto;
   }
   
   .frame153-singup {
     padding: 48px 115px;
     gap: 32px;
     border-radius: 30px;
-    background-color: var(--white);
+    background-color: red;
   }
   
   .button-p {
@@ -239,7 +215,7 @@ body {
   }
   
   .arrow_signUp {
-    margin-left: -175px;
+    margin-left: -220px;
   }
   
   .arrow_signUp:hover {
@@ -282,15 +258,16 @@ body {
     font-weight: bold;
   }
   
+
   .password_container {
     display: flex;
     align-items: center;
     border: 1px solid var(--backgroundSpacer);
     padding: 5px;
     border-radius: 10px;
-    width: fit-content;
-    width: 422px;
     background-color: var(--white);
+    width: 422px;
+    height: px;
   }
   
   .password_container_border {

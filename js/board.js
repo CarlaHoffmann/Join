@@ -444,3 +444,6 @@ async function deleteTask(event, index) {
     await loadTasks();
     closeDialogTask();
 }
+
+
+

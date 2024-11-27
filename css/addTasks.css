@@ -1,3 +1,12 @@
+.close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
 .headlineAddTasks {
   font-size: 61px;
   margin-left: 96px;
