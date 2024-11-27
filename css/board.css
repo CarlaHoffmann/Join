@@ -14,24 +14,25 @@
 #overlay-content {
   width: 1050px;
   height: 850px;
-  /* border: 1px solid black; */
   background-color: #a8a8a8;
   border-radius: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #FFFFFF;
-  /* width: calc(100vw - 432px);
-  height: calc(100vh - 196px); */
-    /* position: absolute;
-    right: 0;
-    bottom: 0; */
 }
- @media(max-width: 1275px) {
+
+@media(max-width: 1275px) {
   #overlay-content {
     width: 500px;
   }
- }
+}
+
+@media(max-width: 680px) {
+  #overlay-content {
+    width: 360px;
+  }
+}
 
 
 
