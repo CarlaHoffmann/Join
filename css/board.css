@@ -1,6 +1,3 @@
-
-
-
 #board-add-task-overlay {
   width: calc(100vw - 232px);
   height: calc(100vh - 96px);
@@ -15,24 +12,20 @@
 }
 
 #overlay-content {
-<<<<<<< HEAD
-  background-color: #a8a8a8;
-  border-radius: 30px;
-=======
   /* width: 1200px; */
   /* height: 700px; */
   /* border: 1px solid black; */
-  background-color: white;
+  background-color: #a8a8a8;
   border-radius: 20px;
->>>>>>> b7a184b5fa079cbf6ddb1672623a090cc58f5388
   display: flex;
   justify-content: center;
   align-items: center;
   /* background-color: #F6F7F8; */
-  /* width: calc(100vw - 432px); */
-  /* height: calc(100vh - 196px); */
-  width: 1050px;
-  height: 800px;
+  width: calc(100vw - 432px);
+  height: calc(100vh - 196px);
+    /* position: absolute;
+    right: 0;
+    bottom: 0; */
 }
 
 
@@ -80,8 +73,6 @@
 :root {
   --height: fit-content;
 }
-
-
 
 #main_container {
   overflow-y: auto;
@@ -157,7 +148,6 @@
   border: 1px solid var(--grey);
   background-color: var(--white);
   height: 48px;
-  width: 312px;
   padding: 8px 16px 8px 16px;
   border-radius: 10px;
   opacity: 0px;
@@ -213,7 +203,6 @@
   border-radius: 100px;
   background-color: rgba(240, 240, 240, 0.5);
 }
-
 
 .no-task-div {
   display: flex;
