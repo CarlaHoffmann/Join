@@ -25,6 +25,29 @@ body {
     width: 100%;
     height: 100%;
 } */
+ /*Für TaskOverlay*/
+.task-head {
+    display: flex;
+    justify-content: space-between;
+}
+.close-button-box {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ .close-button {
+    width: 20px;
+    height: 20px;
+ }
+ .close-button-box:hover {
+    background-color: #D1D1D1;
+    /* border-radius: 10px; */
+ }
+/**/
+
 
 .upper-form {
     display: flex;
@@ -169,7 +192,6 @@ body {
 h1 {
     font-size: 61px;
     margin: 0;
-
 }
 
 /* Title */
