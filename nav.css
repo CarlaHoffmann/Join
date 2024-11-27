@@ -132,12 +132,20 @@ header {
     gap:8px;
     width: 232px;
     padding: 8px 56px;
-    /* transition: transform 0.3s ease; */
 }
 
 #sideBarNavigation a:hover{
     background: #263c5c;
+}
 
+#sideBarNavigation a:hover img,
+#sideBarNavigation a:hover span {
+    transform: translateX(-1px);
+}
+
+#sideBarNavigation a.active-link:hover img,
+#sideBarNavigation a.active-link:hover span {
+    transform: none;
 }
 
 #info-sidebar {
@@ -151,7 +159,6 @@ header {
 
 #info-sidebar a {
     padding: 8px 56px;
-    transition: transform 0.3s ease;
 }
 
 #info-sidebar a:hover{
@@ -162,6 +169,15 @@ header {
 .active-link {
     background-color: #091931;
     color: #FFFFFF !important;
+}
+
+.active-link:hover {
+    background-color: #091931 !important;
+    color: #FFFFFF !important;
+}
+
+#info-sidebar a.active-link:hover {
+    transform: none;
 }
 
 #mobileNav {

@@ -1,15 +1,20 @@
 function addTask() {
-    let container = document.getElementById('task-overlay');
-    container.innerHTML = `
+    let overlay = document.getElementById('task-overlay');
+    overlay.innerHTML = `
         <div id="board-add-task-overlay">
-            <!-- Close button -->
-            <img src="assets/img/add_task/close.svg" alt="Close" class="close-button" onclick="closeOverlay()" />
-
+            
             <div id="overlay-content">
                 <div class="form-box">
                     <form onsubmit="return validateForm()" id="add-task" novalidate>
                         <div class="upper-form">
-                            <h1 class="headline">Add Task</h1>
+                            <div class="task-head">
+                                <h1 class="headline">Add Task</h1>
+
+                                <!-- Close button -->
+                                <div onclick="closeOverlay()" class="close-button-box">
+                                    <img src="assets/img/add_task/close.svg" alt="Close" class="close-button"/>
+                                </div>
+                            </div>
                             <div class="scroll-container fill-in-part">
                                 <div class="add-task-form">
                                     <div id="add-task-first" class="width-440">
@@ -153,6 +158,8 @@ function closeOverlay() {
     const overlay = document.getElementById('task-overlay');
     overlay.innerHTML = ''; // Clear the overlay content
 }
+
+
 
 
 
