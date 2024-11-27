@@ -9,35 +9,99 @@ async function initSummary() {
     await findHighestPriorityTask();
 }
 
+// async function countToDo() {
+//     let response = await fetch(base_url + "/tasks/toDo" + ".json");
+//     let responseToJson = await response.json();
+//     let count = Object.keys(responseToJson).length;
+//     let todoCounter = document.getElementById('todo-counter');
+//     todoCounter.innerHTML = await count;
+// }
 async function countToDo() {
-    let response = await fetch(base_url + "/tasks/toDo" + ".json");
-    let responseToJson = await response.json();
-    let count = Object.keys(responseToJson).length;
     let todoCounter = document.getElementById('todo-counter');
-    todoCounter.innerHTML = await count;
+    try {
+        let response = await fetch(base_url + "/tasks/toDo" + ".json");
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        let responseToJson = await response.json();
+        let count = responseToJson ? Object.keys(responseToJson).length : 0;
+        todoCounter.innerHTML = count;
+    } catch (error) {
+        console.error("Fehler beim Abrufen der To-Do-Daten:", error);
+        // Optional: Benutzerfreundliche Fehlermeldung im UI anzeigen
+        todoCounter.innerHTML = "-";
+    }
 }
 
+// async function countTasksInProgress() {
+//     let response = await fetch(base_url + "/tasks/inProgress" + ".json");
+//     let responseToJson = await response.json();
+//     let count = Object.keys(responseToJson).length;
+    
+//     let progressCounter = document.getElementById('in-progress-counter');
+//     progressCounter.innerHTML = await count;
+// }
 async function countTasksInProgress() {
-    let response = await fetch(base_url + "/tasks/inProgress" + ".json");
-    let responseToJson = await response.json();
-    let count = Object.keys(responseToJson).length;
     let progressCounter = document.getElementById('in-progress-counter');
-    progressCounter.innerHTML = await count;
-}
-async function countAwaitingFeedback() {
-    let response = await fetch(base_url + "/tasks/feedback" + ".json");
-    let responseToJson = await response.json();
-    let count = Object.keys(responseToJson).length;
-    let feedbackCounter = document.getElementById('feedback-awaiting-counter');
-    feedbackCounter.innerHTML = await count;
+    try {
+        let response = await fetch(base_url + "/tasks/inProgress" + ".json");
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        let responseToJson = await response.json();
+        let count = responseToJson ? Object.keys(responseToJson).length : 0;
+        progressCounter.innerHTML = count;
+    } catch (error) {
+        console.error("Fehler beim Abrufen der In-Progress-Aufgaben:", error);
+        // Fehlerfall: "Fehler beim Laden der Aufgaben" anzeigen
+        progressCounter.innerHTML = "-";
+    }
 }
 
+// async function countAwaitingFeedback() {
+//     let response = await fetch(base_url + "/tasks/feedback" + ".json");
+//     let responseToJson = await response.json();
+//     let count = Object.keys(responseToJson).length;
+//     let feedbackCounter = document.getElementById('feedback-awaiting-counter');
+//     feedbackCounter.innerHTML = await count;
+// }
+async function countAwaitingFeedback() {
+    let feedbackCounter = document.getElementById('feedback-awaiting-counter');
+    try {
+        let response = await fetch(base_url + "/tasks/feedback" + ".json");
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        let responseToJson = await response.json();
+        let count = responseToJson ? Object.keys(responseToJson).length : 0;
+        feedbackCounter.innerHTML = count;
+    } catch (error) {
+        console.error("Fehler beim Abrufen der Feedback-Aufgaben:", error);
+        feedbackCounter.innerHTML = "-";
+    }
+}
+
+// async function countDone() {
+//     let response = await fetch(base_url + "/tasks/done" + ".json");
+//     let responseToJson = await response.json();
+//     let count = Object.keys(responseToJson).length;
+//     let doneCounter = document.getElementById('done-counter');
+//     doneCounter.innerHTML = await count;
+// }
 async function countDone() {
-    let response = await fetch(base_url + "/tasks/done" + ".json");
-    let responseToJson = await response.json();
-    let count = Object.keys(responseToJson).length;
     let doneCounter = document.getElementById('done-counter');
-    doneCounter.innerHTML = await count;
+    try {
+        let response = await fetch(base_url + "/tasks/done" + ".json");
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        let responseToJson = await response.json();
+        let count = responseToJson ? Object.keys(responseToJson).length : 0;
+        doneCounter.innerHTML = count;
+    } catch (error) {
+        console.error("Fehler beim Abrufen der erledigten Aufgaben:", error);
+        doneCounter.innerHTML = "Fehler beim Laden der Aufgaben";
+    }
 }
 
 function countTasksOnBoard() {
@@ -65,15 +129,36 @@ async function findHighestPriorityTask() {
         }
     } catch (error) {
         console.error("Fehler beim Abrufen der Aufgaben:", error);
+        updateUI(null, null);
     }
 }
 
+// async function fetchAllTasks(categories) {
+//     let allTasks = [];
+//     for (const category of categories) {
+//         const response = await fetch(`${base_url}/tasks/${category}.json`);
+//         const tasks = await response.json();
+//         allTasks = allTasks.concat(Object.values(tasks));
+//     }
+//     return allTasks;
+// }
 async function fetchAllTasks(categories) {
     let allTasks = [];
     for (const category of categories) {
-        const response = await fetch(`${base_url}/tasks/${category}.json`);
-        const tasks = await response.json();
-        allTasks = allTasks.concat(Object.values(tasks));
+        try {
+            const response = await fetch(`${base_url}/tasks/${category}.json`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const tasks = await response.json();
+            
+            // Überprüfen, ob tasks nicht undefined oder null ist
+            if (tasks) {
+                allTasks = allTasks.concat(Object.values(tasks));
+            }
+        } catch (error) {
+            console.error(`Fehler beim Abrufen der Aufgaben für Kategorie ${category}:`, error);
+        }
     }
     return allTasks;
 }

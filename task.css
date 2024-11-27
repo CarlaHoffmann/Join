@@ -438,6 +438,7 @@ button {
 
 #category {
     background-color: #FFFFFF;
+    border-radius: 10px;
 }
 
 #opened-category {
@@ -445,7 +446,7 @@ button {
     top: 0; 
     left: 0; 
     width: 100%;
-    z-index: 10; 
+    z-index: 1; 
     background-color: #FFFFFF; 
     border-radius: 10px; 
 }
