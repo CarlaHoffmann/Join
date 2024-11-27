@@ -15,15 +15,14 @@
     <script defer src="./js/add_tasks.js"></script>
     <script defer src="./js/generateHTML.js"></script>
     <script defer src="./js/remoteStorage.js"></script>
-    <script defer src="./js/contacts.js"></script>
+    <script defer src="task.js"></script>
+
     <!-- Stylesheets -->
     <link rel="icon" href="/img/general/logo_favicon.svg" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/colors.css" />
     <link rel="stylesheet" href="./css/board.css" />
     <link rel="stylesheet" href="./css/mediaQuery.css" />
-    <link rel="stylesheet" href="./css/addTasks.css" />
-    
     <link rel="stylesheet" href="task.css">
     
 </head>
@@ -37,6 +36,7 @@
 
 
         <!-- Task Boxes -->
+         <div class="boardAddTaskOverlay-page">
         <div id="task-box-small" class="task-box d-none">
             <p class="task-type">Task Type</p>
             <p class="task-headline">Task Headline</p>
@@ -59,6 +59,7 @@
         <div class="background-big-task d-none" onclick="closeDialogTask()">
             <div id="task-box-big" class="task-box-big" onclick="doNotClose(event)"></div>
         </div>
+         </div>
         <!-- End Task Boxes -->
 
         <!-- Overlay -->
@@ -72,10 +73,11 @@
                     <div class="headline-container margin-bottom-32px">
                         <div class="h1-container">
                             <h1>Board</h1>
-                            <a href="add_tasks.html" class="small-add-button">
+                            <a onclick="addTask()" class="small-add-button">
                                 <img src="/assets/img/board/add_white.svg" />
                             </a>
                         </div>
+                        
                         <div class="board-search-add">
                             <div class="search-field">
                                 <div class="search-container">
@@ -108,7 +110,7 @@
                             ondragover="allowDrop(event); highlight('column-open')">
                             <div class="board-headline">
                                 <h2 class="text_board_headline">To do</h2>
-                                <a onclick="addTask()" href="" class="column-plus-button"></a>
+                                <a onclick="addTask()" class="column-plus-button"></a>
                             </div>
                             <div id="openTasks" class="tasks-container"></div>
                         </div>
@@ -119,7 +121,7 @@
                             ondragover="allowDrop(event); highlight('column-inProgress')">
                             <div class="board-headline">
                                 <h2 class="text_board_headline">In progress</h2>
-                                <a onclick="" href="" class="column-plus-button"></a>
+                                <a onclick="addTask()" class="column-plus-button"></a>
                             </div>
                             <div id="inProgressTasks" class="tasks-container"></div>
                         </div>
@@ -130,7 +132,7 @@
                             ondragover="allowDrop(event); highlight('column-awaitFeedback')">
                             <div class="board-headline">
                                 <h2 class="text_board_headline">Await Feedback</h2>
-                                <a onclick="" href="" class="column-plus-button"></a>
+                                <a onclick="addTask()" class="column-plus-button"></a>
                             </div>
                             <div id="awaitFeedbackTasks" class="tasks-container"></div>
                         </div>
@@ -148,9 +150,7 @@
                 </div>
             </section>
         </div>
-        <!-- End Board Section -->
     </div>
-    <script src="task.js"></script>
 </body>
 
 </html>

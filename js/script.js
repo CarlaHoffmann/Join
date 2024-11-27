@@ -1,3 +1,13 @@
+// Funktion: Task hinzufügen
+// Diese Funktion fügt ein Task-Overlay in den Container mit der ID 'task-overlay' ein.
+
+function addTask() {
+    let container = document.getElementById('task-overlay'); // Der Container, in den das Overlay eingefügt wird.
+    container.innerHTML = addTaskHTML(); // Fügt den dynamisch generierten HTML-Code ein.
+}
+
+
+
 let userMail;
 
 function setPreviousPageParams() {
