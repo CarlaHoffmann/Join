@@ -107,17 +107,36 @@ function closeAssigned() {
 //Date
 document.addEventListener('DOMContentLoaded', initializeDatePicker);
 
-function initializeDatePicker() {
-    const datepicker = document.getElementById('datepicker');
-    const warningDialog = document.getElementById('warning-dialog');
-    const dialogMessage = document.getElementById('dialog-message');
-    const currentYear = new Date().getFullYear();
-    const maxYear = currentYear + 5;
+let datepicker, warningDialog, dialogMessage, currentYear, maxYear;
 
-    setupEventListeners(datepicker, warningDialog);
-    
-    return { datepicker, warningDialog, dialogMessage, currentYear, maxYear };
+function initializeDatePicker() {
+    datepicker = document.getElementById('datepicker');
+    warningDialog = document.getElementById('warning-dialog');
+    dialogMessage = document.getElementById('dialog-message');
+    currentYear = new Date().getFullYear();
+    maxYear = currentYear + 5;
+
+    if (datepicker) {
+        setupEventListeners(datepicker, warningDialog);
+    } else {
+        console.error("Das Element mit der ID 'datepicker' wurde nicht gefunden.");
+    }
 }
+
+
+
+
+// function initializeDatePicker() {
+//     const datepicker = document.getElementById('datepicker');
+//     const warningDialog = document.getElementById('warning-dialog');
+//     const dialogMessage = document.getElementById('dialog-message');
+//     const currentYear = new Date().getFullYear();
+//     const maxYear = currentYear + 5;
+
+//     setupEventListeners(datepicker, warningDialog);
+    
+//     return { datepicker, warningDialog, dialogMessage, currentYear, maxYear };
+// }
 
 function setupEventListeners(datepicker, warningDialog) {
     datepicker.addEventListener('input', handleDateInput);
@@ -154,8 +173,15 @@ function validateMonth(parts) {
     }
 }
 
+// function validateYear(parts) {
+//     const { currentYear, maxYear } = initializeDatePicker();
+//     if (parts[2].length === 4) {
+//         let year = parseInt(parts[2]);
+//         if (year < currentYear) parts[2] = currentYear.toString();
+//         if (year > maxYear) parts[2] = maxYear.toString();
+//     }
+// }
 function validateYear(parts) {
-    const { currentYear, maxYear } = initializeDatePicker();
     if (parts[2].length === 4) {
         let year = parseInt(parts[2]);
         if (year < currentYear) parts[2] = currentYear.toString();
@@ -184,8 +210,12 @@ function isValidDate(date, day, month, year) {
     return date.getDate() === day && date.getMonth() === month && date.getFullYear() === year;
 }
 
+// function showWarning(message) {
+//     const { dialogMessage, warningDialog } = initializeDatePicker();
+//     dialogMessage.textContent = message;
+//     warningDialog.style.display = 'block';
+// }
 function showWarning(message) {
-    const { dialogMessage, warningDialog } = initializeDatePicker();
     dialogMessage.textContent = message;
     warningDialog.style.display = 'block';
 }

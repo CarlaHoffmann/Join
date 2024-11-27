@@ -20,4 +20,26 @@ function activeLink() {
     });
 }
 
+async function checkLoggedIn() {
+    const loggedInUser = await getUser();
+    if (loggedInUser = '') {
+        let sideNav = document.getElementById('sideBarNavigation');
+        let mobileNav = document.getElementById('mobileNav');
+        sideNav.classList.add('d-none');
+        mobileNav.classList.add('d-none');
+    } 
+}
+
+async function getUser() {
+    try {
+        const response = await fetch(`${base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
+        const loggedInData = await response.json();
+
+        return { name: loggedInData.name }; // Rückgabe des Namens des eingeloggten Users
+    } catch (error) {
+        console.error("Fehler beim Abrufen des Benutzers:", error);
+        return null;
+    }
+}
+
 window.onload = activeLink;
