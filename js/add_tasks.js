@@ -158,6 +158,8 @@ function closeOverlay() {
 
 
 
+
+
 // let selectUsers = [];
 // let selectUsersColor = [];
 // let selectUsersLetters = [];
