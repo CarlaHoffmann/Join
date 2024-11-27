@@ -9,6 +9,6 @@ function returnColor(){
     ];
     const random = Math.floor(Math.random() * ((rgbaColorArrays.length-1) - 0 + 1)) + 0;
     const randomColor = 'rgba(' + rgbaColorArrays[random] + ')';
-    console.log(randomColor); 
+    return randomColor; 
 }
 returnColor();
