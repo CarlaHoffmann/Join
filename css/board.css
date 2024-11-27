@@ -27,7 +27,11 @@
     right: 0;
     bottom: 0; */
 }
-
+ @media(max-width: 1275px) {
+  #overlay-content {
+    width: 500px;
+  }
+ }
 
 
 
