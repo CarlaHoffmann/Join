@@ -1,0 +1,98 @@
+/* Task Card Container */
+.task-card {
+  width: 252px;
+  height: auto;
+  padding: 16px;
+  background-color: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Header */
+.task-header {
+  display: flex;
+}
+
+.user-story {
+  font-size: 16px; /* Fixierte Schriftgröße */
+  font-weight: 700;
+  color: white;
+  background-color: #007bff;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+/* Content Section */
+.task-content h3 {
+  font-size: 18px;
+  margin: 0;
+  color: #333;
+  font-weight: 700;
+}
+
+.task-content p {
+  font-size: 14px;
+  color: #777;
+  margin: 5px 0 10px 0;
+}
+
+/* Progress Section */
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  position: relative;
+  flex-grow: 1;
+}
+
+.progress {
+  width: 50%; /* Fortschritt: 50% */
+  height: 100%;
+  background-color: #007bff;
+  border-radius: 4px;
+}
+
+.subtasks {
+  font-size: 12px;
+  color: #333;
+}
+
+/* Avatar Section */
+.avatars {
+  display: flex;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  margin: -5px;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  border-radius: 50%;
+  border: 1px solid white;
+  margin-top: 20px;
+}
+
+/* Bottom Icon *
+.icon {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  font-size: 16px;
+  color: #ff4500;
+}
+/

@@ -173,7 +173,6 @@ function updateTasksHTML(tasks) {
     updateTasksByStatus(tasks, 'in progress', 'inProgressTasks', 'No tasks in progress');
     updateTasksByStatus(tasks, 'await feedback', 'awaitFeedbackTasks', 'No tasks await feedback');
     updateTasksByStatus(tasks, 'done', 'doneTasks', 'No tasks done');
-    resetHeight();
 }
 
 
