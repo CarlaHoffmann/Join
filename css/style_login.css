@@ -30,6 +30,7 @@ body {
   }
   
 
+
   /* Overlay */
 #overlay {
   position: fixed;
@@ -64,6 +65,11 @@ body {
       opacity: 0.8;
   }
 }
+
+.hidden {
+    display: none;
+}
+
 
 /* Header */
 .header {

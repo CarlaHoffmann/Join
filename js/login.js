@@ -1,21 +1,29 @@
-let users = [];
-
-
 function animationWindow() {
     const overlay = document.getElementById('overlay');
     const animatedLogo = document.getElementById('animatedLogo');
     const headerLogo = document.getElementById('headerLogo');
 
-    // Start animation
-    animatedLogo.addEventListener('animationend', () => {
-        overlay.style.display = 'none'; // Hide overlay
-        headerLogo.src = animatedLogo.src; // Transfer the same logo to the header
-        headerLogo.style.display = 'block'; // Make the header logo visible
-    });
+    // Prüfen, ob die Animation bereits abgespielt wurde
+    if (!sessionStorage.getItem('animationPlayed')) {
+        // Starten der Animation
+        animatedLogo.addEventListener('animationend', () => {
+            overlay.style.display = 'none'; // Verstecke Overlay
+            headerLogo.src = animatedLogo.src; // Logo in den Header transferieren
+            headerLogo.style.display = 'block'; // Header-Logo sichtbar machen
+        });
+
+        // Markieren, dass die Animation abgespielt wurde
+        sessionStorage.setItem('animationPlayed', 'true');
+    } else {
+        // Wenn die Animation bereits abgespielt wurde
+        overlay.style.display = 'none'; // Verstecke das Overlay
+        headerLogo.src = animatedLogo.src; // Header-Logo setzen
+        headerLogo.style.display = 'block'; // Header-Logo sichtbar machen
+    }
 }
 
-
-
+// Aufrufen der Funktion beim Laden der Seite
+window.onload = animationWindow;
 
 
 async function existingMailLogIn() {
