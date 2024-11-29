@@ -45,42 +45,42 @@ async function loadTasks() {
 //         console.error("Fehler beim Laden der Tasks:", error);
 //     }
 // }
-// async function loadTasks() {
-//     try {
-//       const url = `${base_url}/tasks/toDo.json`;
-//       const response = await fetch(url);
+async function loadToDo() {
+    try {
+      const url = `${base_url}/tasks/toDo.json`;
+      const response = await fetch(url);
   
-//       if (!response.ok) {
-//         throw new Error(`HTTP-Error: ${response.status}`);
-//       }
+      if (!response.ok) {
+        throw new Error(`HTTP-Error: ${response.status}`);
+      }
   
-//       const toDo = await response.json();
-//       const toDoArray = [];
+      const toDo = await response.json();
+      const toDoArray = [];
   
-//       // Iteriere durch die ToDo-Einträge
-//       for (const key in toDo) {
-//         if (toDo.hasOwnProperty(key)) {
-//           const task = toDo[key];
-//           // Erstelle ein neues Objekt mit den relevanten Eigenschaften
-//           const taskObject = {
-//             id: key,
-//             title: task.title,
-//             category: task.category,
-//             contacts: Object.values(task.contacts), // Array von Kontakten
-//             date: task.date,
-//             description: task.description,
-//             prio: task.prio,
-//             subtasks: Object.values(task.subtasks), // Array von Subtasks
-//           };
-//           toDoArray.push(taskObject);
-//         }
-//       }
+      // Iteriere durch die ToDo-Einträge
+      for (const key in toDo) {
+        if (toDo.hasOwnProperty(key)) {
+          const task = toDo[key];
+          // Erstelle ein neues Objekt mit den relevanten Eigenschaften
+          const taskObject = {
+            id: key,
+            title: task.title,
+            category: task.category,
+            contacts: Object.values(task.contacts), // Array von Kontakten
+            date: task.date,
+            description: task.description,
+            prio: task.prio,
+            subtasks: Object.values(task.subtasks), // Array von Subtasks
+          };
+          toDoArray.push(taskObject);
+        }
+      }
   
-//       console.log(toDoArray);
-//     } catch (error) {
-//       console.error("Fehler beim Laden der Tasks:", error);
-//     }
-//   }
+      console.log(toDoArray);
+    } catch (error) {
+      console.error("Fehler beim Laden der Tasks:", error);
+    }
+  }
 //   async function loadToDo() {
 //     try {
 //       const url = `${base_url}/tasks/toDo.json`;
@@ -115,44 +115,44 @@ async function loadTasks() {
 //       console.error("Fehler beim Laden der Tasks:", error);
 //     }
 //   }
-  async function loadToDo() {
-    try {
-      const url = `${base_url}/tasks/toDo.json`;
-      const response = await fetch(url);
+//   async function loadToDo() {
+//     try {
+//       const url = `${base_url}/tasks/toDo.json`;
+//       const response = await fetch(url);
   
-      if (!response.ok) {
-        throw new Error(`HTTP-Error: ${response.status}`);
-      }
+//       if (!response.ok) {
+//         throw new Error(`HTTP-Error: ${response.status}`);
+//       }
   
-      const toDoData = await response.json();
+//       const toDoData = await response.json();
   
-      // Überprüfe, ob toDoData ein Objekt ist
-      if (typeof toDoData !== 'object' || toDoData === null) {
-        console.error("Fehler: toDoData ist nicht ein Objekt oder leer.");
-        return;
-      }
+//       // Überprüfe, ob toDoData ein Objekt ist
+//       if (typeof toDoData !== 'object' || toDoData === null) {
+//         console.error("Fehler: toDoData ist nicht ein Objekt oder leer.");
+//         return;
+//       }
   
-      const toDoArray = [];
+//       const toDoArray = [];
   
-      // Iteriere durch die ToDo-Einträge
-      Object.keys(toDoData).forEach((key, index) => {
-        const task = toDoData[key];
-        // Erstelle ein neues Objekt mit den relevanten Eigenschaften
-        const taskObject = {
-          index: index,
-          title: task.title,
-          category: task.category,
-          contacts: Object.values(task.contacts), // Array von Kontakten
-          date: task.date,
-          description: task.description,
-          prio: task.prio,
-          subtasks: Object.values(task.subtasks) // Array von Subtasks
-        };
-        toDoArray.push(taskObject);
-      });
+//       // Iteriere durch die ToDo-Einträge
+//       Object.keys(toDoData).forEach((key, index) => {
+//         const task = toDoData[key];
+//         // Erstelle ein neues Objekt mit den relevanten Eigenschaften
+//         const taskObject = {
+//           index: index,
+//           title: task.title,
+//           category: task.category,
+//           contacts: Object.values(task.contacts), // Array von Kontakten
+//           date: task.date,
+//           description: task.description,
+//           prio: task.prio,
+//           subtasks: Object.values(task.subtasks) // Array von Subtasks
+//         };
+//         toDoArray.push(taskObject);
+//       });
   
-      console.log(toDoArray);
-    } catch (error) {
-      console.error("Fehler beim Laden der Tasks:", error);
-    }
-  }
+//       console.log(toDoArray);
+//     } catch (error) {
+//       console.error("Fehler beim Laden der Tasks:", error);
+//     }
+//   }
