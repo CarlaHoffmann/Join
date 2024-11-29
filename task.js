@@ -725,11 +725,14 @@ function goToBoard() {
 }
 
 // Funktion zum Hinzufügen von Event-Listenern für die Echtzeit-Validierung
-function setupFormValidation() {
-    document.getElementById('title').addEventListener('input', validateTitle);
-    document.getElementById('datepicker').addEventListener('change', validateDueDate);
-    document.getElementById('category-selection').addEventListener('change', validateCategory);
-}
+// function setupFormValidation() {
+//     document.getElementById('title').addEventListener('input', validateTitle);
+//     document.getElementById('datepicker').addEventListener('change', validateDueDate);
+//     document.getElementById('category-selection').addEventListener('change', validateCategory);
+//     validateTitle();
+//     validateDueDate();
+//     validateCategory();
+// }
 
 function clearForm() {
     // Leeren der Textfelder
@@ -766,5 +769,5 @@ function resetCategory() {
 // Diese Funktion beim Laden der Seite aufrufen
 document.addEventListener('DOMContentLoaded', function() {
     initializePriority();
-    setupFormValidation();
+    // setupFormValidation();
 });
