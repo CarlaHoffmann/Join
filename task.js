@@ -1,3 +1,5 @@
+const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
+
 let selectedContacts = [];
 
 // Assigned to
@@ -71,6 +73,21 @@ function handleContactClick(event) {
     toggleContact({ target: checkbox }); // Aktualisiere den Kontaktstatus
 }
 
+// function toggleContact(event) {
+//     const checkbox = event.target;
+//     const contactName = checkbox.value;
+    
+//     if (checkbox.checked) {
+//         if (!selectedContacts.includes(contactName)) {
+//             selectedContacts.push(contactName);
+//         }
+//     } else {
+//         selectedContacts = selectedContacts.filter(name => name !== contactName);
+//     }
+    
+//     updateSelectedContacts();
+//     console.log(selectedContacts);
+// }
 function toggleContact(event) {
     const checkbox = event.target;
     const contactName = checkbox.value;
@@ -83,18 +100,90 @@ function toggleContact(event) {
         selectedContacts = selectedContacts.filter(name => name !== contactName);
     }
     
-    updateSelectedContacts();
+    // Warte auf die Aktualisierung der selectedContacts
+    updateSelectedContacts().then(() => {
+        console.log("selectedContacts aktualisiert:", selectedContacts);
+    });
 }
 
-function updateSelectedContacts() {
+// async function updateSelectedContacts() {
+//     let contactInitials = document.getElementById('selected-contacts');
+//     contactInitials.innerHTML = '';
+//     let contactInis = [];
+
+//     for (let contactName of selectedContacts) {
+//         let initials = contactName.split(' ').map(word => word[0]).join('');
+        
+//         // Farbe für den Kontakt abrufen
+//         let color = await getContactColor(contactName);
+        
+//         // contactInitials.innerHTML += `<div class="contact-initial" style="background-color: ${color};">${initials}</div>`;
+//         contactInis += `<div class="contact-initial" style="background-color: ${color};">${initials}</div>`;
+//     }
+//     contactInitials.innerHTML = contactInis;
+//     console.log("selectedContacts beim schließen:", selectedContacts);
+// }
+// async function updateSelectedContacts() {
+//     let contactInitials = document.getElementById('selected-contacts');
+//     contactInitials.innerHTML = ''; // Leere den Inhalt vor dem Neuaufbau
+
+//     if (selectedContacts.length === 0) {
+//         console.log(selectedContacts.length);
+//         // Wenn keine Kontakte ausgewählt sind, verlasse die Funktion
+//         return;
+//     }
+//     // Warte auf die Erstellung aller Kontakt-Initialen
+//     const contactInis = await Promise.all(selectedContacts.map(async (contactName) => {
+//         let initials = contactName.split(' ').map(word => word[0]).join('');
+        
+//         // Farbe für den Kontakt abrufen
+//         let color = await getContactColor(contactName);
+        
+//         return `<div class="contact-initial" style="background-color: ${color};">${initials}</div>`;
+//     }));
+
+//     // Füge alle Kontakt-Initialen hinzu
+//     contactInitials.innerHTML = contactInis.join('');
+//     console.log("selectedContacts beim schließen:", selectedContacts);
+// }
+async function updateSelectedContacts() {
     let contactInitials = document.getElementById('selected-contacts');
-    contactInitials.innerHTML = '';
-    
-    selectedContacts.forEach(name => {
-        let initials = name.split(' ').map(word => word[0]).join('');
-        contactInitials.innerHTML += `<div class="contact-initial" value="">${initials}</div>`;
-    });
+    contactInitials.innerHTML = ''; // Leere den Inhalt vor dem Neuaufbau
+
+    let contactInis = ''; // Variable zum Sammeln der HTML-Strings
+
+    for (let i = 0; i < selectedContacts.length; i++) {
+        const contactName = selectedContacts[i];
+        let initials = contactName.split(' ').map(word => word[0]).join('');
+        
+        // Farbe für den Kontakt abrufen
+        let color = await getContactColor(contactName);
+        
+        // Füge den HTML-String zur Sammlung hinzu
+        contactInis += `<div class="contact-initial" style="background-color: ${color};">${initials}</div>`;
+    }
+
+    // Füge alle Kontakt-Initialen hinzu
+    contactInitials.innerHTML = contactInis;
     console.log("selectedContacts beim schließen:", selectedContacts);
+}
+
+async function getContactColor(contactName) {
+    try {
+        const response = await fetch(`${base_url}/users.json`);
+        const users = await response.json();
+        
+        for (let userId in users) {
+            if (users[userId].name === contactName) {
+                const colorResponse = await fetch(`${base_url}/users/${userId}/color.json`);
+                return await colorResponse.json();
+            }
+        }
+        return '#000000'; // Standardfarbe, falls keine gefunden wird
+    } catch (error) {
+        console.error("Fehler beim Abrufen der Kontaktfarbe:", error);
+        return '#000000'; // Standardfarbe im Fehlerfall
+    }
 }
 
 function closeAssigned() {
@@ -122,8 +211,6 @@ function initializeDatePicker() {
         console.error("Das Element mit der ID 'datepicker' wurde nicht gefunden.");
     }
 }
-
-
 
 
 // function initializeDatePicker() {
