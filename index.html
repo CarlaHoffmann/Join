@@ -16,18 +16,15 @@
 </head>
 
 <body onload="animationWindow(); setPreviousPageParams()">
-    <div class="limitation">
 
-
-
-        <!-- Overlay für die Animation -->
-        <div id="joinLogoAnimation" class="join-logo">
-            <div class="img-animaschen animated-image"></div>
+        <div id="overlay">
+            <div id="logoAnimation">
+                <img src="/img/login/Logo for Favicon construction.svg" alt="Logo" id="animatedLogo">
+            </div>
         </div>
-
         <!-- Header mit Logo -->
         <header class="d-center-space-betwen">
-            <img src="/img/login/Logo for Favicon construction.svg" alt="Logo" class="imglogo">
+            <img src="/img/login/Logo for Favicon construction.svg" alt="Logo" id="headerLogo" class="hidden">
             <div class="destop-login display-ac">
                 <div class="display-ac gap">
                     <span>Not a join user?</span>

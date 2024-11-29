@@ -1,10 +1,22 @@
 let users = [];
 
+
 function animationWindow() {
-    setTimeout(function() {
-        document.getElementById('joinLogoAnimation').classList.add('hidden');
-    }, 1400)
+    const overlay = document.getElementById('overlay');
+    const animatedLogo = document.getElementById('animatedLogo');
+    const headerLogo = document.getElementById('headerLogo');
+
+    // Start animation
+    animatedLogo.addEventListener('animationend', () => {
+        overlay.style.display = 'none'; // Hide overlay
+        headerLogo.src = animatedLogo.src; // Transfer the same logo to the header
+        headerLogo.style.display = 'block'; // Make the header logo visible
+    });
 }
+
+
+
+
 
 async function existingMailLogIn() {
     users = Object.entries(await loadData('users'));
