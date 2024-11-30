@@ -163,7 +163,6 @@
             padding-top:110px;
             gap:30px;
             width:calc(100vw - (232px + 456px + 17px)); /*232px Seitenleiste, 456px Kontaktliste, 17px Scrollbar*/
-            background:red;
             padding-left:50px;
             flex-direction:column;
         }
@@ -186,7 +185,6 @@
             width:120px;
             height:120px;
             border:1px solid white;
-            background: #FF7A00;
             color:white;
         }
         .contactHeader span{
@@ -209,20 +207,74 @@
         .hidden{
             display:none !important;
         }
-        @media (max-width: 599px) {
-            #contactList {
-                height: calc(100vh - (80px + 80px));
-                width: 100%;
+        @media (max-width: 1320px){
+            h2{
+                font-size:40px;
+            }
+            h3{
+                font-size:25.5px;
             }
         }
-        @media (max-width: 680px) { /*unter 680*/
-            #contactContent{
-                left:0;
+        @media (max-width: 1220px){
+            h2{
+                font-size: 30px;
+            }
+            h3{
+                font-size: 23.5px;
+            }
+            #contactList h3{
+                font-size: 17px;
+            }
+        }
+        @media (max-width: 1220px){
+            .contactHeader{
+                flex-direction:column;
+            }
+        }
+        @media (max-width: 1160px){
+            #contactViewHeader{
+                flex-direction:column;
+            }
+            #contactViewHeader img{
+                display:none;
+            }
+        }
+        @media (max-width: 1024px) {
+            #contacts {
+                width: calc( 100vw - (232px + 17px) );
+                height: calc(100vh - (80px + 80px));
             }
             #contactView{
                 display:none;
             }
         }
+        @media (max-width: 680px){
+            #contactContent{
+                left:0;
+                width:100vw;
+                display:flex;
+                justify-content:center;
+            }
+            #contacts{
+                width:100vw;
+            }
+            .contact{
+                width:90%;
+            }
+            #addContactButton{
+                height:45px;
+                width:45px;
+                padding:3px;
+                border-radius:25.5px;
+                position:fixed;
+                right:25px;
+                bottom:80px; /*mobilenav is 80px high*/
+            }
+            #addContactButton span{
+                display:none;
+            }
+        }
+        */
         </style>
         <script src="./nav.js"></script>
         <script src="returnColor.js"></script>
@@ -265,7 +317,7 @@
                 </form>
             </div>
             <div id="contacts" style="height:100vh">
-                <button id="addContactButton" onclick="toggleView('addContactBox')">Add new contact <img src="img/contact/person_add.svg"></button>
+                <button id="addContactButton" onclick="toggleView('addContactBox')"><span>Add new contact</span><img src="img/contact/person_add.svg"></button>
                 <section id="contactList" style="height: 80vh; overflow-y:auto;">
                 </section>
             </div>
