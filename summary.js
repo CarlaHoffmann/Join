@@ -196,7 +196,6 @@ function parseDate(dateString) {
 
 function updateUI(tasks, earliestDate) {
     const elements = getUIElements();
-    console.log(elements);
     if (areAllElementsPresent(elements)) {
         if (tasks && tasks.length > 0) {
             updateWithTasks(elements, tasks, earliestDate);

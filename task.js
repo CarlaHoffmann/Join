@@ -3,6 +3,27 @@ const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedataba
 let selectedContacts = [];
 
 // Assigned to
+// async function openAssigned() {
+//     let contactDropDown = document.getElementById('contact-drop-down');
+//     let contactsToSelect = document.getElementById('contacts-to-select');
+//     const contacts = await loadContacts();
+//     console.log(contacts);
+//     let contactsHTML = '';
+
+//     contacts.forEach((contact, index) => {
+//         const isSelected = selectedContacts.includes(contact.name);
+//         contactsHTML += `
+//                 <label onclick="handleContactClick(event)" for="${contact.id}" class="selection-name contact-label">
+//                     <div>${contact.name}${index === 0 ? ' (You)' : ''}</div>
+//                     <input type="checkbox" id="${contact.id}" value="${contact.name}" ${isSelected ? 'checked' : ''}>
+//                 </label>
+//         `;
+//     });
+    
+//     contactsToSelect.innerHTML = contactsHTML;
+//     contactDropDown.style.display = 'block';
+// }
+
 async function openAssigned() {
     let contactDropDown = document.getElementById('contact-drop-down');
     let contactsToSelect = document.getElementById('contacts-to-select');
@@ -10,16 +31,19 @@ async function openAssigned() {
     console.log(contacts);
     let contactsHTML = '';
 
-    contacts.forEach((contact, index) => {
+    const loggedInUser = await getUser(); // Hole den eingeloggten User
+
+    contacts.forEach((contact) => {
         const isSelected = selectedContacts.includes(contact.name);
+        const isCurrentUser = loggedInUser.name !== 'Guest' && contact.name === loggedInUser.name;
         contactsHTML += `
-                <label onclick="handleContactClick(event)" for="${contact.id}" class="selection-name contact-label">
-                    <div>${contact.name}${index === 0 ? ' (You)' : ''}</div>
-                    <input type="checkbox" id="${contact.id}" value="${contact.name}" ${isSelected ? 'checked' : ''}>
-                </label>
+            <label onclick="handleContactClick(event)" for="${contact.id}" class="selection-name contact-label">
+                <div>${contact.name}${isCurrentUser ? ' (You)' : ''}</div>
+                <input type="checkbox" id="${contact.id}" value="${contact.name}" ${isSelected ? 'checked' : ''}>
+            </label>
         `;
     });
-    
+
     contactsToSelect.innerHTML = contactsHTML;
     contactDropDown.style.display = 'block';
 }
@@ -85,8 +109,8 @@ function toggleContact(event) {
         selectedContacts = selectedContacts.filter(name => name !== contactName);
     }
     
-    updateSelectedContacts();
-    console.log("selectedContacts aktualisiert:", selectedContacts);
+    // updateSelectedContacts();
+    // console.log("selectedContacts aktualisiert:", selectedContacts);
 }
 
 async function updateSelectedContacts() {
@@ -108,7 +132,7 @@ async function updateSelectedContacts() {
 
     // Füge alle Kontakt-Initialen hinzu
     contactInitials.innerHTML = contactInis;
-    console.log("selectedContacts beim schließen:", selectedContacts);
+    // console.log("selectedContacts beim schließen:", selectedContacts);
 }
 
 
@@ -135,6 +159,7 @@ function closeAssigned() {
     let contactsToSelect = document.getElementById('contacts-to-select');
     contactDropDown.style.display = 'none';
     contactsToSelect.innerHTML = '';
+    updateSelectedContacts();
 }
 
 //Date

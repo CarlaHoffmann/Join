@@ -39,6 +39,7 @@ function activeLink() {
     });
 }
 
+// Wenn niemand eingeloggt ist, soll die Navigation noch nicht möglich sein
 async function checkLoggedIn() {
     const loggedInUser = await getUser();
     if (loggedInUser = '') {
@@ -61,4 +62,34 @@ async function getUser() {
     }
 }
 
+async function getInitials() {
+    try {
+        const loggedInUser = await getUser(); // Benutzerdaten abrufen
+
+        if (loggedInUser && loggedInUser.name) { // Überprüfen, ob ein Name vorhanden ist
+            // Namen in Vor- und Nachnamen aufteilen
+            const nameParts = loggedInUser.name.split(" ");
+            let initials = "";
+
+            // Initialen berechnen (nur die ersten Buchstaben der Teile)
+            nameParts.forEach(part => {
+                if (part.length > 0) {
+                    initials += part[0].toUpperCase();
+                }
+            });
+
+            // Initialen im HTML anzeigen
+            const initialsElement = document.getElementById('first-letters');
+            initialsElement.textContent = initials; // Initialen setzen
+        } else {
+            console.warn("Kein Benutzer eingeloggt oder Name fehlt.");
+        }
+    } catch (error) {
+        console.error("Fehler beim Abrufen der Initialen:", error);
+    }
+}
+
 window.onload = activeLink;
+document.addEventListener('DOMContentLoaded', () => {
+    getInitials();
+});
