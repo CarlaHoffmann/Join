@@ -132,7 +132,6 @@ async function updateSelectedContacts() {
 
     // Füge alle Kontakt-Initialen hinzu
     contactInitials.innerHTML = contactInis;
-    // console.log("selectedContacts beim schließen:", selectedContacts);
 }
 
 
