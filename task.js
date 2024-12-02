@@ -73,21 +73,6 @@ function handleContactClick(event) {
     toggleContact({ target: checkbox }); // Aktualisiere den Kontaktstatus
 }
 
-// function toggleContact(event) {
-//     const checkbox = event.target;
-//     const contactName = checkbox.value;
-    
-//     if (checkbox.checked) {
-//         if (!selectedContacts.includes(contactName)) {
-//             selectedContacts.push(contactName);
-//         }
-//     } else {
-//         selectedContacts = selectedContacts.filter(name => name !== contactName);
-//     }
-    
-//     updateSelectedContacts();
-//     console.log(selectedContacts);
-// }
 function toggleContact(event) {
     const checkbox = event.target;
     const contactName = checkbox.value;
@@ -100,52 +85,28 @@ function toggleContact(event) {
         selectedContacts = selectedContacts.filter(name => name !== contactName);
     }
     
-    // Warte auf die Aktualisierung der selectedContacts
-    updateSelectedContacts().then(() => {
-        console.log("selectedContacts aktualisiert:", selectedContacts);
-    });
+    updateSelectedContacts();
+    console.log("selectedContacts aktualisiert:", selectedContacts);
 }
 
-// async function updateSelectedContacts() {
-//     let contactInitials = document.getElementById('selected-contacts');
-//     contactInitials.innerHTML = '';
-//     let contactInis = [];
-
-//     for (let contactName of selectedContacts) {
-//         let initials = contactName.split(' ').map(word => word[0]).join('');
-        
-//         // Farbe für den Kontakt abrufen
-//         let color = await getContactColor(contactName);
-        
-//         // contactInitials.innerHTML += `<div class="contact-initial" style="background-color: ${color};">${initials}</div>`;
-//         contactInis += `<div class="contact-initial" style="background-color: ${color};">${initials}</div>`;
+// function toggleContact(event) {
+//     const checkbox = event.target;
+//     const contactName = checkbox.value;
+    
+//     if (checkbox.checked) {
+//         if (!selectedContacts.includes(contactName)) {
+//             selectedContacts.push(contactName);
+//         }
+//     } else {
+//         selectedContacts = selectedContacts.filter(name => name !== contactName);
 //     }
-//     contactInitials.innerHTML = contactInis;
-//     console.log("selectedContacts beim schließen:", selectedContacts);
+    
+//     // Warte auf die Aktualisierung der selectedContacts
+//     updateSelectedContacts().then(() => {
+//         console.log("selectedContacts aktualisiert:", selectedContacts);
+//     });
 // }
-// async function updateSelectedContacts() {
-//     let contactInitials = document.getElementById('selected-contacts');
-//     contactInitials.innerHTML = ''; // Leere den Inhalt vor dem Neuaufbau
 
-//     if (selectedContacts.length === 0) {
-//         console.log(selectedContacts.length);
-//         // Wenn keine Kontakte ausgewählt sind, verlasse die Funktion
-//         return;
-//     }
-//     // Warte auf die Erstellung aller Kontakt-Initialen
-//     const contactInis = await Promise.all(selectedContacts.map(async (contactName) => {
-//         let initials = contactName.split(' ').map(word => word[0]).join('');
-        
-//         // Farbe für den Kontakt abrufen
-//         let color = await getContactColor(contactName);
-        
-//         return `<div class="contact-initial" style="background-color: ${color};">${initials}</div>`;
-//     }));
-
-//     // Füge alle Kontakt-Initialen hinzu
-//     contactInitials.innerHTML = contactInis.join('');
-//     console.log("selectedContacts beim schließen:", selectedContacts);
-// }
 async function updateSelectedContacts() {
     let contactInitials = document.getElementById('selected-contacts');
     contactInitials.innerHTML = ''; // Leere den Inhalt vor dem Neuaufbau
@@ -167,6 +128,7 @@ async function updateSelectedContacts() {
     contactInitials.innerHTML = contactInis;
     console.log("selectedContacts beim schließen:", selectedContacts);
 }
+
 
 async function getContactColor(contactName) {
     try {
@@ -194,7 +156,7 @@ function closeAssigned() {
 }
 
 //Date
-document.addEventListener('DOMContentLoaded', initializeDatePicker);
+// document.addEventListener('DOMContentLoaded', initializeDatePicker);
 
 let datepicker, warningDialog, dialogMessage, currentYear, maxYear;
 
@@ -211,19 +173,6 @@ function initializeDatePicker() {
         console.error("Das Element mit der ID 'datepicker' wurde nicht gefunden.");
     }
 }
-
-
-// function initializeDatePicker() {
-//     const datepicker = document.getElementById('datepicker');
-//     const warningDialog = document.getElementById('warning-dialog');
-//     const dialogMessage = document.getElementById('dialog-message');
-//     const currentYear = new Date().getFullYear();
-//     const maxYear = currentYear + 5;
-
-//     setupEventListeners(datepicker, warningDialog);
-    
-//     return { datepicker, warningDialog, dialogMessage, currentYear, maxYear };
-// }
 
 function setupEventListeners(datepicker, warningDialog) {
     datepicker.addEventListener('input', handleDateInput);
@@ -285,11 +234,11 @@ function validateFullDate() {
     if (parts.length === 3 && parts[2].length === 4) {
         const [day, month, year] = parts.map(part => parseInt(part, 10));
         const date = new Date(year, month - 1, day);
-        if (!isValidDate(date, day, month - 1, year)) {
-            showWarning('Please enter a valid date.');
-        }
-    } else if (this.value !== '') {
-        showWarning('Please enter the date in dd/mm/yyyy format.');
+        // if (!isValidDate(date, day, month - 1, year)) {
+        //     showWarning('Please enter a valid date.');
+        // }
+    // } else if (this.value !== '') {
+    //     showWarning('Please enter the date in dd/mm/yyyy format.');
     }
 }
 
@@ -298,18 +247,13 @@ function isValidDate(date, day, month, year) {
 }
 
 // function showWarning(message) {
-//     const { dialogMessage, warningDialog } = initializeDatePicker();
 //     dialogMessage.textContent = message;
 //     warningDialog.style.display = 'block';
 // }
-function showWarning(message) {
-    dialogMessage.textContent = message;
-    warningDialog.style.display = 'block';
-}
 
-function closeWarningDialog(warningDialog) {
-    warningDialog.style.display = 'none';
-}
+// function closeWarningDialog(warningDialog) {
+//     warningDialog.style.display = 'none';
+// }
 
 function handleWindowClick(event, warningDialog) {
     if (event.target == warningDialog) {
@@ -519,16 +463,6 @@ function addSubtask() {
     }
     closeSubtask();
 }
-// function addSubtask() {
-//     const subtaskInput = document.getElementById('subtaskInput');
-
-//     if (subtaskInput.value.trim()) {
-//         subtasks.push(subtaskInput.value.trim());
-//         updateSubtasksDisplay();
-//     }
-
-//     closeSubtask();
-// }
 
 function editSubtask(index) {
     let subtaskElement = document.getElementById(`subtask${index}`);
@@ -550,27 +484,6 @@ function editSubtask(index) {
     input.focus();
     input.setSelectionRange(input.value.length, input.value.length);
 }
-// function editSubtask(index) {
-//     const subtaskElement = document.getElementById(`subtask${index}`);
-
-//     if (subtasks[index]) {
-//         const currentText = subtasks[index];
-//         subtaskElement.innerHTML = `
-//             <div class="edit-subtask-wrapper">
-//                 <input type="text" class="edit-subtask-input" value="${currentText}">
-//                 <div class="edit-subtask-icons">
-//                     <div><img onclick="deleteSubtask(${index})" class="icon-hover" src="./img/task/subtask_add_bin.svg" alt="Delete"></div>
-//                     <div><img src="./img/task/vector-3.svg" alt="Separator"></div>
-//                     <div><img onclick="replaceSubtask(${index})" class="icon-hover" src="./img/task/subtask_check.svg" alt="Confirm"></div>
-//                 </div>
-//             </div>`;
-
-//         // Fokussiere das Eingabefeld und setze den Cursor ans Ende
-//         const input = subtaskElement.querySelector('.edit-subtask-input');
-//         input.focus();
-//         input.setSelectionRange(input.value.length, input.value.length);
-//     }
-// }
 
 function replaceSubtask(index) {
     let subtaskElement = document.getElementById(`subtask${index}`);
@@ -610,24 +523,9 @@ function updateSubtaskDisplay() {
         `;
     }
 }
-// function updateSubtasksDisplay() {
-//     const addedSubtasksContainer = document.getElementById('subtasks');
-
-//     addedSubtasksContainer.innerHTML = subtasks.map((element, i) => `
-//         <div id="subtask${i}">
-//             <div onclick="editSubtask(${i})" class="subtask-box">
-//                 <div>• ${element}</div>
-//                 <div class="added-subtasks-icons">
-//                     <div><img onclick="editSubtask(${i})" class="icon-hover" src="./img/task/subtask_add_pen.svg" alt=""></div>
-//                     <div><img src="./img/task/vector-3.svg" alt=""></div>
-//                     <div><img onclick="deleteSubtask(${i})" class="icon-hover" src="./img/task/subtask_add_bin.svg" alt=""></div>
-//                 </div>
-//             </div>
-//         </div>`).join('');
-// }
 
 // validation
-document.addEventListener('DOMContentLoaded', function() {
+function initializeValidation() {
     const submitButton = document.querySelector('.submit-button');
 
     if (submitButton) {
@@ -642,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.error('Submit button not found');
     }
-});
+};
 
 function validateForm() {
     let isValid = true;
@@ -678,7 +576,7 @@ function validateDueDate() {
     
     dueDateError.classList.add('d-none');
 
-    if (dueDate === '') {
+    if (dueDate === '' || dueDate.length < 10) {
         dueDateError.classList.remove('d-none');
         return false;
     }
@@ -691,7 +589,7 @@ function validateCategory() {
     
     errorMessage.classList.add('d-none');
 
-    if (categorySelection.value === '' || categorySelection.value === 'Select task category') {
+    if (categorySelection.innerHTML === '' || categorySelection.innerHTML === 'Select task category') {
         errorMessage.classList.remove('d-none');
         return false;
     }
@@ -724,16 +622,6 @@ function goToBoard() {
     window.location.href = 'board.html';
 }
 
-// Funktion zum Hinzufügen von Event-Listenern für die Echtzeit-Validierung
-// function setupFormValidation() {
-//     document.getElementById('title').addEventListener('input', validateTitle);
-//     document.getElementById('datepicker').addEventListener('change', validateDueDate);
-//     document.getElementById('category-selection').addEventListener('change', validateCategory);
-//     validateTitle();
-//     validateDueDate();
-//     validateCategory();
-// }
-
 function clearForm() {
     // Leeren der Textfelder
     document.getElementById('title').value = '';
@@ -765,9 +653,3 @@ function resetCategory() {
     categorySelection.textContent = 'Select task category';
     document.getElementById('opened-category').classList.add('d-none');
 }
-
-// Diese Funktion beim Laden der Seite aufrufen
-document.addEventListener('DOMContentLoaded', function() {
-    initializePriority();
-    // setupFormValidation();
-});

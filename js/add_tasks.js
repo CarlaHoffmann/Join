@@ -151,6 +151,9 @@ function addTask() {
             </div>
         </div>
     `;
+    initializeDatePicker();
+    initializePriority();
+    initializeValidation();
 }
 
 // Function to close the overlay
