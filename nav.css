@@ -10,9 +10,10 @@ nav ul li a{
 }
 
 body {
-    display: flex;
+    /* display: flex; */
     height: 100vh;
-    font-family: Arial, sans-serif;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
 }
 
 header {
@@ -20,7 +21,10 @@ header {
     background: white;
     display: flex;
     align-items: center;
-    justify-content:space-around;
+    /* justify-content:space-around; */
+    justify-content: space-between;
+    padding-right: 40px;
+    padding-left: 80px;
     position: fixed;
     width:calc(100% - 232px);
     top: 0;
@@ -185,6 +189,12 @@ header {
 }
 
 /* Media Queries */
+@media(max-width: 1275px) {
+    header {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
 @media (max-width: 680px) { /*unter 640*/
     header{
         height:80px;

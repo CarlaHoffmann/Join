@@ -3,16 +3,35 @@ function toggleHelpMenu() {
     helpMenu.classList.toggle('d-none');
 }
 
+// function activeLink() {
+//     // Aktuellen Pfad abrufen
+//     const currentPath = window.location.pathname.split('/').pop();
+
+//     // Alle Links im Sidebar und Mobile Nav durchlaufen
+//     const links = document.querySelectorAll('#sidebar a, #mobileNav a');
+
+//     links.forEach(link => {
+//         // Überprüfen, ob der href des Links mit dem aktuellen Pfad übereinstimmt
+//         if (link.getAttribute('href') === currentPath) {
+//             link.classList.add('active-link'); // Aktiven Link hinzufügen
+//         } else {
+//             link.classList.remove('active-link'); // Anderen Links entfernen
+//         }
+//     });
+// }
 function activeLink() {
-    // Aktuellen Pfad abrufen
-    const currentPath = window.location.pathname.split('/').pop();
+    // Aktuellen Pfad abrufen und normalisieren
+    const currentPath = window.location.pathname.replace(/^\/|\/$/g, '');
 
     // Alle Links im Sidebar und Mobile Nav durchlaufen
     const links = document.querySelectorAll('#sidebar a, #mobileNav a');
 
     links.forEach(link => {
+        // href des Links abrufen und normalisieren
+        const linkPath = link.getAttribute('href').replace(/^\/|\/$/g, '');
+
         // Überprüfen, ob der href des Links mit dem aktuellen Pfad übereinstimmt
-        if (link.getAttribute('href') === currentPath) {
+        if (linkPath === currentPath) {
             link.classList.add('active-link'); // Aktiven Link hinzufügen
         } else {
             link.classList.remove('active-link'); // Anderen Links entfernen

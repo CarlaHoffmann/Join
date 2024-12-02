@@ -89,24 +89,6 @@ function toggleContact(event) {
     console.log("selectedContacts aktualisiert:", selectedContacts);
 }
 
-// function toggleContact(event) {
-//     const checkbox = event.target;
-//     const contactName = checkbox.value;
-    
-//     if (checkbox.checked) {
-//         if (!selectedContacts.includes(contactName)) {
-//             selectedContacts.push(contactName);
-//         }
-//     } else {
-//         selectedContacts = selectedContacts.filter(name => name !== contactName);
-//     }
-    
-//     // Warte auf die Aktualisierung der selectedContacts
-//     updateSelectedContacts().then(() => {
-//         console.log("selectedContacts aktualisiert:", selectedContacts);
-//     });
-// }
-
 async function updateSelectedContacts() {
     let contactInitials = document.getElementById('selected-contacts');
     contactInitials.innerHTML = ''; // Leere den Inhalt vor dem Neuaufbau
@@ -156,8 +138,6 @@ function closeAssigned() {
 }
 
 //Date
-// document.addEventListener('DOMContentLoaded', initializeDatePicker);
-
 let datepicker, warningDialog, dialogMessage, currentYear, maxYear;
 
 function initializeDatePicker() {
@@ -180,7 +160,7 @@ function setupEventListeners(datepicker, warningDialog) {
     window.onclick = (event) => handleWindowClick(event, warningDialog);
 }
 
-function handleDateInput(e) {
+function handleDateInput() {
     let value = this.value.replace(/\D/g, '');
     let parts = [value.slice(0, 2), value.slice(2, 4), value.slice(4, 8)];
     validateAndFormatParts(parts);
@@ -209,14 +189,6 @@ function validateMonth(parts) {
     }
 }
 
-// function validateYear(parts) {
-//     const { currentYear, maxYear } = initializeDatePicker();
-//     if (parts[2].length === 4) {
-//         let year = parseInt(parts[2]);
-//         if (year < currentYear) parts[2] = currentYear.toString();
-//         if (year > maxYear) parts[2] = maxYear.toString();
-//     }
-// }
 function validateYear(parts) {
     if (parts[2].length === 4) {
         let year = parseInt(parts[2]);
@@ -234,26 +206,12 @@ function validateFullDate() {
     if (parts.length === 3 && parts[2].length === 4) {
         const [day, month, year] = parts.map(part => parseInt(part, 10));
         const date = new Date(year, month - 1, day);
-        // if (!isValidDate(date, day, month - 1, year)) {
-        //     showWarning('Please enter a valid date.');
-        // }
-    // } else if (this.value !== '') {
-    //     showWarning('Please enter the date in dd/mm/yyyy format.');
     }
 }
 
 function isValidDate(date, day, month, year) {
     return date.getDate() === day && date.getMonth() === month && date.getFullYear() === year;
 }
-
-// function showWarning(message) {
-//     dialogMessage.textContent = message;
-//     warningDialog.style.display = 'block';
-// }
-
-// function closeWarningDialog(warningDialog) {
-//     warningDialog.style.display = 'none';
-// }
 
 function handleWindowClick(event, warningDialog) {
     if (event.target == warningDialog) {
@@ -376,10 +334,10 @@ function setMediumPriority() {
 // Category
 function showCategory() {
     const dropdown = document.getElementById('opened-category');
-    // const icon = document.querySelector('#dropdown-icon2');
-
     dropdown.classList.toggle('d-none'); // Dropdown anzeigen oder verbergen
-    // icon.classList.toggle('dropdown-icon-mirrored'); 
+
+    const categorySelection = document.getElementById('category-selection');
+    categorySelection.textContent = "Select task category";
 }
 
 function categorySelected(category) {
