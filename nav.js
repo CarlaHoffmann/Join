@@ -40,14 +40,20 @@ function activeLink() {
 }
 
 // Wenn niemand eingeloggt ist, soll die Navigation noch nicht möglich sein
-async function checkLoggedIn() {
-    const loggedInUser = await getUser();
-    if (loggedInUser = '') {
-        let sideNav = document.getElementById('sideBarNavigation');
-        let mobileNav = document.getElementById('mobileNav');
-        sideNav.classList.add('d-none');
-        mobileNav.classList.add('d-none');
-    } 
+// async function checkLoggedIn() {
+//     const loggedInUser = await getUser();
+//     if (loggedInUser = '') {
+//         let sideNav = document.getElementById('sideBarNavigation');
+//         let mobileNav = document.getElementById('mobileNav');
+//         sideNav.classList.add('d-none');
+//         mobileNav.classList.add('d-none');
+//     } 
+// }
+function hideNavigation() {
+    let sideNav = document.getElementById('sideBarNavigation');
+    let mobileNav = document.getElementById('mobileNav');
+    sideNav.classList.add('d-none');
+    mobileNav.classList.add('d-none');
 }
 
 async function getUser() {
