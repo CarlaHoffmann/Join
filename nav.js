@@ -68,35 +68,6 @@ async function getInitials() {
         console.error("Fehler beim Abrufen der Initialen:", error);
     }
 }
-// async function getInitials() {
-//     try {
-//         const loggedInUser = await getUser(); // Benutzerdaten abrufen
-
-//         if (!loggedInUser || !loggedInUser.name) { // Überprüfen, ob ein Name vorhanden ist
-//             hideNav();
-//             console.warn("Kein Benutzer eingeloggt oder Name fehlt.");
-//             return;
-//         }
-
-//         // Namen in Vor- und Nachnamen aufteilen
-//         const nameParts = loggedInUser.name.split(" ");
-//         let initials = "";
-
-//         // Initialen berechnen (nur die ersten Buchstaben der Teile)
-//         nameParts.forEach(part => {
-//             if (part.length > 0) {
-//                 initials += part[0].toUpperCase();
-//             }
-//         });
-
-//         // Initialen im HTML anzeigen
-//         const initialsElement = document.getElementById('first-letters');
-//         initialsElement.textContent = initials; // Initialen setzen
-//     } catch (error) {
-//         console.error("Fehler beim Abrufen der Initialen:", error);
-//         // hideNav(); // Navigation ausblenden, wenn ein Fehler auftritt
-//     }
-// }
 
 async function getUser() {
     try {
@@ -118,6 +89,25 @@ function showNav() {
     header.classList.remove('d-none');
     sideNav.classList.remove('d-none');
     mobileNav.classList.remove('d-none');
+}
+
+// const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
+async function logOut() {
+    try {
+        let response = await fetch(base_url + "/loggedIn/" + ".json",{
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ name: "" })
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        // let result = await response.json();
+        // console.log("Guest logged out:", result);
+    } catch (error) {
+        // console.error("Error Guest:", error);
+    }
+    window.location.href = './logIn.html';
 }
 
 window.onload = activeLink;

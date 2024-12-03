@@ -82,11 +82,15 @@ header {
     gap: 8px;
 }
 
-.help-menu a {
+.help-menu a, .help-menu div {
     font-size: 16px;
     text-decoration: none;
     color: #CDCDCD;
     padding: 8px 16px;
+}
+
+.help-menu div:hover {
+    cursor: pointer;
 }
 
 .mobile-visible {
