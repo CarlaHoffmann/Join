@@ -73,8 +73,26 @@ function logout(){
     localStorage.removeItem('logStatus');
 }
 
-function guestLogin() {
-    saveUser('guest@mail.com');
+// function guestLogin() {
+//     saveUser('guest@mail.com');
+//     window.location.href = './summary.html';
+// }
+const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
+async function guestLogin() {
+    try {
+        let response = await fetch(log_base_url + "/loggedIn/" + ".json",{
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ name: "Guest" })
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        let result = await response.json();
+        console.log("Guest logged in:", result);
+    } catch (error) {
+        console.error("Error Guest:", error);
+    }
     window.location.href = './summary.html';
 }
 

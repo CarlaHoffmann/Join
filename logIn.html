@@ -6,14 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
     <link rel="icon" type="image/x-icon" href="/img/general/logo_favicon.svg">
-    <link rel="stylesheet" href="/css/fonts.css">
+
     <link rel="stylesheet" href="/css/colors.css">
     <link rel="stylesheet" href="/css/style_login.css">
     <link rel="stylesheet" href="/css/mediaQuery.css">
 
     <script defer src="/js/login.js"></script>
     <script defer src="/js/script.js"></script>
-    <script src="nav.js"></script>
     
 </head>
 
@@ -80,10 +79,10 @@
                 <div class="d-center-space-betwen gap logIn-btns">
                     <button id="login_button_color"
                         class="button-login-blue button-p text_login_btn mobile_login_btn hover">Log in</button>
-                    <a href="/summary.html">
+                    <div id="guest-login">
                         <p onclick="guestLogin()" class="button-login-white button-p text_login_btn mobile_login_btn">
                             Guest Log in</p>
-                    </a>
+                    </div>
                 </div>
             </form>
         </div>
@@ -92,12 +91,12 @@
 
     <!-- Footer -->
     <footer class="display-fjc gap gray">
-        <a onclick="hideNavigation()" href="./privacyPolicy.html" id="privacyPolicy" class="pointer-coler link_visited" target="_blank">Privacy
+        <a href="./privacyPolicy.html" id="privacyPolicy" class="pointer-coler link_visited">Privacy
             policy</a>
-        <a onclick="hideNavigation()" href="./legalNotice.html" id="legalNotice" class="pointer-coler link_visited" target="_blank">Legal
+        <a href="./legalNotice.html" id="legalNotice" class="pointer-coler link_visited">Legal
             notice</a>
     </footer>
-    </div>
+
 </body>
 
 </html>

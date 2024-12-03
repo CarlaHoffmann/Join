@@ -1,3 +1,5 @@
+const nav_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
+
 function toggleHelpMenu() {
     let helpMenu = document.getElementById('help-menu');
     helpMenu.classList.toggle('d-none');
@@ -39,40 +41,12 @@ function activeLink() {
     });
 }
 
-// Wenn niemand eingeloggt ist, soll die Navigation noch nicht möglich sein
-// async function checkLoggedIn() {
-//     const loggedInUser = await getUser();
-//     if (loggedInUser = '') {
-//         let sideNav = document.getElementById('sideBarNavigation');
-//         let mobileNav = document.getElementById('mobileNav');
-//         sideNav.classList.add('d-none');
-//         mobileNav.classList.add('d-none');
-//     } 
-// }
-function hideNavigation() {
-    let sideNav = document.getElementById('sideBarNavigation');
-    let mobileNav = document.getElementById('mobileNav');
-    sideNav.classList.add('d-none');
-    mobileNav.classList.add('d-none');
-}
-
-async function getUser() {
-    try {
-        const response = await fetch(`${base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
-        const loggedInData = await response.json();
-
-        return { name: loggedInData.name }; // Rückgabe des Namens des eingeloggten Users
-    } catch (error) {
-        console.error("Fehler beim Abrufen des Benutzers:", error);
-        return null;
-    }
-}
-
 async function getInitials() {
     try {
         const loggedInUser = await getUser(); // Benutzerdaten abrufen
 
         if (loggedInUser && loggedInUser.name) { // Überprüfen, ob ein Name vorhanden ist
+            showNav();
             // Namen in Vor- und Nachnamen aufteilen
             const nameParts = loggedInUser.name.split(" ");
             let initials = "";
@@ -93,6 +67,57 @@ async function getInitials() {
     } catch (error) {
         console.error("Fehler beim Abrufen der Initialen:", error);
     }
+}
+// async function getInitials() {
+//     try {
+//         const loggedInUser = await getUser(); // Benutzerdaten abrufen
+
+//         if (!loggedInUser || !loggedInUser.name) { // Überprüfen, ob ein Name vorhanden ist
+//             hideNav();
+//             console.warn("Kein Benutzer eingeloggt oder Name fehlt.");
+//             return;
+//         }
+
+//         // Namen in Vor- und Nachnamen aufteilen
+//         const nameParts = loggedInUser.name.split(" ");
+//         let initials = "";
+
+//         // Initialen berechnen (nur die ersten Buchstaben der Teile)
+//         nameParts.forEach(part => {
+//             if (part.length > 0) {
+//                 initials += part[0].toUpperCase();
+//             }
+//         });
+
+//         // Initialen im HTML anzeigen
+//         const initialsElement = document.getElementById('first-letters');
+//         initialsElement.textContent = initials; // Initialen setzen
+//     } catch (error) {
+//         console.error("Fehler beim Abrufen der Initialen:", error);
+//         // hideNav(); // Navigation ausblenden, wenn ein Fehler auftritt
+//     }
+// }
+
+async function getUser() {
+    try {
+        const response = await fetch(`${nav_base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
+        const loggedInData = await response.json();
+        console.log(loggedInData);
+        return { name: loggedInData.name }; // Rückgabe des Namens des eingeloggten Users
+    } catch (error) {
+        console.error("Fehler beim Abrufen des Benutzers:", error);
+        return null;
+    }
+}
+
+// Wenn niemand eingeloggt ist, wird die Navigation ausgeblendet
+function showNav() {
+    let header = document.getElementById('headerControls');
+    let sideNav = document.getElementById('sideBarNavigation');
+    let mobileNav = document.getElementById('mobileNav');
+    header.classList.remove('d-none');
+    sideNav.classList.remove('d-none');
+    mobileNav.classList.remove('d-none');
 }
 
 window.onload = activeLink;

@@ -94,7 +94,7 @@ header {
 }
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 #sidebar {
@@ -123,7 +123,7 @@ header {
     padding-bottom: 64px;
 }
 
-#sideBarNavigation {
+.sideBarNavigation {
     list-style: none;
     display:flex;
     flex-direction:column;
@@ -132,7 +132,7 @@ header {
     /* width: 232px; */
 }
 
-#sideBarNavigation a{
+.sideBarNavigation a{
     display:flex;
     justify-content:flex-start;
     align-items:center;
@@ -141,17 +141,17 @@ header {
     padding: 8px 56px;
 }
 
-#sideBarNavigation a:hover{
+.sideBarNavigation a:hover{
     background: #263c5c;
 }
 
-#sideBarNavigation a:hover img,
-#sideBarNavigation a:hover span {
+.sideBarNavigation a:hover img,
+.sideBarNavigation a:hover span {
     transform: translateX(-1px);
 }
 
-#sideBarNavigation a.active-link:hover img,
-#sideBarNavigation a.active-link:hover span {
+.sideBarNavigation a.active-link:hover img,
+.sideBarNavigation a.active-link:hover span {
     transform: none;
 }
 
