@@ -99,6 +99,7 @@ body {
 .display-fjc {
   display: flex;
   justify-content: center;
+  font-size: 16px;
 }
   
 .d-center-space-betwen {
@@ -116,6 +117,7 @@ body {
 .display-ac {
   display: flex;
   align-items: center;
+  font-size: 20px;
 }
   
 .display-fccc {
@@ -230,7 +232,6 @@ body {
   padding: 48px 115px;
   gap: 32px;
   border-radius: 30px;
-  background-color: red;
 }
 
 .button-p {
@@ -246,6 +247,7 @@ body {
   border-radius: 8px;
   padding: 15px 24px;
   border: none;
+  white-space: nowrap
 }
 
 /* a */
@@ -266,6 +268,7 @@ body {
   color: var(--menuButtonDarkblue);
   border-radius: 8px;
   padding: 15px 24px;
+  white-space: nowrap
 }
   
 .arrow_header_signUp {
@@ -283,6 +286,7 @@ body {
 
 .text_login_btn {
   font-size: 21px;
+  font-weight: 700; 
 }
   
 .button-login-white:hover {
@@ -299,6 +303,7 @@ body {
 
 .headline_logIn {
   font-size: 61px;
+  margin: 0;
 }
   
 .vector_login {

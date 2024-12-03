@@ -116,10 +116,13 @@
                         ondragover="allowDrop(event); highlight('column-open')">
 
                         <!-- To do Columns -->
-                        <div class="board-headline">
-                            <h2 class="text_board_headline">To do</h2>
-                            <a onclick="addTask()" class="column-plus-button"></a>
+           
+                        <div id="column-open" class="board-column" ondrop="drop(event, 'toDo')" ondragover="allowDrop(event)">
+                            <h2 class="text_board_headline">To Do</h2>
+                            <div id="openTasks" class="tasks-container"></div>
                         </div>
+                        
+
                         <div id="openTasks" class="tasks-container"></div>
                     </div>
 
@@ -128,10 +131,11 @@
                         ondragleave="removeHighlightLeave('column-inProgress')"
                         ondragover="allowDrop(event); highlight('column-inProgress')">
                         <!-- In progress Columns -->
-                        <div class="board-headline">
-                            <h2 class="text_board_headline">In progress</h2>
-                            <a onclick="addTask()" class="column-plus-button"></a>
+                        <div id="column-inProgress" class="board-column" ondrop="drop(event, 'progress')" ondragover="allowDrop(event)">
+                            <h2 class="text_board_headline">In Progress</h2>
+                            <div id="inProgressTasks" class="tasks-container"></div>
                         </div>
+
                         <div id="inProgressTasks" class="tasks-container"></div>
                     </div>
 
@@ -140,9 +144,9 @@
                         ondragleave="removeHighlightLeave('column-awaitFeedback')"
                         ondragover="allowDrop(event); highlight('column-awaitFeedback')">
                         <!-- Await Feedback Columns -->
-                        <div class="board-headline">
+                        <div id="column-awaitFeedback" class="board-column" ondrop="drop(event, 'feedback')" ondragover="allowDrop(event)">
                             <h2 class="text_board_headline">Await Feedback</h2>
-                            <a onclick="addTask()" class="column-plus-button"></a>
+                            <div id="awaitFeedbackTasks" class="tasks-container"></div>
                         </div>
                         <div id="awaitFeedbackTasks" class="tasks-container"></div>
                     </div>
@@ -152,8 +156,9 @@
                         ondragleave="removeHighlightLeave('column-done')"
                         ondragover="allowDrop(event); highlight('column-done')">
                         <!-- Done Columns -->
-                        <div class="board-headline">
+                        <div id="column-done" class="board-column" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
                             <h2 class="text_board_headline">Done</h2>
+                            <div id="doneTasks" class="tasks-container"></div>
                         </div>
                         <div id="doneTasks" class="tasks-container"></div>
                     </div>
@@ -165,3 +170,5 @@
 </body>
 
 </html>
+
+

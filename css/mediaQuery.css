@@ -217,18 +217,12 @@
 }
 
 /* Login & Sign-Up */
-
-
 .arrow_signUp {
   margin-left: -60px;
 }
 
 @media (max-width: 1200px) {
   /* sign-up */
-  .destop-login {
-    display: none;
-  }
-
   .join-logo {
     background-color: #2A3647;
   }
