@@ -1,3 +1,5 @@
+const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
+
 // Fügt einen neuen Benutzer hinzu, überprüft E-Mail und zeigt Fehler an
 async function addUser() {
     document.getElementById('mailError').classList.add('hidden');
@@ -7,13 +9,28 @@ async function addUser() {
 
 // Überprüft, ob die eingegebene E-Mail bereits in der Datenbank existiert
 async function existingMailSignUp() {
-    users = Object.entries(await loadData('users'));
+    const users = Object.entries(await loadUsers());
     let email = document.getElementById('email').value.toLowerCase();
     let user = users.find(u => u[1].mail == email);            
     if (user === undefined) {  
         matchPassword();
     } else {
         document.getElementById('mailError').classList.remove('hidden');  
+    }
+}
+
+async function loadUsers() {
+    try {
+        const response = await fetch(`${base_url}/users.json`);
+        const users = await response.json();
+
+        // Erstelle ein Array von Kontakten
+        const contactsArray = Object.entries(users).map(([userId, userData]) => ({ id: userId, name: userData.name }));
+        console.log(contactsArray);
+        return contactsArray;        
+    } catch (error) {
+        console.error("Fehler beim Laden der Kontakte:", error);
+        return [];
     }
 }
 
@@ -25,14 +42,82 @@ async function matchPassword() {
         document.getElementById('singupError').classList.remove('hidden');        
         document.getElementById('confirmPassword').classList.add('input-border');
     } else {
-        let name = document.getElementById('name');
-        let email = document.getElementById('email');
-        let password = document.getElementById('password');
-        let colorAllocation = getRandomItem(colors);
-        let firstLetters = getContactsInitials(name.value);
-        await postData('users', { name: name.value, mail: email.value, password: password.value });
-        await postData(`contacts`, { name: capitalizeFirstLetters(name.value), mail: email.value, phone: '', color: colorAllocation, letters: firstLetters });
+        createContact();
+        // let name = document.getElementById('name');
+        // let email = document.getElementById('email');
+        // let password = document.getElementById('password');
+        // let colorAllocation = getRandomItem(colors);
+        // let firstLetters = getContactsInitials(name.value);
+        // await postData('users', { name: name.value, mail: email.value, password: password.value });
+        // await postData(`contacts`, { name: capitalizeFirstLetters(name.value), mail: email.value, phone: '', color: colorAllocation, letters: firstLetters });
+        // getLoggedIn();
         successful();
+    }
+}
+
+async function createContact() {
+    let contact = {
+        name: takeName(),
+        mail: takeMail(),
+        // phone: takePhone(),
+        password: takePassword(),
+        // color: getColor()
+    }
+    console.log("Contact to be sent:", contact);
+    await getLoggedIn();
+    await postData(contact);
+    // clearSignUpForm(); // Hier wird das Formular geleert
+    // showContactAddedOverlay();
+}
+
+function takeName() {
+    let name = document.getElementById('name');
+    return name.value;
+}
+
+function takeMail() {
+    let mail = document.getElementById('email');
+    return mail.value;
+}
+
+function takePassword() {
+    let password = document.getElementById('password');
+    return password.value;
+}
+
+// function getColor() {
+//     
+// }
+
+async function postData(contact) {
+    try {
+        let response = await fetch(base_url + "/users/" + ".json",{
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(contact)
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+    } catch (error) {
+        console.error("Error posting data:", error);
+    }
+}
+
+async function getLoggedIn() {
+    let name = takeName();
+    console.log(name);
+    try {
+        let response = await fetch(base_url + "/loggedIn/" + ".json",{
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ name: name })
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+    } catch (error) {
+        console.error("Error Guest:", error);
     }
 }
 
@@ -44,7 +129,7 @@ function successful() {
     successMessage.classList.remove('hidden');
     successMessage.classList.add('show');
     setTimeout(() => {
-        window.location.href = './index.html';
+        // window.location.href = './summary.html';
     }, 1500);
 }
 

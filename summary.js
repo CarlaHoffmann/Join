@@ -108,8 +108,7 @@ function countTasksOnBoard() {
     let todo = parseInt(document.getElementById('todo-counter').innerHTML);
     let progress = parseInt(document.getElementById('in-progress-counter').innerHTML);
     let feedback = parseInt(document.getElementById('feedback-awaiting-counter').innerHTML);
-    let done = parseInt(document.getElementById('done-counter').innerHTML);
-    let totalTasks = todo + progress + feedback + done;
+    let totalTasks = todo + progress + feedback;
     let tasksCounter = document.getElementById('tasks-counter');
     tasksCounter.innerHTML = totalTasks;
 }

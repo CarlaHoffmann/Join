@@ -102,8 +102,6 @@ async function logOut() {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        // let result = await response.json();
-        // console.log("Guest logged out:", result);
     } catch (error) {
         // console.error("Error Guest:", error);
     }
