@@ -1,3 +1,26 @@
+// function animationWindow() {
+//     const overlay = document.getElementById('overlay');
+//     const animatedLogo = document.getElementById('animatedLogo');
+//     const headerLogo = document.getElementById('headerLogo');
+
+//     // Prüfen, ob die Animation bereits abgespielt wurde
+//     if (!sessionStorage.getItem('animationPlayed')) {
+//         // Starten der Animation
+//         animatedLogo.addEventListener('animationend', () => {
+//             overlay.style.display = 'none'; // Verstecke Overlay
+//             headerLogo.src = animatedLogo.src; // Logo in den Header transferieren
+//             headerLogo.style.display = 'block'; // Header-Logo sichtbar machen
+//         });
+
+//         // Markieren, dass die Animation abgespielt wurde
+//         sessionStorage.setItem('animationPlayed', 'true');
+//     } else {
+//         // Wenn die Animation bereits abgespielt wurde
+//         overlay.style.display = 'none'; // Verstecke das Overlay
+//         headerLogo.src = animatedLogo.src; // Header-Logo setzen
+//         headerLogo.style.display = 'block'; // Header-Logo sichtbar machen
+//     }
+// }
 function animationWindow() {
     const overlay = document.getElementById('overlay');
     const animatedLogo = document.getElementById('animatedLogo');
@@ -10,10 +33,8 @@ function animationWindow() {
             overlay.style.display = 'none'; // Verstecke Overlay
             headerLogo.src = animatedLogo.src; // Logo in den Header transferieren
             headerLogo.style.display = 'block'; // Header-Logo sichtbar machen
+            sessionStorage.setItem('animationPlayed', 'true');
         });
-
-        // Markieren, dass die Animation abgespielt wurde
-        sessionStorage.setItem('animationPlayed', 'true');
     } else {
         // Wenn die Animation bereits abgespielt wurde
         overlay.style.display = 'none'; // Verstecke das Overlay
@@ -25,31 +46,86 @@ function animationWindow() {
 // Aufrufen der Funktion beim Laden der Seite
 window.onload = animationWindow;
 
+const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
+// async function existingMailLogIn() {
+//     const users = Object.entries(await loadUsers());
+//     let email = document.getElementById('email').value.toLowerCase();
+//     let password = document.getElementById('password');
+//     let user = users.find(u => u[1].mail == email); //prüfe ob email in users.mail enthalten ist
+//     // console.log(user); 
+//     if(user.contains(email)) {
+//        //wenn die mail adresse vorhanden ist, prüfe ob die mail mit index x und das password von password.value mit dem von index x übereinstimmen
+//     }     
+//     if(user === undefined){  
+//         document.getElementById('loginErrorPassword').classList.remove('hidden');
+//     } else {    
+//         login();
+//     }
+// }
 async function existingMailLogIn() {
-    users = Object.entries(await loadData('users'));
-    let email = document.getElementById('email').value.toLowerCase();
-    let user = users.find(u => u[1].mail == email);            
-    if(user === undefined){  
-        document.getElementById('loginErrorPassword').classList.remove('hidden');
-    } else {    
-        login();
+    try {
+        const users = await loadUsers();
+        let email = document.getElementById('email').value.toLowerCase();
+        let password = document.getElementById('password').value;
+
+        // Finde den Benutzer basierend auf der E-Mail
+        let user = users.find(u => u.email === email);
+
+        if (user) {
+            // Prüfe, ob das Passwort übereinstimmt
+            if (user.password === password) {
+                let name = user.name;
+                await saveUser(name, email);
+                window.location.href = './summary.html';
+            } else {
+                document.getElementById('loginErrorPassword').classList.remove('hidden');
+                document.getElementById('passwordButten').classList.add('input-border');
+            }
+        } else {
+            document.getElementById('loginErrorPassword').classList.remove('hidden');
+        }
+    } catch (error) {
+        console.error("Fehler beim Anmelden:", error);
     }
 }
 
-async function login() {
-    let email = document.getElementById('email').value.toLowerCase();
-    let password = document.getElementById('password').value;
-    let user = users.find(u => u[1].mail == email && u[1].password == password);
-    if (user) {
-        saveUser(email);
-        window.location.href = './summary.html';
-    } else {
-        document.getElementById('loginError').classList.remove('hidden');
-        document.getElementById('passwordButten').classList.add('input-border');
+async function loadUsers() {
+    try {
+        const response = await fetch(`${log_base_url}/users.json`);
+        const users = await response.json();
+
+        // Erstelle ein Array von Benutzerobjekten
+        const usersArray = Object.values(users).map(userData => ({ name: userData.name, email: userData.mail, password: userData.password }));
+        console.log(usersArray);
+        return usersArray;
+    } catch (error) {
+        console.error("Fehler beim Laden der Benutzer:", error);
+        return [];
     }
 }
 
+async function saveUser(name, email) {
+    try {
+        let response = await fetch(base_url + "/loggedIn/" + ".json",{
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ name: name })
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        let result = await response.json();
+        console.log("Guest logged in:", result);
+        // Zum Beispiel mit localStorage
+        localStorage.setItem('currentUser', email);
+    } catch (error) {
+        console.error("Fehler beim Speichern des Benutzers:", error);
+    }
+}
+
+
+// Funktion gehört zum Board !!!!
 function checkUser() {
     let userMail = localStorage.getItem('userMail');
     let previousPage = document.referrer;
@@ -63,21 +139,21 @@ function checkUser() {
     } 
 }
 
-function saveUser(email) {
-    let userMail = JSON.stringify(email);
-    localStorage.setItem("userMail", userMail);
-}
+// function saveUser(email) {
+//     let userMail = JSON.stringify(email);
+//     localStorage.setItem("userMail", userMail);
+// }
 
-function logout(){
-    localStorage.removeItem('userMail');
-    localStorage.removeItem('logStatus');
-}
+// function logout(){
+//     localStorage.removeItem('userMail');
+//     localStorage.removeItem('logStatus');
+// }
 
 // function guestLogin() {
 //     saveUser('guest@mail.com');
 //     window.location.href = './summary.html';
 // }
-const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
+// const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 async function guestLogin() {
     try {
         let response = await fetch(log_base_url + "/loggedIn/" + ".json",{

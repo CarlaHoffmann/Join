@@ -1,4 +1,4 @@
-const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
+const task_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
 let selectedContacts = [];
 
@@ -52,7 +52,7 @@ async function openAssigned() {
 async function loadContacts() {
     try {
         const loggedInUser = await getUser(); // Hole den eingeloggten User
-        const response = await fetch(`${base_url}/users.json`);
+        const response = await fetch(`${task_base_url}/users.json`);
         const users = await response.json();
 
         // Erstelle ein Array von Kontakten
@@ -81,7 +81,7 @@ async function loadContacts() {
 // Funktion zum Abrufen des aktuell eingeloggten Benutzers
 async function getUser() {
     try {
-        const response = await fetch(`${base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
+        const response = await fetch(`${task_base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
         const loggedInData = await response.json();
 
         return { name: loggedInData.name }; // Rückgabe des Namens des eingeloggten Users
@@ -108,9 +108,6 @@ function toggleContact(event) {
     } else {
         selectedContacts = selectedContacts.filter(name => name !== contactName);
     }
-    
-    // updateSelectedContacts();
-    // console.log("selectedContacts aktualisiert:", selectedContacts);
 }
 
 async function updateSelectedContacts() {
@@ -137,12 +134,12 @@ async function updateSelectedContacts() {
 
 async function getContactColor(contactName) {
     try {
-        const response = await fetch(`${base_url}/users.json`);
+        const response = await fetch(`${task_base_url}/users.json`);
         const users = await response.json();
         
         for (let userId in users) {
             if (users[userId].name === contactName) {
-                const colorResponse = await fetch(`${base_url}/users/${userId}/color.json`);
+                const colorResponse = await fetch(`${task_base_url}/users/${userId}/color.json`);
                 return await colorResponse.json();
             }
         }
