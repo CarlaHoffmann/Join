@@ -11,13 +11,61 @@ async function initSummary() {
     await getGreetingName();
 }
 
-// async function countToDo() {
-//     let response = await fetch(base_url + "/tasks/toDo" + ".json");
-//     let responseToJson = await response.json();
-//     let count = Object.keys(responseToJson).length;
-//     let todoCounter = document.getElementById('todo-counter');
-//     todoCounter.innerHTML = await count;
-// }
+async function getGreetingOverlay() {
+    let greeting = document.getElementsByClassName('greeting')[0];
+    let greetName = document.getElementsByClassName('greet-name')[0];
+    let overlay = document.getElementById('greeting-overlay');
+
+    // Prüfe, ob die Weiterleitung von den richtigen Seiten erfolgte
+    let referrer = document.referrer;
+    if (referrer && (referrer.includes('signUp.html') || referrer.includes('logIn.html'))) {
+        try {
+            const response = await fetch(`${base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
+            const loggedInData = await response.json();
+            let user = loggedInData.name;
+
+            if(user === 'Guest') {
+                greeting.innerHTML = 'Good morning!';
+                greetName.innerHTML = '';
+            } else {
+                greetName.innerHTML = loggedInData.name; // Ausgabe des Namens des eingeloggten Users
+            }
+
+            // Zeige das Overlay an, wenn die Bildschirmbreite kleiner oder gleich 1275px ist
+            if (window.matchMedia("(max-width: 1275px)").matches) {
+                overlay.classList.remove('hidden');
+                overlay.classList.add('show');
+
+                // Verstecke das Overlay nach 3 Sekunden
+                setTimeout(function() {
+                    overlay.classList.remove('show');
+                    overlay.classList.add('hidden');
+                }, 3000);
+            }
+        } catch (error) {
+            console.error("Fehler beim Abrufen des Benutzers:", error);
+        }
+    }
+}
+
+async function getGreetingName() {
+    let greeting = document.getElementsByClassName('greeting');
+    let greetName = document.getElementsByClassName('greet-name');
+    try {
+        const response = await fetch(`${base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
+        const loggedInData = await response.json();
+        let user = loggedInData.name;
+        if(user === 'Guest') {
+            greeting.innerHTML = 'Good morning!';
+            greetName.innerHTML = '';
+        } else {
+            greetName.innerHTML = loggedInData.name; // Ausgabe des Namens des eingeloggten Users
+        }
+    } catch (error) {
+        console.error("Fehler beim Abrufen des Benutzers:", error);
+    }
+}
+
 async function countToDo() {
     let todoCounter = document.getElementById('todo-counter');
     try {
@@ -35,14 +83,6 @@ async function countToDo() {
     }
 }
 
-// async function countTasksInProgress() {
-//     let response = await fetch(base_url + "/tasks/inProgress" + ".json");
-//     let responseToJson = await response.json();
-//     let count = Object.keys(responseToJson).length;
-    
-//     let progressCounter = document.getElementById('in-progress-counter');
-//     progressCounter.innerHTML = await count;
-// }
 async function countTasksInProgress() {
     let progressCounter = document.getElementById('in-progress-counter');
     try {
@@ -60,13 +100,6 @@ async function countTasksInProgress() {
     }
 }
 
-// async function countAwaitingFeedback() {
-//     let response = await fetch(base_url + "/tasks/feedback" + ".json");
-//     let responseToJson = await response.json();
-//     let count = Object.keys(responseToJson).length;
-//     let feedbackCounter = document.getElementById('feedback-awaiting-counter');
-//     feedbackCounter.innerHTML = await count;
-// }
 async function countAwaitingFeedback() {
     let feedbackCounter = document.getElementById('feedback-awaiting-counter');
     try {
@@ -83,13 +116,6 @@ async function countAwaitingFeedback() {
     }
 }
 
-// async function countDone() {
-//     let response = await fetch(base_url + "/tasks/done" + ".json");
-//     let responseToJson = await response.json();
-//     let count = Object.keys(responseToJson).length;
-//     let doneCounter = document.getElementById('done-counter');
-//     doneCounter.innerHTML = await count;
-// }
 async function countDone() {
     let doneCounter = document.getElementById('done-counter');
     try {
@@ -134,15 +160,6 @@ async function findHighestPriorityTask() {
     }
 }
 
-// async function fetchAllTasks(categories) {
-//     let allTasks = [];
-//     for (const category of categories) {
-//         const response = await fetch(`${base_url}/tasks/${category}.json`);
-//         const tasks = await response.json();
-//         allTasks = allTasks.concat(Object.values(tasks));
-//     }
-//     return allTasks;
-// }
 async function fetchAllTasks(categories) {
     let allTasks = [];
     for (const category of categories) {
@@ -274,78 +291,6 @@ function formatDate(date) {
 
 function goToBoard() {
     window.location.href = 'board.html';
-}
-
-async function getGreetingName() {
-    let greeting = document.getElementsByClassName('greeting');
-    let greetName = document.getElementsByClassName('greet-name');
-    try {
-        const response = await fetch(`${base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
-        const loggedInData = await response.json();
-        let user = loggedInData.name;
-        if(user === 'Guest') {
-            greeting.innerHTML = 'Good morning!';
-            greetName.innerHTML = '';
-        } else {
-            greetName.innerHTML = loggedInData.name; // Ausgabe des Namens des eingeloggten Users
-        }
-    } catch (error) {
-        console.error("Fehler beim Abrufen des Benutzers:", error);
-    }
-}
-
-// async function getGreetingOverlay() {
-//     let greeting = document.getElementsByClassName('greeting');
-//     let greetName = document.getElementsByClassName('greet-name');
-//     try {
-//         const response = await fetch(`${base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
-//         const loggedInData = await response.json();
-//         let user = loggedInData.name;
-//         if(user === 'Guest') {
-//             greeting.innerHTML = 'Good morning!';
-//             greetName.innerHTML = '';
-//         } else {
-//             greetName.innerHTML = loggedInData.name; // Ausgabe des Namens des eingeloggten Users
-//         }
-//     } catch (error) {
-//         console.error("Fehler beim Abrufen des Benutzers:", error);
-//     }
-// }
-async function getGreetingOverlay() {
-    let greeting = document.getElementsByClassName('greeting')[0];
-    let greetName = document.getElementsByClassName('greet-name')[0];
-    let overlay = document.getElementById('greeting-overlay');
-
-    // Prüfe, ob die Weiterleitung von den richtigen Seiten erfolgte
-    let referrer = document.referrer;
-    if (referrer && (referrer.includes('signUp.html') || referrer.includes('logIn.html'))) {
-        try {
-            const response = await fetch(`${base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
-            const loggedInData = await response.json();
-            let user = loggedInData.name;
-
-            if(user === 'Guest') {
-                greeting.innerHTML = 'Good morning!';
-                greetName.innerHTML = '';
-            } else {
-                greetName.innerHTML = loggedInData.name; // Ausgabe des Namens des eingeloggten Users
-            }
-
-            // Zeige das Overlay an, wenn die Bildschirmbreite kleiner oder gleich 1275px ist
-            if (window.matchMedia("(max-width: 1275px)").matches) {
-                overlay.classList.remove('hidden');
-                overlay.classList.add('show');
-
-                // Verstecke das Overlay nach 3 Sekunden
-                setTimeout(function() {
-                    overlay.classList.remove('show');
-                    overlay.classList.add('hidden');
-                }, 3000);
-            }
-        } catch (error) {
-            console.error("Fehler beim Abrufen des Benutzers:", error);
-        }
-    }
 }
 
 document.addEventListener('DOMContentLoaded', initSummary);
