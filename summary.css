@@ -244,24 +244,46 @@ body {
 }
 
 
-#greeting-box {
+.greeting-box {
     display: flex;
     flex-direction: column;
     gap: 3px;
 }
 
-#greeting {
+.greeting {
     font-size: 47px;
 }
 
-#greet-name {
+.greet-name {
     font-size: 64px;
     font-weight: 700;
     color: #29ABE2;
 }
 
-@media(max-width: 1375px) {
-    #greeting-box {
+#greeting-overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F6F7F8;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#greeting-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+@media(max-width: 1275px) {
+    .greeting-box {
         display: none;
     }
 
@@ -269,6 +291,16 @@ body {
         padding-top: 0px;
         padding-left: 0px;
     }
+
+    #greeting-overlay.show {
+        /* opacity: 1;
+        visibility: visible; */
+        display: flex;
+    }
+
+    /* #greeting-overlay.hidden {
+        display: none;
+    } */
 }
 
 @media(max-width: 840px) {
