@@ -44,7 +44,7 @@ async function countToDo() {
 async function countTasksInProgress() {
     let progressCounter = document.getElementById('in-progress-counter');
     try {
-        let response = await fetch(base_url + "/tasks/inProgress" + ".json");
+        let response = await fetch(base_url + "/tasks/progress" + ".json");
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -115,7 +115,7 @@ function countTasksOnBoard() {
 
 async function findHighestPriorityTask() {
     try {
-        const categories = ['toDo', 'inProgress', 'feedback'];
+        const categories = ['toDo', 'progress', 'feedback'];
         const allTasks = await fetchAllTasks(categories);
         const { highestPriorityTasks, earliestDate } = findHighestPriorityAndEarliestDate(allTasks);
 

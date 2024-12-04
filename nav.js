@@ -73,7 +73,6 @@ async function getUser() {
     try {
         const response = await fetch(`${nav_base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
         const loggedInData = await response.json();
-        console.log(loggedInData);
         return { name: loggedInData.name }; // Rückgabe des Namens des eingeloggten Users
     } catch (error) {
         console.error("Fehler beim Abrufen des Benutzers:", error);
