@@ -63,7 +63,7 @@ function returnContactTemplate(key, name, email, phone, color){
 // }
 function showContact(key, name, email, phone, color) {
     const contactDetails = document.getElementById('contactDetails');
-
+    
     // Inhalt setzen
     contactDetails.innerHTML = returnContactTemplate(key, name, email, phone, color);
 

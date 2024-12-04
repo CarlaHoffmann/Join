@@ -1,12 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body{
-    width:100%;
-    height:100%;
-}
 h2{
     font-size:61px;
 }
@@ -16,9 +7,12 @@ h3{
 #contactContent{
     display:flex;
     position:absolute;
-    left:232px;
-    top:80px;
+    right: 0;
+    bottom: 0;
+    height: calc(100vh - 96px);
+    width: calc(100vw - 232px);
 }
+
 #addContactButton{
     margin-top:22.5px;
     height:56px;
@@ -36,6 +30,10 @@ h3{
     font-size:21px;
 }
 
+/* #addContactBox {
+    border-radius: 30px;
+} */
+
 #addContactBox, #editContactBox{
     width:80%;
     height:50%;
@@ -48,8 +46,9 @@ h3{
     display:flex;
     justify-content: center;
     align-items: center;
-    /*border:15px solid transparent;*/
-    border-radius:15px;
+    border: 5px solid black;
+    /* border-radius:15px; */
+    border-radius: 30px;
 }
 
 #addContactBox .close-button, #editContactBox .close-button{
@@ -91,6 +90,7 @@ h3{
     align-items:center;
     gap:8px;
 }
+
 #contacts {
     width:456px;
     box-shadow: 4px 0px 6px 0px #00000014;
@@ -258,8 +258,8 @@ hr {
 }
 @media (max-width: 1024px) {
     #contacts {
-        width: calc( 100vw - (232px + 17px) );
-        height: calc(100vh - (80px + 80px));
+        width: calc( 100vw - 232px);
+        height: calc(100vh - 96px);
     }
     #contactView{
         display:none;
@@ -268,13 +268,18 @@ hr {
 @media (max-width: 680px){
     #contactContent{
         left:0;
+        bottom: 80px;
         width:100vw;
+        height: calc(100vh - 160px);
         display:flex;
         justify-content:center;
     }
+
     #contacts{
-        width:100vw;
+        width:100%;
+        height: 100%;
     }
+
     .contact{
         width:90%;
     }
