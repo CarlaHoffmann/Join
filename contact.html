@@ -1,476 +1,71 @@
 <!doctype>
 <html>
 <head>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body{
-            width:100%;
-            height:100%;
-        }
-        h2{
-            font-size:61px;
-        }
-        h3{
-            font-size:27px;
-        }
-        #contactContent{
-            display:flex;
-            position:absolute;
-            left:232px;
-            top:80px;
-        }
-        #addContactButton{
-            margin-top:22.5px;
-            height:56px;
-            width:352px;
-            background: #2A3647;
-            color:white;
-            border-radius:10px;
-            border:1px solid #2A3647;
-            cursor:pointer;
-            margin-bottom:15px;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            gap:16px;
-            font-size:21px;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <link rel="stylesheet" href="contact.css">
 
-        #addContactBox, #editContactBox{
-            width:80%;
-            height:50%;
-            background:white;
-            z-index:100;
-            position:absolute;
-            top:25%;
-            width:80%;
-            right:10%;
-            display:flex;
-            justify-content: center;
-            align-items: center;
-            /*border:15px solid transparent;*/
-            border-radius:15px;
-        }
-
-        #addContactBox .close-button, #editContactBox .close-button{
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: transparent;
-            border: none;
-            font-size: 24px;
-            color: #2A3647;
-            cursor: pointer;
-            z-index: 101;
-            font-weight: bold;
-            line-height: 1;
-        }
-
-        #addContactBox div, #editContactBox div{
-            height:calc(100%);
-            width:100%;
-            background:#2A3647;
-            flex-direction:column;
-            display:flex;
-            justify-content: center;
-            align-items: flex-start;
-            color:white;
-            padding-left:48px;
-        }
-        #addContactBox div h2, #editContactBox div h2{
-            font-size:61px;
-        }
-        #addContactBox form, #editContactBox form{
-            height:calc(100%);
-            background:white;
-            border:1px solid black;
-            width:67.67%;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            gap:8px;
-        }
-        #contacts {
-            width:456px;
-            box-shadow: 4px 0px 6px 0px #00000014;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-        }
-        
-        #contactList {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width:100%;
-        }
-        
-        #contactList h3 {
-            font-size: 20px;
-        }
-        
-        hr {
-            width:100%;
-            height:0px;
-            border: 1px solid #D1D1D1;
-            border-radius: 2px;
-        }
-        .contact {
-            height: 78px;
-            width:352px;
-            display: flex;
-            cursor:pointer;
-            gap: 35px;
-        }
-        .contact p{
-            color: #007CEE;
-            display:flex;
-        }
-        .contact div{
-            display:flex;
-            flex-direction:column;
-        }
-        
-        .circle {
-            height: 42px;
-            width: 42px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgb(70, 47, 138);
-            border: 2px solid white;
-            border-radius: 100%;
-            color: white;
-            margin-right:10px;
-        }
-
-        #contactViewHeader{
-            display:flex;
-            gap:30px;
-            align-items:center;
-            justify-content:center;
-        }
-        
-        #contactView{
-            display:flex;
-            justify-content:flex-start;
-            align-items:flex-start;
-            padding-top:110px;
-            gap:30px;
-            width:calc(100vw - (232px + 456px + 17px)); /*232px Seitenleiste, 456px Kontaktliste, 17px Scrollbar*/
-            padding-left:50px;
-            flex-direction:column;
-        }
-
-        /*contact details*/
-        #contactDetails{
-            display:flex;
-            gap:20px;
-            flex-direction:column;
-        }
-
-        .contactHeader{
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            gap:54px;
-            font-size:47px;
-        }
-        .contactHeader .circle{
-            width:120px;
-            height:120px;
-            border:1px solid white;
-            color:white;
-        }
-        .contactHeader span{
-            font-size:16px;
-        }
-        .contactItemControls{
-            display:flex;
-            justify-content:flex-start;
-            align-items: center;
-            gap:8px;
-        }
-        .contactItemControls div{
-            display:flex;
-            justify-content:center;
-            align-items:center;
-        }
-        .contactFooter{
-            font-size:20px;
-        }
-        .hidden{
-            display:none !important;
-        }
-        @media (max-width: 1320px){
-            h2{
-                font-size:40px;
-            }
-            h3{
-                font-size:25.5px;
-            }
-        }
-        @media (max-width: 1220px){
-            h2{
-                font-size: 30px;
-            }
-            h3{
-                font-size: 23.5px;
-            }
-            #contactList h3{
-                font-size: 17px;
-            }
-        }
-        @media (max-width: 1220px){
-            .contactHeader{
-                flex-direction:column;
-            }
-        }
-        @media (max-width: 1160px){
-            #contactViewHeader{
-                flex-direction:column;
-            }
-            #contactViewHeader img{
-                display:none;
-            }
-        }
-        @media (max-width: 1024px) {
-            #contacts {
-                width: calc( 100vw - (232px + 17px) );
-                height: calc(100vh - (80px + 80px));
-            }
-            #contactView{
-                display:none;
-            }
-        }
-        @media (max-width: 680px){
-            #contactContent{
-                left:0;
-                width:100vw;
-                display:flex;
-                justify-content:center;
-            }
-            #contacts{
-                width:100vw;
-            }
-            .contact{
-                width:90%;
-            }
-            #addContactButton{
-                height:45px;
-                width:45px;
-                padding:3px;
-                border-radius:25.5px;
-                position:fixed;
-                right:25px;
-                bottom:80px; /*mobilenav is 80px high*/
-            }
-            #addContactButton span{
-                display:none;
-            }
-        }
-        */
-        </style>
-        <script src="./nav.js"></script>
-        <script src="returnColor.js"></script>
+    <script src="./nav.js"></script>
+    <script src="returnColor.js"></script>
 </head>
 <body">
     <header>
         <div class="nav-bar" w3-include-html="nav.html"></div>
     </header>
-        <div id="contactContent">
-            <!--add contact box-->
-            <div id="addContactBox" class="hidden">
-                <button id="closeAddContactBox" class="close-button" onclick="toggleView('addContactBox')">×</button>
-                <div>
-                    <img src="img/contact/logo.svg">
-                    <h2>Add Contact</h2>
-                    <p>Tasks are better with a team!</p>
-                </div>
-                <form method="post" id="addContactForm" action="contact.html" onsubmit="event.preventDefault(); addContact()">
-                    <input required id="name" placeholder="Name" type="text">
-                    <input required id="email" placeholder="Email" type="email">
-                    <input required id="phone" placeholder="Phone" type="text">
-                    <input type="submit">
-                    <input type="reset">
-                </form>
+    <div id="contactContent">
+        <!--add contact box-->
+        <div id="addContactBox" class="hidden">
+            <button id="closeAddContactBox" class="close-button" onclick="toggleView('addContactBox')">×</button>
+            <div>
+                <img src="img/contact/logo.svg">
+                <h2>Add Contact</h2>
+                <p>Tasks are better with a team!</p>
             </div>
-            <!--edit contact box-->
-            <div id="editContactBox" class="hidden">
-                <button id="closeEditContactBox" class="close-button" onclick="toggleView('editContactBox', '${key}', true)">×</button>
-                <div>
-                    <img src="img/contact/logo.svg">
-                    <h2>Edit Contact</h2>
-                    <p>Tasks are better with a team!</p>
-                </div>
-                <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); editContact('${editKey}');">
-                    <input required id="changedName" placeholder="Name" type="text">
-                    <input required id="changedEmail" placeholder="Email" type="email">
-                    <input required id="changedPhone" placeholder="Phone" type="text">
-                    <input type="submit">
-                    <input type="reset">
-                </form>
-            </div>
-            <div id="contacts" style="height:100vh">
-                <button id="addContactButton" onclick="toggleView('addContactBox')"><span>Add new contact</span><img src="img/contact/person_add.svg"></button>
-                <section id="contactList" style="height: 80vh; overflow-y:auto;">
-                </section>
-            </div>
-            <div id="contactView">
-                <div id="contactViewHeader"><h2>Contacts</h2><img src="img/contact/divider.svg"><h3>Better with a Team</h3></div>
-                <div id="contactDetails">
-                </div>
-            </div>
+            <form method="post" id="addContactForm" action="contact.html" onsubmit="event.preventDefault(); addContact()">
+                <input required id="name" placeholder="Name" type="text">
+                <input required id="email" placeholder="Email" type="email">
+                <input required id="phone" placeholder="Phone" type="text">
+                <input type="submit">
+                <input type="reset">
+            </form>
         </div>
-        <script src="https://www.w3schools.com/lib/w3.js"></script>
-        <script>
-        w3.includeHTML();
-        </script>
-        <script>
-
-            let editKey = null;
-
-            const base_url = 'https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app/';
-            let contactList = document.getElementById('contactList');
-            let contactDetails = document.getElementById('contactDetails');
-            let addContactButton = document.getElementById('addContactButton');
-            let addContactBox = document.getElementById('addContactBox');
-
-            function addContact(){
-                let name = document.getElementById('name').value;
-                let email = document.getElementById('email').value;
-                let phone = document.getElementById('phone').value;
-                let color = returnColor();
-                let uploadData = {
-                    'name':name,
-                    'email':email,
-                    'phone':phone,
-                    'color':color,
-                }
-                createNewContact('/users', uploadData);
-            }
-
-            function getNameInitials(name) {
-                let nameParts = name.split(' ');
-                return nameParts[0].charAt(0) + nameParts[nameParts.length - 1].charAt(0);
-            }
-
-            function returnContactTemplate(key, name, email, phone, color){
-                return `
-                    <div>
-                        <div class="contactHeader">
-                            <div style="background:${color}" class="circle">${(getNameInitials(name))}</div>
-                            <div>
-                                <p>${name}</p>
-                                <div class="contactItemControls">
-                                    <div id="editContainer" onclick="toggleView('editContactBox', '${key}', ${true})"><img src="img/contact/edit.svg"><span>Edit</span></div>
-                                    <div id="deleteContainer" onclick="deleteContact('${key}')"><img src="img/contact/delete.svg"><span>Delete</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contactFooter">
-                            <p>Contact Information</p>
-                            <b>Email</b>
-                            <p>${email}</p>
-                            <b>Phone</b>
-                            ${phone}
-                        </div>
-                    </div>
-                `;
-            }
-
-            function showContact(key, name, email, phone, color){
-                contactDetails.innerHTML = returnContactTemplate(key, name, email, phone, color);
-            }
-
-
-            async function loadContactData(){
-                
-                let response = await fetch(base_url + ".json");
-                let responseToJson = await response.json();
-                let users = await responseToJson.users;
-                let numberOfUser = Object.keys(users).length;
-                let userKeys = Object.keys(users);
-                
-                for(let i = 0; i < numberOfUser; i++){
-                    let key = userKeys[i];
-                    let user = users[key];
-                    let name = users[key].name;
-                    let mail = users[key].email;
-                    let phone = users[key].phone;
-                    let color = users[key].color;
-                    contactList.innerHTML += `
-                        <div class="contact" onclick="showContact('${key}', '${name}', '${mail}', '${phone}', '${color}')")>
-                            <div style="background:${color}" class="circle">${getNameInitials(name)}</div>
-                            <div class="contactInformation">
-                                <h3>${name}</h3>
-                            </div>
-                        </div>
-                    `;
-                }
-            }
-            
-            loadContactData();
-            
-            async function deleteContact(key){
-                const deleteLink = base_url + "users" + "/" + key;
-                const response = await fetch(deleteLink + ".json", {method:'DELETE'});
-                return await response.json();
-            }
-
-            async function createNewContact(path = "", data={}){
-                let response = await fetch(base_url + path + ".json", {
-                    method:"POST",
-                    header:{
-                        "Content-Type":"application/json",
-                    },
-                    body:JSON.stringify(data)
-                });
-                return responseToJson = await response.json();
-            }
-            
-            async function toggleView(elementId, key=null, edit=false){
-                editKey = key;
-                document.getElementById(elementId).classList.toggle('hidden');
-                if(edit){
-
-                    const editLink = base_url + "users" + "/" + editKey;
-                    let response = await fetch(editLink + ".json");
-                    let user = await response.json();
-
-                    document.getElementById('changedName').value = user.name;
-                    document.getElementById('changedEmail').value = user.email;
-                    document.getElementById('changedPhone').value = user.phone;
-                }
-            };
-            
-            async function editContact(){
-                const changedName = document.getElementById('changedName').value;
-                const changedEmail = document.getElementById('changedEmail').value;
-                const changedPhone = document.getElementById('changedPhone').value;
-                const data = {
-                    'name':changedName,
-                    'email':changedEmail,
-                    'phone':changedPhone,
-                };
-                const editLink = base_url + "users" + "/" + editKey + '.json';
-                const response = await fetch(editLink, 
-                {
-                    method:'PUT',
-                    headers: {
-                        "Content-Type":"application/json",
-                    },
-                    body: JSON.stringify(data),
-                });
-                return await response.json();
-            }
-
-        </script>
-        <script src="ipguestpassword.js"></script>
+        <!--edit contact box-->
+        <div id="editContactBox" class="hidden">
+            <button id="closeEditContactBox" class="close-button" onclick="toggleView('editContactBox', '${key}', true)">×</button>
+            <div>
+                <img src="img/contact/logo.svg">
+                <h2>Edit Contact</h2>
+                <p>Tasks are better with a team!</p>
+            </div>
+            <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); editContact('${editKey}');">
+                <input required id="changedName" placeholder="Name" type="text">
+                <input required id="changedEmail" placeholder="Email" type="email">
+                <input required id="changedPhone" placeholder="Phone" type="text">
+                <input type="submit">
+                <input type="reset">
+            </form>
+        </div>
+        <div id="contacts" style="height:100vh">
+            <button id="addContactButton" onclick="toggleView('addContactBox')"><span>Add new contact</span><img src="img/contact/person_add.svg"></button>
+            <section id="contactList" style="height: 80vh; overflow-y:auto;">
+            </section>
+        </div>
+        <div id="contactView">
+            <div id="contactViewHeader">
+                <h2>Contacts</h2>
+                <img src="img/contact/divider.svg">
+                <h3>Better with a Team</h3>
+            </div>
+            <div id="contactDetails"></div>
+        </div>
+    </div>
+    
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script>
+    w3.includeHTML();
+    </script>
+    <script src="contact.js"></script>
+    <script src="ipguestpassword.js"></script>
 </body>
 </html>
