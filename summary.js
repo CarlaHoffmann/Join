@@ -2,13 +2,13 @@ const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedataba
 
 async function initSummary() {
     await getGreetingOverlay();
+    await getGreetingName();
     await countToDo();
     await countDone();
     await countTasksInProgress();
     await countAwaitingFeedback();
     await countTasksOnBoard();
     await findHighestPriorityTask();
-    await getGreetingName();
 }
 
 async function getGreetingOverlay() {
@@ -49,8 +49,8 @@ async function getGreetingOverlay() {
 }
 
 async function getGreetingName() {
-    let greeting = document.getElementsByClassName('greeting');
-    let greetName = document.getElementsByClassName('greet-name');
+    let greeting = document.getElementsByClassName('greeting')[1];
+    let greetName = document.getElementsByClassName('greet-name')[1];
     try {
         const response = await fetch(`${base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
         const loggedInData = await response.json();

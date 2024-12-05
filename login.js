@@ -107,7 +107,7 @@ async function loadUsers() {
 
 async function saveUser(name, email) {
     try {
-        let response = await fetch(base_url + "/loggedIn/" + ".json",{
+        let response = await fetch(log_base_url + "/loggedIn/" + ".json",{
             method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ name: name })
