@@ -1,4 +1,17 @@
 
+/* Task-Karte wird geneigt */
+.task-card.dragging {
+  transform: rotate(-5deg);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: grabbing;
+}
+
+/* Standard-Zustand für Tasks */
+.task-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: grab;
+}
 
 
 #board-add-task-overlay {

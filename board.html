@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="./css/mediaQuery.css" />
     <link rel="stylesheet" href="task.css">
     <link rel="stylesheet" href="smallTaskCard.css">
-
 </head>
 
 <body class="flex_dir_c" onload="includeHTML(), loadTasks()">
@@ -30,8 +29,6 @@
     <header>
         <div class="nav-bar" w3-include-html="nav.html"></div>
     </header>
-
-
 
     <!-- Task Boxes -->
     <div class="boardAddTaskOverlay-page">
@@ -60,11 +57,8 @@
     </div>
     <!-- End Task Boxes -->
 
-
-
     <!-- Overlay -->
     <div id="task-overlay"></div>
-
 
     <!-- Board Section -->
     <div class="right_section flex_dir_c">
@@ -92,7 +86,6 @@
                             </div>
                         </div>
 
-
                         <!-- Add task Button Section -->
                         <div onclick="addTask()" class="add-task-button">
                             <p>Add task</p>
@@ -102,73 +95,62 @@
                 </div>
 
                 <div id="no-search-result" class="no-search-result d-none">
-                    <p>sorry, no task found</p>
+                    <p>Sorry, no task found</p>
                 </div>
 
-
-
                 <div class="d-flex-start">
-
                     <!-- Board Columns -->
-                    <div id="column-open" class="board-column"
-                        ondrop="moveTo('open'); removeHighlightEnd('column-open')"
-                        ondragleave="removeHighlightLeave('column-open')"
-                        ondragover="allowDrop(event); highlight('column-open')">
-
-                        <!-- To do Columns -->
-           
-                        <div id="column-open" class="board-column" ondrop="drop(event, 'toDo')" ondragover="allowDrop(event)">
-                            <h2 class="text_board_headline">To Do</h2>
-                            <div id="openTasks" class="tasks-container"></div>
-                        </div>
-                        
-
-                        <div id="openTasks" class="tasks-container"></div>
+                    <div id="column-toDo" class="board-column"
+                        ondrop="drop(event, 'toDo'); removeHighlightEnd('column-toDo')"
+                        ondragleave="removeHighlightLeave('column-toDo')"
+                        ondragover="allowDrop(event); highlight('column-toDo')">
+                        <h2 class="text_board_headline">To Do</h2>
+                        <div id="toDoTasks" class="tasks-container"></div>
                     </div>
 
-                    <div id="column-inProgress" class="board-column"
-                        ondrop="moveTo('in progress'); removeHighlightEnd('column-inProgress')"
-                        ondragleave="removeHighlightLeave('column-inProgress')"
-                        ondragover="allowDrop(event); highlight('column-inProgress')">
-                        <!-- In progress Columns -->
-                        <div id="column-inProgress" class="board-column" ondrop="drop(event, 'progress')" ondragover="allowDrop(event)">
-                            <h2 class="text_board_headline">In Progress</h2>
-                            <div id="inProgressTasks" class="tasks-container"></div>
-                        </div>
-
-                        <div id="inProgressTasks" class="tasks-container"></div>
+                    <div id="column-progress" class="board-column"
+                        ondrop="drop(event, 'progress'); removeHighlightEnd('column-progress')"
+                        ondragleave="removeHighlightLeave('column-progress')"
+                        ondragover="allowDrop(event); highlight('column-progress')">
+                        <h2 class="text_board_headline">In Progress</h2>
+                        <div id="progressTasks" class="tasks-container"></div>
                     </div>
 
-                    <div id="column-awaitFeedback" class="board-column"
-                        ondrop="moveTo('await feedback'); removeHighlightEnd('column-awaitFeedback')"
-                        ondragleave="removeHighlightLeave('column-awaitFeedback')"
-                        ondragover="allowDrop(event); highlight('column-awaitFeedback')">
-                        <!-- Await Feedback Columns -->
-                        <div id="column-awaitFeedback" class="board-column" ondrop="drop(event, 'feedback')" ondragover="allowDrop(event)">
-                            <h2 class="text_board_headline">Await Feedback</h2>
-                            <div id="awaitFeedbackTasks" class="tasks-container"></div>
-                        </div>
-                        <div id="awaitFeedbackTasks" class="tasks-container"></div>
+                    <div id="column-feedback" class="board-column"
+                        ondrop="drop(event, 'feedback'); removeHighlightEnd('column-feedback')"
+                        ondragleave="removeHighlightLeave('column-feedback')"
+                        ondragover="allowDrop(event); highlight('column-feedback')">
+                        <h2 class="text_board_headline">Await Feedback</h2>
+                        <div id="feedbackTasks" class="tasks-container"></div>
                     </div>
 
                     <div id="column-done" class="board-column"
-                        ondrop="moveTo('done'); removeHighlightEnd('column-done')"
+                        ondrop="drop(event, 'done'); removeHighlightEnd('column-done')"
                         ondragleave="removeHighlightLeave('column-done')"
                         ondragover="allowDrop(event); highlight('column-done')">
-                        <!-- Done Columns -->
-                        <div id="column-done" class="board-column" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
-                            <h2 class="text_board_headline">Done</h2>
-                            <div id="doneTasks" class="tasks-container"></div>
-                        </div>
+                        <h2 class="text_board_headline">Done</h2>
                         <div id="doneTasks" class="tasks-container"></div>
                     </div>
                 </div>
             </div>
         </section>
     </div>
-    </div>
 </body>
 
 </html>
 
 
+
+
+
+<div id="column-open" class="board-column" ondrop="drop(event, 'toDo')" ondragover="allowDrop(event)">
+    <h2 class="text_board_headline">To Do</h2>
+    <div id="openTasks" class="tasks-container"></div>
+</div>
+<div id="openTasks" class="tasks-container"></div>
+</div>
+
+<div id="column-inProgress" class="board-column"
+ondrop="moveTo('in progress'); removeHighlightEnd('column-inProgress')"
+ondragleave="removeHighlightLeave('column-inProgress')"
+ondragover="allowDrop(event); highlight('column-inProgress')">

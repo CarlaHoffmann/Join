@@ -1,0 +1,87 @@
+
+
+{
+    "tasks": {
+      "toDo": {
+        "task1": {
+          "title": "Design Landing Page",
+          "description": "Create a user-friendly landing page",
+          "category": "User Story",
+          "contacts": {
+            "0": "AS",
+            "1": "DE"
+          },
+          "date": "2024-12-10",
+          "prio": "1",
+          "subtasks": {
+            "0": "Set up layout",
+            "1": "Add responsive design"
+          }
+        },
+        "task2": {
+          "title": "Set up Firebase",
+          "description": "Configure Firebase Realtime Database for the project",
+          "category": "Technical Task",
+          "contacts": {
+            "0": "EF"
+          },
+          "date": "2024-12-12",
+          "prio": "2",
+          "subtasks": {
+            "0": "Create database structure",
+            "1": "Integrate with front-end"
+          }
+        }
+      },
+      "progress": {
+        "task3": {
+          "title": "Backend API",
+          "description": "Develop REST API for user authentication",
+          "category": "Backend Task",
+          "contacts": {
+            "0": "GH"
+          },
+          "date": "2024-12-08",
+          "prio": "1",
+          "subtasks": {
+            "0": "Set up Node.js server",
+            "1": "Add user login functionality"
+          }
+        }
+      },
+      "feedback": {
+        "task4": {
+          "title": "UI Feedback",
+          "description": "Incorporate feedback from user testing",
+          "category": "Design Task",
+          "contacts": {
+            "0": "AS",
+            "1": "EF"
+          },
+          "date": "2024-12-15",
+          "prio": "3",
+          "subtasks": {
+            "0": "Improve button styles",
+            "1": "Update color palette"
+          }
+        }
+      },
+      "done": {
+        "task5": {
+          "title": "Setup Project",
+          "description": "Initialize repository and set up basic project structure",
+          "category": "Setup",
+          "contacts": {
+            "0": "DE"
+          },
+          "date": "2024-12-01",
+          "prio": "2",
+          "subtasks": {
+            "0": "Initialize Git repository",
+            "1": "Create basic folder structure"
+          }
+        }
+      }
+    }
+  }
+  

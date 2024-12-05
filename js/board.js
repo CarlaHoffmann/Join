@@ -230,8 +230,6 @@
 //   }
 // }
 
-
-
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app";
 
 async function loadTasks() {
@@ -241,115 +239,64 @@ async function loadTasks() {
         await loadAwaitFeedback();
         await loadDone();
     } catch (error) {
-        console.error("Fehler beim Laden der Tasks:", error);
+        console.error("Error loading tasks:", error);
     }
 }
 
 async function loadToDo() {
-    try {
-        const url = `${base_url}/tasks/toDo.json`;
-        const response = await fetch(url);
-
-        if (!response.ok) {
-            throw new Error(`HTTP-Error: ${response.status}`);
-        }
-
-        const toDo = await response.json();
-        const toDoArray = processTasks(toDo);
-        displayTasks(toDoArray, 'openTasks');
-    } catch (error) {
-        console.error("Fehler beim Laden der ToDo-Tasks:", error);
-    }
+    await loadTaskData('toDo', 'toDoTasks');
 }
 
 async function loadInProgress() {
-    try {
-        const url = `${base_url}/tasks/progress.json`;
-        const response = await fetch(url);
-
-        if (!response.ok) {
-            throw new Error(`HTTP-Error: ${response.status}`);
-        }
-
-        const progress = await response.json();
-        const progressArray = processTasks(progress);
-        displayTasks(progressArray, 'inProgressTasks');
-    } catch (error) {
-        console.error("Fehler beim Laden der InProgress-Tasks:", error);
-    }
+    await loadTaskData('progress', 'progressTasks');
 }
 
 async function loadAwaitFeedback() {
-    try {
-        const url = `${base_url}/tasks/feedback.json`;
-        const response = await fetch(url);
-
-        if (!response.ok) {
-            throw new Error(`HTTP-Error: ${response.status}`);
-        }
-
-        const feedback = await response.json();
-        const feedbackArray = processTasks(feedback);
-        displayTasks(feedbackArray, 'awaitFeedbackTasks');
-    } catch (error) {
-        console.error("Fehler beim Laden der Feedback-Tasks:", error);
-    }
+    await loadTaskData('feedback', 'feedbackTasks');
 }
 
 async function loadDone() {
+    await loadTaskData('done', 'doneTasks');
+}
+
+async function loadTaskData(status, containerId) {
     try {
-        const url = `${base_url}/tasks/done.json`;
+        const url = `${base_url}/tasks/${status}.json`;
         const response = await fetch(url);
 
         if (!response.ok) {
             throw new Error(`HTTP-Error: ${response.status}`);
         }
 
-        const done = await response.json();
-        const doneArray = processTasks(done);
-        displayTasks(doneArray, 'doneTasks');
+        const data = await response.json();
+        const taskArray = processTasks(data);
+        displayTasks(taskArray, containerId);
     } catch (error) {
-        console.error("Fehler beim Laden der Done-Tasks:", error);
+        console.error(`Error loading ${status} tasks:`, error);
     }
 }
 
 function processTasks(tasks) {
     if (!tasks) return [];
-
-    const taskArray = [];
-
-    for (const key in tasks) {
-        if (tasks.hasOwnProperty(key)) {
-            const task = tasks[key];
-            if (!task) continue;
-
-            const taskObject = {
-                id: key,
-                title: task.title ?? '',
-                category: task.category ?? '',
-                contacts: task.contacts ? Object.values(task.contacts) : [],
-                date: task.date ?? '',
-                description: task.description ?? '',
-                prio: task.prio ?? 0,
-                subtasks: task.subtasks ? Object.values(task.subtasks) : [],
-            };
-            taskArray.push(taskObject);
-        }
-    }
-    return taskArray;
+    return Object.keys(tasks).map(key => ({
+        id: key,
+        ...tasks[key],
+        contacts: tasks[key].contacts ? Object.values(tasks[key].contacts) : [],
+        subtasks: tasks[key].subtasks ? Object.values(tasks[key].subtasks) : [],
+    }));
 }
+
 
 function displayTasks(taskArray, containerId) {
     const tasks = document.getElementById(containerId);
-    let taskHTML = '';
-
-    taskArray.forEach(task => {
+    tasks.innerHTML = taskArray.map(task => {
         const subtasksText = `${task.subtasks.length} von ${task.subtasks.length} Subtasks`;
-        const contactsHTML = task.contacts.map(contact => `<div class="member" style="background-color: #7f5af0;">${contact}</div>`).join('');
+        const contactsHTML = task.contacts.map(contact => `<div class="member">${contact}</div>`).join('');
         const prio = getPrio(task.prio);
 
-        taskHTML += `
-            <div id="task-${task.id}" class="task-card" draggable="true" ondragstart="drag(event)">
+        return `
+            <div id="task-${task.id}" class="task-card" draggable="true" 
+                ondragstart="drag(event)" ondragend="dragEnd(event)">
                 <div class="task-type">${task.category}</div>
                 <h3 class="task-title">${task.title}</h3>
                 <p class="task-description">${task.description}</p>
@@ -367,24 +314,83 @@ function displayTasks(taskArray, containerId) {
                 </div>
             </div>
         `;
-    });
-
-    tasks.innerHTML = taskHTML;
+    }).join('');
 }
 
 function getPrio(priority) {
     switch (priority) {
-        case '1':
-            return 'urgent';
-        case '2':
-            return 'medium';
-        case '3':
-            return 'low';
-        default:
-            return 'medium';
+        case '1': return 'urgent';
+        case '2': return 'medium';
+        case '3': return 'low';
+        default: return 'medium';
     }
 }
 
 
+// Drag-and-Drop Functions
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+function drag(event) {
+    event.dataTransfer.setData("taskId", event.target.id);
+}
+
+async function drop(event, newStatus) {
+    event.preventDefault();
+    const taskId = event.dataTransfer.getData("taskId");
+    const taskElement = document.getElementById(taskId);
+
+    if (!taskElement) return;
+
+    const container = document.getElementById(newStatus + "Tasks");
+    container.appendChild(taskElement);
+
+    const taskKey = taskId.replace("task-", "");
+    try {
+        const oldStatus = taskElement.parentElement.id.replace("Tasks", "");
+        const taskData = await (await fetch(`${base_url}/tasks/${oldStatus}/${taskKey}.json`)).json();
+
+        await fetch(`${base_url}/tasks/${newStatus}/${taskKey}.json`, {
+            method: "PUT",
+            body: JSON.stringify(taskData),
+        });
+
+        await fetch(`${base_url}/tasks/${oldStatus}/${taskKey}.json`, { method: "DELETE" });
+
+        console.log(`Task ${taskKey} moved from ${oldStatus} to ${newStatus}`);
+    } catch (error) {
+        console.error("Error moving task:", error);
+    }
+}
+
+// Highlight Functions
+function highlight(columnId) {
+    const column = document.getElementById(columnId);
+    if (column) {
+        column.classList.add("highlight-column");
+    }
+}
+
+function removeHighlightLeave(columnId) {
+    const column = document.getElementById(columnId);
+    if (column) {
+        column.classList.remove("highlight-column");
+    }
+}
+
+function removeHighlightEnd(columnId) {
+    removeHighlightLeave(columnId);
+}
 
 
+function drag(event) {
+    const task = event.target;
+    task.classList.add("dragging"); // Neigung aktivieren
+    event.dataTransfer.setData("taskId", task.id);
+}
+
+function dragEnd(event) {
+    const task = event.target;
+    task.classList.remove("dragging"); // Neigung entfernen
+}
