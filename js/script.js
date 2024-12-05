@@ -72,6 +72,22 @@ function changeClassToActive() {
     })
 }
 
+
+// Funktion gehört zum Board !!!!
+function checkUser() {
+    let userMail = localStorage.getItem('userMail');
+    let previousPage = document.referrer;
+    let currentPage = window.location.pathname;
+    let dependingPages = ['/privacy.html', '/legal_notice.html', '/Join/privacy.html', '/Join/legal_notice.html'];
+    if (dependingPages.includes(currentPage) && (previousPage.includes('/index.html') || previousPage.includes('/signup.html') || dependingPages.some(page => previousPage.includes(page)))) {
+        return;
+    }
+    if (userMail === null ) {
+        window.location.href = './index.html';
+    } 
+}
+//
+
 function doNotClose(event) {
     event.stopPropagation();
 }
