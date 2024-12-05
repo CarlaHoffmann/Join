@@ -272,7 +272,6 @@ function processTasks(tasks) {
     }));
 }
 
-// Funktion, um die Tasks in der HTML-Spalte anzuzeigen
 function displayTasks(taskArray, containerId) {
     const tasks = document.getElementById(containerId);
     tasks.innerHTML = taskArray.map(task => {
@@ -282,6 +281,7 @@ function displayTasks(taskArray, containerId) {
 
         return `
             <div id="task-${task.id}" class="task-card" draggable="true" 
+                onclick="openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})" 
                 ondragstart="drag(event)" ondragend="dragEnd(event)">
                 <div class="task-type">${task.category}</div>
                 <h3 class="task-title">${task.title}</h3>
@@ -302,6 +302,7 @@ function displayTasks(taskArray, containerId) {
         `;
     }).join('');
 }
+
 
 // Hilfsfunktion, um die Priorität anzuzeigen
 function getPrio(priority) {
@@ -460,3 +461,96 @@ async function saveEditedTask() {
 // Event-Listener für das Bearbeitungs-Overlay hinzufügen
 document.getElementById("edit-task-cancel").addEventListener("click", closeEditTaskOverlay);
 document.getElementById("edit-task-save").addEventListener("click", saveEditedTask);
+
+
+
+// Dynamisches Task Overlay Edit 
+function openTaskOverlay(task) {
+    const overlayContainer = document.getElementById('taskOverlayContainer');
+    
+    // Dynamisches HTML für das Overlay
+    overlayContainer.innerHTML = `
+        <div class="taskOverlay">
+            <div class="taskSelect">
+                <div class="taskContainer">${task.category}</div>
+                <div class="close" onclick="closeTaskOverlay()">
+                    <img src="assets/img/add_task/close.svg" alt="Close" />
+                </div>
+            </div>
+            <div class="headline">${task.title}</div>
+            <div>${task.description}</div>
+            <div>
+                <div class="textColor">Due date:</div>
+                <div class="dateSelect">${task.dueDate || "No date set"}</div>
+            </div>
+            <div>
+                <div class="textColor">Priority:</div>
+                <div class="dateSelect">${task.prio}</div>
+            </div>
+            <div>
+                <span class="textColor">Assigned To:</span>
+                <div class="userContainer">
+                    ${task.contacts
+                        .map(contact => `
+                            <div class="user">
+                                <div class="userButton">${contact.initials}</div>
+                                <div class="userName">${contact.name}</div>
+                            </div>
+                        `)
+                        .join('')}
+                </div>
+            </div>
+            <div>
+                <span>Subtasks:</span>
+                <div>
+                    ${task.subtasks
+                        .map(subtask => `
+                            <div>
+                                <div class="check"></div>
+                                <div>${subtask.title}</div>
+                            </div>
+                        `)
+                        .join('')}
+                </div>
+            </div>
+            <div class="deleteEditBtnContainer">
+                <button class="deletBtn" onclick="deleteTask('${task.id}')">
+                    <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- SVG PATH FOR DELETE ICON -->
+                    </svg>
+                    Delete
+                </button>
+                <div class="stroke"></div>
+                <button class="editBtn" onclick="editTask('${task.id}')">
+                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- SVG PATH FOR EDIT ICON -->
+                    </svg>
+                    Edit
+                </button>
+            </div>
+        </div>
+    `;
+
+    overlayContainer.classList.remove('d-none'); // Overlay sichtbar machen
+}
+
+
+function closeTaskOverlay() {
+    const overlayContainer = document.getElementById('taskOverlayContainer');
+    overlayContainer.classList.add('d-none');
+    overlayContainer.innerHTML = ''; // Inhalt löschen
+}
+
+
+async function deleteTask(taskId) {
+    const confirmDelete = confirm("Are you sure you want to delete this task?");
+    if (confirmDelete) {
+        try {
+            await fetch(`${base_url}/tasks/${taskId}.json`, { method: 'DELETE' });
+            closeTaskOverlay();
+            loadTasks(); // Aktualisiere das Board
+        } catch (error) {
+            console.error("Error deleting task:", error);
+        }
+    }
+}
