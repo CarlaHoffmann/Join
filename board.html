@@ -111,42 +111,46 @@
 
                 <div class="d-flex-start">
                     <!-- Board Columns -->
+                    <!-- To Do Column -->
                     <div id="column-toDo" class="board-column"
                         ondrop="drop(event, 'toDo'); removeHighlightEnd('column-toDo')"
                         ondragleave="removeHighlightLeave('column-toDo')"
                         ondragover="allowDrop(event); highlight('column-toDo')">
                         <div class="column-header">
                             <h2 class="text_board_headline">To Do</h2>
-                            <img src="/assets/img/add_task/plus button.svg" alt="Add Task Icon" class="column-icon"
-                                onclick="addTask()" />
+                            <img src="/assets/img/add_task/plus button.svg" alt="Add Task Icon" class="column-icon" onclick="addTask()" />
                         </div>
                         <div id="toDoTasks" class="tasks-container"></div>
+                        <div id="toDoPlaceholder" class="placeholder">No tasks To do</div>
                     </div>
-
+                
+                    <!-- In Progress Column -->
                     <div id="column-progress" class="board-column"
                         ondrop="drop(event, 'progress'); removeHighlightEnd('column-progress')"
                         ondragleave="removeHighlightLeave('column-progress')"
                         ondragover="allowDrop(event); highlight('column-progress')">
                         <div class="column-header">
                             <h2 class="text_board_headline">In Progress</h2>
-                            <img src="/assets/img/add_task/plus button.svg" alt="Add Task Icon" class="column-icon"
-                                onclick="addTask()" />
+                            <img src="/assets/img/add_task/plus button.svg" alt="Add Task Icon" class="column-icon" onclick="addTask()" />
                         </div>
                         <div id="progressTasks" class="tasks-container"></div>
+                        <div id="progressPlaceholder" class="placeholder">No tasks In progress</div>
                     </div>
-
+                
+                    <!-- Await Feedback Column -->
                     <div id="column-feedback" class="board-column"
                         ondrop="drop(event, 'feedback'); removeHighlightEnd('column-feedback')"
                         ondragleave="removeHighlightLeave('column-feedback')"
                         ondragover="allowDrop(event); highlight('column-feedback')">
                         <div class="column-header">
                             <h2 class="text_board_headline">Await Feedback</h2>
-                            <img src="/assets/img/add_task/plus button.svg" alt="Add Task Icon" class="column-icon"
-                                onclick="addTask()" />
+                            <img src="/assets/img/add_task/plus button.svg" alt="Add Task Icon" class="column-icon" onclick="addTask()" />
                         </div>
                         <div id="feedbackTasks" class="tasks-container"></div>
+                        <div id="feedbackPlaceholder" class="placeholder">No tasks Await feedback</div>
                     </div>
-
+                
+                    <!-- Done Column -->
                     <div id="column-done" class="board-column"
                         ondrop="drop(event, 'done'); removeHighlightEnd('column-done')"
                         ondragleave="removeHighlightLeave('column-done')"
@@ -155,9 +159,10 @@
                             <h2 class="text_board_headline">Done</h2>
                         </div>
                         <div id="doneTasks" class="tasks-container"></div>
+                        <div id="donePlaceholder" class="placeholder">No tasks Done</div>
                     </div>
-
                 </div>
+                
         </section>
     </div>
 

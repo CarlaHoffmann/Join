@@ -1,3 +1,15 @@
+.placeholder {
+  display: none; 
+  background-color: #E7E7E7;
+  color: #a0a0a0;
+  font-size: 1rem;
+  text-align: center;
+  padding: 15px 0;
+  border: 2px dashed #d1d1d1; /* Gepunkteter Rahmen */
+  border-radius: 10px; /* Abgerundete Ecken */
+  margin: 10px 0; /* Abstand um den Placeholder */
+}
+
 
 /* Placeholder - no task */
   .overlay-container {
@@ -413,7 +425,6 @@
 }
 
 .tasks-container {
-  height: 90%;
   width: 280px;
 }
 
