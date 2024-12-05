@@ -147,6 +147,12 @@ function addTask() {
                             </div>
                         </div>
                     </form>
+                    <div id="task-added-overlay" class="dialog d-none">
+                        <div id="task-added-confirmation">
+                            <div class="confirmation-text">Task added to board</div>
+                            <img src="./img/task/board_symbol.svg" alt="">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

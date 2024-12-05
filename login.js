@@ -48,21 +48,6 @@ window.onload = animationWindow;
 
 const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
-// async function existingMailLogIn() {
-//     const users = Object.entries(await loadUsers());
-//     let email = document.getElementById('email').value.toLowerCase();
-//     let password = document.getElementById('password');
-//     let user = users.find(u => u[1].mail == email); //prüfe ob email in users.mail enthalten ist
-//     // console.log(user); 
-//     if(user.contains(email)) {
-//        //wenn die mail adresse vorhanden ist, prüfe ob die mail mit index x und das password von password.value mit dem von index x übereinstimmen
-//     }     
-//     if(user === undefined){  
-//         document.getElementById('loginErrorPassword').classList.remove('hidden');
-//     } else {    
-//         login();
-//     }
-// }
 async function existingMailLogIn() {
     try {
         const users = await loadUsers();
