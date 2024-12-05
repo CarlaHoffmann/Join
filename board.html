@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="./css/mediaQuery.css" />
     <link rel="stylesheet" href="task.css">
     <link rel="stylesheet" href="smallTaskCard.css">
+    
+
 </head>
 
 <body class="flex_dir_c" onload="includeHTML(), loadTasks()">
@@ -57,8 +59,13 @@
     </div>
     <!-- End Task Boxes -->
 
-    <!-- Overlay -->
+    <!-- Add Task Overlay -->
     <div id="task-overlay"></div>
+    
+    <!-- Edit Add Task Overlay -->
+    <div id="edit-task-overlay"></div>
+
+
 
     <!-- Board Section -->
     <div class="right_section flex_dir_c">
@@ -104,7 +111,11 @@
                         ondrop="drop(event, 'toDo'); removeHighlightEnd('column-toDo')"
                         ondragleave="removeHighlightLeave('column-toDo')"
                         ondragover="allowDrop(event); highlight('column-toDo')">
-                        <h2 class="text_board_headline">To Do</h2>
+                        <div class="column-header">
+                            <h2 class="text_board_headline">To Do</h2>
+                            <img src="/assets/img/add_task/plus button.svg" alt="Add Task Icon" class="column-icon"
+                                onclick="addTask()" />
+                        </div>
                         <div id="toDoTasks" class="tasks-container"></div>
                     </div>
 
@@ -112,7 +123,11 @@
                         ondrop="drop(event, 'progress'); removeHighlightEnd('column-progress')"
                         ondragleave="removeHighlightLeave('column-progress')"
                         ondragover="allowDrop(event); highlight('column-progress')">
-                        <h2 class="text_board_headline">In Progress</h2>
+                        <div class="column-header">
+                            <h2 class="text_board_headline">In Progress</h2>
+                            <img src="/assets/img/add_task/plus button.svg" alt="Add Task Icon" class="column-icon"
+                                onclick="addTask()" />
+                        </div>
                         <div id="progressTasks" class="tasks-container"></div>
                     </div>
 
@@ -120,7 +135,11 @@
                         ondrop="drop(event, 'feedback'); removeHighlightEnd('column-feedback')"
                         ondragleave="removeHighlightLeave('column-feedback')"
                         ondragover="allowDrop(event); highlight('column-feedback')">
-                        <h2 class="text_board_headline">Await Feedback</h2>
+                        <div class="column-header">
+                            <h2 class="text_board_headline">Await Feedback</h2>
+                            <img src="/assets/img/add_task/plus button.svg" alt="Add Task Icon" class="column-icon"
+                                onclick="addTask()" />
+                        </div>
                         <div id="feedbackTasks" class="tasks-container"></div>
                     </div>
 
@@ -128,29 +147,17 @@
                         ondrop="drop(event, 'done'); removeHighlightEnd('column-done')"
                         ondragleave="removeHighlightLeave('column-done')"
                         ondragover="allowDrop(event); highlight('column-done')">
-                        <h2 class="text_board_headline">Done</h2>
+                        <div class="column-header">
+                            <h2 class="text_board_headline">Done</h2>
+                        </div>
                         <div id="doneTasks" class="tasks-container"></div>
                     </div>
+
                 </div>
-            </div>
         </section>
     </div>
+
+    
 </body>
 
 </html>
-
-
-
-
-
-<div id="column-open" class="board-column" ondrop="drop(event, 'toDo')" ondragover="allowDrop(event)">
-    <h2 class="text_board_headline">To Do</h2>
-    <div id="openTasks" class="tasks-container"></div>
-</div>
-<div id="openTasks" class="tasks-container"></div>
-</div>
-
-<div id="column-inProgress" class="board-column"
-ondrop="moveTo('in progress'); removeHighlightEnd('column-inProgress')"
-ondragleave="removeHighlightLeave('column-inProgress')"
-ondragover="allowDrop(event); highlight('column-inProgress')">

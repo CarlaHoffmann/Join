@@ -1,3 +1,52 @@
+/* Vollbild-Overlay */
+#board-add-task-overlay {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Inhalt des Overlays */
+#overlay-content {
+  width: 1050px;
+  height: 850px;
+  background-color: #ffffff;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Technisches Task-Design */
+.taskOverlay {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 48px 24px 48px 24px;
+  border-radius: 30px;
+  justify-content: space-between;
+  gap: 15px;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+/* Schließen-Button */
+.close img {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+/* Restliche Stile bleiben unverändert */
+
+
 
 /* Task-Karte wird geneigt */
 .task-card.dragging {
@@ -13,6 +62,19 @@
   cursor: grab;
 }
 
+/* SVG Tasks-Icons */
+.column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.column-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
 
 #board-add-task-overlay {
   width: 100vw;
@@ -26,6 +88,7 @@
   z-index: 1000;
   background-color: rgba(0, 0, 0, 0.3);
 }
+
 
 #overlay-content {
   width: 1050px;

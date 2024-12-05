@@ -9,14 +9,15 @@
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   margin-top: 10px;
+  margin-right: 10px;
 }
 
 
 /* Task type badge */
 .task-type {
-  width: 113px;
+  font-weight: 400;
   height: 27px;
   background-color: #0038ff;
   color: #ffffff;

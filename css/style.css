@@ -21,11 +21,7 @@
   }
     
   
-  
-  #main_container {
-    height: calc(100vh - 96px);
-    overflow-y: auto;
-  }
+
   
   .main_maxWidth {
     max-width: 1208px;

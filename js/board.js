@@ -229,36 +229,21 @@
 //           return 'medium';
 //   }
 // }
-
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app";
 
+// Aufgaben beim Laden der Seite aus der Datenbank abrufen
 async function loadTasks() {
     try {
-        await loadToDo();
-        await loadInProgress();
-        await loadAwaitFeedback();
-        await loadDone();
+        await loadTaskData('toDo', 'toDoTasks');
+        await loadTaskData('progress', 'progressTasks');
+        await loadTaskData('feedback', 'feedbackTasks');
+        await loadTaskData('done', 'doneTasks');
     } catch (error) {
         console.error("Error loading tasks:", error);
     }
 }
 
-async function loadToDo() {
-    await loadTaskData('toDo', 'toDoTasks');
-}
-
-async function loadInProgress() {
-    await loadTaskData('progress', 'progressTasks');
-}
-
-async function loadAwaitFeedback() {
-    await loadTaskData('feedback', 'feedbackTasks');
-}
-
-async function loadDone() {
-    await loadTaskData('done', 'doneTasks');
-}
-
+// Funktion, um Tasks für eine Spalte aus der Datenbank zu laden
 async function loadTaskData(status, containerId) {
     try {
         const url = `${base_url}/tasks/${status}.json`;
@@ -269,13 +254,14 @@ async function loadTaskData(status, containerId) {
         }
 
         const data = await response.json();
-        const taskArray = processTasks(data);
-        displayTasks(taskArray, containerId);
+        const taskArray = processTasks(data); // Tasks in ein Array umwandeln
+        displayTasks(taskArray, containerId); // Tasks im entsprechenden Container anzeigen
     } catch (error) {
         console.error(`Error loading ${status} tasks:`, error);
     }
 }
 
+// Funktion, um die Tasks aus der Datenbank zu verarbeiten
 function processTasks(tasks) {
     if (!tasks) return [];
     return Object.keys(tasks).map(key => ({
@@ -286,7 +272,7 @@ function processTasks(tasks) {
     }));
 }
 
-
+// Funktion, um die Tasks in der HTML-Spalte anzuzeigen
 function displayTasks(taskArray, containerId) {
     const tasks = document.getElementById(containerId);
     tasks.innerHTML = taskArray.map(task => {
@@ -317,6 +303,7 @@ function displayTasks(taskArray, containerId) {
     }).join('');
 }
 
+// Hilfsfunktion, um die Priorität anzuzeigen
 function getPrio(priority) {
     switch (priority) {
         case '1': return 'urgent';
@@ -326,36 +313,49 @@ function getPrio(priority) {
     }
 }
 
-
-// Drag-and-Drop Functions
+// Drag-and-Drop-Funktionen
 function allowDrop(event) {
     event.preventDefault();
 }
 
 function drag(event) {
-    event.dataTransfer.setData("taskId", event.target.id);
+    const task = event.target;
+    task.classList.add("dragging"); // Task als "ziehend" markieren
+    event.dataTransfer.setData("taskId", task.id);
 }
 
+function dragEnd(event) {
+    const task = event.target;
+    task.classList.remove("dragging"); // Markierung entfernen
+}
+
+// Funktion zum Verschieben von Tasks zwischen Spalten
 async function drop(event, newStatus) {
     event.preventDefault();
-    const taskId = event.dataTransfer.getData("taskId");
-    const taskElement = document.getElementById(taskId);
+    const taskId = event.dataTransfer.getData("taskId"); // ID des gezogenen Tasks abrufen
+    const taskElement = document.getElementById(taskId); // HTML-Element des Tasks finden
 
     if (!taskElement) return;
 
-    const container = document.getElementById(newStatus + "Tasks");
+    // Alte und neue Spalte identifizieren
+    const oldStatus = taskElement.parentElement.id.replace("Tasks", "");
+    const container = document.getElementById(newStatus + "Tasks"); // Neue Spalte holen
+
+    // Task in die neue Spalte verschieben
     container.appendChild(taskElement);
 
+    // Task-Daten aus Firebase abrufen
     const taskKey = taskId.replace("task-", "");
     try {
-        const oldStatus = taskElement.parentElement.id.replace("Tasks", "");
         const taskData = await (await fetch(`${base_url}/tasks/${oldStatus}/${taskKey}.json`)).json();
 
+        // Task in Firebase in die neue Spalte verschieben
         await fetch(`${base_url}/tasks/${newStatus}/${taskKey}.json`, {
             method: "PUT",
             body: JSON.stringify(taskData),
         });
 
+        // Task aus der alten Spalte löschen
         await fetch(`${base_url}/tasks/${oldStatus}/${taskKey}.json`, { method: "DELETE" });
 
         console.log(`Task ${taskKey} moved from ${oldStatus} to ${newStatus}`);
@@ -364,7 +364,7 @@ async function drop(event, newStatus) {
     }
 }
 
-// Highlight Functions
+// Highlight-Funktionen für Spalten
 function highlight(columnId) {
     const column = document.getElementById(columnId);
     if (column) {
@@ -384,13 +384,79 @@ function removeHighlightEnd(columnId) {
 }
 
 
-function drag(event) {
-    const task = event.target;
-    task.classList.add("dragging"); // Neigung aktivieren
-    event.dataTransfer.setData("taskId", task.id);
+
+
+let currentTask = null; // Variable, um die aktuelle Task zu speichern
+
+/**
+ * Öffnet das Bearbeitungs-Overlay für eine vorhandene Task.
+ * @param {string} taskId - Die ID der zu bearbeitenden Task.
+ * @param {string} status - Der Status (Spalte), in der sich die Task befindet.
+ */
+async function openEditTaskOverlay(taskId, status) {
+    try {
+        const url = `${base_url}/tasks/${status}/${taskId}.json`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`HTTP-Error: ${response.status}`);
+        }
+
+        // Die aktuelle Task-Daten abrufen
+        currentTask = await response.json();
+
+        // Overlay mit den Task-Daten befüllen
+        document.getElementById("editTaskOverlay").classList.remove("d-none");
+        document.getElementById("edit-task-title").value = currentTask.title || "";
+        document.getElementById("edit-task-description").value = currentTask.description || "";
+        document.getElementById("edit-task-priority").value = currentTask.prio || "2"; // Default "medium"
+
+        document.getElementById("edit-task-save").setAttribute("data-task-id", taskId);
+        document.getElementById("edit-task-save").setAttribute("data-status", status);
+
+    } catch (error) {
+        console.error("Error loading task:", error);
+    }
 }
 
-function dragEnd(event) {
-    const task = event.target;
-    task.classList.remove("dragging"); // Neigung entfernen
+/**
+ * Schließt das Bearbeitungs-Overlay.
+ */
+function closeEditTaskOverlay() {
+    document.getElementById("editTaskOverlay").classList.add("d-none");
+    currentTask = null;
 }
+
+/**
+ * Speichert die bearbeiteten Daten und aktualisiert die Task in Firebase.
+ */
+async function saveEditedTask() {
+    const taskId = document.getElementById("edit-task-save").getAttribute("data-task-id");
+    const status = document.getElementById("edit-task-save").getAttribute("data-status");
+
+    // Neue Task-Daten aus dem Overlay abrufen
+    const updatedTask = {
+        ...currentTask,
+        title: document.getElementById("edit-task-title").value,
+        description: document.getElementById("edit-task-description").value,
+        prio: document.getElementById("edit-task-priority").value,
+    };
+
+    try {
+        const url = `${base_url}/tasks/${status}/${taskId}.json`;
+        await fetch(url, {
+            method: "PUT",
+            body: JSON.stringify(updatedTask),
+        });
+
+        // Task im DOM aktualisieren
+        loadTasks(); // Aktualisiere das Board
+        closeEditTaskOverlay(); // Overlay schließen
+    } catch (error) {
+        console.error("Error saving edited task:", error);
+    }
+}
+
+// Event-Listener für das Bearbeitungs-Overlay hinzufügen
+document.getElementById("edit-task-cancel").addEventListener("click", closeEditTaskOverlay);
+document.getElementById("edit-task-save").addEventListener("click", saveEditedTask);
