@@ -55,6 +55,7 @@ async function getGreetingName() {
         const response = await fetch(`${base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
         const loggedInData = await response.json();
         let user = loggedInData.name;
+        console.log(user);
         if(user === 'Guest') {
             greeting.innerHTML = 'Good morning!';
             greetName.innerHTML = '';
