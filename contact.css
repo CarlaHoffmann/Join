@@ -93,10 +93,12 @@ h3{
 
 #contacts {
     width:456px;
-    box-shadow: 4px 0px 6px 0px #00000014;
+    /* box-shadow: 4px 0px 6px 0px #00000014; */
+    box-shadow: 4px 0px 6px 0px #0000001A;
     display:flex;
     flex-direction:column;
     align-items:center;
+    z-index: 1;
 }
 
 #contactList {
@@ -123,7 +125,14 @@ hr {
     align-items: center;
     cursor:pointer;
     gap: 35px;
+    padding: 12px;
+    border-radius: 10px;
 }
+
+.contact:hover {
+    background-color: #F6F7F8;
+}
+
 .contact p{
     color: #007CEE;
     display:flex;
@@ -159,6 +168,7 @@ hr {
     align-items:flex-start;
     padding-top:110px;
     gap:30px;
+    background-color: #F6F7F8;
     width:calc(100vw - (232px + 456px + 17px)); /*232px Seitenleiste, 456px Kontaktliste, 17px Scrollbar*/
     padding-left: 50px;
     flex-direction: column;
