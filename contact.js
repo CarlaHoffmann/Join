@@ -8,14 +8,15 @@ let addContactBox = document.getElementById('addContactBox');
 
 function addContact(){
     let name = document.getElementById('name').value;
-    let email = document.getElementById('email').value;
+    let mail = document.getElementById('email').value;
     let phone = document.getElementById('phone').value;
     let color = returnColor();
     let uploadData = {
-        'name':name,
-        'email':email,
         'phone':phone,
         'color':color,
+        'mail':mail,
+        'name':name,
+        'password':'pw',
     }
     createNewContact('/users', uploadData);
 }
