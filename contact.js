@@ -28,7 +28,7 @@ function getNameInitials(name) {
 }
 
 function returnContactTemplate(key, name, email, phone, color){
-    console.log(email);
+    // console.log(email);
     return `
         <div>
             <div class="contactHeader">
@@ -36,7 +36,7 @@ function returnContactTemplate(key, name, email, phone, color){
                 <div>
                     <p>${name}</p>
                     <div class="contactItemControls">
-                        <div id="editContainer" onclick="toggleView('editContactBox', '${key}', ${true})"><img src="img/contact/edit.svg"><span>Edit</span></div>
+                        <div id="editContainer" onclick="toggleView('editContactBox', '${key}', true)"><img src="img/contact/edit.svg"><span>Edit</span></div>
                         <div id="deleteContainer" onclick="deleteContact('${key}')"><img src="img/contact/delete.svg"><span>Delete</span></div>
                     </div>
                 </div>
@@ -64,7 +64,6 @@ function showContact(key, name, email, phone, color) {
 
 
 async function loadContactData(){
-    
     let response = await fetch(base_url + ".json");
     let responseToJson = await response.json();
     let users = await responseToJson.users;
@@ -177,7 +176,7 @@ async function editContact() {
 
         const data = {
             'color': user.color,
-            'email': changedEmail, // Ändere 'mail' in 'email', wenn nötig
+            'mail': changedEmail,
             'name': changedName,
             'password': user.password,
             'phone': changedPhone, // Ändere 'phone' in 'telephone', wenn nötig
