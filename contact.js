@@ -6,6 +6,12 @@ let contactDetails = document.getElementById('contactDetails');
 let addContactButton = document.getElementById('addContactButton');
 let addContactBox = document.getElementById('addContactBox');
 
+function clearAddContactFields(){
+    document.getElementById('name').value = "";
+    document.getElementById('email').value = "";
+    document.getElementById('phone').value = "";
+}
+
 function addContact(){
     let name = document.getElementById('name').value;
     let mail = document.getElementById('email').value;
@@ -19,6 +25,8 @@ function addContact(){
         'password':'pw',
     }
     createNewContact('/users', uploadData);
+    closeAddContactBox();
+    clearAddContactFields();
     loadContactData();
 }
 
