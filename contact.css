@@ -169,7 +169,7 @@ hr {
     padding-top:110px;
     gap:30px;
     background-color: #F6F7F8;
-    width:calc(100vw - (232px + 456px + 17px)); /*232px Seitenleiste, 456px Kontaktliste, 17px Scrollbar*/
+    width:calc(100vw - (232px + 456px)); /*232px Seitenleiste, 456px Kontaktliste, 17px Scrollbar*/
     padding-left: 50px;
     flex-direction: column;
     transition: right 0.5s ease-in-out;
@@ -186,8 +186,8 @@ hr {
     position: absolute; /* Wichtiger Punkt: Position relativ zum nächstgelegenen relativen Container */
     top: 200px;
     left: 506px;
-    width:calc(100vw - (232px + 456px + 27x));
-    background: white;
+    /* width:calc(100vw - (232px + 456px + 27x)); */
+    background: #F6F7F8;
 
     transform: translateX(100%); /* Start außerhalb des Bildschirms */
     transition: transform 0.5s ease-in-out;
