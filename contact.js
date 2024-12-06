@@ -127,32 +127,78 @@ async function toggleView(elementId, key=null, edit=false){
     }
 };
             
-async function editContact(){
-    const changedName = document.getElementById('changedName').value;
-    const changedEmail = document.getElementById('changedEmail').value;
-    const changedPhone = document.getElementById('changedPhone').value;
-    const editLink = base_url + "users" + "/" + editKey;
-    let userResponse = await fetch(editLink);
-    let user = await userResponse.json();
+// async function editContact(){
+//     const changedName = document.getElementById('changedName').value;
+//     const changedEmail = document.getElementById('changedEmail').value;
+//     const changedPhone = document.getElementById('changedPhone').value;
+//     const editLink = base_url + "users" + "/" + editKey;
+//     let userResponse = await fetch(editLink + ".json");
+//     let user = await userResponse.json();
 
-    const data = {
-        'color': user.color,
-        'mail':changedEmail,
-        'name':changedName,
-        'password':user.password,
-        'phone':changedPhone,
-    };
-    console.log(data);
-    const response = await fetch(editLink, 
-    {
-        method:'PUT',
-        headers: {
-            "Content-Type":"application/json",
-        },
-        body: JSON.stringify(data),
-    });
-    loadContactData();
-    contactDetails.innerHTML = '';
-    toggleView('editContactBox');
-    return await response.json();
+//     const data = {
+//         'color': user.color,
+//         'mail':changedEmail,
+//         'name':changedName,
+//         'password':user.password,
+//         'phone':changedPhone,
+//     };
+//     console.log(data);
+//     const response = await fetch(editLink, 
+//     {
+//         method:'PUT',
+//         headers: {
+//             "Content-Type":"application/json",
+//         },
+//         body: JSON.stringify(data),
+//     });
+//     loadContactData();
+//     contactDetails.innerHTML = '';
+//     toggleView('editContactBox');
+//     return await response.json();
+// }
+async function editContact() {
+    const changedName = document.getElementById('changedName').value.trim();
+    const changedEmail = document.getElementById('changedEmail').value.trim();
+    const changedPhone = document.getElementById('changedPhone').value.trim();
+    const editLink = base_url + "users" + "/" + editKey;
+
+    // Validierung der Eingabedaten
+    if (!changedName || !changedEmail || !changedPhone) {
+        alert("Bitte füllen Sie alle Felder aus.");
+        return;
+    }
+
+    try {
+        let userResponse = await fetch(editLink + ".json");
+        if (!userResponse.ok) {
+            throw new Error(`HTTP error! status: ${userResponse.status}`);
+        }
+        let user = await userResponse.json();
+
+        const data = {
+            'color': user.color,
+            'email': changedEmail, // Ändere 'mail' in 'email', wenn nötig
+            'name': changedName,
+            'password': user.password,
+            'phone': changedPhone, // Ändere 'phone' in 'telephone', wenn nötig
+        };
+
+        console.log(data);
+
+        const response = await fetch(editLink + ".json", {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+        loadContactData();
+        contactDetails.innerHTML = '';
+        toggleView('editContactBox');
+        return await response.json();
+    } catch (error) {
+        console.error('Fehler beim Bearbeiten des Kontakts:', error);
+        alert('Es gab einen Fehler beim Bearbeiten des Kontakts. Bitte versuchen Sie es erneut.');
+    }
 }
