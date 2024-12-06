@@ -19,6 +19,7 @@ function addContact(){
         'password':'pw',
     }
     createNewContact('/users', uploadData);
+    loadContactData();
 }
 
 function getNameInitials(name) {
@@ -27,6 +28,7 @@ function getNameInitials(name) {
 }
 
 function returnContactTemplate(key, name, email, phone, color){
+    console.log(email);
     return `
         <div>
             <div class="contactHeader">
@@ -50,18 +52,6 @@ function returnContactTemplate(key, name, email, phone, color){
     `;
 }
 
-// function showContact(key, name, email, phone, color){
-//     contactDetails.innerHTML = returnContactTemplate(key, name, email, phone, color);
-// }
-// function showContact(key, name, email, phone, color) {
-//     // Zeige die Kontaktansicht an und füge die Klasse 'show' hinzu
-//     const contactDetails = document.getElementById('contactDetails');
-//     contactDetails.classList.add('show');
-//     contactDetails.style.display = 'flex'; // Sicherstellen, dass es sichtbar ist
-
-//     // Setze den Inhalt der Kontaktansicht
-//     contactDetails.innerHTML = returnContactTemplate(key, name, email, phone, color);
-// }
 function showContact(key, name, email, phone, color) {
     const contactDetails = document.getElementById('contactDetails');
     
@@ -80,12 +70,12 @@ async function loadContactData(){
     let users = await responseToJson.users;
     let numberOfUser = Object.keys(users).length;
     let userKeys = Object.keys(users);
-    
+    contactList.innerHTML = "";
     for(let i = 0; i < numberOfUser; i++){
         let key = userKeys[i];
         // let user = users[key];
         let name = users[key].name;
-        let mail = users[key].email;
+        let mail = users[key].mail;
         let phone = users[key].phone;
         let color = users[key].color;
         contactList.innerHTML += `
@@ -102,8 +92,11 @@ async function loadContactData(){
 loadContactData();
             
 async function deleteContact(key){
+    const contactDetails = document.getElementById('contactDetails');
     const deleteLink = base_url + "users" + "/" + key;
     const response = await fetch(deleteLink + ".json", {method:'DELETE'});
+    loadContactData();
+    contactDetails.innerHTML = "";
     return await response.json();
 }
 
@@ -120,6 +113,7 @@ async function createNewContact(path = "", data={}){
             
 async function toggleView(elementId, key=null, edit=false){
     editKey = key;
+    console.log(editKey);
     document.getElementById(elementId).classList.toggle('hidden');
     if(edit){
 
@@ -128,7 +122,7 @@ async function toggleView(elementId, key=null, edit=false){
         let user = await response.json();
 
         document.getElementById('changedName').value = user.name;
-        document.getElementById('changedEmail').value = user.email;
+        document.getElementById('changedEmail').value = user.mail;
         document.getElementById('changedPhone').value = user.phone;
     }
 };
@@ -137,12 +131,18 @@ async function editContact(){
     const changedName = document.getElementById('changedName').value;
     const changedEmail = document.getElementById('changedEmail').value;
     const changedPhone = document.getElementById('changedPhone').value;
+    const editLink = base_url + "users" + "/" + editKey;
+    let userResponse = await fetch(editLink);
+    let user = await userResponse.json();
+
     const data = {
+        'color': user.color,
+        'mail':changedEmail,
         'name':changedName,
-        'email':changedEmail,
+        'password':user.password,
         'phone':changedPhone,
     };
-    const editLink = base_url + "users" + "/" + editKey + '.json';
+    console.log(data);
     const response = await fetch(editLink, 
     {
         method:'PUT',
@@ -151,5 +151,8 @@ async function editContact(){
         },
         body: JSON.stringify(data),
     });
+    loadContactData();
+    contactDetails.innerHTML = '';
+    toggleView('editContactBox');
     return await response.json();
 }
