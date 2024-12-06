@@ -112,7 +112,8 @@ async function createNewContact(path = "", data={}){
             
 async function toggleView(elementId, key=null, edit=false){
     editKey = key;
-    document.getElementById(elementId).classList.toggle('hidden');
+    document.getElementById(elementId).classList.remove('hidden');
+
     if(edit){
 
         const editLink = base_url + "users" + "/" + editKey;
@@ -124,6 +125,14 @@ async function toggleView(elementId, key=null, edit=false){
         document.getElementById('changedPhone').value = user.phone;
     }
 };
+
+function closeEditBox(){
+    document.getElementById('editContactBox').classList.add('hidden');
+}
+
+function closeAddContactBox(){
+    document.getElementById('addContactBox').classList.add('hidden');
+}
             
 // async function editContact(){
 //     const changedName = document.getElementById('changedName').value;
@@ -158,6 +167,7 @@ async function editContact() {
     const changedName = document.getElementById('changedName').value.trim();
     const changedEmail = document.getElementById('changedEmail').value.trim();
     const changedPhone = document.getElementById('changedPhone').value.trim();
+    console.log(editKey);
     const editLink = base_url + "users" + "/" + editKey;
 
     // Validierung der Eingabedaten
@@ -191,7 +201,7 @@ async function editContact() {
 
         loadContactData();
         contactDetails.innerHTML = '';
-        toggleView('editContactBox');
+        closeEditBox();
         return await response.json();
     } catch (error) {
         console.error('Fehler beim Bearbeiten des Kontakts:', error);

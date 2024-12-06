@@ -16,7 +16,7 @@
     <div id="contactContent">
         <!--add contact box-->
         <div id="addContactBox" class="hidden">
-            <button id="closeAddContactBox" class="close-button" onclick="toggleView('addContactBox')">×</button>
+            <button id="closeAddContactBox" class="close-button" onclick="closeAddContactBox();">×</button>
             <div>
                 <img src="img/contact/logo.svg">
                 <h2>Add Contact</h2>
@@ -32,7 +32,7 @@
         </div>
         <!--edit contact box-->
         <div id="editContactBox" class="hidden">
-            <button id="closeEditContactBox" class="close-button" onclick="toggleView('editContactBox', '${key}', true)">×</button>
+            <button id="closeEditContactBox" class="close-button" onclick="closeEditBox()">×</button>
             <div>
                 <img src="img/contact/logo.svg">
                 <h2>Edit Contact</h2>
