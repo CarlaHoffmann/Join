@@ -201,6 +201,12 @@ hr {
     transform: translateX(0); 
 }
 
+.detailsBox {
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+}
+
 .contactHeader{
     display:flex;
     justify-content:center;
@@ -208,12 +214,24 @@ hr {
     gap:54px;
     font-size:47px;
 }
-.contactHeader .circle{
+/* .contactHeader .circle{
     width:120px;
     height:120px;
     border:1px solid white;
     color:white;
+} */
+
+.circleDetails {
+    color:white;
+    width:120px;
+    height:120px;
+    border:3px solid white;
+    border-radius: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 .contactHeader span{
     font-size:16px;
 }
@@ -234,6 +252,19 @@ hr {
 .hidden{
     display:none !important;
 }
+
+#contactDetailOverlayBox {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: calc(100vw - 232px);
+    height: calc(100vh - 96px);
+    z-index: 2;
+    background-color: #F6F7F8;
+    display: flex;
+    padding: 16px;
+}
+
 @media (max-width: 1320px){
     h2{
         font-size:40px;
@@ -257,6 +288,7 @@ hr {
     .contactHeader{
         flex-direction:column;
         align-items: flex-start;
+        gap: 21px;
     }
 }
 @media (max-width: 1160px){
@@ -274,6 +306,15 @@ hr {
     }
     #contactView{
         display:none;
+    }
+    .contactDetailOverlayBox {
+        display: block !important;
+        /* padding: 16px; */
+    }
+    #contactDetailsOverlay .contactHeader {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
     }
 }
 @media (max-width: 680px){
@@ -305,5 +346,9 @@ hr {
     }
     #addContactButton span{
         display:none;
+    }
+    #contactDetailOverlayBox {
+        width: 100vw;
+        height: calc(100vh - 160px);
     }
 }

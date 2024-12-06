@@ -38,9 +38,9 @@ function getNameInitials(name) {
 function returnContactTemplate(key, name, email, phone, color){
     // console.log(email);
     return `
-        <div>
+        <div class="detailsBox">
             <div class="contactHeader">
-                <div style="background:${color}" class="circle">${(getNameInitials(name))}</div>
+                <div style="background:${color}" class="circleDetails">${(getNameInitials(name))}</div>
                 <div>
                     <p>${name}</p>
                     <div class="contactItemControls">
@@ -62,12 +62,19 @@ function returnContactTemplate(key, name, email, phone, color){
 
 function showContact(key, name, email, phone, color) {
     const contactDetails = document.getElementById('contactDetails');
+    const contactDetailsOverlay = document.getElementById('contactDetailsOverlay');
     
     // Inhalt setzen
     contactDetails.innerHTML = returnContactTemplate(key, name, email, phone, color);
+    contactDetailsOverlay.innerHTML = returnContactTemplate(key, name, email, phone, color);
 
     // Animation starten
     contactDetails.classList.add('show');
+}
+
+function showOverlayAddContact() {
+    let contactDetailOverlayBox = document.getElementById('contactDetailOverlayBox');
+    contactDetailOverlayBox.classList.add('contactDetailOverlayBox');
 }
 
 
@@ -86,7 +93,7 @@ async function loadContactData(){
         let phone = users[key].phone;
         let color = users[key].color;
         contactList.innerHTML += `
-            <div class="contact" onclick="showContact('${key}', '${name}', '${mail}', '${phone}', '${color}')")>
+            <div class="contact" onclick="showContact('${key}', '${name}', '${mail}', '${phone}', '${color}'), showOverlayAddContact()")>
                 <div style="background:${color}" class="circle">${getNameInitials(name)}</div>
                 <div class="contactInformation">
                     <h3>${name}</h3>
