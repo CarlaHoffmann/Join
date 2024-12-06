@@ -112,7 +112,6 @@ async function createNewContact(path = "", data={}){
             
 async function toggleView(elementId, key=null, edit=false){
     editKey = key;
-    console.log(editKey);
     document.getElementById(elementId).classList.toggle('hidden');
     if(edit){
 
@@ -181,8 +180,6 @@ async function editContact() {
             'password': user.password,
             'phone': changedPhone, // Ändere 'phone' in 'telephone', wenn nötig
         };
-
-        console.log(data);
 
         const response = await fetch(editLink + ".json", {
             method: 'PUT',
