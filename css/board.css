@@ -1,3 +1,26 @@
+.overlay-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.overlay-textarea {
+  width: 100%;
+  height: 80px;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.overlay-select {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+
 .placeholder {
   display: none; 
   background-color: #E7E7E7;
@@ -346,14 +369,15 @@
   line-height: 24px;
 }
 
-.column-plus-button {
+.column-icon-button {
   display: flex;
   position: relative;
   width: 24px;
   height: 24px;
-  background-image: url(/assets/img/board/plus_button.svg);
+  background-image: url(/assets/img/board/arrow_drop_down_up.svg);
   background-repeat: no-repeat;
   cursor: pointer;
+  
 }
 
 .column-plus-button:hover {

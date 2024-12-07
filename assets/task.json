@@ -1,4 +1,7 @@
 {
+  "loggedIn": {
+    "name": "Guest"
+  },
   "tasks": {
     "toDo": {
       "task1": {
@@ -151,6 +154,43 @@
           "1": "Test deployment pipeline"
         }
       }
+    }
+  },
+  "users": {
+    "-ODQ9zvXJTMRB6AbAb5M": {
+      "color": "#007CEE",
+      "mail": "c@gmail.com",
+      "name": "Carla Maxa",
+      "password": "pw",
+      "phone": "9393948394"
+    },
+    "-ODQKhCLAU17p0M5U0Dt": {
+      "color": "rgb(255,122,0)",
+      "mail": "aacm@gmail.com",
+      "name": "Carla M",
+      "password": "pw",
+      "phone": "399482"
+    },
+    "-ODQoz-Q4sj1KK_84LyS": {
+      "color": "rgba(147,39,255)",
+      "mail": "m@gmail.com",
+      "name": "Sofie Müller",
+      "password": "pw",
+      "phone": "1546"
+    },
+    "-ODQp3AOOT8sacJlZ1w_": {
+      "color": "rgba(31,215,193)",
+      "mail": "benedikt@gmail.com",
+      "name": "Benni",
+      "password": "pw",
+      "phone": "565489"
+    },
+    "-ODR3MEX4HlT0geA6FBH": {
+      "color": "rgba(255,187,43)",
+      "mail": "mustermann@mail.de",
+      "name": "Max Musterman",
+      "password": "pw",
+      "phone": "394888293"
     }
   }
 }
