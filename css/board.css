@@ -64,7 +64,7 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-/* Inhalt des Overlays */
+/*
 #overlay-content {
   width: 1050px;
   height: 850px;
@@ -74,7 +74,9 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
+  background-color: red;
 }
+*/
 
 /* Technisches Task-Design */
 .taskOverlay {

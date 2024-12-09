@@ -34,7 +34,9 @@
           "0": "Develop a theme toggle",
           "1": "Test for visual consistency"
         }
-      },
+      }
+    },
+    "progress": {
       "task3": {
         "title": "Develop Landing Page",
         "description": "Design and develop an engaging landing page for new users",
@@ -65,7 +67,9 @@
           "0": "Create search algorithms",
           "1": "Optimize backend queries"
         }
-      },
+      }
+    },
+    "feedback": {
       "task5": {
         "title": "Optimize Login Security",
         "description": "Enhance security protocols for the login process",
@@ -96,7 +100,9 @@
           "0": "Design UI layout",
           "1": "Integrate with database"
         }
-      },
+      }
+    },
+    "done": {
       "task7": {
         "title": "Implement Payment Integration",
         "description": "Integrate a payment gateway for seamless transactions",
