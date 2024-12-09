@@ -10,28 +10,95 @@ let selectedContacts = [];
 //     console.log(contacts);
 //     let contactsHTML = '';
 
-//     contacts.forEach((contact, index) => {
+//     const loggedInUser = await getUser(); // Hole den eingeloggten User
+
+//     contacts.forEach((contact) => {
 //         const isSelected = selectedContacts.includes(contact.name);
+//         const isCurrentUser = loggedInUser.name !== 'Guest' && contact.name === loggedInUser.name;
 //         contactsHTML += `
-//                 <label onclick="handleContactClick(event)" for="${contact.id}" class="selection-name contact-label">
-//                     <div>${contact.name}${index === 0 ? ' (You)' : ''}</div>
-//                     <input type="checkbox" id="${contact.id}" value="${contact.name}" ${isSelected ? 'checked' : ''}>
-//                 </label>
+//             <label onclick="handleContactClick(event)" for="${contact.id}" class="selection-name contact-label">
+//                 <div>${contact.name}${isCurrentUser ? ' (You)' : ''}</div>
+//                 <input type="checkbox" id="${contact.id}" value="${contact.name}" ${isSelected ? 'checked' : ''}>
+//             </label>
 //         `;
 //     });
-    
+
 //     contactsToSelect.innerHTML = contactsHTML;
 //     contactDropDown.style.display = 'block';
 // }
-
 async function openAssigned() {
     let contactDropDown = document.getElementById('contact-drop-down');
     let contactsToSelect = document.getElementById('contacts-to-select');
-    const contacts = await loadContacts();
-    console.log(contacts);
-    let contactsHTML = '';
 
-    const loggedInUser = await getUser(); // Hole den eingeloggten User
+    const contacts = await loadContacts();
+    const loggedInUser = await getUser();
+
+    const preparedContacts = await prepareContacts(contacts, loggedInUser);
+    const contactsHTML = createContactsHTML(preparedContacts, selectedContacts, loggedInUser);
+
+    contactsToSelect.innerHTML = contactsHTML;
+    contactDropDown.style.display = 'block';
+}
+
+// Funktion zum Laden der Kontakte aus Firebase
+// async function loadContacts() {
+//     try {
+//         const loggedInUser = await getUser(); // Hole den eingeloggten User
+//         const response = await fetch(`${task_base_url}/users.json`);
+//         const users = await response.json();
+
+//         // Erstelle ein Array von Kontakten
+//         const contactsArray = Object.entries(users).map(([userId, userData]) => ({ id: userId, name: userData.name }));
+
+//         // Finde den eingeloggten User und entferne ihn aus dem Array
+//         const loggedInContactIndex = contactsArray.findIndex(contact => contact.name === loggedInUser.name);
+//         if (loggedInContactIndex !== -1) {
+//             const [loggedInContact] = contactsArray.splice(loggedInContactIndex, 1); // Entferne den User aus dem Array
+
+//             // Sortiere die restlichen Kontakte alphabetisch nach Namen
+//             contactsArray.sort((a, b) => a.name.localeCompare(b.name));
+
+//             return [loggedInContact, ...contactsArray]; // Füge ihn an erster Stelle wieder hinzu
+//         }
+
+//         // Wenn kein eingeloggter User gefunden wurde, gebe das ursprüngliche Array zurück und sortiere es
+//         return contactsArray.sort((a, b) => a.name.localeCompare(b.name));
+        
+//     } catch (error) {
+//         console.error("Fehler beim Laden der Kontakte:", error);
+//         return [];
+//     }
+// }
+async function loadContacts() {
+    try {
+        const response = await fetch(`${task_base_url}/users.json`);
+        const users = await response.json();
+
+        // Erstelle ein Array von Kontakten
+        const contactsArray = Object.entries(users).map(([userId, userData]) => ({ id: userId, name: userData.name }));
+
+        return contactsArray;
+    } catch (error) {
+        console.error("Fehler beim Laden der Kontakte:", error);
+        return [];
+    }
+}
+
+async function prepareContacts(contacts, loggedInUser) {
+    if (!loggedInUser) return contacts;
+
+    const loggedInContactIndex = contacts.findIndex(contact => contact.name === loggedInUser.name);
+    if (loggedInContactIndex !== -1) {
+        const [loggedInContact] = contacts.splice(loggedInContactIndex, 1); // Entferne den User aus dem Array
+        contacts.sort((a, b) => a.name.localeCompare(b.name));
+        return [loggedInContact, ...contacts]; // Füge ihn an erster Stelle wieder hinzu
+    }
+
+    return contacts.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function createContactsHTML(contacts, selectedContacts, loggedInUser) {
+    let contactsHTML = '';
 
     contacts.forEach((contact) => {
         const isSelected = selectedContacts.includes(contact.name);
@@ -44,38 +111,7 @@ async function openAssigned() {
         `;
     });
 
-    contactsToSelect.innerHTML = contactsHTML;
-    contactDropDown.style.display = 'block';
-}
-
-// Funktion zum Laden der Kontakte aus Firebase
-async function loadContacts() {
-    try {
-        const loggedInUser = await getUser(); // Hole den eingeloggten User
-        const response = await fetch(`${task_base_url}/users.json`);
-        const users = await response.json();
-
-        // Erstelle ein Array von Kontakten
-        const contactsArray = Object.entries(users).map(([userId, userData]) => ({ id: userId, name: userData.name }));
-
-        // Finde den eingeloggten User und entferne ihn aus dem Array
-        const loggedInContactIndex = contactsArray.findIndex(contact => contact.name === loggedInUser.name);
-        if (loggedInContactIndex !== -1) {
-            const [loggedInContact] = contactsArray.splice(loggedInContactIndex, 1); // Entferne den User aus dem Array
-
-            // Sortiere die restlichen Kontakte alphabetisch nach Namen
-            contactsArray.sort((a, b) => a.name.localeCompare(b.name));
-
-            return [loggedInContact, ...contactsArray]; // Füge ihn an erster Stelle wieder hinzu
-        }
-
-        // Wenn kein eingeloggter User gefunden wurde, gebe das ursprüngliche Array zurück und sortiere es
-        return contactsArray.sort((a, b) => a.name.localeCompare(b.name));
-        
-    } catch (error) {
-        console.error("Fehler beim Laden der Kontakte:", error);
-        return [];
-    }
+    return contactsHTML;
 }
 
 // Funktion zum Abrufen des aktuell eingeloggten Benutzers

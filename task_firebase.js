@@ -18,7 +18,7 @@ async function createTask() {
         category: takeCatergory(),
         subtasks: takeSubtask(),
     }
-    console.log("Task to be sent:", task);
+    // console.log("Task to be sent:", task);
     await postData(task);
     clearForm(); // Hier wird das Formular geleert
     showTaskAddedOverlay();
@@ -35,7 +35,7 @@ async function postData(taskData) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         let result = await response.json();
-        console.log("Task successfully added:", result);
+        // console.log("Task successfully added:", result);
         return result;
     } catch (error) {
         console.error("Error posting data:", error);
