@@ -5,153 +5,127 @@
   "tasks": {
     "toDo": {
       "task1": {
-        "title": "Implement Login Page",
-        "description": "Develop a secure login page for user authentication",
+        "title": "Design Main Navigation",
+        "description": "Create a clear and intuitive design for the main navigation of the website",
         "category": "User Story",
         "contacts": {
-          "0": "AS",
-          "1": "DE"
+          "0": "Sven Neumann",
+          "1": "Carla Müller",
+          "2": "Michael Bauer"
         },
-        "date": "2024-12-10",
+        "date": "2025-01-15",
         "prio": "1",
         "subtasks": {
-          "0": "Create login form",
-          "1": "Validate user input"
+          "0": "Create wireframes",
+          "1": "Define color palette"
         }
       },
       "task2": {
-        "title": "Configure API Gateway",
-        "description": "Set up API Gateway for microservices communication",
+        "title": "Implement Dark Mode",
+        "description": "Add a toggle feature for dark mode and ensure consistent design",
         "category": "Technical Task",
         "contacts": {
-          "0": "EF"
+          "0": "Sofie Müller",
+          "1": "Benedict Keller"
         },
-        "date": "2024-12-12",
+        "date": "2025-02-05",
         "prio": "2",
         "subtasks": {
-          "0": "Define routes",
-          "1": "Implement security policies"
+          "0": "Develop a theme toggle",
+          "1": "Test for visual consistency"
         }
       },
       "task3": {
-        "title": "Optimize Database Queries",
-        "description": "Improve database query performance for faster data retrieval",
-        "category": "Technical Task",
-        "contacts": {
-          "0": "GH"
-        },
-        "date": "2024-12-15",
-        "prio": "1",
-        "subtasks": {
-          "0": "Analyze slow queries",
-          "1": "Rewrite queries with indexes"
-        }
-      }
-    },
-    "progress": {
-      "task4": {
-        "title": "Develop User Dashboard",
-        "description": "Create a dynamic dashboard to display user data",
+        "title": "Develop Landing Page",
+        "description": "Design and develop an engaging landing page for new users",
         "category": "User Story",
         "contacts": {
-          "0": "AS",
-          "1": "EF"
+          "0": "Carla Maxa",
+          "1": "Max Mustermann",
+          "2": "Lisa Fischer"
         },
-        "date": "2024-12-08",
+        "date": "2025-02-20",
         "prio": "1",
         "subtasks": {
-          "0": "Design UI components",
-          "1": "Integrate with backend API"
+          "0": "Create hero section",
+          "1": "Optimize for responsiveness"
+        }
+      },
+      "task4": {
+        "title": "Build Search Functionality",
+        "description": "Implement a search bar with auto-suggestions",
+        "category": "Technical Task",
+        "contacts": {
+          "0": "Sven Neumann",
+          "1": "Michael Bauer"
+        },
+        "date": "2025-03-01",
+        "prio": "1",
+        "subtasks": {
+          "0": "Create search algorithms",
+          "1": "Optimize backend queries"
         }
       },
       "task5": {
-        "title": "Build Notification System",
-        "description": "Set up a system to deliver real-time notifications",
+        "title": "Optimize Login Security",
+        "description": "Enhance security protocols for the login process",
         "category": "Technical Task",
         "contacts": {
-          "0": "DE"
+          "0": "Benedict Keller",
+          "1": "Sofie Müller",
+          "2": "Thomas Meyer"
         },
-        "date": "2024-12-09",
-        "prio": "2",
+        "date": "2025-03-15",
+        "prio": "1",
         "subtasks": {
-          "0": "Implement WebSocket connection",
-          "1": "Test notification triggers"
+          "0": "Implement 2FA",
+          "1": "Test with different user cases"
         }
-      }
-    },
-    "feedback": {
+      },
       "task6": {
-        "title": "Code Review for Authentication Module",
-        "description": "Conduct a detailed code review of the authentication module",
-        "category": "Technical Task",
+        "title": "Create Profile Page",
+        "description": "Design a personalized profile page for users to manage their data",
+        "category": "User Story",
         "contacts": {
-          "0": "GH",
-          "1": "EF"
+          "0": "Carla Müller",
+          "1": "Max Mustermann"
         },
-        "date": "2024-12-16",
+        "date": "2025-04-01",
         "prio": "2",
         "subtasks": {
-          "0": "Review login logic",
-          "1": "Verify security compliance"
+          "0": "Design UI layout",
+          "1": "Integrate with database"
         }
       },
       "task7": {
-        "title": "Unit Testing for Payment Gateway",
-        "description": "Write and execute unit tests for the payment gateway integration",
+        "title": "Implement Payment Integration",
+        "description": "Integrate a payment gateway for seamless transactions",
         "category": "Technical Task",
         "contacts": {
-          "0": "DE"
+          "0": "Michael Bauer",
+          "1": "Sven Neumann",
+          "2": "Lisa Fischer"
         },
-        "date": "2024-12-18",
-        "prio": "3",
+        "date": "2025-04-20",
+        "prio": "1",
         "subtasks": {
-          "0": "Write test cases",
-          "1": "Analyze test results"
+          "0": "Integrate API",
+          "1": "Test payment flows"
         }
       },
       "task8": {
-        "title": "UX Review for Registration Process",
-        "description": "Gather feedback and improve the registration flow",
+        "title": "Redesign Dashboard",
+        "description": "Revamp the user dashboard for better usability",
         "category": "User Story",
         "contacts": {
-          "0": "AS"
+          "0": "Carla Maxa",
+          "1": "Sofie Müller"
         },
-        "date": "2024-12-20",
+        "date": "2025-05-01",
         "prio": "2",
         "subtasks": {
-          "0": "Conduct user tests",
-          "1": "Refine input validation"
-        }
-      }
-    },
-    "done": {
-      "task9": {
-        "title": "Set Up Development Environment",
-        "description": "Install tools and configure the project for development",
-        "category": "Technical Task",
-        "contacts": {
-          "0": "DE"
-        },
-        "date": "2024-12-01",
-        "prio": "1",
-        "subtasks": {
-          "0": "Install Node.js and dependencies",
-          "1": "Set up Docker environment"
-        }
-      },
-      "task10": {
-        "title": "Deploy Initial Version",
-        "description": "Deploy the first version of the app to the staging server",
-        "category": "Technical Task",
-        "contacts": {
-          "0": "EF",
-          "1": "GH"
-        },
-        "date": "2024-12-02",
-        "prio": "1",
-        "subtasks": {
-          "0": "Deploy backend services",
-          "1": "Test deployment pipeline"
+          "0": "Gather user feedback",
+          "1": "Implement feedback into design"
         }
       }
     }
@@ -159,38 +133,80 @@
   "users": {
     "-ODQ9zvXJTMRB6AbAb5M": {
       "color": "#007CEE",
-      "mail": "c@gmail.com",
+      "mail": "c.maxa@gmail.com",
       "name": "Carla Maxa",
       "password": "pw",
       "phone": "9393948394"
     },
     "-ODQKhCLAU17p0M5U0Dt": {
       "color": "rgb(255,122,0)",
-      "mail": "aacm@gmail.com",
-      "name": "Carla M",
+      "mail": "carla.m@gmail.com",
+      "name": "Carla Müller",
       "password": "pw",
       "phone": "399482"
     },
     "-ODQoz-Q4sj1KK_84LyS": {
       "color": "rgba(147,39,255)",
-      "mail": "m@gmail.com",
+      "mail": "s.muller@gmail.com",
       "name": "Sofie Müller",
       "password": "pw",
       "phone": "1546"
     },
     "-ODQp3AOOT8sacJlZ1w_": {
       "color": "rgba(31,215,193)",
-      "mail": "benedikt@gmail.com",
-      "name": "Benni",
+      "mail": "benedict.k@gmail.com",
+      "name": "Benedict Keller",
       "password": "pw",
       "phone": "565489"
     },
     "-ODR3MEX4HlT0geA6FBH": {
       "color": "rgba(255,187,43)",
-      "mail": "mustermann@mail.de",
-      "name": "Max Musterman",
+      "mail": "max.mustermann@mail.de",
+      "name": "Max Mustermann",
       "password": "pw",
       "phone": "394888293"
+    },
+    "-ODRNNXN4HlT0geB6FBH": {
+      "color": "#8B0000",
+      "mail": "sven.neumann@gmail.com",
+      "name": "Sven Neumann",
+      "password": "pw",
+      "phone": "4827593021"
+    },
+    "-ODROEXX4HlT0geC6FBH": {
+      "color": "#4B0082",
+      "mail": "anna.schmidt@gmail.com",
+      "name": "Anna Schmidt",
+      "password": "pw",
+      "phone": "4837291827"
+    },
+    "-ODRPXXO4HlT0geD6FBH": {
+      "color": "#228B22",
+      "mail": "julia.hoffmann@gmail.com",
+      "name": "Julia Hoffmann",
+      "password": "pw",
+      "phone": "5829374059"
+    },
+    "-ODRQAXX4HlT0geE6FBH": {
+      "color": "#FFD700",
+      "mail": "michael.bauer@gmail.com",
+      "name": "Michael Bauer",
+      "password": "pw",
+      "phone": "6783948576"
+    },
+    "-ODRSAXX4HlT0geF6FBH": {
+      "color": "#FF4500",
+      "mail": "lisa.fischer@gmail.com",
+      "name": "Lisa Fischer",
+      "password": "pw",
+      "phone": "4872930483"
+    },
+    "-ODRTBXX4HlT0geG6FBH": {
+      "color": "#4682B4",
+      "mail": "thomas.meyer@gmail.com",
+      "name": "Thomas Meyer",
+      "password": "pw",
+      "phone": "2948572048"
     }
   }
 }

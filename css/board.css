@@ -23,14 +23,15 @@
 
 .placeholder {
   display: none; 
+  max-width: 252px;
   background-color: #E7E7E7;
   color: #a0a0a0;
   font-size: 1rem;
   text-align: center;
   padding: 15px 0;
-  border: 2px dashed #d1d1d1; /* Gepunkteter Rahmen */
-  border-radius: 10px; /* Abgerundete Ecken */
-  margin: 10px 0; /* Abstand um den Placeholder */
+  border: 2px dashed #d1d1d1; 
+  border-radius: 10px;
+  margin: 10px 0; 
 }
 
 
