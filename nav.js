@@ -43,7 +43,7 @@ function activeLink() {
 
 async function getInitials() {
     try {
-        const loggedInUser = await getUser(); // Benutzerdaten abrufen
+        const loggedInUser = await getNavUser(); // Benutzerdaten abrufen
 
         if (loggedInUser && loggedInUser.name) { // Überprüfen, ob ein Name vorhanden ist
             showNav();
@@ -69,7 +69,7 @@ async function getInitials() {
     }
 }
 
-async function getUser() {
+async function getNavUser() {
     try {
         const response = await fetch(`${nav_base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
         const loggedInData = await response.json();

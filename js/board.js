@@ -25,7 +25,7 @@ async function loadTaskData(status, containerId) {
         }
 
         const data = await response.json();
-        const taskArray = processTasks(data); // Tasks in ein Array umwandeln
+        const taskArray = processTasks(data, status); // Tasks in ein Array umwandeln
         displayTasks(taskArray, containerId); // Tasks im entsprechenden Container anzeigen
     } catch (error) {
         console.error(`Error loading ${status} tasks:`, error);
@@ -33,9 +33,10 @@ async function loadTaskData(status, containerId) {
 }
 
 // Funktion, um die Tasks aus der Datenbank zu verarbeiten
-function processTasks(tasks) {
+function processTasks(tasks, status) {
     if (!tasks) return [];
     return Object.keys(tasks).map(key => ({
+        path: status,
         id: key,
         ...tasks[key],
         contacts: tasks[key].contacts ? Object.values(tasks[key].contacts) : [],
@@ -281,7 +282,7 @@ function openTaskOverlay(task) {
                 </div>
                 <div class="buttonContainer">
                     <button class="editBtn" id="editTaskButton" onclick="enableEditMode()">Edit</button>
-                    <button class="saveBtn d-none" id="saveTaskButton" onclick="saveOverlayChanges('${task.id}', '${task.category}')">OK</button>
+                    <button class="saveBtn d-none" id="saveTaskButton" onclick="saveOverlayChanges('${task.id}', '${task.path}')">OK</button>
                 </div>
             </div>
         </div>
@@ -309,26 +310,78 @@ function enableEditMode() {
 
 
 
-async function saveOverlayChanges(taskId, category) {
+// async function saveOverlayChanges(taskId, category) {
+//     // Geänderte Daten aus den Feldern abrufen
+//     const updatedTask = {
+//         title: document.getElementById('overlayTitle').value,
+//         description: document.getElementById('overlayDescription').value,
+//         date: document.getElementById('overlayDueDate').value,
+//         prio: document.querySelector('.prio-button.active-button').id.replace('prio', ''),
+//         contacts: Array.from(document.querySelectorAll('#overlayContacts .contact-initial')).map(contact => contact.textContent),
+//         subtasks: Array.from(document.querySelectorAll('#overlaySubtasks li')).map(subtask => subtask.textContent),
+//     };
+
+//     try {
+//         const url = `${base_url}/tasks/${category}/${taskId}.json`;
+//         const response = await fetch(url, {
+//             method: 'PUT',
+//             body: JSON.stringify(updatedTask),
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         });
+
+//         if (!response.ok) {
+//             throw new Error(`HTTP error: ${response.status}`);
+//         }
+
+//         console.log('Task successfully updated!');
+//         closeTaskOverlay();
+//         loadTasks(); // Aktualisiere das Board
+//     } catch (error) {
+//         console.error('Error saving task changes:', error);
+//     }
+// }
+async function saveOverlayChanges(taskId, taskStatus) {
     // Geänderte Daten aus den Feldern abrufen
+    const titleElement = document.getElementById('overlayTitle');
+    const descriptionElement = document.getElementById('overlayDescription');
+    const dueDateElement = document.getElementById('overlayDueDate');
+    const prioButton = document.querySelector('.prio-button.active-button');
+    const contactsElements = document.querySelectorAll('#overlayContacts .contact-initial');
+    const subtasksElements = document.querySelectorAll('#overlaySubtasks li');
+
+    if (!titleElement || !descriptionElement || !dueDateElement || !prioButton || contactsElements.length === 0 || subtasksElements.length === 0) {
+        console.error('Ein oder mehrere erforderliche Elemente existieren nicht.');
+        return;
+    }
+
     const updatedTask = {
-        title: document.getElementById('overlayTitle').value,
-        description: document.getElementById('overlayDescription').value,
-        date: document.getElementById('overlayDueDate').value,
-        prio: document.querySelector('.prio-button.active-button').id.replace('prio', ''),
-        contacts: Array.from(document.querySelectorAll('#overlayContacts .contact-initial')).map(contact => contact.textContent),
-        subtasks: Array.from(document.querySelectorAll('#overlaySubtasks li')).map(subtask => subtask.textContent),
+        title: titleElement.value,
+        description: descriptionElement.value,
+        date: dueDateElement.value,
+        prio: prioButton.id.replace('prio', ''),
+        contacts: Array.from(contactsElements).map(contact => contact.textContent),
+        subtasks: Array.from(subtasksElements).map(subtask => subtask.textContent),
     };
 
+    console.log(updatedTask);
+
     try {
-        const url = `${base_url}/tasks/${category}/${taskId}.json`;
+        const url = `${base_url}/tasks/${taskStatus}/${taskId}.json`;
+        console.log(url);
+
         const response = await fetch(url, {
             method: 'PUT',
             body: JSON.stringify(updatedTask),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error: ${response.status}`);
+            const errorMessage = await response.text();
+            throw new Error(`HTTP error: ${response.status} - ${errorMessage}`);
         }
 
         console.log('Task successfully updated!');
