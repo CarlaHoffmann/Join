@@ -1,4 +1,4 @@
-// const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
+const task_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
 function submit() {
     checkForm();
@@ -26,7 +26,7 @@ async function createTask() {
 
 async function postData(taskData) {
     try {
-        let response = await fetch(base_url + "/tasks/toDo" + ".json",{
+        let response = await fetch(task_base_url + "/tasks/toDo" + ".json",{
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(taskData)
