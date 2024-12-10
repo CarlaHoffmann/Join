@@ -600,7 +600,7 @@ async function openTaskOverlay(task) {
             <div>${task.description}</div>
             <div>
                 <div class="textColor">Due date:</div>
-                <div class="dateSelect">${task.date || ''}</div>
+                <div class="dateSelect">${getDate(task.date)}</div>
             </div>
             <div>
                 <div class="textColor">Priority:</div>
@@ -932,7 +932,16 @@ async function openEditTaskOverlay(task) {
     updateEditContacts();
 }
 
+function getDate(date){
+    // Zerlege das Datum in seine Bestandteile
+    const parts = date.split('-');
+    const day = parts[2];
+    const month = parts[1];
+    const year = parts[0];
 
+    // Formatiere das Datum als dd/mm/yyyy
+    return `${day}/${month}/${year}`;
+}
 
 
 function enableEditMode() {
