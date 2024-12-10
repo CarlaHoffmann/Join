@@ -138,6 +138,28 @@ body {
     background-color: transparent;
 }
 
+.assigned-contact {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px; /* Optional, Abstand zwischen den Kontakten */
+}
+
+.contact-initial {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    margin-right: 8px; /* Abstand zwischen Initialen und Namen */
+}
+
+.contact-name {
+    font-size: 14px;
+    color: #2a3647; /* Beispiel-Farbe für den Text */
+}
 
 
 /* Media Queries */

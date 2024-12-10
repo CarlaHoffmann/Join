@@ -508,13 +508,17 @@ document.getElementById("edit-task-save").addEventListener("click", saveEditedTa
 
 async function openTaskOverlay(task) {
     const overlayContainer = document.getElementById('taskOverlayContainer');
-    
+
     // Farben für die Kontakte abrufen
     const contactColors = await getContactColors([task]);
     const contactsHTML = task.contacts.map((contact, index) => {
         const contactColor = contactColors[0][index]; // Erste Aufgabe und entsprechender Kontakt
         const initials = getContactInitials(contact);
-        return `<div class="contact-initial" style="background-color: ${contactColor};">${initials}</div>`;
+        return `
+            <div class="assigned-contact">
+                <div class="contact-initial" style="background-color: ${contactColor};">${initials}</div>
+                <span class="contact-name">${contact}</span>
+            </div>`;
     }).join('');
 
     overlayContainer.innerHTML = `
