@@ -501,58 +501,62 @@ function openTaskOverlay(task) {
             </div>
         </div>`;
         
-    // overlayContainer.innerHTML = `
-    //     <div class="taskOverlay">
-    //         <div class="taskSelect">
-    //             <div class="taskContainer">${task.category}</div>
-    //             <div class="close" onclick="closeTaskOverlay()">
-    //                 <img src="assets/img/add_task/close.svg" alt="Close" />
-    //             </div>
-    //         </div>
-    //         <div id="overlayContent">
-    //             <div class="headline">
-    //                 <label>Title:</label>
-    //                 <input id="overlayTitle" type="text" value="${task.title}" class="overlay-input" readonly />
-    //             </div>
-    //             <div>
-    //                 <label>Description:</label>
-    //                 <textarea id="overlayDescription" class="overlay-textarea" readonly>${task.description}</textarea>
-    //             </div>
-    //             <div>
-    //                 <label>Due Date:</label>
-    //                 <input id="overlayDueDate" type="date" value="${task.date || ''}" class="overlay-input" readonly />
-    //             </div>
-    //             <div>
-    //                 <label>Priority:</label>
-    //                 <div class="prio-buttons">
-    //                     <button onclick="setOverlayPriority(1)" class="prio-button ${task.prio === '1' ? 'urgent active-button' : ''}" id="prio1" disabled>Urgent</button>
-    //                     <button onclick="setOverlayPriority(2)" class="prio-button ${task.prio === '2' ? 'med active-button' : ''}" id="prio2" disabled>Medium</button>
-    //                     <button onclick="setOverlayPriority(3)" class="prio-button ${task.prio === '3' ? 'low active-button' : ''}" id="prio3" disabled>Low</button>
-    //                 </div>
-    //             </div>
-    //             <div>
-    //                 <label>Assigned to:</label>
-    //                 <div id="overlayContacts" class="selected-contacts">
-    //                     ${task.contacts.map(contact => `<div class="contact-initial">${contact}</div>`).join('')}
-    //                 </div>
-    //             </div>
-    //             <div>
-    //                 <label>Subtasks:</label>
-    //                 <ul id="overlaySubtasks">
-    //                     ${task.subtasks.map(subtask => `<li>${subtask}</li>`).join('')}
-    //                 </ul>
-    //                 <input id="newSubtaskInput" type="text" placeholder="Add new subtask" class="overlay-input d-none" />
-    //                 <button onclick="addOverlaySubtask()" id="addSubtaskButton" class="d-none">Add</button>
-    //             </div>
-    //             <div class="buttonContainer">
-    //                 <button class="editBtn" id="editTaskButton" onclick="enableEditMode()">Edit</button>
-    //                 <button class="saveBtn d-none" id="saveTaskButton" onclick="saveOverlayChanges('${task.id}', '${task.path}')">OK</button>
-    //             </div>
-    //         </div>
-    //     </div>
-    // `;
 
     overlayContainer.classList.remove('d-none');
+}
+
+function openEditTaskOverlay() {
+    const overlayContainer = document.getElementById('taskOverlayContainer');
+    overlayContainer.innerHTML = `
+        <div class="taskOverlay">
+            <div class="taskSelect">
+                <div class="taskContainer">${task.category}</div>
+                <div class="close" onclick="closeTaskOverlay()">
+                    <img src="assets/img/add_task/close.svg" alt="Close" />
+                </div>
+            </div>
+            <div id="overlayContent">
+                <div class="headline">
+                    <label>Title:</label>
+                    <input id="overlayTitle" type="text" value="${task.title}" class="overlay-input" readonly />
+                </div>
+                <div>
+                    <label>Description:</label>
+                    <textarea id="overlayDescription" class="overlay-textarea" readonly>${task.description}</textarea>
+                </div>
+                <div>
+                    <label>Due Date:</label>
+                    <input id="overlayDueDate" type="date" value="${task.date || ''}" class="overlay-input" readonly />
+                </div>
+                <div>
+                    <label>Priority:</label>
+                    <div class="prio-buttons">
+                        <button onclick="setOverlayPriority(1)" class="prio-button ${task.prio === '1' ? 'urgent active-button' : ''}" id="prio1" disabled>Urgent</button>
+                        <button onclick="setOverlayPriority(2)" class="prio-button ${task.prio === '2' ? 'med active-button' : ''}" id="prio2" disabled>Medium</button>
+                        <button onclick="setOverlayPriority(3)" class="prio-button ${task.prio === '3' ? 'low active-button' : ''}" id="prio3" disabled>Low</button>
+                    </div>
+                </div>
+                <div>
+                    <label>Assigned to:</label>
+                    <div id="overlayContacts" class="selected-contacts">
+                        ${task.contacts.map(contact => `<div class="contact-initial">${contact}</div>`).join('')}
+                    </div>
+                </div>
+                <div>
+                    <label>Subtasks:</label>
+                    <ul id="overlaySubtasks">
+                        ${task.subtasks.map(subtask => `<li>${subtask}</li>`).join('')}
+                    </ul>
+                    <input id="newSubtaskInput" type="text" placeholder="Add new subtask" class="overlay-input d-none" />
+                    <button onclick="addOverlaySubtask()" id="addSubtaskButton" class="d-none">Add</button>
+                </div>
+                <div class="buttonContainer">
+                    <button class="editBtn" id="editTaskButton" onclick="enableEditMode()">Edit</button>
+                    <button class="saveBtn d-none" id="saveTaskButton" onclick="saveOverlayChanges('${task.id}', '${task.path}')">OK</button>
+                </div>
+            </div>
+        </div>
+    `;
 }
 
 
