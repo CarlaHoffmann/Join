@@ -661,8 +661,8 @@ function openEditTaskOverlay(task) {
 
     overlayContainer.innerHTML = `
         <div class="taskOverlay">
-            <div class="scroll-container fill-in-part">
-                <div class="add-task-form">
+            <div class="scroll-container fill-in-part-edit">
+                <div class="add-task-edit-form">
                     <div id="add-task-first" class="width-440">
                         <div class="labled-box">
                             <label class="form-label">

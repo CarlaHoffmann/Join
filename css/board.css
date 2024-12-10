@@ -839,3 +839,15 @@
   margin-top: 8px;
 
 }
+
+
+.add-task-edit-form {
+  display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+    flex-direction: column;
+}
+
+.fill-in-part-edit {
+  overflow-y: auto; 
+}
