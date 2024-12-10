@@ -507,7 +507,9 @@ document.getElementById("edit-task-save").addEventListener("click", saveEditedTa
 // }
 function openTaskOverlay(task) {
     const overlayContainer = document.getElementById('taskOverlayContainer');
-    let priority = getPriorityClass(task.prio);
+    // console.log('task.prio:', task.prio, typeof task.prio);
+    let priority = getPriorityClass(task.prio); // funktioniert noch nicht
+
     console.log(priority);
     overlayContainer.innerHTML = `
         <div class="taskOverlay">
@@ -577,6 +579,7 @@ function openTaskOverlay(task) {
 
 function getPriorityClass(priority) {
     console.log('prio');
+    console.log('task.prio:', task.prio, typeof task.prio);
     switch(priority) {
         case '1': return 'urgent';
         case '2': return 'med';
