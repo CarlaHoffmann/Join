@@ -310,6 +310,38 @@ function enableEditMode() {
 
 
 
+// async function saveOverlayChanges(taskId, category) {
+//     // Geänderte Daten aus den Feldern abrufen
+//     const updatedTask = {
+//         title: document.getElementById('overlayTitle').value,
+//         description: document.getElementById('overlayDescription').value,
+//         date: document.getElementById('overlayDueDate').value,
+//         prio: document.querySelector('.prio-button.active-button').id.replace('prio', ''),
+//         contacts: Array.from(document.querySelectorAll('#overlayContacts .contact-initial')).map(contact => contact.textContent),
+//         subtasks: Array.from(document.querySelectorAll('#overlaySubtasks li')).map(subtask => subtask.textContent),
+//     };
+
+//     try {
+//         const url = `${base_url}/tasks/${category}/${taskId}.json`;
+//         const response = await fetch(url, {
+//             method: 'PUT',
+//             body: JSON.stringify(updatedTask),
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         });
+
+//         if (!response.ok) {
+//             throw new Error(`HTTP error: ${response.status}`);
+//         }
+
+//         console.log('Task successfully updated!');
+//         closeTaskOverlay();
+//         loadTasks(); // Aktualisiere das Board
+//     } catch (error) {
+//         console.error('Error saving task changes:', error);
+//     }
+// }
 async function saveOverlayChanges(taskId, taskStatus) {
     // Geänderte Daten aus den Feldern abrufen
     const titleElement = document.getElementById('overlayTitle');
@@ -438,33 +470,4 @@ function updatePlaceholders() {
             console.log(`Hiding placeholder for ${column}`);
         }
     });
-}
-
-
-function addSearchTask() {
-    const searchInput = document.getElementById("searchField").value.toLowerCase();
-    const allTasks = document.querySelectorAll(".task-card");
-    const noSearchResult = document.getElementById("no-search-result");
-
-    let hasResults = false;
-
-    allTasks.forEach(task => {
-        const taskTitle = task.querySelector(".task-title").textContent.toLowerCase();
-        const taskDescription = task.querySelector(".task-description").textContent.toLowerCase();
-        const taskCategory = task.querySelector(".task-type").textContent.toLowerCase();
-
-        if (taskTitle.includes(searchInput) || taskDescription.includes(searchInput) || taskCategory.includes(searchInput)) {
-            task.style.display = "block"; // Zeige den Task
-            hasResults = true;
-        } else {
-            task.style.display = "none"; // Verstecke den Task
-        }
-    });
-}
-
-// Suchfeld zurücksetzen
-function deleteSearch() {
-    const searchField = document.getElementById("searchField");
-    searchField.value = ""; // Eingabe leeren
-    addSearchTask(); // Alle Tasks wieder sichtbar machen
 }
