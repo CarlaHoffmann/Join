@@ -840,7 +840,7 @@
 
 }
 
-
+/*Zum Task Edit Overlay*/
 .add-task-edit-form {
   display: flex;
     gap: 24px;
@@ -850,12 +850,8 @@
 
 .fill-in-part-edit {
   overflow-y: auto; 
-  /* width: ; */
 }
 
-/* .width-440 {
-  width: 440px;
-} */
 .title-edit {
   padding: 12px 21px;
   box-sizing: border-box;

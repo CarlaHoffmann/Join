@@ -1,0 +1,71 @@
+// Initialisieren von selectedContacts mit task.contacts
+// let taskContacts = task.contacts;
+
+// Funktion zum Öffnen der Kontaktliste
+async function openAssigned() {
+    let contactDropDown = document.getElementById('contact-drop-down');
+    let contactsToSelect = document.getElementById('contacts-to-select');
+
+    const contacts = await loadContacts();
+    const loggedInUser = await getUser();
+
+    const preparedContacts = await prepareContacts(contacts, loggedInUser);
+    const contactsHTML = createEditContactsHTML(preparedContacts, selectedContacts, loggedInUser);
+
+    contactsToSelect.innerHTML = contactsHTML;
+    contactDropDown.style.display = 'block';
+
+    // Aktualisieren der ausgewählten Kontakte im Overlay
+    updateEditContacts();
+}
+
+// Funktion zum Erstellen der Kontaktliste
+function createEditContactsHTML(contacts, taskContacts, loggedInUser) {
+    let contactsHTML = '';
+
+    contacts.forEach((contact) => {
+        const isSelected = taskContacts.includes(contact.name);
+        const isCurrentUser = loggedInUser.name !== 'Guest' && contact.name === loggedInUser.name;
+        contactsHTML += `
+            <label onclick="handleContactClick(event)" for="${contact.id}" class="selection-name contact-label">
+                <div>${contact.name}${isCurrentUser ? ' (You)' : ''}</div>
+                <input type="checkbox" id="${contact.id}" value="${contact.name}" ${isSelected ? 'checked' : ''}>
+            </label>
+        `;
+    });
+
+    return contactsHTML;
+}
+
+// Funktion zum Aktualisieren der ausgewählten Kontakte im Overlay
+async function updateEditContacts() {
+    let contactInitials = document.getElementById('selected-contacts');
+    contactInitials.innerHTML = ''; // Leere den Inhalt vor dem Neuaufbau
+
+    let contactInis = ''; // Variable zum Sammeln der HTML-Strings
+
+    for (let i = 0; i < selectedContacts.length; i++) {
+        const contactName = selectedContacts[i];
+        let initials = contactName.split(' ').map(word => word[0]).join('');
+        
+        // Farbe für den Kontakt abrufen
+        let color = await getContactColor(contactName);
+        
+        // Füge den HTML-String zur Sammlung hinzu
+        contactInis += `<div class="contact-initial" style="background-color: ${color};">${initials}</div>`;
+    }
+
+    // Füge alle Kontakt-Initialen hinzu
+    contactInitials.innerHTML = contactInis;
+}
+
+function getDate(date){
+    // Zerlege das Datum in seine Bestandteile
+    const parts = date.split('-');
+    const day = parts[2];
+    const month = parts[1];
+    const year = parts[0];
+
+    // Formatiere das Datum als dd/mm/yyyy
+    return `${day}/${month}/${year}`;
+}

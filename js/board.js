@@ -621,7 +621,7 @@ async function openTaskOverlay(task) {
                     Delete
                 </button>
                 <div class="stroke"></div>
-                <button class="editBtn" onclick="openEditTaskOverlay('${task}')">
+                <button class="editBtn" onclick="openEditTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})">
                     Edit
                 </button>
             </div>
@@ -643,8 +643,6 @@ document.querySelectorAll('.check input[type="checkbox"]').forEach((checkbox, in
     });
 });
 
-
-
 function getPriorityClass(priority) {
     console.log('prio');
     switch(priority) {
@@ -655,9 +653,179 @@ function getPriorityClass(priority) {
     }
 }
 
-function openEditTaskOverlay(task) {
+// function openEditTaskOverlay(task) {
+//     const overlayContainer = document.getElementById('taskOverlayContainer');
+//     console.log(task);
+
+//     overlayContainer.innerHTML = `
+//         <div class="taskOverlay">
+//             <div class="scroll-container fill-in-part-edit">
+//                 <div class="add-task-edit-form">
+//                     <div id="add-task-first" class="width-440-edit">
+//                         <div class="labled-box">
+//                             <label class="form-label">
+//                                 <div>Title<span class="red-asterisk">*</span></div>
+//                                 <div id="titel-wrapper">
+//                                     <input type="text" id="title" class="form-field margin-bottom title-edit" placeholder="Enter a title" minlength="3" required value="${task.title}">
+//                                     <div id="title-error" class="error-message d-none">This field is required.</div>
+//                                     <div id="title-minlength-error" class="error-message d-none">Please enter at least 3 characters.</div>
+//                                 </div>
+//                             </label>
+//                         </div>
+
+//                         <div class="labled-box">
+//                             <label class="form-label">
+//                                 Description
+//                                 <textarea name="description" id="description" class="form-field margin-bottom description" placeholder="Enter a description">${task.description}</textarea>
+//                             </label>
+//                         </div>
+
+
+//                         <div class="labled-box">
+//                             <label class="form-label">
+//                                 Assigned to
+//                                 <div id="contact-selection" class="contact-selection">
+//                                     <div onclick="openAssigned()" id="select-field" class="selection-field form-field pad-12-16">
+//                                         <p>Select contacts to assign</p><img class="symbol-hover icon-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
+//                                     </div>
+//                                     <div onclick="closeAssigned()" id="contact-drop-down" class="select-items" style="display: none;">
+//                                         <div id="contact-dropped-down" class="selection-field form-field pad-12-16 blue-border">
+//                                             <p>Select contacts to assign</p><img class="symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
+//                                         </div>
+//                                         <div id="contacts-to-select"></div>
+//                                     </div>
+//                                 </div>
+//                             </label>
+//                             <div id="selected-contacts" class="selected-contacts"></div>
+//                         </div>
+//                     </div>
+
+//                     <div class="vertical-divider hide-mobile"></div>
+
+//                     <div id="add-task-second" class="width-440-edit">
+//                         <div class="labled-box">
+//                             <label class="form-label">
+//                                 <div>Due date<span class="red-asterisk">*</span></div>
+//                                 <div class="date-input-wrapper">
+//                                     <input type="text" id="datepicker" class="form-field margin-bottom pad-12-16 date-input" placeholder="dd/mm/yyyy" maxlength="10" required>
+//                                     <span class="calendar-icon">
+//                                         <img src="./img/task/event.svg" alt="Calendar" class="calendar-icon">
+//                                     </span>
+//                                     <div id="due-date-error" class="error-message d-none">This field is required.</div>
+//                                 </div>
+                                
+//                             </label>                    
+//                         </div>
+                        
+
+//                         <div class="labled-box">
+//                             <div class="button-box">
+//                                 <div  class="form-label">Prio</div>
+//                                 <div class="prio-buttons">
+//                                     <button onclick="priority(1, event)" class="prio-button hover-button" id="prio1">
+//                                         <p>Urgent</p>
+//                                         <div class="double-arrow-up">
+//                                             <img src="./img/task/prio_high.svg" alt="high">
+//                                         </div>
+//                                     </button>
+//                                     <button onclick="priority(2, event)" class="prio-button hover-button" id="prio2">
+//                                         <p>Medium</p>
+//                                         <div class="double-line">
+//                                             <img src="./img/task/prio_med.svg" alt="medium">
+//                                         </div>
+//                                     </button>
+//                                     <button onclick="priority(3, event)" class="prio-button hover-button" id="prio3">
+//                                         <p>Low</p>
+//                                         <div class="double-arrow-down">
+//                                             <img src="./img/task/prio_low.svg" alt="low">
+//                                         </div>
+//                                     </button>
+//                                 </div>
+//                             </div>
+//                         </div>
+
+//                         <div class="labled-box">
+//                             <div class="form-label">
+//                                 <div>Category<span class="red-asterisk">*</span></div>
+//                                 <div id="select-wrapper" class="select-wrapper">
+//                                     <div  id="category">
+//                                         <div onclick="showCategory()" class="select-field">
+//                                             <div id="category-selection" class="form-field margin-bottom pad-12-16">Select task category</div>
+//                                             <img class="dropdown-icon symbol-hover icon-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
+//                                         </div>
+//                                     </div>
+//                                     <div id="error-message" class="error-message d-none">This field is required.</div>
+
+//                                     <div id="opened-category" class="d-none">
+//                                         <div onclick="showCategory()" class="select-field">
+//                                             <div class="form-field pad-12-16 blue-border">Select task category</div>
+//                                             <img id="dropdown-icon2" class="dropdown-icon symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
+//                                         </div>
+//                                         <div class="selection-drop-down">
+//                                             <div onclick="categorySelected('Technical Task')" class="drop-down-field">Technical Task</div>
+//                                             <div onclick="categorySelected('User Story')" class="drop-down-field">User Story</div>
+//                                         </div>
+//                                     </div>
+//                                 </div>
+//                             </div>
+//                         </div>
+
+//                         <div class="labled-box">
+//                             <label class="form-label">
+//                                 Subtasks
+//                                 <div onclick="openSubtaskTemplate()" id="subtask-input-wrapper">
+//                                     <div id="subtask">
+//                                         <input onclick="openSubtaskTemplate()" id="subtaskInput" type="text" class="form-field pad-12-16" placeholder="Add new subtask">
+//                                         <div id="subtask-buttons">
+//                                             <img class="subtask-img symbol-hover icon-hover" src="./img/task/subtask.svg" alt="add subtask">
+//                                         </div>
+//                                     </div>
+//                                 </div>
+//                             </label>
+//                             <div>
+//                                 <div id="subtasks">
+//                                 </div>
+//                             </div>
+//                             <span class="font-16 hide-desktop"><span class="red-asterisk">*</span>This field is required</span>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//             <button onclick="openTaskOverlay()">OK</button>
+//         </div>
+//     `;
+// }
+// Funktion zum Öffnen des Edit-Overlays
+let taskContacts = task.contacts;
+
+async function openEditTaskOverlay(task) {
     const overlayContainer = document.getElementById('taskOverlayContainer');
     console.log(task);
+
+    // Initialisieren von selectedContacts mit task.contacts
+    // taskContacts = task.contacts;
+
+    // Farben für die Kontakte abrufen
+    const contactColors = await getContactColors([task]);
+    const contactsHTML = task.contacts.map((contact, index) => {
+        const contactColor = contactColors[0][index]; // Erste Aufgabe und entsprechender Kontakt
+        const initials = getContactInitials(contact);
+        return `
+            <div class="assigned-contact">
+                <div class="contact-initial" style="background-color: ${contactColor};">${initials}</div>
+                <span class="contact-name">${contact}</span>
+            </div>`;
+    }).join('');
+
+    // Subtasks mit Checkbox-Status
+    const subtasksHTML = Object.keys(task.subtasks).map(key => {
+        const subtask = task.subtasks[key];
+        return `
+            <div class="check">
+                <input type="checkbox" ${subtask.checked ? 'checked' : ''} disabled>
+                <div>${subtask.task}</div>
+            </div>`;
+    }).join('');
 
     overlayContainer.innerHTML = `
         <div class="taskOverlay">
@@ -668,7 +836,7 @@ function openEditTaskOverlay(task) {
                             <label class="form-label">
                                 <div>Title<span class="red-asterisk">*</span></div>
                                 <div id="titel-wrapper">
-                                    <input type="text" id="title-edit" class="form-field margin-bottom title-edit" placeholder="Enter a title" minlength="3" required>
+                                    <input type="text" id="title" class="form-field margin-bottom title-edit" placeholder="Enter a title" minlength="3" required value="${task.title}">
                                     <div id="title-error" class="error-message d-none">This field is required.</div>
                                     <div id="title-minlength-error" class="error-message d-none">Please enter at least 3 characters.</div>
                                 </div>
@@ -678,10 +846,9 @@ function openEditTaskOverlay(task) {
                         <div class="labled-box">
                             <label class="form-label">
                                 Description
-                                <textarea name="description" id="description" class="form-field margin-bottom description" placeholder="Enter a description"></textarea>
+                                <textarea name="description" id="description" class="form-field margin-bottom description" placeholder="Enter a description">${task.description}</textarea>
                             </label>
                         </div>
-
 
                         <div class="labled-box">
                             <label class="form-label">
@@ -709,146 +876,44 @@ function openEditTaskOverlay(task) {
                             <label class="form-label">
                                 <div>Due date<span class="red-asterisk">*</span></div>
                                 <div class="date-input-wrapper">
-                                    <input type="text" id="datepicker" class="form-field margin-bottom pad-12-16 date-input" placeholder="dd/mm/yyyy" maxlength="10" required>
+                                    <input type="text" id="datepicker" class="form-field margin-bottom pad-12-16 date-input" placeholder="dd/mm/yyyy" maxlength="10" required value="${getDate(task.date)}">
                                     <span class="calendar-icon">
                                         <img src="./img/task/event.svg" alt="Calendar" class="calendar-icon">
                                     </span>
                                     <div id="due-date-error" class="error-message d-none">This field is required.</div>
                                 </div>
-                                
                             </label>                    
                         </div>
-                        
+                    </div>
 
-                        <div class="labled-box">
-                            <div class="button-box">
-                                <div  class="form-label">Prio</div>
-                                <div class="prio-buttons">
-                                    <button onclick="priority(1, event)" class="prio-button hover-button" id="prio1">
-                                        <p>Urgent</p>
-                                        <div class="double-arrow-up">
-                                            <img src="./img/task/prio_high.svg" alt="high">
-                                        </div>
-                                    </button>
-                                    <button onclick="priority(2, event)" class="prio-button hover-button" id="prio2">
-                                        <p>Medium</p>
-                                        <div class="double-line">
-                                            <img src="./img/task/prio_med.svg" alt="medium">
-                                        </div>
-                                    </button>
-                                    <button onclick="priority(3, event)" class="prio-button hover-button" id="prio3">
-                                        <p>Low</p>
-                                        <div class="double-arrow-down">
-                                            <img src="./img/task/prio_low.svg" alt="low">
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="labled-box">
-                            <div class="form-label">
-                                <div>Category<span class="red-asterisk">*</span></div>
-                                <div id="select-wrapper" class="select-wrapper">
-                                    <div  id="category">
-                                        <div onclick="showCategory()" class="select-field">
-                                            <div id="category-selection" class="form-field margin-bottom pad-12-16">Select task category</div>
-                                            <img class="dropdown-icon symbol-hover icon-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
-                                        </div>
-                                    </div>
-                                    <div id="error-message" class="error-message d-none">This field is required.</div>
-
-                                    <div id="opened-category" class="d-none">
-                                        <div onclick="showCategory()" class="select-field">
-                                            <div class="form-field pad-12-16 blue-border">Select task category</div>
-                                            <img id="dropdown-icon2" class="dropdown-icon symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
-                                        </div>
-                                        <div class="selection-drop-down">
-                                            <div onclick="categorySelected('Technical Task')" class="drop-down-field">Technical Task</div>
-                                            <div onclick="categorySelected('User Story')" class="drop-down-field">User Story</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="labled-box">
-                            <label class="form-label">
-                                Subtasks
-                                <div onclick="openSubtaskTemplate()" id="subtask-input-wrapper">
-                                    <div id="subtask">
-                                        <input onclick="openSubtaskTemplate()" id="subtaskInput" type="text" class="form-field pad-12-16" placeholder="Add new subtask">
-                                        <div id="subtask-buttons">
-                                            <img class="subtask-img symbol-hover icon-hover" src="./img/task/subtask.svg" alt="add subtask">
-                                        </div>
-                                    </div>
-                                </div>
-                            </label>
-                            <div>
-                                <div id="subtasks">
-                                </div>
-                            </div>
-                            <span class="font-16 hide-desktop"><span class="red-asterisk">*</span>This field is required</span>
-                        </div>
+                        <!-- Weitere Felder und Logik hierhin -->
                     </div>
                 </div>
             </div>
-            <button onclick="openTaskOverlay()">OK</button>
-        </div>
-    `;
+            <div>
+                <span>Subtasks:</span>
+                <div>
+                    ${subtasksHTML}
+                </div>
+            </div>
+            <div class="deleteEditBtnContainer">
+                <button class="deletBtn" onclick="deleteTask('${task.id}')">
+                    Delete
+                </button>
+                <div class="stroke"></div>
+                <button class="editBtn" onclick="openEditTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})">
+                    Edit
+                </button>
+            </div>
+        </div>`;
+        
+    overlayContainer.classList.remove('d-none');
 
-
-//     overlayContainer.innerHTML = `
-//     <div class="taskOverlay">
-//         <div class="taskSelect">
-//             <div class="taskContainer">${task.category}</div>
-//             <div class="close" onclick="closeTaskOverlay()">
-//                 <img src="assets/img/add_task/close.svg" alt="Close" />
-//             </div>
-//         </div>
-//         <div id="overlayContent">
-//             <div class="headline">
-//                 <label>Title:</label>
-//                 <input id="overlayTitle" type="text" value="${task.title}" class="overlay-input" readonly />
-//             </div>
-//             <div>
-//                 <label>Description:</label>
-//                 <textarea id="overlayDescription" class="overlay-textarea" readonly>${task.description}</textarea>
-//             </div>
-//             <div>
-//                 <label>Due Date:</label>
-//                 <input id="overlayDueDate" type="date" value="${task.date || ''}" class="overlay-input" readonly />
-//             </div>
-//             <div>
-//                 <label>Priority:</label>
-//                 <div class="prio-buttons">
-//                     <button onclick="setOverlayPriority(1)" class="prio-button ${task.prio === '1' ? 'urgent active-button' : ''}" id="prio1" disabled>Urgent</button>
-//                     <button onclick="setOverlayPriority(2)" class="prio-button ${task.prio === '2' ? 'med active-button' : ''}" id="prio2" disabled>Medium</button>
-//                     <button onclick="setOverlayPriority(3)" class="prio-button ${task.prio === '3' ? 'low active-button' : ''}" id="prio3" disabled>Low</button>
-//                 </div>
-//             </div>
-//             <div>
-//                 <label>Assigned to:</label>
-//                 <div id="overlayContacts" class="selected-contacts">
-//                     ${task.contacts.map(contact => `<div class="contact-initial">${contact}</div>`).join('')}
-//                 </div>
-//             </div>
-//             <div>
-//                 <label>Subtasks:</label>
-//                 <ul id="overlaySubtasks">
-//                     ${task.subtasks.map(subtask => `<li>${subtask}</li>`).join('')}
-//                 </ul>
-//                 <input id="newSubtaskInput" type="text" placeholder="Add new subtask" class="overlay-input d-none" />
-//                 <button onclick="addOverlaySubtask()" id="addSubtaskButton" class="d-none">Add</button>
-//             </div>
-//             <div class="buttonContainer">
-//                 <button class="editBtn" id="editTaskButton" onclick="enableEditMode()">Edit</button>
-//                 <button class="saveBtn d-none" id="saveTaskButton" onclick="saveOverlayChanges('${task.id}', '${task.path}')">OK</button>
-//             </div>
-//         </div>
-//     </div>
-// `;
+    // Aktualisieren der ausgewählten Kontakte im Overlay
+    updateEditContacts();
 }
+
+
 
 
 function enableEditMode() {
