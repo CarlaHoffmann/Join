@@ -506,6 +506,64 @@ document.getElementById("edit-task-save").addEventListener("click", saveEditedTa
 //     overlayContainer.classList.remove('d-none');
 // }
 
+// async function openTaskOverlay(task) {
+//     const overlayContainer = document.getElementById('taskOverlayContainer');
+
+//     // Farben für die Kontakte abrufen
+//     const contactColors = await getContactColors([task]);
+//     const contactsHTML = task.contacts.map((contact, index) => {
+//         const contactColor = contactColors[0][index]; // Erste Aufgabe und entsprechender Kontakt
+//         const initials = getContactInitials(contact);
+//         return `
+//             <div class="assigned-contact">
+//                 <div class="contact-initial" style="background-color: ${contactColor};">${initials}</div>
+//                 <span class="contact-name">${contact}</span>
+//             </div>`;
+//     }).join('');
+
+//     overlayContainer.innerHTML = `
+//         <div class="taskOverlay">
+//             <div class="taskSelect">
+//                 <div class="taskContainer">${task.category}</div>
+//                 <div class="close" onclick="closeTaskOverlay()"><img src="assets/img/add_task/close.svg" alt="Close" /></div>
+//             </div>
+//             <div class="headline">${task.title}</div>
+//             <div>${task.description}</div>
+//             <div>
+//                 <div class="textColor">Due date:</div>
+//                 <div class="dateSelect">${task.date || ''}</div>
+//             </div>
+//             <div>
+//                 <div class="textColor">Priority:</div>
+//                 <div class="dateSelect">${getPrio(task.prio)}</div>
+//             </div>
+//             <div>
+//                 <span class="textColor">Assigned To:</span>
+//                 <div class="userContainer">${contactsHTML}</div>
+//             </div>
+//             <div>
+//                 <span>Subtasks:</span>
+//                 <div>
+//                     ${task.subtasks.map(subtask => `
+//                         <div class="check">
+//                             <input type="checkbox">
+//                             <div>${subtask}</div>
+//                         </div>`).join('')}
+//                 </div>
+//             </div>
+//             <div class="deleteEditBtnContainer">
+//                 <button class="deletBtn" onclick="deleteTask('${task.id}')">
+//                     Delete
+//                 </button>
+//                 <div class="stroke"></div>
+//                 <button class="editBtn" onclick="openEditTaskOverlay('${task.id}', '${task.path}')">
+//                     Edit
+//                 </button>
+//             </div>
+//         </div>`;
+        
+//     overlayContainer.classList.remove('d-none');
+// }
 async function openTaskOverlay(task) {
     const overlayContainer = document.getElementById('taskOverlayContainer');
 
@@ -518,6 +576,16 @@ async function openTaskOverlay(task) {
             <div class="assigned-contact">
                 <div class="contact-initial" style="background-color: ${contactColor};">${initials}</div>
                 <span class="contact-name">${contact}</span>
+            </div>`;
+    }).join('');
+
+    // Subtasks mit Checkbox-Status
+    const subtasksHTML = Object.keys(task.subtasks).map(key => {
+        const subtask = task.subtasks[key];
+        return `
+            <div class="check">
+                <input type="checkbox" ${subtask.checked ? 'checked' : ''} disabled>
+                <div>${subtask.task}</div>
             </div>`;
     }).join('');
 
@@ -544,11 +612,7 @@ async function openTaskOverlay(task) {
             <div>
                 <span>Subtasks:</span>
                 <div>
-                    ${task.subtasks.map(subtask => `
-                        <div class="check">
-                            <input type="checkbox">
-                            <div>${subtask}</div>
-                        </div>`).join('')}
+                    ${subtasksHTML}
                 </div>
             </div>
             <div class="deleteEditBtnContainer">
@@ -556,7 +620,7 @@ async function openTaskOverlay(task) {
                     Delete
                 </button>
                 <div class="stroke"></div>
-                <button class="editBtn" onclick="openEditTaskOverlay('${task.id}', '${task.path}')">
+                <button class="editBtn" onclick="openEditTaskOverlay('${task}')">
                     Edit
                 </button>
             </div>
@@ -565,6 +629,18 @@ async function openTaskOverlay(task) {
     overlayContainer.classList.remove('d-none');
 }
 
+// Fügen Sie dies nach der Erstellung des HTML-Inhalts hinzu
+document.querySelectorAll('.check input[type="checkbox"]').forEach((checkbox, index) => {
+    checkbox.addEventListener('change', () => {
+        const taskId = task.id;
+        const subtaskId = Object.keys(task.subtasks)[index];
+        const isChecked = checkbox.checked;
+
+        // Beispiel für die Verwendung von Firebase Realtime Database
+        const db = firebase.database();
+        db.ref(`toDo/${taskId}/subtasks/${subtaskId}/checked`).set(isChecked);
+    });
+});
 
 
 
@@ -578,8 +654,20 @@ function getPriorityClass(priority) {
     }
 }
 
-function openEditTaskOverlay() {
+function openEditTaskOverlay(task) {
     const overlayContainer = document.getElementById('taskOverlayContainer');
+    // Farben für die Kontakte abrufen
+    // const contactColors = await getContactColors([task]);
+    // const contactsHTML = task.contacts.map((contact, index) => {
+    //     const contactColor = contactColors[0][index]; // Erste Aufgabe und entsprechender Kontakt
+    //     const initials = getContactInitials(contact);
+    //     return `
+    //         <div class="assigned-contact">
+    //             <div class="contact-initial" style="background-color: ${contactColor};">${initials}</div>
+    //             <span class="contact-name">${contact}</span>
+    //         </div>`;
+    // }).join('');
+
     overlayContainer.innerHTML = `
         <div class="taskOverlay">
             <div class="taskSelect">
