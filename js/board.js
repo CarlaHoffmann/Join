@@ -911,16 +911,57 @@ async function openEditTaskOverlay(task) {
                             </div>
                         </div>
 
+                        <div class="labled-box">
+                            <div class="form-label">
+                                <div>Category<span class="red-asterisk">*</span></div>
+                                <div id="select-wrapper" class="select-wrapper">
+                                    <div  id="category">
+                                        <div onclick="showCategory()" class="select-field">
+                                            <div id="category-selection" class="form-field margin-bottom pad-12-16">${task.category || 'Select task category'}</div>
+                                            <img class="dropdown-icon symbol-hover icon-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
+                                        </div>
+                                    </div>
+                                    <div id="error-message" class="error-message d-none">This field is required.</div>
+
+                                    <div id="opened-category" class="d-none">
+                                        <div onclick="showCategory()" class="select-field">
+                                            <div class="form-field pad-12-16 blue-border">Select task category</div>
+                                            <img id="dropdown-icon2" class="dropdown-icon symbol-hover dropdown-icon-mirrored" src="./img/task/arrow_drop_downaa.svg" alt="">
+                                        </div>
+                                        <div class="selection-drop-down">
+                                            <div onclick="categorySelected('Technical Task')" class="drop-down-field">Technical Task</div>
+                                            <div onclick="categorySelected('User Story')" class="drop-down-field">User Story</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="labled-box">
+                            <label class="form-label">
+                                Subtasks
+                                <div onclick="openSubtaskTemplate()" id="subtask-input-wrapper">
+                                    <div id="subtask">
+                                        <input onclick="openSubtaskTemplate()" id="subtaskInput" type="text" class="form-field pad-12-16" placeholder="Add new subtask">
+                                        <div id="subtask-buttons">
+                                            <img class="subtask-img symbol-hover icon-hover" src="./img/task/subtask.svg" alt="add subtask">
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                            <div>
+                                <div id="subtasks">
+                                    ${subtasksHTML}
+                                </div>
+                            </div>
+                            <span class="font-16 hide-desktop"><span class="red-asterisk">*</span>This field is required</span>
+                        </div>
+
                         <!-- Weitere Felder und Logik hierhin -->
                     </div>
                 </div>
             </div>
-            <div>
-                <span>Subtasks:</span>
-                <div>
-                    ${subtasksHTML}
-                </div>
-            </div>
+ 
             <div class="deleteEditBtnContainer">
                 <button onclick="openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})">OK</button>
             </div>
@@ -930,6 +971,10 @@ async function openEditTaskOverlay(task) {
 
     // Aktualisieren der ausgewählten Kontakte im Overlay
     updateEditContacts();
+    initializeDatePicker();
+    initializeEditPriority(task.prio);
+    const categorySelection = document.getElementById('category-selection');
+    categorySelection.textContent = task.category || 'Select task category';
 }
 
 function getDate(date){
