@@ -884,7 +884,32 @@ async function openEditTaskOverlay(task) {
                                 </div>
                             </label>                    
                         </div>
-                    </div>
+
+                        <div class="labled-box">
+                            <div class="button-box">
+                                <div  class="form-label">Prio</div>
+                                <div class="prio-buttons">
+                                    <button onclick="priority(1, event)" class="prio-button hover-button" id="prio1">
+                                        <p>Urgent</p>
+                                        <div class="double-arrow-up">
+                                            <img src="./img/task/prio_high.svg" alt="high">
+                                        </div>
+                                    </button>
+                                    <button onclick="priority(2, event)" class="prio-button hover-button" id="prio2">
+                                        <p>Medium</p>
+                                        <div class="double-line">
+                                            <img src="./img/task/prio_med.svg" alt="medium">
+                                        </div>
+                                    </button>
+                                    <button onclick="priority(3, event)" class="prio-button hover-button" id="prio3">
+                                        <p>Low</p>
+                                        <div class="double-arrow-down">
+                                            <img src="./img/task/prio_low.svg" alt="low">
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Weitere Felder und Logik hierhin -->
                     </div>
@@ -897,13 +922,7 @@ async function openEditTaskOverlay(task) {
                 </div>
             </div>
             <div class="deleteEditBtnContainer">
-                <button class="deletBtn" onclick="deleteTask('${task.id}')">
-                    Delete
-                </button>
-                <div class="stroke"></div>
-                <button class="editBtn" onclick="openEditTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})">
-                    Edit
-                </button>
+                <button onclick="openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})">OK</button>
             </div>
         </div>`;
         

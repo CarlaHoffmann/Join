@@ -69,3 +69,14 @@ function getDate(date){
     // Formatiere das Datum als dd/mm/yyyy
     return `${day}/${month}/${year}`;
 }
+
+function initializeEditPriority(task) {
+    resetAllPriorityButtons();
+    const priority = task.prio;
+    const prioButton = document.getElementById(`prio${priority}`);
+    if (prioButton) {
+        activateButton(prioButton, priority);
+    } else {
+        console.error('Priority button not found');
+    }
+}
