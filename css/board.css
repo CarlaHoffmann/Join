@@ -850,4 +850,28 @@
 
 .fill-in-part-edit {
   overflow-y: auto; 
+  /* width: ; */
+}
+
+/* .width-440 {
+  width: 440px;
+} */
+.title-edit {
+  padding: 12px 21px;
+  box-sizing: border-box;
+  width: 440px;
+}
+
+@media(max-width: 680px) {
+  .add-task-edit-form {
+    width: 440px;
+  }
+}
+@media(max-width: 600px) {
+  .add-task-edit-form {
+    width: 100%;
+  }
+  .title-edit {
+    width: 100%;
+  }
 }

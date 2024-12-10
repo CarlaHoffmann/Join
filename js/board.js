@@ -663,12 +663,12 @@ function openEditTaskOverlay(task) {
         <div class="taskOverlay">
             <div class="scroll-container fill-in-part-edit">
                 <div class="add-task-edit-form">
-                    <div id="add-task-first" class="width-440">
+                    <div id="add-task-first" class="width-440-edit">
                         <div class="labled-box">
                             <label class="form-label">
                                 <div>Title<span class="red-asterisk">*</span></div>
                                 <div id="titel-wrapper">
-                                    <input type="text" id="title" class="form-field margin-bottom title" placeholder="Enter a title" minlength="3" required>
+                                    <input type="text" id="title-edit" class="form-field margin-bottom title-edit" placeholder="Enter a title" minlength="3" required>
                                     <div id="title-error" class="error-message d-none">This field is required.</div>
                                     <div id="title-minlength-error" class="error-message d-none">Please enter at least 3 characters.</div>
                                 </div>
@@ -704,7 +704,7 @@ function openEditTaskOverlay(task) {
 
                     <div class="vertical-divider hide-mobile"></div>
 
-                    <div id="add-task-second" class="width-440">
+                    <div id="add-task-second" class="width-440-edit">
                         <div class="labled-box">
                             <label class="form-label">
                                 <div>Due date<span class="red-asterisk">*</span></div>
