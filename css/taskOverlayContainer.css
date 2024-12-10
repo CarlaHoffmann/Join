@@ -124,20 +124,91 @@ body {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-    padding-right: 16px;
+    align-items: center;
+    margin-top: 20px;
+    border-top: 1px solid #f1f1f1;
+    padding-top: 10px;
+}
+
+.deleteEditBtnContainer .stroke {
+    width: 1px;
+    height: 20px;
+    background-color: #ccc;
 }
 
 .deleteEditBtnContainer button {
-    font-size: 16px;
-    font-weight: 400;
     display: flex;
     align-items: center;
     gap: 5px;
+    font-size: 16px;
+    font-weight: 400;
     border: none;
+    background: none;
     cursor: pointer;
-    background-color: transparent;
+    color: #2A3647;
 }
 
+.deleteEditBtnContainer button:hover {
+    color: #1FD7C1;
+}
+
+#overlaySubtasks .subtask-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+#overlaySubtasks .subtask-edit-input {
+    flex: 1;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+#overlaySubtasks .subtask-edit-btn,
+#overlaySubtasks .subtask-delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+#overlaySubtasks .subtask-edit-btn svg,
+#overlaySubtasks .subtask-delete-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: #2A3647;
+}
+
+#overlaySubtasks .subtask-edit-btn:hover svg,
+#overlaySubtasks .subtask-delete-btn:hover svg {
+    fill: #1FD7C1;
+}
+
+
+
+
+.editConfirmBtn {
+    background-color: #1FD7C1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.editConfirmBtn:hover {
+    background-color: #17b4a5;
+}
 
 
 /* Media Queries */
