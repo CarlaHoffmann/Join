@@ -202,7 +202,7 @@ async function displayTasks(taskArray, containerId) {
             <div id="task-${task.id}" class="task-card" draggable="true" 
                 onclick="openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})"
                 ondragstart="drag(event)" ondragend="dragEnd(event)">
-                <div class="task-type">${task.category}</div>
+                <div class="task-type" style="background-color: ${getCategoryColor(task.category)}">${task.category}</div>
                 <h3 class="task-title">${task.title}</h3>
                 <p class="task-description">${task.description}</p>
                 <div class="progress-section">
@@ -279,6 +279,15 @@ async function getContactColors(tasks) {
 function getContactInitials(contact) {
     let initials = contact.split(' ').map(word => word[0]).join('').toUpperCase();
     return initials;
+}
+
+function getCategoryColor(category) {
+    if(category === 'User Story') {
+        return '#0038FF;';
+    }
+    if(category === 'Technical Task') {
+        return '#1FD7C1;';
+    }
 }
 
 
