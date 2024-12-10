@@ -71,11 +71,26 @@ function takeCatergory() {
     return category.innerHTML;
 }
 
+// function takeSubtask() {
+//     if (subtasks.length > 0) {
+//         for each subtasks
+//         return subtasks; // Wir können das Array direkt zurückgeben
+//     } else {
+//         console.log("Keine Subtasks vorhanden");
+//         return [];
+//     }
+// }
 function takeSubtask() {
     if (subtasks.length > 0) {
-        return subtasks; // Wir können das Array direkt zurückgeben
+        const formattedSubtasks = subtasks.map((subtask) => {
+            return {
+                task: subtask,
+                checked: false
+            };
+        });
+        return formattedSubtasks;
     } else {
-        console.log("Keine Subtasks vorhanden");
+        // console.log("Keine Subtasks vorhanden");
         return [];
     }
 }
