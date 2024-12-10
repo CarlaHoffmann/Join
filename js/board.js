@@ -47,14 +47,155 @@ function processTasks(tasks, status) {
 
 
 
-function displayTasks(taskArray, containerId) {
+// function displayTasks(taskArray, containerId) {
+//     const tasks = document.getElementById(containerId);
+//     const placeholder = document.getElementById(containerId.replace("Tasks", "Placeholder"));
+
+//     // HTML für die Tasks generieren
+//     tasks.innerHTML = taskArray.map(task => {
+//         const subtasksText = `${task.subtasks.length} von ${task.subtasks.length} Subtasks`;
+//         const contactsHTML = task.contacts.map(contact => `<div class="member">${contact}</div>`).join('');
+//         const prio = getPrio(task.prio);
+        
+//         return `
+//             <div id="task-${task.id}" class="task-card" draggable="true" 
+//                 onclick="openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})"
+//                 ondragstart="drag(event)" ondragend="dragEnd(event)">
+//                 <div class="task-type">${task.category}</div>
+//                 <h3 class="task-title">${task.title}</h3>
+//                 <p class="task-description">${task.description}</p>
+//                 <div class="progress-section">
+//                     <div class="progress">
+//                         <div class="progress-bar" style="width: 50%;"></div>
+//                     </div>
+//                     <p class="subtasks">${subtasksText}</p>
+//                 </div>
+//                 <div class="members-section">
+//                     <div class="members" style="background-color: ${getContactColor(task.contacts)}">${contactsHTML}</div>
+//                     <div class="priority">
+//                         <img src="./assets/img/add_task/prio_${prio}.svg" alt="${prio} icon">
+//                     </div>
+//                 </div>
+//             </div>
+//         `;
+//     }).join('');
+
+//     // Placeholder-Logik
+//     if (taskArray.length === 0) {
+//         placeholder.style.display = "block"; // Placeholder anzeigen
+//     } else {
+//         placeholder.style.display = "none"; // Placeholder verstecken
+//     }
+// }
+// async function displayTasks(taskArray, containerId) {
+//     const tasks = document.getElementById(containerId);
+//     const placeholder = document.getElementById(containerId.replace("Tasks", "Placeholder"));
+
+//     // Farben für die Kontakte abrufen
+//     const contactColors = await getContactColors(taskArray);
+//     console.log(taskArray);
+
+//     // HTML für die Tasks generieren
+//     tasks.innerHTML = taskArray.map((task, index) => {
+//         const contactColor = contactColors[index];
+//         const subtasksText = `${task.subtasks.length} von ${task.subtasks.length} Subtasks`;
+//         const contactsHTML = task.contacts.map(contact => `<div class="member" style="background-color: ${contactColor}">${contact}</div>`).join('');
+//         const prio = getPrio(task.prio);
+
+//         console.log(contactColor);
+
+//         return `
+//             <div id="task-${task.id}" class="task-card" draggable="true" 
+//                 onclick="openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})"
+//                 ondragstart="drag(event)" ondragend="dragEnd(event)">
+//                 <div class="task-type">${task.category}</div>
+//                 <h3 class="task-title">${task.title}</h3>
+//                 <p class="task-description">${task.description}</p>
+//                 <div class="progress-section">
+//                     <div class="progress">
+//                         <div class="progress-bar" style="width: 50%;"></div>
+//                     </div>
+//                     <p class="subtasks">${subtasksText}</p>
+//                 </div>
+//                 <div class="members-section">
+//                     <div class="members">${contactsHTML}</div>
+//                     <div class="priority">
+//                         <img src="./assets/img/add_task/prio_${prio}.svg" alt="${prio} icon">
+//                     </div>
+//                 </div>
+//             </div>
+//         `;
+//     }).join('');
+
+//     // Placeholder-Logik
+//     if (taskArray.length === 0) {
+//         placeholder.style.display = "block"; // Placeholder anzeigen
+//     } else {
+//         placeholder.style.display = "none"; // Placeholder verstecken
+//     }
+// }
+// async function displayTasks(taskArray, containerId) {
+//     const tasks = document.getElementById(containerId);
+//     const placeholder = document.getElementById(containerId.replace("Tasks", "Placeholder"));
+
+//     // Farben für die Kontakte abrufen
+//     const contactColors = await getContactColors(taskArray);
+//     const contactInitials = await getContactInitials(task.contact);
+
+//     // HTML für die Tasks generieren
+//     tasks.innerHTML = taskArray.map((task, taskIndex) => {
+//         const subtasksText = `${task.subtasks.length} von ${task.subtasks.length} Subtasks`;
+//         const contactsHTML = task.contacts.map((contact, contactIndex) => {
+//             const contactColor = contactColors[taskIndex][contactIndex];
+//             return `<div class="member" style="background-color: ${contactColor}">${contact}</div>`;
+//         }).join('');
+//         const prio = getPrio(task.prio);
+
+//         return `
+//             <div id="task-${task.id}" class="task-card" draggable="true" 
+//                 onclick="openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})"
+//                 ondragstart="drag(event)" ondragend="dragEnd(event)">
+//                 <div class="task-type">${task.category}</div>
+//                 <h3 class="task-title">${task.title}</h3>
+//                 <p class="task-description">${task.description}</p>
+//                 <div class="progress-section">
+//                     <div class="progress">
+//                         <div class="progress-bar" style="width: 50%;"></div>
+//                     </div>
+//                     <p class="subtasks">${subtasksText}</p>
+//                 </div>
+//                 <div class="members-section">
+//                     <div class="members">${contactsHTML}</div>
+//                     <div class="priority">
+//                         <img src="./assets/img/add_task/prio_${prio}.svg" alt="${prio} icon">
+//                     </div>
+//                 </div>
+//             </div>
+//         `;
+//     }).join('');
+
+//     // Placeholder-Logik
+//     if (taskArray.length === 0) {
+//         placeholder.style.display = "block"; // Placeholder anzeigen
+//     } else {
+//         placeholder.style.display = "none"; // Placeholder verstecken
+//     }
+// }
+async function displayTasks(taskArray, containerId) {
     const tasks = document.getElementById(containerId);
     const placeholder = document.getElementById(containerId.replace("Tasks", "Placeholder"));
 
+    // Farben für die Kontakte abrufen
+    const contactColors = await getContactColors(taskArray);
+
     // HTML für die Tasks generieren
-    tasks.innerHTML = taskArray.map(task => {
+    tasks.innerHTML = taskArray.map((task, taskIndex) => {
         const subtasksText = `${task.subtasks.length} von ${task.subtasks.length} Subtasks`;
-        const contactsHTML = task.contacts.map(contact => `<div class="member">${contact}</div>`).join('');
+        const contactsHTML = task.contacts.map((contact, contactIndex) => {
+            const contactColor = contactColors[taskIndex][contactIndex];
+            const initials = getContactInitials(contact);
+            return `<div class="member" style="background-color: ${contactColor}">${initials}</div>`;
+        }).join('');
         const prio = getPrio(task.prio);
 
         return `
@@ -86,6 +227,58 @@ function displayTasks(taskArray, containerId) {
     } else {
         placeholder.style.display = "none"; // Placeholder verstecken
     }
+}
+
+// async function getContactColor(tasks) {
+//     try {
+//         const response = await fetch(`${task_base_url}/users.json`);
+//         const users = await response.json();
+        
+//         for (let userId in users) {
+//             if (users[userId].name === contactName) {
+//                 const colorResponse = await fetch(`${task_base_url}/users/${userId}/color.json`);
+//                 return await colorResponse.json();
+//             }
+//         }
+//         return '#000000'; // Standardfarbe, falls keine gefunden wird
+//     } catch (error) {
+//         console.error("Fehler beim Abrufen der Kontaktfarbe:", error);
+//         return '#000000'; // Standardfarbe im Fehlerfall
+//     }
+// }
+async function getContactColors(tasks) {
+    const contactColors = [];
+    for (const task of tasks) {
+        const taskContactColors = await Promise.all(task.contacts.map(async contact => {
+            try {
+                const response = await fetch(`${task_base_url}/users.json`);
+                const users = await response.json();
+                
+                for (let userId in users) {
+                    if (users[userId].name === contact) {
+                        const colorResponse = await fetch(`${task_base_url}/users/${userId}/color.json`);
+                        return await colorResponse.json();
+                    }
+                }
+                return '#000000'; // Standardfarbe, falls keine gefunden wird
+            } catch (error) {
+                console.error("Fehler beim Abrufen der Kontaktfarbe:", error);
+                return '#000000'; // Standardfarbe im Fehlerfall
+            }
+        }));
+        // contactColors.push(taskContactColors.join(', ')); // oder eine andere Art, die Farben zu kombinieren
+        contactColors.push(taskContactColors);
+    }
+    return contactColors;
+}
+
+// async function getContactInitials(contact) {
+//     let initials = contact.split(' ').map(word => word[0]).join('');
+//     return initials;
+// }
+function getContactInitials(contact) {
+    let initials = contact.split(' ').map(word => word[0]).join('').toUpperCase();
+    return initials;
 }
 
 
@@ -236,57 +429,119 @@ document.getElementById("edit-task-save").addEventListener("click", saveEditedTa
 
 function openTaskOverlay(task) {
     const overlayContainer = document.getElementById('taskOverlayContainer');
-
+    console.log(task.color);
     overlayContainer.innerHTML = `
         <div class="taskOverlay">
             <div class="taskSelect">
                 <div class="taskContainer">${task.category}</div>
-                <div class="close" onclick="closeTaskOverlay()">
-                    <img src="assets/img/add_task/close.svg" alt="Close" />
+                <div class="close" onclick="closeTaskOverlay()"><img src="assets/img/add_task/close.svg" alt="Close" /></div>
+            </div>
+
+            <div class="headline">${task.title}</div>
+
+            <div>${task.description}</div>
+
+            <div>
+                <div class="textColor">Due date:</div>
+                <div class="dateSelect">${task.date || ''}</div>
+            </div>
+
+            <div>
+                <div class="textColor">Priority:</div>
+                <div class="dateSelect">${task.prio === '1' ? 'urgent active-button' : ''}</div>
+            </div>
+
+            <!-- ASSIGNED TO -->
+            <div>
+                <span class="textColor">Assigned To:</span>
+                <div class="userContainer">
+                    ${task.contacts.map(contact => `<div class="contact-initial" style="background-color: ${task.color};">${contact}</div>`).join('')}
+                    
                 </div>
             </div>
-            <div id="overlayContent">
-                <div class="headline">
-                    <label>Title:</label>
-                    <input id="overlayTitle" type="text" value="${task.title}" class="overlay-input" readonly />
-                </div>
+
+            <div>
+                <span>Subtasks:</span>
                 <div>
-                    <label>Description:</label>
-                    <textarea id="overlayDescription" class="overlay-textarea" readonly>${task.description}</textarea>
-                </div>
-                <div>
-                    <label>Due Date:</label>
-                    <input id="overlayDueDate" type="date" value="${task.date || ''}" class="overlay-input" readonly />
-                </div>
-                <div>
-                    <label>Priority:</label>
-                    <div class="prio-buttons">
-                        <button onclick="setOverlayPriority(1)" class="prio-button ${task.prio === '1' ? 'urgent active-button' : ''}" id="prio1" disabled>Urgent</button>
-                        <button onclick="setOverlayPriority(2)" class="prio-button ${task.prio === '2' ? 'med active-button' : ''}" id="prio2" disabled>Medium</button>
-                        <button onclick="setOverlayPriority(3)" class="prio-button ${task.prio === '3' ? 'low active-button' : ''}" id="prio3" disabled>Low</button>
-                    </div>
-                </div>
-                <div>
-                    <label>Assigned to:</label>
-                    <div id="overlayContacts" class="selected-contacts">
-                        ${task.contacts.map(contact => `<div class="contact-initial">${contact}</div>`).join('')}
-                    </div>
-                </div>
-                <div>
-                    <label>Subtasks:</label>
-                    <ul id="overlaySubtasks">
-                        ${task.subtasks.map(subtask => `<li>${subtask}</li>`).join('')}
-                    </ul>
-                    <input id="newSubtaskInput" type="text" placeholder="Add new subtask" class="overlay-input d-none" />
-                    <button onclick="addOverlaySubtask()" id="addSubtaskButton" class="d-none">Add</button>
-                </div>
-                <div class="buttonContainer">
-                    <button class="editBtn" id="editTaskButton" onclick="enableEditMode()">Edit</button>
-                    <button class="saveBtn d-none" id="saveTaskButton" onclick="saveOverlayChanges('${task.id}', '${task.path}')">OK</button>
+                    ${task.subtasks.map(subtask => `
+                        <div class="check">
+                            <input type="checkbox">
+                            <div>${subtask}</div>
+                        </div>`).join('')}
                 </div>
             </div>
-        </div>
-    `;
+
+            <div class="deleteEditBtnContainer">
+                <button class="deletBtn">
+                    <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M3 18C2.45 18 1.97917 17.8042 1.5875 17.4125C1.19583 17.0208 1 16.55 1 16V3C0.716667 3 0.479167 2.90417 0.2875 2.7125C0.0958333 2.52083 0 2.28333 0 2C0 1.71667 0.0958333 1.47917 0.2875 1.2875C0.479167 1.09583 0.716667 1 1 1H5C5 0.716667 5.09583 0.479167 5.2875 0.2875C5.47917 0.0958333 5.71667 0 6 0H10C10.2833 0 10.5208 0.0958333 10.7125 0.2875C10.9042 0.479167 11 0.716667 11 1H15C15.2833 1 15.5208 1.09583 15.7125 1.2875C15.9042 1.47917 16 1.71667 16 2C16 2.28333 15.9042 2.52083 15.7125 2.7125C15.5208 2.90417 15.2833 3 15 3V16C15 16.55 14.8042 17.0208 14.4125 17.4125C14.0208 17.8042 13.55 18 13 18H3ZM3 3V16H13V3H3ZM5 13C5 13.2833 5.09583 13.5208 5.2875 13.7125C5.47917 13.9042 5.71667 14 6 14C6.28333 14 6.52083 13.9042 6.7125 13.7125C6.90417 13.5208 7 13.2833 7 13V6C7 5.71667 6.90417 5.47917 6.7125 5.2875C6.52083 5.09583 6.28333 5 6 5C5.71667 5 5.47917 5.09583 5.2875 5.2875C5.09583 5.47917 5 5.71667 5 6V13ZM9 13C9 13.2833 9.09583 13.5208 9.2875 13.7125C9.47917 13.9042 9.71667 14 10 14C10.2833 14 10.5208 13.9042 10.7125 13.7125C10.9042 13.5208 11 13.2833 11 13V6C11 5.71667 10.9042 5.47917 10.7125 5.2875C10.5208 5.09583 10.2833 5 10 5C9.71667 5 9.47917 5.09583 9.2875 5.2875C9.09583 5.47917 9 5.71667 9 6V13Z"
+                            fill="#2A3647"/>
+                    </svg>
+                    Delete
+                </button>
+                <div class="stroke"></div>
+                <button class="editBtn">
+                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M2 17H3.4L12.025 8.375L10.625 6.975L2 15.6V17ZM16.3 6.925L12.05 2.725L13.45 1.325C13.8333 0.941667 14.3042 0.75 14.8625 0.75C15.4208 0.75 15.8917 0.941667 16.275 1.325L17.675 2.725C18.0583 3.10833 18.2583 3.57083 18.275 4.1125C18.2917 4.65417 18.1083 5.11667 17.725 5.5L16.3 6.925ZM14.85 8.4L4.25 19H0V14.75L10.6 4.15L14.85 8.4Z"
+                            fill="#2A3647"/>
+                    </svg>
+                    Edit
+                </button>
+            </div>
+        </div>`;
+        
+    // overlayContainer.innerHTML = `
+    //     <div class="taskOverlay">
+    //         <div class="taskSelect">
+    //             <div class="taskContainer">${task.category}</div>
+    //             <div class="close" onclick="closeTaskOverlay()">
+    //                 <img src="assets/img/add_task/close.svg" alt="Close" />
+    //             </div>
+    //         </div>
+    //         <div id="overlayContent">
+    //             <div class="headline">
+    //                 <label>Title:</label>
+    //                 <input id="overlayTitle" type="text" value="${task.title}" class="overlay-input" readonly />
+    //             </div>
+    //             <div>
+    //                 <label>Description:</label>
+    //                 <textarea id="overlayDescription" class="overlay-textarea" readonly>${task.description}</textarea>
+    //             </div>
+    //             <div>
+    //                 <label>Due Date:</label>
+    //                 <input id="overlayDueDate" type="date" value="${task.date || ''}" class="overlay-input" readonly />
+    //             </div>
+    //             <div>
+    //                 <label>Priority:</label>
+    //                 <div class="prio-buttons">
+    //                     <button onclick="setOverlayPriority(1)" class="prio-button ${task.prio === '1' ? 'urgent active-button' : ''}" id="prio1" disabled>Urgent</button>
+    //                     <button onclick="setOverlayPriority(2)" class="prio-button ${task.prio === '2' ? 'med active-button' : ''}" id="prio2" disabled>Medium</button>
+    //                     <button onclick="setOverlayPriority(3)" class="prio-button ${task.prio === '3' ? 'low active-button' : ''}" id="prio3" disabled>Low</button>
+    //                 </div>
+    //             </div>
+    //             <div>
+    //                 <label>Assigned to:</label>
+    //                 <div id="overlayContacts" class="selected-contacts">
+    //                     ${task.contacts.map(contact => `<div class="contact-initial">${contact}</div>`).join('')}
+    //                 </div>
+    //             </div>
+    //             <div>
+    //                 <label>Subtasks:</label>
+    //                 <ul id="overlaySubtasks">
+    //                     ${task.subtasks.map(subtask => `<li>${subtask}</li>`).join('')}
+    //                 </ul>
+    //                 <input id="newSubtaskInput" type="text" placeholder="Add new subtask" class="overlay-input d-none" />
+    //                 <button onclick="addOverlaySubtask()" id="addSubtaskButton" class="d-none">Add</button>
+    //             </div>
+    //             <div class="buttonContainer">
+    //                 <button class="editBtn" id="editTaskButton" onclick="enableEditMode()">Edit</button>
+    //                 <button class="saveBtn d-none" id="saveTaskButton" onclick="saveOverlayChanges('${task.id}', '${task.path}')">OK</button>
+    //             </div>
+    //         </div>
+    //     </div>
+    // `;
 
     overlayContainer.classList.remove('d-none');
 }
