@@ -55,7 +55,7 @@ async function getGreetingName() {
         const response = await fetch(`${base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
         const loggedInData = await response.json();
         let user = loggedInData.name;
-        console.log(user);
+
         if(user === 'Guest') {
             greeting.innerHTML = 'Good morning!';
             greetName.innerHTML = '';
@@ -79,7 +79,6 @@ async function countToDo() {
         todoCounter.innerHTML = count;
     } catch (error) {
         console.error("Fehler beim Abrufen der To-Do-Daten:", error);
-        // Optional: Benutzerfreundliche Fehlermeldung im UI anzeigen
         todoCounter.innerHTML = "-";
     }
 }
@@ -149,14 +148,11 @@ async function findHighestPriorityTask() {
         const { highestPriorityTasks, earliestDate } = findHighestPriorityAndEarliestDate(allTasks);
 
         if (highestPriorityTasks.length > 0) {
-            console.log("Höchste Priorität Tasks:", highestPriorityTasks);
             updateUI(highestPriorityTasks, earliestDate);
         } else {
-            console.log("Keine Aufgaben gefunden");
             updateUI(null, null);
         }
     } catch (error) {
-        console.error("Fehler beim Abrufen der Aufgaben:", error);
         updateUI(null, null);
     }
 }

@@ -74,6 +74,7 @@ body {
 
 .box-row {
     height: 168px;
+    max-width: 560px;
 }
 
 .number {
