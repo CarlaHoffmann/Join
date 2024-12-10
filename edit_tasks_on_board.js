@@ -59,8 +59,6 @@ async function updateEditContacts() {
     contactInitials.innerHTML = contactInis;
 }
 
-
-
 function initializeEditPriority(task) {
     resetAllPriorityButtons();
     const priority = task.prio;
