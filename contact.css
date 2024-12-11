@@ -295,26 +295,6 @@ hr {
     display: flex;
     padding: 16px;
 }
-
-@media (max-width: 1320px){
-    h2{
-        font-size:40px;
-    }
-    h3{
-        font-size:25.5px;
-    }
-}
-@media (max-width: 1220px){
-    h2{
-        font-size: 30px;
-    }
-    h3{
-        font-size: 23.5px;
-    }
-    #contactList h3{
-        font-size: 17px;
-    }
-}
 @media (max-width: 1220px){
     .contactHeader{
         flex-direction:column;
@@ -325,6 +305,7 @@ hr {
 @media (max-width: 1160px){
     #contactViewHeader{
         flex-direction:column;
+        align-items:flex-start;
     }
     #contactViewHeader img{
         display:none;
