@@ -1,4 +1,5 @@
 
+
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app";
 
 // Aufgaben beim Laden der Seite aus der Datenbank abrufen
