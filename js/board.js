@@ -319,6 +319,7 @@ function dragEnd(event) {
 }
 
 // Funktion zum Verschieben von Tasks zwischen Spalten
+// Funktion zum Verschieben von Tasks zwischen Spalten
 async function drop(event, newStatus) {
     event.preventDefault();
     const taskId = event.dataTransfer.getData("taskId");
@@ -331,12 +332,43 @@ async function drop(event, newStatus) {
     container.appendChild(taskElement);
 
     try {
-        // Aktualisiere die Firebase-Daten (wenn benötigt)
+        // Task-Daten aus Firebase abrufen
+        const taskKey = taskId.replace('task-', '');
+        const taskUrl = `${base_url}/tasks/${oldStatus}/${taskKey}.json`;
+        const response = await fetch(taskUrl);
+
+        if (!response.ok) {
+            throw new Error(`HTTP-Error: ${response.status}`);
+        }
+
+        const taskData = await response.json();
+
+        // Task aus dem alten Status entfernen
+        await fetch(taskUrl, { method: 'DELETE' });
+
+        // Task unter dem neuen Status mit derselben Task-ID hinzufügen
+        const newTaskUrl = `${base_url}/tasks/${newStatus}/${taskKey}.json`;
+        const putResponse = await fetch(newTaskUrl, {
+            method: 'PUT',
+            body: JSON.stringify(taskData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!putResponse.ok) {
+            throw new Error(`HTTP-Error: ${putResponse.status}`);
+        }
+
+        // Task-ID aktualisieren (falls erforderlich)
+        taskElement.id = `task-${taskKey}`;
+
         updatePlaceholders(); // Placeholder prüfen
     } catch (error) {
-        console.error("Error moving task:", error);
+        console.error("Fehler beim Verschieben des Tasks:", error);
     }
 }
+
 
 
 // Highlight-Funktionen für Spalten
