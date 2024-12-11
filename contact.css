@@ -4,6 +4,10 @@ h2{
 h3{
     font-size:27px;
 }
+.email{
+    color:#007CEE;
+    font-size:16px;
+}
 #contactContent{
     display:flex;
     position:absolute;
@@ -130,15 +134,18 @@ hr {
     padding: 12px;
     border-radius: 10px;
 }
-
+.contactInformation{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+.contactInformationName{
+    font-size:20px;
+}
 .contact:hover {
     background-color: #F6F7F8;
 }
 
-.contact p{
-    color: #007CEE;
-    display:flex;
-}
 .contact div{
     display:flex;
     flex-direction:column;
@@ -162,6 +169,10 @@ hr {
     gap:30px;
     align-items:center;
     justify-content:center;
+}
+
+#contactViewHeader p{
+    font-size:27px;
 }
 
 #contactView{
@@ -237,19 +248,37 @@ hr {
 .contactHeader span{
     font-size:16px;
 }
+.contactNameDetails{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
 .contactItemControls{
     display:flex;
     justify-content:flex-start;
     align-items: center;
-    gap:8px;
+    gap:26px;
 }
-.contactItemControls div{
+#editContainer, #deleteContainer{
     display:flex;
     justify-content:center;
     align-items:center;
+    gap:13px;
+}
+.contactInformationTitle{
+    padding-top:20px;
+    padding-bottom:20px;
 }
 .contactFooter{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
     font-size:20px;
+}
+.contactFooterInformation{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
 }
 .hidden{
     display:none !important;

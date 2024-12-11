@@ -41,7 +41,7 @@ function returnContactTemplate(key, name, email, phone, color){
         <div class="detailsBox">
             <div class="contactHeader">
                 <div style="background:${color}" class="circleDetails">${(getNameInitials(name))}</div>
-                <div>
+                <div class='nameDetails'>
                     <p>${name}</p>
                     <div class="contactItemControls">
                         <div id="editContainer" onclick="toggleView('editContactBox', '${key}', true)"><img src="img/contact/edit.svg"><span>Edit</span></div>
@@ -49,12 +49,16 @@ function returnContactTemplate(key, name, email, phone, color){
                     </div>
                 </div>
             </div>
+            <p class='contactInformationTitle'>Contact Information</p>
             <div class="contactFooter">
-                <p>Contact Information</p>
-                <b>Email</b>
-                <p>${email}</p>
-                <b>Phone</b>
-                ${phone}
+                <div class="contactFooterInformation">
+                    <b>Email</b>
+                    <p class="email">${email}</p>
+                </div>
+                <div class="contactFooterInformation">
+                    <b>Phone</b>
+                    <p>${phone}</p>
+                </div>
             </div>
         </div>
     `;
@@ -96,7 +100,8 @@ async function loadContactData(){
             <div class="contact" onclick="showContact('${key}', '${name}', '${mail}', '${phone}', '${color}'), showOverlayAddContact()")>
                 <div style="background:${color}" class="circle">${getNameInitials(name)}</div>
                 <div class="contactInformation">
-                    <h3>${name}</h3>
+                    <p class="contactInformationName">${name}</p>
+                    <p class="email">${mail}</p>
                 </div>
             </div>
         `;
