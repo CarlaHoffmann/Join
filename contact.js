@@ -12,7 +12,7 @@ function clearAddContactFields(){
     document.getElementById('phone').value = "";
 }
 
-function addContact(){
+async function addContact(){
     let name = document.getElementById('name').value;
     let mail = document.getElementById('email').value;
     let phone = document.getElementById('phone').value;
@@ -24,7 +24,7 @@ function addContact(){
         'name':name,
         'password':'pw',
     }
-    createNewContact('/users', uploadData);
+    await createNewContact('/users', uploadData);
     closeAddContactBox();
     clearAddContactFields();
     loadContactData();
@@ -97,34 +97,33 @@ function sortUsers(usersArray){
 
 
 async function loadContactData(){
+    //read out data from firebase
     let response = await fetch(base_url + ".json");
     let responseToJson = await response.json();
     let users = await responseToJson.users;
+    //create usersArray (includes values from firebaseanswer)
     usersArray = Object.values(users);
+    //add key from firebaseanswer to usersarray
+    let keys = Object.keys(users);
+    for(let i = 0; i < usersArray.length; i++){
+        usersArray[i].key = keys[i];
+    }
+    //sort usersArray
     sortUsers(usersArray);
-    usersArray.forEach(element => {
-        console.log(element);
-    });
-    let numberOfUser = Object.keys(users).length;
-    let userKeys = Object.keys(users);
+    //clears contactList
     contactList.innerHTML = "";
-    for(let i = 0; i < numberOfUser; i++){
-        let key = userKeys[i];
-        console.log(key);
-        let name = users[key].name;
-        let mail = users[key].mail;
-        let phone = users[key].phone;
-        let color = users[key].color;
+    //fills contactList
+    usersArray.forEach(user => {
         contactList.innerHTML += `
-            <div class="contact" onclick="showContact('${key}', '${name}', '${mail}', '${phone}', '${color}'), showOverlayAddContact()")>
-                <div style="background:${color}" class="circle">${getNameInitials(name)}</div>
+            <div class="contact" onclick="showContact('${user.key}', '${user.name}', '${user.mail}', '${user.phone}', '${user.color}'), showOverlayAddContact()")>
+                <div style="background:${user.color}" class="circle">${getNameInitials(user.name)}</div>
                 <div class="contactInformation">
-                    <p class="contactInformationName">${name}</p>
-                    <p class="email">${mail}</p>
+                    <p class="contactInformationName">${user.name}</p>
+                    <p class="email">${user.mail}</p>
                 </div>
             </div>
         `;
-    }
+    });
 }
 
 loadContactData();
