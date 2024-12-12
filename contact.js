@@ -94,38 +94,37 @@ function sortUsers(usersArray){
         }
     });
 }
-//returns one contact with it's keys, usersArray (from loadContactData) should be passed as argument
-function returnContactTemplate(usersArray){
-    return `
-            <div class="contact" onclick="showContact('${usersArray.key}', '${usersArray.name}', '${usersArray.mail}', '${usersArray.phone}', '${usersArray.color}'), showOverlayAddContact()")>
-                <div style="background:${usersArray.color}" class="circle">${getNameInitials(usersArray.name)}</div>
-                <div class="contactInformation">
-                    <p class="contactInformationName">${usersArray.name}</p>
-                    <p class="email">${usersArray.mail}</p>
-                </div>
-            </div>
-        `;
-}
+
 
 async function loadContactData(){
-    //get data from firebase
     let response = await fetch(base_url + ".json");
     let responseToJson = await response.json();
     let users = await responseToJson.users;
-    //get values out from users (Object) and create usersArray and sort it
-    let usersArray = Object.values(users);
+    usersArray = Object.values(users);
     sortUsers(usersArray);
-    //get keys saved in the users object and save them into the usersArray's objects as key which is the same as the key from firebase
-    let keys = Object.keys(users);
-    console.log(usersArray.length);
-    for(let i = 0; i < usersArray.length; i++){
-        usersArray[i].key = keys[i];
-    }
-    contactList.innerHTML = "";
-    //fill list with contacts
-    usersArray.forEach(user => {
-        contactList.innerHTML += returnContactTemplate(user);
+    usersArray.forEach(element => {
+        console.log(element);
     });
+    let numberOfUser = Object.keys(users).length;
+    let userKeys = Object.keys(users);
+    contactList.innerHTML = "";
+    for(let i = 0; i < numberOfUser; i++){
+        let key = userKeys[i];
+        console.log(key);
+        let name = users[key].name;
+        let mail = users[key].mail;
+        let phone = users[key].phone;
+        let color = users[key].color;
+        contactList.innerHTML += `
+            <div class="contact" onclick="showContact('${key}', '${name}', '${mail}', '${phone}', '${color}'), showOverlayAddContact()")>
+                <div style="background:${color}" class="circle">${getNameInitials(name)}</div>
+                <div class="contactInformation">
+                    <p class="contactInformationName">${name}</p>
+                    <p class="email">${mail}</p>
+                </div>
+            </div>
+        `;
+    }
 }
 
 loadContactData();
