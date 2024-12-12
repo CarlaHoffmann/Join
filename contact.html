@@ -46,11 +46,13 @@
                 <input type="reset">
             </form>
         </div>
+        <!--contacts-->
         <div id="contacts">
             <button id="addContactButton" onclick="toggleView('addContactBox')"><span>Add new contact</span><img src="img/contact/person_add.svg"></button>
             <section id="contactList">
             </section>
         </div>
+        <!--contactView-->
         <div id="contactView">
             <div id="contactViewHeader">
                 <h2>Contacts</h2>
@@ -60,16 +62,15 @@
             <div id="contactDetails"></div>
         </div>
     </div>
-
+    <!--contactDetailOverlayBox-->
     <div id="contactDetailOverlayBox" class="hidden">
         <div id="contactDetailsOverlay"></div>
     </div>
-    
+    <!--adding scripts-->
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script>
     w3.includeHTML();
     </script>
     <script src="contact.js"></script>
-    <script src="ipguestpassword.js"></script>
 </body>
 </html>
