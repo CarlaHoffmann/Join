@@ -164,14 +164,14 @@ hr {
     margin-right:10px;
 }
 
-#contactViewHeader{
+.contactViewHeader{
     display:flex;
     gap:30px;
     align-items:center;
     justify-content:center;
 }
 
-#contactViewHeader p{
+.contactViewHeader p{
     font-size:27px;
 }
 
@@ -198,6 +198,10 @@ hr {
     flex-direction: column;
     gap: 20px;
     /* z-index: 100; */
+}
+
+.divider2{
+    display:none;
 }
 
 #contactDetails.show {
@@ -292,13 +296,16 @@ hr {
         gap: 21px;
     }
 }
-@media (max-width: 1160px){
-    #contactViewHeader{
+@media (max-width: 1195px){
+    .contactViewHeader{
         flex-direction:column;
         align-items:flex-start;
     }
-    #contactViewHeader img{
+    .divider1{
         display:none;
+    }
+    .divider2{
+        display:flex;
     }
 }
 @media (max-width: 1024px) {

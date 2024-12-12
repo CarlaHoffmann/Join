@@ -35,8 +35,8 @@ function getNameInitials(name) {
     return nameParts[0].charAt(0) + nameParts[nameParts.length - 1].charAt(0);
 }
 
-function returnContactTemplate(key, name, email, phone, color){
-    // console.log(email);
+function returnContactDetailsTemplate(key, name, email, phone, color){
+
     return `
         <div class="detailsBox">
             <div class="contactHeader">
@@ -69,8 +69,8 @@ function showContact(key, name, email, phone, color) {
     const contactDetailsOverlay = document.getElementById('contactDetailsOverlay');
     
     // Inhalt setzen
-    contactDetails.innerHTML = returnContactTemplate(key, name, email, phone, color);
-    contactDetailsOverlay.innerHTML = returnContactTemplate(key, name, email, phone, color);
+    contactDetails.innerHTML = returnContactDetailsTemplate(key, name, email, phone, color);
+    contactDetailsOverlay.innerHTML = returnContactDetailsTemplate(key, name, email, phone, color);
 
     // Animation starten
     contactDetails.classList.add('show');
