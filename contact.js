@@ -154,35 +154,6 @@ function closeAddContactBox(){
     document.getElementById('addContactBox').classList.add('hidden');
 }
             
-// async function editContact(){
-//     const changedName = document.getElementById('changedName').value;
-//     const changedEmail = document.getElementById('changedEmail').value;
-//     const changedPhone = document.getElementById('changedPhone').value;
-//     const editLink = base_url + "users" + "/" + editKey;
-//     let userResponse = await fetch(editLink + ".json");
-//     let user = await userResponse.json();
-
-//     const data = {
-//         'color': user.color,
-//         'mail':changedEmail,
-//         'name':changedName,
-//         'password':user.password,
-//         'phone':changedPhone,
-//     };
-//     console.log(data);
-//     const response = await fetch(editLink, 
-//     {
-//         method:'PUT',
-//         headers: {
-//             "Content-Type":"application/json",
-//         },
-//         body: JSON.stringify(data),
-//     });
-//     loadContactData();
-//     contactDetails.innerHTML = '';
-//     toggleView('editContactBox');
-//     return await response.json();
-// }
 async function editContact() {
     const changedName = document.getElementById('changedName').value.trim();
     const changedEmail = document.getElementById('changedEmail').value.trim();
