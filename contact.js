@@ -81,17 +81,36 @@ function showOverlayAddContact() {
     contactDetailOverlayBox.classList.add('contactDetailOverlayBox');
 }
 
+function sortUsers(usersArray){
+    usersArray.sort(function(a,b){
+        const nameA = a.name.toLowerCase();
+        const nameB = b.name.toLowerCase();
+        if(nameA < nameB){ //a before b
+            return -1;
+        } else if(nameA > nameB){ //b before a
+            return 1;
+        } else{ //same value
+            return 0;
+        }
+    });
+}
+
 
 async function loadContactData(){
     let response = await fetch(base_url + ".json");
     let responseToJson = await response.json();
     let users = await responseToJson.users;
+    usersArray = Object.values(users);
+    sortUsers(usersArray);
+    usersArray.forEach(element => {
+        console.log(element);
+    });
     let numberOfUser = Object.keys(users).length;
     let userKeys = Object.keys(users);
     contactList.innerHTML = "";
     for(let i = 0; i < numberOfUser; i++){
         let key = userKeys[i];
-        // let user = users[key];
+        console.log(key);
         let name = users[key].name;
         let mail = users[key].mail;
         let phone = users[key].phone;
@@ -109,7 +128,7 @@ async function loadContactData(){
 }
 
 loadContactData();
-            
+
 async function deleteContact(key){
     const contactDetails = document.getElementById('contactDetails');
     const deleteLink = base_url + "users" + "/" + key;
