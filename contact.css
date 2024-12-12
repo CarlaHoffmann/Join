@@ -190,16 +190,6 @@ hr {
 
 /*contact details*/
 #contactDetails{
-    /* display: none;
-    right: -100%;
-    display:flex;
-    gap:20px;
-    flex-direction:column; */
-
-    position: absolute; /* Wichtiger Punkt: Position relativ zum nächstgelegenen relativen Container */
-    top: 200px;
-    left: 506px;
-    /* width:calc(100vw - (232px + 456px + 27x)); */
     background: #F6F7F8;
 
     transform: translateX(100%); /* Start außerhalb des Bildschirms */
