@@ -108,17 +108,15 @@ function categorySelected(category) {
 let subtasks = [];
 
 function closeSubtask() {
-    if (document.title === 'Add Task') {
-        let subtaskButtons = document.getElementById('subtask-buttons');
-        let subtaskInput = document.getElementById('subtaskInput');
+    let subtaskButtons = document.getElementById('subtask-buttons');
+    let subtaskInput = document.getElementById('subtaskInput');
 
-        // Setze die Ansicht auf den ursprünglichen Zustand zurück
-        subtaskButtons.innerHTML = `
-            <img class="subtask-img symbol-hover icon-hover" src="./img/task/subtask.svg" alt="add subtask">
-        `;
-        subtaskInput.value = '';
-        document.removeEventListener('click', closeSubtaskOnOutsideClick);
-    }
+    // Setze die Ansicht auf den ursprünglichen Zustand zurück
+    subtaskButtons.innerHTML = `
+        <img class="subtask-img symbol-hover icon-hover" src="./img/task/subtask.svg" alt="add subtask">
+    `;
+    subtaskInput.value = '';
+    document.removeEventListener('click', closeSubtaskOnOutsideClick);
 }
 
 function closeSubtaskOnOutsideClick(event) {

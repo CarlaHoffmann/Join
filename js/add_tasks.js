@@ -118,9 +118,9 @@ function addTask() {
                                         <div class="labled-box">
                                             <label class="form-label">
                                                 Subtasks
-                                                <div onclick="openSubtask()" id="subtask-input-wrapper">
+                                                <div onclick="openSubtaskTemplate()" id="subtask-input-wrapper">
                                                     <div id="subtask">
-                                                        <input onclick="openSubtask()" id="subtaskInput" type="text" class="form-field pad-12-16" placeholder="Add new subtask">
+                                                        <input onclick="openSubtaskTemplate()" id="subtaskInput" type="text" class="form-field pad-12-16" placeholder="Add new subtask">
                                                         <div id="subtask-buttons">
                                                             <img class="subtask-img symbol-hover icon-hover" src="./img/task/subtask.svg" alt="add subtask">
                                                         </div>
@@ -128,7 +128,8 @@ function addTask() {
                                                 </div>
                                             </label>
                                             <div>
-                                                <div id="subtasks"></div>
+                                                <div id="subtasks">
+                                                </div>
                                             </div>
                                             <span class="font-16 hide-desktop"><span class="red-asterisk">*</span>This field is required</span>
                                         </div>
