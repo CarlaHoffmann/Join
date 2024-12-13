@@ -127,7 +127,7 @@ async function postEditData(taskData) {
     let index = getIndex();
     let path = getPath();
     try {
-        let response = await fetch(task_base_url + "/tasks"[index]/ + path + ".json",{
+        let response = await fetch(task_base_url + "/tasks/" + path[index] + ".json",{
             method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(taskData)
