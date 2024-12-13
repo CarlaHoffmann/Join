@@ -33,10 +33,11 @@
         </div>
         <!--edit contact box-->
         <div id="editContactBox" class="hidden">
-            <button id="closeEditContactBox" class="close-button" onclick="closeEditBox()">×</button>
+            <img src="img/contact/close.svg" id="closeEditContactBox" class="close-button" onclick="closeEditBox()">
             <div>
-                <img src="img/contact/logo.svg">
+                <img class="logo" src="img/contact/logo.svg">
                 <h2>Edit Contact</h2>
+                <img class="dividerOverlay" src="img/contact/dividerOverlay.svg">
                 <p>Tasks are better with a team!</p>
             </div>
             <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); editContact('${editKey}');">

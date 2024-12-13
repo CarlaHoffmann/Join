@@ -56,6 +56,10 @@ h3{
     border-radius: 30px;
 }
 
+.dividerOverlay{
+    display:none;
+}
+
 #addContactBox .close-button, #editContactBox .close-button{
     position: absolute;
     top: 10px;
@@ -385,5 +389,19 @@ hr {
     #contactDetailOverlayBox {
         width: 100vw;
         height: calc(100vh - 160px);
+        top:80px;
+    }
+    #editContactBox{
+        flex-direction:column;
+    }
+    #editContactBox form{
+        border:none;
+    }
+    #editContactBox form input{
+        border-radius:10px;
+        padding: 13px 21px;
+    }
+    #editContactBox .logo{
+        display:none;
     }
 }
