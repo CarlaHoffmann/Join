@@ -896,7 +896,13 @@ async function openEditTaskOverlay(task) {
             </div>
 
             <div class="okBtnContainer">
-                <button onclick="openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})">OK</button>
+                <button onclick="initializeValidationEdit(), openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})" class="submit-button">OK</button>
+            </div>
+            <div id="task-added-overlay" class="dialog d-none">
+                <div id="task-added-confirmation">
+                    <div class="confirmation-text">Task added to board</div>
+                    <img src="./img/task/board_symbol.svg" alt="">
+                </div>
             </div>
         </div>`;
 

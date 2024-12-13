@@ -1,12 +1,12 @@
 // const task_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
-function submit() {
-    checkForm();
-}
+// function submit() {
+//     checkForm();
+// }
 
-function checkForm() {
-    createTask();
-}
+// function checkForm() {
+//     createTask();
+// }
 
 async function createTask() {
     let task = {
