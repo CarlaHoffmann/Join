@@ -119,7 +119,7 @@ async function createEditTask() {
     }
     // console.log("Task to be sent:", task);
     await postEditData(task);
-    clearForm(); // Hier wird das Formular geleert
+    // clearForm(); // Hier wird das Formular geleert
     showTaskAddedOverlay();
 }
 
