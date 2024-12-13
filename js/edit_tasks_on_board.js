@@ -109,7 +109,7 @@ async function initializeValidationEdit() {
 
 async function createEditTask() {
     let task = {
-        path: takePath(),
+        path: getPath(),
         title: takeTitle(),
         description: takeDescription(),
         contacts: takeContacts(),
