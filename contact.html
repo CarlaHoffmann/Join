@@ -8,6 +8,7 @@
 
     <script src="./nav.js"></script>
     <script src="returnColor.js"></script>
+    <script src="back_button.js"></script>
 </head>
 <body>
     <header>
@@ -54,23 +55,34 @@
         </div>
         <!--contactView-->
         <div id="contactView">
+
             <div class="contactViewHeader">
                 <h2>Contacts</h2>
                 <img class="divider1" src="img/contact/divider.svg">
                 <p>Better with a Team</p>
                 <img class="divider2" src="img/contact/dividerOverlay.svg">
             </div>
+
             <div id="contactDetails"></div>
+
         </div>
     </div>
     <!--contactDetailOverlayBox-->
     <div id="contactDetailOverlayBox" class="hidden">
-        <div class="contactViewHeader">
-            <h2>Contacts</h2>
-            <img class="divider1" src="img/contact/divider.svg">
-            <p>Better with a Team</p>
-            <img  class="divider2" src="img/contact/dividerOverlay.svg">
+
+        <div class="contactViewHeaderOverlay">
+
+            <div class="contactViewHeader">
+                <h2>Contacts</h2>
+                <img class="divider1" src="img/contact/divider.svg">
+                <p>Better with a Team</p>
+                <img  class="divider2" src="img/contact/dividerOverlay.svg">
+            </div>
+
+            <div class="back"><img src="./img/arrow-left-line.svg" alt=""></div>
         </div>
+        
+
         <div id="contactDetailsOverlay"></div>
     </div>
     <!--adding scripts-->

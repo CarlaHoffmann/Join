@@ -164,6 +164,23 @@ hr {
     margin-right:10px;
 }
 
+#contactDetailOverlayBox {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: calc(100vw - 232px);
+    height: calc(100vh - 96px);
+    z-index: 2;
+    background-color: #F6F7F8;
+    display: flex;
+    padding: 16px;
+    gap: 20px;
+}
+
+.contactViewHeaderOverlay {
+    display: flex;
+    justify-content: space-between;
+}
 .contactViewHeader{
     display:flex;
     gap:30px;
@@ -173,6 +190,27 @@ hr {
 
 .contactViewHeader p{
     font-size:27px;
+}
+
+.back {
+    /* position: fixed;
+    top: 96px;
+    right: 96px; */
+    width: 37px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back:hover {
+    background-color: #efefef;
+    border-radius: 19px;
+    cursor: pointer;
+}
+
+.back:hover img {
+    transform: scale(1.1);
 }
 
 #contactView{
@@ -276,18 +314,7 @@ hr {
     display:none !important;
 }
 
-#contactDetailOverlayBox {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    width: calc(100vw - 232px);
-    height: calc(100vh - 96px);
-    z-index: 2;
-    background-color: #F6F7F8;
-    display: flex;
-    padding: 16px;
-    gap: 20px;
-}
+
 @media (max-width: 1220px){
     .contactHeader{
         flex-direction:column;

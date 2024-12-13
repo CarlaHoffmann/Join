@@ -1,5 +1,5 @@
 
-  (function() {
+(function() {
     function initBackButton() {
         const backButtons = document.getElementsByClassName('back');
         
