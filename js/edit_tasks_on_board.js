@@ -125,8 +125,10 @@ async function createEditTask() {
 }
 
 async function postEditData(taskData) {
+    let index = getIndex();
+    let path = getPath();
     try {
-        let response = await fetch(task_base_url + "/tasks"[i]/ + path + ".json",{
+        let response = await fetch(task_base_url + "/tasks"[index]/ + path + ".json",{
             method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(taskData)
@@ -144,7 +146,7 @@ async function postEditData(taskData) {
 
 function getIndex() {}
 
-function takePath() {}
+function getPath() {}
 
 function takeTitle() {
     let title = document.getElementById('title');
@@ -175,15 +177,6 @@ function takeCatergory() {
     return category.innerHTML;
 }
 
-// function takeSubtask() {
-//     if (subtasks.length > 0) {
-//         for each subtasks
-//         return subtasks; // Wir können das Array direkt zurückgeben
-//     } else {
-//         console.log("Keine Subtasks vorhanden");
-//         return [];
-//     }
-// }
 function takeSubtask() {
     if (subtasks.length > 0) {
         const formattedSubtasks = subtasks.map((subtask) => {
