@@ -127,16 +127,7 @@ body {
     padding-right: 16px;
 }
 
-.deleteEditBtnContainer button {
-    font-size: 16px;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-}
+
 
 .assigned-contact {
     display: flex;
@@ -156,11 +147,62 @@ body {
     margin-right: 8px; /* Abstand zwischen Initialen und Namen */
 }
 
-.contact-name {
-    font-size: 14px;
-    color: #2a3647; /* Beispiel-Farbe für den Text */
+/* Buttons mit Icons */
+.deleteEditBtnContainer svg {
+    font-size: 16px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    padding: 8px 12px; /* Padding für bessere Klickfläche */
+    border-radius: 8px; /* Für abgerundete Ecken beim Hover-Hintergrund */
+    transition: background-color 0.3s ease; /* Weiche Übergänge beim Hover */
+    width: 96px;
+    height: 40px ;
 }
 
+.deleteBtn, .editBtn {
+    width: 96px;
+    height: 40px ;
+}
+.okBtnContainer {
+    font-size: 16px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    padding: 8px 12px; /* Padding für bessere Klickfläche */
+    border-radius: 8px; /* Für abgerundete Ecken beim Hover-Hintergrund */
+    transition: background-color 0.3s ease; /* Weiche Übergänge beim Hover */
+    width: 96px;
+    height: 40px ;
+    background-color: red;
+}
+
+/* Container für die Buttons */
+.deleteEditBtnContainer {
+    display: flex;
+    align-items: center;
+}
+
+/* Vertikale Trennlinie */
+.vertical-line {
+    width: 1px;
+    height: 24px;
+    background-color: #d3d3d3; /* Hellgrau */
+    margin: 0 10px; /* Abstand zu den Buttons */
+}
+
+
+/*
+.contact-name {
+    font-size: 16px;
+}
+*/
 
 /* Media Queries */
 @media (max-width: 600px) {
