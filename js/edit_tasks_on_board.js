@@ -59,13 +59,32 @@ async function updateEditContacts() {
     contactInitials.innerHTML = contactInis;
 }
 
-function initializeEditPriority(task) {
+function initializeEditPriority(prio) {
     resetAllPriorityButtons();
-    const priority = task.prio;
+    
+    const priority = prio;
+    console.log(priority);
     const prioButton = document.getElementById(`prio${priority}`);
     if (prioButton) {
-        activateButton(prioButton, priority);
+        activateEditButton(prioButton, priority);
     } else {
         console.error('Priority button not found');
+    }
+}
+
+function activateEditButton(button, priority) {
+    button.classList.remove('hover-button');
+    button.classList.add('active-button');
+    button.classList.add(getPriorityClassEdit(priority));
+    updateButtonContent(button);
+}
+
+function getPriorityClassEdit(priority) {
+    console.log('prio');
+    switch (priority) {
+        case '1': return 'urgent';
+        case '2': return 'med';
+        case '3': return 'low';
+        // default: return 'med';
     }
 }

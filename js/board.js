@@ -505,7 +505,7 @@ async function openTaskOverlay(task) {
             <div>${task.description}</div>
             <div>
                 <div class="textColor">Due date:</div>
-                <div class="dateSelect">${getDate(task.date)}</div>
+                <div class="dateSelect">${task.date}</div>
             </div>
             <div>
                 <div class="textColor">Priority:</div>
@@ -724,26 +724,24 @@ function getPriorityClass(priority) {
 //     `;
 // }
 // Funktion zum Öffnen des Edit-Overlays
-let taskContacts = task.contacts;
-
 async function openEditTaskOverlay(task) {
     const overlayContainer = document.getElementById('taskOverlayContainer');
     console.log(task);
 
     // Initialisieren von selectedContacts mit task.contacts
-    // taskContacts = task.contacts;
+    selectedContacts = task.contacts;
 
     // Farben für die Kontakte abrufen
-    const contactColors = await getContactColors([task]);
-    const contactsHTML = task.contacts.map((contact, index) => {
-        const contactColor = contactColors[0][index]; // Erste Aufgabe und entsprechender Kontakt
-        const initials = getContactInitials(contact);
-        return `
-            <div class="assigned-contact">
-                <div class="contact-initial" style="background-color: ${contactColor};">${initials}</div>
-                <span class="contact-name">${contact}</span>
-            </div>`;
-    }).join('');
+    // const contactColors = await getContactColors([task]);
+    // const contactsHTML = task.contacts.map((contact, index) => {
+    //     const contactColor = contactColors[0][index]; // Erste Aufgabe und entsprechender Kontakt
+    //     const initials = getContactInitials(contact);
+    //     return `
+    //         <div class="assigned-contact">
+    //             <div class="contact-initial" style="background-color: ${contactColor};">${initials}</div>
+    //             <span class="contact-name">${contact}</span>
+    //         </div>`;
+    // }).join('');
 
     // Subtasks aus dem task-Objekt laden
     let subtasks = [];
@@ -754,6 +752,7 @@ async function openEditTaskOverlay(task) {
         });
     });
 
+    
     // Subtasks-HTML generieren
     const subtasksHTML = subtasks.map((subtask, index) => {
         return getAddSubtaskTemplate(index, subtask.task);
@@ -810,7 +809,7 @@ async function openEditTaskOverlay(task) {
                             <label class="form-label">
                                 <div>Due date<span class="red-asterisk">*</span></div>
                                 <div class="date-input-wrapper">
-                                    <input type="text" id="datepicker" class="form-field margin-bottom pad-12-16 date-input" placeholder="dd/mm/yyyy" maxlength="10" required value="${getDate(task.date)}">
+                                    <input type="text" id="datepicker" class="form-field margin-bottom pad-12-16 date-input" placeholder="dd/mm/yyyy" maxlength="10" required value="${task.date}">
                                     <span class="calendar-icon">
                                         <img src="./img/task/event.svg" alt="Calendar" class="calendar-icon">
                                     </span>
@@ -851,7 +850,7 @@ async function openEditTaskOverlay(task) {
                                 <div id="select-wrapper" class="select-wrapper">
                                     <div  id="category">
                                         <div onclick="showCategory()" class="select-field">
-                                            <div id="category-selection" class="form-field margin-bottom pad-12-16">${task.category || 'Select task category'}</div>
+                                            <div id="category-selection" class="form-field margin-bottom pad-12-16">'Select task category'</div>
                                             <img class="dropdown-icon symbol-hover icon-hover" src="./img/task/arrow_drop_downaa.svg" alt="">
                                         </div>
                                     </div>
@@ -902,6 +901,7 @@ async function openEditTaskOverlay(task) {
         </div>`;
 
     overlayContainer.classList.remove('d-none');
+    categorySelected(task.category);
 
     // Aktualisieren der ausgewählten Kontakte im Overlay
     updateEditContacts();
@@ -910,11 +910,6 @@ async function openEditTaskOverlay(task) {
     const categorySelection = document.getElementById('category-selection');
     categorySelection.textContent = task.category || 'Select task category';
 }
-
-function getDate(date) {
-    return `${date}`;
-}
-
 
 function enableEditMode() {
     // Felder editierbar machen
