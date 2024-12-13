@@ -912,14 +912,7 @@ async function openEditTaskOverlay(task) {
 }
 
 function getDate(date) {
-    // Zerlege das Datum in seine Bestandteile
-    const parts = date.split('-');
-    const day = parts[2];
-    const month = parts[1];
-    const year = parts[0];
-
-    // Formatiere das Datum als dd/mm/yyyy
-    return `${day}/${month}/${year}`;
+    return `${date}`;
 }
 
 
