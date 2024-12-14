@@ -1096,3 +1096,6 @@ function updatePlaceholders() {
         }
     });
 }
+
+const searchField = document.querySelector('#searchField');
+console.log(searchField);
