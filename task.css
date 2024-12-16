@@ -20,7 +20,7 @@ body {
 }
 
  /*Für TaskOverlay*/
-.task-head {
+/* .task-head {
     display: flex;
     justify-content: space-between;
 }
@@ -38,7 +38,7 @@ body {
  }
  .close-button-box:hover {
     background-color: #D1D1D1;
- }
+ } */
 /**/
 
 
