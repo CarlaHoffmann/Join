@@ -1,13 +1,3 @@
-// const task_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
-
-// function submit() {
-//     checkForm();
-// }
-
-// function checkForm() {
-//     createTask();
-// }
-
 async function createTask() {
     let task = {
         title: takeTitle(),
@@ -18,7 +8,7 @@ async function createTask() {
         category: takeCatergory(),
         subtasks: takeSubtask(),
     }
-    // console.log("Task to be sent:", task);
+
     await postData(task);
     clearForm(); // Hier wird das Formular geleert
     showTaskAddedOverlay();
@@ -35,7 +25,7 @@ async function postData(taskData) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         let result = await response.json();
-        // console.log("Task successfully added:", result);
+        // Task successfully added
         return result;
     } catch (error) {
         console.error("Error posting data:", error);
@@ -71,15 +61,6 @@ function takeCatergory() {
     return category.innerHTML;
 }
 
-// function takeSubtask() {
-//     if (subtasks.length > 0) {
-//         for each subtasks
-//         return subtasks; // Wir können das Array direkt zurückgeben
-//     } else {
-//         console.log("Keine Subtasks vorhanden");
-//         return [];
-//     }
-// }
 function takeSubtask() {
     if (subtasks.length > 0) {
         const formattedSubtasks = subtasks.map((subtask) => {
@@ -90,7 +71,7 @@ function takeSubtask() {
         });
         return formattedSubtasks;
     } else {
-        // console.log("Keine Subtasks vorhanden");
+        // If no subtask, return []
         return [];
     }
 }
