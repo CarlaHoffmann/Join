@@ -240,6 +240,7 @@ body {
     text-wrap: wrap;
 }
 
+
 .greeting-box {
     display: flex;
     flex-direction: column;
@@ -258,11 +259,11 @@ body {
 
 #greeting-overlay {
     position: fixed;
-    left: 0;
+    right: 0;
     top: 0;
-    width: 100vw;
+    width: calc(100vw - 232px);
     height: 100vh;
-    z-index: 2;
+    z-index: 8;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -410,6 +411,10 @@ body {
         height: calc(100vh - 160px);
         width: 100vw;
         bottom: 80px;
+    }
+
+    #greeting-overlay {
+        width: 100vw;
     }
 }
 

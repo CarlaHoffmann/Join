@@ -38,7 +38,6 @@ body {
  }
  .close-button-box:hover {
     background-color: #D1D1D1;
-    /* border-radius: 10px; */
  }
 /**/
 
@@ -74,7 +73,6 @@ body {
 
 #add-task-first {
     flex-grow: 1;
-    /* width: 440px; */
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -91,7 +89,6 @@ body {
 
 #add-task-second {
     flex-grow: 1;
-    /* width: 440px; */
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -138,7 +135,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 4px;
-
 }
 
 .symbol-hover:hover {
