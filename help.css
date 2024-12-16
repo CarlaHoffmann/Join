@@ -58,9 +58,6 @@ a:hover {
 }
 
 .back {
-    /* position: fixed;
-    top: 96px;
-    right: 96px; */
     width: 37px;
     height: 37px;
     display: flex;

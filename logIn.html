@@ -25,76 +25,81 @@
         </div>
     </div>
 
-    <!-- Header with Logo -->
-    <header class="d-center-space-betwen">
-        <img src="/img/login/Logo for Favicon construction.svg" alt="Header Logo" id="headerLogo" class="hidden">
-        <div class="destop-login display-ac">
-            <div class="display-ac gap">
-                <span>Not a join user?</span>
-                <a href="./signup.html">
-                    <p class="button-login-blue button-p">Sign up</p>
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Login Form -->
-    <div class="display-fcc">
-        <div class="frame153 display-fccc">
-            <div class="header_LogIn">
-                <h1 class="headline_logIn">Log in</h1>
-                <div class="vector_login"></div>
-            </div>
-            <form onsubmit="existingMailLogIn(); return false;" class="display-fccc gap">
-                <!-- Email Input -->
-                <div id="emailContainer" class="password_container">
-                    <input id="email" placeholder="Email" type="email" class="input-with-image b-img-email"
-                        onclick="changeEmail()" required>
-                    <img src="/img/login/mail.png" alt="Email Icon">
-                </div>
-
-                <!-- Password Input -->
-                <div id="passwordButten" class="password_container">
-                    <input id="password" placeholder="Password" type="password" onclick="changePassword()" required>
-                    <img src="/img/login/lock.png" alt="Lock Icon" id="passwordLock" class="password_lock">
-                    <a role="button" class="password_butten" onclick="togglePasswordVisibility()">
-                        <img src="img/login/visibility_off.svg" alt="Visibility Off" id="unlock" class="hidden">
-                        <img src="img/login/visibility.svg" alt="Visibility On" id="lock" class="hidden">
+    <div class="logIn-page">
+        <!-- Header with Logo -->
+        <header class="d-center-space-betwen">
+            <img src="/img/login/Logo for Favicon construction.svg" alt="Header Logo" id="headerLogo" class="hidden">
+            <div class="destop-login display-ac">
+                <div class="display-ac gap">
+                    <span>Not a join user?</span>
+                    <a href="./signup.html">
+                        <p class="button-login-blue button-p">Sign up</p>
                     </a>
                 </div>
+            </div>
+        </header>
 
-                <!-- Error Messages -->
-                <span id="loginError" class="password-error hidden">Wrong password Ups! Try again.</span>
-                <span id="loginErrorPassword" class="password-error hidden">Ups! Your password does not
-                    exist.</span>
-
-                <!-- Remember Me -->
-                <div class="accept_box">
-                    <input type="checkbox" class="style_checkbox">
-                    <span class="gray">Remember me</span>
+        <!-- Login Form -->
+        <div class="display-fcc">
+            <div class="frame153 display-fccc">
+                <div class="header_LogIn">
+                    <h1 class="headline_logIn">Log in</h1>
+                    <div class="vector_login"></div>
                 </div>
+                <form onsubmit="existingMailLogIn(); return false;" class="form-gap">
+                    <div>
+                        <div class="display-fccc gap-20">
+                            <!-- Email Input -->
+                            <div id="emailContainer" class="password_container">
+                                <input id="email" placeholder="Email" type="email" class="input-with-image b-img-email"
+                                    onclick="changeEmail()" required>
+                                <img src="/img/login/mail.png" alt="Email Icon">
+                            </div>
 
-                <!-- Buttons -->
-                <div class="d-center-space-betwen gap logIn-btns">
-                    <button id="login_button_color"
-                        class="button-login-blue button-p text_login_btn mobile_login_btn hover">Log in</button>
-                    <div id="guest-login">
-                        <p onclick="guestLogin()" class="button-login-white button-p text_login_btn mobile_login_btn">
-                            Guest Log in</p>
+                            <!-- Password Input -->
+                            <div id="passwordButten" class="password_container">
+                                <input id="password" placeholder="Password" type="password" onclick="changePassword()" required>
+                                <img src="/img/login/lock.png" alt="Lock Icon" id="passwordLock" class="password_lock">
+                                <a role="button" class="password_butten" onclick="togglePasswordVisibility()">
+                                    <img src="img/login/visibility_off.svg" alt="Visibility Off" id="unlock" class="hidden">
+                                    <img src="img/login/visibility.svg" alt="Visibility On" id="lock" class="hidden">
+                                </a>
+                            </div>
+
+                            <!-- Error Messages -->
+                            <span id="loginError" class="password-error hidden">Wrong password Ups! Try again.</span>
+                            <span id="loginErrorPassword" class="password-error hidden">Ups! Your password does not
+                                exist.</span>
+
+                            <!-- Remember Me -->
+                            <div class="accept_box">
+                                <input type="checkbox" class="style_checkbox">
+                                <span class="gray">Remember me</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </form>
+
+                    <!-- Buttons -->
+                    <div class="gap logIn-btns">
+                        <button id="login_button_color"
+                            class="button-login-blue button-p text_login_btn mobile_login_btn hover">Log in</button>
+                        <div id="guest-login">
+                            <p onclick="guestLogin()" class="button-login-white button-p text_login_btn mobile_login_btn">
+                                Guest Log in</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
+
+        <!-- Footer -->
+        <footer class="display-fjc gap gray">
+            <a href="./privacyPolicy.html" id="privacyPolicy" class="pointer-coler link_visited">Privacy
+                policy</a>
+            <a href="./legalNotice.html" id="legalNotice" class="pointer-coler link_visited">Legal
+                notice</a>
+        </footer>
     </div>
-
-    <!-- Footer -->
-    <footer class="display-fjc gap gray">
-        <a href="./privacyPolicy.html" id="privacyPolicy" class="pointer-coler link_visited">Privacy
-            policy</a>
-        <a href="./legalNotice.html" id="legalNotice" class="pointer-coler link_visited">Legal
-            notice</a>
-    </footer>
-
 </body>
 
 </html>
