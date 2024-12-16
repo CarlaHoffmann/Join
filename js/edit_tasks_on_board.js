@@ -126,10 +126,10 @@ async function createEditTask(path, id) {
     // openTaskOverlay(task);
     try {
         await postEditData(task, path, id);
+        showTaskAddedOverlay();
         closeTaskOverlay()
         await loadTasks();
-        showTaskAddedOverlay();
-        
+                
     } catch (error) {
         console.error("Error during task creation or loading:", error);
     } finally {

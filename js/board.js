@@ -329,8 +329,8 @@ async function saveEditedTask() {
 }
 
 // Event-Listener für das Bearbeitungs-Overlay hinzufügen
-document.getElementById("edit-task-cancel").addEventListener("click", closeEditTaskOverlay);
-document.getElementById("edit-task-save").addEventListener("click", saveEditedTask);
+// document.getElementById("edit-task-cancel").addEventListener("click", closeEditTaskOverlay);
+// document.getElementById("edit-task-save").addEventListener("click", saveEditedTask);
 
 
 async function openTaskOverlay(task) {
@@ -743,15 +743,11 @@ async function saveOverlayChanges(taskId, taskStatus) {
     }
 }
 
-
-
-
 function setOverlayPriority(priority) {
     document.querySelectorAll('.prio-button').forEach(button => button.classList.remove('active-button'));
     document.getElementById(`prio${priority}`).classList.add('active-button');
     document.getElementById('overlayPriority').value = priority;
 }
-
 
 function addOverlaySubtask() {
     const newSubtask = document.getElementById('newSubtaskInput').value.trim();
@@ -762,16 +758,11 @@ function addOverlaySubtask() {
     }
 }
 
-
-
-
 function closeTaskOverlay() {
     const overlayContainer = document.getElementById('taskOverlayContainer');
     overlayContainer.classList.add('d-none');
     overlayContainer.innerHTML = ''; // Inhalt löschen
 }
-
-
 
 //  Task Overlay Delete 
 async function deleteTask(taskId) {
