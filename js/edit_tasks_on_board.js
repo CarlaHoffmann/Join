@@ -89,7 +89,7 @@ function getPriorityClassEdit(priority) {
     }
 }
 
-async function initializeValidationEdit() {
+async function initializeValidationEdit(task) {
     // const submitButton = document.querySelector('.submit-button');
 
     // if (submitButton) {
@@ -97,8 +97,10 @@ async function initializeValidationEdit() {
             // event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
 
             if (validateForm()) {
-                await createEditTask();
+                await createEditTask(task.path, task.id);
                 console.log('Form is valid. Submitting...');
+                // openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})
+                openTaskOverlay(task);
             }
         // });
     // } 
@@ -107,7 +109,7 @@ async function initializeValidationEdit() {
     }
 };
 
-async function createEditTask() {
+async function createEditTask(path, id) {
     let task = {
         title: takeTitle(),
         description: takeDescription(),
@@ -118,16 +120,14 @@ async function createEditTask() {
         subtasks: takeSubtask(),
     }
     // console.log("Task to be sent:", task);
-    await postEditData(task);
-    // clearForm(); // Hier wird das Formular geleert
+    await postEditData(task, path, id);
     showTaskAddedOverlay();
 }
 
-async function postEditData(taskData) {
-    let index = getIndex();
-    let path = getPath();
+async function postEditData(taskData, path, id) {
+    console.log(taskData);
     try {
-        let response = await fetch(task_base_url + "/tasks/" + path[index] + ".json",{
+        let response = await fetch(`${task_base_url}/tasks/${path}/${id}.json`, {
             method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(taskData)
@@ -143,11 +143,6 @@ async function postEditData(taskData) {
     }
 }
 
-
-
-function getIndex() {}
-
-function getPath() {}
 
 function takeTitle() {
     let title = document.getElementById('title');
