@@ -271,7 +271,7 @@ function showTaskAddedOverlay() {
 
 function hideTaskAddedOverlay() {
     const overlay = document.getElementById('task-added-overlay');
-    overlay.classList.remove('show');
+    // overlay.classList.remove('show');
     setTimeout(() => {
         overlay.classList.add('d-none');
     }, 300); // Warten auf das Ende der Ausblend-Animation

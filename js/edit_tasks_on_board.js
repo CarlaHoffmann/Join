@@ -120,8 +120,21 @@ async function createEditTask(path, id) {
         subtasks: takeSubtask(),
     }
     // console.log("Task to be sent:", task);
-    await postEditData(task, path, id);
-    showTaskAddedOverlay();
+    // await postEditData(task, path, id);
+    // showTaskAddedOverlay();
+    // loadTasks();
+    // openTaskOverlay(task);
+    try {
+        await postEditData(task, path, id);
+        closeTaskOverlay()
+        await loadTasks();
+        showTaskAddedOverlay();
+        
+    } catch (error) {
+        console.error("Error during task creation or loading:", error);
+    } finally {
+        await openTaskOverlay(task);
+    }
 }
 
 async function postEditData(taskData, path, id) {
