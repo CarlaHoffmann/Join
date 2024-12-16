@@ -1,6 +1,5 @@
 * {
     margin: 0;
-    /* padding: 0; */
     box-sizing: border-box;
 }
 
@@ -10,8 +9,6 @@ nav ul li a{
 }
 
 body {
-    /* display: flex; */
-    /* height: 100vh; */
     font-family: "Inter", sans-serif;
     font-size: 20px;
 }
@@ -21,19 +18,29 @@ header {
     background: white;
     display: flex;
     align-items: center;
-    /* justify-content:space-around; */
     justify-content: space-between;
     padding-right: 40px;
     padding-left: 300px;
     position: fixed;
-    /* width:calc(100% - 232px); */
     width: 100vw;
     top: 0;
-    z-index:1;
-    /* left: 232px; */
+    z-index:9;
     left: 0;
     box-shadow: 0px 4px 4px 0px #0000001A;
     transition: height 0.3s ease, width 0s ease, padding 0.3s ease;
+}
+
+#headerText{
+    display:flex;
+}
+
+#headerLogo{
+    display:none;
+}
+
+#mobileNav{
+    display: none; 
+    /* Mobile Navigation ausblenden */
 }
 
 #headerControls{
@@ -111,7 +118,7 @@ header {
     position:fixed;
     left:0;
     top: 0;
-    z-index: 2;
+    z-index: 10;
     height:100vh;
     transition: transform 0.3s ease;
 }
@@ -133,7 +140,6 @@ header {
     flex-direction:column;
     justify-content:flex-start;
     gap:20px;
-    /* width: 232px; */
 }
 
 .sideBarNavigation a{
@@ -202,7 +208,7 @@ header {
         padding-right: 16px;
     }
 }
-@media (max-width: 680px) { /*unter 640*/
+@media (max-width: 680px) {
     header{
         height:80px;
         width:100vw;
@@ -242,14 +248,11 @@ header {
         left: 0;
         right: 0;
         background: #2A3647;
-        
         display: flex;
         justify-content: space-around;
         align-items: center;
         z-index: 1000;
         height:80px;
-
-        /* width:100%; */
     }
 
     #mobileNav a{
@@ -275,21 +278,5 @@ header {
 
     #content{
         padding-top:80px;
-    }
-}
-
-@media (min-width: 681px) { 
-    /*über 681px*/
-    #headerText{
-        display:flex;
-    }
-
-    #headerLogo{
-        display:none;
-    }
-
-    #mobileNav{
-        display: none; 
-        /* Mobile Navigation ausblenden */
     }
 }
