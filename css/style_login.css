@@ -1,12 +1,29 @@
+* {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
 .logIn-page {
   background: rgb(246, 247, 248);
   width: 100vw;
   height: 100vh;
 }
   
-* {
-  margin: 0;
-  font-family: "Inter", sans-serif;
+.signUp-page {
+  background: rgb(246, 247, 248);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.signUp-formfields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
 }
   
 a {
@@ -21,18 +38,6 @@ a {
 .gray {
   color: var(--grey);
 }
-  
-.limitation {
-    max-width: 1440px;
-    width: 100%;
-    height: 100vh;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 
   /* Overlay */
 #overlay {
@@ -124,8 +129,6 @@ a {
 }
 
 .display-fcc {
-  /* width: 100%;
-  height: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -297,11 +300,15 @@ a {
 }
   
 .arrow_header_signUp {
+  display: flex;
+  justify-content: center;
   align-items: baseline;
+  width: 100%;
+  position: relative;
 }
 
 .arrow_signUp {
-  margin-left: -220px;
+  margin-left: -100px;
 }
 
 .arrow_signUp:hover {
@@ -355,7 +362,6 @@ a {
   border-radius: 10px;
   background-color: var(--white);
   width: 422px;
-  height: px;
 }
   
 .password_container_border {
@@ -422,6 +428,13 @@ input:hover,
   display: flex;
   gap: 8px;
   align-items: center;
+}
+
+.accept_box {
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
 }
 
 .style_checkbox {

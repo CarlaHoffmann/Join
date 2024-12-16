@@ -216,11 +216,6 @@
   }
 }
 
-/* Login & Sign-Up */
-.arrow_signUp {
-  margin-left: -60px;
-}
-
 @media (max-width: 1200px) {
   /* sign-up */
   .join-logo {
@@ -233,10 +228,6 @@
     background: url(../assets/img/logIn_SignUp/Capa2.svg);
     background-repeat: no-repeat;
   }
-
-  .limitation {
-    width: 100%;
-  }
 }
 
 @media (max-width: 500px) {
@@ -248,15 +239,6 @@
     margin-left: 16px;
     margin-right: 16px;
     margin-top: 40px;
-  }
-
-  /* style-login */
-  .password_container {
-    width: 95%;
-  }
-
-  .frame153 {
-    padding: 32px 24px;
   }
 }
 
@@ -272,18 +254,51 @@
   }
 }
 
-@media (max-width: 380px) {
-  .imglogo {
-    padding: 24px;
-    height: 40px;
+@media(max-width: 1024px) {
+  #headerLogo {
+    width: 64px;
+    height: 78px;
+    top: 37px;
+    left: 38px;
   }
 
   .imglogo {
-    width: 56px;
-    padding: 30px;
+    width: 64px;
+    height: 78px;
+    top: 37px;
+    left: 38px;
+  }
+}
+
+@media (max-width: 680px) {
+  .arrow_signUp {
+    margin: 0;
+    position: absolute;
+    left: 0px;
+    top: 16px;
   }
 
   .frame153 {
-    padding: 24px;
+    width: 100%;
+    padding: 32px 16px;
+  }
+
+  .frame153-signup {
+    width: 100%;
+    padding: 32px 16px;
+  }
+
+  .display-fcc {
+    padding: 16px;
+  }
+}
+
+@media(max-width: 500px) {
+  .signUp-formfields {
+    width: 100%;
+  }
+
+  .password_container {
+    width: calc(100vw - 64px);
   }
 }
