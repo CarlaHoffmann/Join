@@ -119,11 +119,7 @@ async function createEditTask(path, id) {
         category: takeCatergory(),
         subtasks: takeSubtask(),
     }
-    // console.log("Task to be sent:", task);
-    // await postEditData(task, path, id);
-    // showTaskAddedOverlay();
-    // loadTasks();
-    // openTaskOverlay(task);
+
     try {
         await postEditData(task, path, id);
         showTaskAddedOverlay();
