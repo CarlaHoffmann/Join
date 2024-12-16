@@ -291,6 +291,15 @@
   .display-fcc {
     padding: 16px;
   }
+
+  .accept_box {
+    height: 16px;
+  }
+
+  .logIn-btns {
+    flex-direction: column;
+    gap: 21px;
+  }
 }
 
 @media(max-width: 500px) {
