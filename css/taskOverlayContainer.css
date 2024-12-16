@@ -14,6 +14,27 @@ body {
     padding-right: 8px;
 }
 */
+.task-head {
+    display: flex;
+    justify-content: space-between;
+}
+.close-button-box {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ .close-button {
+    width: 20px;
+    height: 20px;
+ }
+ .close-button-box:hover {
+    background-color: #D1D1D1;
+ }
+
+ 
 
 .taskOverlay {
     width: 525px;
