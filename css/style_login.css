@@ -175,9 +175,10 @@ a {
   font-weight: 700;
   background-color: var(--menuButtonDarkblue);
   color: var(--white);
-  border-radius: 8px;
-  padding: 15px 24px;
+  border-radius: 20px;
+  padding: 25px;
   border: none;
+  font-size: 20px;
 }
 
 @keyframes moveSpan {

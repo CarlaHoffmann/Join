@@ -43,14 +43,6 @@ async function matchPassword() {
         document.getElementById('confirmPassword').classList.add('input-border');
     } else {
         createContact();
-        // let name = document.getElementById('name');
-        // let email = document.getElementById('email');
-        // let password = document.getElementById('password');
-        // let colorAllocation = getRandomItem(colors);
-        // let firstLetters = getContactsInitials(name.value);
-        // await postData('users', { name: name.value, mail: email.value, password: password.value });
-        // await postData(`contacts`, { name: capitalizeFirstLetters(name.value), mail: email.value, phone: '', color: colorAllocation, letters: firstLetters });
-        // getLoggedIn();
         successful();
     }
 }
@@ -65,7 +57,7 @@ async function createContact() {
     console.log("Contact to be sent:", contact);
     await getLoggedIn();
     await postData(contact);
-    showSuccessMessage();
+    // showSuccessMessage();
 }
 
 function takeName() {
@@ -219,8 +211,8 @@ function toggleConfirmPasswordVisibility() {
 }
 
 // Zeigt eine Erfolgsnachricht an und animiert sie
-function showSuccessMessage() {
-    const message = document.getElementById('successMessage');
-    message.classList.remove('hidden');
-    message.classList.add('animate');
-}
+// function showSuccessMessage() {
+//     const message = document.getElementById('successMessage');
+//     message.classList.remove('hidden');
+//     message.classList.add('animate');
+// }
