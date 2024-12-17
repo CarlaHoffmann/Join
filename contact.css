@@ -232,20 +232,6 @@ hr {
 }
 
 /*contact details*/
-/* #contactDetails{
-    background: #F6F7F8;
-    transform: translateX(100%);  */
-    /* Start außerhalb des Bildschirms */
-    /* transition: transform 0.5s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-} */
-
-
-/* #contactDetails.show {
-    transform: translateX(0); 
-} */
 #contactDetails {
     background: #F6F7F8;
     transform: translateX(100%);
