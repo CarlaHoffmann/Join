@@ -59,15 +59,13 @@ async function createContact() {
     let contact = {
         name: takeName(),
         mail: takeMail(),
-        // phone: takePhone(),
         password: takePassword(),
         color: getColor()
     }
     console.log("Contact to be sent:", contact);
     await getLoggedIn();
     await postData(contact);
-    // clearSignUpForm(); // Hier wird das Formular geleert
-    // showContactAddedOverlay();
+    showSuccessMessage();
 }
 
 function takeName() {
@@ -221,7 +219,7 @@ function toggleConfirmPasswordVisibility() {
 }
 
 // Zeigt eine Erfolgsnachricht an und animiert sie
-function showMessage() {
+function showSuccessMessage() {
     const message = document.getElementById('successMessage');
     message.classList.remove('hidden');
     message.classList.add('animate');
