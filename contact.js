@@ -255,3 +255,8 @@ async function editContact() {
         alert('Es gab einen Fehler beim Bearbeiten des Kontakts. Bitte versuchen Sie es erneut.');
     }
 }
+
+function closeDetailsOverlay() {
+    let contactDetailOverlayBox = document.getElementById('contactDetailOverlayBox');
+    contactDetailOverlayBox.classList.remove('contactDetailOverlayBox');
+}
