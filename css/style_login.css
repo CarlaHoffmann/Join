@@ -7,11 +7,10 @@
   background: rgb(246, 247, 248);
   width: 100vw;
   height: 100vh;
-  position: relative;
-  /* display: flex;
+  display: flex;
   flex-direction: column;
-  justify-content: center; */
-  /* position: relative; */
+  justify-content: center;
+  overflow: hidden;
 }
   
 .signUp-page {
@@ -22,6 +21,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .signUp-formfields {
@@ -45,7 +45,7 @@ a {
 }
 
   /* Overlay */
-#overlay {
+/* #overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -81,13 +81,10 @@ a {
 
 .hidden {
     display: none;
-}
-
+} */
 
 /* Header */
 #headerLogo {
-  width: 80px;
-
   position: absolute;
   top: 80px;
   left: 77px;
@@ -107,14 +104,6 @@ a {
   font-size: 16px;
   width: 264px;
 }
-  
-/* .login-header {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 40px;
-} */
 
 .display-fc {
   display: flex;
@@ -138,9 +127,7 @@ a {
   display: none;
 }
 
-/* noch nicht fertig */
 .login-content {
-  /* height: calc(100vh - 158px); */
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -192,6 +179,7 @@ a {
   padding: 15px 24px;
   border: none;
 }
+
 @keyframes moveSpan {
   0% {
     bottom: -100px;
@@ -200,6 +188,7 @@ a {
     bottom: 30%;
   }
 }
+
 .animate {
   display: block;
   animation: moveSpan 2s linear forwards;
@@ -242,20 +231,20 @@ a {
 .form-gap {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 32px;
 }
 
 .imglogo {
-  /* margin: 30px 0px 50px 60px; */
   position: absolute;
   top: 80px;
   left: 77px;
 }
   
-.logo-login {
+/* .logo-login {
   height: 100vh;
   background-color: var(--white);
-}
+} */
 
 .frame153 {
   padding: 48px 115px;
@@ -371,7 +360,6 @@ a {
   text-decoration: underline;
   font-weight: bold;
 }
-  
 
 .input-container {
   display: flex;
@@ -452,10 +440,9 @@ input:hover,
 }
 
 .accept_box {
-  height: 48px;
+  padding: 3px 4px;
   display: flex;
   justify-content: center;
-  align-items: end;
 }
 
 .style_checkbox {
@@ -468,9 +455,9 @@ input:hover,
   color: var(--errorPink);
 }
 
-footer {
-  padding: 16px;
-  bottom: 40px;
+.login-footer {
+  position: absolute;
+  bottom: 8px;
 }
 
 footer a {
@@ -480,4 +467,3 @@ footer a {
 .pointer-color:hover {
   color: var(--lightblue);
 }
-  

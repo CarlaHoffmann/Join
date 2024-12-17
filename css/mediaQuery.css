@@ -242,18 +242,6 @@
   }
 }
 
-@media (min-width: 900px) {
-  .mobile-login {
-    display: none;
-    height: 80px;
-  }
-
-  .butten-mobile {
-    display: none;
-    width: 150px;
-  }
-}
-
 @media(max-width: 1024px) {
   #headerLogo {
     width: 64px;
@@ -268,16 +256,25 @@
     top: 37px;
     left: 38px;
   }
+
+  /* .frame153-signup {
+    padding: 32px 16px;
+  } */
+}
+
+@media (min-width: 900px) {
+  .mobile-login {
+    display: none;
+    height: 80px;
+  }
+
+  .butten-mobile {
+    display: none;
+    width: 150px;
+  }
 }
 
 @media (max-width: 680px) {
-  #headerLogo {
-    width: 64px;
-    height: 78px;
-    top: 37px;
-    left: 38px;
-  }
-
   .arrow_signUp {
     margin: 0;
     position: absolute;
@@ -286,12 +283,10 @@
   }
 
   .frame153 {
-    width: calc(100vw - 64px);
     padding: 32px 16px;
   }
 
   .frame153-signup {
-    width: calc(100vw - 64px);
     padding: 32px 16px;
   }
 
@@ -310,6 +305,11 @@
   .logIn-btns {
     flex-direction: column;
     gap: 21px;
+    width: fit-content;
+  }
+
+  #login_button_color {
+    width: 100%;
   }
 
   #signup-linking-desktop {
@@ -319,22 +319,11 @@
   #signup-linking-mobile {
     display: flex;
     position: absolute;
-    top: 778px;
-  }
-
-  .login-footer {
-    position: absolute;
-    bottom: 20px;
+    bottom: 80px;
   }
 }
 
 @media(max-width: 500px) {
-  /* .signUp-formfields {
-    width: 100%;
-    padding-left: 16px;
-    padding-right: 16px;
-  } */
-
   .input-container {
     width: 264px;
   }
@@ -342,7 +331,6 @@
 
 @media(max-width: 372px) {
   .arrow_signUp {
-    /* position: relative; */
     left: -10px;
   }
 
@@ -352,5 +340,28 @@
 
   .input-with-image {
     width: 200px;
+  }
+}
+
+@media (max-height: 800px) and (max-width: 680px) {
+  .logIn-page {
+    height: 800px;
+    overflow-y: auto;
+  }
+
+  .signUp-page {
+    height: 800px;
+    overflow-y: auto;
+  }
+
+  #signup-linking-mobile {
+    display: flex;
+    position: relative;
+    top: 0px;
+  }
+
+  .login-footer {
+    position: relative;
+    top: 10px;
   }
 }
