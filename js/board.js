@@ -362,7 +362,7 @@ async function openTaskOverlay(task) {
     overlayContainer.innerHTML = `
         <div class="taskOverlay">
             <div class="taskSelect">
-                <div class="taskContainer">${task.category}</div>
+                <div class="taskContainer" style="background-color: ${getCategoryColor(task.category)};">${task.category}</div>
                 <div class="close" onclick="closeTaskOverlay()"><img src="assets/img/add_task/close.svg" alt="Close" /></div>
             </div>
             <div class="headline">${task.title}</div>
