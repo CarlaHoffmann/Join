@@ -1,3 +1,4 @@
+// This asynchronous function creates a new task object from the form data and posts it to the server.
 async function createTask() {
     let task = {
         title: takeTitle(),
@@ -14,6 +15,7 @@ async function createTask() {
     showTaskAddedOverlay();
 }
 
+// This asynchronous function posts the task data to the server using the fetch API.
 async function postData(taskData) {
     try {
         let response = await fetch(task_base_url + "/tasks/toDo" + ".json",{
@@ -32,35 +34,42 @@ async function postData(taskData) {
     }
 }
 
+// This function extracts the title from the form.
 function takeTitle() {
     let title = document.getElementById('title');
     return title.value;
 }
 
+// This function extracts the description from the form.
 function takeDescription() {
     let description = document.getElementById('description');
     return description.value;
 }
 
+// This function extracts the selected contacts.
 function takeContacts() {
     return selectedContacts;
 }
 
+// This function extracts the due date from the form.
 function takeDate() {
     let date = document.getElementById('datepicker');
     return date.value;
 }
 
+// This function extracts the selected priority.
 function takePrio() {
     let activeButton = document.querySelector('.prio-button.active-button');
     return activeButton.id.replace('prio', '');
 }
 
+// This function extracts the selected category.
 function takeCatergory() {
     let category = document.getElementById('category-selection');
     return category.innerHTML;
 }
 
+// This function extracts and formats the subtasks.
 function takeSubtask() {
     if (subtasks.length > 0) {
         const formattedSubtasks = subtasks.map((subtask) => {

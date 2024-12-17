@@ -1,8 +1,9 @@
 const task_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
+// This URL is used to connect to the Firebase Realtime Database.
 
 let selectedContacts = [];
 
-// Assigned to
+// This function opens the contact dropdown and populates it with contacts.
 async function openAssigned() {
     let contactDropDown = document.getElementById('contact-drop-down');
     let contactsToSelect = document.getElementById('contacts-to-select');
@@ -17,7 +18,9 @@ async function openAssigned() {
     contactDropDown.style.display = 'block';
 }
 
-// Funktion zum Laden der Kontakte aus Firebase
+// This asynchronous function fetches contacts from the Firebase Realtime Database.
+// Purpose: Retrieves a list of contacts from the Firebase Realtime Database.
+// Return: An array of contact objects with id and name properties.
 async function loadContacts() {
     try {
         const response = await fetch(`${task_base_url}/users.json`);
@@ -33,6 +36,7 @@ async function loadContacts() {
     }
 }
 
+// This function prepares the contacts array by sorting and positioning the logged-in user at the top.
 async function prepareContacts(contacts, loggedInUser) {
     if (!loggedInUser) return contacts;
 
@@ -46,6 +50,7 @@ async function prepareContacts(contacts, loggedInUser) {
     return contacts.sort((a, b) => a.name.localeCompare(b.name));
 }
 
+// This function generates the HTML for displaying the contacts.
 function createContactsHTML(contacts, selectedContacts, loggedInUser) {
     let contactsHTML = '';
 
@@ -63,7 +68,7 @@ function createContactsHTML(contacts, selectedContacts, loggedInUser) {
     return contactsHTML;
 }
 
-// Funktion zum Abrufen des aktuell eingeloggten Benutzers
+// This asynchronous function retrieves the currently logged-in user from the Firebase Realtime Database.
 async function getUser() {
     try {
         const response = await fetch(`${task_base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
@@ -76,12 +81,16 @@ async function getUser() {
     }
 }
 
+// This function handles the click event on a contact label.
+// Purpose: Toggles the selection status of a contact when its label is clicked.
 function handleContactClick(event) {
     event.stopPropagation(); // Verhindert die Ausbreitung des Events
     const checkbox = event.currentTarget.querySelector('input[type="checkbox"]');
     toggleContact({ target: checkbox }); // Aktualisiere den Kontaktstatus
 }
 
+// This function toggles the selection status of a contact.
+// Purpose: Adds or removes a contact from the selectedContacts array based on the checkbox state.
 function toggleContact(event) {
     const checkbox = event.target;
     const contactName = checkbox.value;
@@ -95,6 +104,7 @@ function toggleContact(event) {
     }
 }
 
+// This function updates the display of selected contacts.
 async function updateSelectedContacts() {
     let contactInitials = document.getElementById('selected-contacts');
     contactInitials.innerHTML = ''; // Leere den Inhalt vor dem Neuaufbau
@@ -116,7 +126,7 @@ async function updateSelectedContacts() {
     contactInitials.innerHTML = contactInis;
 }
 
-
+// This asynchronous function retrieves the color associated with a contact.
 async function getContactColor(contactName) {
     try {
         const response = await fetch(`${task_base_url}/users.json`);
@@ -135,6 +145,7 @@ async function getContactColor(contactName) {
     }
 }
 
+// This function closes the contact dropdown and clears its content.
 function closeAssigned() {
     let contactDropDown = document.getElementById('contact-drop-down');
     let contactsToSelect = document.getElementById('contacts-to-select');
@@ -146,6 +157,7 @@ function closeAssigned() {
 //Date
 let datepicker, warningDialog, dialogMessage, currentYear, maxYear;
 
+//This function initializes the date picker and sets up event listeners.
 function initializeDatePicker() {
     datepicker = document.getElementById('datepicker');
     warningDialog = document.getElementById('warning-dialog');
@@ -160,12 +172,14 @@ function initializeDatePicker() {
     }
 }
 
+// This function sets up event listeners for the date picker.
 function setupEventListeners(datepicker, warningDialog) {
     datepicker.addEventListener('input', handleDateInput);
     datepicker.addEventListener('blur', validateFullDate);
     window.onclick = (event) => handleWindowClick(event, warningDialog);
 }
 
+// These functions handle and validate the date input.
 function handleDateInput() {
     let value = this.value.replace(/\D/g, '');
     let parts = [value.slice(0, 2), value.slice(2, 4), value.slice(4, 8)];
@@ -215,10 +229,11 @@ function validateFullDate() {
     }
 }
 
-function isValidDate(date, day, month, year) {
-    return date.getDate() === day && date.getMonth() === month && date.getFullYear() === year;
-}
+// function isValidDate(date, day, month, year) {
+//     return date.getDate() === day && date.getMonth() === month && date.getFullYear() === year;
+// }
 
+// This function handles window clicks to close the warning dialog if necessary.
 function handleWindowClick(event, warningDialog) {
     if (event.target == warningDialog) {
         closeWarningDialog(warningDialog);

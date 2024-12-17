@@ -1,9 +1,12 @@
 // Prio
+// This function initializes the priority buttons by resetting all buttons and setting the medium priority as the default.
 function initializePriority() {
     resetAllPriorityButtons();
     setMediumPriority();
 }
 
+// This function handles the priority button click event. It prevents the default button 
+// behavior if an event is provided, resets other buttons, and toggles the current button.
 function priority(x, event) {
     if (event) {
         event.preventDefault(); // Verhindert das Standardverhalten des Buttons, wenn ein Event übergeben wird
@@ -14,7 +17,7 @@ function priority(x, event) {
     toggleCurrentButton(currentPrio, x);
 }
 
-// Setzt alle anderen Buttons zurück
+// This function resets all priority buttons except the current one.
 function resetOtherButtons(allButtons, currentButton) {
     allButtons.forEach(button => {
         if (button !== currentButton) {
@@ -23,7 +26,7 @@ function resetOtherButtons(allButtons, currentButton) {
     });
 }
 
-// Schaltet den aktuellen Button um (aktivieren/deaktivieren)
+// This function toggles the state of the current priority button (activates or deactivates it).
 function toggleCurrentButton(button, priority) {
     if (button.classList.contains('active-button')) {
         resetButton(button);
@@ -32,14 +35,14 @@ function toggleCurrentButton(button, priority) {
     }
 }
 
-// Setzt einen Button in den Grundzustand zurück
+// This function resets a priority button to its default state.
 function resetButton(button) {
     button.classList.remove('active-button', 'urgent', 'med', 'low');
     button.classList.add('hover-button');
     updateButtonContent(button);
 }
 
-// Aktiviert einen Button
+// This function activates a priority button with the specified priority.
 function activateButton(button, priority) {
     button.classList.remove('hover-button');
     button.classList.add('active-button');
@@ -47,7 +50,7 @@ function activateButton(button, priority) {
     updateButtonContent(button);
 }
 
-// Bestimmt die CSS-Klasse basierend auf der Priorität
+// This function determines the CSS class based on the priority level.
 function getPriorityClass(priority) {
     switch(priority) {
         case 1: return 'urgent';
@@ -57,13 +60,14 @@ function getPriorityClass(priority) {
     }
 }
 
-// Aktualisiert den Inhalt eines Buttons
+// This function updates the content of a priority button based on its state.
 function updateButtonContent(button) {
     const priority = button.id.replace('prio', '');
     const isActive = button.classList.contains('active-button');
     button.innerHTML = getButtonContent(priority, isActive);
 }
 
+// This function resets all priority buttons to their default state.
 function resetAllPriorityButtons() {
     const priorityButtons = document.querySelectorAll('.prio-button');
     priorityButtons.forEach(button => {
@@ -71,6 +75,7 @@ function resetAllPriorityButtons() {
     });
 }
 
+// This function sets the medium priority button as active by default.
 function setMediumPriority() {
     const mediumButton = document.getElementById('prio2');
     if (mediumButton) {
@@ -81,6 +86,7 @@ function setMediumPriority() {
 }
 
 // Category
+// This function toggles the visibility of the category dropdown.
 function showCategory() {
     const dropdown = document.getElementById('opened-category');
     dropdown.classList.toggle('d-none'); // Dropdown anzeigen oder verbergen
@@ -89,6 +95,7 @@ function showCategory() {
     categorySelection.textContent = "Select task category";
 }
 
+// This function handles the selection of a category from the dropdown.
 function categorySelected(category) {
     // Das Element mit der ID "category-selection" abrufen
     const categorySelection = document.getElementById('category-selection');
@@ -105,8 +112,10 @@ function categorySelected(category) {
 }
 
 // Subtask
+// This array stores the list of subtasks.
 let subtasks = [];
 
+// This function closes the subtask input field and resets its view to the original state.
 function closeSubtask() {
     let subtaskButtons = document.getElementById('subtask-buttons');
     let subtaskInput = document.getElementById('subtaskInput');
@@ -119,6 +128,7 @@ function closeSubtask() {
     document.removeEventListener('click', closeSubtaskOnOutsideClick);
 }
 
+// This function closes the subtask input field when a click occurs outside the subtask wrapper.
 function closeSubtaskOnOutsideClick(event) {
     let subtaskWrapper = document.getElementById('subtask-input-wrapper');
     if (!subtaskWrapper.contains(event.target)) {
@@ -126,6 +136,7 @@ function closeSubtaskOnOutsideClick(event) {
     }
 }
 
+// This function adds a new subtask to the list and updates the display.
 function addSubtask() {
     let subtaskInput = document.getElementById('subtaskInput');
     let addedSubtask = document.getElementById('subtasks');
@@ -144,6 +155,7 @@ function addSubtask() {
     closeSubtask();
 }
 
+// This function edits an existing subtask by replacing its content with an input field.
 function editSubtask(index) {
     let subtaskElement = document.getElementById(`subtask${index}`);
     let currentText = subtasks[index];
@@ -156,6 +168,7 @@ function editSubtask(index) {
     input.setSelectionRange(input.value.length, input.value.length);
 }
 
+// This function replaces the text of an edited subtask and updates the display.
 function replaceSubtask(index) {
     let subtaskElement = document.getElementById(`subtask${index}`);
     let input = subtaskElement.querySelector('.edit-subtask-input');
@@ -169,11 +182,13 @@ function replaceSubtask(index) {
     }
 }
 
+// This function deletes a subtask from the list and updates the display.
 function deleteSubtask(index) {
     subtasks.splice(index, 1);
     updateSubtaskDisplay();
 }
 
+// This function updates the display of all subtasks after adding, editing, or deleting a subtask.
 function updateSubtaskDisplay() {
     let addedSubtask = document.getElementById('subtasks');
     addedSubtask.innerHTML = '';
@@ -185,6 +200,7 @@ function updateSubtaskDisplay() {
 }
 
 // validation
+// This function initializes the form validation by adding an event listener to the submit button.
 function initializeValidation() {
     const submitButton = document.querySelector('.submit-button');
 
@@ -202,6 +218,7 @@ function initializeValidation() {
     }
 };
 
+// This function validates the entire form by calling individual validation functions for each field.
 function validateForm() {
     let isValid = true;
 
@@ -212,6 +229,7 @@ function validateForm() {
     return isValid;
 }
 
+// This function validates the title field to ensure it is not empty and meets the minimum length requirement.
 function validateTitle() {
     const title = document.getElementById('title').value.trim();
     const titleError = document.getElementById('title-error');
@@ -230,6 +248,7 @@ function validateTitle() {
     return true;
 }
 
+// This function validates the due date field to ensure it is not empty and meets the required format.
 function validateDueDate() {
     const dueDate = document.getElementById('datepicker').value.trim();
     const dueDateError = document.getElementById('due-date-error');
@@ -243,6 +262,7 @@ function validateDueDate() {
     return true;
 }
 
+// This function validates the category selection to ensure a category is selected.
 function validateCategory() {
     const categorySelection = document.getElementById('category-selection');
     const errorMessage = document.getElementById('error-message');
@@ -256,6 +276,7 @@ function validateCategory() {
     return true;
 }
 
+// This function displays an overlay indicating that the task has been added successfully.
 function showTaskAddedOverlay() {
     const overlay = document.getElementById('task-added-overlay');
     overlay.classList.remove('d-none');
@@ -269,6 +290,7 @@ function showTaskAddedOverlay() {
     }, 3000);
 }
 
+// This function hides the task added overlay and redirects to the board page.
 function hideTaskAddedOverlay() {
     const overlay = document.getElementById('task-added-overlay');
     overlay.classList.remove('show');
@@ -278,36 +300,39 @@ function hideTaskAddedOverlay() {
     goToBoard();
 }
 
+// This function redirects the user to the board page.
 function goToBoard() {
     window.location.href = 'board.html';
 }
 
+// This function clears all fields and resets the form to its initial state.
 function clearForm() {
-    // Leeren der Textfelder
+    // Clear text fields
     document.getElementById('title').value = '';
     document.getElementById('description').value = '';
     document.getElementById('datepicker').value = '';
 
-    // Leeren der Kontakte
+    // Clear contacts
     selectedContacts = [];
     updateSelectedContacts();
 
-    // Zurücksetzen der Priorität
+    // Reset priority
     resetAllPriorityButtons();
     setMediumPriority();
 
-    // Zurücksetzen der Kategorie
+    // Reset category
     resetCategory();
 
-    // Leeren der Subtasks
+    // Clear subtasks
     subtasks = [];
     updateSubtaskDisplay();
 
-    // Entfernen aller Fehlermeldungen
+    // Remove all error messages
     const errorMessages = document.querySelectorAll('.error-message');
     errorMessages.forEach(msg => msg.classList.add('d-none'));
 }
 
+// This function resets the category selection to its initial state.
 function resetCategory() {
     const categorySelection = document.getElementById('category-selection');
     categorySelection.textContent = 'Select task category';
