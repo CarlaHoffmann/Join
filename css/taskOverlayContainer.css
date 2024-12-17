@@ -120,6 +120,45 @@ body {
 
 }
 
+/* Wrapper für Info-Bereich */
+.task-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Abstand zwischen Due Date und Priority */
+    margin: 15px 0;
+}
+
+/* Info-Bereich einzeln */
+.task-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-label {
+    font-weight: bold;
+    color: #2A3647;
+    min-width: 80px; /* Einheitliche Breite der Labels */
+}
+
+.info-value {
+    color: #4A4A4A;
+    font-size: 19px;
+}
+
+
+.priority-container {
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+}
+
+.priority-icon {
+    width: 20px; 
+    height: 20px;
+}
+
+
 .assigned {
     display: flex;
     flex-direction: column;
@@ -192,49 +231,58 @@ body {
     margin-right: 8px; /* Abstand zwischen Initialen und Namen */
 }
 
-/* Buttons mit Icons */
-.deleteEditBtnContainer svg {
-    font-size: 16px;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-    padding: 8px 12px; /* Padding für bessere Klickfläche */
-    border-radius: 8px; /* Für abgerundete Ecken beim Hover-Hintergrund */
-    transition: background-color 0.3s ease; /* Weiche Übergänge beim Hover */
-    width: 96px;
-    height: 40px ;
-}
 
-.deleteBtn, .editBtn {
-    width: 96px;
-    height: 40px ;
-}
+
 /*
-.okBtnContainer {
-    font-size: 16px;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-    padding: 8px 12px; /* Padding für bessere Klickfläche 
-    border-radius: 8px; /* Für abgerundete Ecken beim Hover-Hintergrund 
-    transition: background-color 0.3s ease; /* Weiche Übergänge beim Hover 
-    width: 96px;
-    height: 40px ;
-    background-color: red;
-}
-*/
 
-/* Container für die Buttons */
+/* Container für Delete- und Edit-Icons */
 .deleteEditBtnContainer {
     display: flex;
     align-items: center;
+    gap: 10px;
 }
+
+/* Icons Styling */
+.icon-button {
+    width: 81px; /* Größe der Icons */
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.icon-button:hover {
+    transform: scale(1.1); /* Vergrößerung beim Hover */
+}
+
+/* Vertikale Trennlinie */
+.vertical-line {
+    width: 20px;
+    height: 24px;
+    background-color: #d3d3d3;
+    margin: 0 10px;
+}
+
+.icon-text-button {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Abstand zwischen Icon und Text */
+    cursor: pointer;
+}
+
+.icon-svg {
+    width: 24px;
+    height: 24px;
+    transition: stroke 0.3s ease; /* Weicher Übergang für die Farbe */
+}
+
+/* Text und Icon Hover-Effekt */
+.icon-text-button:hover .icon-svg path {
+    stroke: #29ABE2; /* Ändert die Pfadfarbe des SVG */
+}
+
+.icon-text-button:hover .icon-text {
+    color: #29ABE2; /* Ändert die Textfarbe */
+}
+
 
 /* Vertikale Trennlinie */
 .vertical-line {

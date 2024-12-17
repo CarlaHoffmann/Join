@@ -102,7 +102,15 @@
                         ondragover="allowDrop(event); highlight('column-toDo')">
                         <div class="column-header">
                             <h2 class="text_board_headline">To Do</h2>
-                            <img src="/assets/img/add_task/plus button.svg" alt="Add Task Icon" class="column-icon" onclick="addTask()" />
+
+                            <!-- <img src="/assets/img/add_task/plus button.svg" alt="Add Task Icon" class="column-icon" onclick="addTask()" /> -->
+
+                            <svg class="column-icon" onclick="addTask()" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                                <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                
                         </div>
                         <div id="toDoTasks" class="tasks-container"></div>
                         <div id="toDoPlaceholder" class="placeholder">No tasks To do</div>
@@ -115,7 +123,11 @@
                         ondragover="allowDrop(event); highlight('column-progress')">
                         <div class="column-header">
                             <h2 class="text_board_headline">In Progress</h2>
-                            <img src="/assets/img/add_task/plus button.svg" alt="Add Task Icon" class="column-icon" onclick="addTask()" />
+                            <svg class="column-icon" onclick="addTask()" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                                <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
                         </div>
                         <div id="progressTasks" class="tasks-container"></div>
                         <div id="progressPlaceholder" class="placeholder">No tasks In progress</div>
@@ -128,8 +140,11 @@
                         ondragover="allowDrop(event); highlight('column-feedback')">
                         <div class="column-header">
                             <h2 class="text_board_headline">Await Feedback</h2>
-                            <img src="/assets/img/add_task/plus button.svg" alt="Add Task Icon" class="column-icon" onclick="addTask()" />
-                        </div>
+                            <svg class="column-icon" onclick="addTask()" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                                <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                </svg>                        </div>
                         <div id="feedbackTasks" class="tasks-container"></div>
                         <div id="feedbackPlaceholder" class="placeholder">No tasks Await feedback</div>
                     </div>

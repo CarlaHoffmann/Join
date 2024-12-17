@@ -383,20 +383,20 @@
   line-height: 24px;
 }
 
-.column-icon-button {
-  display: flex;
-  position: relative;
+
+.column-icon {
   width: 24px;
   height: 24px;
-  background-image: url(/assets/img/board/arrow_drop_down_up.svg);
-  background-repeat: no-repeat;
   cursor: pointer;
-  
+  transition: stroke 0.3s ease; /* Sanfter Übergang */
 }
 
-.column-plus-button:hover {
-  background-image: url(/assets/img/board/plus_button_blue.svg);
+.column-icon:hover rect,
+.column-icon:hover path {
+  stroke: #29ABE2; 
+  transition: stroke 0.2s ease;
 }
+
 
 .search-icon {
   cursor: pointer;
