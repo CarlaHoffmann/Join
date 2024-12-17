@@ -3,6 +3,15 @@ body {
     background-color: #f1f1f1;
 }
 
+.okBtnContainer {
+    display: flex;
+    justify-content: end;
+}
+.close {
+    display: flex;
+    justify-content: end;
+}
+
 /* OVERLAY
 .task-overlay-content{
     display:flex;
