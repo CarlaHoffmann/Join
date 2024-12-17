@@ -19,29 +19,6 @@ body {
     bottom: 0;
 }
 
- /*Für TaskOverlay*/
-/* .task-head {
-    display: flex;
-    justify-content: space-between;
-}
-.close-button-box {
-    width: 32px;
-    height: 32px;
-    border-radius: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
- .close-button {
-    width: 20px;
-    height: 20px;
- }
- .close-button-box:hover {
-    background-color: #D1D1D1;
- } */
-/**/
-
-
 .upper-form {
     display: flex;
     flex-direction: column;
@@ -65,7 +42,6 @@ body {
 }
 
 .add-task-form {
-    /* width: 100%; */
     display: flex;
     gap: 24px;
     margin-bottom: 20px;
@@ -190,7 +166,6 @@ h1 {
     padding-top: 12px;
     padding-bottom: 12px;
     position: relative;
-    /* bottom: -40px; */
 }
 
 .bottom-buttons {
@@ -262,11 +237,6 @@ h1 {
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* .dialog.show {
-    opacity: 1;
-    visibility: visible;
-} */
-
 #task-added-confirmation {
     background-color: #2A3647;
     color: white;
@@ -281,9 +251,6 @@ h1 {
     transition: transform 0.3s ease;
 }
 
-/* .dialog.show #task-added-confirmation {
-    transform: translateY(0);
-} */
 .show {
     opacity: 1;
     visibility: visible;
@@ -361,10 +328,7 @@ h1 {
     }
 
     .upper-form {
-        display: flex;
-        flex-direction: column;
         gap: 20px;
-        /* padding: 12px 16px; */
     }
 
     .title {

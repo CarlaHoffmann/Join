@@ -1,0 +1,161 @@
+/* Title */
+#titel-wrapper {
+    position: relative;
+}
+
+.title {
+    padding: 12px 21px;
+    box-sizing: border-box;
+    width: 440px;
+}
+
+ .title::placeholder {
+    color: #D1D1D1;
+ }
+
+/* Description */
+.description {
+    box-sizing: border-box;
+    height: 120px;
+    padding: 18px 16px;
+    resize: vertical;
+    font-family: "Inter", sans-serif;
+}
+
+.description::placeholder {
+    color: #D1D1D1;
+}
+
+/* Contact Selection*/
+#contact-selection {
+    position: relative;
+}
+
+.selection-field {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+.selection-field p {
+    margin: 0;
+}
+
+#contact-drop-down {
+    position: absolute;
+    background-color: white;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    border: none;
+    border-radius: 10px;
+    max-height: 250px;
+    overflow-y: auto; 
+}
+
+#contacts-to-select {
+    max-height: 200px; 
+    overflow-y: auto;
+}
+
+.selection-name {
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 16px;
+}
+
+.selection-name:hover {
+    background-color: #efefef;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.contact-label{
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+.selection-name input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.selected-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.contact-initial {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+/* Anpassung des Scrollbalkens für besseres Aussehen */
+#contacts-to-select::-webkit-scrollbar {
+    width: 8px;
+}
+
+#contacts-to-select::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-radius: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#contacts-to-select::-webkit-scrollbar-thumb {
+    background: #D1D1D1;
+    border-radius: 10px;
+}
+
+#contacts-to-select::-webkit-scrollbar-thumb:hover {
+    background: #A8A8A8;
+}
+
+/* Date*/
+.date-input-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.date-input-wrapper input[type="date"] {
+    width: 100%;
+}
+
+.date-input-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none; /* Versteckt den Standard-Kalender-Picker */
+}
+
+.date-input-wrapper input[type="date"]::placeholder {
+    color: #D1D1D1; /* Anpassen der Placeholder-Farbe nach Bedarf */
+}
+
+.date-input {
+    width: 100%;
+}
+
+.calendar-icon {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    pointer-events: none; /* Verhindert, dass das Icon Klicks blockiert */
+}
+
+.date-input::placeholder {
+    color: #D1D1D1;
+}  
+
