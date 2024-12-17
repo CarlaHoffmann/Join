@@ -137,11 +137,11 @@
 }
 
 .date-input-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
-    display: none; /* Versteckt den Standard-Kalender-Picker */
+    display: none;
 }
 
 .date-input-wrapper input[type="date"]::placeholder {
-    color: #D1D1D1; /* Anpassen der Placeholder-Farbe nach Bedarf */
+    color: #D1D1D1;
 }
 
 .date-input {
@@ -152,7 +152,7 @@
     position: absolute;
     right: 6px;
     top: 6px;
-    pointer-events: none; /* Verhindert, dass das Icon Klicks blockiert */
+    pointer-events: none;
 }
 
 .date-input::placeholder {
