@@ -64,16 +64,54 @@ function returnContactDetailsTemplate(key, name, email, phone, color){
     `;
 }
 
+// function showContact(key, name, email, phone, color) {
+//     const contactDetails = document.getElementById('contactDetails');
+//     const contactDetailsOverlay = document.getElementById('contactDetailsOverlay');
+    
+//     // Inhalt setzen
+//     contactDetails.innerHTML = returnContactDetailsTemplate(key, name, email, phone, color);
+//     contactDetailsOverlay.innerHTML = returnContactDetailsTemplate(key, name, email, phone, color);
+
+//     if(contactDetails.classList.contains('show')) {
+//         contactDetails.classList.remove('show');
+//     }
+//     // Animation starten
+//     contactDetails.classList.add('show');
+// }
+// function showContact(key, name, email, phone, color) {
+//     const contactDetails = document.getElementById('contactDetails');
+//     const contactDetailsOverlay = document.getElementById('contactDetailsOverlay');
+
+//     // Prüfen, ob die Klasse 'show' bereits vorhanden ist und entfernen, wenn ja
+//     if (contactDetails.classList.contains('show')) {
+//         contactDetails.innerHTML = '';
+//         contactDetails.classList.remove('show');
+//     }
+//     // Animation starten, wenn 'show' nicht vorhanden ist oder entfernt wurde
+//     contactDetails.classList.add('show');
+//     // Inhalt setzen
+//     contactDetails.innerHTML = returnContactDetailsTemplate(key, name, email, phone, color);
+//     contactDetailsOverlay.innerHTML = returnContactDetailsTemplate(key, name, email, phone, color);
+// }
 function showContact(key, name, email, phone, color) {
     const contactDetails = document.getElementById('contactDetails');
     const contactDetailsOverlay = document.getElementById('contactDetailsOverlay');
-    
+
     // Inhalt setzen
     contactDetails.innerHTML = returnContactDetailsTemplate(key, name, email, phone, color);
     contactDetailsOverlay.innerHTML = returnContactDetailsTemplate(key, name, email, phone, color);
 
-    // Animation starten
-    contactDetails.classList.add('show');
+    // Prüfen, ob die Klasse 'show' bereits vorhanden ist und entfernen, wenn ja
+    if (contactDetails.classList.contains('show')) {
+        contactDetails.classList.remove('show');
+        requestAnimationFrame(() => {
+            // Animation starten
+            contactDetails.classList.add('show');
+        });
+    } else {
+        // Animation starten, wenn 'show' nicht vorhanden ist
+        contactDetails.classList.add('show');
+    }
 }
 
 function showOverlayAddContact() {

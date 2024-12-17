@@ -228,24 +228,47 @@ hr {
     padding-left: 50px;
     flex-direction: column;
     transition: right 0.5s ease-in-out;
+    overflow-x: hidden;
 }
 
 /*contact details*/
-#contactDetails{
+/* #contactDetails{
     background: #F6F7F8;
-    transform: translateX(100%); /* Start außerhalb des Bildschirms */
-    transition: transform 0.5s ease-in-out;
+    transform: translateX(100%);  */
+    /* Start außerhalb des Bildschirms */
+    /* transition: transform 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+} */
+
+
+/* #contactDetails.show {
+    transform: translateX(0); 
+} */
+#contactDetails {
+    background: #F6F7F8;
+    transform: translateX(100%);
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.divider2{
-    display:none;
+#contactDetails.show {
+    animation: slideIn 0.5s ease-in-out forwards;
 }
 
-#contactDetails.show {
-    transform: translateX(0); 
+@keyframes slideIn {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.divider2{
+    display:none;
 }
 
 .detailsBox {
