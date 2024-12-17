@@ -1,5 +1,7 @@
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
+// This asynchronous function initializes the task summary by calling several functions to 
+// fetch and display various task counts and the highest priority task.
 async function initSummary() {
     await getGreetingOverlay();
     await getGreetingName();
@@ -11,16 +13,17 @@ async function initSummary() {
     await findHighestPriorityTask();
 }
 
+// This asynchronous function displays a greeting overlay and updates the greeting name based on the logged-in user.
 async function getGreetingOverlay() {
     let greeting = document.getElementsByClassName('greeting')[0];
     let greetName = document.getElementsByClassName('greet-name')[0];
     let overlay = document.getElementById('greeting-overlay');
 
-    // Prüfe, ob die Weiterleitung von den richtigen Seiten erfolgte
+    // Check if the referral is from the correct pages
     let referrer = document.referrer;
     if (referrer && (referrer.includes('signUp.html') || referrer.includes('logIn.html'))) {
         try {
-            const response = await fetch(`${base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
+            const response = await fetch(`${base_url}/loggedIn.json`); // Example path for the logged-in user
             const loggedInData = await response.json();
             let user = loggedInData.name;
 
@@ -28,7 +31,7 @@ async function getGreetingOverlay() {
                 greeting.innerHTML = 'Good morning!';
                 greetName.innerHTML = '';
             } else {
-                greetName.innerHTML = loggedInData.name; // Ausgabe des Namens des eingeloggten Users
+                greetName.innerHTML = loggedInData.name; // Display the name of the logged-in user
             }
 
             // Zeige das Overlay an, wenn die Bildschirmbreite kleiner oder gleich 1275px ist
