@@ -354,7 +354,7 @@ async function openTaskOverlay(task) {
         const subtask = task.subtasks[key];
         return `
             <div class="check">
-                <input type="checkbox" ${subtask.checked ? 'checked' : ''} disabled>
+                <input type="checkbox" ${subtask.checked ? 'checked' : ''}>
                 <div>${subtask.task}</div>
             </div>`;
     }).join('');

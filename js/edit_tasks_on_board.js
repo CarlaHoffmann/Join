@@ -123,7 +123,7 @@ async function createEditTask(path, id) {
     try {
         await postEditData(task, path, id);
         showTaskAddedOverlay();
-        closeTaskOverlay()
+        closeTaskOverlay();
         await loadTasks();
                 
     } catch (error) {
