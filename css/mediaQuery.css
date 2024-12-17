@@ -271,6 +271,13 @@
 }
 
 @media (max-width: 680px) {
+  #headerLogo {
+    width: 64px;
+    height: 78px;
+    top: 37px;
+    left: 38px;
+  }
+
   .arrow_signUp {
     margin: 0;
     position: absolute;
@@ -279,13 +286,17 @@
   }
 
   .frame153 {
-    width: 100%;
+    width: calc(100vw - 64px);
     padding: 32px 16px;
   }
 
   .frame153-signup {
-    width: 100%;
+    width: calc(100vw - 64px);
     padding: 32px 16px;
+  }
+
+  .input-container {
+    width: 364px;
   }
 
   .display-fcc {
@@ -300,14 +311,46 @@
     flex-direction: column;
     gap: 21px;
   }
+
+  #signup-linking-desktop {
+    display: none;
+  }
+
+  #signup-linking-mobile {
+    display: flex;
+    position: absolute;
+    top: 778px;
+  }
+
+  .login-footer {
+    position: absolute;
+    bottom: 20px;
+  }
 }
 
 @media(max-width: 500px) {
-  .signUp-formfields {
+  /* .signUp-formfields {
     width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+  } */
+
+  .input-container {
+    width: 264px;
+  }
+}
+
+@media(max-width: 372px) {
+  .arrow_signUp {
+    /* position: relative; */
+    left: -10px;
   }
 
-  .password_container {
-    width: calc(100vw - 64px);
+  .input-container {
+    width: 224px;
+  }
+
+  .input-with-image {
+    width: 200px;
   }
 }
