@@ -15,7 +15,7 @@
 </head>
 
 <body onload="setPreviousPageParams()" class="display-fc">
-    <div class="limitation signUp-page">
+    <div class="signUp-page">
         <header class="d-center-space-betwen">
             <!-- <img src="./assets/img/logIn_SignUp/Capa1.svg" alt="" class="imglogo"> -->
             <img src="/img/login/Logo for Favicon construction.svg" alt="" class="imglogo">
@@ -36,20 +36,20 @@
                 
                 <form onsubmit="addUser(); return false;" class="display-fccc gap">
                     <div class="signUp-formfields">
-                        <div id="nameContainer" class="password_container">
+                        <div id="nameContainer" class="input-container">
                             <input id="name" placeholder="Name" type="text" class="input-with-image b-img-email"
                                 onclick="changeName()" required>
                             <img src="/img/login/person.png" alt="">
                         </div>
 
-                        <div id="emailContainer" class="password_container">
+                        <div id="emailContainer" class="input-container">
                             <input id="email" placeholder="Email" type="email" class="input-with-image b-img-email"
                                 onclick="changeEmail()" required>
                             <img src="/img/login/mail.png" alt="">
                         </div>
 
-                        <div id="passwordButten" class="password_container">
-                            <input id="password" placeholder="Password" type="password" onclick="changePassword()" required>
+                        <div id="passwordButten" class="input-container">
+                            <input id="password" placeholder="Password" type="password" class="input-with-image" onclick="changePassword()" required>
                             <img src="/img/login/lock.png" alt="" id="passwordLock" class="password_lock">
                             <a role="button" class="password_butten" onclick="togglePasswordVisibility()">
                                 <img src="img/login/visibility_off.svg" alt="" id="notSee" class="hidden">
@@ -57,8 +57,8 @@
                             </a>
 
                         </div>
-                        <div id="confirmPasswordButten" class="password_container">
-                            <input id="confirmPassword" placeholder="Password" type="password"
+                        <div id="confirmPasswordButten" class="input-container">
+                            <input id="confirmPassword" placeholder="Password" type="password" class="input-with-image"
                                 onclick="changeConfirmPassword()" required>
                             <img src="/img/login/lock.png" alt="" id="confirmpPasswordLock"
                                 class="password_lock">
@@ -87,9 +87,9 @@
             </div>
         </div>
 
-        <footer class="display-fcc gap gray">
-            <a href="privacyPolicy.html" class="pointer-coler link_visited" target="_blank">Privacy policy</a>
-            <a href="legalNotice.html" class="pointer-coler link_visited" target="_blank">Legal notice</a>
+        <footer class="login-footer gap gray">
+            <a href="privacyPolicy.html" class="pointer-color link_visited" target="_blank">Privacy policy</a>
+            <a href="legalNotice.html" class="pointer-color link_visited" target="_blank">Legal notice</a>
         </footer>
 
     </div>

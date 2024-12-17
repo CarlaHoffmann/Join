@@ -26,18 +26,14 @@
     </div>
 
     <div class="logIn-page">
-        <!-- Header with Logo -->
-        <header class="d-center-space-betwen">
-            <img src="/img/login/Logo for Favicon construction.svg" alt="Header Logo" id="headerLogo" class="hidden">
-            <div class="destop-login display-ac">
-                <div class="display-ac gap">
-                    <span>Not a join user?</span>
-                    <a href="./signup.html">
-                        <p class="button-login-blue button-p">Sign up</p>
-                    </a>
-                </div>
-            </div>
-        </header>
+        <img src="/img/login/Logo for Favicon construction.svg" alt="Header Logo" id="headerLogo" class="hidden">
+
+        <div id="signup-linking-desktop" class="signup-linking">
+            <span>Not a join user?</span>
+            <a href="./signup.html">
+                <p class="button-login-blue button-p">Sign up</p>
+            </a>
+        </div>
 
         <div class="login-content">
             <!-- Login Form -->
@@ -47,19 +43,20 @@
                         <h1 class="headline_logIn">Log in</h1>
                         <div class="vector_login"></div>
                     </div>
+
                     <form onsubmit="existingMailLogIn(); return false;" class="form-gap">
                         <div>
                             <div class="display-fccc gap-20">
                                 <!-- Email Input -->
-                                <div id="emailContainer" class="password_container">
+                                <div id="emailContainer" class="input-container">
                                     <input id="email" placeholder="Email" type="email" class="input-with-image b-img-email"
                                         onclick="changeEmail()" required>
                                     <img src="/img/login/mail.png" alt="Email Icon">
                                 </div>
 
                                 <!-- Password Input -->
-                                <div id="passwordButten" class="password_container">
-                                    <input id="password" placeholder="Password" type="password" onclick="changePassword()" required>
+                                <div id="passwordButten" class="input-container">
+                                    <input id="password" placeholder="Password" type="password" class="input-with-image" onclick="changePassword()" required>
                                     <img src="/img/login/lock.png" alt="Lock Icon" id="passwordLock" class="password_lock">
                                     <a role="button" class="password_butten" onclick="togglePasswordVisibility()">
                                         <img src="img/login/visibility_off.svg" alt="Visibility Off" id="unlock" class="hidden">
@@ -93,11 +90,18 @@
                 </div>
             </div>
 
+            <div id="signup-linking-mobile" class="signup-linking">
+                <span>Not a join user?</span>
+                <a href="./signup.html">
+                    <p class="button-login-blue button-p">Sign up</p>
+                </a>
+            </div>
+
             <!-- Footer -->
-            <footer class="display-fjc gap gray">
-                <a href="./privacyPolicy.html" id="privacyPolicy" class="pointer-coler link_visited">Privacy
+            <footer class="login-footer gap gray">
+                <a href="./privacyPolicy.html" id="privacyPolicy" class="pointer-color link_visited">Privacy
                     policy</a>
-                <a href="./legalNotice.html" id="legalNotice" class="pointer-coler link_visited">Legal
+                <a href="./legalNotice.html" id="legalNotice" class="pointer-color link_visited">Legal
                     notice</a>
             </footer>
         </div>
