@@ -254,45 +254,8 @@ function removeHighlightEnd(columnId) {
     removeHighlightLeave(columnId);
 }
 
-
-
-
 let currentTask = null; // Variable, um die aktuelle Task zu speichern
 
-/**
- * Öffnet das Bearbeitungs-Overlay für eine vorhandene Task.
- * @param {string} taskId - Die ID der zu bearbeitenden Task.
- * @param {string} status - Der Status (Spalte), in der sich die Task befindet.
- */
-// async function openEditTaskOverlay(taskId, status) {
-//     try {
-//         const url = `${base_url}/tasks/${status}/${task.id}.json`;
-//         const response = await fetch(url);
-//         console.log(task.id);
-//         if (!response.ok) {
-//             throw new Error(`HTTP-Error: ${response.status}`);
-//         }
-
-//         // Die aktuelle Task-Daten abrufen
-//         currentTask = await response.json();
-
-//         // Overlay mit den Task-Daten befüllen
-//         document.getElementById("editTaskOverlay").classList.remove("d-none");
-//         document.getElementById("edit-task-title").value = currentTask.title || "";
-//         document.getElementById("edit-task-description").value = currentTask.description || "";
-//         document.getElementById("edit-task-priority").value = currentTask.prio || "2"; // Default "medium"
-
-//         document.getElementById("edit-task-save").setAttribute("data-task-id", taskId);
-//         document.getElementById("edit-task-save").setAttribute("data-status", status);
-
-//     } catch (error) {
-//         console.error("Error loading task:", error);
-//     }
-// }
-
-/**
- * Schließt das Bearbeitungs-Overlay.
- */
 function closeEditTaskOverlay() {
     document.getElementById("editTaskOverlay").classList.add("d-none");
     currentTask = null;
@@ -362,7 +325,7 @@ async function openTaskOverlay(task) {
     overlayContainer.innerHTML = `
         <div class="taskOverlay">
             <div class="taskSelect">
-                <div class="taskContainer" style="background-color: ${getCategoryColor(task.category)};">${task.category}</div>
+                <div class="taskContainer">${task.category}</div>
                 <div class="close" onclick="closeTaskOverlay()"><img src="assets/img/add_task/close.svg" alt="Close" /></div>
             </div>
             <div class="headline">${task.title}</div>
@@ -661,38 +624,6 @@ function enableEditMode() {
 
 
 
-// async function saveOverlayChanges(taskId, category) {
-//     // Geänderte Daten aus den Feldern abrufen
-//     const updatedTask = {
-//         title: document.getElementById('overlayTitle').value,
-//         description: document.getElementById('overlayDescription').value,
-//         date: document.getElementById('overlayDueDate').value,
-//         prio: document.querySelector('.prio-button.active-button').id.replace('prio', ''),
-//         contacts: Array.from(document.querySelectorAll('#overlayContacts .contact-initial')).map(contact => contact.textContent),
-//         subtasks: Array.from(document.querySelectorAll('#overlaySubtasks li')).map(subtask => subtask.textContent),
-//     };
-
-//     try {
-//         const url = `${base_url}/tasks/${category}/${taskId}.json`;
-//         const response = await fetch(url, {
-//             method: 'PUT',
-//             body: JSON.stringify(updatedTask),
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             }
-//         });
-
-//         if (!response.ok) {
-//             throw new Error(`HTTP error: ${response.status}`);
-//         }
-
-//         console.log('Task successfully updated!');
-//         closeTaskOverlay();
-//         loadTasks(); // Aktualisiere das Board
-//     } catch (error) {
-//         console.error('Error saving task changes:', error);
-//     }
-// }
 async function saveOverlayChanges(taskId, taskStatus) {
     // Geänderte Daten aus den Feldern abrufen
     const titleElement = document.getElementById('overlayTitle');

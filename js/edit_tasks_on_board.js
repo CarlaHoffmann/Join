@@ -238,10 +238,12 @@ function takeSubtask() {
 function getCategoryColor(category) {
     switch (category) {
         case 'User Story':
-            return '#0038FF'; // Blau für User Story
+            return '#0038FF'; 
         case 'Technical Task':
-            return '#1FD7C1'; // Türkis für Technical Task
+            return '#1FD7C1';
         default:
-            return '#D3D3D3'; // Standardfarbe (Hellgrau)
+            return '#D3D3D3';
     }
 }
+
+

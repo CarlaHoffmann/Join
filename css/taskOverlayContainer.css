@@ -12,6 +12,20 @@ body {
     justify-content: end;
 }
 
+.subtask-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.check {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
 /* OVERLAY
 .task-overlay-content{
     display:flex;
@@ -56,6 +70,7 @@ body {
     box-sizing: border-box;
     background-color: white;
 }
+
 
 
 /* Scrollbalkens */
