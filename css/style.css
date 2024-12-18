@@ -3,6 +3,7 @@
     align-items: center;
     height: 100vh;
     background-color: var(--backgroundblue);
+    
   }
   
   .wrapped_maxWidth {
@@ -13,12 +14,7 @@
     position: relative;
   }
   
-  
-  .right_section {
-    flex: 1;
-    margin-left: 232px;
-    margin-top: 60px;
-  }
+
     
 
   .main_maxWidth {
