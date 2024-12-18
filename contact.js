@@ -44,7 +44,7 @@ function returnContactDetailsTemplate(key, name, email, phone, color){
                 <div class='nameDetails'>
                     <p>${name}</p>
                     <div class="contactItemControls">
-                        <div id="editContainer" onclick="toggleView('editContactBox', '${key}', true)"><img src="img/contact/edit.svg"><span>Edit</span></div>
+                        <div id="editContainer" onclick="toggleView('editContactBoxOverlay', '${key}', true)"><img src="img/contact/edit.svg"><span>Edit</span></div>
                         <div id="deleteContainer" onclick="deleteContact('${key}')"><img src="img/contact/delete.svg"><span>Delete</span></div>
                     </div>
                 </div>
@@ -174,7 +174,7 @@ async function toggleView(elementId, key=null, edit=false){
 };
 
 function closeEditBox(){
-    document.getElementById('editContactBox').classList.add('hidden');
+    document.getElementById('editContactBoxOverlay').classList.add('hidden');
 }
 
 function closeAddContactBox(){

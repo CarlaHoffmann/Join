@@ -31,25 +31,7 @@
                 <input type="reset">
             </form>
         </div>
-        <!--edit contact box-->
-        <div id="editContactBox" class="hidden">
-            <img src="img/contact/close.svg" id="closeEditContactBox" class="close-button" onclick="closeEditBox()">
-            <div id="editContactBoxHeader">
-                <img class="logo" src="img/contact/logo.svg">
-                <h2>Edit Contact</h2>
-                <img class="dividerOverlay" src="img/contact/dividerOverlay.svg">
-                <p>Tasks are better with a team!</p>
-            </div>
-            <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); editContact('${editKey}');">
-                <input required id="changedName" placeholder="Name" type="text">
-                <input required id="changedEmail" placeholder="Email" type="email">
-                <input required id="changedPhone" placeholder="Phone" type="text">
-                <div class="deleteAndSaveButton">
-                    <input type="submit" value="Delete">
-                    <input class="saveButton" type="submit" value="Save">
-                </div>
-            </form>
-        </div>
+        
         <!--contacts-->
         <div id="contacts">
             <button id="addContactButton" onclick="toggleView('addContactBox')"><span>Add new contact</span><img src="img/contact/person_add.svg"></button>
@@ -70,6 +52,7 @@
 
         </div>
     </div>
+
     <!--contactDetailOverlayBox-->
     <div id="contactDetailOverlayBox" class="hidden">
 
@@ -87,6 +70,28 @@
         
 
         <div id="contactDetailsOverlay"></div>
+    </div>
+
+    <!--edit contact box-->
+    <div id="editContactBoxOverlay" class="hidden">
+        <div id="editContactBox">
+            <img src="img/contact/close.svg" id="closeEditContactBox" class="close-button" onclick="closeEditBox()">
+            <div id="editContactBoxHeader">
+                <img class="logo" src="img/contact/logo.svg">
+                <h2>Edit Contact</h2>
+                <img class="dividerOverlay" src="img/contact/dividerOverlay.svg">
+                <p>Tasks are better with a team!</p>
+            </div>
+            <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); editContact('${editKey}');">
+                <input required id="changedName" placeholder="Name" type="text">
+                <input required id="changedEmail" placeholder="Email" type="email">
+                <input required id="changedPhone" placeholder="Phone" type="text">
+                <div class="deleteAndSaveButton">
+                    <input type="submit" value="Delete">
+                    <input class="saveButton" type="submit" value="Save">
+                </div>
+            </form>
+        </div>
     </div>
     <!--adding scripts-->
     <script src="https://www.w3schools.com/lib/w3.js"></script>

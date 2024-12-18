@@ -39,7 +39,7 @@ h3{
     border-radius: 30px;
 } */
 
-#addContactBox, #editContactBox{
+#addContactBox{
     width:80%;
     height:50%;
     background:white;
@@ -48,6 +48,23 @@ h3{
     top:25%;
     width:80%;
     right:10%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid black;
+    /* border-radius:15px; */
+    border-radius: 30px;
+}
+
+#editContactBox{
+    width:80%;
+    height:50%;
+    background:white;
+    /* z-index:100; */
+    /* position:absolute; */
+    /* top:25%; */
+    width:80%;
+    /* right:10%; */
     display:flex;
     justify-content: center;
     align-items: center;
@@ -108,6 +125,18 @@ h3{
     justify-content:center;
     align-items:center;
     gap:8px;
+}
+#editContactBoxOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 12;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #contacts {
@@ -408,10 +437,8 @@ hr {
         height: calc(100vh - 160px);
         top:80px;
     }
+
     #editContactBox{
-        position:absolute;
-        top:0;
-        right:5vw;
         width: 90vw;
         height: calc(100vh - 160px);
         flex-direction:column;
