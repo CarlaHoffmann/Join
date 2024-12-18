@@ -35,10 +35,6 @@ h3{
     padding: 12px;
 }
 
-/* #addContactBox {
-    border-radius: 30px;
-} */
-
 #addContactBoxOverlay {
     position: absolute;
     top: 0;
@@ -52,37 +48,15 @@ h3{
     align-items: center;
 }
 
-#addContactBox {
+#addContactBox, #editContactBox {
     width:80%;
     height:50%;
     background:white;
-    /* z-index:100; */
-    /* position:absolute; */
-    /* top:25%; */
     width:80%;
-    /* right:10%; */
     display:flex;
     justify-content: center;
     align-items: center;
-    border: 5px solid black;
-    /* border-radius:15px; */
-    border-radius: 30px;
-}
-
-#editContactBox{
-    width:80%;
-    height:50%;
-    background:white;
-    /* z-index:100; */
-    /* position:absolute; */
-    /* top:25%; */
-    width:80%;
-    /* right:10%; */
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    border: 5px solid black;
-    /* border-radius:15px; */
+    /* border: 5px solid black; */
     border-radius: 30px;
 }
 
@@ -97,7 +71,7 @@ h3{
 }
 
 .dividerOverlay{
-    display:none;
+    width: 90px;
 }
 
 #addContactBox .close-button, #editContactBox .close-button{
@@ -114,24 +88,29 @@ h3{
     line-height: 1;
 }
 
-#addContactBox div, #editContactBoxHeader{
-    height:calc(100%);
-    width:100%;
+#addContactBoxHeader, #editContactBoxHeader {
+    height: 100%;
+    width: 100%;
     background:#2A3647;
     flex-direction:column;
     display:flex;
     justify-content: center;
     align-items: flex-start;
+    gap: 12px;
     color:white;
-    padding-left:48px;
+    padding: 66px 48px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
 }
-#addContactBoxHeader h2, #editContactBoxHeader h2{
-    font-size:61px;
+
+.contactBoxHeaderText {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
+
 #addContactBox form, #editContactBox form{
     height:calc(100%);
-    background:white;
-    border:1px solid black;
     width:67.67%;
     display:flex;
     flex-direction:column;
@@ -139,6 +118,7 @@ h3{
     align-items:center;
     gap:8px;
 }
+
 #editContactBoxOverlay {
     position: absolute;
     top: 0;
@@ -154,7 +134,6 @@ h3{
 
 #contacts {
     width:456px;
-    /* box-shadow: 4px 0px 6px 0px #00000014; */
     box-shadow: 4px 0px 6px 0px #0000001A;
     display:flex;
     flex-direction:column;
@@ -322,12 +301,6 @@ hr {
     gap:54px;
     font-size:47px;
 }
-/* .contactHeader .circle{
-    width:120px;
-    height:120px;
-    border:1px solid white;
-    color:white;
-} */
 
 .circleDetails {
     color:white;
@@ -457,6 +430,12 @@ hr {
         height: calc(100vh - 160px);
         flex-direction:column;
     }
+
+    #editContactBoxHeader, #addContactBoxHeader {
+        border-top-right-radius: 30px;
+        border-bottom-left-radius: 0px;
+    }
+    
     #editContactBoxHeader h2, #addContactHeadline {
         font-size:47px;
     }

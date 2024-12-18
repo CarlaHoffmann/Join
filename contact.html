@@ -59,10 +59,13 @@
     <div id="addContactBoxOverlay" class="hidden">
         <div id="addContactBox">
             <button id="closeAddContactBox" class="close-button" onclick="closeAddContactBoxOverlay();">×</button>
-            <div id="addContactHeader">
+            <div id="addContactBoxHeader">
                 <img class="logo" src="img/contact/logo.svg">
-                <h2 id="addContactHeadline">Add Contact</h2>
-                <p>Tasks are better with a team!</p>
+                <div class="contactBoxHeaderText">
+                    <h2 id="addContactHeadline">Add Contact</h2>
+                    <p>Tasks are better with a team!</p>
+                    <img class="dividerOverlay" src="img/contact/dividerOverlay.svg">
+                </div>
             </div>
             <form method="post" id="addContactForm" action="contact.html" onsubmit="event.preventDefault(); addContact()">
                 <input required id="name" placeholder="Name" type="text">
@@ -81,9 +84,11 @@
             <img src="img/contact/close.svg" id="closeEditContactBox" class="close-button" onclick="closeEditBox()">
             <div id="editContactBoxHeader">
                 <img class="logo" src="img/contact/logo.svg">
-                <h2>Edit Contact</h2>
-                <img class="dividerOverlay" src="img/contact/dividerOverlay.svg">
-                <p>Tasks are better with a team!</p>
+                <div class="contactBoxHeaderText">
+                    <h2>Edit Contact</h2>
+                    <p>Tasks are better with a team!</p>
+                    <img class="dividerOverlay" src="img/contact/dividerOverlay.svg">
+                </div>
             </div>
             <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); editContact('${editKey}');">
                 <input required id="changedName" placeholder="Name" type="text">
