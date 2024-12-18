@@ -277,6 +277,9 @@
     left: 0px;
     top: 16px;
   }
+  .right_section {
+    margin-left: 0px; /* Verschiebt den gesamten Bereich nach rechts */
+  }
 
   .frame153 {
     padding: 32px 16px;

@@ -1,4 +1,24 @@
 
+
+/*  .wrapped_maxWidth {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  overflow: hidden;
+  position: relative;
+}
+*/
+
+.main_maxWidth {
+  max-width: 1300px;
+}
+
+.right_section {
+  margin-left: 300px; /* Verschiebt den gesamten Bereich nach rechts */
+  margin-top: 160px;
+  box-sizing: border-box; 
+}
+
 .check {
   display: flex;
   align-items: center;
