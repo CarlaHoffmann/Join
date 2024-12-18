@@ -59,9 +59,9 @@
     <div id="addContactBoxOverlay" class="hidden">
         <div id="addContactBox">
             <button id="closeAddContactBox" class="close-button" onclick="closeAddContactBoxOverlay();">×</button>
-            <div>
-                <img src="img/contact/logo.svg">
-                <h2>Add Contact</h2>
+            <div id="addContactHeader">
+                <img class="logo" src="img/contact/logo.svg">
+                <h2 id="addContactHeadline">Add Contact</h2>
                 <p>Tasks are better with a team!</p>
             </div>
             <form method="post" id="addContactForm" action="contact.html" onsubmit="event.preventDefault(); addContact()">

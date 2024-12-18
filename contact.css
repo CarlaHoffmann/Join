@@ -39,15 +39,28 @@ h3{
     border-radius: 30px;
 } */
 
+#addContactBoxOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 12;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #addContactBox {
     width:80%;
     height:50%;
     background:white;
-    z-index:100;
-    position:absolute;
-    top:25%;
+    /* z-index:100; */
+    /* position:absolute; */
+    /* top:25%; */
     width:80%;
-    right:10%;
+    /* right:10%; */
     display:flex;
     justify-content: center;
     align-items: center;
@@ -112,7 +125,7 @@ h3{
     color:white;
     padding-left:48px;
 }
-#addContactBox div h2, #editContactBoxHeader h2{
+#addContactBoxHeader h2, #editContactBoxHeader h2{
     font-size:61px;
 }
 #addContactBox form, #editContactBox form{
@@ -439,12 +452,12 @@ hr {
         top:80px;
     }
 
-    #editContactBox{
+    #editContactBox, #addContactBox{
         width: 90vw;
         height: calc(100vh - 160px);
         flex-direction:column;
     }
-    #editContactBoxHeader h2{
+    #editContactBoxHeader h2, #addContactHeadline {
         font-size:47px;
     }
     #editContactBox form{
@@ -454,7 +467,7 @@ hr {
         border-radius:10px;
         padding: 13px 21px;
     }
-    #editContactBox .logo{
+    .logo{
         display:none;
     }
 }
