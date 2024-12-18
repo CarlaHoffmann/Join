@@ -53,23 +53,25 @@
         </div>
     </div>
 
-    <!--contactDetailOverlayBox-->
-    <div id="contactDetailOverlayBox" class="hidden">
+    <!--contactDetailBox-->
+    <div id="contactDetailBoxOverlay">
+        <div id="contactDetailBox" class="hidden">
 
-        <div class="contactViewHeaderOverlay">
+            <div class="contactViewHeaderOverlay">
 
-            <div class="contactViewHeader">
-                <h2>Contacts</h2>
-                <img class="divider1" src="img/contact/divider.svg">
-                <p>Better with a Team</p>
-                <img  class="divider2" src="img/contact/dividerOverlay.svg">
+                <div class="contactViewHeader">
+                    <h2>Contacts</h2>
+                    <img class="divider1" src="img/contact/divider.svg">
+                    <p>Better with a Team</p>
+                    <img  class="divider2" src="img/contact/dividerOverlay.svg">
+                </div>
+
+                <div onclick="closeDetailsOverlay()" class="back"><img src="./img/arrow-left-line.svg" alt=""></div>
             </div>
+            
 
-            <div onclick="closeDetailsOverlay()" class="back"><img src="./img/arrow-left-line.svg" alt=""></div>
+            <div id="contactDetailsOverlay"></div>
         </div>
-        
-
-        <div id="contactDetailsOverlay"></div>
     </div>
 
     <!--edit contact box-->

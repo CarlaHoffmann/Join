@@ -207,7 +207,7 @@ hr {
     margin-right:10px;
 }
 
-#contactDetailOverlayBox {
+#contactDetailBox {
     position: fixed;
     bottom: 0;
     right: 0;
@@ -394,7 +394,7 @@ hr {
     #contactView{
         display:none;
     }
-    .contactDetailOverlayBox {
+    .contactDetailBox {
         display: flex !important;
         flex-direction:column;
     }
@@ -432,7 +432,7 @@ hr {
     #addContactButton span{
         display:none;
     }
-    #contactDetailOverlayBox {
+    #contactDetailBox {
         width: 100vw;
         height: calc(100vh - 160px);
         top:80px;

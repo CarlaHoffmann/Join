@@ -86,8 +86,8 @@ function showContact(key, name, email, phone, color) {
 }
 
 function showOverlayAddContact() {
-    let contactDetailOverlayBox = document.getElementById('contactDetailOverlayBox');
-    contactDetailOverlayBox.classList.add('contactDetailOverlayBox');
+    let contactDetailBox = document.getElementById('contactDetailBox');
+    contactDetailBox.classList.add('contactDetailBox');
 }
 
 function sortUsers(usersArray){
@@ -228,6 +228,6 @@ async function editContact() {
 }
 
 function closeDetailsOverlay() {
-    let contactDetailOverlayBox = document.getElementById('contactDetailOverlayBox');
-    contactDetailOverlayBox.classList.remove('contactDetailOverlayBox');
+    let contactDetailBox = document.getElementById('contactDetailBox');
+    contactDetailBox.classList.remove('contactDetailBox');
 }
