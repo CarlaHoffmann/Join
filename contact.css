@@ -323,11 +323,7 @@ hr {
 .contactHeader span{
     font-size:16px;
 }
-.contactHeader .circleDetails{
-    width:70px;
-    height:70px;
-    padding:10px;
-}
+
 .contactNameDetails{
     display:flex;
     flex-direction:column;
@@ -403,6 +399,11 @@ hr {
     }
 }
 @media (max-width: 680px){
+    .contactHeader .circleDetails{
+        width:70px;
+        height:70px;
+        padding:10px;
+    }
     #contactContent{
         left:0;
         bottom: 80px;
@@ -447,7 +448,7 @@ hr {
         border-top-right-radius: 30px;
         border-bottom-left-radius: 0px;
     }
-    
+
     #editContactBoxHeader h2, #addContactHeadline {
         font-size:47px;
     }
