@@ -86,8 +86,8 @@ function showContact(key, name, email, phone, color) {
 }
 
 function showOverlayAddContact() {
-    let contactDetailBox = document.getElementById('contactDetailBox');
-    contactDetailBox.classList.add('contactDetailBox');
+    let contactDetailBoxOverlay = document.getElementById('contactDetailBoxOverlay');
+    contactDetailBoxOverlay.classList.add('contactDetailBoxOverlay');
 }
 
 function sortUsers(usersArray){
@@ -158,6 +158,9 @@ async function createNewContact(path = "", data={}){
 }
             
 async function toggleView(elementId, key=null, edit=false){
+
+    console.log('hallo');
+
     editKey = key;
     document.getElementById(elementId).classList.remove('hidden');
 
@@ -228,6 +231,6 @@ async function editContact() {
 }
 
 function closeDetailsOverlay() {
-    let contactDetailBox = document.getElementById('contactDetailBox');
-    contactDetailBox.classList.remove('contactDetailBox');
+    let contactDetailBoxOverlayOverlay = document.getElementById('contactDetailBoxOverlayOverlay');
+    contactDetailBoxOverlayOverlay.classList.remove('contactDetailBoxOverlayOverlay');
 }
