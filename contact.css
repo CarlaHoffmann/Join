@@ -52,12 +52,12 @@ h3{
     width:80%;
     height:50%;
     background:white;
-    width:80%;
     display:flex;
     justify-content: center;
     align-items: center;
     /* border: 5px solid black; */
     border-radius: 30px;
+    position: relative;
 }
 
 .deleteAndSaveButton{
@@ -76,16 +76,20 @@ h3{
 
 #addContactBox .close-button, #editContactBox .close-button{
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background: transparent;
+    top: 48px;
+    right: 48px;
+    /* background: transparent; */
     border: none;
     font-size: 24px;
     color: #2A3647;
     cursor: pointer;
-    z-index: 101;
+    /* z-index: 101; */
     font-weight: bold;
     line-height: 1;
+}
+
+.close-button:hover {
+    background: #D1D1D1;
 }
 
 #addContactBoxHeader, #editContactBoxHeader {
@@ -103,7 +107,7 @@ h3{
     border-bottom-left-radius: 30px;
 }
 
-.contactBoxHeaderText {
+.contactHeaderText {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -452,5 +456,14 @@ hr {
     }
     .logo{
         display:none;
+    }
+
+    .close-button {
+        top: 24px;
+        right: 16px;
+    }
+    
+    .close-button:hover {
+        background: none;
     }
 }
