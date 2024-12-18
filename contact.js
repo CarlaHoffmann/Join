@@ -130,8 +130,20 @@ async function loadContactData(){
     sortUsers(usersArray);
     //clears contactList
     contactList.innerHTML = "";
+    //array to recognize which letters have to be shown
+    let lettersArray = [];
     //fills contactList
-    usersArray.forEach(user => {
+    for (let i = 0; i < usersArray.length; i++) {
+        let user = usersArray[i];
+        let firstUserLetter = getNameInitials(user.name)[0].toLowerCase();
+        let letterExists = lettersArray.includes(firstUserLetter);
+        if (!letterExists) {
+            lettersArray.push(firstUserLetter);
+            contactList.innerHTML += `
+                <p>${firstUserLetter.toUpperCase()}</p>
+                <hr>
+            `;
+        }
         contactList.innerHTML += `
             <div class="contact" onclick="showContact('${user.key}', '${user.name}', '${user.mail}', '${user.phone}', '${user.color}'), showOverlayAddContact()")>
                 <div style="background:${user.color}" class="circle">${getNameInitials(user.name)}</div>
@@ -141,7 +153,7 @@ async function loadContactData(){
                 </div>
             </div>
         `;
-    });
+    }
 }
 
 loadContactData();
