@@ -1,26 +1,21 @@
+
+
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app";
 
-/**
- * Lädt alle Aufgaben aus der Datenbank und zeigt sie im Board an.
- * Aufgaben werden in die Spalten "toDo", "progress", "feedback" und "done" geladen.
- */
+// Aufgaben beim Laden der Seite aus der Datenbank abrufen
 async function loadTasks() {
     try {
         await loadTaskData('toDo', 'toDoTasks');
         await loadTaskData('progress', 'progressTasks');
         await loadTaskData('feedback', 'feedbackTasks');
         await loadTaskData('done', 'doneTasks');
-        updatePlaceholders(); // Überprüft und aktualisiert Platzhalter für leere Spalten
+        updatePlaceholders(); // Placeholder aktualisieren
     } catch (error) {
         console.error("Error loading tasks:", error);
     }
 }
 
-/**
- * Lädt Aufgaben aus einem bestimmten Pfad in der Datenbank und zeigt sie in der entsprechenden Spalte an.
- * @param {string} path - Der Pfad in der Datenbank (z.B. "toDo").
- * @param {string} containerId - Die ID des Containers, in dem die Aufgaben angezeigt werden sollen.
- */
+// Funktion, um Tasks für eine Spalte aus der Datenbank zu laden
 async function loadTaskData(path, containerId) {
     try {
         const url = `${base_url}/tasks/${path}.json`;
@@ -31,20 +26,14 @@ async function loadTaskData(path, containerId) {
         }
 
         const data = await response.json();
-        const taskArray = processTasks(data, path); // Wandelt die Daten in ein Array um
-        displayTasks(taskArray, containerId); // Zeigt die Aufgaben im UI an
+        const taskArray = processTasks(data, path); // Tasks in ein Array umwandeln
+        displayTasks(taskArray, containerId); // Tasks im entsprechenden Container anzeigen
     } catch (error) {
         console.error(`Error loading ${path} tasks:`, error);
     }
 }
 
-/**
- * Wandelt die aus der Datenbank abgerufenen Aufgaben in ein Array um.
- * Fügt zusätzliche Informationen wie Kontakte und Subtasks hinzu.
- * @param {Object} tasks - Die Aufgabenobjekte aus der Datenbank.
- * @param {string} status - Der Status der Aufgaben (z.B. "toDo").
- * @returns {Array} Ein Array von Aufgabenobjekten.
- */
+// Funktion, um die Tasks aus der Datenbank zu verarbeiten
 function processTasks(tasks, status) {
     if (!tasks) return [];
     return Object.keys(tasks).map(key => ({
@@ -56,20 +45,17 @@ function processTasks(tasks, status) {
     }));
 }
 
-/**
- * Zeigt die übergebenen Aufgaben im UI an.
- * Aktualisiert die Progressbar und überprüft, ob ein Platzhalter für leere Spalten angezeigt werden soll.
- * @param {Array} taskArray - Das Array der Aufgaben.
- * @param {string} containerId - Die ID des Containers, in dem die Aufgaben angezeigt werden.
- */
+
 async function displayTasks(taskArray, containerId) {
     const tasks = document.getElementById(containerId);
     const placeholder = document.getElementById(containerId.replace("Tasks", "Placeholder"));
 
+    // Farben für die Kontakte abrufen
     const contactColors = await getContactColors(taskArray);
 
+    // HTML für die Tasks generieren
     tasks.innerHTML = taskArray.map((task, taskIndex) => {
-        const subtasksText = `${task.subtasks.filter(st => st.checked).length} von ${task.subtasks.length} Subtasks`;
+        const subtasksText = `${task.subtasks.length} von ${task.subtasks.length} Subtasks`;
         const contactsHTML = task.contacts.map((contact, contactIndex) => {
             const contactColor = contactColors[taskIndex][contactIndex];
             const initials = getContactInitials(contact);
@@ -86,7 +72,7 @@ async function displayTasks(taskArray, containerId) {
                 <p class="task-description">${task.description}</p>
                 <div class="progress-section">
                     <div class="progress">
-                        <div id="progress-${task.id}" class="progress-bar" style="width: 0%;"></div>
+                        <div class="progress-bar" style="width: 50%;"></div>
                     </div>
                     <p class="subtasks">${subtasksText}</p>
                 </div>
@@ -100,22 +86,31 @@ async function displayTasks(taskArray, containerId) {
         `;
     }).join('');
 
-    // Aktualisiert die Progressbar für jede Aufgabe
-    taskArray.forEach(task => updateProgressBar(task));
-
-    // Zeigt oder versteckt den Platzhalter basierend auf der Aufgabenanzahl
+    // Placeholder-Logik
     if (taskArray.length === 0) {
-        placeholder.style.display = "block";
+        placeholder.style.display = "block"; // Placeholder anzeigen
     } else {
-        placeholder.style.display = "none";
+        placeholder.style.display = "none"; // Placeholder verstecken
     }
 }
 
-/**
- * Ruft die Farben der Kontakte für die Aufgaben ab.
- * @param {Array} tasks - Die Aufgaben, für die die Kontaktfarben abgerufen werden sollen.
- * @returns {Array} Ein Array mit den Farben der Kontakte.
- */
+// async function getContactColor(tasks) {
+//     try {
+//         const response = await fetch(`${task_base_url}/users.json`);
+//         const users = await response.json();
+
+//         for (let userId in users) {
+//             if (users[userId].name === contactName) {
+//                 const colorResponse = await fetch(`${task_base_url}/users/${userId}/color.json`);
+//                 return await colorResponse.json();
+//             }
+//         }
+//         return '#000000'; // Standardfarbe, falls keine gefunden wird
+//     } catch (error) {
+//         console.error("Fehler beim Abrufen der Kontaktfarbe:", error);
+//         return '#000000'; // Standardfarbe im Fehlerfall
+//     }
+// }
 async function getContactColors(tasks) {
     const contactColors = [];
     for (const task of tasks) {
@@ -136,40 +131,35 @@ async function getContactColors(tasks) {
                 return '#000000'; // Standardfarbe im Fehlerfall
             }
         }));
+        // contactColors.push(taskContactColors.join(', ')); // oder eine andere Art, die Farben zu kombinieren
         contactColors.push(taskContactColors);
     }
     return contactColors;
 }
 
-/**
- * Gibt die Initialen eines Kontakts basierend auf seinem Namen zurück.
- * @param {string} contact - Der Name des Kontakts.
- * @returns {string} Die Initialen des Kontakts.
- */
+// async function getContactInitials(contact) {
+//     let initials = contact.split(' ').map(word => word[0]).join('');
+//     return initials;
+// }
 function getContactInitials(contact) {
     let initials = contact.split(' ').map(word => word[0]).join('').toUpperCase();
     return initials;
 }
 
-/**
- * Gibt die Farbe für die Kategorie zurück.
- * @param {string} category - Die Kategorie der Aufgabe.
- * @returns {string} Die Farbe für die Kategorie.
- */
+
 function getCategoryColor(category) {
     if (category === 'User Story') {
-        return '#0038FF;';
+        return '#0038FF'; // Falsches Semikolon entfernen
     }
     if (category === 'Technical Task') {
-        return '#1FD7C1;';
+        return '#1FD7C1';
     }
+    return '#000000'; // Standardfarbe, falls die Kategorie nicht erkannt wird
 }
 
-/**
- * Gibt die Priorität einer Aufgabe als Text zurück.
- * @param {string} priority - Die Priorität der Aufgabe (z.B. "1", "2", "3").
- * @returns {string} Die Priorität als Text (z.B. "urgent", "medium", "low").
- */
+
+
+// Hilfsfunktion, um die Priorität anzuzeigen
 function getPrio(priority) {
     switch (priority) {
         case '1': return 'urgent';
@@ -178,9 +168,6 @@ function getPrio(priority) {
         default: return 'medium';
     }
 }
-
-
-
 
 // Drag-and-Drop-Funktionen
 function allowDrop(event) {
@@ -280,6 +267,31 @@ let currentTask = null; // Variable, um die aktuelle Task zu speichern
  * @param {string} taskId - Die ID der zu bearbeitenden Task.
  * @param {string} status - Der Status (Spalte), in der sich die Task befindet.
  */
+// async function openEditTaskOverlay(taskId, status) {
+//     try {
+//         const url = `${base_url}/tasks/${status}/${task.id}.json`;
+//         const response = await fetch(url);
+//         console.log(task.id);
+//         if (!response.ok) {
+//             throw new Error(`HTTP-Error: ${response.status}`);
+//         }
+
+//         // Die aktuelle Task-Daten abrufen
+//         currentTask = await response.json();
+
+//         // Overlay mit den Task-Daten befüllen
+//         document.getElementById("editTaskOverlay").classList.remove("d-none");
+//         document.getElementById("edit-task-title").value = currentTask.title || "";
+//         document.getElementById("edit-task-description").value = currentTask.description || "";
+//         document.getElementById("edit-task-priority").value = currentTask.prio || "2"; // Default "medium"
+
+//         document.getElementById("edit-task-save").setAttribute("data-task-id", taskId);
+//         document.getElementById("edit-task-save").setAttribute("data-status", status);
+
+//     } catch (error) {
+//         console.error("Error loading task:", error);
+//     }
+// }
 
 /**
  * Schließt das Bearbeitungs-Overlay.
@@ -319,6 +331,9 @@ async function saveEditedTask() {
     }
 }
 
+// Event-Listener für das Bearbeitungs-Overlay hinzufügen
+// document.getElementById("edit-task-cancel").addEventListener("click", closeEditTaskOverlay);
+// document.getElementById("edit-task-save").addEventListener("click", saveEditedTask);
 
 
 async function openTaskOverlay(task) {
@@ -338,23 +353,23 @@ async function openTaskOverlay(task) {
     }).join('');
 
     // Subtasks mit Checkbox-Status
-    const subtasksHTML = Object.keys(task.subtasks).map((key, index) => {
+    const subtasksHTML = Object.keys(task.subtasks).map(key => {
         const subtask = task.subtasks[key];
         return `
-            <div class="check" data-subtask-index="${index}">
+            <div class="check">
                 <input type="checkbox" ${subtask.checked ? 'checked' : ''}>
                 <div>${subtask.task}</div>
             </div>`;
     }).join('');
 
+
     overlayContainer.innerHTML = `
     <div class="taskOverlay">
-        <!-- Header mit Kategorie und Close-Button -->
         <div class="taskSelect">
-            <div class="taskContainer">${task.category}</div>
-            <div class="close" onclick="closeTaskOverlay()">
-                <img src="assets/img/add_task/close.svg" alt="Close" />
-            </div>
+            <div class="taskContainer" style="background-color: ${getCategoryColor(task.category)}">${task.category}</div>
+    <div class="close" onclick="closeTaskOverlay()">
+        <img src="assets/img/add_task/close.svg" alt="Close" />
+    </div>
         </div>
 
         <!-- Titel -->
@@ -387,7 +402,7 @@ async function openTaskOverlay(task) {
         <!-- Subtasks -->
         <div>
             <span class="info-label">Subtasks:</span>
-            <div class="subtasks-container">${subtasksHTML}</div>
+            <div>${subtasksHTML}</div>
         </div>
 
         <!-- Delete and Edit Buttons -->
@@ -418,36 +433,9 @@ async function openTaskOverlay(task) {
     </div>`;
 
     overlayContainer.classList.remove('d-none');
-
-    // Event Delegation für Subtask-Checkboxen
-    document.querySelector('.subtasks-container').addEventListener('change', async (event) => {
-        if (event.target.type === 'checkbox') {
-            const subtaskElement = event.target.closest('.check');
-            const index = subtaskElement.getAttribute('data-subtask-index');
-
-            const isChecked = event.target.checked;
-            task.subtasks[index].checked = isChecked;
-
-            // Firebase aktualisieren
-            const subtaskKey = Object.keys(task.subtasks)[index];
-            const dbPath = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskKey}/checked.json`;
-
-            try {
-                await fetch(dbPath, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(isChecked),
-                });
-                console.log(`Subtask ${subtaskKey} updated to ${isChecked}`);
-            } catch (error) {
-                console.error("Error updating subtask:", error);
-            }
-
-            // Progressbar aktualisieren
-            updateProgressBar(task);
-        }
-    });
 }
+
+
 
 
 
@@ -465,7 +453,7 @@ document.querySelectorAll('.check input[type="checkbox"]').forEach((checkbox, in
 });
 
 
-
+/*
 function getPriorityClass(priority) {
     console.log('prio');
     switch (priority) {
@@ -475,6 +463,7 @@ function getPriorityClass(priority) {
         // default: return 'med';
     }
 }
+    */
 
 function getPrioImage(prio) {
     switch (prio) {
@@ -511,6 +500,18 @@ async function openEditTaskOverlay(task) {
     // Initialisieren von selectedContacts mit task.contacts
     selectedContacts = task.contacts;
 
+    // Farben für die Kontakte abrufen
+    // const contactColors = await getContactColors([task]);
+    // const contactsHTML = task.contacts.map((contact, index) => {
+    //     const contactColor = contactColors[0][index]; // Erste Aufgabe und entsprechender Kontakt
+    //     const initials = getContactInitials(contact);
+    //     return `
+    //         <div class="assigned-contact">
+    //             <div class="contact-initial" style="background-color: ${contactColor};">${initials}</div>
+    //             <span class="contact-name">${contact}</span>
+    //         </div>`;
+    // }).join('');
+
     // Subtasks aus dem task-Objekt laden
     let subtasks = [];
     Object.keys(task.subtasks).forEach(key => {
@@ -519,7 +520,6 @@ async function openEditTaskOverlay(task) {
             checked: task.subtasks[key].checked
         });
     });
-
 
     
     // Subtasks-HTML generieren
@@ -708,17 +708,51 @@ function enableEditMode() {
 
 
 
-async function saveOverlayChanges(taskId, taskStatus) {
-    // Geänderte Daten aus den Feldern abrufen
-    const titleElement = document.getElementById('overlayTitle');
-    const descriptionElement = document.getElementById('overlayDescription');
-    const dueDateElement = document.getElementById('overlayDueDate');
-    const prioButton = document.querySelector('.prio-button.active-button');
-    const contactsElements = document.querySelectorAll('#overlayContacts .contact-initial');
-    const subtasksElements = document.querySelectorAll('#overlaySubtasks li');
+// async function saveOverlayChanges(taskId, category) {
+//     // Geänderte Daten aus den Feldern abrufen
+//     const updatedTask = {
+//         title: document.getElementById('overlayTitle').value,
+//         description: document.getElementById('overlayDescription').value,
+//         date: document.getElementById('overlayDueDate').value,
+//         prio: document.querySelector('.prio-button.active-button').id.replace('prio', ''),
+//         contacts: Array.from(document.querySelectorAll('#overlayContacts .contact-initial')).map(contact => contact.textContent),
+//         subtasks: Array.from(document.querySelectorAll('#overlaySubtasks li')).map(subtask => subtask.textContent),
+//     };
 
-    if (!titleElement || !descriptionElement || !dueDateElement || !prioButton || contactsElements.length === 0 || subtasksElements.length === 0) {
-        console.error('Ein oder mehrere erforderliche Elemente existieren nicht.');
+//     try {
+//         const url = `${base_url}/tasks/${category}/${taskId}.json`;
+//         const response = await fetch(url, {
+//             method: 'PUT',
+//             body: JSON.stringify(updatedTask),
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         });
+
+//         if (!response.ok) {
+//             throw new Error(`HTTP error: ${response.status}`);
+//         }
+
+//         console.log('Task successfully updated!');
+//         closeTaskOverlay();
+//         loadTasks(); // Aktualisiere das Board
+//     } catch (error) {
+//         console.error('Error saving task changes:', error);
+//     }
+// }
+
+
+async function saveOverlayChanges(taskId, taskStatus) {
+    const titleElement = document.getElementById('title');
+    const descriptionElement = document.getElementById('description');
+    const dueDateElement = document.getElementById('datepicker');
+    const prioButton = document.querySelector('.prio-button.active-button');
+    const categoryElement = document.getElementById('category-selection');
+    const contactsElements = selectedContacts;
+    const subtasksElements = subtasks;
+
+    if (!titleElement || !descriptionElement || !dueDateElement || !prioButton || !categoryElement) {
+        console.error('Ein oder mehrere erforderliche Elemente fehlen.');
         return;
     }
 
@@ -727,36 +761,31 @@ async function saveOverlayChanges(taskId, taskStatus) {
         description: descriptionElement.value,
         date: dueDateElement.value,
         prio: prioButton.id.replace('prio', ''),
-        contacts: Array.from(contactsElements).map(contact => contact.textContent),
-        subtasks: Array.from(subtasksElements).map(subtask => subtask.textContent),
+        category: categoryElement.textContent.trim(),
+        contacts: contactsElements,
+        subtasks: subtasksElements,
     };
-
-    console.log(updatedTask);
 
     try {
         const url = `${base_url}/tasks/${taskStatus}/${taskId}.json`;
-        console.log(url);
-
         const response = await fetch(url, {
             method: 'PUT',
             body: JSON.stringify(updatedTask),
             headers: {
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
         });
 
         if (!response.ok) {
-            const errorMessage = await response.text();
-            throw new Error(`HTTP error: ${response.status} - ${errorMessage}`);
+            throw new Error(`HTTP error: ${response.status}`);
         }
+        await loadTasks();
 
-        console.log('Task successfully updated!');
-        closeTaskOverlay();
-        loadTasks(); // Aktualisiere das Board
+        openTaskOverlay({ ...updatedTask, id: taskId });
     } catch (error) {
-        console.error('Error saving task changes:', error);
     }
 }
+
 
 function setOverlayPriority(priority) {
     document.querySelectorAll('.prio-button').forEach(button => button.classList.remove('active-button'));
@@ -812,6 +841,8 @@ async function deleteTask(taskId) {
 
 
 
+
+
 //  Task Placeholder  
 function updatePlaceholders() {
     const columns = ["toDo", "progress", "feedback", "done"];
@@ -831,54 +862,3 @@ function updatePlaceholders() {
 
 const searchField = document.querySelector('#searchField');
 console.log(searchField);
-
-
-
-document.querySelectorAll('.check input[type="checkbox"]').forEach((checkbox, index) => {
-    checkbox.addEventListener('change', async () => {
-        const subtaskId = Object.keys(task.subtasks)[index];
-        const isChecked = checkbox.checked;
-
-        // Aktualisiere den Subtask-Status lokal
-        task.subtasks[index].checked = isChecked;
-
-        // Firebase-Update (optional, falls synchronisiert werden soll)
-        try {
-            const dbPath = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskId}/checked.json`;
-            await fetch(dbPath, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(isChecked),
-            });
-
-            console.log(`Subtask ${subtaskId} updated to ${isChecked}`);
-        } catch (error) {
-            console.error('Error updating subtask status:', error);
-        }
-
-        // Aktualisiere die Progressbar auf dem Board
-        updateProgressBar(task);
-    });
-});
-
-
-
-function updateProgressBar(task) {
-    const progressBar = document.getElementById(`progress-${task.id}`);
-    const subtasksTextElement = document.querySelector(`#task-${task.id} .subtasks`);
-    
-    if (!progressBar || !subtasksTextElement) return;
-
-    const completedSubtasks = task.subtasks.filter(subtask => subtask.checked).length;
-    const totalSubtasks = task.subtasks.length;
-
-    const progressPercentage = totalSubtasks === 0 ? 0 : (completedSubtasks / totalSubtasks) * 100;
-
-    // Progress-Bar aktualisieren
-    progressBar.style.width = `${progressPercentage}%`;
-
-    // Subtask-Zähler-Text aktualisieren
-    subtasksTextElement.innerText = `${completedSubtasks} von ${totalSubtasks} Subtasks`;
-
-    console.log(`Progress updated: ${progressPercentage}% | ${completedSubtasks} von ${totalSubtasks}`);
-}

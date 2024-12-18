@@ -90,37 +90,24 @@ function getPriorityClassEdit(priority) {
 }
 
 async function initializeValidationEdit(task) {
-    if (validateForm()) {
-        await createEditTask(task.path, task.id); // Speichern der Änderungen
-        console.log('Form is valid. Submitting...');
+    // const submitButton = document.querySelector('.submit-button');
 
-        // Task neu aus der Datenbank laden und das Overlay neu rendern
-        const updatedTask = await fetchUpdatedTask(task.path, task.id);
-        openTaskOverlay(updatedTask);
-    } 
-};
+    // if (submitButton) {
+    //     submitButton.addEventListener('click', async function(event) {
+            // event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
 
-
-async function fetchUpdatedTask(path, id) {
-    try {
-        const response = await fetch(`${base_url}/tasks/${path}/${id}.json`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const updatedTask = await response.json();
-        return {
-            path: path,
-            id: id,
-            ...updatedTask,
-            contacts: updatedTask.contacts ? Object.values(updatedTask.contacts) : [],
-            subtasks: updatedTask.subtasks ? Object.values(updatedTask.subtasks) : []
-        };
-    } catch (error) {
-        console.error("Error fetching updated task:", error);
-        return null;
+            if (validateForm()) {
+                await createEditTask(task.path, task.id);
+                console.log('Form is valid. Submitting...');
+                // openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})
+                openTaskOverlay(task);
+            }
+        // });
+    // } 
+    else {
+        console.error('Submit button not found');
     }
-}
-
+};
 
 async function createEditTask(path, id) {
     let task = {
@@ -134,59 +121,34 @@ async function createEditTask(path, id) {
     };
 
     try {
-        // Daten in der Firebase speichern
         await postEditData(task, path, id);
+        showTaskAddedOverlay();
+        await loadTasks();
 
-        // Task neu aus der Firebase abrufen
-        const updatedTask = await fetchUpdatedTask(path, id);
-
-        if (updatedTask) {
-            updateTaskOverlay(updatedTask); // Aktualisiere das Overlay
-            loadTasks(); // Aktualisiere das Board
-        }
     } catch (error) {
-        console.error("Error updating task:", error);
+        console.error("Error during task creation or loading:", error);
+    } finally {
+        await openTaskOverlay(task);
     }
 }
 
-// updae von TaskOverlay
-function updateTaskOverlay(task) {
-    document.getElementById('title').value = task.title;
-
-    document.getElementById('description').value = task.description;
-
-    document.getElementById('datepicker').value = task.date;
-
-    initializeEditPriority(task.prio);
-
-    selectedContacts = task.contacts;
-    updateEditContacts();
-
-    const subtasksContainer = document.getElementById('subtasks');
-    subtasksContainer.innerHTML = task.subtasks.map((subtask, index) => {
-        return getAddSubtaskTemplate(index, subtask.task);
-    }).join('');
-}
-
-
-
-
 
 async function postEditData(taskData, path, id) {
+    console.log(taskData);
     try {
-        let response = await fetch(`${base_url}/tasks/${path}/${id}.json`, {
+        let response = await fetch(`${task_base_url}/tasks/${path}/${id}.json`, {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(taskData)
         });
-
         if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-        console.log("Task successfully saved to Firebase!");
-        return await response.json(); // Rückgabe der gespeicherten Daten
+        let result = await response.json();
+        // console.log("Task successfully added:", result);
+        return result;
     } catch (error) {
-        console.error("Error posting data to Firebase:", error);
+        console.error("Error posting data:", error);
     }
 }
 
@@ -232,20 +194,6 @@ function takeSubtask() {
     } else {
         // console.log("Keine Subtasks vorhanden");
         return [];
-    }
-}
-
-
-
-
-function getCategoryColor(category) {
-    switch (category) {
-        case 'User Story':
-            return '#0038FF'; 
-        case 'Technical Task':
-            return '#1FD7C1';
-        default:
-            return '#D3D3D3';
     }
 }
 
