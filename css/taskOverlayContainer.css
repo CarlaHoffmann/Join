@@ -264,23 +264,23 @@ body {
 .icon-text-button {
     display: flex;
     align-items: center;
-    gap: 8px; /* Abstand zwischen Icon und Text */
+    gap: 8px; 
     cursor: pointer;
 }
 
 .icon-svg {
     width: 24px;
     height: 24px;
-    transition: stroke 0.3s ease; /* Weicher Übergang für die Farbe */
+    transition: stroke 0.3s ease; 
 }
 
 /* Text und Icon Hover-Effekt */
 .icon-text-button:hover .icon-svg path {
-    stroke: #29ABE2; /* Ändert die Pfadfarbe des SVG */
+    stroke: #29ABE2; 
 }
 
 .icon-text-button:hover .icon-text {
-    color: #29ABE2; /* Ändert die Textfarbe */
+    color: #29ABE2; 
 }
 
 

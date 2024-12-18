@@ -12,6 +12,21 @@
 }
 
 
+.progress {
+  width: 100%;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 8px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #29ABE2;
+  transition: width 0.3s ease; /* Sanfter Übergang */
+}
+
+
 
 .overlay-input {
   width: 100%;
@@ -223,9 +238,6 @@
   --height: fit-content;
 }
 
-#main_container {
-  overflow-y: auto;
-}
 
 .content-board {
   margin: 60px 20px 100px;
@@ -720,13 +732,7 @@
   border-left: 0.1px solid var(--backgroundSpacer);
 }
 
-.delete:hover,
-.delete:hover p,
-.edit:hover,
-.edit:hover p {
-  filter: invert(52%) sepia(91%) saturate(455%) hue-rotate(155deg) brightness(96%) contrast(84%);
-  color: var(--lightblue);
-}
+
 
 .delete-edit-icon2 {
   display: flex;

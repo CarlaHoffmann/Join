@@ -171,6 +171,7 @@ function updateTaskOverlay(task) {
 
 
 
+
 async function postEditData(taskData, path, id) {
     try {
         let response = await fetch(`${base_url}/tasks/${path}/${id}.json`, {
@@ -233,6 +234,8 @@ function takeSubtask() {
         return [];
     }
 }
+
+
 
 
 function getCategoryColor(category) {
