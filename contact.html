@@ -15,26 +15,9 @@
         <div class="nav-bar" w3-include-html="nav.html"></div>
     </header>
     <div id="contactContent">
-        <!--add contact box-->
-        <div id="addContactBox" class="hidden">
-            <button id="closeAddContactBox" class="close-button" onclick="closeAddContactBox();">×</button>
-            <div>
-                <img src="img/contact/logo.svg">
-                <h2>Add Contact</h2>
-                <p>Tasks are better with a team!</p>
-            </div>
-            <form method="post" id="addContactForm" action="contact.html" onsubmit="event.preventDefault(); addContact()">
-                <input required id="name" placeholder="Name" type="text">
-                <input required id="email" placeholder="Email" type="email">
-                <input required id="phone" placeholder="Phone" type="text">
-                <input type="submit">
-                <input type="reset">
-            </form>
-        </div>
-        
         <!--contacts-->
         <div id="contacts">
-            <button id="addContactButton" onclick="toggleView('addContactBox')"><span>Add new contact</span><img src="img/contact/person_add.svg"></button>
+            <button id="addContactButton" onclick="toggleView('addContactBoxOverlay')"><span>Add new contact</span><img src="img/contact/person_add.svg"></button>
             <section id="contactList">
             </section>
         </div>
@@ -54,25 +37,43 @@
     </div>
 
     <!--contactDetailBox-->
-    <!-- <div id="contactDetailBoxOverlay" > -->
-        <div id="contactDetailBox" class="hidden">
+    <div id="contactDetailBox" class="hidden">
 
-            <div class="contactViewHeaderOverlay">
+        <div class="contactViewHeaderOverlay">
 
-                <div class="contactViewHeader">
-                    <h2>Contacts</h2>
-                    <img class="divider1" src="img/contact/divider.svg">
-                    <p>Better with a Team</p>
-                    <img  class="divider2" src="img/contact/dividerOverlay.svg">
-                </div>
-
-                <div onclick="closeDetailsOverlay()" class="back"><img src="./img/arrow-left-line.svg" alt=""></div>
+            <div class="contactViewHeader">
+                <h2>Contacts</h2>
+                <img class="divider1" src="img/contact/divider.svg">
+                <p>Better with a Team</p>
+                <img  class="divider2" src="img/contact/dividerOverlay.svg">
             </div>
-            
 
-            <div id="contactDetailsOverlay"></div>
+            <div onclick="closeDetailsOverlay()" class="back"><img src="./img/arrow-left-line.svg" alt=""></div>
         </div>
-    <!-- </div> -->
+        
+
+        <div id="contactDetailsOverlay"></div>
+    </div>
+
+    <!--add contact box-->
+    <div id="addContactBoxOverlay" class="hidden">
+        <div id="addContactBox">
+            <button id="closeAddContactBox" class="close-button" onclick="closeAddContactBoxOverlay();">×</button>
+            <div>
+                <img src="img/contact/logo.svg">
+                <h2>Add Contact</h2>
+                <p>Tasks are better with a team!</p>
+            </div>
+            <form method="post" id="addContactForm" action="contact.html" onsubmit="event.preventDefault(); addContact()">
+                <input required id="name" placeholder="Name" type="text">
+                <input required id="email" placeholder="Email" type="email">
+                <input required id="phone" placeholder="Phone" type="text">
+                <input type="submit">
+                <input type="reset">
+            </form>
+        </div>
+    </div>
+
 
     <!--edit contact box-->
     <div id="editContactBoxOverlay" class="hidden">

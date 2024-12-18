@@ -4,7 +4,7 @@ const base_url = 'https://joinapp-28ae7-default-rtdb.europe-west1.firebasedataba
 let contactList = document.getElementById('contactList');
 let contactDetails = document.getElementById('contactDetails');
 let addContactButton = document.getElementById('addContactButton');
-let addContactBox = document.getElementById('addContactBox');
+let addContactBoxOverlay = document.getElementById('addContactBoxOverlay');
 
 function clearAddContactFields(){
     document.getElementById('name').value = "";
@@ -25,7 +25,7 @@ async function addContact(){
         'password':'pw',
     }
     await createNewContact('/users', uploadData);
-    closeAddContactBox();
+    closeaddContactBoxOverlay();
     clearAddContactFields();
     loadContactData();
 }
@@ -180,8 +180,8 @@ function closeEditBox(){
     document.getElementById('editContactBoxOverlay').classList.add('hidden');
 }
 
-function closeAddContactBox(){
-    document.getElementById('addContactBox').classList.add('hidden');
+function closeAddContactBoxOverlay(){
+    document.getElementById('addContactBoxOverlay').classList.add('hidden');
 }
             
 async function editContact() {
