@@ -1,21 +1,26 @@
-
-
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app";
 
-// Aufgaben beim Laden der Seite aus der Datenbank abrufen
+/**
+ * Lädt alle Aufgaben aus der Datenbank und zeigt sie im Board an.
+ * Aufgaben werden in die Spalten "toDo", "progress", "feedback" und "done" geladen.
+ */
 async function loadTasks() {
     try {
         await loadTaskData('toDo', 'toDoTasks');
         await loadTaskData('progress', 'progressTasks');
         await loadTaskData('feedback', 'feedbackTasks');
         await loadTaskData('done', 'doneTasks');
-        updatePlaceholders(); // Placeholder aktualisieren
+        updatePlaceholders(); // Überprüft und aktualisiert Platzhalter für leere Spalten
     } catch (error) {
         console.error("Error loading tasks:", error);
     }
 }
 
-// Funktion, um Tasks für eine Spalte aus der Datenbank zu laden
+/**
+ * Lädt Aufgaben aus einem bestimmten Pfad in der Datenbank und zeigt sie in der entsprechenden Spalte an.
+ * @param {string} path - Der Pfad in der Datenbank (z.B. "toDo").
+ * @param {string} containerId - Die ID des Containers, in dem die Aufgaben angezeigt werden sollen.
+ */
 async function loadTaskData(path, containerId) {
     try {
         const url = `${base_url}/tasks/${path}.json`;
@@ -26,14 +31,20 @@ async function loadTaskData(path, containerId) {
         }
 
         const data = await response.json();
-        const taskArray = processTasks(data, path); // Tasks in ein Array umwandeln
-        displayTasks(taskArray, containerId); // Tasks im entsprechenden Container anzeigen
+        const taskArray = processTasks(data, path); // Wandelt die Daten in ein Array um
+        displayTasks(taskArray, containerId); // Zeigt die Aufgaben im UI an
     } catch (error) {
         console.error(`Error loading ${path} tasks:`, error);
     }
 }
 
-// Funktion, um die Tasks aus der Datenbank zu verarbeiten
+/**
+ * Wandelt die aus der Datenbank abgerufenen Aufgaben in ein Array um.
+ * Fügt zusätzliche Informationen wie Kontakte und Subtasks hinzu.
+ * @param {Object} tasks - Die Aufgabenobjekte aus der Datenbank.
+ * @param {string} status - Der Status der Aufgaben (z.B. "toDo").
+ * @returns {Array} Ein Array von Aufgabenobjekten.
+ */
 function processTasks(tasks, status) {
     if (!tasks) return [];
     return Object.keys(tasks).map(key => ({
@@ -45,7 +56,12 @@ function processTasks(tasks, status) {
     }));
 }
 
-
+/**
+ * Zeigt die übergebenen Aufgaben im UI an.
+ * Aktualisiert die Progressbar und überprüft, ob ein Platzhalter für leere Spalten angezeigt werden soll.
+ * @param {Array} taskArray - Das Array der Aufgaben.
+ * @param {string} containerId - Die ID des Containers, in dem die Aufgaben angezeigt werden.
+ */
 async function displayTasks(taskArray, containerId) {
     const tasks = document.getElementById(containerId);
     const placeholder = document.getElementById(containerId.replace("Tasks", "Placeholder"));
@@ -84,10 +100,10 @@ async function displayTasks(taskArray, containerId) {
         `;
     }).join('');
 
-    // Aktualisiere die Progressbar für jede Task
+    // Aktualisiert die Progressbar für jede Aufgabe
     taskArray.forEach(task => updateProgressBar(task));
 
-    // Placeholder-Logik
+    // Zeigt oder versteckt den Platzhalter basierend auf der Aufgabenanzahl
     if (taskArray.length === 0) {
         placeholder.style.display = "block";
     } else {
@@ -95,9 +111,11 @@ async function displayTasks(taskArray, containerId) {
     }
 }
 
-
-
-
+/**
+ * Ruft die Farben der Kontakte für die Aufgaben ab.
+ * @param {Array} tasks - Die Aufgaben, für die die Kontaktfarben abgerufen werden sollen.
+ * @returns {Array} Ein Array mit den Farben der Kontakte.
+ */
 async function getContactColors(tasks) {
     const contactColors = [];
     for (const task of tasks) {
@@ -118,18 +136,26 @@ async function getContactColors(tasks) {
                 return '#000000'; // Standardfarbe im Fehlerfall
             }
         }));
-        // contactColors.push(taskContactColors.join(', ')); // oder eine andere Art, die Farben zu kombinieren
         contactColors.push(taskContactColors);
     }
     return contactColors;
 }
 
-
+/**
+ * Gibt die Initialen eines Kontakts basierend auf seinem Namen zurück.
+ * @param {string} contact - Der Name des Kontakts.
+ * @returns {string} Die Initialen des Kontakts.
+ */
 function getContactInitials(contact) {
     let initials = contact.split(' ').map(word => word[0]).join('').toUpperCase();
     return initials;
 }
 
+/**
+ * Gibt die Farbe für die Kategorie zurück.
+ * @param {string} category - Die Kategorie der Aufgabe.
+ * @returns {string} Die Farbe für die Kategorie.
+ */
 function getCategoryColor(category) {
     if (category === 'User Story') {
         return '#0038FF;';
@@ -139,8 +165,11 @@ function getCategoryColor(category) {
     }
 }
 
-
-// Hilfsfunktion, um die Priorität anzuzeigen
+/**
+ * Gibt die Priorität einer Aufgabe als Text zurück.
+ * @param {string} priority - Die Priorität der Aufgabe (z.B. "1", "2", "3").
+ * @returns {string} Die Priorität als Text (z.B. "urgent", "medium", "low").
+ */
 function getPrio(priority) {
     switch (priority) {
         case '1': return 'urgent';
@@ -149,6 +178,9 @@ function getPrio(priority) {
         default: return 'medium';
     }
 }
+
+
+
 
 // Drag-and-Drop-Funktionen
 function allowDrop(event) {
@@ -433,7 +465,7 @@ document.querySelectorAll('.check input[type="checkbox"]').forEach((checkbox, in
 });
 
 
-/*
+
 function getPriorityClass(priority) {
     console.log('prio');
     switch (priority) {
@@ -443,7 +475,6 @@ function getPriorityClass(priority) {
         // default: return 'med';
     }
 }
-    */
 
 function getPrioImage(prio) {
     switch (prio) {
