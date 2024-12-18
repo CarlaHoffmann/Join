@@ -72,16 +72,25 @@ function showContact(key, name, email, phone, color) {
     contactDetails.innerHTML = returnContactDetailsTemplate(key, name, email, phone, color);
     contactDetailsOverlay.innerHTML = returnContactDetailsTemplate(key, name, email, phone, color);
 
-    // Prüfen, ob die Klasse 'show' bereits vorhanden ist und entfernen, wenn ja
+    // Animation starten
     if (contactDetails.classList.contains('show')) {
         contactDetails.classList.remove('show');
         requestAnimationFrame(() => {
-            // Animation starten
             contactDetails.classList.add('show');
         });
     } else {
-        // Animation starten, wenn 'show' nicht vorhanden ist
         contactDetails.classList.add('show');
+    }
+
+    // Entferne 'selected' von allen Kontakten
+    document.querySelectorAll('.contact').forEach(contact => {
+        contact.classList.remove('selected');
+    });
+
+    // Füge 'selected' dem aktuellen Kontakt hinzu
+    const selectedContact = document.querySelector(`.contact[onclick*="'${key}'"]`);
+    if (selectedContact) {
+        selectedContact.classList.add('selected');
     }
 }
 
@@ -233,4 +242,8 @@ async function editContact() {
 function closeDetailsOverlay() {
     let contactDetailBoxOverlayOverlay = document.getElementById('contactDetailBox');
     contactDetailBoxOverlayOverlay.classList.remove('contactDetailBox');
+
+    document.querySelectorAll('.contact').forEach(contact => {
+        contact.classList.remove('selected');
+    });
 }
