@@ -88,13 +88,7 @@
     align-items: baseline;
   }
 
-  .board-search-add {
-    width: 100%;
-  }
 
-  .search-field {
-    min-width: 396px;
-  }
 
   .content-board {
     margin-top: 50px;
@@ -123,13 +117,7 @@
     line-height: 73.2px;
   }
 
-  .board-search-add {
-    width: 100%;
-  }
 
-  .search-field {
-    width: 100vw;
-  }
 
   .d-flex-start {
     flex-direction: column;
@@ -144,9 +132,6 @@
     cursor: pointer;
   }
 
-  .plus-button:hover {
-    src: url(/assets/img/board/plus_button_blue.svg);
-  }
 
   .content-board {
     margin-top: 32px;
@@ -278,7 +263,7 @@
     top: 16px;
   }
   .right_section {
-    margin-left: 0px; /* Verschiebt den gesamten Bereich nach rechts */
+    margin-left: 0px;
   }
 
   .frame153 {
