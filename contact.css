@@ -56,6 +56,16 @@ h3{
     border-radius: 30px;
 }
 
+.deleteAndSaveButton{
+    display:flex;
+    gap:20px;
+}
+
+.saveButton{
+    background:#2A3647;
+    color:white;
+}
+
 .dividerOverlay{
     display:none;
 }
@@ -74,7 +84,7 @@ h3{
     line-height: 1;
 }
 
-#addContactBox div, #editContactBox div{
+#addContactBox div, #editContactBoxHeader{
     height:calc(100%);
     width:100%;
     background:#2A3647;
@@ -85,7 +95,7 @@ h3{
     color:white;
     padding-left:48px;
 }
-#addContactBox div h2, #editContactBox div h2{
+#addContactBox div h2, #editContactBoxHeader h2{
     font-size:61px;
 }
 #addContactBox form, #editContactBox form{
@@ -374,12 +384,10 @@ hr {
         display:flex;
         justify-content:center;
     }
-
     #contacts{
         width:100%;
         height: 100%;
     }
-
     .contact{
         width:90%;
     }
@@ -401,7 +409,15 @@ hr {
         top:80px;
     }
     #editContactBox{
+        position:absolute;
+        top:0;
+        right:5vw;
+        width: 90vw;
+        height: calc(100vh - 160px);
         flex-direction:column;
+    }
+    #editContactBoxHeader h2{
+        font-size:47px;
     }
     #editContactBox form{
         border:none;

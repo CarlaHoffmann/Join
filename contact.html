@@ -34,7 +34,7 @@
         <!--edit contact box-->
         <div id="editContactBox" class="hidden">
             <img src="img/contact/close.svg" id="closeEditContactBox" class="close-button" onclick="closeEditBox()">
-            <div>
+            <div id="editContactBoxHeader">
                 <img class="logo" src="img/contact/logo.svg">
                 <h2>Edit Contact</h2>
                 <img class="dividerOverlay" src="img/contact/dividerOverlay.svg">
@@ -44,8 +44,10 @@
                 <input required id="changedName" placeholder="Name" type="text">
                 <input required id="changedEmail" placeholder="Email" type="email">
                 <input required id="changedPhone" placeholder="Phone" type="text">
-                <input type="submit">
-                <input type="reset">
+                <div class="deleteAndSaveButton">
+                    <input type="submit" value="Delete">
+                    <input class="saveButton" type="submit" value="Save">
+                </div>
             </form>
         </div>
         <!--contacts-->
