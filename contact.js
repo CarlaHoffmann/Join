@@ -168,8 +168,6 @@ async function createNewContact(path = "", data={}){
             
 async function toggleView(elementId, key=null, edit=false){
 
-    console.log('hallo');
-
     editKey = key;
     document.getElementById(elementId).classList.remove('hidden');
 
@@ -197,7 +195,6 @@ async function editContact() {
     const changedName = document.getElementById('changedName').value.trim();
     const changedEmail = document.getElementById('changedEmail').value.trim();
     const changedPhone = document.getElementById('changedPhone').value.trim();
-    console.log(editKey);
     const editLink = base_url + "users" + "/" + editKey;
 
     // Validierung der Eingabedaten
