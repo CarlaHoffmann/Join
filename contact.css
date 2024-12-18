@@ -320,9 +320,13 @@ hr {
     justify-content: center;
     align-items: center;
 }
-
 .contactHeader span{
     font-size:16px;
+}
+.contactHeader .circleDetails{
+    width:70px;
+    height:70px;
+    padding:10px;
 }
 .contactNameDetails{
     display:flex;
