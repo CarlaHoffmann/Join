@@ -25,7 +25,7 @@ async function addContact(){
         'password':'pw',
     }
     await createNewContact('/users', uploadData);
-    closeaddContactBoxOverlay();
+    closeAddContactBoxOverlay();
     clearAddContactFields();
     loadContactData();
 }
