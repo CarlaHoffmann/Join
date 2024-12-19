@@ -78,7 +78,7 @@
     display:flex;
     flex-direction:column;
     justify-content:center;
-    align-items:center;
+    /*align-items:center;*/
     gap: 40px;
 }
 
@@ -146,26 +146,52 @@
 } */
 
 
+.bottom-buttons {
+    display: flex;
+    justify-content: end;
+    gap: 16px;
+}
+
 .clear-button {
     border: 1px solid #2A3647;
-    background-color: #F6F7F8;
-    color: #2A3647;
+    background-color: #F6F7F8;;
+    padding: 16px;
+    display: flex;
+    gap: 4px;
 }
 
 .clear-button:hover {
-    background-color: #E2E5E8; /* Helle Hintergrundfarbe beim Hover */
-    border-color: #1F2A38; /* Dunklere Rahmenfarbe beim Hover */
+    border-color: #29ABE2;
+    color: #29ABE2;
+}
+
+.clear-button .icon-normal {
+    display: inline;
+}
+
+.clear-button .icon-hover {
+    display: none;
+}
+
+.clear-button:hover .icon-normal {
+    display: none;
+}
+
+.clear-button:hover .icon-hover {
+    display: inline;
 }
 
 .submit-button {
     background-color: #2A3647;
-    color: #FFFFFF;
-    font-size: 16px;
-    cursor: pointer;
+    color: rgb(255, 255, 255);
+    padding: 16px;
+    display: flex;
+    gap: 4px;
+    
 }
 
 .submit-button:hover {
-    background-color: #1F2A38; /* Dunklere Hintergrundfarbe beim Hover */
+    background-color: #29ABE2;
 }
 
 .saveButton{

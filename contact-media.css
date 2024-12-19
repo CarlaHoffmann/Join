@@ -76,6 +76,9 @@
     .desktop-only {
         display: none;
     }
+    #addContactForm {
+        align-items:center;
+    }
 
     .mobile-only {
         display: flex;
