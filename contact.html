@@ -116,12 +116,29 @@
                 </div>
             </div>
             <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); editContact('${editKey}');">
-                <input required id="changedName" placeholder="Name" type="text">
-                <input required id="changedEmail" placeholder="Email" type="email">
-                <input required id="changedPhone" placeholder="Phone" type="text">
+                <div class="input-container">
+                    <input required id="changedName" placeholder="Name" type="text">
+                    <img src="" alt="">
+                </div>
+                <div class="input-container">
+                    <input required id="changedEmail" placeholder="Email" type="email">
+                    <img src="" alt="">
+                </div>
+                <div class="input-container">
+                    <input required id="changedPhone" placeholder="Phone" type="text">
+                    <img src="" alt="">
+                </div>
                 <div class="deleteAndSaveButton">
-                    <input type="submit" value="Delete">
-                    <input class="saveButton" type="submit" value="Save">
+                    <!-- <input type="submit" value="Delete">
+                    <input class="saveButton" type="submit" value="Save"> -->
+                    <button type="reset" class="clear-button form-button hover-button">
+                        Delete
+                        <img src="./img/login/Vector (2).svg" alt="">
+                    </button>
+                    <button type="submit" class="submit-button form-button hover-button">
+                        Save
+                        <img src="./img/login/check (1).svg" alt="">
+                    </button>
                 </div>
             </form>
         </div>

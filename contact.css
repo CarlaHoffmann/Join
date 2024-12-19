@@ -235,6 +235,16 @@ form {
     align-items: center;
 }
 
+/* #editContactBox form input {
+    border-radius: 10px;
+    padding: 13px 21px;
+} */
+
+/* #addContactBox form input {
+    border-radius: 10px;
+    padding: 13px 21px;
+} */
+
 #contacts {
     width:456px;
     box-shadow: 4px 0px 6px 0px #0000001A;
