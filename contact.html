@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacts</title>
     <link rel="stylesheet" href="contact.css">
-    <link rel="stylesheet" href="contact-overlay.css">
+    <link rel="stylesheet" href="contact-add-edit-overlay.css">
+    <link rel="stylesheet" href="contact-media.css">
 
     <script src="./nav.js"></script>
     <script src="returnColor.js"></script>
@@ -24,7 +25,6 @@
         </div>
         <!--contactView-->
         <div id="contactView">
-
             <div class="contactViewHeader">
                 <h2>Contacts</h2>
                 <img class="divider1" src="img/contact/divider.svg">
@@ -33,15 +33,12 @@
             </div>
 
             <div id="contactDetails"></div>
-
         </div>
     </div>
 
     <!--contactDetailBox-->
     <div id="contactDetailBox" class="hidden">
-
         <div class="contactViewHeaderOverlay">
-
             <div class="contactViewHeader">
                 <h2>Contacts</h2>
                 <img class="divider1" src="img/contact/divider.svg">
@@ -52,7 +49,6 @@
             <div onclick="closeDetailsOverlay()" class="back"><img src="./img/arrow-left-line.svg" alt=""></div>
         </div>
         
-
         <div id="contactDetailsOverlay"></div>
     </div>
 
@@ -85,11 +81,7 @@
                         <input required id="phone" placeholder="Phone" type="text" class="addField input-with-image">
                         <img src="/img/login/call.svg" alt="Phone Icon" class="input-icon">
                     </div>
-                    <!-- <div class="form-buttons"> -->
-                        <!-- 
-                        <input type="submit" value="Submit" class="form-button">
-                        <input type="reset" value="Reset" class="form-button">
-                    -->
+                    
                     <div class="add-form-buttons">
                         <button type="reset" class="clear-button form-button hover-button">
                             Cancel
@@ -100,8 +92,6 @@
                             <img src="./img/login/check (1).svg" alt="">
                         </button>
                     </div>
-
-                    <!-- </div> -->
                 </form>
             </div>
             
@@ -138,6 +128,7 @@
                         <input required id="changedPhone" class="addField input-with-image" placeholder="Phone" type="text">
                         <img src="" alt="">
                     </div>
+
                     <div class="edit-form-buttons">
                         <!-- <input type="submit" value="Delete">
                         <input class="saveButton" type="submit" value="Save"> -->
@@ -155,6 +146,7 @@
             
         </div>
     </div>
+
     <!--adding scripts-->
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script>
