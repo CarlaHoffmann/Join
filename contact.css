@@ -240,13 +240,35 @@ hr {
     gap: 10px;
 }
 
-#editContainer, #deleteContainer{
-    display:flex;
-    justify-content:center;
-    align-items:center;
+/* Container für Edit/Delete */
+#editContainer, #deleteContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 10px;
-    margin-top: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
+
+.icon-text-button:hover {
+    color: #29ABE2; 
+}
+
+.icon-svg {
+    width: 24px;
+    height: 24px;
+    transition: stroke 0.3s ease; 
+}
+
+/* Hover-Effekt für das SVG */
+.icon-text-button:hover .icon-svg path {
+    stroke: #29ABE2;
+}
+
+.icon-text-button:hover span {
+    color: #29ABE2; 
+}
+
 
 
 .contactInformationTitle{
