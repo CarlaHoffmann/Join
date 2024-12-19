@@ -1,0 +1,114 @@
+/* Allgemeine Stile */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F6F7F8;
+    margin: 0;
+    padding: 100px;
+}
+
+
+/* Banner */
+.success-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    background-color: #2A3647;
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+    text-align: center;
+    width: 326px;
+    height: 74px;
+}
+
+
+
+
+
+
+/* Edit / Delete Menü */
+.options-menu {
+    background-color: white;
+    border-radius: 20px 20px 0px 20px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    padding: 8px;
+    width: 116px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px; 
+    padding: 6px 8px; 
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.option-item:hover {
+    background-color: #2A3647;
+}
+
+.option-item:hover span {
+    color: white;
+}
+
+.option-item:hover img {
+    filter: brightness(0) invert(1);
+}
+
+
+
+
+
+
+/* Login */
+.circle-login {
+    background: #2A3647;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease; 
+}
+
+.circle-login img {
+    width: 20px;
+    height: 20px;
+}
+
+.circle-login:hover {
+    background: #29ABE2;
+}
+
+/* Person-Add */
+.circle-person-add {
+    background: #2A3647;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.circle-person-add img {
+    width: 26px;
+    height: 26px;
+}
+
+.circle-person-add:hover {
+    background: #29ABE2;
+}
+
+
