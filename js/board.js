@@ -500,18 +500,6 @@ async function openEditTaskOverlay(task) {
     // Initialisieren von selectedContacts mit task.contacts
     selectedContacts = task.contacts;
 
-    // Farben für die Kontakte abrufen
-    // const contactColors = await getContactColors([task]);
-    // const contactsHTML = task.contacts.map((contact, index) => {
-    //     const contactColor = contactColors[0][index]; // Erste Aufgabe und entsprechender Kontakt
-    //     const initials = getContactInitials(contact);
-    //     return `
-    //         <div class="assigned-contact">
-    //             <div class="contact-initial" style="background-color: ${contactColor};">${initials}</div>
-    //             <span class="contact-name">${contact}</span>
-    //         </div>`;
-    // }).join('');
-
     // Subtasks aus dem task-Objekt laden
     let subtasks = [];
     Object.keys(task.subtasks).forEach(key => {
@@ -767,9 +755,10 @@ async function saveOverlayChanges(taskId, taskStatus) {
     };
 
     try {
+        // URL für das Aktualisieren der bestehenden Task
         const url = `${base_url}/tasks/${taskStatus}/${taskId}.json`;
         const response = await fetch(url, {
-            method: 'PUT',
+            method: 'PUT', // Wichtig: PUT überschreibt die bestehende Aufgabe
             body: JSON.stringify(updatedTask),
             headers: {
                 'Content-Type': 'application/json',
@@ -779,12 +768,17 @@ async function saveOverlayChanges(taskId, taskStatus) {
         if (!response.ok) {
             throw new Error(`HTTP error: ${response.status}`);
         }
+
+        // Board aktualisieren
         await loadTasks();
 
+        // Overlay schließen und aktualisierte Aufgabe anzeigen
         openTaskOverlay({ ...updatedTask, id: taskId });
     } catch (error) {
+        console.error("Fehler beim Aktualisieren der Aufgabe:", error);
     }
 }
+
 
 
 function setOverlayPriority(priority) {

@@ -68,12 +68,37 @@
                 </div>
             </div>
             <form method="post" id="addContactForm" action="contact.html" onsubmit="event.preventDefault(); addContact()">
-                <input required id="name" placeholder="Name" type="text">
-                <input required id="email" placeholder="Email" type="email">
-                <input required id="phone" placeholder="Phone" type="text">
-                <input type="submit">
-                <input type="reset">
+                <div class="input-container">
+                    <input required id="name" placeholder="Name" type="text" class="addField input-with-image">
+                    <img src="/img/login/person.png" alt="Person Icon" class="input-icon">
+                </div>
+                <div class="input-container">
+                    <input required id="email" placeholder="Email" type="email" class="addField input-with-image">
+                    <img src="/img/login/mail.png" alt="Mail Icon" class="input-icon">
+                </div>
+                <div class="input-container">
+                    <input required id="phone" placeholder="Phone" type="text" class="addField input-with-image">
+                    <img src="/img/login/call.svg" alt="Phone Icon" class="input-icon">
+                </div>
+                <div class="form-buttons">
+                    <!-- 
+                    <input type="submit" value="Submit" class="form-button">
+                    <input type="reset" value="Reset" class="form-button">
+                -->
+                <div class="form-buttons">
+                    <button class="clear-button hover-button">
+                        Cancel
+                        <img src="./img/login/Vector (2).svg" alt="">
+                    </button>
+                    <button class="submit-button hover-button">
+                        Create contact
+                        <img src="./img/login/check (1).svg" alt="">
+                    </button>
+                </div>
+
+                </div>
             </form>
+            
         </div>
     </div>
 
