@@ -1,13 +1,16 @@
 h2{
     font-size:61px;
 }
+
 h3{
     font-size:27px;
 }
+
 .email{
     color:#007CEE;
     font-size:16px;
 }
+
 #contactContent{
     display:flex;
     position:absolute;
@@ -68,6 +71,7 @@ hr {
     border: 1px solid #D1D1D1;
     border-radius: 2px;
 }
+
 .contact {
     height: 78px;
     width:352px;
@@ -78,11 +82,13 @@ hr {
     padding: 12px;
     border-radius: 10px;
 }
+
 .contactInformation{
     display:flex;
     flex-direction:column;
     gap:5px;
 }
+
 .contactInformationName{
     font-size:20px;
 }
@@ -216,6 +222,7 @@ hr {
     justify-content: center;
     align-items: center;
 }
+
 .contactHeader span{
     font-size:16px;
 }
@@ -225,12 +232,14 @@ hr {
     flex-direction:column;
     gap:8px;
 }
+
 .contactItemControls{
     display:flex;
     justify-content:flex-start;
     align-items: center;
     gap:26px;
 }
+
 #editContainer, #deleteContainer{
     display:flex;
     justify-content:center;

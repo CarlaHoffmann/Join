@@ -355,9 +355,14 @@ async function openTaskOverlay(task) {
     // Subtasks mit Checkbox-Status
     const subtasksHTML = Object.keys(task.subtasks).map(key => {
         const subtask = task.subtasks[key];
+        // return `
+        //     <div class="check">
+        //         <input name="${subtask.task}" type="checkbox" ${subtask.checked ? 'checked' : ''}>
+        //         <div>${subtask.task}</div>
+        //     </div>`;
         return `
             <div class="check">
-                <input type="checkbox" ${subtask.checked ? 'checked' : ''}>
+                <input type="checkbox" data-subtask-key="${key}" ${subtask.checked ? 'checked' : ''}>
                 <div>${subtask.task}</div>
             </div>`;
     }).join('');
@@ -432,11 +437,31 @@ async function openTaskOverlay(task) {
         </div>
     </div>`;
 
+    // Füge Event Listener für Checkboxen hinzu
+    const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            const key = checkbox.dataset.subtaskKey;
+            const checked = checkbox.checked;
+            task.subtasks[key].checked = checked;
+            updateSubtasksWithOverlay(task);
+        });
+    });
+
+    updateSubtasksWithOverlay(task);
+
     overlayContainer.classList.remove('d-none');
 }
 
-
-
+let updatedSubtasksWithOverlay = [];
+function updateSubtasksWithOverlay(task) {
+    updatedSubtasksWithOverlay = Object.keys(task.subtasks).map(key => ({
+        key,
+        task: task.subtasks[key].task,
+        checked: task.subtasks[key].checked
+    }));
+    console.log(updatedSubtasksWithOverlay);
+}
 
 
 // Fügen Sie dies nach der Erstellung des HTML-Inhalts hinzu
@@ -692,44 +717,44 @@ async function openEditTaskOverlay(task) {
     // categorySelection.textContent = task.category || 'Select task category';
 }
 
-function addSubtaskEventListeners(taskId, status) {
-    const subtaskCheckboxes = document.querySelectorAll("#subtasks .subtask-checkbox");
+// function addSubtaskEventListeners(taskId, status) {
+//     const subtaskCheckboxes = document.querySelectorAll("#subtasks .subtask-checkbox");
 
-    subtaskCheckboxes.forEach((checkbox, index) => {
-        checkbox.addEventListener("change", async () => {
-            // Aktuellen Zustand der Checkbox abrufen
-            const isChecked = checkbox.checked;
+//     subtaskCheckboxes.forEach((checkbox, index) => {
+//         checkbox.addEventListener("change", async () => {
+//             // Aktuellen Zustand der Checkbox abrufen
+//             const isChecked = checkbox.checked;
 
-            // Subtask im aktuellen Zustand aktualisieren
-            subtasks[index].checked = isChecked;
+//             // Subtask im aktuellen Zustand aktualisieren
+//             subtasks[index].checked = isChecked;
 
-            // Subtasks in der Datenbank aktualisieren
-            try {
-                const url = `${base_url}/tasks/${status}/${taskId}/subtasks.json`;
-                await fetch(url, {
-                    method: "PUT",
-                    body: JSON.stringify(subtasks),
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                });
+//             // Subtasks in der Datenbank aktualisieren
+//             try {
+//                 const url = `${base_url}/tasks/${status}/${taskId}/subtasks.json`;
+//                 await fetch(url, {
+//                     method: "PUT",
+//                     body: JSON.stringify(subtasks),
+//                     headers: {
+//                         "Content-Type": "application/json",
+//                     },
+//                 });
 
-                // Fortschritt berechnen und Progress-Bar aktualisieren
-                const completedSubtasks = subtasks.filter(subtask => subtask.checked).length;
-                const totalSubtasks = subtasks.length;
-                const progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
+//                 // Fortschritt berechnen und Progress-Bar aktualisieren
+//                 const completedSubtasks = subtasks.filter(subtask => subtask.checked).length;
+//                 const totalSubtasks = subtasks.length;
+//                 const progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
 
-                // Progress-Bar im Overlay aktualisieren
-                document.querySelector(".progress-bar").style.width = `${progressPercentage}%`;
+//                 // Progress-Bar im Overlay aktualisieren
+//                 document.querySelector(".progress-bar").style.width = `${progressPercentage}%`;
 
-                // Fortschrittsanzeige aktualisieren
-                document.querySelector(".subtasks").textContent = `${completedSubtasks} von ${totalSubtasks} Subtasks`;
-            } catch (error) {
-                console.error("Error updating subtasks:", error);
-            }
-        });
-    });
-}
+//                 // Fortschrittsanzeige aktualisieren
+//                 document.querySelector(".subtasks").textContent = `${completedSubtasks} von ${totalSubtasks} Subtasks`;
+//             } catch (error) {
+//                 console.error("Error updating subtasks:", error);
+//             }
+//         });
+//     });
+// }
 
 
 function enableEditMode() {
@@ -850,7 +875,12 @@ function addOverlaySubtask() {
     }
 }
 
+function updateSubtasks() {
+
+}
+
 function closeTaskOverlay() {
+    updateSubtasks();
     const overlayContainer = document.getElementById('taskOverlayContainer');
     overlayContainer.classList.add('d-none');
     overlayContainer.innerHTML = ''; // Inhalt löschen
