@@ -53,9 +53,12 @@ async function displayTasks(taskArray, containerId) {
     // Farben für die Kontakte abrufen
     const contactColors = await getContactColors(taskArray);
 
-    // HTML für die Tasks generieren
     tasks.innerHTML = taskArray.map((task, taskIndex) => {
-        const subtasksText = `${task.subtasks.length} von ${task.subtasks.length} Subtasks`;
+        const completedSubtasks = task.subtasks.filter(subtask => subtask.checked).length;
+        const totalSubtasks = task.subtasks.length;
+        const subtasksText = `${completedSubtasks} von ${totalSubtasks} Subtasks`;
+        const progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
+
         const contactsHTML = task.contacts.map((contact, contactIndex) => {
             const contactColor = contactColors[taskIndex][contactIndex];
             const initials = getContactInitials(contact);
@@ -72,7 +75,7 @@ async function displayTasks(taskArray, containerId) {
                 <p class="task-description">${task.description}</p>
                 <div class="progress-section">
                     <div class="progress">
-                        <div class="progress-bar" style="width: 50%;"></div>
+                        <div class="progress-bar" style="width: ${progressPercentage}%;"></div>
                     </div>
                     <p class="subtasks">${subtasksText}</p>
                 </div>
@@ -87,12 +90,9 @@ async function displayTasks(taskArray, containerId) {
     }).join('');
 
     // Placeholder-Logik
-    if (taskArray.length === 0) {
-        placeholder.style.display = "block"; // Placeholder anzeigen
-    } else {
-        placeholder.style.display = "none"; // Placeholder verstecken
-    }
+    placeholder.style.display = taskArray.length === 0 ? "block" : "none";
 }
+
 
 // async function getContactColor(tasks) {
 //     try {
@@ -441,16 +441,30 @@ async function openTaskOverlay(task) {
 
 // Fügen Sie dies nach der Erstellung des HTML-Inhalts hinzu
 document.querySelectorAll('.check input[type="checkbox"]').forEach((checkbox, index) => {
-    checkbox.addEventListener('change', () => {
-        const taskId = task.id;
+    checkbox.addEventListener('change', async () => {
         const subtaskId = Object.keys(task.subtasks)[index];
         const isChecked = checkbox.checked;
 
-        // Beispiel für die Verwendung von Firebase Realtime Database
-        const db = firebase.database();
-        db.ref(`toDo/${taskId}/subtasks/${subtaskId}/checked`).set(isChecked);
+        task.subtasks[subtaskId].checked = isChecked;
+
+        // Firebase aktualisieren
+        const taskUrl = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskId}.json`;
+        await fetch(taskUrl, {
+            method: 'PUT',
+            body: JSON.stringify(task.subtasks[subtaskId]),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        // Progress-Bar aktualisieren
+        const completedSubtasks = Object.values(task.subtasks).filter(subtask => subtask.checked).length;
+        const totalSubtasks = Object.values(task.subtasks).length;
+        const progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
+
+        document.querySelector('.progress-bar').style.width = `${progressPercentage}%`;
+        document.querySelector('.subtasks').textContent = `${completedSubtasks} von ${totalSubtasks} Subtasks`;
     });
 });
+
 
 
 /*
