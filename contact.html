@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacts</title>
     <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="contact-overlay.css">
 
     <script src="./nav.js"></script>
     <script src="returnColor.js"></script>
@@ -67,37 +68,42 @@
                     <img class="dividerOverlay" src="img/contact/dividerOverlay.svg">
                 </div>
             </div>
-            <form method="post" id="addContactForm" action="contact.html" onsubmit="event.preventDefault(); addContact()">
-                <div class="input-container">
-                    <input required id="name" placeholder="Name" type="text" class="addField input-with-image">
-                    <img src="/img/login/person.png" alt="Person Icon" class="input-icon">
-                </div>
-                <div class="input-container">
-                    <input required id="email" placeholder="Email" type="email" class="addField input-with-image">
-                    <img src="/img/login/mail.png" alt="Mail Icon" class="input-icon">
-                </div>
-                <div class="input-container">
-                    <input required id="phone" placeholder="Phone" type="text" class="addField input-with-image">
-                    <img src="/img/login/call.svg" alt="Phone Icon" class="input-icon">
-                </div>
-                <div class="form-buttons">
-                    <!-- 
-                    <input type="submit" value="Submit" class="form-button">
-                    <input type="reset" value="Reset" class="form-button">
-                -->
-                <div class="form-buttons">
-                    <button type="reset" class="clear-button form-button hover-button">
-                        Cancel
-                        <img src="./img/login/Vector (2).svg" alt="">
-                    </button>
-                    <button type="submit" class="submit-button form-button hover-button">
-                        Create contact
-                        <img src="./img/login/check (1).svg" alt="">
-                    </button>
-                </div>
 
-                </div>
-            </form>
+            <div class="addContactInfoOverlay">
+                <img class="overlay-contact-img" src="./img/contact/add-user.svg" alt="">
+            
+                <form method="post" id="addContactForm" action="contact.html" onsubmit="event.preventDefault(); addContact()">
+                    <div class="input-container">
+                        <input required id="name" placeholder="Name" type="text" class="addField input-with-image">
+                        <img src="/img/login/person.png" alt="Person Icon" class="input-icon">
+                    </div>
+                    <div class="input-container">
+                        <input required id="email" placeholder="Email" type="email" class="addField input-with-image">
+                        <img src="/img/login/mail.png" alt="Mail Icon" class="input-icon">
+                    </div>
+                    <div class="input-container">
+                        <input required id="phone" placeholder="Phone" type="text" class="addField input-with-image">
+                        <img src="/img/login/call.svg" alt="Phone Icon" class="input-icon">
+                    </div>
+                    <!-- <div class="form-buttons"> -->
+                        <!-- 
+                        <input type="submit" value="Submit" class="form-button">
+                        <input type="reset" value="Reset" class="form-button">
+                    -->
+                    <div class="add-form-buttons">
+                        <button type="reset" class="clear-button form-button hover-button">
+                            Cancel
+                            <img src="./img/login/Vector (2).svg" alt="">
+                        </button>
+                        <button type="submit" class="submit-button form-button hover-button">
+                            Create contact
+                            <img src="./img/login/check (1).svg" alt="">
+                        </button>
+                    </div>
+
+                    <!-- </div> -->
+                </form>
+            </div>
             
         </div>
     </div>
@@ -110,37 +116,43 @@
             <div id="editContactBoxHeader">
                 <img class="logo" src="img/contact/logo.svg">
                 <div class="contactHeaderText">
-                    <h2>Edit Contact</h2>
+                    <h2 id="editContactHeadline">Edit Contact</h2>
                     <p>Tasks are better with a team!</p>
                     <img class="dividerOverlay" src="img/contact/dividerOverlay.svg">
                 </div>
             </div>
-            <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); editContact('${editKey}');">
-                <div class="input-container">
-                    <input required id="changedName" placeholder="Name" type="text">
-                    <img src="" alt="">
-                </div>
-                <div class="input-container">
-                    <input required id="changedEmail" placeholder="Email" type="email">
-                    <img src="" alt="">
-                </div>
-                <div class="input-container">
-                    <input required id="changedPhone" placeholder="Phone" type="text">
-                    <img src="" alt="">
-                </div>
-                <div class="deleteAndSaveButton">
-                    <!-- <input type="submit" value="Delete">
-                    <input class="saveButton" type="submit" value="Save"> -->
-                    <button type="reset" class="clear-button form-button hover-button">
-                        Delete
-                        <img src="./img/login/Vector (2).svg" alt="">
-                    </button>
-                    <button type="submit" class="submit-button form-button hover-button">
-                        Save
-                        <img src="./img/login/check (1).svg" alt="">
-                    </button>
-                </div>
-            </form>
+
+            <div class="editContactInfoOverlay">
+                <img class="overlay-contact-img" src="" alt="">
+            
+                <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); editContact('${editKey}');">
+                    <div class="input-container">
+                        <input required id="changedName" class="addField input-with-image" placeholder="Name" type="text">
+                        <img src="" alt="">
+                    </div>
+                    <div class="input-container">
+                        <input required id="changedEmail" class="addField input-with-image" placeholder="Email" type="email">
+                        <img src="" alt="">
+                    </div>
+                    <div class="input-container">
+                        <input required id="changedPhone" class="addField input-with-image" placeholder="Phone" type="text">
+                        <img src="" alt="">
+                    </div>
+                    <div class="edit-form-buttons">
+                        <!-- <input type="submit" value="Delete">
+                        <input class="saveButton" type="submit" value="Save"> -->
+                        <button type="reset" class="clear-button form-button hover-button">
+                            Delete
+                            <img src="./img/login/Vector (2).svg" alt="">
+                        </button>
+                        <button type="submit" class="submit-button form-button hover-button">
+                            Save
+                            <img src="./img/login/check (1).svg" alt="">
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
         </div>
     </div>
     <!--adding scripts-->

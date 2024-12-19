@@ -35,215 +35,16 @@ h3{
     padding: 12px;
 }
 
-#addContactBoxOverlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 12;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px; /* Abstand zwischen den Feldern */
-    width: 422px; /* Breite des Formulars */
-    margin: 0 auto; /* Zentrieren des Formulars */
-  }
-  
-  /* Container für die Eingabefelder */
-  .input-container {
-    display: flex;
-    align-items: center;
-    border: 1px solid #D1D1D1;
-    padding: 12px 21px;
-    border-radius: 10px;
-    width: 80%;
-  }
-  
-  /* Eingabefelder mit Bild */
-  .input-with-image {
-    border: none;
-    outline: none;
-    flex: 1; /* Das Eingabefeld nimmt den restlichen Platz ein */
-    font-size: 16px;
-    background-color: var(--white);
-  }
-  
-  /* Icons im Eingabefeld */
-  .input-icon {
-    width: 20px;
-    height: 20px;
-    margin-left: 10px;
-  }
-  
-  /* Formularbuttons */
-  .form-buttons {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-  }
-  
-  .form-button {
-    border: none;
-    border-radius: 10px;
-    padding: 12px 21px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: var(--lightblue);
-    color: var(--white);
-  }
-  
-  .form-button:hover {
-    background-color: var(--darkblue);
-  }
-  
-  .input-container:focus-within {
-    border-color: #29ABE2
-  }
-  
-.form-buttons {
-    margin-top: 10px;
-}
-  .clear-button {
-    border: 1px solid #2A3647;
-    background-color: #F6F7F8;
-    color: #2A3647;
-    padding: 16px;
-    display: flex;
-    align-items: center; /* Vertikale Zentrierung */
-    gap: 4px; /* Abstand zwischen Text und Bild */
-    border-radius: 8px; /* Optional: abgerundete Ecken */
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.clear-button:hover {
-    background-color: #E2E5E8; /* Helle Hintergrundfarbe beim Hover */
-    border-color: #1F2A38; /* Dunklere Rahmenfarbe beim Hover */
-}
-
-.submit-button {
-    background-color: #2A3647;
-    color: #FFFFFF;
-    padding: 16px;
-    display: flex;
-    align-items: center; /* Vertikale Zentrierung */
-    gap: 4px; /* Abstand zwischen Text und Bild */
-    border: none; /* Kein Rahmen */
-    border-radius: 8px; /* Optional: abgerundete Ecken */
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.submit-button:hover {
-    background-color: #1F2A38; /* Dunklere Hintergrundfarbe beim Hover */
-}
 
 
 
-#addContactBox, #editContactBox {
-    width:80%;
-    height:50%;
-    background:white;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    /* border: 5px solid black; */
-    border-radius: 30px;
-    position: relative;
-}
 
-.deleteAndSaveButton{
-    display:flex;
-    gap:20px;
-}
 
-.saveButton{
-    background:#2A3647;
-    color:white;
-}
 
-.dividerOverlay{
-    width: 90px;
-}
 
-#addContactBox .close-button, #editContactBox .close-button{
-    position: absolute;
-    top: 48px;
-    right: 48px;
-    /* background: transparent; */
-    border: none;
-    font-size: 24px;
-    color: #2A3647;
-    cursor: pointer;
-    /* z-index: 101; */
-    font-weight: bold;
-    line-height: 1;
-}
 
-.close-button:hover {
-    background: #D1D1D1;
-}
 
-#addContactBoxHeader, #editContactBoxHeader {
-    height: 100%;
-    width: 100%;
-    background:#2A3647;
-    flex-direction:column;
-    display:flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 12px;
-    color:white;
-    padding: 66px 48px;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-}
 
-.contactHeaderText {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-#addContactBox form, #editContactBox form{
-    height:calc(100%);
-    width:67.67%;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    gap:8px;
-}
-
-#editContactBoxOverlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 12;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* #editContactBox form input {
-    border-radius: 10px;
-    padding: 13px 21px;
-} */
-
-/* #addContactBox form input {
-    border-radius: 10px;
-    padding: 13px 21px;
-} */
 
 #contacts {
     width:456px;
@@ -567,11 +368,17 @@ hr {
     #editContactBoxHeader, #addContactBoxHeader {
         border-top-right-radius: 30px;
         border-bottom-left-radius: 0px;
+        width: 100%;
     }
 
-    #editContactBoxHeader h2, #addContactHeadline {
+    #editContactHeadline, #addContactHeadline {
         font-size:47px;
     }
+
+    .contactHeaderText p {
+        font-size: 20px;
+    }
+
     #editContactBox form{
         border:none;
     }
