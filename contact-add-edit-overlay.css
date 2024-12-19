@@ -70,6 +70,7 @@
 
 .overlay-contact-img {
     width: 120px;
+    height: 120px;
 }
 
 #addContactForm, #editContactForm{
@@ -96,6 +97,10 @@
     padding: 12px 21px;
     border-radius: 10px;
     width: 100%;
+}
+
+.input-container:focus-within {
+    border-color: #29ABE2
 }
   
 /* Eingabefelder mit Bild */
@@ -124,33 +129,27 @@
 .form-button {
     border: none;
     border-radius: 10px;
-    padding: 12px 21px;
+    /* padding: 12px 21px; */
+    padding: 16px;
     font-size: 16px;
     cursor: pointer;
     background-color: var(--lightblue);
     color: var(--white);
     text-wrap: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
   
-.form-button:hover {
+/* .form-button:hover {
     background-color: var(--darkblue);  
-}
+} */
 
-.input-container:focus-within {
-    border-color: #29ABE2
-}
 
 .clear-button {
     border: 1px solid #2A3647;
     background-color: #F6F7F8;
     color: #2A3647;
-    padding: 16px;
-    display: flex;
-    align-items: center; /* Vertikale Zentrierung */
-    gap: 4px; /* Abstand zwischen Text und Bild */
-    border-radius: 8px; /* Optional: abgerundete Ecken */
-    font-size: 16px;
-    cursor: pointer;
 }
 
 .clear-button:hover {
@@ -161,12 +160,6 @@
 .submit-button {
     background-color: #2A3647;
     color: #FFFFFF;
-    padding: 16px;
-    display: flex;
-    align-items: center; /* Vertikale Zentrierung */
-    gap: 4px; /* Abstand zwischen Text und Bild */
-    border: none; /* Kein Rahmen */
-    border-radius: 8px; /* Optional: abgerundete Ecken */
     font-size: 16px;
     cursor: pointer;
 }

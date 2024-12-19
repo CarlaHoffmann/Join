@@ -25,7 +25,7 @@ async function addContact(){
         'password':'pw',
     }
     await createNewContact('/users', uploadData);
-    closeAddContactBoxOverlay();
+    closeAddOverlay();
     clearAddContactFields();
     loadContactData();
 }
@@ -195,11 +195,11 @@ async function toggleView(elementId, key=null, edit=false){
     }
 };
 
-function closeEditBox(){
+function closeEditOverlay(){
     document.getElementById('editContactBoxOverlay').classList.add('hidden');
 }
 
-function closeAddContactBoxOverlay(){
+function closeAddOverlay(){
     document.getElementById('addContactBoxOverlay').classList.add('hidden');
 }
             
@@ -240,7 +240,7 @@ async function editContact() {
 
         loadContactData();
         contactDetails.innerHTML = '';
-        closeEditBox();
+        closeEditOverlay();
         return await response.json();
     } catch (error) {
         console.error('Fehler beim Bearbeiten des Kontakts:', error);

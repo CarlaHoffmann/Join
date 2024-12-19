@@ -55,7 +55,8 @@
     <!--add contact box-->
     <div id="addContactBoxOverlay" class="hidden">
         <div id="addContactBox">
-            <button id="closeAddContactBox" class="close-button" onclick="closeAddContactBoxOverlay();">×</button>
+            <img src="img/contact/close.svg" id="closeAddContactBox" class="close-button" onclick="closeAddOverlay()">
+            <!-- <button id="closeAddContactBox" class="close-button" onclick="closeAddContactBoxOverlay()">×</button> -->
             <div id="addContactBoxHeader">
                 <img class="logo" src="img/contact/logo.svg">
                 <div class="contactHeaderText">
@@ -85,11 +86,11 @@
                     </div>
                     
                     <div class="add-form-buttons">
-                        <button type="reset" class="clear-button form-button hover-button">
+                        <button type="reset" class="clear-button form-button">
                             Cancel
                             <img src="./img/login/Vector (2).svg" alt="">
                         </button>
-                        <button type="submit" class="submit-button form-button hover-button">
+                        <button type="submit" class="submit-button form-button">
                             Create contact
                             <img src="./img/login/check (1).svg" alt="">
                         </button>
@@ -104,7 +105,7 @@
     <!--edit contact box-->
     <div id="editContactBoxOverlay" class="hidden">
         <div id="editContactBox">
-            <img src="img/contact/close.svg" id="closeEditContactBox" class="close-button" onclick="closeEditBox()">
+            <img src="img/contact/close.svg" id="closeEditContactBox" class="close-button" onclick="closeEditOverlay()">
             <div id="editContactBoxHeader">
                 <img class="logo" src="img/contact/logo.svg">
                 <div class="contactHeaderText">
@@ -121,26 +122,26 @@
                     <div class="input-fields">
                         <div class="input-container">
                             <input required id="changedName" class="addField input-with-image" placeholder="Name" type="text">
-                            <img src="" alt="">
+                            <img src="/img/login/person.png" alt="Person Icon" class="input-icon">
                         </div>
                         <div class="input-container">
                             <input required id="changedEmail" class="addField input-with-image" placeholder="Email" type="email">
-                            <img src="" alt="">
+                            <img src="/img/login/mail.png" alt="Mail Icon" class="input-icon">
                         </div>
                         <div class="input-container">
                             <input required id="changedPhone" class="addField input-with-image" placeholder="Phone" type="text">
-                            <img src="" alt="">
+                            <img src="/img/login/call.svg" alt="Phone Icon" class="input-icon">
                         </div>
                     </div>
 
                     <div class="edit-form-buttons">
                         <!-- <input type="submit" value="Delete">
                         <input class="saveButton" type="submit" value="Save"> -->
-                        <button type="reset" class="clear-button form-button hover-button">
+                        <button type="reset" class="clear-button form-button">
                             Delete
                             <img src="./img/login/Vector (2).svg" alt="">
                         </button>
-                        <button type="submit" class="submit-button form-button hover-button">
+                        <button type="submit" class="submit-button form-button">
                             Save
                             <img src="./img/login/check (1).svg" alt="">
                         </button>
