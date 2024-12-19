@@ -69,17 +69,19 @@
                 <img class="overlay-contact-img" src="./img/contact/add-user.svg" alt="">
             
                 <form method="post" id="addContactForm" action="contact.html" onsubmit="event.preventDefault(); addContact()">
-                    <div class="input-container">
-                        <input required id="name" placeholder="Name" type="text" class="addField input-with-image">
-                        <img src="/img/login/person.png" alt="Person Icon" class="input-icon">
-                    </div>
-                    <div class="input-container">
-                        <input required id="email" placeholder="Email" type="email" class="addField input-with-image">
-                        <img src="/img/login/mail.png" alt="Mail Icon" class="input-icon">
-                    </div>
-                    <div class="input-container">
-                        <input required id="phone" placeholder="Phone" type="text" class="addField input-with-image">
-                        <img src="/img/login/call.svg" alt="Phone Icon" class="input-icon">
+                    <div class="input-fields">
+                        <div class="input-container">
+                            <input required id="name" placeholder="Name" type="text" class="addField input-with-image">
+                            <img src="/img/login/person.png" alt="Person Icon" class="input-icon">
+                        </div>
+                        <div class="input-container">
+                            <input required id="email" placeholder="Email" type="email" class="addField input-with-image">
+                            <img src="/img/login/mail.png" alt="Mail Icon" class="input-icon">
+                        </div>
+                        <div class="input-container">
+                            <input required id="phone" placeholder="Phone" type="text" class="addField input-with-image">
+                            <img src="/img/login/call.svg" alt="Phone Icon" class="input-icon">
+                        </div>
                     </div>
                     
                     <div class="add-form-buttons">
@@ -107,7 +109,7 @@
                 <img class="logo" src="img/contact/logo.svg">
                 <div class="contactHeaderText">
                     <h2 id="editContactHeadline">Edit Contact</h2>
-                    <p>Tasks are better with a team!</p>
+                    <!-- <p>Tasks are better with a team!</p> -->
                     <img class="dividerOverlay" src="img/contact/dividerOverlay.svg">
                 </div>
             </div>
@@ -116,17 +118,19 @@
                 <img class="overlay-contact-img" src="" alt="">
             
                 <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); editContact('${editKey}');">
-                    <div class="input-container">
-                        <input required id="changedName" class="addField input-with-image" placeholder="Name" type="text">
-                        <img src="" alt="">
-                    </div>
-                    <div class="input-container">
-                        <input required id="changedEmail" class="addField input-with-image" placeholder="Email" type="email">
-                        <img src="" alt="">
-                    </div>
-                    <div class="input-container">
-                        <input required id="changedPhone" class="addField input-with-image" placeholder="Phone" type="text">
-                        <img src="" alt="">
+                    <div class="input-fields">
+                        <div class="input-container">
+                            <input required id="changedName" class="addField input-with-image" placeholder="Name" type="text">
+                            <img src="" alt="">
+                        </div>
+                        <div class="input-container">
+                            <input required id="changedEmail" class="addField input-with-image" placeholder="Email" type="email">
+                            <img src="" alt="">
+                        </div>
+                        <div class="input-container">
+                            <input required id="changedPhone" class="addField input-with-image" placeholder="Phone" type="text">
+                            <img src="" alt="">
+                        </div>
                     </div>
 
                     <div class="edit-form-buttons">

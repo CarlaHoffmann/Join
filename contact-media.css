@@ -1,3 +1,25 @@
+@media(max-width: 1440px) {
+    .addContactInfoOverlay, .addContactInfoOverlay {
+        gap: 24px;
+    }
+}
+
+@media(max-width: 1330px) {
+    .addContactInfoOverlay, .editContactInfoOverlay {
+        flex-direction: column;
+        padding: 0px 16px;
+    }
+
+    .input-fields {
+        /* flex-grow: 1; */
+        width: 364px;
+    }
+
+    .input-container {
+        width: 100%; /* Breite anpassen bei kleineren Bildschirmen */
+    }
+}
+
 @media (max-width: 1220px){
     .contactHeader{
         flex-direction:column;
@@ -21,6 +43,13 @@
     }
 }
 
+@media(max-width: 1060px) {
+    #addContactBox, #editContactBox {
+        width: fit-content;
+        height:594px;
+    }
+}
+
 @media (max-width: 1024px) {
     #contacts {
         width: calc( 100vw - 232px);
@@ -40,6 +69,54 @@
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
+    }
+}
+
+@media(max-width: 880px) {
+    #addContactBox, #editContactBox {
+        width: 396px;
+        height: calc(100vh - 160px);
+        flex-direction:column;
+    }
+
+    #editContactBoxHeader, #addContactBoxHeader {
+        border-top-right-radius: 30px;
+        border-bottom-left-radius: 0px;
+        width: 100%;
+        height: 352px;
+    }
+
+    #editContactHeadline, #addContactHeadline {
+        font-size:47px;
+    }
+
+    .contactHeaderText p {
+        font-size: 20px;
+    }
+
+    .addContactInfoOverlay, .editContactInfoOverlay {
+        position: relative;
+        top: -56px;
+    }
+
+    #editContactBox form{
+        border:none;
+    }
+    #editContactBox form input{
+        border-radius:10px;
+        padding: 13px 21px;
+    }
+    .logo{
+        display:none;
+    }
+
+    .close-button {
+        top: 24px;
+        right: 16px;
+    }
+    
+    .close-button:hover {
+        background: none;
     }
 }
 
@@ -103,45 +180,7 @@
         top:80px;
     }
 
-    #editContactBox, #addContactBox{
-        width: 90vw;
-        height: calc(100vh - 160px);
-        flex-direction:column;
-    }
-
-    #editContactBoxHeader, #addContactBoxHeader {
-        border-top-right-radius: 30px;
-        border-bottom-left-radius: 0px;
-        width: 100%;
-    }
-
-    #editContactHeadline, #addContactHeadline {
-        font-size:47px;
-    }
-
-    .contactHeaderText p {
-        font-size: 20px;
-    }
-
-    #editContactBox form{
-        border:none;
-    }
-    #editContactBox form input{
-        border-radius:10px;
-        padding: 13px 21px;
-    }
-    .logo{
-        display:none;
-    }
-
-    .close-button {
-        top: 24px;
-        right: 16px;
-    }
     
-    .close-button:hover {
-        background: none;
-    }
 }
 
 @media (max-width: 380px){

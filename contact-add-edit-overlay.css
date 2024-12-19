@@ -13,7 +13,7 @@
   
 #addContactBox, #editContactBox {
     width:80%;
-    height:50%;
+    height:594px;
     background:white;
     display:flex;
     align-items: center;
@@ -34,6 +34,12 @@
     padding: 66px 48px;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    top: 152px;
 }
 
 .contactHeaderText {
@@ -54,28 +60,32 @@
     width: 90px;
 }
 
-.addContactInfoOverlay, .addContactInfoOverlay {
-    width: 100%;
+.addContactInfoOverlay, .editContactInfoOverlay {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 54px;
 }
 
 .overlay-contact-img {
     width: 120px;
-    padding-left: 20px;
 }
 
 #addContactForm, #editContactForm{
     height: 100%;
-    /* width: 422px; */
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
+    gap: 40px;
+}
+
+.input-fields {
+    display: flex;
+    flex-direction: column;
     gap: 32px;
-    padding: 66px 48px;
-    /* margin: 0 auto; Zentrieren des Formulars */
+    width: 422px;
 }
 
 /* Container für die Eingabefelder */
@@ -85,7 +95,7 @@
     border: 1px solid #D1D1D1;
     padding: 12px 21px;
     border-radius: 10px;
-    width: 422px;
+    width: 100%;
 }
   
 /* Eingabefelder mit Bild */
@@ -170,7 +180,7 @@
     color:white;
 }
 
-#addContactBox .close-button, #editContactBox .close-button{
+.close-button {
     position: absolute;
     top: 48px;
     right: 48px;
@@ -179,7 +189,7 @@
     font-size: 24px;
     color: #2A3647;
     cursor: pointer;
-    /* z-index: 101; */
+    z-index: 13;
     font-weight: bold;
     line-height: 1;
 }
