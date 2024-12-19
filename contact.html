@@ -55,8 +55,11 @@
     <!--add contact box-->
     <div id="addContactBoxOverlay" class="hidden">
         <div id="addContactBox">
-            <img src="img/contact/close.svg" id="closeAddContactBox" class="close-button" onclick="closeAddOverlay()">
-            <!-- <button id="closeAddContactBox" class="close-button" onclick="closeAddContactBoxOverlay()">×</button> -->
+            <div class="close-button-box">
+                <img src="img/contact/close.svg" class="desktop-only close-button" onclick="closeAddOverlay()">
+                <img src="img/contact/close-mobile.svg" class="mobile-only close-button" onclick="closeAddOverlay()">
+            </div>
+            
             <div id="addContactBoxHeader">
                 <img class="logo" src="img/contact/logo.svg">
                 <div class="contactHeaderText">
@@ -105,7 +108,11 @@
     <!--edit contact box-->
     <div id="editContactBoxOverlay" class="hidden">
         <div id="editContactBox">
-            <img src="img/contact/close.svg" id="closeEditContactBox" class="close-button" onclick="closeEditOverlay()">
+            <div class="close-button-box">
+                <img src="img/contact/close.svg" class="desktop-only close-button" onclick="closeEditOverlay()">
+                <img src="img/contact/close-mobile.svg" class="mobile-only close-button" onclick="closeEditOverlay()">
+            </div>
+
             <div id="editContactBoxHeader">
                 <img class="logo" src="img/contact/logo.svg">
                 <div class="contactHeaderText">

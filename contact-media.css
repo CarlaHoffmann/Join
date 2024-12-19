@@ -46,7 +46,7 @@
 @media(max-width: 1060px) {
     #addContactBox, #editContactBox {
         width: fit-content;
-        height:594px;
+        /* height:594px; */
     }
 }
 
@@ -73,6 +73,14 @@
 }
 
 @media(max-width: 880px) {
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-only {
+        display: flex;
+    }
+
     #addContactBox, #editContactBox {
         width: 396px;
         height: calc(100vh - 160px);
@@ -115,12 +123,12 @@
         gap: 20px;
     }
 
-    .close-button {
+    .close-button-box {
         top: 24px;
         right: 16px;
     }
     
-    .close-button:hover {
+    .close-button-box:hover {
         background: none;
     }
 }
@@ -183,9 +191,7 @@
         width: 100vw;
         height: calc(100vh - 160px);
         top:80px;
-    }
-
-    
+    }    
 }
 
 @media (max-width: 380px){

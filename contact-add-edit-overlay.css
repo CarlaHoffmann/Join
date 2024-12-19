@@ -173,20 +173,34 @@
     color:white;
 }
 
-.close-button {
+.desktop-only {
+    display: flex;
+}
+
+.mobile-only {
+    display: none;
+}
+
+.close-button-box {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
     position: absolute;
+    z-index: 13;
     top: 48px;
     right: 48px;
-    /* background: transparent; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-button {
     border: none;
     font-size: 24px;
     color: #2A3647;
-    cursor: pointer;
-    z-index: 13;
-    font-weight: bold;
-    line-height: 1;
 }
 
-.close-button:hover {
+.close-button-box:hover {
     background: #D1D1D1;
+    cursor: pointer;
 }
