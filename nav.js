@@ -40,16 +40,16 @@ function activeLink() {
         }
     });
 
-        // // Entferne 'selected' von allen Kontakten
-        // document.querySelectorAll('.contact').forEach(contact => {
-        //     contact.classList.remove('selected');
-        // });
-    
-        // // Füge 'selected' dem aktuellen Kontakt hinzu
-        // const selectedContact = document.querySelector(`.contact[onclick*="'${key}'"]`);
-        // if (selectedContact) {
-        //     selectedContact.classList.add('selected');
-        // }
+    // // Entferne 'selected' von allen Kontakten
+    // document.querySelectorAll('.contact').forEach(link => {
+    //     link.classList.remove('active-link');
+    // });
+
+    // // Füge 'selected' dem aktuellen Kontakt hinzu
+    // const activeLink = document.querySelector(`.contact[onclick*="'${key}'"]`);
+    // if (activeLink) {
+    //     activeLink.classList.add('active-link');
+    // }
 }
 
 async function getInitials() {
