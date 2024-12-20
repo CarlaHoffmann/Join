@@ -160,7 +160,9 @@ async function loadContactData(){
         if (!letterExists) {
             lettersArray.push(firstUserLetter);
             contactList.innerHTML += `
-                <p>${firstUserLetter.toUpperCase()}</p>
+                <div class="capital-letter-box">
+                    <p class="capital-letter">${firstUserLetter.toUpperCase()}</p>
+                </div>
                 <hr>
             `;
         }

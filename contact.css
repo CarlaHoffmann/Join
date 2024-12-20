@@ -38,6 +38,21 @@ h3{
     padding: 12px;
 }
 
+.capital-letter-box {
+    width: 352px;
+    padding: 17px 36px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.capital-letter {
+    /* width: 42px;
+    height: 42px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #contacts {
     width:456px;
     box-shadow: 4px 0px 6px 0px #0000001A;
@@ -83,7 +98,7 @@ hr {
     align-items: center;
     cursor:pointer;
     gap: 35px;
-    padding: 12px;
+    padding: 15px 24px;
     border-radius: 10px;
 }
 
@@ -117,7 +132,6 @@ hr {
     border: 2px solid white;
     border-radius: 100%;
     color: white;
-    margin-right:10px;
 }
 
 #contactDetailBox {
