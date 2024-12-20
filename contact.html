@@ -70,7 +70,9 @@
             </div>
 
             <div class="addContactInfoOverlay">
-                <img class="overlay-contact-img" src="./img/contact/add-user.svg" alt="">
+                <div class="imgBox">
+                    <img class="overlay-contact-img" src="./img/contact/add-user.svg" alt="">
+                </div>
             
                 <form method="post" id="addContactForm" action="contact.html" onsubmit="event.preventDefault(); addContact()">
                     <div class="input-fields">
@@ -89,13 +91,14 @@
                     </div>
                     
                     <div class="add-form-buttons">
-                        <button type="reset" class="clear-button form-button">
+                        <button type="reset" class="clear-button form-button hover-button">
                             Cancel
-                            <img src="./img/login/Vector (2).svg" alt="">
+                            <img class="icon-normal" src="./img/task/iconoir_cancel.svg" alt="">
+                            <img class="icon-hover" src="./img/task/iconoir_cancel_hover.svg" alt="">
                         </button>
-                        <button type="submit" class="submit-button form-button">
+                        <button type="submit" class="submit-button form-button hover-button">
                             Create contact
-                            <img src="./img/login/check (1).svg" alt="">
+                            <img src="./img/task/check.svg" alt="">
                         </button>
                     </div>
                 </form>
@@ -123,7 +126,9 @@
             </div>
 
             <div class="editContactInfoOverlay">
-                <img class="overlay-contact-img" src="" alt="">
+                <div class="imgBox">
+                    <div id="changedImg" class="overlay-contact-img circleDetails"></div>
+                </div>
             
                 <form method="post" id="editContactForm" action="contact.html" onsubmit="event.preventDefault(); editContact('${editKey}');">
                     <div class="input-fields">
@@ -142,15 +147,12 @@
                     </div>
 
                     <div class="edit-form-buttons">
-                        <!-- <input type="submit" value="Delete">
-                        <input class="saveButton" type="submit" value="Save"> -->
-                        <button type="reset" class="clear-button form-button">
+                        <button type="reset" class="clear-button form-button hover-button">
                             Delete
-                            <img src="./img/login/Vector (2).svg" alt="">
                         </button>
-                        <button type="submit" class="submit-button form-button">
+                        <button type="submit" class="submit-button form-button hover-button">
                             Save
-                            <img src="./img/login/check (1).svg" alt="">
+                            <img src="./img/task/check.svg" alt="">
                         </button>
                     </div>
                 </form>

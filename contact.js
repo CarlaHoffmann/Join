@@ -30,8 +30,15 @@ async function addContact(){
     loadContactData();
 }
 
+// function getNameInitials(name) {
+//     let nameParts = name.split(' ');
+//     return nameParts[0].charAt(0) + nameParts[nameParts.length - 1].charAt(0);
+// }
 function getNameInitials(name) {
     let nameParts = name.split(' ');
+    if (nameParts.length < 2) {
+        return name.charAt(0); // Wenn nur ein Namesteil vorhanden ist, gib den ersten Buchstaben zurück
+    }
     return nameParts[0].charAt(0) + nameParts[nameParts.length - 1].charAt(0);
 }
 
@@ -211,6 +218,9 @@ async function toggleView(elementId, key=null, edit=false){
         let response = await fetch(editLink + ".json");
         let user = await response.json();
 
+        document.getElementById('changedImg').style.backgroundColor = user.color;
+        // document.getElementById('changedImg').innerHTML = getNameInitials(user.name);
+        document.getElementById('changedImg').textContent = getNameInitials(user.name);
         document.getElementById('changedName').value = user.name;
         document.getElementById('changedEmail').value = user.mail;
         document.getElementById('changedPhone').value = user.phone;
