@@ -276,7 +276,8 @@ function validateCategory() {
     return true;
 }
 
-// This function displays an overlay indicating that the task has been added successfully.
+// This function displays an overlay indicating that the task has been added successfully,
+// hides the task added overlay and redirects to the board page.
 function showTaskAddedOverlay() {
     const overlay = document.getElementById('task-added-overlay');
     overlay.classList.remove('d-none');
@@ -286,18 +287,12 @@ function showTaskAddedOverlay() {
 
     // Automatisches Ausblenden nach 3 Sekunden
     setTimeout(() => {
-        hideTaskAddedOverlay();
+        overlay.classList.remove('show');
+        setTimeout(() => {
+            overlay.classList.add('d-none');
+            goToBoard();
+        }, 300); // Warten auf das Ende der Ausblend-Animation
     }, 3000);
-}
-
-// This function hides the task added overlay and redirects to the board page.
-function hideTaskAddedOverlay() {
-    const overlay = document.getElementById('task-added-overlay');
-    overlay.classList.remove('show');
-    setTimeout(() => {
-        overlay.classList.add('d-none');
-    }, 300); // Warten auf das Ende der Ausblend-Animation
-    goToBoard();
 }
 
 // This function redirects the user to the board page.
