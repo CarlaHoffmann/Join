@@ -47,7 +47,6 @@
 @media(max-width: 1060px) {
     #addContactBox, #editContactBox {
         width: fit-content;
-        /* height:594px; */
     }
 }
 
@@ -64,6 +63,10 @@
     .contactDetailBox {
         display: flex !important;
         flex-direction:column;
+    }
+
+    .contactItemControls {
+        display: none;
     }
 
     #contactDetailsOverlay .contactHeader {

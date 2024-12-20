@@ -43,7 +43,7 @@ function animationWindow() {
     }
 }
 
-// Aufrufen der Funktion beim Laden der Seite
+// onload start function animationWindow
 window.onload = animationWindow;
 
 const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
@@ -54,11 +54,11 @@ async function existingMailLogIn() {
         let email = document.getElementById('email').value.toLowerCase();
         let password = document.getElementById('password').value;
 
-        // Finde den Benutzer basierend auf der E-Mail
+        // Find user by E-Mail
         let user = users.find(u => u.email === email);
 
         if (user) {
-            // Prüfe, ob das Passwort übereinstimmt
+            // if password fits, save user
             if (user.password === password) {
                 let name = user.name;
                 await saveUser(name, email);
@@ -80,7 +80,7 @@ async function loadUsers() {
         const response = await fetch(`${log_base_url}/users.json`);
         const users = await response.json();
 
-        // Erstelle ein Array von Benutzerobjekten
+        // create an Array with user objects
         const usersArray = Object.values(users).map(userData => ({ name: userData.name, email: userData.mail, password: userData.password }));
         console.log(usersArray);
         return usersArray;

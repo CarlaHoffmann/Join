@@ -1,3 +1,13 @@
+.hidden{
+    display:none !important;
+}
+
+.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
 h2{
     font-size:61px;
 }
@@ -46,8 +56,6 @@ h3{
 }
 
 .capital-letter {
-    /* width: 42px;
-    height: 42px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,7 +84,7 @@ h3{
 
 .contact.selected {
     background-color: #2A3647;
-    color: white; /* Optional, falls der Text kontrastreich sein soll */
+    color: white;
 }
 
 .contact.selected:hover {
@@ -134,22 +142,15 @@ hr {
     color: white;
 }
 
-
-
-
-  
-/* Breite der Scrollleiste */
 #contactList::-webkit-scrollbar {
     width: 24px;
 }
-  
-/* Hintergrund der Scrollleiste */
+
 #contactList::-webkit-scrollbar-track {
     background-color: white;
     border-radius: 3px;
 }
-  
-/* Der scrollbar-thumb (die bewegliche Leiste) */
+
 #contactList::-webkit-scrollbar-thumb {
     background-color: #A8A8A8;
     height: 53px; 
@@ -157,14 +158,10 @@ hr {
     border: 8px solid white; 
     border-radius: 12px; 
 }
-  
-/* Optional: Hover-Effekt */
+ 
 #contactList::-webkit-scrollbar-thumb:hover {
     background-color: #888; 
 }
-
-
-
 
 #contactDetailBox {
     position: fixed;
@@ -314,7 +311,7 @@ hr {
     transition: stroke 0.3s ease; 
 }
 
-/* Hover-Effekt für das SVG */
+/* Hover-effect for SVG */
 .icon-text-button:hover .icon-svg path {
     stroke: #29ABE2;
 }
@@ -323,23 +320,85 @@ hr {
     color: #29ABE2; 
 }
 
-
-
-.contactInformationTitle{
+.contactInformationTitle {
     padding-top:20px;
     padding-bottom:20px;
 }
-.contactFooter{
+
+.contactFooter {
     display:flex;
     flex-direction:column;
     gap:22px;
     font-size:20px;
 }
-.contactFooterInformation{
+
+.contactFooterInformation {
     display:flex;
     flex-direction:column;
     gap:15px;
 }
-.hidden{
-    display:none !important;
+
+/* control element */
+.circle-edit-mobile-control {
+    background: #2A3647;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease; 
+    position: absolute;
+    bottom: 32px;
+    right: 16px
+}
+
+.circle-edit-mobile-control img {
+    width: 20px;
+    height: 20px;
+}
+
+.circle-edit-mobile-control:hover {
+    background: #29ABE2;
+}
+
+/* Edit / Delete Menu */
+.options-menu {
+    background-color: white;
+    border-radius: 20px 20px 0px 20px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    padding: 8px;
+    width: 116px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    bottom: 16px;
+    right: 8px;
+}
+
+.option-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 16px;
+    gap: 8px; 
+    padding: 8px; 
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.option-item:hover {
+    background-color: #2A3647;
+}
+
+.option-item:hover span {
+    color: white;
+}
+
+.option-item:hover img {
+    filter: brightness(0) invert(1);
 }

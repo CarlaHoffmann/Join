@@ -27,6 +27,7 @@ async function addContact(){
     await createNewContact('/users', uploadData);
     closeAddOverlay();
     clearAddContactFields();
+    showContactAddedOverlay();
     loadContactData();
 }
 
@@ -287,4 +288,33 @@ function closeDetailsOverlay() {
     document.querySelectorAll('.contact').forEach(contact => {
         contact.classList.remove('selected');
     });
+}
+
+function openControlMenu() {
+    let controlMenu = document.getElementById('options-menu');
+    controlMenu.classList.remove('hidden');
+}
+
+//noch nicht fertig
+function closeControlMenu() {
+    let controlMenu = document.getElementById('options-menu');
+    controlMenu.classList.add('hidden');
+}
+
+//
+function showContactAddedOverlay() {
+    const overlay = document.getElementById('contact-added-overlay');
+    overlay.classList.remove('hidden');
+    setTimeout(() => {
+        overlay.classList.add('show');
+    }, 10); // Kleine Verzögerung für die Animation
+
+    // Automatisches Ausblenden nach 3 Sekunden
+    setTimeout(() => {
+        overlay.classList.remove('show');
+        setTimeout(() => {
+            overlay.classList.add('hidden');
+            goToBoard();
+        }, 300); // Warten auf das Ende der Ausblend-Animation
+    }, 3000);
 }

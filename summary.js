@@ -14,42 +14,93 @@ async function initSummary() {
 }
 
 // This asynchronous function displays a greeting overlay and updates the greeting name based on the logged-in user.
+// async function getGreetingOverlay() {
+//     let greeting = document.getElementsByClassName('greeting')[0];
+//     let greetName = document.getElementsByClassName('greet-name')[0];
+//     let overlay = document.getElementById('greeting-overlay');
+
+//     // Check if the referral is from the correct pages
+//     let referrer = document.referrer;
+//     if (referrer && (referrer.includes('signUp.html') || referrer.includes('logIn.html'))) {
+//         try {
+//             const response = await fetch(`${base_url}/loggedIn.json`); // Example path for the logged-in user
+//             const loggedInData = await response.json();
+//             let user = loggedInData.name;
+
+//             if(user === 'Guest') {
+//                 greeting.innerHTML = 'Good morning!';
+//                 greetName.innerHTML = '';
+//             } else {
+//                 greetName.innerHTML = loggedInData.name; // Display the name of the logged-in user
+//             }
+
+//             // Zeige das Overlay an, wenn die Bildschirmbreite kleiner oder gleich 1275px ist
+//             if (window.matchMedia("(max-width: 1275px)").matches) {
+//                 overlay.classList.remove('hidden');
+//                 overlay.classList.add('show');
+
+//                 // Verstecke das Overlay nach 3 Sekunden
+//                 setTimeout(function() {
+//                     overlay.classList.remove('show');
+//                     overlay.classList.add('hidden');
+//                 }, 3000);
+//             }
+//         } catch (error) {
+//             console.error("Fehler beim Abrufen des Benutzers:", error);
+//         }
+//     }
+// }
 async function getGreetingOverlay() {
-    let greeting = document.getElementsByClassName('greeting')[0];
-    let greetName = document.getElementsByClassName('greet-name')[0];
-    let overlay = document.getElementById('greeting-overlay');
+    const greeting = document.getElementsByClassName('greeting')[0];
+    const greetName = document.getElementsByClassName('greet-name')[0];
+    const overlay = document.getElementById('greeting-overlay');
 
-    // Check if the referral is from the correct pages
-    let referrer = document.referrer;
-    if (referrer && (referrer.includes('signUp.html') || referrer.includes('logIn.html'))) {
+    if (isReferrerValid()) {
         try {
-            const response = await fetch(`${base_url}/loggedIn.json`); // Example path for the logged-in user
-            const loggedInData = await response.json();
-            let user = loggedInData.name;
-
-            if(user === 'Guest') {
-                greeting.innerHTML = 'Good morning!';
-                greetName.innerHTML = '';
-            } else {
-                greetName.innerHTML = loggedInData.name; // Display the name of the logged-in user
-            }
-
-            // Zeige das Overlay an, wenn die Bildschirmbreite kleiner oder gleich 1275px ist
-            if (window.matchMedia("(max-width: 1275px)").matches) {
-                overlay.classList.remove('hidden');
-                overlay.classList.add('show');
-
-                // Verstecke das Overlay nach 3 Sekunden
-                setTimeout(function() {
-                    overlay.classList.remove('show');
-                    overlay.classList.add('hidden');
-                }, 3000);
-            }
+            const user = await getLoggedInUser();
+            updateGreeting(greeting, greetName, user);
+            showGreetingOverlay(overlay);
         } catch (error) {
             console.error("Fehler beim Abrufen des Benutzers:", error);
         }
     }
 }
+
+function isReferrerValid() {
+    const referrer = document.referrer;
+    return referrer && (referrer.includes('signUp.html') || referrer.includes('logIn.html'));
+}
+
+async function getLoggedInUser() {
+    const response = await fetch(`${base_url}/loggedIn.json`);
+    const loggedInData = await response.json();
+    return loggedInData.name;
+}
+
+function updateGreeting(greeting, greetName, user) {
+    if (user === 'Guest') {
+        greeting.innerHTML = 'Good morning!';
+        greetName.innerHTML = '';
+    } else {
+        greeting.innerHTML = `Good morning,`;
+        greetName.innerHTML = user;
+    }
+}
+
+function showGreetingOverlay(overlay) {
+    if (window.matchMedia("(max-width: 1275px)").matches) {
+        overlay.classList.remove('hidden');
+        overlay.classList.add('show');
+
+        // Verstecke das Overlay nach 3 Sekunden
+        setTimeout(function() {
+            overlay.classList.remove('show');
+            overlay.classList.add('hidden');
+        }, 3000);
+    }
+}
+
+
 
 async function getGreetingName() {
     let greeting = document.getElementsByClassName('greeting')[1];

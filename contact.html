@@ -48,8 +48,23 @@
 
             <div onclick="closeDetailsOverlay()" class="back"><img src="./img/arrow-left-line.svg" alt=""></div>
         </div>
-        
         <div id="contactDetailsOverlay"></div>
+
+        <div onclick="openControlMenu()" class="circle-edit-mobile-control">
+            <img src="img/login/more_vert.svg" alt="">
+        </div>
+
+        <!-- Edit/Delete Dropdown -->
+        <div id="options-menu" class="options-menu hidden">
+            <div class="option-item">
+                <img src="img/contact/edit.svg" alt="Edit">
+                <span>Edit</span>
+            </div>
+            <div class="option-item">
+                <img src="img/contact/delete.svg" alt="Delete">
+                <span>Delete</span>
+            </div>
+        </div>
     </div>
 
     <!--add contact box-->
@@ -158,6 +173,12 @@
                 </form>
             </div>
             
+        </div>
+    </div>
+
+    <div id="contact-added-overlay" class="contact-added-overlay hidden">
+        <div class="contact-added-banner">
+            Contact successfully created
         </div>
     </div>
 
