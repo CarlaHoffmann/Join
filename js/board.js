@@ -337,10 +337,11 @@ async function saveEditedTask() {
 
 
 async function openTaskOverlay(task) {
-    const overlayContainer = document.getElementById('taskOverlayContainer');
-    console.log(task);
+    currentTask = task; // Task global speichern
 
-    // Farben für die Kontakte abrufen
+    const overlayContainer = document.getElementById('taskOverlayContainer');
+
+    // Farben für Kontakte abrufen
     const contactColors = await getContactColors([task]);
     const contactsHTML = task.contacts.map((contact, index) => {
         const contactColor = contactColors[0][index];
@@ -352,14 +353,9 @@ async function openTaskOverlay(task) {
             </div>`;
     }).join('');
 
-    // Subtasks mit Checkbox-Status
-    const subtasksHTML = Object.keys(task.subtasks).map(key => {
+    // Subtasks-HTML generieren
+    const subtasksHTML = Object.keys(task.subtasks || {}).map(key => {
         const subtask = task.subtasks[key];
-        // return `
-        //     <div class="check">
-        //         <input name="${subtask.task}" type="checkbox" ${subtask.checked ? 'checked' : ''}>
-        //         <div>${subtask.task}</div>
-        //     </div>`;
         return `
             <div class="check">
                 <input type="checkbox" data-subtask-key="${key}" ${subtask.checked ? 'checked' : ''}>
@@ -372,9 +368,9 @@ async function openTaskOverlay(task) {
     <div class="taskOverlay">
         <div class="taskSelect">
             <div class="taskContainer" style="background-color: ${getCategoryColor(task.category)}">${task.category}</div>
-    <div class="close" onclick="closeTaskOverlay()">
-        <img src="assets/img/add_task/close.svg" alt="Close" />
-    </div>
+            <div class="close" onclick="closeTaskOverlay()">
+                <img src="assets/img/add_task/close.svg" alt="Close" />
+            </div>
         </div>
 
         <!-- Titel -->
@@ -437,21 +433,48 @@ async function openTaskOverlay(task) {
         </div>
     </div>`;
 
-    // Füge Event Listener für Checkboxen hinzu
-    const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', () => {
-            const key = checkbox.dataset.subtaskKey;
-            const checked = checkbox.checked;
-            task.subtasks[key].checked = checked;
-            updateSubtasksWithOverlay(task);
-        });
-    });
-
-    updateSubtasksWithOverlay(task);
+    // Event Listener für die Subtasks hinzufügen
+    addSubtaskListeners(task);
 
     overlayContainer.classList.remove('d-none');
 }
+
+function addSubtaskListeners(task) {
+    const overlayContainer = document.getElementById('taskOverlayContainer');
+    const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', async () => {
+            const subtaskKey = checkbox.dataset.subtaskKey;
+            const isChecked = checkbox.checked;
+
+            // Subtask-Status im task-Objekt aktualisieren
+            task.subtasks[subtaskKey].checked = isChecked;
+
+            try {
+                // Subtask-Status in Firebase aktualisieren
+                const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskKey}.json`;
+                await fetch(url, {
+                    method: 'PUT',
+                    body: JSON.stringify(task.subtasks[subtaskKey]),
+                    headers: { 'Content-Type': 'application/json' },
+                });
+
+                console.log(`Subtask ${subtaskKey} updated:`, isChecked);
+            } catch (error) {
+                console.error(`Error updating subtask ${subtaskKey}:`, error);
+            }
+        });
+    });
+}
+
+function closeTaskOverlay() {
+    const overlayContainer = document.getElementById('taskOverlayContainer');
+    overlayContainer.classList.add('d-none');
+    overlayContainer.innerHTML = ''; // Inhalt löschen
+}
+
+
 
 let updatedSubtasksWithOverlay = [];
 function updateSubtasksWithOverlay(task) {
@@ -463,6 +486,73 @@ function updateSubtasksWithOverlay(task) {
     console.log(updatedSubtasksWithOverlay);
 }
 
+//new
+async function saveOverlayChanges(taskId, taskStatus) {
+    const titleElement = document.getElementById('title');
+    const descriptionElement = document.getElementById('description');
+    const dueDateElement = document.getElementById('datepicker');
+    const prioButton = document.querySelector('.prio-button.active-button');
+    const categoryElement = document.getElementById('category-selection');
+
+    if (!titleElement || !descriptionElement || !dueDateElement || !prioButton || !categoryElement) {
+        console.error('Ein oder mehrere erforderliche Elemente fehlen.');
+        return;
+    }
+
+    // Änderungen lokal in currentTask speichern
+    currentTask.title = titleElement.value;
+    currentTask.description = descriptionElement.value;
+    currentTask.date = dueDateElement.value;
+    currentTask.prio = prioButton.id.replace('prio', '');
+    currentTask.category = categoryElement.textContent.trim();
+
+    try {
+        // Änderungen in Firebase speichern
+        const url = `${base_url}/tasks/${taskStatus}/${taskId}.json`;
+        const response = await fetch(url, {
+            method: 'PUT',
+            body: JSON.stringify(currentTask),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+
+        console.log('Task erfolgreich gespeichert:', currentTask);
+    } catch (error) {
+        console.error('Fehler beim Speichern der Task:', error);
+    }
+}
+
+
+
+
+// Event-Listener für Subtask-Checkboxen
+function addSubtaskListeners(task) {
+    const overlayContainer = document.getElementById('taskOverlayContainer');
+    const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', async () => {
+            const subtaskKey = checkbox.dataset.subtaskKey;
+            const isChecked = checkbox.checked;
+
+            // Subtask-Status im task-Objekt aktualisieren
+            task.subtasks[subtaskKey].checked = isChecked;
+
+            // Firebase aktualisieren
+            const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskKey}.json`;
+            await fetch(url, {
+                method: 'PUT',
+                body: JSON.stringify(task.subtasks[subtaskKey]),
+                headers: { 'Content-Type': 'application/json' },
+            });
+
+            console.log(`Subtask ${subtaskKey} updated:`, isChecked);
+        });
+    });
+}
 
 // Fügen Sie dies nach der Erstellung des HTML-Inhalts hinzu
 document.querySelectorAll('.check input[type="checkbox"]').forEach((checkbox, index) => {
@@ -878,13 +968,76 @@ function addOverlaySubtask() {
 function updateSubtasks() {
 
 }
-
+//new
 function closeTaskOverlay() {
-    updateSubtasks();
     const overlayContainer = document.getElementById('taskOverlayContainer');
+
+    // Speichern der Subtasks
+    if (currentTask) {
+        saveTaskSubtasks(currentTask);
+    }
+
     overlayContainer.classList.add('d-none');
     overlayContainer.innerHTML = ''; // Inhalt löschen
 }
+// new
+async function saveTaskSubtasks(task) {
+    try {
+        const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks.json`;
+        const updatedSubtasks = task.subtasks;
+
+        await fetch(url, {
+            method: 'PUT',
+            body: JSON.stringify(updatedSubtasks),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        console.log(`Subtasks for task ${task.id} saved successfully.`);
+    } catch (error) {
+        console.error('Error saving subtasks:', error);
+    }
+}
+
+//new
+
+async function updateOverlay(taskId, taskStatus) {
+    try {
+        // Abrufen der aktualisierten Daten aus Firebase
+        const url = `${base_url}/tasks/${taskStatus}/${taskId}.json`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+
+        const updatedTask = await response.json();
+
+        // Neu rendern des Overlays
+        openTaskOverlay({ ...updatedTask, id: taskId, path: taskStatus });
+    } catch (error) {
+        console.error('Fehler beim Aktualisieren des Overlays:', error);
+    }
+}
+
+
+async function initializeValidationEdit(task) {
+    try {
+        const taskId = task.id;
+        const taskStatus = task.path;
+
+        // Änderungen speichern
+        await saveOverlayChanges(taskId, taskStatus);
+
+        // Overlay direkt mit aktuellen Daten aktualisieren
+        openTaskOverlay(currentTask);
+
+        console.log('Overlay erfolgreich aktualisiert.');
+    } catch (error) {
+        console.error('Fehler beim Validieren und Aktualisieren der Task:', error);
+    }
+}
+
+
 
 //  Task Overlay Delete 
 async function deleteTask(taskId) {
