@@ -18,6 +18,7 @@
     display: flex;
     overflow-x: auto;
     height: unset;
+    gap: 20px;
   }
 
   .d-flex-start {
