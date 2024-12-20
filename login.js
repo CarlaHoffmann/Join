@@ -109,36 +109,6 @@ async function saveUser(name, email) {
     }
 }
 
-
-// // Funktion gehört zum Board !!!!
-// function checkUser() {
-//     let userMail = localStorage.getItem('userMail');
-//     let previousPage = document.referrer;
-//     let currentPage = window.location.pathname;
-//     let dependingPages = ['/privacy.html', '/legal_notice.html', '/Join/privacy.html', '/Join/legal_notice.html'];
-//     if (dependingPages.includes(currentPage) && (previousPage.includes('/index.html') || previousPage.includes('/signup.html') || dependingPages.some(page => previousPage.includes(page)))) {
-//         return;
-//     }
-//     if (userMail === null ) {
-//         window.location.href = './index.html';
-//     } 
-// }
-
-// function saveUser(email) {
-//     let userMail = JSON.stringify(email);
-//     localStorage.setItem("userMail", userMail);
-// }
-
-// function logout(){
-//     localStorage.removeItem('userMail');
-//     localStorage.removeItem('logStatus');
-// }
-
-// function guestLogin() {
-//     saveUser('guest@mail.com');
-//     window.location.href = './summary.html';
-// }
-// const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 async function guestLogin() {
     try {
         let response = await fetch(log_base_url + "/loggedIn/" + ".json",{
