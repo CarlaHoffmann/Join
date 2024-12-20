@@ -64,6 +64,10 @@ h3{
     color: white; /* Optional, falls der Text kontrastreich sein soll */
 }
 
+.contact.selected:hover {
+    background-color: #2A3647;
+    color: white;
+}
 
 hr {
     width:100%;
@@ -81,6 +85,10 @@ hr {
     gap: 35px;
     padding: 12px;
     border-radius: 10px;
+}
+
+.contact:hover {
+    background-color: #efefef;
 }
 
 .contactInformation{
