@@ -124,6 +124,8 @@
 
     .edit-form-buttons {
         gap: 20px;
+        display: flex;
+        justify-content: center;
     }
 
     .close-button-box {

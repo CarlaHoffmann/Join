@@ -172,7 +172,7 @@ hr {
     overflow-x: hidden;
 }
 
-/*contact details*/
+/*contact details with animation*/
 #contactDetails {
     background: #F6F7F8;
     transform: translateX(100%);
