@@ -1,3 +1,4 @@
+ich habe alles gemacht wie vorgegeben . Leider ist es nun so, dass die seite erst neu geladen werden muss bevor man die änderungen in der smalltaks board seite sieht . Zwar ist dann alles aktualisiert aber ich möchte nicht immer die seite neu laden. Wenn ich im overlay auf close klicke sollen diese mit den änderungen schon auf der board seite sichbar sein
 
 
 

@@ -1,26 +1,8 @@
-// function animationWindow() {
-//     const overlay = document.getElementById('overlay');
-//     const animatedLogo = document.getElementById('animatedLogo');
-//     const headerLogo = document.getElementById('headerLogo');
 
-//     // Prüfen, ob die Animation bereits abgespielt wurde
-//     if (!sessionStorage.getItem('animationPlayed')) {
-//         // Starten der Animation
-//         animatedLogo.addEventListener('animationend', () => {
-//             overlay.style.display = 'none'; // Verstecke Overlay
-//             headerLogo.src = animatedLogo.src; // Logo in den Header transferieren
-//             headerLogo.style.display = 'block'; // Header-Logo sichtbar machen
-//         });
 
-//         // Markieren, dass die Animation abgespielt wurde
-//         sessionStorage.setItem('animationPlayed', 'true');
-//     } else {
-//         // Wenn die Animation bereits abgespielt wurde
-//         overlay.style.display = 'none'; // Verstecke das Overlay
-//         headerLogo.src = animatedLogo.src; // Header-Logo setzen
-//         headerLogo.style.display = 'block'; // Header-Logo sichtbar machen
-//     }
-// }
+
+const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
+
 function animationWindow() {
     const overlay = document.getElementById('overlay');
     const animatedLogo = document.getElementById('animatedLogo');
@@ -28,52 +10,27 @@ function animationWindow() {
 
     // Prüfen, ob die Animation bereits abgespielt wurde
     if (!sessionStorage.getItem('animationPlayed')) {
-        // Starten der Animation
         animatedLogo.addEventListener('animationend', () => {
             overlay.style.display = 'none'; // Verstecke Overlay
-            headerLogo.src = animatedLogo.src; // Logo in den Header transferieren
+            headerLogo.src = animatedLogo.src; // Übertrage Logo in den Header
             headerLogo.style.display = 'block'; // Header-Logo sichtbar machen
-            sessionStorage.setItem('animationPlayed', 'true');
+            sessionStorage.setItem('animationPlayed', 'true'); // Status speichern
         });
     } else {
         // Wenn die Animation bereits abgespielt wurde
-        overlay.style.display = 'none'; // Verstecke das Overlay
-        headerLogo.src = animatedLogo.src; // Header-Logo setzen
+        overlay.style.display = 'none'; // Verstecke Overlay
+        headerLogo.src = animatedLogo.src; // Logo in den Header übertragen
         headerLogo.style.display = 'block'; // Header-Logo sichtbar machen
     }
 }
 
-// onload start function animationWindow
+// Starte Animation beim Laden der Seite
 window.onload = animationWindow;
 
-const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
-async function existingMailLogIn() {
-    try {
-        const users = await loadUsers();
-        let email = document.getElementById('email').value.toLowerCase();
-        let password = document.getElementById('password').value;
+// Starte Animation beim Laden der Seite
+window.onload = animationWindow;
 
-        // Find user by E-Mail
-        let user = users.find(u => u.email === email);
-
-        if (user) {
-            // if password fits, save user
-            if (user.password === password) {
-                let name = user.name;
-                await saveUser(name, email);
-                window.location.href = './summary.html';
-            } else {
-                document.getElementById('loginErrorPassword').classList.remove('hidden');
-                document.getElementById('passwordButten').classList.add('input-border');
-            }
-        } else {
-            document.getElementById('loginErrorPassword').classList.remove('hidden');
-        }
-    } catch (error) {
-        console.error("Fehler beim Anmelden:", error);
-    }
-}
 
 async function loadUsers() {
     try {
