@@ -140,6 +140,8 @@ hr {
     border: 2px solid white;
     border-radius: 100%;
     color: white;
+    font-size: 12px;
+    font-weight: 400;
 }
 
 #contactList::-webkit-scrollbar {
@@ -351,7 +353,9 @@ hr {
     transition: background-color 0.3s ease; 
     position: absolute;
     bottom: 32px;
-    right: 16px
+    right: 16px;
+    font-size: 12px;
+    font-weight: 400;
 }
 
 .circle-edit-mobile-control img {
