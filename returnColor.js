@@ -1,3 +1,7 @@
+/**
+ * This function returns a random RGBA color string from a predefined array of colors.
+ * @returns {string} A random RGBA color in the format 'rgba(r, g, b, a)'.
+ */
 function returnColor(){
     const rgbaColorArrays = [
         [255,122,0],
