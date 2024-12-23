@@ -964,28 +964,6 @@ function closeTaskOverlay() {
 }
 
 
-function updateTaskUI(taskId, taskPath, taskData) {
-    const taskElement = document.getElementById(`task-${taskId}`);
-    if (!taskElement) return;
-
-    const completedSubtasks = taskData.subtasks.filter(subtask => subtask.checked).length;
-    const totalSubtasks = taskData.subtasks.length;
-
-    // Fortschrittsbalken aktualisieren
-    const progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
-    const progressBar = taskElement.querySelector('.progress-bar');
-    if (progressBar) {
-        progressBar.style.width = `${progressPercentage}%`;
-    }
-
-    // Subtask-Anzeige aktualisieren
-    const subtasksText = `${completedSubtasks} von ${totalSubtasks} Subtasks`;
-    const subtasksElement = taskElement.querySelector('.subtasks');
-    if (subtasksElement) {
-        subtasksElement.textContent = subtasksText;
-    }
-}
-
 // new
 async function saveTaskSubtasks(task) {
     try {

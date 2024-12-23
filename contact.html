@@ -57,151 +57,150 @@
             <img src="img/login/more_vert.svg" alt="More options">
         </div>
 
+        <div id="contactDetailsOverlayMenu"></div>
         <!-- Edit/Delete Dropdown -->
-        <div id="options-menu" class="options-menu hidden">
-            <!-- Edit Option -->
+        <!-- <div id="options-menu" class="options-menu hidden">
             <div onclick="toggleView('editContactBoxOverlay', '${key}', true)" class="option-item">
                 <img src="img/contact/edit.svg" alt="Edit">
                 <span>Edit</span>
             </div>
 
-            <!-- Delete Option -->
             <div onclick="deleteContact('${key}')" class="option-item">
                 <img src="img/contact/delete.svg" alt="Delete">
                 <span>Delete</span>
             </div>
+        </div> -->
+    </div>
+
+    <!--add contact box-->
+    <div id="addContactBoxOverlay" class="hidden">
+        <div id="addContactBox">
+            <div class="close-button-box" onclick="closeAddOverlay()">
+                <img src="img/contact/close.svg" class="desktop-only close-button">
+                <img src="img/contact/close-mobile.svg" class="mobile-only close-button">
+            </div>
+
+            <div id="addContactBoxHeader">
+                <img class="logo" src="img/contact/logo.svg">
+                <div class="contactHeaderText">
+                    <h2 id="addContactHeadline">Add Contact</h2>
+                    <p>Tasks are better with a team!</p>
+                    <img class="dividerOverlay" src="img/contact/dividerOverlay.svg">
+                </div>
+            </div>
+
+            <div class="addContactInfoOverlay">
+                <div class="imgBox">
+                    <img class="overlay-contact-img" src="./img/contact/add-user.svg" alt="">
+                </div>
+
+                <form method="post" id="addContactForm" action="contact.html"
+                    onsubmit="event.preventDefault(); addContact()">
+                    <div class="input-fields">
+                        <div class="input-container">
+                            <input required id="name" placeholder="Name" type="text"
+                                class="addField input-with-image">
+                            <img src="/img/login/person.png" alt="Person Icon" class="input-icon">
+                        </div>
+                        <div class="input-container">
+                            <input required id="email" placeholder="Email" type="email"
+                                class="addField input-with-image">
+                            <img src="/img/login/mail.png" alt="Mail Icon" class="input-icon">
+                        </div>
+                        <div class="input-container">
+                            <input required id="phone" placeholder="Phone" type="text"
+                                class="addField input-with-image">
+                            <img src="/img/login/call.svg" alt="Phone Icon" class="input-icon">
+                        </div>
+                    </div>
+
+                    <div class="add-form-buttons">
+                        <button type="reset" class="clear-button form-button hover-button">
+                            Cancel
+                            <img class="icon-normal" src="./img/task/iconoir_cancel.svg" alt="">
+                            <img class="icon-hover" src="./img/task/iconoir_cancel_hover.svg" alt="">
+                        </button>
+                        <button type="submit" class="submit-button form-button hover-button">
+                            Create contact
+                            <img src="./img/task/check.svg" alt="">
+                        </button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 
-        <!--add contact box-->
-        <div id="addContactBoxOverlay" class="hidden">
-            <div id="addContactBox">
-                <div class="close-button-box" onclick="closeAddOverlay()">
-                    <img src="img/contact/close.svg" class="desktop-only close-button">
-                    <img src="img/contact/close-mobile.svg" class="mobile-only close-button">
-                </div>
 
-                <div id="addContactBoxHeader">
-                    <img class="logo" src="img/contact/logo.svg">
-                    <div class="contactHeaderText">
-                        <h2 id="addContactHeadline">Add Contact</h2>
-                        <p>Tasks are better with a team!</p>
-                        <img class="dividerOverlay" src="img/contact/dividerOverlay.svg">
-                    </div>
-                </div>
-
-                <div class="addContactInfoOverlay">
-                    <div class="imgBox">
-                        <img class="overlay-contact-img" src="./img/contact/add-user.svg" alt="">
-                    </div>
-
-                    <form method="post" id="addContactForm" action="contact.html"
-                        onsubmit="event.preventDefault(); addContact()">
-                        <div class="input-fields">
-                            <div class="input-container">
-                                <input required id="name" placeholder="Name" type="text"
-                                    class="addField input-with-image">
-                                <img src="/img/login/person.png" alt="Person Icon" class="input-icon">
-                            </div>
-                            <div class="input-container">
-                                <input required id="email" placeholder="Email" type="email"
-                                    class="addField input-with-image">
-                                <img src="/img/login/mail.png" alt="Mail Icon" class="input-icon">
-                            </div>
-                            <div class="input-container">
-                                <input required id="phone" placeholder="Phone" type="text"
-                                    class="addField input-with-image">
-                                <img src="/img/login/call.svg" alt="Phone Icon" class="input-icon">
-                            </div>
-                        </div>
-
-                        <div class="add-form-buttons">
-                            <button type="reset" class="clear-button form-button hover-button">
-                                Cancel
-                                <img class="icon-normal" src="./img/task/iconoir_cancel.svg" alt="">
-                                <img class="icon-hover" src="./img/task/iconoir_cancel_hover.svg" alt="">
-                            </button>
-                            <button type="submit" class="submit-button form-button hover-button">
-                                Create contact
-                                <img src="./img/task/check.svg" alt="">
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
+    <!--edit contact box-->
+    <div id="editContactBoxOverlay" class="hidden">
+        <div id="editContactBox">
+            <div class="close-button-box" onclick="closeEditOverlay()">
+                <img src="img/contact/close.svg" class="desktop-only close-button">
+                <img src="img/contact/close-mobile.svg" class="mobile-only close-button">
             </div>
-        </div>
 
-
-        <!--edit contact box-->
-        <div id="editContactBoxOverlay" class="hidden">
-            <div id="editContactBox">
-                <div class="close-button-box" onclick="closeEditOverlay()">
-                    <img src="img/contact/close.svg" class="desktop-only close-button">
-                    <img src="img/contact/close-mobile.svg" class="mobile-only close-button">
+            <div id="editContactBoxHeader">
+                <img class="logo" src="img/contact/logo.svg">
+                <div class="contactHeaderText">
+                    <h2 id="editContactHeadline">Edit Contact</h2>
+                    <!-- <p>Tasks are better with a team!</p> -->
+                    <img class="dividerOverlay" src="img/contact/dividerOverlay.svg">
                 </div>
-
-                <div id="editContactBoxHeader">
-                    <img class="logo" src="img/contact/logo.svg">
-                    <div class="contactHeaderText">
-                        <h2 id="editContactHeadline">Edit Contact</h2>
-                        <!-- <p>Tasks are better with a team!</p> -->
-                        <img class="dividerOverlay" src="img/contact/dividerOverlay.svg">
-                    </div>
-                </div>
-
-                <div class="editContactInfoOverlay">
-                    <div class="imgBox">
-                        <div id="changedImg" class="overlay-contact-img circleDetails"></div>
-                    </div>
-
-                    <form method="post" id="editContactForm" action="contact.html"
-                        onsubmit="event.preventDefault(); editContact('${editKey}');">
-                        <div class="input-fields">
-                            <div class="input-container">
-                                <input required id="changedName" class="addField input-with-image" placeholder="Name"
-                                    type="text">
-                                <img src="/img/login/person.png" alt="Person Icon" class="input-icon">
-                            </div>
-                            <div class="input-container">
-                                <input required id="changedEmail" class="addField input-with-image" placeholder="Email"
-                                    type="email">
-                                <img src="/img/login/mail.png" alt="Mail Icon" class="input-icon">
-                            </div>
-                            <div class="input-container">
-                                <input required id="changedPhone" class="addField input-with-image" placeholder="Phone"
-                                    type="text">
-                                <img src="/img/login/call.svg" alt="Phone Icon" class="input-icon">
-                            </div>
-                        </div>
-
-                        <div class="edit-form-buttons">
-                            <button type="reset" class="clear-button form-button hover-button">
-                                Delete
-                            </button>
-                            <button type="submit" class="submit-button form-button hover-button">
-                                Save
-                                <img src="./img/task/check.svg" alt="">
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
             </div>
-        </div>
 
-        <div id="contact-added-overlay" class="contact-added-overlay hidden">
-            <div class="contact-added-banner">
-                Contact successfully created
+            <div class="editContactInfoOverlay">
+                <div class="imgBox">
+                    <div id="changedImg" class="overlay-contact-img circleDetails"></div>
+                </div>
+
+                <form method="post" id="editContactForm" action="contact.html"
+                    onsubmit="event.preventDefault(); editContact('${editKey}');">
+                    <div class="input-fields">
+                        <div class="input-container">
+                            <input required id="changedName" class="addField input-with-image" placeholder="Name"
+                                type="text">
+                            <img src="/img/login/person.png" alt="Person Icon" class="input-icon">
+                        </div>
+                        <div class="input-container">
+                            <input required id="changedEmail" class="addField input-with-image" placeholder="Email"
+                                type="email">
+                            <img src="/img/login/mail.png" alt="Mail Icon" class="input-icon">
+                        </div>
+                        <div class="input-container">
+                            <input required id="changedPhone" class="addField input-with-image" placeholder="Phone"
+                                type="text">
+                            <img src="/img/login/call.svg" alt="Phone Icon" class="input-icon">
+                        </div>
+                    </div>
+
+                    <div class="edit-form-buttons">
+                        <button type="reset" class="clear-button form-button hover-button">
+                            Delete
+                        </button>
+                        <button type="submit" class="submit-button form-button hover-button">
+                            Save
+                            <img src="./img/task/check.svg" alt="">
+                        </button>
+                    </div>
+                </form>
             </div>
-        </div>
 
-        <!--adding scripts-->
-        <script src="https://www.w3schools.com/lib/w3.js"></script>
-        <script>
-            w3.includeHTML();
-        </script>
-        <script src="contact.js"></script>
+        </div>
+    </div>
+
+    <div id="contact-added-overlay" class="contact-added-overlay hidden">
+        <div class="contact-added-banner">
+            Contact successfully created
+        </div>
+    </div>
+
+    <!--adding scripts-->
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script>
+        w3.includeHTML();
+    </script>
+    <script src="contact.js"></script>
 </body>
 
 </html>
