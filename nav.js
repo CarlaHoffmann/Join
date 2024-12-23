@@ -1,26 +1,20 @@
+/**
+ * Base URL for the Firebase Realtime Database.
+ * @constant {string}
+ */
 const nav_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
+/**
+ * This function toggles the visibility of the help menu.
+ */
 function toggleHelpMenu() {
     let helpMenu = document.getElementById('help-menu');
     helpMenu.classList.toggle('d-none');
 }
 
-// function activeLink() {
-//     // Aktuellen Pfad abrufen
-//     const currentPath = window.location.pathname.split('/').pop();
-
-//     // Alle Links im Sidebar und Mobile Nav durchlaufen
-//     const links = document.querySelectorAll('#sidebar a, #mobileNav a');
-
-//     links.forEach(link => {
-//         // Überprüfen, ob der href des Links mit dem aktuellen Pfad übereinstimmt
-//         if (link.getAttribute('href') === currentPath) {
-//             link.classList.add('active-link'); // Aktiven Link hinzufügen
-//         } else {
-//             link.classList.remove('active-link'); // Anderen Links entfernen
-//         }
-//     });
-// }
+/**
+ * This function highlights the active link in the sidebar and mobile navigation.
+ */
 function activeLink() {
     // Aktuellen Pfad abrufen und normalisieren
     const currentPath = window.location.pathname.replace(/^\/|\/$/g, '');
@@ -39,19 +33,11 @@ function activeLink() {
             link.classList.remove('active-link'); // Anderen Links entfernen
         }
     });
-
-    // // Entferne 'selected' von allen Kontakten
-    // document.querySelectorAll('.contact').forEach(link => {
-    //     link.classList.remove('active-link');
-    // });
-
-    // // Füge 'selected' dem aktuellen Kontakt hinzu
-    // const activeLink = document.querySelector(`.contact[onclick*="'${key}'"]`);
-    // if (activeLink) {
-    //     activeLink.classList.add('active-link');
-    // }
 }
 
+/**
+ * This asynchronous function retrieves the initials of the logged-in user and displays them.
+ */
 async function getInitials() {
     try {
         const loggedInUser = await getNavUser(); // Benutzerdaten abrufen
@@ -80,6 +66,10 @@ async function getInitials() {
     }
 }
 
+/**
+ * This asynchronous function fetches the logged-in user data from Firebase.
+ * @returns {Object|null} The user object containing the name, or null if not found.
+ */
 async function getNavUser() {
     try {
         const response = await fetch(`${nav_base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
@@ -91,7 +81,9 @@ async function getNavUser() {
     }
 }
 
-// Wenn niemand eingeloggt ist, wird die Navigation ausgeblendet
+/**
+ * This function shows the navigation elements when a user is logged in.
+ */
 function showNav() {
     let header = document.getElementById('headerControls');
     let sideNav = document.getElementById('sideBarNavigation');
@@ -101,10 +93,12 @@ function showNav() {
     mobileNav.classList.remove('d-none');
 }
 
-// const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
+/**
+ * This asynchronous function logs out the user by clearing their session in Firebase.
+ */
 async function logOut() {
     try {
-        let response = await fetch(base_url + "/loggedIn/" + ".json",{
+        let response = await fetch(`${nav_base_url}/loggedIn.json`,{
             method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ name: "" })
@@ -113,12 +107,15 @@ async function logOut() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
     } catch (error) {
-        // console.error("Error Guest:", error);
+        console.error("Error logging out:", error);
     }
     window.location.href = './logIn.html';
 }
 
+/** Initialize active link highlighting on page load */
 window.onload = activeLink;
+
+/** Fetch initials when DOM content is fully loaded */
 document.addEventListener('DOMContentLoaded', () => {
     getInitials();
 });
