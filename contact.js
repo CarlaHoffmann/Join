@@ -44,7 +44,6 @@ function getNameInitials(name) {
 }
 
 function returnContactDetailsTemplate(key, name, email, phone, color){
-
     return `
                 <div class="detailsBox">
             <div class="contactHeader">
@@ -92,13 +91,33 @@ function returnContactDetailsTemplate(key, name, email, phone, color){
     `;
 }
 
+function returncontactDetailsMenuTemplate(key) {
+    return `
+        <div id="options-menu" class="options-menu hidden">
+            <!-- Edit Option -->
+            <div onclick="toggleView('editContactBoxOverlay', '${key}', true)" class="option-item">
+                <img src="img/contact/edit.svg" alt="Edit">
+                <span>Edit</span>
+            </div>
+
+            <!-- Delete Option -->
+            <div onclick="deleteContact('${key}')" class="option-item">
+                <img src="img/contact/delete.svg" alt="Delete">
+                <span>Delete</span>
+            </div>
+        </div>
+    `;
+}
+
 function showContact(key, name, email, phone, color) {
     const contactDetails = document.getElementById('contactDetails');
     const contactDetailsOverlay = document.getElementById('contactDetailsOverlay');
+    const contactDetailsOverlayMenu = document.getElementById('contactDetailsOverlayMenu');
 
     // Inhalt setzen
     contactDetails.innerHTML = returnContactDetailsTemplate(key, name, email, phone, color);
     contactDetailsOverlay.innerHTML = returnContactDetailsTemplate(key, name, email, phone, color);
+    contactDetailsOverlayMenu.innerHTML = returncontactDetailsMenuTemplate(key);
 
     // Animation starten
     if (contactDetails.classList.contains('show')) {
@@ -194,6 +213,11 @@ async function deleteContact(key){
     const response = await fetch(deleteLink + ".json", {method:'DELETE'});
     loadContactData();
     contactDetails.innerHTML = "";
+    const editContactBoxOverlay = document.getElementById('editContactBoxOverlay');
+
+    if (!editContactBoxOverlay.classList.contains('hidden')) {
+        closeEditOverlay();
+    }
     return await response.json();
 }
 
@@ -209,12 +233,10 @@ async function createNewContact(path = "", data={}){
 }
             
 async function toggleView(elementId, key=null, edit=false){
-
     editKey = key;
     document.getElementById(elementId).classList.remove('hidden');
 
     if(edit){
-
         const editLink = base_url + "users" + "/" + editKey;
         let response = await fetch(editLink + ".json");
         let user = await response.json();
@@ -280,6 +302,7 @@ async function editContact() {
         alert('Es gab einen Fehler beim Bearbeiten des Kontakts. Bitte versuchen Sie es erneut.');
     }
 }
+
 
 function closeDetailsOverlay() {
     let contactDetailBoxOverlayOverlay = document.getElementById('contactDetailBox');
