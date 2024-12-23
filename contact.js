@@ -141,7 +141,7 @@ function showContact(key, name, email, phone, color) {
     }
 }
 
-function showOverlayAddContact() {
+function showContactDetailOverlay() {
     let contactDetailBoxOverlay = document.getElementById('contactDetailBox');
     contactDetailBoxOverlay.classList.add('contactDetailBox');
 }
@@ -194,7 +194,7 @@ async function loadContactData(){
             `;
         }
         contactList.innerHTML += `
-            <div class="contact" onclick="showContact('${user.key}', '${user.name}', '${user.mail}', '${user.phone}', '${user.color}'), showOverlayAddContact()")>
+            <div class="contact" onclick="showContact('${user.key}', '${user.name}', '${user.mail}', '${user.phone}', '${user.color}'), showContactDetailOverlay()")>
                 <div style="background:${user.color}" class="circle">${getNameInitials(user.name)}</div>
                 <div class="contactInformation">
                     <p class="contactInformationName">${user.name}</p>
@@ -213,11 +213,12 @@ async function deleteContact(key){
     const response = await fetch(deleteLink + ".json", {method:'DELETE'});
     loadContactData();
     contactDetails.innerHTML = "";
-    const editContactBoxOverlay = document.getElementById('editContactBoxOverlay');
+    // const editContactBoxOverlay = document.getElementById('editContactBoxOverlay');
 
-    if (!editContactBoxOverlay.classList.contains('hidden')) {
+    // if (!editContactBoxOverlay.classList.contains('hidden')) {
         closeEditOverlay();
-    }
+    // }
+    showContact(key, key.name, key.email, key.phone, key.color);
     return await response.json();
 }
 

@@ -923,25 +923,25 @@ async function saveOverlayChanges(taskId, taskStatus) {
 
 
 
-function updateTaskUI(taskId, taskStatus, taskData) {
-    const taskElement = document.getElementById(`task-${taskId}`);
-    if (!taskElement) return;
+// function updateTaskUI(taskId, taskStatus, taskData) {
+//     const taskElement = document.getElementById(`task-${taskId}`);
+//     if (!taskElement) return;
 
-    taskElement.querySelector('.task-title').textContent = taskData.title;
-    taskElement.querySelector('.task-description').textContent = taskData.description;
+//     taskElement.querySelector('.task-title').textContent = taskData.title;
+//     taskElement.querySelector('.task-description').textContent = taskData.description;
 
-    const progressPercentage = taskData.subtasks.length
-        ? (taskData.subtasks.filter(subtask => subtask.checked).length / taskData.subtasks.length) * 100
-        : 0;
+//     const progressPercentage = taskData.subtasks.length
+//         ? (taskData.subtasks.filter(subtask => subtask.checked).length / taskData.subtasks.length) * 100
+//         : 0;
 
-    const progressBar = taskElement.querySelector('.progress-bar');
-    if (progressBar) {
-        progressBar.style.width = `${progressPercentage}%`;
-    }
+//     const progressBar = taskElement.querySelector('.progress-bar');
+//     if (progressBar) {
+//         progressBar.style.width = `${progressPercentage}%`;
+//     }
 
-    taskElement.querySelector('.subtasks').textContent = `${taskData.subtasks.filter(subtask => subtask.checked).length} von ${taskData.subtasks.length} Subtasks`;
-    taskElement.querySelector('.task-type').style.backgroundColor = getCategoryColor(taskData.category);
-}
+//     taskElement.querySelector('.subtasks').textContent = `${taskData.subtasks.filter(subtask => subtask.checked).length} von ${taskData.subtasks.length} Subtasks`;
+//     taskElement.querySelector('.task-type').style.backgroundColor = getCategoryColor(taskData.category);
+// }
 
 
 
@@ -973,9 +973,9 @@ function addOverlaySubtask() {
     }
 }
 
-function updateSubtasks() {
+// function updateSubtasks() {
 
-}
+// }
 //new
 function closeTaskOverlay() {
     const overlayContainer = document.getElementById('taskOverlayContainer');
