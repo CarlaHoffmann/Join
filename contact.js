@@ -1,17 +1,42 @@
+/**
+ * @type {string|null}
+ * @description variable to store editKey which is needed to edit a contact
+ */
 let editKey = null;
 
+/**
+ * @type {string}
+ * @description basic url to firebase
+ */
 const base_url = 'https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app/';
+
+/**
+ * The following variables include references to HTMLElements
+ */
 let contactList = document.getElementById('contactList');
 let contactDetails = document.getElementById('contactDetails');
 let addContactButton = document.getElementById('addContactButton');
 let addContactBoxOverlay = document.getElementById('addContactBoxOverlay');
 
+/**
+ * Clears the input fields in the "Add Contact" form.
+ * Resets the values of the name, email, and phone input elements to an empty string.
+ */
 function clearAddContactFields(){
     document.getElementById('name').value = "";
     document.getElementById('email').value = "";
     document.getElementById('phone').value = "";
 }
 
+/**
+ * Adds a new contact by collecting form input values, generating a color, 
+ * and uploading the data to the server. Also clears the form, updates the UI, 
+ * and reloads contact data.
+ * 
+ * @async
+ * @function addContact
+ * @returns {Promise<void>} A promise that resolves when the contact is successfully added.
+ */
 async function addContact(){
     let name = document.getElementById('name').value;
     let mail = document.getElementById('email').value;
@@ -31,7 +56,14 @@ async function addContact(){
     loadContactData();
 }
 
-
+/**
+ * Extracts the initials from a given name.
+ * If the name consists of a single part, returns the first letter of that part.
+ * If the name has multiple parts, returns the initials of the first and last parts.
+ * 
+ * @param {string} name - The full name from which to extract initials.
+ * @returns {string} The initials derived from the name.
+ */
 function getNameInitials(name) {
     let nameParts = name.split(' ');
     if (nameParts.length < 2) {
@@ -40,6 +72,16 @@ function getNameInitials(name) {
     return nameParts[0].charAt(0) + nameParts[nameParts.length - 1].charAt(0);
 }
 
+/**
+ * Generates an HTML template string for displaying detailed information about a contact.
+ * 
+ * @param {string} key - The unique identifier for the contact.
+ * @param {string} name - The full name of the contact.
+ * @param {string} email - The email address of the contact.
+ * @param {string} phone - The phone number of the contact.
+ * @param {string} color - The background color for the contact's initials circle.
+ * @returns {string} The HTML string representing the contact's details template.
+ */
 function returnContactDetailsTemplate(key, name, email, phone, color){
     return `
                 <div class="detailsBox">
@@ -88,6 +130,13 @@ function returnContactDetailsTemplate(key, name, email, phone, color){
     `;
 }
 
+/**
+ * Generates an HTML template string for the contact details options menu.
+ * The menu includes options to edit or delete the contact.
+ * 
+ * @param {string} key - The unique identifier for the contact.
+ * @returns {string} The HTML string representing the options menu for the contact.
+ */
 function returncontactDetailsMenuTemplate(key) {
     return `
         <div id="options-menu" class="options-menu hidden">
@@ -105,6 +154,18 @@ function returncontactDetailsMenuTemplate(key) {
         </div>
     `;
 }
+
+
+/**
+ * Displays the detailed information of a selected contact, including name, email, 
+ * phone, and color. Also manages the animation and highlights the selected contact.
+ * 
+ * @param {string} key - The unique identifier for the contact to display.
+ * @param {string} name - The name of the contact.
+ * @param {string} email - The email address of the contact.
+ * @param {string} phone - The phone number of the contact.
+ * @param {string} color - The background color associated with the contact.
+ */
 
 function showContactDetails(key, name, email, phone, color) {
     const contactDetails = document.getElementById('contactDetails');
@@ -138,11 +199,22 @@ function showContactDetails(key, name, email, phone, color) {
     }
 }
 
+/**
+ * Displays the contact detail overlay by adding a specific CSS class to the overlay element.
+ */
 function showContactDetailOverlay() {
     let contactDetailBoxOverlay = document.getElementById('contactDetailBox');
     contactDetailBoxOverlay.classList.add('contactDetailBox');
 }
 
+/**
+ * Sorts an array of users alphabetically by their name property.
+ * The sorting is case-insensitive.
+ * 
+ * @param {Array} usersArray - The array of user objects to be sorted.
+ * @param {Object} usersArray[] - The user object containing at least a `name` property.
+ * @param {string} usersArray[].name - The name of the user, used for sorting.
+ */
 function sortUsers(usersArray){
     usersArray.sort(function(a,b){
         const nameA = a.name.toLowerCase();
@@ -157,7 +229,13 @@ function sortUsers(usersArray){
     });
 }
 
-
+/**
+ * Asynchronously loads contact data from a Firebase database, processes the data,
+ * and populates the contact list with users' information, sorted alphabetically.
+ * It also displays the appropriate letters for name initials and manages the UI elements.
+ * 
+ * @async
+ */
 async function loadContactData(){
     //read out data from firebase
     let response = await fetch(base_url + ".json");
@@ -204,6 +282,13 @@ async function loadContactData(){
 
 loadContactData();
 
+/**
+ * Deletes a contact by its key, updates the contact list, and clears the contact details overlay.
+ * It also calls the function to handle the deletion process in the database or data structure.
+ * 
+ * @async
+ * @param {string} key - The unique identifier of the contact to be deleted.
+ */
 async function deleteContact(key){
     updateDeletedContact(key);
     const contactDetails = document.getElementById('contactDetails');
@@ -212,6 +297,14 @@ async function deleteContact(key){
     closeDetailsOverlay();
 }
 
+/**
+ * Deletes a contact from the Firebase database by its unique key and updates the contact list.
+ * It sends a DELETE request to Firebase and reloads the contact data after the deletion.
+ * 
+ * @async
+ * @param {string} key - The unique identifier of the contact to be deleted from the database.
+ * @returns {Promise<Object>} The response data from the DELETE request to Firebase.
+ */
 async function updateDeletedContact(key){
     const contactDetails = document.getElementById('contactDetails');
     const deleteLink = base_url + "users" + "/" + key;
@@ -222,6 +315,18 @@ async function updateDeletedContact(key){
     return await response.json();
 }
 
+/**
+ * Creates a new contact in the Firebase database by sending a POST request with the provided data.
+ * 
+ * @async
+ * @param {string} [path=""] - The path in the Firebase database where the contact data should be stored.
+ * @param {Object} [data={}] - The data of the new contact to be created, typically an object containing the contact's details.
+ * @param {string} data.name - The name of the contact.
+ * @param {string} data.email - The email address of the contact.
+ * @param {string} data.phone - The phone number of the contact.
+ * @param {string} data.color - The color associated with the contact.
+ * @returns {Promise<Object>} The response data from the Firebase database after the contact is created.
+ */
 async function createNewContact(path = "", data={}){
     let response = await fetch(base_url + path + ".json", {
         method:"POST",
@@ -232,7 +337,15 @@ async function createNewContact(path = "", data={}){
     });
     return responseToJson = await response.json();
 }
-            
+
+/**
+ * Toggles the visibility of a specified element and, if in edit mode, populates it with user data for editing.
+ * 
+ * @async
+ * @param {string} elementId - The ID of the HTML element to show by removing the 'hidden' class.
+ * @param {string|null} [key=null] - The unique identifier of the user for edit mode, defaults to null if no edit is required.
+ * @param {boolean} [edit=false] - A flag indicating whether to enable edit mode; if true, user data will be fetched and displayed for editing.
+ */
 async function toggleView(elementId, key=null, edit=false){
     editKey = key;
     document.getElementById(elementId).classList.remove('hidden');
@@ -251,14 +364,26 @@ async function toggleView(elementId, key=null, edit=false){
     }
 };
 
+/**
+ * Closes the edit contact overlay by adding the 'hidden' class to the edit contact box element.
+ */
 function closeEditOverlay(){
     document.getElementById('editContactBoxOverlay').classList.add('hidden');
 }
 
+/**
+ * Closes the add contact overlay by adding the 'hidden' class to the add contact box element.
+ */
 function closeAddOverlay(){
     document.getElementById('addContactBoxOverlay').classList.add('hidden');
 }
-            
+
+/**
+ * Edits a contact by updating its details and then fetching the updated user data to display.
+ * 
+ * @async
+ * @returns {Promise<void>} A promise that resolves once the contact details have been updated and displayed.
+ */
 async function editContact() {
     await updateEditedContact();
     
@@ -269,6 +394,15 @@ async function editContact() {
     showContactDetails(editKey, user.name, user.mail, user.phone, user.color);
 }
 
+/**
+ * Updates the contact details with the new values entered in the edit form. 
+ * Validates the form inputs, sends a PUT request to update the contact data, 
+ * and refreshes the contact list.
+ * 
+ * @async
+ * @returns {Promise<Object>} A promise that resolves to the updated contact data after the PUT request.
+ * @throws {Error} Throws an error if there is an issue with the HTTP request or input validation.
+ */
 async function updateEditedContact() {
     const changedName = document.getElementById('changedName').value.trim();
     const changedEmail = document.getElementById('changedEmail').value.trim();
@@ -314,7 +448,11 @@ async function updateEditedContact() {
     }
 }
 
-
+/**
+ * Closes the contact details overlay by removing the 'contactDetailBox' class 
+ * and resetting the selected contact state.
+ * It also removes the 'selected' class from all contacts to clear the selection.
+ */
 function closeDetailsOverlay() {
     let contactDetailBoxOverlayOverlay = document.getElementById('contactDetailBox');
     contactDetailBoxOverlayOverlay.classList.remove('contactDetailBox');
@@ -324,6 +462,11 @@ function closeDetailsOverlay() {
     });
 }
 
+/**
+ * Toggles the visibility of the control menu and the active state of the control circle.
+ * It adds/removes the 'hidden' class to the control menu and the 'active' class to 
+ * the mobile control circle element to show/hide the menu and change its state.
+ */
 function ControlMenu() {
     let controlMenu = document.getElementById('options-menu');
     let circleControl = document.querySelector('.circle-edit-mobile-control');
@@ -338,7 +481,12 @@ function closeControlMenu() {
     controlMenu.classList.add('hidden');
 }
 
-//
+/**
+ * Displays a confirmation overlay when a contact is added.
+ * The overlay is shown with a small delay to allow for animation, and automatically hides 
+ * after 3 seconds. The 'show' and 'hidden' classes are used to control the visibility and 
+ * animation of the overlay.
+ */
 function showContactAddedOverlay() {
     const overlay = document.getElementById('contact-added-overlay');
     overlay.classList.remove('hidden');
