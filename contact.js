@@ -31,10 +31,7 @@ async function addContact(){
     loadContactData();
 }
 
-// function getNameInitials(name) {
-//     let nameParts = name.split(' ');
-//     return nameParts[0].charAt(0) + nameParts[nameParts.length - 1].charAt(0);
-// }
+
 function getNameInitials(name) {
     let nameParts = name.split(' ');
     if (nameParts.length < 2) {
@@ -212,8 +209,7 @@ async function deleteContact(key){
     const contactDetails = document.getElementById('contactDetails');
     contactDetails.innerHTML = '';
 
-    let contactDetailBoxOverlay = document.getElementById('contactDetailBox');
-    contactDetailBoxOverlay.classList.remove('contactDetailBox');
+    closeDetailsOverlay();
 }
 
 async function updateDeletedContact(key){
@@ -264,6 +260,16 @@ function closeAddOverlay(){
 }
             
 async function editContact() {
+    await updateEditedContact();
+    
+    const response = await fetch(`${base_url}/users/${editKey}.json`);
+    const user = await response.json();
+    console.log(user);
+    
+    showContactDetails(editKey, user.name, user.mail, user.phone, user.color);
+}
+
+async function updateEditedContact() {
     const changedName = document.getElementById('changedName').value.trim();
     const changedEmail = document.getElementById('changedEmail').value.trim();
     const changedPhone = document.getElementById('changedPhone').value.trim();
@@ -287,7 +293,7 @@ async function editContact() {
             'mail': changedEmail,
             'name': changedName,
             'password': user.password,
-            'phone': changedPhone, // Ändere 'phone' in 'telephone', wenn nötig
+            'phone': changedPhone
         };
 
         const response = await fetch(editLink + ".json", {
