@@ -462,7 +462,6 @@ function closeDetailsOverlay() {
     });
 }
 
-<<<<<<< HEAD
 // function ControlMenu() {
 //     let controlMenu = document.getElementById('options-menu');
 //     let circleControl = document.querySelector('.circle-edit-mobile-control');
@@ -470,15 +469,13 @@ function closeDetailsOverlay() {
 //     controlMenu.classList.toggle('hidden');
 //     circleControl.classList.toggle('active');
 // }
-function openControlMenu() {
-=======
+
 /**
  * Toggles the visibility of the control menu and the active state of the control circle.
  * It adds/removes the 'hidden' class to the control menu and the 'active' class to 
  * the mobile control circle element to show/hide the menu and change its state.
  */
-function ControlMenu() {
->>>>>>> 9426b0e9a6a60f2f2546a29f2615724978fa382a
+function openControlMenu() {
     let controlMenu = document.getElementById('options-menu');
     let circleControl = document.querySelector('.circle-edit-mobile-control');
 
