@@ -6,58 +6,86 @@
     "done": {
       "-ODpvTNQjOj64To4fmBY": {
         "category": "Technical Task",
-        "contacts": ["Julia Hoffmann"],
+        "contacts": ["Julia Hoffmann", "Hans Albert", "Anna Nikolaus"],
         "date": "23/12/2024",
         "description": "Finalize the database schema and verify migrations.",
         "prio": "2",
-        "title": "Database Setup Complete"
+        "title": "Database Setup Complete",
+        "subtasks": [
+          {"checked": true, "task": "Design schema diagrams"},
+          {"checked": false, "task": "Write migration scripts"},
+          {"checked": true, "task": "Test migrations"}
+        ]
       },
       "-OEEpeS4rZGCkkXS9Hds": {
         "category": "User Story",
-        "contacts": ["Michael Bauer"],
+        "contacts": ["Michael Bauer", "Peter Pan", "Carla Müller", "Sven Neumann"],
         "date": "15/03/2025",
         "description": "Customer feedback integration finished.",
         "prio": "3",
-        "title": "Customer Feedback Process Complete"
+        "title": "Customer Feedback Process Complete",
+        "subtasks": [
+          {"checked": true, "task": "Collect feedback from users"},
+          {"checked": false, "task": "Integrate feedback into the design"},
+          {"checked": false, "task": "Validate changes with stakeholders"}
+        ]
       }
     },
     "feedback": {
       "-OEOYEqDrSlOG7MRKxpH": {
         "category": "User Story",
-        "contacts": ["Hans Albert"],
+        "contacts": ["Hans Albert", "Julia Hoffmann", "Sabine Müller"],
         "date": "23/12/2024",
         "description": "Developing initial sprint planning draft.",
         "prio": "2",
-        "title": "Sprint Planning Feedback"
+        "title": "Sprint Planning Feedback",
+        "subtasks": [
+          {"checked": false, "task": "Define sprint goals"},
+          {"checked": true, "task": "Identify key tasks"},
+          {"checked": false, "task": "Prepare timeline"},
+          {"checked": false, "task": "Finalize draft"}
+        ]
       },
       "-OEYuNymSZJ7mX_3h8ZS": {
         "category": "Technical Task",
-        "contacts": ["Hans Albert"],
+        "contacts": ["Hans Albert", "Marie Meier", "Bastian Meier", "Peter Pan"],
         "date": "21/12/2024",
         "description": "Backend API testing required for new endpoints.",
         "prio": "2",
-        "title": "API Testing for Backend"
+        "title": "API Testing for Backend",
+        "subtasks": [
+          {"checked": false, "task": "Setup test environment"},
+          {"checked": false, "task": "Write test cases"},
+          {"checked": false, "task": "Execute tests"},
+          {"checked": false, "task": "Document results"}
+        ]
       },
       "-OEYuTUp3S42XR1Uwirn": {
         "category": "Technical Task",
-        "contacts": ["Anna Nikolaus"],
+        "contacts": ["Anna Nikolaus", "Michael Bauer", "Sabine Müller", "Carla Müller", "Sven Neumann"],
         "date": "21/12/2024",
         "description": "Ensure API integration aligns with specifications.",
         "prio": "1",
-        "title": "Integration Feedback"
+        "title": "Integration Feedback",
+        "subtasks": [
+          {"checked": false, "task": "Review API documentation"},
+          {"checked": true, "task": "Validate integration"},
+          {"checked": false, "task": "Fix discrepancies"}
+        ]
       }
     },
     "progress": {
       "-ODpvTNQjOj64To4fmBY2": {
         "category": "User Story",
-        "contacts": ["Bastian Meier"],
+        "contacts": ["Bastian Meier", "Anna Nikolaus", "Peter Pan", "Julia Hoffmann"],
         "date": "24/12/2024",
         "description": "Refactoring code for scalability.",
         "prio": "1",
         "subtasks": [
           {"checked": false, "task": "Review legacy code"},
           {"checked": true, "task": "Refactor critical modules"},
-          {"checked": false, "task": "Write documentation"}
+          {"checked": false, "task": "Write documentation"},
+          {"checked": false, "task": "Conduct code review"}
         ],
         "title": "Code Refactoring"
       }
@@ -65,22 +93,29 @@
     "toDo": {
       "-OEYZACBT08UFkcWnDa7": {
         "category": "User Story",
-        "contacts": ["Peter Pan", "Carla Müller"],
+        "contacts": ["Peter Pan", "Carla Müller", "Hans Albert", "Sabine Müller"],
         "date": "22/11/2025",
         "description": "Setup the initial project repository.",
         "prio": "1",
         "subtasks": [
           {"checked": false, "task": "Create README.md"},
-          {"checked": false, "task": "Setup folder structure"}
+          {"checked": false, "task": "Setup folder structure"},
+          {"checked": false, "task": "Initialize repository"}
         ],
         "title": "Project Repository Setup"
       },
       "tasks": {
         "category": "Technical Task",
-        "contacts": ["Sven Neumann"],
+        "contacts": ["Sven Neumann", "Julia Hoffmann", "Michael Bauer", "Anna Nikolaus"],
         "date": "22/12/2024",
         "description": "Fix bugs in the main application flow.",
         "prio": "2",
+        "subtasks": [
+          {"checked": false, "task": "Identify bugs"},
+          {"checked": false, "task": "Fix high-priority issues"},
+          {"checked": false, "task": "Test fixes"},
+          {"checked": false, "task": "Deploy updates"}
+        ],
         "title": "Bug Fixing in Main Flow"
       }
     }
