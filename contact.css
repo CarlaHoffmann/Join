@@ -377,6 +377,20 @@ hr {
     display: none;
 }
 
+/* .options-menu {
+    background-color: white;
+    border-radius: 20px 20px 0px 20px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    padding: 8px;
+    width: 116px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    bottom: 16px;
+    right: 8px;
+} */
 .options-menu {
     background-color: white;
     border-radius: 20px 20px 0px 20px; 
@@ -390,7 +404,43 @@ hr {
     position: absolute;
     bottom: 16px;
     right: 8px;
-    bottom: 95px;
+    opacity: 0; /* Start mit unsichtbar */
+    transform: translateX(100%); /* Startposition außerhalb des Bildschirms */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0; 
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1; 
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1; 
+        transform: translateX(0); 
+    }
+    to {
+        opacity: 0; 
+        transform: translateX(100%); 
+    }
+}
+
+.options-menu.active {
+    animation-name: slideIn; 
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
+}
+
+.options-menu.hidden {
+    animation-name: slideOut; 
+    animation-duration: 0.4s; 
+    animation-fill-mode: forwards;
 }
 
 .option-item {

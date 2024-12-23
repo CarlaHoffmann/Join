@@ -462,14 +462,6 @@ function closeDetailsOverlay() {
     });
 }
 
-// function ControlMenu() {
-//     let controlMenu = document.getElementById('options-menu');
-//     let circleControl = document.querySelector('.circle-edit-mobile-control');
-
-//     controlMenu.classList.toggle('hidden');
-//     circleControl.classList.toggle('active');
-// }
-
 /**
  * Toggles the visibility of the control menu and the active state of the control circle.
  * It adds/removes the 'hidden' class to the control menu and the 'active' class to 
@@ -480,13 +472,39 @@ function openControlMenu() {
     let circleControl = document.querySelector('.circle-edit-mobile-control');
 
     controlMenu.classList.remove('hidden');
-    circleControl.classList.add('active');
+    circleControl.classList.add('active'); 
+    setTimeout(() => {
+        controlMenu.classList.add('active');
+    }, 10);
+
+    document.addEventListener('click', handleClickOutside);
 }
 
-//noch nicht fertig
+
 function closeControlMenu() {
     let controlMenu = document.getElementById('options-menu');
+    let circleControl = document.querySelector('.circle-edit-mobile-control');
+    
+    controlMenu.classList.remove('active');
     controlMenu.classList.add('hidden');
+
+    setTimeout(() => {
+        circleControl.classList.remove('active'); // Entferne die aktive Klasse vom Kreis
+        // controlMenu.style.opacity = "0"; // Optional, falls es visuell stört
+        controlMenu.style.transform = "translateX(100%)"; // Setze zurück für nächste Animation
+    }, 600);
+
+    document.removeEventListener('click', handleClickOutside);
+}
+
+function handleClickOutside(event) {
+    const controlMenu = document.getElementById('options-menu');
+    const circleControl = document.querySelector('.circle-edit-mobile-control');
+
+    // Überprüfe, ob der Klick außerhalb des Menüs und des Steuerelements war
+    if (!controlMenu.contains(event.target) && !circleControl.contains(event.target)) {
+        closeControlMenu();
+    }
 }
 
 /**
