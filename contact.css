@@ -140,6 +140,8 @@ hr {
     border: 2px solid white;
     border-radius: 100%;
     color: white;
+    font-size: 12px;
+    font-weight: 400;
 }
 
 #contactList::-webkit-scrollbar {
@@ -172,7 +174,7 @@ hr {
     z-index: 2;
     background-color: #F6F7F8;
     display: flex;
-    padding: 16px;
+    padding: 110px 20px 0 50px;
     gap: 20px;
 }
 
@@ -301,10 +303,10 @@ hr {
     transition: color 0.3s ease;
 }
 
-.icon-text-button:hover {
+/*.icon-text-button:hover {
     color: #29ABE2; 
 }
-
+*/
 .icon-svg {
     width: 24px;
     height: 24px;
@@ -351,7 +353,9 @@ hr {
     transition: background-color 0.3s ease; 
     position: absolute;
     bottom: 32px;
-    right: 16px
+    right: 16px;
+    font-size: 12px;
+    font-weight: 400;
 }
 
 .circle-edit-mobile-control img {
@@ -363,7 +367,16 @@ hr {
     background: #29ABE2;
 }
 
+.circle-edit-mobile-control.active {
+    background: #29ABE2;
+    transition: background-color 0.3s ease;
+}
+
 /* Edit / Delete Menu */
+.hidden {
+    display: none;
+}
+
 .options-menu {
     background-color: white;
     border-radius: 20px 20px 0px 20px; 
@@ -377,6 +390,7 @@ hr {
     position: absolute;
     bottom: 16px;
     right: 8px;
+    bottom: 95px;
 }
 
 .option-item {

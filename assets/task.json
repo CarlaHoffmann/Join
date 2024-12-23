@@ -3,216 +3,191 @@
     "name": "Guest"
   },
   "tasks": {
-    "toDo": {
-      "task1": {
-        "title": "Design Main Navigation",
-        "description": "Create a clear and intuitive design for the main navigation of the website",
-        "category": "User Story",
-        "contacts": {
-          "0": "Sven Neumann",
-          "1": "Carla Müller",
-          "2": "Michael Bauer"
-        },
-        "date": "2025-01-15",
-        "prio": "1",
-        "subtasks": {
-          "0": "Create wireframes",
-          "1": "Define color palette"
-        }
-      },
-      "task2": {
-        "title": "Implement Dark Mode",
-        "description": "Add a toggle feature for dark mode and ensure consistent design",
+    "done": {
+      "-ODpvTNQjOj64To4fmBY": {
         "category": "Technical Task",
-        "contacts": {
-          "0": "Sofie Müller",
-          "1": "Benedict Keller"
-        },
-        "date": "2025-02-05",
+        "contacts": ["Julia Hoffmann", "Hans Albert", "Anna Nikolaus"],
+        "date": "23/12/2024",
+        "description": "Finalize the database schema and verify migrations.",
         "prio": "2",
-        "subtasks": {
-          "0": "Develop a theme toggle",
-          "1": "Test for visual consistency"
-        }
-      }
-    },
-    "progress": {
-      "task3": {
-        "title": "Develop Landing Page",
-        "description": "Design and develop an engaging landing page for new users",
-        "category": "User Story",
-        "contacts": {
-          "0": "Carla Maxa",
-          "1": "Max Mustermann",
-          "2": "Lisa Fischer"
-        },
-        "date": "2025-02-20",
-        "prio": "1",
-        "subtasks": {
-          "0": "Create hero section",
-          "1": "Optimize for responsiveness"
-        }
+        "title": "Database Setup Complete",
+        "subtasks": [
+          {"checked": true, "task": "Design schema diagrams"},
+          {"checked": false, "task": "Write migration scripts"},
+          {"checked": true, "task": "Test migrations"}
+        ]
       },
-      "task4": {
-        "title": "Build Search Functionality",
-        "description": "Implement a search bar with auto-suggestions",
-        "category": "Technical Task",
-        "contacts": {
-          "0": "Sven Neumann",
-          "1": "Michael Bauer"
-        },
-        "date": "2025-03-01",
-        "prio": "1",
-        "subtasks": {
-          "0": "Create search algorithms",
-          "1": "Optimize backend queries"
-        }
+      "-OEEpeS4rZGCkkXS9Hds": {
+        "category": "User Story",
+        "contacts": ["Michael Bauer", "Peter Pan", "Carla Müller", "Sven Neumann"],
+        "date": "15/03/2025",
+        "description": "Customer feedback integration finished.",
+        "prio": "3",
+        "title": "Customer Feedback Process Complete",
+        "subtasks": [
+          {"checked": true, "task": "Collect feedback from users"},
+          {"checked": false, "task": "Integrate feedback into the design"},
+          {"checked": false, "task": "Validate changes with stakeholders"}
+        ]
       }
     },
     "feedback": {
-      "task5": {
-        "title": "Optimize Login Security",
-        "description": "Enhance security protocols for the login process",
-        "category": "Technical Task",
-        "contacts": {
-          "0": "Benedict Keller",
-          "1": "Sofie Müller",
-          "2": "Thomas Meyer"
-        },
-        "date": "2025-03-15",
-        "prio": "1",
-        "subtasks": {
-          "0": "Implement 2FA",
-          "1": "Test with different user cases"
-        }
-      },
-      "task6": {
-        "title": "Create Profile Page",
-        "description": "Design a personalized profile page for users to manage their data",
+      "-OEOYEqDrSlOG7MRKxpH": {
         "category": "User Story",
-        "contacts": {
-          "0": "Carla Müller",
-          "1": "Max Mustermann"
-        },
-        "date": "2025-04-01",
+        "contacts": ["Hans Albert", "Julia Hoffmann", "Sabine Müller"],
+        "date": "23/12/2024",
+        "description": "Developing initial sprint planning draft.",
         "prio": "2",
-        "subtasks": {
-          "0": "Design UI layout",
-          "1": "Integrate with database"
-        }
+        "title": "Sprint Planning Feedback",
+        "subtasks": [
+          {"checked": false, "task": "Define sprint goals"},
+          {"checked": true, "task": "Identify key tasks"},
+          {"checked": false, "task": "Prepare timeline"},
+          {"checked": false, "task": "Finalize draft"}
+        ]
+      },
+      "-OEYuNymSZJ7mX_3h8ZS": {
+        "category": "Technical Task",
+        "contacts": ["Hans Albert", "Marie Meier", "Bastian Meier", "Peter Pan"],
+        "date": "21/12/2024",
+        "description": "Backend API testing required for new endpoints.",
+        "prio": "2",
+        "title": "API Testing for Backend",
+        "subtasks": [
+          {"checked": false, "task": "Setup test environment"},
+          {"checked": false, "task": "Write test cases"},
+          {"checked": false, "task": "Execute tests"},
+          {"checked": false, "task": "Document results"}
+        ]
+      },
+      "-OEYuTUp3S42XR1Uwirn": {
+        "category": "Technical Task",
+        "contacts": ["Anna Nikolaus", "Michael Bauer", "Sabine Müller", "Carla Müller", "Sven Neumann"],
+        "date": "21/12/2024",
+        "description": "Ensure API integration aligns with specifications.",
+        "prio": "1",
+        "title": "Integration Feedback",
+        "subtasks": [
+          {"checked": false, "task": "Review API documentation"},
+          {"checked": true, "task": "Validate integration"},
+          {"checked": false, "task": "Fix discrepancies"}
+        ]
       }
     },
-    "done": {
-      "task7": {
-        "title": "Implement Payment Integration",
-        "description": "Integrate a payment gateway for seamless transactions",
-        "category": "Technical Task",
-        "contacts": {
-          "0": "Michael Bauer",
-          "1": "Sven Neumann",
-          "2": "Lisa Fischer"
-        },
-        "date": "2025-04-20",
-        "prio": "1",
-        "subtasks": {
-          "0": "Integrate API",
-          "1": "Test payment flows"
-        }
-      },
-      "task8": {
-        "title": "Redesign Dashboard",
-        "description": "Revamp the user dashboard for better usability",
+    "progress": {
+      "-ODpvTNQjOj64To4fmBY2": {
         "category": "User Story",
-        "contacts": {
-          "0": "Carla Maxa",
-          "1": "Sofie Müller"
-        },
-        "date": "2025-05-01",
+        "contacts": ["Bastian Meier", "Anna Nikolaus", "Peter Pan", "Julia Hoffmann"],
+        "date": "24/12/2024",
+        "description": "Refactoring code for scalability.",
+        "prio": "1",
+        "subtasks": [
+          {"checked": false, "task": "Review legacy code"},
+          {"checked": true, "task": "Refactor critical modules"},
+          {"checked": false, "task": "Write documentation"},
+          {"checked": false, "task": "Conduct code review"}
+        ],
+        "title": "Code Refactoring"
+      }
+    },
+    "toDo": {
+      "-OEYZACBT08UFkcWnDa7": {
+        "category": "User Story",
+        "contacts": ["Peter Pan", "Carla Müller", "Hans Albert", "Sabine Müller"],
+        "date": "22/11/2025",
+        "description": "Setup the initial project repository.",
+        "prio": "1",
+        "subtasks": [
+          {"checked": false, "task": "Create README.md"},
+          {"checked": false, "task": "Setup folder structure"},
+          {"checked": false, "task": "Initialize repository"}
+        ],
+        "title": "Project Repository Setup"
+      },
+      "tasks": {
+        "category": "Technical Task",
+        "contacts": ["Sven Neumann", "Julia Hoffmann", "Michael Bauer", "Anna Nikolaus"],
+        "date": "22/12/2024",
+        "description": "Fix bugs in the main application flow.",
         "prio": "2",
-        "subtasks": {
-          "0": "Gather user feedback",
-          "1": "Implement feedback into design"
-        }
+        "subtasks": [
+          {"checked": false, "task": "Identify bugs"},
+          {"checked": false, "task": "Fix high-priority issues"},
+          {"checked": false, "task": "Test fixes"},
+          {"checked": false, "task": "Deploy updates"}
+        ],
+        "title": "Bug Fixing in Main Flow"
       }
     }
   },
   "users": {
-    "-ODQ9zvXJTMRB6AbAb5M": {
-      "color": "#007CEE",
-      "mail": "c.maxa@gmail.com",
-      "name": "Carla Maxa",
-      "password": "pw",
-      "phone": "9393948394"
-    },
-    "-ODQKhCLAU17p0M5U0Dt": {
-      "color": "rgb(255,122,0)",
-      "mail": "carla.m@gmail.com",
-      "name": "Carla Müller",
-      "password": "pw",
-      "phone": "399482"
-    },
-    "-ODQoz-Q4sj1KK_84LyS": {
-      "color": "rgba(147,39,255)",
-      "mail": "s.muller@gmail.com",
-      "name": "Sofie Müller",
-      "password": "pw",
-      "phone": "1546"
-    },
-    "-ODQp3AOOT8sacJlZ1w_": {
-      "color": "rgba(31,215,193)",
-      "mail": "benedict.k@gmail.com",
-      "name": "Benedict Keller",
-      "password": "pw",
-      "phone": "565489"
-    },
-    "-ODR3MEX4HlT0geA6FBH": {
-      "color": "rgba(255,187,43)",
-      "mail": "max.mustermann@mail.de",
-      "name": "Max Mustermann",
-      "password": "pw",
-      "phone": "394888293"
-    },
-    "-ODRNNXN4HlT0geB6FBH": {
-      "color": "#8B0000",
-      "mail": "sven.neumann@gmail.com",
-      "name": "Sven Neumann",
-      "password": "pw",
-      "phone": "4827593021"
-    },
-    "-ODROEXX4HlT0geC6FBH": {
-      "color": "#4B0082",
-      "mail": "anna.schmidt@gmail.com",
-      "name": "Anna Schmidt",
-      "password": "pw",
-      "phone": "4837291827"
-    },
     "-ODRPXXO4HlT0geD6FBH": {
-      "color": "#228B22",
+      "color": "rgba(147,39,255)",
       "mail": "julia.hoffmann@gmail.com",
       "name": "Julia Hoffmann",
       "password": "pw",
       "phone": "5829374059"
     },
     "-ODRQAXX4HlT0geE6FBH": {
-      "color": "#FFD700",
       "mail": "michael.bauer@gmail.com",
       "name": "Michael Bauer",
       "password": "pw",
       "phone": "6783948576"
     },
-    "-ODRSAXX4HlT0geF6FBH": {
-      "color": "#FF4500",
-      "mail": "lisa.fischer@gmail.com",
-      "name": "Lisa Fischer",
+    "-OETAkjtEgHHZmTY3o_6": {
+      "color": "rgba(255,122,0)",
+      "mail": "hansa@gmail.com",
+      "name": "Hans Albert",
       "password": "pw",
-      "phone": "4872930483"
+      "phone": "123"
     },
-    "-ODRTBXX4HlT0geG6FBH": {
-      "color": "#4682B4",
-      "mail": "thomas.meyer@gmail.com",
-      "name": "Thomas Meyer",
+    "-ODvVXTnXWwfvvzrK-cV": {
+      "color": "rgba(31,215,193)",
+      "mail": "mailanna@mail.de",
+      "name": "Anna Nikolaus",
       "password": "pw",
-      "phone": "2948572048"
+      "phone": "03004003"
+    },
+    "-OEKLybOHCJPsvVMAYfx": {
+      "color": "rgba(147,39,255)",
+      "mail": "pan@mail.com",
+      "name": "Peter Pan",
+      "password": "pw"
+    },
+    "-ODCMmQXtWwgHTlYwn76": {
+      "color": "rgba(255,200,100)",
+      "mail": "carla.m@gmail.com",
+      "name": "Carla Müller",
+      "password": "securepw",
+      "phone": "349820123"
+    },
+    "-ODCNeBXuWgiHRjZXn73": {
+      "color": "rgba(200,50,150)",
+      "mail": "bastian.m@mail.com",
+      "name": "Bastian Meier",
+      "password": "strongpw",
+      "phone": "498200123"
+    },
+    "-ODCHmWXvWgfRTlZWn62": {
+      "color": "rgba(100,150,200)",
+      "mail": "sven.neumann@mail.com",
+      "name": "Sven Neumann",
+      "password": "mypassword",
+      "phone": "849320103"
+    },
+    "-ODRDnBXvWgrPTlZWn45": {
+      "color": "rgba(123,200,150)",
+      "mail": "marie.m@mail.com",
+      "name": "Marie Meier",
+      "password": "pass123",
+      "phone": "839201243"
+    },
+    "-ODRKnDXuWgiHTlZYn87": {
+      "color": "rgba(255,120,200)",
+      "mail": "sabine.m@mail.com",
+      "name": "Sabine Müller",
+      "password": "testpw",
+      "phone": "439820143"
     }
   }
 }

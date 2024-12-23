@@ -1,3 +1,4 @@
+ich habe alles gemacht wie vorgegeben . Leider ist es nun so, dass die seite erst neu geladen werden muss bevor man die änderungen in der smalltaks board seite sieht . Zwar ist dann alles aktualisiert aber ich möchte nicht immer die seite neu laden. Wenn ich im overlay auf close klicke sollen diese mit den änderungen schon auf der board seite sichbar sein
 
 
 
@@ -15,8 +16,6 @@ async function loadTasks() {
         console.error("Error loading tasks:", error);
     }
 }
-
-
 
 
 // Funktion, um Tasks für eine Spalte aus der Datenbank zu laden
@@ -452,25 +451,25 @@ function addSubtaskListeners(task) {
             const subtaskKey = checkbox.dataset.subtaskKey;
             const isChecked = checkbox.checked;
 
-            // Subtask-Status im Task-Objekt aktualisieren
+            // Subtask-Status im task-Objekt aktualisieren
             task.subtasks[subtaskKey].checked = isChecked;
 
-            // Subtask in Firebase speichern
-            const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskKey}.json`;
-            await fetch(url, {
-                method: 'PUT',
-                body: JSON.stringify(task.subtasks[subtaskKey]),
-                headers: { 'Content-Type': 'application/json' },
-            });
+            try {
+                // Subtask-Status in Firebase aktualisieren
+                const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskKey}.json`;
+                await fetch(url, {
+                    method: 'PUT',
+                    body: JSON.stringify(task.subtasks[subtaskKey]),
+                    headers: { 'Content-Type': 'application/json' },
+                });
 
-            console.log(`Subtask ${subtaskKey} updated:`, isChecked);
-
-            // Fortschrittsanzeige sofort aktualisieren
-            updateTaskUI(task.id, task.path, task);
+                console.log(`Subtask ${subtaskKey} updated:`, isChecked);
+            } catch (error) {
+                console.error(`Error updating subtask ${subtaskKey}:`, error);
+            }
         });
     });
 }
-
 
 function closeTaskOverlay() {
     const overlayContainer = document.getElementById('taskOverlayContainer');
@@ -877,70 +876,53 @@ function enableEditMode() {
 // }
 
 
-
-
 async function saveOverlayChanges(taskId, taskStatus) {
     const titleElement = document.getElementById('title');
     const descriptionElement = document.getElementById('description');
     const dueDateElement = document.getElementById('datepicker');
     const prioButton = document.querySelector('.prio-button.active-button');
     const categoryElement = document.getElementById('category-selection');
+    const contactsElements = selectedContacts;
+    const subtasksElements = subtasks;
 
     if (!titleElement || !descriptionElement || !dueDateElement || !prioButton || !categoryElement) {
         console.error('Ein oder mehrere erforderliche Elemente fehlen.');
         return;
     }
 
-    // Änderungen lokal in currentTask speichern
-    currentTask.title = titleElement.value;
-    currentTask.description = descriptionElement.value;
-    currentTask.date = dueDateElement.value;
-    currentTask.prio = prioButton.id.replace('prio', '');
-    currentTask.category = categoryElement.textContent.trim();
+    const updatedTask = {
+        title: titleElement.value,
+        description: descriptionElement.value,
+        date: dueDateElement.value,
+        prio: prioButton.id.replace('prio', ''),
+        category: categoryElement.textContent.trim(),
+        contacts: contactsElements,
+        subtasks: subtasksElements,
+    };
 
     try {
-        // Änderungen in Firebase speichern
+        // URL für das Aktualisieren der bestehenden Task
         const url = `${base_url}/tasks/${taskStatus}/${taskId}.json`;
         const response = await fetch(url, {
-            method: 'PUT',
-            body: JSON.stringify(currentTask),
-            headers: { 'Content-Type': 'application/json' },
+            method: 'PUT', // Wichtig: PUT überschreibt die bestehende Aufgabe
+            body: JSON.stringify(updatedTask),
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
 
         if (!response.ok) {
             throw new Error(`HTTP error: ${response.status}`);
         }
 
-        console.log('Task erfolgreich gespeichert:', currentTask);
+        // Board aktualisieren
+        await loadTasks();
 
-        // DOM sofort aktualisieren
-        updateTaskUI(taskId, taskStatus, currentTask);
-
+        // Overlay schließen und aktualisierte Aufgabe anzeigen
+        openTaskOverlay({ ...updatedTask, id: taskId });
     } catch (error) {
-        console.error('Fehler beim Speichern der Task:', error);
+        console.error("Fehler beim Aktualisieren der Aufgabe:", error);
     }
-}
-
-
-
-function updateTaskUI(taskId, taskStatus, taskData) {
-    const taskElement = document.getElementById(`task-${taskId}`);
-    if (!taskElement) return;
-
-    taskElement.querySelector('.task-title').textContent = taskData.title;
-    taskElement.querySelector('.task-description').textContent = taskData.description;
-
-    const progressPercentage = taskData.subtasks.length
-        ? (taskData.subtasks.filter(subtask => subtask.checked).length / taskData.subtasks.length) * 100
-        : 0;
-
-    const progressBar = taskElement.querySelector('.progress-bar');
-    if (progressBar) {
-        progressBar.style.width = `${progressPercentage}%`;
-    }
-
-    taskElement.querySelector('.subtasks').textContent = `${taskData.subtasks.filter(subtask => subtask.checked).length} von ${taskData.subtasks.length} Subtasks`;
-    taskElement.querySelector('.task-type').style.backgroundColor = getCategoryColor(taskData.category);
 }
 
 
@@ -952,24 +934,11 @@ function setOverlayPriority(priority) {
 }
 
 function addOverlaySubtask() {
-    const newSubtaskInput = document.getElementById('subtaskInput');
-    const newSubtask = newSubtaskInput.value.trim();
-
+    const newSubtask = document.getElementById('newSubtaskInput').value.trim();
     if (newSubtask) {
-        // Subtask zu currentTask hinzufügen
-        currentTask.subtasks = currentTask.subtasks || [];
-        currentTask.subtasks.push({ task: newSubtask, checked: false });
-
-        // Subtask im Overlay anzeigen
-        const subtasksContainer = document.getElementById('subtasks');
-        subtasksContainer.innerHTML += `
-            <div class="check">
-                <input type="checkbox" data-subtask-key="${currentTask.subtasks.length - 1}" />
-                <div>${newSubtask}</div>
-            </div>`;
-
-        // Input-Feld leeren
-        newSubtaskInput.value = '';
+        const subtasksList = document.getElementById('overlaySubtasks');
+        subtasksList.innerHTML += `<li>${newSubtask}</li>`;
+        document.getElementById('newSubtaskInput').value = '';
     }
 }
 
@@ -982,25 +951,16 @@ function closeTaskOverlay() {
 
     // Speichern der Subtasks
     if (currentTask) {
-        saveTaskSubtasks(currentTask)
-            .then(() => {
-                console.log('Subtasks saved successfully.');
-                loadTasks(); // Board aktualisieren, damit Änderungen sichtbar sind
-            })
-            .catch((error) => {
-                console.error('Fehler beim Speichern der Subtasks:', error);
-            });
+        saveTaskSubtasks(currentTask);
     }
 
     overlayContainer.classList.add('d-none');
     overlayContainer.innerHTML = ''; // Inhalt löschen
 }
 
-
 // new
 async function saveTaskSubtasks(task) {
     try {
-        // Speichere aktualisierte Subtasks in Firebase
         const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks.json`;
         const updatedSubtasks = task.subtasks;
 
@@ -1013,10 +973,8 @@ async function saveTaskSubtasks(task) {
         console.log(`Subtasks for task ${task.id} saved successfully.`);
     } catch (error) {
         console.error('Error saving subtasks:', error);
-        throw error; // Fehler weitergeben
     }
 }
-
 
 
 //new
@@ -1049,11 +1007,8 @@ async function initializeValidationEdit(task) {
         // Änderungen speichern
         await saveOverlayChanges(taskId, taskStatus);
 
-        // Änderungen sofort im bestehenden Overlay aktualisieren
-        updateOverlayFields(task);
-
-        // Option, das Overlay vollständig neu zu laden (falls nötig)
-        // openTaskOverlay(currentTask);
+        // Overlay direkt mit aktuellen Daten aktualisieren
+        openTaskOverlay(currentTask);
 
         console.log('Overlay erfolgreich aktualisiert.');
     } catch (error) {
@@ -1097,6 +1052,7 @@ async function deleteTask(taskId) {
 
 
 
+
 //  Task Placeholder  
 function updatePlaceholders() {
     const columns = ["toDo", "progress", "feedback", "done"];
@@ -1116,5 +1072,3 @@ function updatePlaceholders() {
 
 const searchField = document.querySelector('#searchField');
 console.log(searchField);
-
-
