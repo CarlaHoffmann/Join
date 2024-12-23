@@ -950,40 +950,11 @@ function closeTaskOverlay() {
 
     // Speichern der Subtasks
     if (currentTask) {
-        saveTaskSubtasks(currentTask).then(() => {
-            // Board-Seite aktualisieren
-            updateTaskUI(currentTask.id, currentTask.path, currentTask);
-            console.log('Subtasks updated and board refreshed.');
-        }).catch(error => {
-            console.error('Error saving subtasks:', error);
-        });
+        saveTaskSubtasks(currentTask);
     }
 
     overlayContainer.classList.add('d-none');
     overlayContainer.innerHTML = ''; // Inhalt löschen
-}
-
-
-function updateTaskUI(taskId, taskPath, taskData) {
-    const taskElement = document.getElementById(`task-${taskId}`);
-    if (!taskElement) return;
-
-    const completedSubtasks = taskData.subtasks.filter(subtask => subtask.checked).length;
-    const totalSubtasks = taskData.subtasks.length;
-
-    // Fortschrittsbalken aktualisieren
-    const progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
-    const progressBar = taskElement.querySelector('.progress-bar');
-    if (progressBar) {
-        progressBar.style.width = `${progressPercentage}%`;
-    }
-
-    // Subtask-Anzeige aktualisieren
-    const subtasksText = `${completedSubtasks} von ${totalSubtasks} Subtasks`;
-    const subtasksElement = taskElement.querySelector('.subtasks');
-    if (subtasksElement) {
-        subtasksElement.textContent = subtasksText;
-    }
 }
 
 // new
@@ -1045,38 +1016,6 @@ async function initializeValidationEdit(task) {
 }
 
 
-function addSubtaskListeners(task) {
-    const overlayContainer = document.getElementById('taskOverlayContainer');
-    const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
-
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', async () => {
-            const subtaskKey = checkbox.dataset.subtaskKey;
-            const isChecked = checkbox.checked;
-
-            // Subtask-Status im Task-Objekt aktualisieren
-            task.subtasks[subtaskKey].checked = isChecked;
-
-            try {
-                // Subtask in Firebase aktualisieren
-                const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskKey}.json`;
-                await fetch(url, {
-                    method: 'PUT',
-                    body: JSON.stringify(task.subtasks[subtaskKey]),
-                    headers: { 'Content-Type': 'application/json' },
-                });
-
-                console.log(`Subtask ${subtaskKey} updated:`, isChecked);
-
-                // Board-Seite aktualisieren
-                updateTaskUI(task.id, task.path, task);
-            } catch (error) {
-                console.error(`Error updating subtask ${subtaskKey}:`, error);
-            }
-        });
-    });
-}
-
 
 //  Task Overlay Delete 
 async function deleteTask(taskId) {
@@ -1106,7 +1045,6 @@ async function deleteTask(taskId) {
         }
     }
 }
-
 
 
 
