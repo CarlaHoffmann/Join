@@ -439,34 +439,34 @@ async function openTaskOverlay(task) {
     overlayContainer.classList.remove('d-none');
 }
 
-function addSubtaskListeners(task) {
-    const overlayContainer = document.getElementById('taskOverlayContainer');
-    const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
+// function addSubtaskListeners(task) {
+//     const overlayContainer = document.getElementById('taskOverlayContainer');
+//     const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
 
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', async () => {
-            const subtaskKey = checkbox.dataset.subtaskKey;
-            const isChecked = checkbox.checked;
+//     checkboxes.forEach(checkbox => {
+//         checkbox.addEventListener('change', async () => {
+//             const subtaskKey = checkbox.dataset.subtaskKey;
+//             const isChecked = checkbox.checked;
 
-            // Subtask-Status im task-Objekt aktualisieren
-            task.subtasks[subtaskKey].checked = isChecked;
+//             // Subtask-Status im task-Objekt aktualisieren
+//             task.subtasks[subtaskKey].checked = isChecked;
 
-            try {
-                // Subtask-Status in Firebase aktualisieren
-                const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskKey}.json`;
-                await fetch(url, {
-                    method: 'PUT',
-                    body: JSON.stringify(task.subtasks[subtaskKey]),
-                    headers: { 'Content-Type': 'application/json' },
-                });
+//             try {
+//                 // Subtask-Status in Firebase aktualisieren
+//                 const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskKey}.json`;
+//                 await fetch(url, {
+//                     method: 'PUT',
+//                     body: JSON.stringify(task.subtasks[subtaskKey]),
+//                     headers: { 'Content-Type': 'application/json' },
+//                 });
 
-                console.log(`Subtask ${subtaskKey} updated:`, isChecked);
-            } catch (error) {
-                console.error(`Error updating subtask ${subtaskKey}:`, error);
-            }
-        });
-    });
-}
+//                 console.log(`Subtask ${subtaskKey} updated:`, isChecked);
+//             } catch (error) {
+//                 console.error(`Error updating subtask ${subtaskKey}:`, error);
+//             }
+//         });
+//     });
+// }
 
 function closeTaskOverlay() {
     const overlayContainer = document.getElementById('taskOverlayContainer');
@@ -939,9 +939,9 @@ function addOverlaySubtask() {
     }
 }
 
-function updateSubtasks() {
+// function updateSubtasks() {
 
-}
+// }
 //new
 function closeTaskOverlay() {
     const overlayContainer = document.getElementById('taskOverlayContainer');
@@ -1016,6 +1016,49 @@ async function initializeValidationEdit(task) {
 
 
 //  Task Overlay Delete 
+// async function deleteTask(taskId) {
+//     const confirmDelete = confirm("Are you sure you want to delete this task?");
+//     if (confirmDelete) {
+//         try {
+//             // Identifiziere die Spalte (toDo, progress, feedback, done) anhand der Task-ID
+//             const taskElement = document.getElementById(`task-${taskId}`);
+//             const parentColumnId = taskElement.parentElement.id.replace("Tasks", "");
+
+//             // Lösche die Task aus Firebase
+//             const url = `${base_url}/tasks/${parentColumnId}/${taskId}.json`;
+//             await fetch(url, { method: 'DELETE' });
+
+//             // Entferne die Task aus dem DOM
+//             taskElement.remove();
+
+//             // Überprüfe, ob der Placeholder angezeigt werden soll
+//             updatePlaceholders();
+
+//             // Schließe das Overlay
+//             closeTaskOverlay();
+
+//             console.log(`Task ${taskId} deleted successfully`);
+//         } catch (error) {
+//             console.error("Error deleting task:", error);
+//         }
+//     }
+// }
+async function deleteSubtasks(parentId) {
+    const url = `${base_url}/tasks/${parentId}.json`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    // Überprüfe, ob es untergeordnete Aufgaben gibt
+    if (data && data.subtasks) {
+        const subtasks = Object.keys(data.subtasks);
+        for (const subtaskId of subtasks) {
+            await deleteSubtasks(`${parentId}/subtasks/${subtaskId}`); // Rekursives Löschen
+            const subtaskUrl = `${base_url}/tasks/${parentId}/subtasks/${subtaskId}.json`;
+            await fetch(subtaskUrl, { method: 'DELETE' });
+        }
+    }
+}
+
 async function deleteTask(taskId) {
     const confirmDelete = confirm("Are you sure you want to delete this task?");
     if (confirmDelete) {
@@ -1024,11 +1067,14 @@ async function deleteTask(taskId) {
             const taskElement = document.getElementById(`task-${taskId}`);
             const parentColumnId = taskElement.parentElement.id.replace("Tasks", "");
 
-            // Lösche die Task aus Firebase
+            // Lösche zuerst alle untergeordneten Aufgaben
+            await deleteSubtasks(`${parentColumnId}/${taskId}`);
+
+            // Lösche die Hauptaufgabe aus Firebase
             const url = `${base_url}/tasks/${parentColumnId}/${taskId}.json`;
             await fetch(url, { method: 'DELETE' });
 
-            // Entferne die Task aus dem DOM
+            // Entferne die Aufgabe aus dem DOM
             taskElement.remove();
 
             // Überprüfe, ob der Placeholder angezeigt werden soll
@@ -1043,8 +1089,6 @@ async function deleteTask(taskId) {
         }
     }
 }
-
-
 
 
 

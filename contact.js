@@ -324,12 +324,19 @@ function closeDetailsOverlay() {
     });
 }
 
-function ControlMenu() {
+// function ControlMenu() {
+//     let controlMenu = document.getElementById('options-menu');
+//     let circleControl = document.querySelector('.circle-edit-mobile-control');
+
+//     controlMenu.classList.toggle('hidden');
+//     circleControl.classList.toggle('active');
+// }
+function openControlMenu() {
     let controlMenu = document.getElementById('options-menu');
     let circleControl = document.querySelector('.circle-edit-mobile-control');
 
-    controlMenu.classList.toggle('hidden');
-    circleControl.classList.toggle('active');
+    controlMenu.classList.remove('hidden');
+    circleControl.classList.add('active');
 }
 
 //noch nicht fertig
