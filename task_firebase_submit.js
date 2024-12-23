@@ -1,4 +1,6 @@
-// This asynchronous function creates a new task object from the form data and posts it to the server.
+/**
+ * This asynchronous function creates a new task object from the form data and posts it to the server.
+ */
 async function createTask() {
     let task = {
         title: takeTitle(),
@@ -11,11 +13,15 @@ async function createTask() {
     }
 
     await postData(task);
-    clearForm(); // Hier wird das Formular geleert
+    clearForm(); 
     showTaskAddedOverlay();
 }
 
-// This asynchronous function posts the task data to the server using the fetch API.
+/**
+ * This asynchronous function posts the task data to the server using the fetch API.
+ * @param {Object} taskData - The task object to be posted.
+ * @returns {Object} The response from the server, or an error if the request fails.
+ */
 async function postData(taskData) {
     try {
         let response = await fetch(task_base_url + "/tasks/toDo" + ".json",{
@@ -34,42 +40,63 @@ async function postData(taskData) {
     }
 }
 
-// This function extracts the title from the form.
+/**
+ * This function extracts the title from the form.
+ * @returns {string} The title value.
+ */
 function takeTitle() {
     let title = document.getElementById('title');
     return title.value;
 }
 
-// This function extracts the description from the form.
+/**
+ * This function extracts the description from the form.
+ * @returns {string} The description value.
+ */
 function takeDescription() {
     let description = document.getElementById('description');
     return description.value;
 }
 
-// This function extracts the selected contacts.
+/**
+ * This function extracts the selected contacts.
+ * @returns {Array<string>} An array of selected contact names.
+ */
 function takeContacts() {
     return selectedContacts;
 }
 
-// This function extracts the due date from the form.
+/**
+ * This function extracts the due date from the form.
+ * @returns {string} The due date value.
+ */
 function takeDate() {
     let date = document.getElementById('datepicker');
     return date.value;
 }
 
-// This function extracts the selected priority.
+/**
+ * This function extracts the selected priority.
+ * @returns {string} The priority level (1, 2, or 3).
+ */
 function takePrio() {
     let activeButton = document.querySelector('.prio-button.active-button');
     return activeButton.id.replace('prio', '');
 }
 
-// This function extracts the selected category.
+/**
+ * This function extracts the selected category.
+ * @returns {string} The category text.
+ */
 function takeCatergory() {
     let category = document.getElementById('category-selection');
     return category.innerHTML;
 }
 
-// This function extracts and formats the subtasks.
+/**
+ * This function extracts and formats the subtasks.
+ * @returns {Array<Object>} An array of formatted subtask objects, or an empty array if no subtasks are present.
+ */
 function takeSubtask() {
     if (subtasks.length > 0) {
         const formattedSubtasks = subtasks.map((subtask) => {
@@ -80,7 +107,6 @@ function takeSubtask() {
         });
         return formattedSubtasks;
     } else {
-        // If no subtask, return []
         return [];
     }
 }
