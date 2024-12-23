@@ -1,4 +1,9 @@
-// Generiert den HTML-Inhalt für einen Button
+/**
+ * Generates the HTML content for a priority button.
+ * @param {string} priority - The priority level (1, 2, or 3).
+ * @param {boolean} isActive - Whether the button is active.
+ * @returns {string} The HTML content for the button.
+ */
 function getButtonContent(priority, isActive) {
     const activeStatus = isActive ? '_active' : '';
     switch(priority) {
@@ -28,6 +33,9 @@ function getButtonContent(priority, isActive) {
     }
 }
 
+/**
+ * Updates the subtask buttons to show the open state and adds an event listener for outside clicks.
+ */
 function openSubtaskTemplate() {
     let subtaskButtons = document.getElementById('subtask-buttons');
     subtaskButtons.innerHTML = `
@@ -44,6 +52,12 @@ function openSubtaskTemplate() {
     document.addEventListener('click', closeSubtaskOnOutsideClick);
 }
 
+/**
+ * Generates the HTML template for adding a new subtask.
+ * @param {number} i - The index of the subtask.
+ * @param {string} element - The text of the subtask.
+ * @returns {string} The HTML template for the subtask.
+ */
 function getAddSubtaskTemplate(i, element) {
     return `
         <div id="subtask${i}">
@@ -59,6 +73,12 @@ function getAddSubtaskTemplate(i, element) {
     `;
 }
 
+/**
+ * Generates the HTML template for editing an existing subtask.
+ * @param {number} index - The index of the subtask.
+ * @param {string} currentText - The current text of the subtask.
+ * @returns {string} The HTML template for editing the subtask.
+ */
 function editSubtaskTemplate(index, currentText) {
     return `
         <div class="edit-subtask-wrapper">
@@ -72,6 +92,12 @@ function editSubtaskTemplate(index, currentText) {
     `;
 }
 
+/**
+ * Generates the HTML template for updating the display of a subtask after adding, editing, or deleting.
+ * @param {number} i - The index of the subtask.
+ * @param {string} element - The text of the subtask.
+ * @returns {string} The HTML template for the updated subtask display.
+ */
 function updateSubtaskDisplayTemplate(i, element) {
     return `
         <div id="subtask${i}">

@@ -1,12 +1,16 @@
-// Prio
-// This function initializes the priority buttons by resetting all buttons and setting the medium priority as the default.
+/** Prio */
+/** 
+ * This function initializes the priority buttons by resetting all buttons and setting the medium priority as the default. 
+ */
 function initializePriority() {
     resetAllPriorityButtons();
     setMediumPriority();
 }
 
-// This function handles the priority button click event. It prevents the default button 
-// behavior if an event is provided, resets other buttons, and toggles the current button.
+/** 
+ * This function handles the priority button click event. It prevents the default button
+ * behavior if an event is provided, resets other buttons, and toggles the current button.
+ */
 function priority(x, event) {
     if (event) {
         event.preventDefault(); // Verhindert das Standardverhalten des Buttons, wenn ein Event übergeben wird
@@ -17,7 +21,7 @@ function priority(x, event) {
     toggleCurrentButton(currentPrio, x);
 }
 
-// This function resets all priority buttons except the current one.
+/** This function resets all priority buttons except the current one.*/
 function resetOtherButtons(allButtons, currentButton) {
     allButtons.forEach(button => {
         if (button !== currentButton) {
@@ -26,7 +30,7 @@ function resetOtherButtons(allButtons, currentButton) {
     });
 }
 
-// This function toggles the state of the current priority button (activates or deactivates it).
+/** This function toggles the state of the current priority button (activates or deactivates it).*/
 function toggleCurrentButton(button, priority) {
     if (button.classList.contains('active-button')) {
         resetButton(button);
@@ -35,14 +39,14 @@ function toggleCurrentButton(button, priority) {
     }
 }
 
-// This function resets a priority button to its default state.
+/** This function resets a priority button to its default state.*/
 function resetButton(button) {
     button.classList.remove('active-button', 'urgent', 'med', 'low');
     button.classList.add('hover-button');
     updateButtonContent(button);
 }
 
-// This function activates a priority button with the specified priority.
+/** This function activates a priority button with the specified priority.*/
 function activateButton(button, priority) {
     button.classList.remove('hover-button');
     button.classList.add('active-button');
@@ -50,7 +54,7 @@ function activateButton(button, priority) {
     updateButtonContent(button);
 }
 
-// This function determines the CSS class based on the priority level.
+/** This function determines the CSS class based on the priority level.*/
 function getPriorityClass(priority) {
     switch(priority) {
         case 1: return 'urgent';
@@ -60,14 +64,14 @@ function getPriorityClass(priority) {
     }
 }
 
-// This function updates the content of a priority button based on its state.
+/** This function updates the content of a priority button based on its state.*/
 function updateButtonContent(button) {
     const priority = button.id.replace('prio', '');
     const isActive = button.classList.contains('active-button');
     button.innerHTML = getButtonContent(priority, isActive);
 }
 
-// This function resets all priority buttons to their default state.
+/** This function resets all priority buttons to their default state.*/
 function resetAllPriorityButtons() {
     const priorityButtons = document.querySelectorAll('.prio-button');
     priorityButtons.forEach(button => {
@@ -75,7 +79,7 @@ function resetAllPriorityButtons() {
     });
 }
 
-// This function sets the medium priority button as active by default.
+/** This function sets the medium priority button as active by default.*/
 function setMediumPriority() {
     const mediumButton = document.getElementById('prio2');
     if (mediumButton) {
@@ -85,42 +89,56 @@ function setMediumPriority() {
     }
 }
 
-// Category
-// This function toggles the visibility of the category dropdown.
+/** Category */
+/** This function toggles the visibility of the category dropdown.*/
 function showCategory() {
     const dropdown = document.getElementById('opened-category');
-    dropdown.classList.toggle('d-none'); // Dropdown anzeigen oder verbergen
+    dropdown.classList.toggle('d-none'); /** Toggle dropdown */
 
     const categorySelection = document.getElementById('category-selection');
     categorySelection.textContent = "Select task category";
 }
 
-// This function handles the selection of a category from the dropdown.
+/** This function handles the selection of a category from the dropdown.*/
 function categorySelected(category) {
-    // Das Element mit der ID "category-selection" abrufen
+    /**
+     * Get the element with the ID "category-selection".
+     */
     const categorySelection = document.getElementById('category-selection');
     const errorMessage = document.getElementById('error-message');
 
-    // Den Text des ausgewählten Eintrags in das Feld übertragen
+    /**
+     * Transfer the text of the selected entry into the field.
+     */
     categorySelection.textContent = category; 
 
-    // Fehlermeldung ausblenden
     errorMessage.classList.add('d-none');
 
-    // Das Dropdown-Menü wieder schließen, nachdem eine Auswahl getroffen wurde
+    /**
+     * Close the dropdown menu after a selection is made
+     */
     document.getElementById('opened-category').classList.add('d-none'); 
 }
 
-// Subtask
-// This array stores the list of subtasks.
+/** Subtask*/
+/**
+ * This array stores the list of subtasks.
+ */
 let subtasks = [];
 
-// This function closes the subtask input field and resets its view to the original state.
+/**
+ * This function closes the subtask input field and resets its view to the original state.
+ */
 function closeSubtask() {
+    /**
+     * Get the subtask buttons and input elements.
+     */
     let subtaskButtons = document.getElementById('subtask-buttons');
     let subtaskInput = document.getElementById('subtaskInput');
 
-    // Setze die Ansicht auf den ursprünglichen Zustand zurück
+    /**
+     * Reset the view to the original state.
+     */
     subtaskButtons.innerHTML = `
         <img class="subtask-img symbol-hover icon-hover" src="./img/task/subtask.svg" alt="add subtask">
     `;
@@ -128,16 +146,27 @@ function closeSubtask() {
     document.removeEventListener('click', closeSubtaskOnOutsideClick);
 }
 
-// This function closes the subtask input field when a click occurs outside the subtask wrapper.
+/**
+ * This function closes the subtask input field when a click occurs outside the subtask wrapper.
+ * @param {Event} event - The click event.
+ */
 function closeSubtaskOnOutsideClick(event) {
+    /**
+     * Get the subtask wrapper element.
+     */
     let subtaskWrapper = document.getElementById('subtask-input-wrapper');
     if (!subtaskWrapper.contains(event.target)) {
         closeSubtask();
     }
 }
 
-// This function adds a new subtask to the list and updates the display.
+/**
+ * This function adds a new subtask to the list and updates the display.
+ */
 function addSubtask() {
+    /**
+     * Get the subtask input and the element to display added subtasks.
+     */
     let subtaskInput = document.getElementById('subtaskInput');
     let addedSubtask = document.getElementById('subtasks');
 
@@ -146,8 +175,6 @@ function addSubtask() {
     }
     addedSubtask.innerHTML = '';
 
-    // getAddSubtaskTemplate();
-
     for (let i = 0; i < subtasks.length; i++) {
         const element = subtasks[i];
         addedSubtask.innerHTML += getAddSubtaskTemplate(i, element);
@@ -155,21 +182,35 @@ function addSubtask() {
     closeSubtask();
 }
 
-// This function edits an existing subtask by replacing its content with an input field.
+/**
+ * This function edits an existing subtask by replacing its content with an input field.
+ * @param {number} index - The index of the subtask to edit.
+ */
 function editSubtask(index) {
+    /**
+     * Get the subtask element and its current text.
+     */
     let subtaskElement = document.getElementById(`subtask${index}`);
     let currentText = subtasks[index];
 
     subtaskElement.innerHTML = editSubtaskTemplate(index, currentText);
 
-    // Fokussiere das Eingabefeld und setze den Cursor ans Ende
+    /**
+     * Focus the input field and set the cursor to the end.
+     */
     let input = subtaskElement.querySelector('.edit-subtask-input');
     input.focus();
     input.setSelectionRange(input.value.length, input.value.length);
 }
 
-// This function replaces the text of an edited subtask and updates the display.
+/**
+ * This function replaces the text of an edited subtask and updates the display.
+ * @param {number} index - The index of the subtask to replace.
+ */
 function replaceSubtask(index) {
+    /**
+     * Get the subtask element and its input field.
+     */
     let subtaskElement = document.getElementById(`subtask${index}`);
     let input = subtaskElement.querySelector('.edit-subtask-input');
     let newText = input.value.trim();
@@ -182,14 +223,22 @@ function replaceSubtask(index) {
     }
 }
 
-// This function deletes a subtask from the list and updates the display.
+/**
+ * This function deletes a subtask from the list and updates the display.
+ * @param {number} index - The index of the subtask to delete.
+ */
 function deleteSubtask(index) {
     subtasks.splice(index, 1);
     updateSubtaskDisplay();
 }
 
-// This function updates the display of all subtasks after adding, editing, or deleting a subtask.
+/**
+ * This function updates the display of all subtasks after adding, editing, or deleting a subtask.
+ */
 function updateSubtaskDisplay() {
+    /**
+     * Get the element to display the subtasks.
+     */
     let addedSubtask = document.getElementById('subtasks');
     addedSubtask.innerHTML = '';
 
@@ -199,14 +248,16 @@ function updateSubtaskDisplay() {
     }
 }
 
-// validation
-// This function initializes the form validation by adding an event listener to the submit button.
+/** validation*/
+/**
+ * This function initializes the form validation by adding an event listener to the submit button.
+ */
 function initializeValidation() {
     const submitButton = document.querySelector('.submit-button');
 
     if (submitButton) {
         submitButton.addEventListener('click', async function(event) {
-            event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
+            event.preventDefault(); /** Prevents the default form submission behavior*/
 
             if (validateForm()) {
                 await createTask();
@@ -218,7 +269,10 @@ function initializeValidation() {
     }
 };
 
-// This function validates the entire form by calling individual validation functions for each field.
+/**
+ * This function validates the entire form by calling individual validation functions for each field.
+ * @returns {boolean} Whether the form is valid.
+ */
 function validateForm() {
     let isValid = true;
 
@@ -229,7 +283,10 @@ function validateForm() {
     return isValid;
 }
 
-// This function validates the title field to ensure it is not empty and meets the minimum length requirement.
+/**
+ * This function validates the title field to ensure it is not empty and meets the minimum length requirement.
+ * @returns {boolean} Whether the title is valid.
+ */
 function validateTitle() {
     const title = document.getElementById('title').value.trim();
     const titleError = document.getElementById('title-error');
@@ -248,7 +305,10 @@ function validateTitle() {
     return true;
 }
 
-// This function validates the due date field to ensure it is not empty and meets the required format.
+/**
+ * This function validates the due date field to ensure it is not empty and meets the required format.
+ * @returns {boolean} Whether the due date is valid.
+ */
 function validateDueDate() {
     const dueDate = document.getElementById('datepicker').value.trim();
     const dueDateError = document.getElementById('due-date-error');
@@ -262,7 +322,10 @@ function validateDueDate() {
     return true;
 }
 
-// This function validates the category selection to ensure a category is selected.
+/**
+ * This function validates the category selection to ensure a category is selected.
+ * @returns {boolean} Whether the category is valid.
+ */
 function validateCategory() {
     const categorySelection = document.getElementById('category-selection');
     const errorMessage = document.getElementById('error-message');
@@ -276,58 +339,59 @@ function validateCategory() {
     return true;
 }
 
-// This function displays an overlay indicating that the task has been added successfully,
-// hides the task added overlay and redirects to the board page.
+/**
+ * This function displays an overlay indicating that the task has been added successfully,
+ * hides the task added overlay, and redirects to the board page.
+ */
 function showTaskAddedOverlay() {
     const overlay = document.getElementById('task-added-overlay');
     overlay.classList.remove('d-none');
     setTimeout(() => {
         overlay.classList.add('show');
-    }, 10); // Kleine Verzögerung für die Animation
+    }, 10); 
 
-    // Automatisches Ausblenden nach 3 Sekunden
     setTimeout(() => {
         overlay.classList.remove('show');
         setTimeout(() => {
             overlay.classList.add('d-none');
             goToBoard();
-        }, 300); // Warten auf das Ende der Ausblend-Animation
+        }, 300); 
     }, 3000);
 }
 
-// This function redirects the user to the board page.
+/**
+ * This function redirects the user to the board page.
+ */
 function goToBoard() {
     window.location.href = 'board.html';
 }
 
-// This function clears all fields and resets the form to its initial state.
+/**
+ * This function clears all fields and resets the form to its initial state.
+ */
 function clearForm() {
-    // Clear text fields
     document.getElementById('title').value = '';
     document.getElementById('description').value = '';
     document.getElementById('datepicker').value = '';
 
-    // Clear contacts
     selectedContacts = [];
     updateSelectedContacts();
 
-    // Reset priority
     resetAllPriorityButtons();
     setMediumPriority();
 
-    // Reset category
     resetCategory();
 
-    // Clear subtasks
     subtasks = [];
     updateSubtaskDisplay();
 
-    // Remove all error messages
     const errorMessages = document.querySelectorAll('.error-message');
     errorMessages.forEach(msg => msg.classList.add('d-none'));
 }
 
-// This function resets the category selection to its initial state.
+/**
+ * This function resets the category selection to its initial state.
+ */
 function resetCategory() {
     const categorySelection = document.getElementById('category-selection');
     categorySelection.textContent = 'Select task category';

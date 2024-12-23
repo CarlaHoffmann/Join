@@ -1,9 +1,9 @@
 const task_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
-// This URL is used to connect to the Firebase Realtime Database.
+/** This URL is used to connect to the Firebase Realtime Database. */
 
 let selectedContacts = [];
 
-// This function opens the contact dropdown and populates it with contacts.
+/** This function opens the contact dropdown and populates it with contacts.*/
 async function openAssigned() {
     let contactDropDown = document.getElementById('contact-drop-down');
     let contactsToSelect = document.getElementById('contacts-to-select');
@@ -18,15 +18,17 @@ async function openAssigned() {
     contactDropDown.style.display = 'block';
 }
 
-// This asynchronous function fetches contacts from the Firebase Realtime Database.
-// Purpose: Retrieves a list of contacts from the Firebase Realtime Database.
-// Return: An array of contact objects with id and name properties.
+/** 
+ * This asynchronous function fetches contacts from the Firebase Realtime Database.
+ * Purpose: Retrieves a list of contacts from the Firebase Realtime Database.
+ * Return: An array of contact objects with id and name properties.
+ */
 async function loadContacts() {
     try {
         const response = await fetch(`${task_base_url}/users.json`);
         const users = await response.json();
 
-        // Erstelle ein Array von Kontakten
+        /** Create an array with contacts */
         const contactsArray = Object.entries(users).map(([userId, userData]) => ({ id: userId, name: userData.name }));
 
         return contactsArray;
@@ -36,21 +38,23 @@ async function loadContacts() {
     }
 }
 
-// This function prepares the contacts array by sorting and positioning the logged-in user at the top.
+/** This function prepares the contacts array by sorting and positioning the logged-in user at the top.*/
 async function prepareContacts(contacts, loggedInUser) {
     if (!loggedInUser) return contacts;
 
     const loggedInContactIndex = contacts.findIndex(contact => contact.name === loggedInUser.name);
     if (loggedInContactIndex !== -1) {
-        const [loggedInContact] = contacts.splice(loggedInContactIndex, 1); // Entferne den User aus dem Array
+        const [loggedInContact] = contacts.splice(loggedInContactIndex, 1); /** Remove the user from the array */
         contacts.sort((a, b) => a.name.localeCompare(b.name));
-        return [loggedInContact, ...contacts]; // Füge ihn an erster Stelle wieder hinzu
+        return [loggedInContact, ...contacts]; /** Add it back at the beginning */
     }
 
     return contacts.sort((a, b) => a.name.localeCompare(b.name));
 }
 
-// This function generates the HTML for displaying the contacts.
+/** 
+ * This function generates the HTML for displaying the contacts.
+ */
 function createContactsHTML(contacts, selectedContacts, loggedInUser) {
     let contactsHTML = '';
 
@@ -68,29 +72,33 @@ function createContactsHTML(contacts, selectedContacts, loggedInUser) {
     return contactsHTML;
 }
 
-// This asynchronous function retrieves the currently logged-in user from the Firebase Realtime Database.
+/** 
+ * This asynchronous function retrieves the currently logged-in user from the Firebase Realtime Database.
+ */
 async function getUser() {
     try {
-        const response = await fetch(`${task_base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
+        const response = await fetch(`${task_base_url}/loggedIn.json`); 
         const loggedInData = await response.json();
 
-        return { name: loggedInData.name }; // Rückgabe des Namens des eingeloggten Users
+        return { name: loggedInData.name };
     } catch (error) {
         console.error("Fehler beim Abrufen des Benutzers:", error);
         return null;
     }
 }
 
-// This function handles the click event on a contact label.
-// Purpose: Toggles the selection status of a contact when its label is clicked.
+/** This function handles the click event on a contact label.
+* Purpose: Toggles the selection status of a contact when its label is clicked.
+*/
 function handleContactClick(event) {
     event.stopPropagation(); // Verhindert die Ausbreitung des Events
     const checkbox = event.currentTarget.querySelector('input[type="checkbox"]');
     toggleContact({ target: checkbox }); // Aktualisiere den Kontaktstatus
 }
 
-// This function toggles the selection status of a contact.
-// Purpose: Adds or removes a contact from the selectedContacts array based on the checkbox state.
+/** This function toggles the selection status of a contact.
+* Purpose: Adds or removes a contact from the selectedContacts array based on the checkbox state.
+*/
 function toggleContact(event) {
     const checkbox = event.target;
     const contactName = checkbox.value;
@@ -104,29 +112,39 @@ function toggleContact(event) {
     }
 }
 
-// This function updates the display of selected contacts.
+/** 
+ * This function updates the display of selected contacts.
+ */
 async function updateSelectedContacts() {
     let contactInitials = document.getElementById('selected-contacts');
-    contactInitials.innerHTML = ''; // Leere den Inhalt vor dem Neuaufbau
+    contactInitials.innerHTML = ''; 
 
-    let contactInis = ''; // Variable zum Sammeln der HTML-Strings
+    let contactInis = ''; /** Variable for collecting strings*/
 
     for (let i = 0; i < selectedContacts.length; i++) {
         const contactName = selectedContacts[i];
         let initials = contactName.split(' ').map(word => word[0]).join('');
         
-        // Farbe für den Kontakt abrufen
+        /** 
+         * Get color of contacts
+         */
         let color = await getContactColor(contactName);
         
-        // Füge den HTML-String zur Sammlung hinzu
+        /** 
+         * Add HTML-String to collection
+         */
         contactInis += `<div class="contact-initial" style="background-color: ${color};">${initials}</div>`;
     }
 
-    // Füge alle Kontakt-Initialen hinzu
+    /** 
+     * Add all contact-initials 
+    */
     contactInitials.innerHTML = contactInis;
 }
 
-// This asynchronous function retrieves the color associated with a contact.
+/** 
+ * This asynchronous function retrieves the color associated with a contact.
+ */
 async function getContactColor(contactName) {
     try {
         const response = await fetch(`${task_base_url}/users.json`);
@@ -138,14 +156,16 @@ async function getContactColor(contactName) {
                 return await colorResponse.json();
             }
         }
-        return '#000000'; // Standardfarbe, falls keine gefunden wird
+        return '#000000'; /** Standard, if no color can be found*/
     } catch (error) {
         console.error("Fehler beim Abrufen der Kontaktfarbe:", error);
-        return '#000000'; // Standardfarbe im Fehlerfall
+        return '#000000'; /** Standard color if not found*/
     }
 }
 
-// This function closes the contact dropdown and clears its content.
+/** 
+ * This function closes the contact dropdown and clears its content.
+ */
 function closeAssigned() {
     let contactDropDown = document.getElementById('contact-drop-down');
     let contactsToSelect = document.getElementById('contacts-to-select');
@@ -154,10 +174,14 @@ function closeAssigned() {
     updateSelectedContacts();
 }
 
-//Date
+/** 
+ * Date
+ */
 let datepicker, warningDialog, dialogMessage, currentYear, maxYear;
 
-//This function initializes the date picker and sets up event listeners.
+/** 
+ * This function initializes the date picker and sets up event listeners.
+ */
 function initializeDatePicker() {
     datepicker = document.getElementById('datepicker');
     warningDialog = document.getElementById('warning-dialog');
@@ -172,14 +196,18 @@ function initializeDatePicker() {
     }
 }
 
-// This function sets up event listeners for the date picker.
+/** 
+ * This function sets up event listeners for the date picker.
+ */
 function setupEventListeners(datepicker, warningDialog) {
     datepicker.addEventListener('input', handleDateInput);
     datepicker.addEventListener('blur', validateFullDate);
     window.onclick = (event) => handleWindowClick(event, warningDialog);
 }
 
-// These functions handle and validate the date input.
+/**
+ * These functions handle and validate the date input.
+ */
 function handleDateInput() {
     let value = this.value.replace(/\D/g, '');
     let parts = [value.slice(0, 2), value.slice(2, 4), value.slice(4, 8)];
@@ -187,12 +215,20 @@ function handleDateInput() {
     this.value = formatDate(parts);
 }
 
+/**
+ * Validates and formats the day, month, and year parts of the date.
+ * @param {Array<string>} parts - An array containing the day, month, and year parts.
+ */
 function validateAndFormatParts(parts) {
     validateDay(parts);
     validateMonth(parts);
     validateYear(parts);
 }
 
+/**
+ * Validates the day part of the date to ensure it is within the valid range (1-31).
+ * @param {Array<string>} parts - An array containing the day, month, and year parts.
+ */
 function validateDay(parts) {
     if (parts[0].length === 2) {
         let day = parseInt(parts[0]);
@@ -201,6 +237,10 @@ function validateDay(parts) {
     }
 }
 
+/**
+ * Validates the month part of the date to ensure it is within the valid range (1-12).
+ * @param {Array<string>} parts - An array containing the day, month, and year parts.
+ */
 function validateMonth(parts) {
     if (parts[1].length === 2) {
         let month = parseInt(parts[1]);
@@ -209,6 +249,10 @@ function validateMonth(parts) {
     }
 }
 
+/**
+ * Validates the year part of the date to ensure it is within a specified range.
+ * @param {Array<string>} parts - An array containing the day, month, and year parts.
+ */
 function validateYear(parts) {
     if (parts[2].length === 4) {
         let year = parseInt(parts[2]);
@@ -217,10 +261,18 @@ function validateYear(parts) {
     }
 }
 
+/**
+ * Formats the date parts into a string in the format DD/MM/YYYY.
+ * @param {Array<string>} parts - An array containing the day, month, and year parts.
+ * @returns {string} The formatted date string.
+ */
 function formatDate(parts) {
     return parts.join('/').replace(/\/+$/, '');
 }
 
+/**
+ * Validates the full date to ensure it forms a valid date.
+ */
 function validateFullDate() {
     const parts = this.value.split('/');
     if (parts.length === 3 && parts[2].length === 4) {
@@ -229,11 +281,9 @@ function validateFullDate() {
     }
 }
 
-// function isValidDate(date, day, month, year) {
-//     return date.getDate() === day && date.getMonth() === month && date.getFullYear() === year;
-// }
-
-// This function handles window clicks to close the warning dialog if necessary.
+/** 
+ * This function handles window clicks to close the warning dialog if necessary.
+ */
 function handleWindowClick(event, warningDialog) {
     if (event.target == warningDialog) {
         closeWarningDialog(warningDialog);
