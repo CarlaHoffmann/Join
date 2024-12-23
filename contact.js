@@ -314,7 +314,6 @@ function showContactAddedOverlay() {
         overlay.classList.remove('show');
         setTimeout(() => {
             overlay.classList.add('hidden');
-            goToBoard();
         }, 300); // Warten auf das Ende der Ausblend-Animation
     }, 3000);
 }
