@@ -419,16 +419,15 @@ async function openTaskOverlay(task) {
 
             <!-- Delete and Edit Buttons -->
             <div class="deleteEditBtnContainer">
-                <!-- Delete Button -->
-                <div class="icon-text-button" onclick="deleteTask('${currentTask.id}')">
-                    <svg class="icon-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 6H5H21" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M19 6V19C19 20.1046 18.1046 21 17 21H7C5.89543 21 5 20.1046 5 19V6" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M10 11V17" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M14 11V17" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M8 6V4C8 3.44772 8.44772 3 9 3H15C15.5523 3 16 3.44772 16 4V6" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span class="icon-text">Delete</span>
+    <div class="icon-text-button" onclick="deleteTask('${currentTask.id}')">
+        <svg class="icon-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 6H5H21" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19 6V19C19 20.1046 18.1046 21 17 21H7C5.89543 21 5 20.1046 5 19V6" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 11V17" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 11V17" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 6V4C8 3.44772 8.44772 3 9 3H15C15.5523 3 16 3.44772 16 4V6" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="icon-text">Delete</span>
                 </div>
 
                 <!-- Vertikale Trennlinie -->
@@ -948,7 +947,6 @@ async function saveTaskSubtasks(task) {
 
 
 //new
-
 async function updateOverlay(taskId, taskStatus) {
     try {
         // Abrufen der aktualisierten Daten aus Firebase
@@ -990,8 +988,6 @@ async function initializeValidationEdit(task) {
 
 //  Task Overlay Delete 
 
-
-
 function closeTaskOverlay() {
     const overlayContainer = document.getElementById('taskOverlayContainer');
 
@@ -1011,9 +1007,6 @@ function closeTaskOverlay() {
 
 
 // NEW FUNC.
-addSubtaskListeners
-
-
 function addSubtaskListeners(task) {
     const overlayContainer = document.getElementById('taskOverlayContainer');
     const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
@@ -1077,7 +1070,7 @@ async function deleteTask(taskId) {
     }
 
     try {
-        // Identifiziere die Spalte, aus der die Aufgabe entfernt werden soll
+        // Identifiziere die Spalte (z. B. "done")
         const taskElement = document.getElementById(`task-${taskId}`);
         if (!taskElement) {
             console.error(`Task element with ID task-${taskId} not found.`);
@@ -1085,41 +1078,26 @@ async function deleteTask(taskId) {
         }
 
         const parentColumnId = taskElement.parentElement.id.replace("Tasks", "");
+
+        // Lösche die Aufgabe und alle Subtasks aus Firebase
         const taskUrl = `${base_url}/tasks/${parentColumnId}/${taskId}.json`;
-
-        // 1. Hole die Task-Daten, um sicherzustellen, dass Subtasks existieren
-        const response = await fetch(taskUrl);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch task: ${response.status}`);
-        }
-
-        const taskData = await response.json();
-
-        // 2. Lösche Subtasks (falls vorhanden)
-        if (taskData && taskData.subtasks) {
-            const subtaskKeys = Object.keys(taskData.subtasks);
-            for (const subtaskKey of subtaskKeys) {
-                const subtaskUrl = `${base_url}/tasks/${parentColumnId}/${taskId}/subtasks/${subtaskKey}.json`;
-                await fetch(subtaskUrl, { method: 'DELETE' });
-            }
-        }
-
-        // 3. Lösche die Hauptaufgabe
         const deleteResponse = await fetch(taskUrl, { method: 'DELETE' });
+
         if (!deleteResponse.ok) {
             throw new Error(`Failed to delete task: ${deleteResponse.status}`);
         }
 
-        // 4. Entferne die Task aus dem DOM
+        console.log(`Task ${taskId} deleted from Firebase.`);
+
+        // Entferne die Aufgabe aus dem DOM
         taskElement.remove();
 
-        // 5. Aktualisiere den Platzhalter
+        // Aktualisiere den Platzhalter
         updatePlaceholders();
 
-        // 6. Schließe das Overlay, falls geöffnet
+        // Schließe das Overlay, falls geöffnet
         closeTaskOverlay();
 
-        console.log(`Task ${taskId} deleted successfully.`);
     } catch (error) {
         console.error(`Error deleting task ${taskId}:`, error);
     }
@@ -1147,3 +1125,13 @@ function updatePlaceholders() {
 const searchField = document.querySelector('#searchField');
 console.log(searchField);
 
+
+
+async function reloadTasksAfterDeletion() {
+    try {
+        await loadTasks(); // Ruft alle Tasks erneut ab
+        console.log("Tasks reloaded after deletion.");
+    } catch (error) {
+        console.error("Error reloading tasks:", error);
+    }
+}
