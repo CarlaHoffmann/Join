@@ -11,9 +11,7 @@
 
     <script src="./nav.js"></script>
     <script src="returnColor.js"></script>
-    <!-- <script src="back_button.js"></script> -->
 </head>
-
 <body>
     <header>
         <div class="nav-bar" w3-include-html="nav.html"></div>
@@ -58,18 +56,7 @@
         </div>
 
         <div id="contactDetailsOverlayMenu"></div>
-        <!-- Edit/Delete Dropdown -->
-        <!-- <div id="options-menu" class="options-menu hidden">
-            <div onclick="toggleView('editContactBoxOverlay', '${key}', true)" class="option-item">
-                <img src="img/contact/edit.svg" alt="Edit">
-                <span>Edit</span>
-            </div>
 
-            <div onclick="deleteContact('${key}')" class="option-item">
-                <img src="img/contact/delete.svg" alt="Delete">
-                <span>Delete</span>
-            </div>
-        </div> -->
     </div>
 
     <!--add contact box-->
@@ -93,7 +80,6 @@
                 <div class="imgBox">
                     <img class="overlay-contact-img" src="./img/contact/add-user.svg" alt="">
                 </div>
-
                 <form method="post" id="addContactForm" action="contact.html"
                     onsubmit="event.preventDefault(); addContact()">
                     <div class="input-fields">
@@ -113,7 +99,6 @@
                             <img src="/img/login/call.svg" alt="Phone Icon" class="input-icon">
                         </div>
                     </div>
-
                     <div class="add-form-buttons">
                         <button type="reset" class="clear-button form-button hover-button">
                             Cancel
@@ -130,8 +115,6 @@
 
         </div>
     </div>
-
-
     <!--edit contact box-->
     <div id="editContactBoxOverlay" class="hidden">
         <div id="editContactBox">
@@ -144,7 +127,6 @@
                 <img class="logo" src="img/contact/logo.svg">
                 <div class="contactHeaderText">
                     <h2 id="editContactHeadline">Edit Contact</h2>
-                    <!-- <p>Tasks are better with a team!</p> -->
                     <img class="dividerOverlay" src="img/contact/dividerOverlay.svg">
                 </div>
             </div>
@@ -194,7 +176,6 @@
             Contact successfully created
         </div>
     </div>
-
     <!--adding scripts-->
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script>
