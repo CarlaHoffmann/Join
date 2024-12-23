@@ -185,7 +185,6 @@ function dragEnd(event) {
 }
 
 // Funktion zum Verschieben von Tasks zwischen Spalten
-// Funktion zum Verschieben von Tasks zwischen Spalten
 async function drop(event, newStatus) {
     event.preventDefault();
     const taskId = event.dataTransfer.getData("taskId");
@@ -990,33 +989,7 @@ async function initializeValidationEdit(task) {
 
 
 //  Task Overlay Delete 
-async function deleteTask(taskId) {
-    const confirmDelete = confirm("Are you sure you want to delete this task?");
-    if (confirmDelete) {
-        try {
-            // Identifiziere die Spalte (toDo, progress, feedback, done) anhand der Task-ID
-            const taskElement = document.getElementById(`task-${taskId}`);
-            const parentColumnId = taskElement.parentElement.id.replace("Tasks", "");
 
-            // Lösche die Task aus Firebase
-            const url = `${base_url}/tasks/${parentColumnId}/${taskId}.json`;
-            await fetch(url, { method: 'DELETE' });
-
-            // Entferne die Task aus dem DOM
-            taskElement.remove();
-
-            // Überprüfe, ob der Placeholder angezeigt werden soll
-            updatePlaceholders();
-
-            // Schließe das Overlay
-            closeTaskOverlay();
-
-            console.log(`Task ${taskId} deleted successfully`);
-        } catch (error) {
-            console.error("Error deleting task:", error);
-        }
-    }
-}
 
 
 function closeTaskOverlay() {
@@ -1097,10 +1070,60 @@ function updateTaskUI(taskId, taskPath, taskData) {
 }
 
 
+async function deleteTask(taskId) {
+    const confirmDelete = confirm("Are you sure you want to delete this task?");
+    if (!confirmDelete) {
+        return;
+    }
 
+    try {
+        // Identifiziere die Spalte, aus der die Aufgabe entfernt werden soll
+        const taskElement = document.getElementById(`task-${taskId}`);
+        if (!taskElement) {
+            console.error(`Task element with ID task-${taskId} not found.`);
+            return;
+        }
 
+        const parentColumnId = taskElement.parentElement.id.replace("Tasks", "");
+        const taskUrl = `${base_url}/tasks/${parentColumnId}/${taskId}.json`;
 
+        // 1. Hole die Task-Daten, um sicherzustellen, dass Subtasks existieren
+        const response = await fetch(taskUrl);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch task: ${response.status}`);
+        }
 
+        const taskData = await response.json();
+
+        // 2. Lösche Subtasks (falls vorhanden)
+        if (taskData && taskData.subtasks) {
+            const subtaskKeys = Object.keys(taskData.subtasks);
+            for (const subtaskKey of subtaskKeys) {
+                const subtaskUrl = `${base_url}/tasks/${parentColumnId}/${taskId}/subtasks/${subtaskKey}.json`;
+                await fetch(subtaskUrl, { method: 'DELETE' });
+            }
+        }
+
+        // 3. Lösche die Hauptaufgabe
+        const deleteResponse = await fetch(taskUrl, { method: 'DELETE' });
+        if (!deleteResponse.ok) {
+            throw new Error(`Failed to delete task: ${deleteResponse.status}`);
+        }
+
+        // 4. Entferne die Task aus dem DOM
+        taskElement.remove();
+
+        // 5. Aktualisiere den Platzhalter
+        updatePlaceholders();
+
+        // 6. Schließe das Overlay, falls geöffnet
+        closeTaskOverlay();
+
+        console.log(`Task ${taskId} deleted successfully.`);
+    } catch (error) {
+        console.error(`Error deleting task ${taskId}:`, error);
+    }
+}
 
 
 
@@ -1123,3 +1146,4 @@ function updatePlaceholders() {
 
 const searchField = document.querySelector('#searchField');
 console.log(searchField);
+
