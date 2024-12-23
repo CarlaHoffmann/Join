@@ -1,6 +1,3 @@
-
-
-
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app";
 
 // Aufgaben beim Laden der Seite aus der Datenbank abrufen
@@ -950,19 +947,12 @@ function closeTaskOverlay() {
 
     // Speichern der Subtasks
     if (currentTask) {
-        saveTaskSubtasks(currentTask).then(() => {
-            // Board-Seite aktualisieren
-            updateTaskUI(currentTask.id, currentTask.path, currentTask);
-            console.log('Subtasks updated and board refreshed.');
-        }).catch(error => {
-            console.error('Error saving subtasks:', error);
-        });
+        saveTaskSubtasks(currentTask);
     }
 
     overlayContainer.classList.add('d-none');
     overlayContainer.innerHTML = ''; // Inhalt löschen
 }
-
 
 // new
 async function saveTaskSubtasks(task) {
@@ -1023,38 +1013,6 @@ async function initializeValidationEdit(task) {
 }
 
 
-function addSubtaskListeners(task) {
-    const overlayContainer = document.getElementById('taskOverlayContainer');
-    const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
-
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', async () => {
-            const subtaskKey = checkbox.dataset.subtaskKey;
-            const isChecked = checkbox.checked;
-
-            // Subtask-Status im Task-Objekt aktualisieren
-            task.subtasks[subtaskKey].checked = isChecked;
-
-            try {
-                // Subtask in Firebase aktualisieren
-                const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskKey}.json`;
-                await fetch(url, {
-                    method: 'PUT',
-                    body: JSON.stringify(task.subtasks[subtaskKey]),
-                    headers: { 'Content-Type': 'application/json' },
-                });
-
-                console.log(`Subtask ${subtaskKey} updated:`, isChecked);
-
-                // Board-Seite aktualisieren
-                updateTaskUI(task.id, task.path, task);
-            } catch (error) {
-                console.error(`Error updating subtask ${subtaskKey}:`, error);
-            }
-        });
-    });
-}
-
 
 //  Task Overlay Delete 
 async function deleteTask(taskId) {
@@ -1084,7 +1042,6 @@ async function deleteTask(taskId) {
         }
     }
 }
-
 
 
 
