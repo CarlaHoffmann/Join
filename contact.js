@@ -31,10 +31,7 @@ async function addContact(){
     loadContactData();
 }
 
-// function getNameInitials(name) {
-//     let nameParts = name.split(' ');
-//     return nameParts[0].charAt(0) + nameParts[nameParts.length - 1].charAt(0);
-// }
+
 function getNameInitials(name) {
     let nameParts = name.split(' ');
     if (nameParts.length < 2) {
@@ -268,7 +265,7 @@ async function editContact() {
     const response = await fetch(`${base_url}/users/${editKey}.json`);
     const user = await response.json();
     console.log(user);
-    // const user = base_url + "users" + "/" + editKey;
+    
     showContactDetails(editKey, user.name, user.mail, user.phone, user.color);
 }
 
