@@ -530,12 +530,11 @@ function showContactAddedOverlay() {
 }
 
 function startEditOrAddAnimation(operation){
-    const smartView = window.matchMedia('(max-width:680px)').matches
-    if(smartView && operation === 'add'){
+    if(operation === 'add'){
         document.querySelector('#addContactBoxOverlay').classList.add('show');
         document.querySelector('#addContactBoxOverlay').classList.remove('hidden');
     }
-    if(smartView && operation === 'edit'){
+    if(operation === 'edit'){
         document.querySelector('#editContactBoxOverlay').classList.add('show');
         document.querySelector('#editContactBoxOverlay').classList.remove('hidden');
     }
