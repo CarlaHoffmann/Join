@@ -205,6 +205,19 @@
         width: 100vw;
         height: calc(100vh - 160px);
         top:80px;
+    }
+    #editContactBoxOverlay.show, #addContactBoxOverlay.show {
+        display: flex;
+        animation: slideUp 0.5s ease forwards;
+    }
+    
+    @keyframes slideUp {
+        from {
+            top: 100vh;
+        }
+        to {
+            top: 0;
+        }
     }    
 }
 

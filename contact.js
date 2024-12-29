@@ -141,7 +141,7 @@ function returncontactDetailsMenuTemplate(key) {
     return `
         <div id="options-menu" class="options-menu hidden">
             <!-- Edit Option -->
-            <div onclick="toggleView('editContactBoxOverlay', '${key}', true)" class="option-item">
+            <div onclick="toggleView('editContactBoxOverlay', '${key}', true); startEditOrAddAnimation('edit')" class="option-item">
                 <img src="img/contact/edit.svg" alt="Edit">
                 <span>Edit</span>
             </div>
@@ -527,4 +527,16 @@ function showContactAddedOverlay() {
             overlay.classList.add('hidden');
         }, 300); // Warten auf das Ende der Ausblend-Animation
     }, 3000);
+}
+
+function startEditOrAddAnimation(operation){
+    const smartView = window.matchMedia('(max-width:680px)').matches
+    if(smartView && operation === 'add'){
+        document.querySelector('#addContactBoxOverlay').classList.add('show');
+        document.querySelector('#addContactBoxOverlay').classList.remove('hidden');
+    }
+    if(smartView && operation === 'edit'){
+        document.querySelector('#editContactBoxOverlay').classList.add('show');
+        document.querySelector('#editContactBoxOverlay').classList.remove('hidden');
+    }
 }

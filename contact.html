@@ -19,7 +19,7 @@
     <div id="contactContent">
         <!--contacts-->
         <div id="contacts">
-            <button id="addContactButton" onclick="toggleView('addContactBoxOverlay')"><span>Add new contact</span><img
+            <button id="addContactButton" onclick="toggleView('addContactBoxOverlay'); startEditOrAddAnimation('add')"><span>Add new contact</span><img
                     src="img/contact/person_add.svg"></button>
             <section id="contactList">
             </section>
@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <div class="addContactInfoOverlay">
+            <div class="addContactInfoOverlay" class="hidden">
                 <div class="imgBox">
                     <img class="overlay-contact-img" src="./img/contact/add-user.svg" alt="">
                 </div>

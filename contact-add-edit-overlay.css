@@ -10,6 +10,20 @@
     justify-content: center;
     align-items: center;
 }
+
+#editContactBoxOverlay.show, #addContactBoxOverlay.show {
+    display: flex;
+    animation: slideUp 0.5s ease forwards;
+}
+
+@keyframes slideUp {
+    from {
+        left:10vw;
+    }
+    to {
+        left:0;
+    }
+}
   
 #addContactBox, #editContactBox {
     width:80%;
