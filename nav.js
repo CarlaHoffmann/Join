@@ -55,7 +55,7 @@ async function getInitials() {
             });
 
             const initialsElement = document.getElementById('first-letters');
-            initialsElement.textContent = initials; // Initialen setzen
+            initialsElement.textContent = initials;
         } else {
             console.warn("Kein Benutzer eingeloggt oder Name fehlt.");
         }
@@ -70,9 +70,9 @@ async function getInitials() {
  */
 async function getNavUser() {
     try {
-        const response = await fetch(`${nav_base_url}/loggedIn.json`); // Beispiel-Pfad für den eingeloggten User
+        const response = await fetch(`${nav_base_url}/loggedIn.json`);
         const loggedInData = await response.json();
-        return { name: loggedInData.name }; // Rückgabe des Namens des eingeloggten Users
+        return { name: loggedInData.name }; 
     } catch (error) {
         console.error("Fehler beim Abrufen des Benutzers:", error);
         return null;
