@@ -15,22 +15,45 @@ function toggleHelpMenu() {
 /**
  * This function highlights the active link in the sidebar and mobile navigation.
  */
+// function activeLink() {
+//     // Aktuellen Pfad abrufen und normalisieren
+//     const currentPath = window.location.pathname.replace(/^\/|\/$/g, '');
+
+//     // Alle Links im Sidebar und Mobile Nav durchlaufen
+//     const links = document.querySelectorAll('#sidebar a, #mobileNav a');
+
+//     links.forEach(link => {
+//         // href des Links abrufen und normalisieren
+//         const linkPath = link.getAttribute('href').replace(/^\/|\/$/g, '');
+
+//         // Überprüfen, ob der href des Links mit dem aktuellen Pfad übereinstimmt
+//         if (linkPath === currentPath) {
+//             link.classList.add('active-link'); // Aktiven Link hinzufügen
+//         } else {
+//             link.classList.remove('active-link'); // Anderen Links entfernen
+//         }
+//     });
+// }
+/**
+ * Highlights the active link in the sidebar and mobile navigation.
+ * A link is considered active if its path is contained within the current URL path.
+ */
 function activeLink() {
-    // Aktuellen Pfad abrufen und normalisieren
+    // Retrieve and normalize the current path
     const currentPath = window.location.pathname.replace(/^\/|\/$/g, '');
 
-    // Alle Links im Sidebar und Mobile Nav durchlaufen
+    // Iterate through all links in the sidebar and mobile navigation
     const links = document.querySelectorAll('#sidebar a, #mobileNav a');
 
     links.forEach(link => {
-        // href des Links abrufen und normalisieren
+        // Retrieve and normalize the href attribute of the link
         const linkPath = link.getAttribute('href').replace(/^\/|\/$/g, '');
 
-        // Überprüfen, ob der href des Links mit dem aktuellen Pfad übereinstimmt
-        if (linkPath === currentPath) {
-            link.classList.add('active-link'); // Aktiven Link hinzufügen
+        // Check if the current path includes the link's path
+        if (currentPath.includes(linkPath)) {
+            link.classList.add('active-link'); // Add the active link class
         } else {
-            link.classList.remove('active-link'); // Anderen Links entfernen
+            link.classList.remove('active-link'); // Remove the active link class from other links
         }
     });
 }
