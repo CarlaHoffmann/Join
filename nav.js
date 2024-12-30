@@ -13,28 +13,6 @@ function toggleHelpMenu() {
 }
 
 /**
- * This function highlights the active link in the sidebar and mobile navigation.
- */
-// function activeLink() {
-//     // Aktuellen Pfad abrufen und normalisieren
-//     const currentPath = window.location.pathname.replace(/^\/|\/$/g, '');
-
-//     // Alle Links im Sidebar und Mobile Nav durchlaufen
-//     const links = document.querySelectorAll('#sidebar a, #mobileNav a');
-
-//     links.forEach(link => {
-//         // href des Links abrufen und normalisieren
-//         const linkPath = link.getAttribute('href').replace(/^\/|\/$/g, '');
-
-//         // Überprüfen, ob der href des Links mit dem aktuellen Pfad übereinstimmt
-//         if (linkPath === currentPath) {
-//             link.classList.add('active-link'); // Aktiven Link hinzufügen
-//         } else {
-//             link.classList.remove('active-link'); // Anderen Links entfernen
-//         }
-//     });
-// }
-/**
  * Highlights the active link in the sidebar and mobile navigation.
  * A link is considered active if its path is contained within the current URL path.
  */
@@ -59,38 +37,63 @@ function activeLink() {
 }
 
 /**
- * This asynchronous function retrieves the initials of the logged-in user and displays them.
+ * Fetches the user's initials and handles the display or redirection based on login status.
+ * @async
  */
 async function getInitials() {
     try {
         const loggedInUser = await getNavUser();
-
-        if (loggedInUser && loggedInUser.name) { 
-            showNav();
-            
-            const nameParts = loggedInUser.name.split(" ");
-            let initials = "";
-
-            nameParts.forEach(part => {
-                if (part.length > 0) {
-                    initials += part[0].toUpperCase();
-                }
-            });
-
-            const initialsElement = document.getElementById('first-letters');
-            initialsElement.textContent = initials;
+        if (loggedInUser && loggedInUser.name) {
+            handleLoggedInUser(loggedInUser);
         } else {
-            // if no User logged in
-            // Get the current path
-            const path = window.location.pathname;
-
-            // Redirect to login.html if the path doesn't include privacyPolicy.html or legalNotice.html
-            if (!path.includes('privacyPolicy.html') && !path.includes('legalNotice.html')) {
-                window.location.href = './logIn.html';
-            }
+            handleNoLoggedInUser();
         }
     } catch (error) {
         console.error("Fehler beim Abrufen der Initialen:", error);
+    }
+}
+
+/**
+ * Handles actions for a logged-in user.
+ * @param {Object} user - The logged-in user object.
+ * @param {string} user.name - The name of the logged-in user.
+ */
+function handleLoggedInUser(user) {
+    showNav();
+    const initials = calculateInitials(user.name);
+    displayInitials(initials);
+}
+
+/**
+ * Calculates initials from a given name.
+ * @param {string} name - The full name of the user.
+ * @returns {string} The calculated initials.
+ */
+function calculateInitials(name) {
+    const nameParts = name.split(" ");
+    return nameParts
+        .filter(part => part.length > 0)
+        .map(part => part[0].toUpperCase())
+        .join('');
+}
+
+/**
+ * Displays the initials in the DOM.
+ * @param {string} initials - The initials to be displayed.
+ */
+function displayInitials(initials) {
+    const initialsElement = document.getElementById('first-letters');
+    initialsElement.textContent = initials;
+}
+
+/**
+ * Handles the case when no user is logged in.
+ * Redirects to login page unless on privacy policy or legal notice pages.
+ */
+function handleNoLoggedInUser() {
+    const path = window.location.pathname;
+    if (!path.includes('privacyPolicy.html') && !path.includes('legalNotice.html')) {
+        window.location.href = './logIn.html';
     }
 }
 
