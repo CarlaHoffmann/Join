@@ -80,7 +80,14 @@ async function getInitials() {
             const initialsElement = document.getElementById('first-letters');
             initialsElement.textContent = initials;
         } else {
-            console.warn("Kein Benutzer eingeloggt oder Name fehlt.");
+            // if no User logged in
+            // Get the current path
+            const path = window.location.pathname;
+
+            // Redirect to login.html if the path doesn't include privacyPolicy.html or legalNotice.html
+            if (!path.includes('privacyPolicy.html') && !path.includes('legalNotice.html')) {
+                window.location.href = './logIn.html';
+            }
         }
     } catch (error) {
         console.error("Fehler beim Abrufen der Initialen:", error);
