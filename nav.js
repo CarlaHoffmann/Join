@@ -40,22 +40,20 @@ function activeLink() {
  */
 async function getInitials() {
     try {
-        const loggedInUser = await getNavUser(); // Benutzerdaten abrufen
+        const loggedInUser = await getNavUser();
 
-        if (loggedInUser && loggedInUser.name) { // Überprüfen, ob ein Name vorhanden ist
+        if (loggedInUser && loggedInUser.name) { 
             showNav();
-            // Namen in Vor- und Nachnamen aufteilen
+            
             const nameParts = loggedInUser.name.split(" ");
             let initials = "";
 
-            // Initialen berechnen (nur die ersten Buchstaben der Teile)
             nameParts.forEach(part => {
                 if (part.length > 0) {
                     initials += part[0].toUpperCase();
                 }
             });
 
-            // Initialen im HTML anzeigen
             const initialsElement = document.getElementById('first-letters');
             initialsElement.textContent = initials; // Initialen setzen
         } else {
