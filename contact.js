@@ -393,20 +393,16 @@ async function updateEditedContact() {
     const changedEmail = document.getElementById('changedEmail').value.trim();
     const changedPhone = document.getElementById('changedPhone').value.trim();
     const editLink = base_url + "users" + "/" + editKey;
-
-    // Validierung der Eingabedaten
     if (!changedName || !changedEmail || !changedPhone) {
         alert("Bitte füllen Sie alle Felder aus.");
         return;
     }
-
     try {
         let userResponse = await fetch(editLink + ".json");
         if (!userResponse.ok) {
             throw new Error(`HTTP error! status: ${userResponse.status}`);
         }
         let user = await userResponse.json();
-
         const data = {
             'color': user.color,
             'mail': changedEmail,
@@ -414,7 +410,6 @@ async function updateEditedContact() {
             'password': user.password,
             'phone': changedPhone
         };
-
         const response = await fetch(editLink + ".json", {
             method: 'PUT',
             headers: {
@@ -422,7 +417,6 @@ async function updateEditedContact() {
             },
             body: JSON.stringify(data),
         });
-
         loadContactData();
         contactDetails.innerHTML = '';
         closeEditOverlay();
