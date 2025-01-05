@@ -171,13 +171,9 @@ function showContactDetails(key, name, email, phone, color) {
     const contactDetails = document.getElementById('contactDetails');
     const contactDetailsOverlay = document.getElementById('contactDetailsOverlay');
     const contactDetailsOverlayMenu = document.getElementById('contactDetailsOverlayMenu');
-
-    // Inhalt setzen
     contactDetails.innerHTML = returnContactDetailsTemplate(key, name, email, phone, color);
     contactDetailsOverlay.innerHTML = returnContactDetailsTemplate(key, name, email, phone, color);
     contactDetailsOverlayMenu.innerHTML = returncontactDetailsMenuTemplate(key);
-
-    // Animation starten
     if (contactDetails.classList.contains('show')) {
         contactDetails.classList.remove('show');
         requestAnimationFrame(() => {
@@ -186,13 +182,9 @@ function showContactDetails(key, name, email, phone, color) {
     } else {
         contactDetails.classList.add('show');
     }
-
-    // Entferne 'selected' von allen Kontakten
     document.querySelectorAll('.contact').forEach(contact => {
         contact.classList.remove('selected');
     });
-
-    // Füge 'selected' dem aktuellen Kontakt hinzu
     const selectedContact = document.querySelector(`.contact[onclick*="'${key}'"]`);
     if (selectedContact) {
         selectedContact.classList.add('selected');
