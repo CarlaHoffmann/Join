@@ -237,24 +237,17 @@ function sortUsers(usersArray){
  * @async
  */
 async function loadContactData(){
-    //read out data from firebase
     let response = await fetch(base_url + ".json");
     let responseToJson = await response.json();
     let users = await responseToJson.users;
-    //create usersArray (includes values from firebaseanswer)
     usersArray = Object.values(users);
-    //add key from firebaseanswer to usersarray
     let keys = Object.keys(users);
     for(let i = 0; i < usersArray.length; i++){
         usersArray[i].key = keys[i];
     }
-    //sort usersArray
     sortUsers(usersArray);
-    //clears contactList
     contactList.innerHTML = "";
-    //array to recognize which letters have to be shown
     let lettersArray = [];
-    //fills contactList
     for (let i = 0; i < usersArray.length; i++) {
         let user = usersArray[i];
         let firstUserLetter = getNameInitials(user.name)[0].toLowerCase();
@@ -480,7 +473,12 @@ function openControlMenu() {
     document.addEventListener('click', handleClickOutside);
 }
 
-
+/**
+ * Closes the control menu by hiding it and resetting its position.
+ * The function removes the "active" class, adds the "hidden" class to the menu,
+ * and ensures a smooth transition effect before fully resetting its position.
+ * Also removes the click event listener for handling clicks outside the menu.
+ */
 function closeControlMenu() {
     let controlMenu = document.getElementById('options-menu');
     let circleControl = document.querySelector('.circle-edit-mobile-control');
@@ -489,19 +487,24 @@ function closeControlMenu() {
     controlMenu.classList.add('hidden');
 
     setTimeout(() => {
-        circleControl.classList.remove('active'); // Entferne die aktive Klasse vom Kreis
-        // controlMenu.style.opacity = "0"; // Optional, falls es visuell stört
-        controlMenu.style.transform = "translateX(100%)"; // Setze zurück für nächste Animation
+        circleControl.classList.remove('active');
+        controlMenu.style.transform = "translateX(100%)";
     }, 600);
 
     document.removeEventListener('click', handleClickOutside);
 }
 
+
+/**
+ * Handles click events outside the control menu and circle control.
+ * If the clicked element is not inside the control menu or the circle control,
+ * the function triggers the `closeControlMenu` function to hide the menu.
+ *
+ * @param {MouseEvent} event - The click event object containing details about the event.
+ */
 function handleClickOutside(event) {
     const controlMenu = document.getElementById('options-menu');
     const circleControl = document.querySelector('.circle-edit-mobile-control');
-
-    // Überprüfe, ob der Klick außerhalb des Menüs und des Steuerelements war
     if (!controlMenu.contains(event.target) && !circleControl.contains(event.target)) {
         closeControlMenu();
     }
@@ -518,17 +521,22 @@ function showContactAddedOverlay() {
     overlay.classList.remove('hidden');
     setTimeout(() => {
         overlay.classList.add('show');
-    }, 10); // Kleine Verzögerung für die Animation
-
-    // Automatisches Ausblenden nach 3 Sekunden
+    }, 10);
     setTimeout(() => {
         overlay.classList.remove('show');
         setTimeout(() => {
             overlay.classList.add('hidden');
-        }, 300); // Warten auf das Ende der Ausblend-Animation
+        }, 300);
     }, 3000);
 }
-
+/**
+ * Toggles the visibility of an overlay element for adding or editing a contact.
+ * Depending on the specified operation, the appropriate overlay is shown
+ * by adding the "show" class and removing the "hidden" class.
+ * @param {string} operation - The type of operation to perform. 
+ *                              Use "add" to display the "Add Contact" overlay, 
+ *                              or "edit" to display the "Edit Contact" overlay.
+ */
 function startEditOrAddAnimation(operation){
     if(operation === 'add'){
         document.querySelector('#addContactBoxOverlay').classList.add('show');
