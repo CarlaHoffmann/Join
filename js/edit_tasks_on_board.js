@@ -119,15 +119,16 @@ function addEditedSubtask(subtasks) {
     console.log(subtasks);
     let subtaskInput = document.getElementById('subtaskInput');
     let addedSubtask = document.getElementById('subtasks');
-    getSubtasks();
-
+    // getSubtasks();
+    
+    let currentSubtasks = [];
     if (subtaskInput.value !== '') {
-        subtasks.push(subtaskInput.value);
+        currentSubtasks.push(subtaskInput.value);
     }
     addedSubtask.innerHTML = '';
 
-    for (let i = 0; i < subtasks.length; i++) {
-        const element = subtasks[i];
+    for (let i = 0; i < currentSubtasks.length; i++) {
+        const element = currentSubtasks[i];
         addedSubtask.innerHTML += getAddSubtaskTemplate(i, element);
     }
     closeSubtask();
