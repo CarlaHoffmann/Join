@@ -269,356 +269,6 @@ let currentTask = null; // Variable, um die aktuelle Task zu speichern
  * @param {string} taskId - Die ID der zu bearbeitenden Task.
  * @param {string} status - Der Status (Spalte), in der sich die Task befindet.
  */
-// async function openEditTaskOverlay(taskId, status) {
-//     try {
-//         const url = `${base_url}/tasks/${status}/${task.id}.json`;
-//         const response = await fetch(url);
-//         console.log(task.id);
-//         if (!response.ok) {
-//             throw new Error(`HTTP-Error: ${response.status}`);
-//         }
-
-//         // Die aktuelle Task-Daten abrufen
-//         currentTask = await response.json();
-
-//         // Overlay mit den Task-Daten befüllen
-//         document.getElementById("editTaskOverlay").classList.remove("d-none");
-//         document.getElementById("edit-task-title").value = currentTask.title || "";
-//         document.getElementById("edit-task-description").value = currentTask.description || "";
-//         document.getElementById("edit-task-priority").value = currentTask.prio || "2"; // Default "medium"
-
-//         document.getElementById("edit-task-save").setAttribute("data-task-id", taskId);
-//         document.getElementById("edit-task-save").setAttribute("data-status", status);
-
-//     } catch (error) {
-//         console.error("Error loading task:", error);
-//     }
-// }
-
-/**
- * Schließt das Bearbeitungs-Overlay.
- */
-function closeEditTaskOverlay() {
-    document.getElementById("editTaskOverlay").classList.add("d-none");
-    currentTask = null;
-}
-
-/**
- * Speichert die bearbeiteten Daten und aktualisiert die Task in Firebase.
- */
-async function saveEditedTask() {
-    const taskId = document.getElementById("edit-task-save").getAttribute("data-task-id");
-    const status = document.getElementById("edit-task-save").getAttribute("data-status");
-
-    // Neue Task-Daten aus dem Overlay abrufen
-    const updatedTask = {
-        ...currentTask,
-        title: document.getElementById("edit-task-title").value,
-        description: document.getElementById("edit-task-description").value,
-        prio: document.getElementById("edit-task-priority").value,
-    };
-
-    try {
-        const url = `${base_url}/tasks/${status}/${taskId}.json`;
-        await fetch(url, {
-            method: "PUT",
-            body: JSON.stringify(updatedTask),
-        });
-
-        // Task im DOM aktualisieren
-        loadTasks(); // Aktualisiere das Board
-        closeEditTaskOverlay(); // Overlay schließen
-    } catch (error) {
-        console.error("Error saving edited task:", error);
-    }
-}
-
-// Event-Listener für das Bearbeitungs-Overlay hinzufügen
-// document.getElementById("edit-task-cancel").addEventListener("click", closeEditTaskOverlay);
-// document.getElementById("edit-task-save").addEventListener("click", saveEditedTask);
-
-
-async function openTaskOverlay(task) {
-    currentTask = task; // Task global speichern
-
-    const overlayContainer = document.getElementById('taskOverlayContainer');
-
-    // Farben für Kontakte abrufen
-    const contactColors = await getContactColors([task]);
-    const contactsHTML = task.contacts.map((contact, index) => {
-        const contactColor = contactColors[0][index];
-        const initials = getContactInitials(contact);
-        return `
-            <div class="assigned-contact">
-                <div class="contact-initial" style="background-color: ${contactColor};">${initials}</div>
-                <span class="contact-name">${contact}</span>
-            </div>`;
-    }).join('');
-
-    // Subtasks-HTML generieren
-    const subtasksHTML = Object.keys(task.subtasks || {}).map(key => {
-        const subtask = task.subtasks[key];
-        return `
-            <div class="check">
-                <input type="checkbox" data-subtask-key="${key}" ${subtask.checked ? 'checked' : ''}>
-                <div>${subtask.task}</div>
-            </div>`;
-    }).join('');
-
-
-    overlayContainer.innerHTML = `
-    <div class="taskOverlay">
-        <div class="taskSelect">
-            <div class="taskContainer" style="background-color: ${getCategoryColor(task.category)}">${task.category}</div>
-            <div class="close" onclick="closeTaskOverlay()">
-                <img src="assets/img/add_task/close.svg" alt="Close" />
-            </div>
-        </div>
-
-        <!-- Titel -->
-        <div class="headline">${task.title}</div>
-
-        <!-- Beschreibung -->
-        <div class="description">${task.description}</div>
-
-        <!-- Due Date und Priority untereinander -->
-        <div class="task-info-wrapper">
-            <div class="task-info">
-                <span class="info-label">Due date:</span>
-                <span class="info-value">${task.date}</span>
-            </div>
-            <div class="task-info">
-                <span class="info-label">Priority:</span>
-                <span class="info-value priority-container">
-                    ${getPrioText(task.prio)}
-                    <img src="${getPrioImage(task.prio)}" alt="Priority Icon" class="priority-icon">
-                </span>
-            </div>
-        </div>
-
-        <!-- Assigned Contacts -->
-        <div>
-            <span class="info-label">Assigned To:</span>
-            <div class="userContainer">${contactsHTML}</div>
-        </div>
-
-        <!-- Subtasks -->
-        <div>
-            <span class="info-label">Subtasks:</span>
-            <div>${subtasksHTML}</div>
-        </div>
-
-        <!-- Delete and Edit Buttons -->
-        <div class="deleteEditBtnContainer">
-            <!-- Delete Button -->
-            <div class="icon-text-button" onclick="deleteTask('${task.id}')">
-                <svg class="icon-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 6H5H21" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M19 6V19C19 20.1046 18.1046 21 17 21H7C5.89543 21 5 20.1046 5 19V6" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M10 11V17" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M14 11V17" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M8 6V4C8 3.44772 8.44772 3 9 3H15C15.5523 3 16 3.44772 16 4V6" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span class="icon-text">Delete</span>
-            </div>
-
-            <!-- Vertikale Trennlinie -->
-            <div class="vertical-line"></div>
-
-            <!-- Edit Button -->
-            <div class="icon-text-button" onclick="openEditTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})">
-                <svg class="icon-svg" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2.14453 17H3.54453L12.1695 8.375L10.7695 6.975L2.14453 15.6V17ZM16.4445 6.925L12.1945 2.725L13.5945 1.325C13.9779 0.941667 14.4487 0.75 15.007 0.75C15.5654 0.75 16.0362 0.941667 16.4195 1.325L17.8195 2.725C18.2029 3.10833 18.4029 3.57083 18.4195 4.1125C18.4362 4.65417 18.2529 5.11667 17.8695 5.5L16.4445 6.925ZM14.9945 8.4L4.39453 19H0.144531V14.75L10.7445 4.15L14.9945 8.4Z" fill="#2A3647"/>
-                </svg>
-                <span class="icon-text">Edit</span>
-            </div>
-        </div>
-    </div>`;
-
-    // Event Listener für die Subtasks hinzufügen
-    addSubtaskListeners(task);
-
-    overlayContainer.classList.remove('d-none');
-}
-
-
-
-function closeTaskOverlay() {
-    const overlayContainer = document.getElementById('taskOverlayContainer');
-    overlayContainer.classList.add('d-none');
-    overlayContainer.innerHTML = ''; // Inhalt löschen
-}
-
-
-
-let updatedSubtasksWithOverlay = [];
-function updateSubtasksWithOverlay(task) {
-    updatedSubtasksWithOverlay = Object.keys(task.subtasks).map(key => ({
-        key,
-        task: task.subtasks[key].task,
-        checked: task.subtasks[key].checked
-    }));
-    console.log(updatedSubtasksWithOverlay);
-}
-
-//new
-async function saveOverlayChanges(taskId, taskStatus) {
-    const titleElement = document.getElementById('title');
-    const descriptionElement = document.getElementById('description');
-    const dueDateElement = document.getElementById('datepicker');
-    const prioButton = document.querySelector('.prio-button.active-button');
-    const categoryElement = document.getElementById('category-selection');
-    const contactsElements = selectedContacts;
-
-    const subtasksContainer = document.getElementById("subtasks");
-    const subtaskElements = subtasksContainer.querySelectorAll(".check");
-
-    if (!titleElement || !descriptionElement || !dueDateElement || !prioButton || !categoryElement) {
-        console.error('Ein oder mehrere erforderliche Elemente fehlen.');
-        return;
-    }
-
-    // Subtasks-Daten sammeln
-    const subtasksData = {};
-    subtaskElements.forEach(subtaskElement => {
-        const subtaskKey = subtaskElement.querySelector("input[type='checkbox']").dataset.subtaskKey;
-        const subtaskTask = subtaskElement.querySelector("div").textContent;
-        const isChecked = subtaskElement.querySelector("input[type='checkbox']").checked;
-
-        // Hinzufügen oder Aktualisieren des Subtasks
-        subtasksData[subtaskKey] = {
-            task: subtaskTask,
-            checked: isChecked
-        };
-    });
-
-    // Task-Daten aktualisieren
-    const updatedTask = {
-        title: titleElement.value,
-        description: descriptionElement.value,
-        date: dueDateElement.value,
-        prio: prioButton.id.replace('prio', ''),
-        category: categoryElement.textContent.trim(),
-        contacts: contactsElements,
-        subtasks: subtasksData
-    };
-
-    try {
-        // URL für das Aktualisieren der bestehenden Task
-        const url = `${base_url}/tasks/${taskStatus}/${taskId}.json`;
-        const response = await fetch(url, {
-            method: 'PUT', // Wichtig: PUT überschreibt die bestehende Aufgabe
-            body: JSON.stringify(updatedTask),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error: ${response.status}`);
-        }
-
-        console.log('Task erfolgreich gespeichert:', updatedTask);
-
-        // Board aktualisieren
-        await loadTasks();
-    } catch (error) {
-        console.error("Fehler beim Aktualisieren der Aufgabe:", error);
-    }
-}
-
-
-
-
-/**
- * Fügt Event-Listener zu den Subtask-Checkboxen hinzu und aktualisiert die Fortschrittsanzeige.
- * @param {Object} task - Die Task, zu der die Subtasks gehören.
- */
-function addSubtaskListeners(task) {
-    const overlayContainer = document.getElementById('taskOverlayContainer');
-    const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
-
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', async () => {
-            const subtaskKey = checkbox.dataset.subtaskKey;
-            const isChecked = checkbox.checked;
-
-            // Subtask-Status im Task-Objekt aktualisieren
-            task.subtasks[subtaskKey].checked = isChecked;
-
-            // Subtask in Firebase speichern
-            const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskKey}.json`;
-            await fetch(url, {
-                method: 'PUT',
-                body: JSON.stringify(task.subtasks[subtaskKey]),
-                headers: { 'Content-Type': 'application/json' },
-            });
-
-            console.log(`Subtask ${subtaskKey} updated:`, isChecked);
-
-            // Fortschrittsanzeige aktualisieren
-            updateTaskProgress(task);
-        });
-    });
-}
-
-/**
- * Aktualisiert die Fortschrittsanzeige und die Subtask-Zähler für eine Task.
- * @param {Object} task - Die Task, deren Fortschritt aktualisiert werden soll.
- */
-function updateTaskProgress(task) {
-    const taskElement = document.getElementById(`task-${task.id}`);
-
-    if (taskElement) {
-        const completedSubtasks = Object.values(task.subtasks).filter(subtask => subtask.checked).length;
-        const totalSubtasks = Object.keys(task.subtasks).length;
-        const progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
-
-        // Fortschrittsanzeige aktualisieren
-        const progressBar = taskElement.querySelector('.progress-bar');
-        if (progressBar) {
-            progressBar.style.width = `${progressPercentage}%`;
-        }
-
-        // Subtask-Anzeige aktualisieren
-        const subtasksText = taskElement.querySelector('.subtasks');
-        if (subtasksText) {
-            subtasksText.textContent = `${completedSubtasks} von ${totalSubtasks} Subtasks`;
-        }
-    }
-}
-
-
-
-
-
-function getPrioImage(prio) {
-    switch (prio) {
-        case '1': // Urgent
-            return 'assets/img/board/prio_urgent.svg';
-        case '2': // Medium
-            return 'assets/img/board/prio_medium.svg';
-        case '3': // Low
-            return 'assets/img/board/prio_low.svg';
-        default:
-            return 'assets/img/board/prio_medium.svg'; // Standardwert
-    }
-}
-
-function getPrioText(prio) {
-    switch (prio) {
-        case '1':
-            return 'Urgent';
-        case '2':
-            return 'Medium';
-        case '3':
-            return 'Low';
-        default:
-            return 'Medium'; // Standardwert
-    }
-}
-
-
 // Funktion zum Öffnen des Edit-Overlays
 async function openEditTaskOverlay(task) {
     const overlayContainer = document.getElementById('taskOverlayContainer');
@@ -780,7 +430,7 @@ async function openEditTaskOverlay(task) {
             </div>
 
         <div class="okBtnContainer">
-            <button onclick="initializeValidationEdit(${JSON.stringify(task).replace(/"/g, '&quot;')})" class="submit-button">
+            <button onclick="saveEditedTask(${JSON.stringify(task).replace(/"/g, '&quot;')})" class="submit-button">
                 OK <img src="assets/img/add_task/check 2.svg" alt="OK Icon" class="button-icon">
 
             </button>
@@ -805,98 +455,156 @@ async function openEditTaskOverlay(task) {
     // categorySelection.textContent = task.category || 'Select task category';
 }
 
-// function addSubtaskEventListeners(taskId, status) {
-//     const subtaskCheckboxes = document.querySelectorAll("#subtasks .subtask-checkbox");
 
-//     subtaskCheckboxes.forEach((checkbox, index) => {
-//         checkbox.addEventListener("change", async () => {
-//             // Aktuellen Zustand der Checkbox abrufen
-//             const isChecked = checkbox.checked;
-
-//             // Subtask im aktuellen Zustand aktualisieren
-//             subtasks[index].checked = isChecked;
-
-//             // Subtasks in der Datenbank aktualisieren
-//             try {
-//                 const url = `${base_url}/tasks/${status}/${taskId}/subtasks.json`;
-//                 await fetch(url, {
-//                     method: "PUT",
-//                     body: JSON.stringify(subtasks),
-//                     headers: {
-//                         "Content-Type": "application/json",
-//                     },
-//                 });
-
-//                 // Fortschritt berechnen und Progress-Bar aktualisieren
-//                 const completedSubtasks = subtasks.filter(subtask => subtask.checked).length;
-//                 const totalSubtasks = subtasks.length;
-//                 const progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
-
-//                 // Progress-Bar im Overlay aktualisieren
-//                 document.querySelector(".progress-bar").style.width = `${progressPercentage}%`;
-
-//                 // Fortschrittsanzeige aktualisieren
-//                 document.querySelector(".subtasks").textContent = `${completedSubtasks} von ${totalSubtasks} Subtasks`;
-//             } catch (error) {
-//                 console.error("Error updating subtasks:", error);
-//             }
-//         });
-//     });
-// }
-
-
-function enableEditMode() {
-    // Felder editierbar machen
-    document.getElementById('overlayTitle').removeAttribute('readonly');
-    document.getElementById('overlayDescription').removeAttribute('readonly');
-    document.getElementById('overlayDueDate').removeAttribute('readonly');
-    document.querySelectorAll('.prio-button').forEach(button => button.removeAttribute('disabled'));
-
-    // Subtasks editierbar machen
-    document.getElementById('newSubtaskInput').classList.remove('d-none');
-    document.getElementById('addSubtaskButton').classList.remove('d-none');
-
-    // Buttons aktualisieren
-    document.getElementById('editTaskButton').classList.add('d-none');
-    document.getElementById('saveTaskButton').classList.remove('d-none');
+/**
+ * Schließt das Bearbeitungs-Overlay.
+ */
+function closeEditTaskOverlay(task) {
+    currentTask = null;
+    openTaskOverlay(task);
 }
 
 
+async function saveEditedTask(task) {
+    try {
+        const taskId = task.id;
+        const taskStatus = task.path;
 
-// async function saveOverlayChanges(taskId, category) {
-//     // Geänderte Daten aus den Feldern abrufen
-//     const updatedTask = {
-//         title: document.getElementById('overlayTitle').value,
-//         description: document.getElementById('overlayDescription').value,
-//         date: document.getElementById('overlayDueDate').value,
-//         prio: document.querySelector('.prio-button.active-button').id.replace('prio', ''),
-//         contacts: Array.from(document.querySelectorAll('#overlayContacts .contact-initial')).map(contact => contact.textContent),
-//         subtasks: Array.from(document.querySelectorAll('#overlaySubtasks li')).map(subtask => subtask.textContent),
-//     };
+        // Änderungen speichern
+        await saveOverlayChanges(taskId, taskStatus);
 
-//     try {
-//         const url = `${base_url}/tasks/${category}/${taskId}.json`;
-//         const response = await fetch(url, {
-//             method: 'PUT',
-//             body: JSON.stringify(updatedTask),
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             }
-//         });
+        // Overlay direkt mit aktuellen Daten aktualisieren
+        // openTaskOverlay(task); //muss wieder rein
 
-//         if (!response.ok) {
-//             throw new Error(`HTTP error: ${response.status}`);
-//         }
-
-//         console.log('Task successfully updated!');
-//         closeTaskOverlay();
-//         loadTasks(); // Aktualisiere das Board
-//     } catch (error) {
-//         console.error('Error saving task changes:', error);
-//     }
-// }
+        // console.log('Overlay erfolgreich aktualisiert.');
+    } catch (error) {
+        // console.error('Fehler beim Validieren und Aktualisieren der Task:', error);
+    }
+}
 
 
+async function openTaskOverlay(task) {
+    currentTask = task; // Task global speichern
+
+    const overlayContainer = document.getElementById('taskOverlayContainer');
+
+    // Farben für Kontakte abrufen
+    const contactColors = await getContactColors([task]);
+    const contactsHTML = task.contacts.map((contact, index) => {
+    const contactColor = contactColors[0][index];
+    const initials = getContactInitials(contact);
+    return `
+        <div class="assigned-contact">
+            <div class="contact-initial" style="background-color: ${contactColor};">${initials}</div>
+            <span class="contact-name">${contact}</span>
+        </div>`;
+    }).join('');
+
+    // Subtasks-HTML generieren
+    const subtasksHTML = Object.keys(task.subtasks || {}).map(key => {
+    const subtask = task.subtasks[key];
+    return `
+        <div class="check">
+            <input type="checkbox" data-subtask-key="${key}" ${subtask.checked ? 'checked' : ''}>
+            <div>${subtask.task}</div>
+        </div>`;
+    }).join('');
+
+
+    overlayContainer.innerHTML = `
+    <div class="taskOverlay">
+        <div class="taskSelect">
+            <div class="taskContainer" style="background-color: ${getCategoryColor(task.category)}">${task.category}</div>
+            <div class="close" onclick="closeTaskOverlay()">
+                <img src="assets/img/add_task/close.svg" alt="Close" />
+            </div>
+        </div>
+
+        <!-- Titel -->
+        <div class="headline">${task.title}</div>
+
+        <!-- Beschreibung -->
+        <div class="description">${task.description}</div>
+
+        <!-- Due Date und Priority untereinander -->
+        <div class="task-info-wrapper">
+            <div class="task-info">
+                <span class="info-label">Due date:</span>
+                <span class="info-value">${task.date}</span>
+            </div>
+            <div class="task-info">
+                <span class="info-label">Priority:</span>
+                <span class="info-value priority-container">
+                    ${getPrioText(task.prio)}
+                    <img src="${getPrioImage(task.prio)}" alt="Priority Icon" class="priority-icon">
+                </span>
+            </div>
+        </div>
+
+        <!-- Assigned Contacts -->
+        <div>
+            <span class="info-label">Assigned To:</span>
+            <div class="userContainer">${contactsHTML}</div>
+        </div>
+
+        <!-- Subtasks -->
+        <div>
+            <span class="info-label">Subtasks:</span>
+            <div>${subtasksHTML}</div>
+        </div>
+
+        <!-- Delete and Edit Buttons -->
+        <div class="deleteEditBtnContainer">
+            <!-- Delete Button -->
+            <div class="icon-text-button" onclick="deleteTask('${task.id}')">
+                <svg class="icon-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 6H5H21" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19 6V19C19 20.1046 18.1046 21 17 21H7C5.89543 21 5 20.1046 5 19V6" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 11V17" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14 11V17" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8 6V4C8 3.44772 8.44772 3 9 3H15C15.5523 3 16 3.44772 16 4V6" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="icon-text">Delete</span>
+            </div>
+
+            <!-- Vertikale Trennlinie -->
+            <div class="vertical-line"></div>
+
+            <!-- Edit Button -->
+            <div class="icon-text-button" onclick="openEditTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})">
+                <svg class="icon-svg" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.14453 17H3.54453L12.1695 8.375L10.7695 6.975L2.14453 15.6V17ZM16.4445 6.925L12.1945 2.725L13.5945 1.325C13.9779 0.941667 14.4487 0.75 15.007 0.75C15.5654 0.75 16.0362 0.941667 16.4195 1.325L17.8195 2.725C18.2029 3.10833 18.4029 3.57083 18.4195 4.1125C18.4362 4.65417 18.2529 5.11667 17.8695 5.5L16.4445 6.925ZM14.9945 8.4L4.39453 19H0.144531V14.75L10.7445 4.15L14.9945 8.4Z" fill="#2A3647"/>
+                </svg>
+                <span class="icon-text">Edit</span>
+            </div>
+        </div>
+    </div>`;
+
+    // Event Listener für die Subtasks hinzufügen
+    addSubtaskListeners(task);
+
+    overlayContainer.classList.remove('d-none');
+}
+
+
+function closeTaskOverlay() {
+    const overlayContainer = document.getElementById('taskOverlayContainer');
+    overlayContainer.classList.add('d-none');
+    overlayContainer.innerHTML = ''; // Inhalt löschen
+}
+
+
+let updatedSubtasksWithOverlay = [];
+function updateSubtasksWithOverlay(task) {
+    updatedSubtasksWithOverlay = Object.keys(task.subtasks).map(key => ({
+        key,
+        task: task.subtasks[key].task,
+        checked: task.subtasks[key].checked
+    }));
+    console.log(updatedSubtasksWithOverlay);
+}
+
+//new
 async function saveOverlayChanges(taskId, taskStatus) {
     const titleElement = document.getElementById('title');
     const descriptionElement = document.getElementById('description');
@@ -904,13 +612,30 @@ async function saveOverlayChanges(taskId, taskStatus) {
     const prioButton = document.querySelector('.prio-button.active-button');
     const categoryElement = document.getElementById('category-selection');
     const contactsElements = selectedContacts;
-    const subtasksElements = subtasks;
+
+    const subtasksContainer = document.getElementById("subtasks");
+    const subtaskElements = subtasksContainer.querySelectorAll(".check");
 
     if (!titleElement || !descriptionElement || !dueDateElement || !prioButton || !categoryElement) {
         console.error('Ein oder mehrere erforderliche Elemente fehlen.');
         return;
     }
 
+    // Subtasks-Daten sammeln
+    const subtasksData = {};
+    subtaskElements.forEach(subtaskElement => {
+        const subtaskKey = subtaskElement.querySelector("input[type='checkbox']").dataset.subtaskKey;
+        const subtaskTask = subtaskElement.querySelector("div").textContent;
+        const isChecked = subtaskElement.querySelector("input[type='checkbox']").checked;
+
+        // Hinzufügen oder Aktualisieren des Subtasks
+        subtasksData[subtaskKey] = {
+            task: subtaskTask,
+            checked: isChecked
+        };
+    });
+
+    // Task-Daten aktualisieren
     const updatedTask = {
         title: titleElement.value,
         description: descriptionElement.value,
@@ -918,8 +643,9 @@ async function saveOverlayChanges(taskId, taskStatus) {
         prio: prioButton.id.replace('prio', ''),
         category: categoryElement.textContent.trim(),
         contacts: contactsElements,
-        subtasks: subtasksElements,
+        subtasks: subtasksData
     };
+    console.log(updatedTask);
 
     try {
         // URL für das Aktualisieren der bestehenden Task
@@ -936,16 +662,118 @@ async function saveOverlayChanges(taskId, taskStatus) {
             throw new Error(`HTTP error: ${response.status}`);
         }
 
-        // Board aktualisieren
-        await loadTasks();
+        // console.log('Task erfolgreich gespeichert:', updatedTask);
 
-        // Overlay schließen und aktualisierte Aufgabe anzeigen
-        openTaskOverlay({ ...updatedTask, id: taskId });
+        // Board aktualisieren
+        // await loadTasks();
     } catch (error) {
-        console.error("Fehler beim Aktualisieren der Aufgabe:", error);
+        // console.error("Fehler beim Aktualisieren der Aufgabe:", error);
     }
 }
 
+
+// Globale Variable für die Listener-Funktion
+let subtaskListenerFunction;
+
+/**
+ * Adds event listeners to the subtasks' checkboxes and updates their status.
+ * @param {Object} task - The task object containing subtasks.
+ */
+function addSubtaskListeners(task) {
+    const overlayContainer = document.getElementById('taskOverlayContainer');
+    const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
+
+    // Definiere die Listener-Funktion nur einmal
+    subtaskListenerFunction = async (event) => {
+        const checkbox = event.target;
+        const subtaskKey = checkbox.dataset.subtaskKey;
+        const isChecked = checkbox.checked;
+
+        // Subtask-Status im Task-Objekt aktualisieren
+        task.subtasks[subtaskKey].checked = isChecked;
+
+        // Subtask in Firebase speichern
+        const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskKey}.json`;
+        await fetch(url, {
+            method: 'PUT',
+            body: JSON.stringify(task.subtasks[subtaskKey]),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        console.log(`Subtask ${subtaskKey} updated:`, isChecked);
+
+        // Optional: Fortschrittsanzeige aktualisieren
+        // updateTaskProgress(task);
+
+        loadTasks();
+    };
+
+    // Eventlistener hinzufügen
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', subtaskListenerFunction);
+    });
+}
+
+/**
+ * Removes previously added event listeners from the subtasks' checkboxes.
+ */
+function removeSubtaskListeners() {
+    const overlayContainer = document.getElementById('taskOverlayContainer');
+    const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
+
+    // Eventlistener entfernen
+    checkboxes.forEach((checkbox) => {
+        if (subtaskListenerFunction) {
+            checkbox.removeEventListener('change', subtaskListenerFunction);
+        }
+    });
+
+    // Listener-Funktion zurücksetzen
+    subtaskListenerFunction = null;
+}
+
+
+function getPrioImage(prio) {
+    switch (prio) {
+        case '1': // Urgent
+            return 'assets/img/board/prio_urgent.svg';
+        case '2': // Medium
+            return 'assets/img/board/prio_medium.svg';
+        case '3': // Low
+            return 'assets/img/board/prio_low.svg';
+        default:
+            return 'assets/img/board/prio_medium.svg'; // Standardwert
+    }
+}
+
+function getPrioText(prio) {
+    switch (prio) {
+        case '1':
+            return 'Urgent';
+        case '2':
+            return 'Medium';
+        case '3':
+            return 'Low';
+        default:
+            return 'Medium'; // Standardwert
+    }
+}
+
+function enableEditMode() {
+    // Felder editierbar machen
+    document.getElementById('overlayTitle').removeAttribute('readonly');
+    document.getElementById('overlayDescription').removeAttribute('readonly');
+    document.getElementById('overlayDueDate').removeAttribute('readonly');
+    document.querySelectorAll('.prio-button').forEach(button => button.removeAttribute('disabled'));
+
+    // Subtasks editierbar machen
+    document.getElementById('newSubtaskInput').classList.remove('d-none');
+    document.getElementById('addSubtaskButton').classList.remove('d-none');
+
+    // Buttons aktualisieren
+    document.getElementById('editTaskButton').classList.add('d-none');
+    document.getElementById('saveTaskButton').classList.remove('d-none');
+}
 
 
 function setOverlayPriority(priority) {
@@ -974,9 +802,10 @@ function closeTaskOverlay() {
     if (currentTask) {
         saveTaskSubtasks(currentTask);
     }
-
+    
     overlayContainer.classList.add('d-none');
     overlayContainer.innerHTML = ''; // Inhalt löschen
+    // removeSubtaskListeners();
 }
 
 // new
@@ -1017,60 +846,6 @@ async function updateOverlay(taskId, taskStatus) {
         console.error('Fehler beim Aktualisieren des Overlays:', error);
     }
 }
-
-
-async function initializeValidationEdit(task) {
-    try {
-        const taskId = task.id;
-        const taskStatus = task.path;
-
-        // Änderungen speichern
-        await saveOverlayChanges(taskId, taskStatus);
-
-        // Overlay direkt mit aktuellen Daten aktualisieren
-        openTaskOverlay(currentTask);
-
-        console.log('Overlay erfolgreich aktualisiert.');
-    } catch (error) {
-        console.error('Fehler beim Validieren und Aktualisieren der Task:', error);
-    }
-}
-
-
-
-//  Task Overlay Delete 
-// async function deleteTask(taskId) {
-//     const confirmDelete = confirm("Are you sure you want to delete this task?");
-//     if (confirmDelete) {
-//         try {
-//             // Identifiziere die Spalte (toDo, progress, feedback, done) anhand der Task-ID
-//             const taskElement = document.getElementById(`task-${taskId}`);
-//             const parentColumnId = taskElement.parentElement.id.replace("Tasks", "");
-
-//             // Lösche die Task aus Firebase
-//             const url = `${base_url}/tasks/${parentColumnId}/${taskId}.json`;
-//             await fetch(url, { method: 'DELETE' });
-
-//             // Entferne die Task aus dem DOM
-//             taskElement.remove();
-
-//             // Überprüfe, ob der Placeholder angezeigt werden soll
-//             updatePlaceholders();
-
-//             // Schließe das Overlay
-//             closeTaskOverlay();
-
-//             console.log(`Task ${taskId} deleted successfully`);
-//         } catch (error) {
-//             console.error("Error deleting task:", error);
-//         }
-//     }
-// }
-
-
-
-
-
 
 
 // Funktion, um Subtasks rekursiv zu löschen
@@ -1134,30 +909,25 @@ async function deleteTask(taskId) {
 }
 
 
-
-
 //  Task Placeholder  
 function updatePlaceholders() {
     const columns = ["toDo", "progress", "feedback", "done"];
     columns.forEach(column => {
         const tasksContainer = document.getElementById(column + "Tasks");
         const placeholder = document.getElementById(column + "Placeholder");
-        console.log(`Checking ${column}: ${tasksContainer.childElementCount} tasks`);
+        // console.log(`Checking ${column}: ${tasksContainer.childElementCount} tasks`);
         if (tasksContainer.childElementCount === 0) {
             placeholder.style.display = "block";
-            console.log(`Showing placeholder for ${column}`);
+            // console.log(`Showing placeholder for ${column}`);
         } else {
             placeholder.style.display = "none";
-            console.log(`Hiding placeholder for ${column}`);
+            // console.log(`Hiding placeholder for ${column}`);
         }
     });
 }
 
 const searchField = document.querySelector('#searchField');
-console.log(searchField);
-
-
-
+// console.log(searchField);
 
 
 
