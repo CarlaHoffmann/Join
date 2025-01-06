@@ -295,7 +295,7 @@ async function openEditTaskOverlay(task) {
         <div class="taskOverlay">
             <div class="scroll-container fill-in-part-edit">
                 <div class="add-task-edit-form">
-                                <div class="close" onclick="closeTaskOverlay()"><img src="assets/img/add_task/close.svg" alt="Close" /></div>
+                    <div class="close" onclick="closeTaskOverlay()"><img src="assets/img/add_task/close.svg" alt="Close" /></div>
 
                     <div id="add-task-first" class="width-440-edit">
                         <div class="labled-box">
