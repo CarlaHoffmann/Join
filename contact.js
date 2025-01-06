@@ -92,7 +92,7 @@ function returnContactDetailsTemplate(key, name, email, phone, color){
                         <div class="contactItemControls">
 
                             <!-- Edit -->
-                            <div id="editContainer" class="icon-text-button" onclick="toggleView('editContactBoxOverlay', '${key}', true)">
+                            <div id="editContainer" class="icon-text-button" onclick="toggleView('editContactBoxOverlay', '${key}', true), startEditOrAddAnimation('edit')">
                                 <svg class="icon-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <mask id="mask0_249463_2447" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                                 <rect width="24" height="24" fill="#29ABE2"/>
