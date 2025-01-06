@@ -278,9 +278,9 @@ async function openEditTaskOverlay(task) {
     selectedContacts = task.contacts;
 
     // Subtasks aus dem task-Objekt laden
-    let subtasks = [];
+    let currentSubtasks = [];
     Object.keys(task.subtasks).forEach(key => {
-        subtasks.push({
+        currentSubtasks.push({
             task: task.subtasks[key].task,
             checked: task.subtasks[key].checked
         });
@@ -288,7 +288,7 @@ async function openEditTaskOverlay(task) {
 
     
     // Subtasks-HTML generieren
-    const subtasksHTML = subtasks.map((subtask, index) => {
+    const subtasksHTML = currentSubtasks.map((subtask, index) => {
         return getAddSubtaskTemplate(index, subtask.task);
     }).join('');
 
@@ -407,9 +407,9 @@ async function openEditTaskOverlay(task) {
                         <div class="labled-box">
                             <label class="form-label">
                                 Subtasks
-                                <div onclick="openSubtaskTemplate()" id="subtask-input-wrapper">
+                                <div onclick="openEditSubtaskTemplate('${currentSubtasks}')" id="subtask-input-wrapper">
                                     <div id="subtask">
-                                        <input onclick="openSubtaskTemplate()" id="subtaskInput" type="text" class="form-field pad-12-16" placeholder="Add new subtask">
+                                        <input id="subtaskInput" type="text" class="form-field pad-12-16" placeholder="Add new subtask">
                                         <div id="subtask-buttons">
                                             <img class="subtask-img symbol-hover icon-hover" src="./img/task/subtask.svg" alt="add subtask">
                                         </div>
@@ -634,6 +634,7 @@ async function saveOverlayChanges(taskId, taskStatus) {
             checked: isChecked
         };
     });
+    console.log(subtasksData);
 
     // Task-Daten aktualisieren
     const updatedTask = {

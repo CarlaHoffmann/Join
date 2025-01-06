@@ -89,6 +89,53 @@ function getPriorityClassEdit(priority) {
     }
 }
 
+
+/**
+ * Updates the subtask buttons to show the open state and adds an event listener for outside clicks.
+ */
+function openEditSubtaskTemplate(subtasks) {
+    let subtaskButtons = document.getElementById('subtask-buttons');
+    subtaskButtons.innerHTML = `
+        <div id="opened-subtask-icons">
+            <div class="opened-subtask-icon-box icon-hover" onclick="closeSubtask()">
+                <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt="">
+            </div>
+            <div><img src="./img/task/vector-3.svg" alt="seperator"></div>
+            <div class="opened-subtask-icon-box icon-hover"  onclick="addEditedSubtask('${subtasks}')">
+                <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt="">
+            </div>
+        </div>
+    `;
+    document.addEventListener('click', closeSubtaskOnOutsideClick);
+}
+
+/**
+ * This function adds a new subtask to the list and updates the display.
+ */
+function addEditedSubtask(subtasks) {
+    /**
+     * Get the subtask input and the element to display added subtasks.
+     */
+    console.log(subtasks);
+    let subtaskInput = document.getElementById('subtaskInput');
+    let addedSubtask = document.getElementById('subtasks');
+    getSubtasks();
+
+    if (subtaskInput.value !== '') {
+        subtasks.push(subtaskInput.value);
+    }
+    addedSubtask.innerHTML = '';
+
+    for (let i = 0; i < subtasks.length; i++) {
+        const element = subtasks[i];
+        addedSubtask.innerHTML += getAddSubtaskTemplate(i, element);
+    }
+    closeSubtask();
+}
+
+function getSubtasks() {}
+
+
 async function saveEditedTask(task) {
     // const submitButton = document.querySelector('.submit-button');
 
