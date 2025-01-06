@@ -13,10 +13,10 @@
 
 #editContactBoxOverlay.show, #addContactBoxOverlay.show {
     display: flex;
-    animation: slideUp 0.65s ease forwards;
+    animation: slide 0.65s ease forwards;
 }
 
-@keyframes slideUp {
+@keyframes slide {
     from {
         left:100vw;
     }
