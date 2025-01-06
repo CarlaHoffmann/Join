@@ -286,7 +286,6 @@ async function openEditTaskOverlay(task) {
         });
     });
 
-    
     // Subtasks-HTML generieren
     const subtasksHTML = currentSubtasks.map((subtask, index) => {
         return getAddSubtaskTemplate(index, subtask.task);
