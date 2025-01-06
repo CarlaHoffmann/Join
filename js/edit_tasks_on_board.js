@@ -101,7 +101,7 @@ function openEditSubtaskTemplate(subtasks) {
                 <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt="">
             </div>
             <div><img src="./img/task/vector-3.svg" alt="seperator"></div>
-            <div class="opened-subtask-icon-box icon-hover"  onclick="addEditedSubtask('${subtasks}')">
+            <div class="opened-subtask-icon-box icon-hover"  onclick="addEditedSubtask('${JSON.stringify(subtasks)}')">
                 <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt="">
             </div>
         </div>
@@ -112,29 +112,30 @@ function openEditSubtaskTemplate(subtasks) {
 /**
  * This function adds a new subtask to the list and updates the display.
  */
-function addEditedSubtask(subtasks) {
-    /**
-     * Get the subtask input and the element to display added subtasks.
-     */
-    console.log(subtasks);
+function addEditedSubtask(existingSubtasks) {
+    console.log(existingSubtasks);
     let subtaskInput = document.getElementById('subtaskInput');
     let addedSubtask = document.getElementById('subtasks');
-    // getSubtasks();
-    
-    let currentSubtasks = [];
+
+    console.log(existingSubtasks);
     if (subtaskInput.value !== '') {
-        currentSubtasks.push(subtaskInput.value);
+        existingSubtasks.push({
+            task: subtaskInput.value,
+            checked: false
+        });
     }
     addedSubtask.innerHTML = '';
 
-    for (let i = 0; i < currentSubtasks.length; i++) {
-        const element = currentSubtasks[i];
+    for (let i = 0; i < existingSubtasks.length; i++) {
+        const element = existingSubtasks[i].task;
         addedSubtask.innerHTML += getAddSubtaskTemplate(i, element);
     }
     closeSubtask();
 }
 
-function getSubtasks() {}
+// function getSubtasks(subtasks) {
+//     console.log
+// }
 
 
 async function saveEditedTask(task) {
