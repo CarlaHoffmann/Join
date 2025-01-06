@@ -590,17 +590,7 @@ function updateTaskProgress(task) {
 
 
 
-/*
-function getPriorityClass(priority) {
-    console.log('prio');
-    switch (priority) {
-        case '1': return 'urgent';
-        case '2': return 'med';
-        case '3': return 'low';
-        // default: return 'med';
-    }
-}
-    */
+
 
 function getPrioImage(prio) {
     switch (prio) {

@@ -1,6 +1,4 @@
 
-
-
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app";
 
 // Aufgaben beim Laden der Seite aus der Datenbank abrufen
@@ -15,8 +13,6 @@ async function loadTasks() {
         console.error("Error loading tasks:", error);
     }
 }
-
-
 
 
 // Funktion, um Tasks für eine Spalte aus der Datenbank zu laden
@@ -68,6 +64,7 @@ async function displayTasks(taskArray, containerId) {
             const initials = getContactInitials(contact);
             return `<div class="member" style="background-color: ${contactColor}">${initials}</div>`;
         }).join('');
+
         const prio = getPrio(task.prio);
 
         return `
@@ -96,6 +93,7 @@ async function displayTasks(taskArray, containerId) {
     // Placeholder-Logik
     placeholder.style.display = taskArray.length === 0 ? "block" : "none";
 }
+
 
 
 // async function getContactColor(tasks) {
@@ -443,34 +441,34 @@ async function openTaskOverlay(task) {
     overlayContainer.classList.remove('d-none');
 }
 
-function addSubtaskListeners(task) {
-    const overlayContainer = document.getElementById('taskOverlayContainer');
-    const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
+// function addSubtaskListeners(task) {
+//     const overlayContainer = document.getElementById('taskOverlayContainer');
+//     const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
 
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', async () => {
-            const subtaskKey = checkbox.dataset.subtaskKey;
-            const isChecked = checkbox.checked;
+//     checkboxes.forEach(checkbox => {
+//         checkbox.addEventListener('change', async () => {
+//             const subtaskKey = checkbox.dataset.subtaskKey;
+//             const isChecked = checkbox.checked;
 
-            // Subtask-Status im Task-Objekt aktualisieren
-            task.subtasks[subtaskKey].checked = isChecked;
+//             // Subtask-Status im task-Objekt aktualisieren
+//             task.subtasks[subtaskKey].checked = isChecked;
 
-            // Subtask in Firebase speichern
-            const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskKey}.json`;
-            await fetch(url, {
-                method: 'PUT',
-                body: JSON.stringify(task.subtasks[subtaskKey]),
-                headers: { 'Content-Type': 'application/json' },
-            });
+//             try {
+//                 // Subtask-Status in Firebase aktualisieren
+//                 const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskKey}.json`;
+//                 await fetch(url, {
+//                     method: 'PUT',
+//                     body: JSON.stringify(task.subtasks[subtaskKey]),
+//                     headers: { 'Content-Type': 'application/json' },
+//                 });
 
-            console.log(`Subtask ${subtaskKey} updated:`, isChecked);
-
-            // Fortschrittsanzeige sofort aktualisieren
-            updateTaskUI(task.id, task.path, task);
-        });
-    });
-}
-
+//                 console.log(`Subtask ${subtaskKey} updated:`, isChecked);
+//             } catch (error) {
+//                 console.error(`Error updating subtask ${subtaskKey}:`, error);
+//             }
+//         });
+//     });
+// }
 
 function closeTaskOverlay() {
     const overlayContainer = document.getElementById('taskOverlayContainer');
@@ -497,35 +495,62 @@ async function saveOverlayChanges(taskId, taskStatus) {
     const dueDateElement = document.getElementById('datepicker');
     const prioButton = document.querySelector('.prio-button.active-button');
     const categoryElement = document.getElementById('category-selection');
+    const contactsElements = selectedContacts;
+
+    const subtasksContainer = document.getElementById("subtasks");
+    const subtaskElements = subtasksContainer.querySelectorAll(".check");
 
     if (!titleElement || !descriptionElement || !dueDateElement || !prioButton || !categoryElement) {
         console.error('Ein oder mehrere erforderliche Elemente fehlen.');
         return;
     }
 
-    // Änderungen lokal in currentTask speichern
-    currentTask.title = titleElement.value;
-    currentTask.description = descriptionElement.value;
-    currentTask.date = dueDateElement.value;
-    currentTask.prio = prioButton.id.replace('prio', '');
-    currentTask.category = categoryElement.textContent.trim();
+    // Subtasks-Daten sammeln
+    const subtasksData = {};
+    subtaskElements.forEach(subtaskElement => {
+        const subtaskKey = subtaskElement.querySelector("input[type='checkbox']").dataset.subtaskKey;
+        const subtaskTask = subtaskElement.querySelector("div").textContent;
+        const isChecked = subtaskElement.querySelector("input[type='checkbox']").checked;
+
+        // Hinzufügen oder Aktualisieren des Subtasks
+        subtasksData[subtaskKey] = {
+            task: subtaskTask,
+            checked: isChecked
+        };
+    });
+
+    // Task-Daten aktualisieren
+    const updatedTask = {
+        title: titleElement.value,
+        description: descriptionElement.value,
+        date: dueDateElement.value,
+        prio: prioButton.id.replace('prio', ''),
+        category: categoryElement.textContent.trim(),
+        contacts: contactsElements,
+        subtasks: subtasksData
+    };
 
     try {
-        // Änderungen in Firebase speichern
+        // URL für das Aktualisieren der bestehenden Task
         const url = `${base_url}/tasks/${taskStatus}/${taskId}.json`;
         const response = await fetch(url, {
-            method: 'PUT',
-            body: JSON.stringify(currentTask),
-            headers: { 'Content-Type': 'application/json' },
+            method: 'PUT', // Wichtig: PUT überschreibt die bestehende Aufgabe
+            body: JSON.stringify(updatedTask),
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
 
         if (!response.ok) {
             throw new Error(`HTTP error: ${response.status}`);
         }
 
-        console.log('Task erfolgreich gespeichert:', currentTask);
+        console.log('Task erfolgreich gespeichert:', updatedTask);
+
+        // Board aktualisieren
+        await loadTasks();
     } catch (error) {
-        console.error('Fehler beim Speichern der Task:', error);
+        console.error("Fehler beim Aktualisieren der Aufgabe:", error);
     }
 }
 
@@ -877,70 +902,53 @@ function enableEditMode() {
 // }
 
 
-
-
 async function saveOverlayChanges(taskId, taskStatus) {
     const titleElement = document.getElementById('title');
     const descriptionElement = document.getElementById('description');
     const dueDateElement = document.getElementById('datepicker');
     const prioButton = document.querySelector('.prio-button.active-button');
     const categoryElement = document.getElementById('category-selection');
+    const contactsElements = selectedContacts;
+    const subtasksElements = subtasks;
 
     if (!titleElement || !descriptionElement || !dueDateElement || !prioButton || !categoryElement) {
         console.error('Ein oder mehrere erforderliche Elemente fehlen.');
         return;
     }
 
-    // Änderungen lokal in currentTask speichern
-    currentTask.title = titleElement.value;
-    currentTask.description = descriptionElement.value;
-    currentTask.date = dueDateElement.value;
-    currentTask.prio = prioButton.id.replace('prio', '');
-    currentTask.category = categoryElement.textContent.trim();
+    const updatedTask = {
+        title: titleElement.value,
+        description: descriptionElement.value,
+        date: dueDateElement.value,
+        prio: prioButton.id.replace('prio', ''),
+        category: categoryElement.textContent.trim(),
+        contacts: contactsElements,
+        subtasks: subtasksElements,
+    };
 
     try {
-        // Änderungen in Firebase speichern
+        // URL für das Aktualisieren der bestehenden Task
         const url = `${base_url}/tasks/${taskStatus}/${taskId}.json`;
         const response = await fetch(url, {
-            method: 'PUT',
-            body: JSON.stringify(currentTask),
-            headers: { 'Content-Type': 'application/json' },
+            method: 'PUT', // Wichtig: PUT überschreibt die bestehende Aufgabe
+            body: JSON.stringify(updatedTask),
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
 
         if (!response.ok) {
             throw new Error(`HTTP error: ${response.status}`);
         }
 
-        console.log('Task erfolgreich gespeichert:', currentTask);
+        // Board aktualisieren
+        await loadTasks();
 
-        // DOM sofort aktualisieren
-        updateTaskUI(taskId, taskStatus, currentTask);
-
+        // Overlay schließen und aktualisierte Aufgabe anzeigen
+        openTaskOverlay({ ...updatedTask, id: taskId });
     } catch (error) {
-        console.error('Fehler beim Speichern der Task:', error);
+        console.error("Fehler beim Aktualisieren der Aufgabe:", error);
     }
-}
-
-
-
-function updateTaskUI(taskId, taskStatus, taskData) {
-    const taskElement = document.getElementById(`task-${taskId}`);
-    if (!taskElement) return;
-
-    taskElement.querySelector('.task-title').textContent = taskData.title;
-    taskElement.querySelector('.task-description').textContent = taskData.description;
-
-    const progressPercentage = taskData.subtasks.length
-        ? (taskData.subtasks.filter(subtask => subtask.checked).length / taskData.subtasks.length) * 100
-        : 0;
-
-    const progressBar = taskElement.querySelector('.progress-bar');
-    if (progressBar) {
-        progressBar.style.width = `${progressPercentage}%`;
-    }
-
-    taskElement.querySelector('.subtasks').textContent = `${taskData.subtasks.filter(subtask => subtask.checked).length} von ${taskData.subtasks.length} Subtasks`;
-    taskElement.querySelector('.task-type').style.backgroundColor = getCategoryColor(taskData.category);
 }
 
 
@@ -952,55 +960,33 @@ function setOverlayPriority(priority) {
 }
 
 function addOverlaySubtask() {
-    const newSubtaskInput = document.getElementById('subtaskInput');
-    const newSubtask = newSubtaskInput.value.trim();
-
+    const newSubtask = document.getElementById('newSubtaskInput').value.trim();
     if (newSubtask) {
-        // Subtask zu currentTask hinzufügen
-        currentTask.subtasks = currentTask.subtasks || [];
-        currentTask.subtasks.push({ task: newSubtask, checked: false });
-
-        // Subtask im Overlay anzeigen
-        const subtasksContainer = document.getElementById('subtasks');
-        subtasksContainer.innerHTML += `
-            <div class="check">
-                <input type="checkbox" data-subtask-key="${currentTask.subtasks.length - 1}" />
-                <div>${newSubtask}</div>
-            </div>`;
-
-        // Input-Feld leeren
-        newSubtaskInput.value = '';
+        const subtasksList = document.getElementById('overlaySubtasks');
+        subtasksList.innerHTML += `<li>${newSubtask}</li>`;
+        document.getElementById('newSubtaskInput').value = '';
     }
 }
 
-function updateSubtasks() {
+// function updateSubtasks() {
 
-}
+// }
 //new
 function closeTaskOverlay() {
     const overlayContainer = document.getElementById('taskOverlayContainer');
 
     // Speichern der Subtasks
     if (currentTask) {
-        saveTaskSubtasks(currentTask)
-            .then(() => {
-                console.log('Subtasks saved successfully.');
-                loadTasks(); // Board aktualisieren, damit Änderungen sichtbar sind
-            })
-            .catch((error) => {
-                console.error('Fehler beim Speichern der Subtasks:', error);
-            });
+        saveTaskSubtasks(currentTask);
     }
 
     overlayContainer.classList.add('d-none');
     overlayContainer.innerHTML = ''; // Inhalt löschen
 }
 
-
 // new
 async function saveTaskSubtasks(task) {
     try {
-        // Speichere aktualisierte Subtasks in Firebase
         const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks.json`;
         const updatedSubtasks = task.subtasks;
 
@@ -1013,14 +999,11 @@ async function saveTaskSubtasks(task) {
         console.log(`Subtasks for task ${task.id} saved successfully.`);
     } catch (error) {
         console.error('Error saving subtasks:', error);
-        throw error; // Fehler weitergeben
     }
 }
 
 
-
 //new
-
 async function updateOverlay(taskId, taskStatus) {
     try {
         // Abrufen der aktualisierten Daten aus Firebase
@@ -1049,11 +1032,8 @@ async function initializeValidationEdit(task) {
         // Änderungen speichern
         await saveOverlayChanges(taskId, taskStatus);
 
-        // Änderungen sofort im bestehenden Overlay aktualisieren
-        updateOverlayFields(task);
-
-        // Option, das Overlay vollständig neu zu laden (falls nötig)
-        // openTaskOverlay(currentTask);
+        // Overlay direkt mit aktuellen Daten aktualisieren
+        openTaskOverlay(currentTask);
 
         console.log('Overlay erfolgreich aktualisiert.');
     } catch (error) {
@@ -1064,56 +1044,99 @@ async function initializeValidationEdit(task) {
 
 
 //  Task Overlay Delete 
+// async function deleteTask(taskId) {
+//     const confirmDelete = confirm("Are you sure you want to delete this task?");
+//     if (confirmDelete) {
+//         try {
+//             // Identifiziere die Spalte (toDo, progress, feedback, done) anhand der Task-ID
+//             const taskElement = document.getElementById(`task-${taskId}`);
+//             const parentColumnId = taskElement.parentElement.id.replace("Tasks", "");
+
+//             // Lösche die Task aus Firebase
+//             const url = `${base_url}/tasks/${parentColumnId}/${taskId}.json`;
+//             await fetch(url, { method: 'DELETE' });
+
+//             // Entferne die Task aus dem DOM
+//             taskElement.remove();
+
+//             // Überprüfe, ob der Placeholder angezeigt werden soll
+//             updatePlaceholders();
+
+//             // Schließe das Overlay
+//             closeTaskOverlay();
+
+//             console.log(`Task ${taskId} deleted successfully`);
+//         } catch (error) {
+//             console.error("Error deleting task:", error);
+//         }
+//     }
+// }
+
+
+
+
+
+
+
+// Funktion, um Subtasks rekursiv zu löschen
+async function deleteSubtasks(parentPath) {
+    try {
+        const url = `${base_url}/tasks/${parentPath}.json`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`HTTP-Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // Überprüfen, ob Subtasks existieren
+        if (data && data.subtasks) {
+            const subtasks = Object.keys(data.subtasks);
+
+            for (const subtaskId of subtasks) {
+                // Rekursive Löschung von Subtasks
+                await deleteSubtasks(`${parentPath}/subtasks/${subtaskId}`);
+                const subtaskUrl = `${base_url}/tasks/${parentPath}/subtasks/${subtaskId}.json`;
+                await fetch(subtaskUrl, { method: 'DELETE' });
+            }
+        }
+    } catch (error) {
+        console.error("Fehler beim Löschen der Subtasks:", error);
+    }
+}
+
+// Überarbeitete Hauptfunktion zum Löschen von Tasks
 async function deleteTask(taskId) {
     const confirmDelete = confirm("Are you sure you want to delete this task?");
     if (confirmDelete) {
         try {
+            // Task-Element identifizieren
             const taskElement = document.getElementById(`task-${taskId}`);
-            if (!taskElement) {
-                console.error(`Task with ID ${taskId} not found in the DOM.`);
-                return;
-            }
-
-            // Spaltenstatus bestimmen (toDo, progress, feedback, done)
             const parentColumnId = taskElement.parentElement.id.replace("Tasks", "");
 
-            // Firebase URLs
-            const taskUrl = `${base_url}/tasks/${parentColumnId}/${taskId}.json`;
+            // Rekursive Löschung aller Subtasks
+            await deleteSubtasks(`${parentColumnId}/${taskId}`);
 
-            // 1. Lösche die Subtasks (falls vorhanden)
-            const response = await fetch(taskUrl);
-            if (!response.ok) {
-                throw new Error(`Error fetching task data: ${response.status}`);
-            }
-            const taskData = await response.json();
+            // Löschen des Haupttasks aus Firebase
+            const url = `${base_url}/tasks/${parentColumnId}/${taskId}.json`;
+            await fetch(url, { method: 'DELETE' });
 
-            if (taskData.subtasks) {
-                // Entferne alle Subtasks aus der Datenbank
-                const subtaskUrl = `${taskUrl}/subtasks.json`;
-                await fetch(subtaskUrl, { method: 'DELETE' });
-                console.log(`Subtasks for task ${taskId} deleted.`);
-            }
-
-            // 2. Lösche die Hauptaufgabe
-            await fetch(taskUrl, { method: 'DELETE' });
-            console.log(`Task ${taskId} deleted successfully.`);
-
-            // 3. Entferne die Aufgabe aus dem DOM
+            // Entferne den Task aus dem DOM
             taskElement.remove();
 
-            // 4. Überprüfe, ob ein Placeholder angezeigt werden muss
+            // Überprüfen, ob Placeholder angezeigt werden muss
             updatePlaceholders();
 
-            // 5. Schließe das Overlay, falls es geöffnet ist
+            // Schließe das Overlay
             closeTaskOverlay();
+
+            console.log(`Task ${taskId} und alle Subtasks erfolgreich gelöscht.`);
         } catch (error) {
-            console.error("Error deleting task:", error);
+            console.error("Fehler beim Löschen des Tasks:", error);
         }
     }
 }
-
-
-
 
 
 
@@ -1139,3 +1162,53 @@ const searchField = document.querySelector('#searchField');
 console.log(searchField);
 
 
+
+
+
+
+// Suchfunktion
+function addSearchTask() {
+    const searchValue = document.getElementById("searchField").value.toLowerCase(); // Suchwert abrufen
+    const tasksContainers = document.querySelectorAll(".tasks-container"); // Alle Task-Container abrufen
+    let noResultFound = true; // Status, ob ein Ergebnis gefunden wurde
+
+    // Alle Tasks in allen Containern durchsuchen
+    tasksContainers.forEach(container => {
+        const tasks = container.querySelectorAll(".task-card"); // Alle Task-Karten abrufen
+
+        tasks.forEach(task => {
+            const title = task.querySelector(".task-title").textContent.toLowerCase();
+            const description = task.querySelector(".task-description").textContent.toLowerCase();
+
+            // Überprüfen, ob der Task-Titel oder die Beschreibung den Suchbegriff enthält
+            if (title.includes(searchValue) || description.includes(searchValue)) {
+                task.style.display = "block"; // Task anzeigen
+                noResultFound = false;
+            } else {
+                task.style.display = "none"; // Task ausblenden
+            }
+        });
+    });
+
+    // Keine Ergebnisse gefunden
+    const noSearchResult = document.getElementById("no-search-result");
+    noSearchResult.style.display = noResultFound ? "block" : "none"; // Nachricht ein-/ausblenden
+    document.getElementById("delete-search").classList.toggle("d-none", !searchValue); // Löschen-Icon ein-/ausblenden
+}
+
+// Suchfeld zurücksetzen
+function deleteSearch() {
+    document.getElementById("searchField").value = ""; // Suchfeld leeren
+    document.getElementById("delete-search").classList.add("d-none"); // Löschen-Icon ausblenden
+    const noSearchResult = document.getElementById("no-search-result");
+    noSearchResult.style.display = "none"; // Keine Ergebnisse Nachricht ausblenden
+
+    // Alle Tasks wieder einblenden
+    const tasksContainers = document.querySelectorAll(".tasks-container");
+    tasksContainers.forEach(container => {
+        const tasks = container.querySelectorAll(".task-card");
+        tasks.forEach(task => {
+            task.style.display = "block";
+        });
+    });
+}
