@@ -84,28 +84,16 @@ function getNameInitials(name) {
  */
 
 function showContactDetails(key, name, email, phone, color) {
-    const contactDetails = document.getElementById('contactDetails');
-    const contactDetailsOverlay = document.getElementById('contactDetailsOverlay');
-    const contactDetailsOverlayMenu = document.getElementById('contactDetailsOverlayMenu');
-    contactDetails.innerHTML = returnContactDetailsTemplate(key, name, email, phone, color);
-    contactDetailsOverlay.innerHTML = returnContactDetailsTemplate(key, name, email, phone, color);
-    contactDetailsOverlayMenu.innerHTML = returncontactDetailsMenuTemplate(key);
-    if (contactDetails.classList.contains('show')) {
-        contactDetails.classList.remove('show');
-        requestAnimationFrame(() => {
-            contactDetails.classList.add('show');
-        });
-    } else {
-        contactDetails.classList.add('show');
-    }
-    document.querySelectorAll('.contact').forEach(contact => {
-        contact.classList.remove('selected');
-    });
-    const selectedContact = document.querySelector(`.contact[onclick*="'${key}'"]`);
-    if (selectedContact) {
-        selectedContact.classList.add('selected');
-    }
+    const [details, overlay, menu] = ['contactDetails', 'contactDetailsOverlay', 'contactDetailsOverlayMenu'].map(id => document.getElementById(id));
+    const template = returnContactDetailsTemplate(key, name, email, phone, color);
+    details.innerHTML = overlay.innerHTML = template;
+    menu.innerHTML = returncontactDetailsMenuTemplate(key);
+    details.classList.contains('show') ? (details.classList.remove('show'), requestAnimationFrame(() => details.classList.add('show'))) : details.classList.add('show');
+    document.querySelectorAll('.contact').forEach(c => c.classList.remove('selected'));
+    const selected = document.querySelector(`.contact[onclick*="'${key}'"]`);
+    selected && selected.classList.add('selected');
 }
+
 
 /**
  * Displays the contact detail overlay by adding a specific CSS class to the overlay element.
@@ -272,52 +260,30 @@ async function editContact() {
 }
 
 /**
- * Updates the contact details with the new values entered in the edit form. 
- * Validates the form inputs, sends a PUT request to update the contact data, 
- * and refreshes the contact list.
+ * Updates contact details based on edited form data.
  * 
  * @async
- * @returns {Promise<Object>} A promise that resolves to the updated contact data after the PUT request.
- * @throws {Error} Throws an error if there is an issue with the HTTP request or input validation.
+ * @function updateEditedContact
+ * @throws {Error} If form fields are empty or HTTP request fails
+ * @returns {Promise<Object>} Updated contact data
  */
 async function updateEditedContact() {
-    const changedName = document.getElementById('changedName').value.trim();
-    const changedEmail = document.getElementById('changedEmail').value.trim();
-    const changedPhone = document.getElementById('changedPhone').value.trim();
-    const editLink = base_url + "users" + "/" + editKey;
-    if (!changedName || !changedEmail || !changedPhone) {
-        alert("Bitte füllen Sie alle Felder aus.");
-        return;
-    }
-    try {
-        let userResponse = await fetch(editLink + ".json");
-        if (!userResponse.ok) {
-            throw new Error(`HTTP error! status: ${userResponse.status}`);
-        }
-        let user = await userResponse.json();
-        const data = {
-            'color': user.color,
-            'mail': changedEmail,
-            'name': changedName,
-            'password': user.password,
-            'phone': changedPhone
-        };
-        const response = await fetch(editLink + ".json", {
-            method: 'PUT',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
-        loadContactData();
-        contactDetails.innerHTML = '';
-        closeEditOverlay();
-        return await response.json();
-    } catch (error) {
-        console.error('Fehler beim Bearbeiten des Kontakts:', error);
-        alert('Es gab einen Fehler beim Bearbeiten des Kontakts. Bitte versuchen Sie es erneut.');
-    }
+    const [name, email, phone] = ['changedName', 'changedEmail', 'changedPhone'].map(id => document.getElementById(id).value.trim());
+    if (!name || !email || !phone) return alert("Bitte füllen Sie alle Felder aus.");
+    const editLink = `${base_url}users/${editKey}`;
+    const userResponse = await fetch(`${editLink}.json`);
+    if (!userResponse.ok) throw new Error(`HTTP error! status: ${userResponse.status}`);
+    const user = await userResponse.json();
+    const data = { ...user, mail: email, name, phone };
+    const response = await fetch(`${editLink}.json`, {
+        method: 'PUT', headers: { "Content-Type": "application/json" }, body: JSON.stringify(data),
+    });
+    loadContactData();
+    contactDetails.innerHTML = '';
+    closeEditOverlay();
+    return await response.json();
 }
+
 
 /**
  * Closes the contact details overlay by removing the 'contactDetailBox' class 
