@@ -9,6 +9,9 @@
 }
 */
 
+
+
+
 .main_maxWidth {
   max-width: 1300px;
 }
@@ -254,10 +257,6 @@
   justify-content: space-between;
 }
 
-/* Board */
-:root {
-  --height: fit-content;
-}
 
 
 .content-board {

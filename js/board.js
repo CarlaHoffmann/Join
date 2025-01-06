@@ -64,6 +64,7 @@ async function displayTasks(taskArray, containerId) {
             const initials = getContactInitials(contact);
             return `<div class="member" style="background-color: ${contactColor}">${initials}</div>`;
         }).join('');
+
         const prio = getPrio(task.prio);
 
         return `
@@ -92,6 +93,7 @@ async function displayTasks(taskArray, containerId) {
     // Placeholder-Logik
     placeholder.style.display = taskArray.length === 0 ? "block" : "none";
 }
+
 
 
 // async function getContactColor(tasks) {
@@ -439,34 +441,7 @@ async function openTaskOverlay(task) {
     overlayContainer.classList.remove('d-none');
 }
 
-// function addSubtaskListeners(task) {
-//     const overlayContainer = document.getElementById('taskOverlayContainer');
-//     const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
 
-//     checkboxes.forEach(checkbox => {
-//         checkbox.addEventListener('change', async () => {
-//             const subtaskKey = checkbox.dataset.subtaskKey;
-//             const isChecked = checkbox.checked;
-
-//             // Subtask-Status im task-Objekt aktualisieren
-//             task.subtasks[subtaskKey].checked = isChecked;
-
-//             try {
-//                 // Subtask-Status in Firebase aktualisieren
-//                 const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskKey}.json`;
-//                 await fetch(url, {
-//                     method: 'PUT',
-//                     body: JSON.stringify(task.subtasks[subtaskKey]),
-//                     headers: { 'Content-Type': 'application/json' },
-//                 });
-
-//                 console.log(`Subtask ${subtaskKey} updated:`, isChecked);
-//             } catch (error) {
-//                 console.error(`Error updating subtask ${subtaskKey}:`, error);
-//             }
-//         });
-//     });
-// }
 
 function closeTaskOverlay() {
     const overlayContainer = document.getElementById('taskOverlayContainer');
@@ -493,42 +468,72 @@ async function saveOverlayChanges(taskId, taskStatus) {
     const dueDateElement = document.getElementById('datepicker');
     const prioButton = document.querySelector('.prio-button.active-button');
     const categoryElement = document.getElementById('category-selection');
+    const contactsElements = selectedContacts;
+
+    const subtasksContainer = document.getElementById("subtasks");
+    const subtaskElements = subtasksContainer.querySelectorAll(".check");
 
     if (!titleElement || !descriptionElement || !dueDateElement || !prioButton || !categoryElement) {
         console.error('Ein oder mehrere erforderliche Elemente fehlen.');
         return;
     }
 
-    // Änderungen lokal in currentTask speichern
-    currentTask.title = titleElement.value;
-    currentTask.description = descriptionElement.value;
-    currentTask.date = dueDateElement.value;
-    currentTask.prio = prioButton.id.replace('prio', '');
-    currentTask.category = categoryElement.textContent.trim();
+    // Subtasks-Daten sammeln
+    const subtasksData = {};
+    subtaskElements.forEach(subtaskElement => {
+        const subtaskKey = subtaskElement.querySelector("input[type='checkbox']").dataset.subtaskKey;
+        const subtaskTask = subtaskElement.querySelector("div").textContent;
+        const isChecked = subtaskElement.querySelector("input[type='checkbox']").checked;
+
+        // Hinzufügen oder Aktualisieren des Subtasks
+        subtasksData[subtaskKey] = {
+            task: subtaskTask,
+            checked: isChecked
+        };
+    });
+
+    // Task-Daten aktualisieren
+    const updatedTask = {
+        title: titleElement.value,
+        description: descriptionElement.value,
+        date: dueDateElement.value,
+        prio: prioButton.id.replace('prio', ''),
+        category: categoryElement.textContent.trim(),
+        contacts: contactsElements,
+        subtasks: subtasksData
+    };
 
     try {
-        // Änderungen in Firebase speichern
+        // URL für das Aktualisieren der bestehenden Task
         const url = `${base_url}/tasks/${taskStatus}/${taskId}.json`;
         const response = await fetch(url, {
-            method: 'PUT',
-            body: JSON.stringify(currentTask),
-            headers: { 'Content-Type': 'application/json' },
+            method: 'PUT', // Wichtig: PUT überschreibt die bestehende Aufgabe
+            body: JSON.stringify(updatedTask),
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
 
         if (!response.ok) {
             throw new Error(`HTTP error: ${response.status}`);
         }
 
-        console.log('Task erfolgreich gespeichert:', currentTask);
+        console.log('Task erfolgreich gespeichert:', updatedTask);
+
+        // Board aktualisieren
+        await loadTasks();
     } catch (error) {
-        console.error('Fehler beim Speichern der Task:', error);
+        console.error("Fehler beim Aktualisieren der Aufgabe:", error);
     }
 }
 
 
 
 
-// Event-Listener für Subtask-Checkboxen
+/**
+ * Fügt Event-Listener zu den Subtask-Checkboxen hinzu und aktualisiert die Fortschrittsanzeige.
+ * @param {Object} task - Die Task, zu der die Subtasks gehören.
+ */
 function addSubtaskListeners(task) {
     const overlayContainer = document.getElementById('taskOverlayContainer');
     const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
@@ -550,8 +555,37 @@ function addSubtaskListeners(task) {
             });
 
             console.log(`Subtask ${subtaskKey} updated:`, isChecked);
+
+            // Fortschrittsanzeige aktualisieren
+            updateTaskProgress(task);
         });
     });
+}
+
+/**
+ * Aktualisiert die Fortschrittsanzeige und die Subtask-Zähler für eine Task.
+ * @param {Object} task - Die Task, deren Fortschritt aktualisiert werden soll.
+ */
+function updateTaskProgress(task) {
+    const taskElement = document.getElementById(`task-${task.id}`);
+
+    if (taskElement) {
+        const completedSubtasks = Object.values(task.subtasks).filter(subtask => subtask.checked).length;
+        const totalSubtasks = Object.keys(task.subtasks).length;
+        const progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
+
+        // Fortschrittsanzeige aktualisieren
+        const progressBar = taskElement.querySelector('.progress-bar');
+        if (progressBar) {
+            progressBar.style.width = `${progressPercentage}%`;
+        }
+
+        // Subtask-Anzeige aktualisieren
+        const subtasksText = taskElement.querySelector('.subtasks');
+        if (subtasksText) {
+            subtasksText.textContent = `${completedSubtasks} von ${totalSubtasks} Subtasks`;
+        }
+    }
 }
 
 
@@ -975,7 +1009,6 @@ async function saveTaskSubtasks(task) {
 
 
 //new
-
 async function updateOverlay(taskId, taskStatus) {
     try {
         // Abrufen der aktualisierten Daten aus Firebase
@@ -1043,53 +1076,72 @@ async function initializeValidationEdit(task) {
 //         }
 //     }
 // }
-async function deleteSubtasks(parentId) {
-    const url = `${base_url}/tasks/${parentId}.json`;
-    const response = await fetch(url);
-    const data = await response.json();
 
-    // Überprüfe, ob es untergeordnete Aufgaben gibt
-    if (data && data.subtasks) {
-        const subtasks = Object.keys(data.subtasks);
-        for (const subtaskId of subtasks) {
-            await deleteSubtasks(`${parentId}/subtasks/${subtaskId}`); // Rekursives Löschen
-            const subtaskUrl = `${base_url}/tasks/${parentId}/subtasks/${subtaskId}.json`;
-            await fetch(subtaskUrl, { method: 'DELETE' });
+
+
+
+
+
+
+// Funktion, um Subtasks rekursiv zu löschen
+async function deleteSubtasks(parentPath) {
+    try {
+        const url = `${base_url}/tasks/${parentPath}.json`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`HTTP-Error: ${response.status}`);
         }
+
+        const data = await response.json();
+
+        // Überprüfen, ob Subtasks existieren
+        if (data && data.subtasks) {
+            const subtasks = Object.keys(data.subtasks);
+
+            for (const subtaskId of subtasks) {
+                // Rekursive Löschung von Subtasks
+                await deleteSubtasks(`${parentPath}/subtasks/${subtaskId}`);
+                const subtaskUrl = `${base_url}/tasks/${parentPath}/subtasks/${subtaskId}.json`;
+                await fetch(subtaskUrl, { method: 'DELETE' });
+            }
+        }
+    } catch (error) {
+        console.error("Fehler beim Löschen der Subtasks:", error);
     }
 }
 
+// Überarbeitete Hauptfunktion zum Löschen von Tasks
 async function deleteTask(taskId) {
     const confirmDelete = confirm("Are you sure you want to delete this task?");
     if (confirmDelete) {
         try {
-            // Identifiziere die Spalte (toDo, progress, feedback, done) anhand der Task-ID
+            // Task-Element identifizieren
             const taskElement = document.getElementById(`task-${taskId}`);
             const parentColumnId = taskElement.parentElement.id.replace("Tasks", "");
 
-            // Lösche zuerst alle untergeordneten Aufgaben
+            // Rekursive Löschung aller Subtasks
             await deleteSubtasks(`${parentColumnId}/${taskId}`);
 
-            // Lösche die Hauptaufgabe aus Firebase
+            // Löschen des Haupttasks aus Firebase
             const url = `${base_url}/tasks/${parentColumnId}/${taskId}.json`;
             await fetch(url, { method: 'DELETE' });
 
-            // Entferne die Aufgabe aus dem DOM
+            // Entferne den Task aus dem DOM
             taskElement.remove();
 
-            // Überprüfe, ob der Placeholder angezeigt werden soll
+            // Überprüfen, ob Placeholder angezeigt werden muss
             updatePlaceholders();
 
             // Schließe das Overlay
             closeTaskOverlay();
 
-            console.log(`Task ${taskId} deleted successfully`);
+            console.log(`Task ${taskId} und alle Subtasks erfolgreich gelöscht.`);
         } catch (error) {
-            console.error("Error deleting task:", error);
+            console.error("Fehler beim Löschen des Tasks:", error);
         }
     }
 }
-
 
 
 
@@ -1113,3 +1165,55 @@ function updatePlaceholders() {
 
 const searchField = document.querySelector('#searchField');
 console.log(searchField);
+
+
+
+
+
+
+// Suchfunktion
+function addSearchTask() {
+    const searchValue = document.getElementById("searchField").value.toLowerCase(); // Suchwert abrufen
+    const tasksContainers = document.querySelectorAll(".tasks-container"); // Alle Task-Container abrufen
+    let noResultFound = true; // Status, ob ein Ergebnis gefunden wurde
+
+    // Alle Tasks in allen Containern durchsuchen
+    tasksContainers.forEach(container => {
+        const tasks = container.querySelectorAll(".task-card"); // Alle Task-Karten abrufen
+
+        tasks.forEach(task => {
+            const title = task.querySelector(".task-title").textContent.toLowerCase();
+            const description = task.querySelector(".task-description").textContent.toLowerCase();
+
+            // Überprüfen, ob der Task-Titel oder die Beschreibung den Suchbegriff enthält
+            if (title.includes(searchValue) || description.includes(searchValue)) {
+                task.style.display = "block"; // Task anzeigen
+                noResultFound = false;
+            } else {
+                task.style.display = "none"; // Task ausblenden
+            }
+        });
+    });
+
+    // Keine Ergebnisse gefunden
+    const noSearchResult = document.getElementById("no-search-result");
+    noSearchResult.style.display = noResultFound ? "block" : "none"; // Nachricht ein-/ausblenden
+    document.getElementById("delete-search").classList.toggle("d-none", !searchValue); // Löschen-Icon ein-/ausblenden
+}
+
+// Suchfeld zurücksetzen
+function deleteSearch() {
+    document.getElementById("searchField").value = ""; // Suchfeld leeren
+    document.getElementById("delete-search").classList.add("d-none"); // Löschen-Icon ausblenden
+    const noSearchResult = document.getElementById("no-search-result");
+    noSearchResult.style.display = "none"; // Keine Ergebnisse Nachricht ausblenden
+
+    // Alle Tasks wieder einblenden
+    const tasksContainers = document.querySelectorAll(".tasks-container");
+    tasksContainers.forEach(container => {
+        const tasks = container.querySelectorAll(".task-card");
+        tasks.forEach(task => {
+            task.style.display = "block";
+        });
+    });
+}
