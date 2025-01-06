@@ -89,7 +89,7 @@ function getPriorityClassEdit(priority) {
     }
 }
 
-async function initializeValidationEdit(task) {
+async function saveEditedTask(task) {
     // const submitButton = document.querySelector('.submit-button');
 
     // if (submitButton) {
