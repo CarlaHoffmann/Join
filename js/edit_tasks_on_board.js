@@ -93,7 +93,8 @@ function getPriorityClassEdit(priority) {
 /**
  * Updates the subtask buttons to show the open state and adds an event listener for outside clicks.
  */
-function openEditSubtaskTemplate(subtasks) {
+function openEditSubtaskTemplate(task) {
+    console.log(task);
     let subtaskButtons = document.getElementById('subtask-buttons');
     subtaskButtons.innerHTML = `
         <div id="opened-subtask-icons">
@@ -101,7 +102,7 @@ function openEditSubtaskTemplate(subtasks) {
                 <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt="">
             </div>
             <div><img src="./img/task/vector-3.svg" alt="seperator"></div>
-            <div class="opened-subtask-icon-box icon-hover"  onclick="addEditedSubtask('${JSON.stringify(subtasks)}')">
+            <div class="opened-subtask-icon-box icon-hover"  onclick="addEditedSubtask(${task})">
                 <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt="">
             </div>
         </div>
@@ -112,7 +113,8 @@ function openEditSubtaskTemplate(subtasks) {
 /**
  * This function adds a new subtask to the list and updates the display.
  */
-function addEditedSubtask(existingSubtasks) {
+function addEditedSubtask(task) {
+    let existingSubtasks = task.subtasks;
     console.log(existingSubtasks);
     let subtaskInput = document.getElementById('subtaskInput');
     let addedSubtask = document.getElementById('subtasks');
