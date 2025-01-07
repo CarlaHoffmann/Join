@@ -112,47 +112,25 @@ function openEditSubtaskTemplate(taskId, path) {
 /**
  * This function adds a new subtask to the list and updates the display.
  */
-// async function addEditedSubtask(taskId, path) {
-//     /**
-//      * Get the subtask input and the element to display added subtasks.
-//      */
-//     let subtaskInput = document.getElementById('subtaskInput');
-//     let addedSubtask = document.getElementById('subtasks');
-//     let existingSubtasks = await getExistingSubtasks(taskId, path);
-//     console.log(existingSubtasks);
-//     // subtasks.push(existingSubtasks);
-//     subtasks = [...existingSubtasks];
-
-//     if (subtaskInput.value !== '') {
-//         subtasks.push(subtaskInput.value);
-//     }
-//     console.log(subtasks);
-//     addedSubtask.innerHTML = '';
-
-//     for (let i = 0; i < subtasks.length; i++) {
-//         const element = subtasks[i];
-//         addedSubtask.innerHTML += getAddEditedSubtaskTemplate(i, element, 'false');
-//     }
-//     closeSubtask();
-// }
 async function addEditedSubtask(taskId, path) {
     let subtaskInput = document.getElementById('subtaskInput');
     let addedSubtask = document.getElementById('subtasks');
 
     let newSubtask = subtaskInput.value;
+    console.log(newSubtask);
 
     let existingSubtasks = await getExistingSubtasks(taskId, path);
     console.log(existingSubtasks);
+    // let length = existingSubtasks.length;
 
     if (subtaskInput.value !== '') {
         existingSubtasks.push({
-            index: existingSubtasks.length,
+            // index: length,
             task: newSubtask,
             checked: false
         });
     }
-    console.log(`index: ${existingSubtasks.length}`);
-    // console.log(`task: ${subtaskInput.value}`);
+    console.log(existingSubtasks);
 
     addedSubtask.innerHTML = '';
     for (let i = 0; i < existingSubtasks.length; i++) {
@@ -162,20 +140,6 @@ async function addEditedSubtask(taskId, path) {
     closeSubtask();
 }
 
-// function getAddEditedSubtaskTemplate(i, element, x) {
-//     return `
-//         <div id="subtask${i}">
-//             <div onclick="editEditedSubtask(${i}, '${element}', '${x}')" class="subtask-box" value="${x}">
-//                 <div>• ${element}</div>
-//                 <div class="added-subtask-icons">
-//                     <div><img onclick="editEditedSubtask(${i}, '${element}', '${x}')" class="icon-hover" src="./img/task/subtask_add_pen.svg" alt=""></div>
-//                     <div><img src="./img/task/vector-3.svg" alt=""></div>
-//                     <div><img onclick="deleteSubtask(${i})" class="icon-hover"  src="./img/task/subtask_add_bin.svg" alt=""></div>
-//                 </div>
-//             </div>
-//         </div>
-//     `;
-// }
 function getAddEditedSubtaskTemplate(i, element, checked) {
     return `
         <div id="subtask${i}">
@@ -191,42 +155,6 @@ function getAddEditedSubtaskTemplate(i, element, checked) {
     `;
 }
 
-// async function getExistingSubtasks(taskId) {
-
-//     for (let i = 0; i < subtasks.length; i++) {
-//         const element = subtasks[i];
-//         existingSubtasks += (i, element, 'false');
-//     }
-//     return existingSubtasks;
-// }
-// async function getExistingSubtasks(taskId, path) {  
-//     console.log(path);
-//     try {
-//         const url = `${base_url}/tasks/${path}/${taskId}.json`;
-//         const response = await fetch(url);
-//       if (!response.ok) {
-//         throw new Error('Netzwerkantwort war nicht ok');
-//       }
-//       const subtasksData = await response.json();
-//       const existingSubtasks = [];
-  
-//       if (subtasksData) {
-//         Object.keys(subtasksData).forEach((key, index) => {
-//           const subtask = subtasksData[key];
-//           existingSubtasks.push({
-//             index: index,
-//             task: subtask.task,
-//             checked: subtask.checked || false
-//           });
-//         });
-//       }
-  
-//       return existingSubtasks;
-//     } catch (error) {
-//       console.error("Fehler beim Abrufen der Subtasks:", error);
-//       return [];
-//     }
-//   }
 async function getExistingSubtasks(taskId, path) {
     try {
         const url = `${base_url}/tasks/${path}/${taskId}/subtasks.json`;
@@ -240,7 +168,7 @@ async function getExistingSubtasks(taskId, path) {
         if (subtasksData) {
             Object.entries(subtasksData).forEach(([key, subtask], index) => {
                 existingSubtasks.push({
-                    index: index,
+                    // index: index,
                     task: subtask.task,
                     checked: subtask.checked || false
                 });
