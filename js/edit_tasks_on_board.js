@@ -113,29 +113,12 @@ function openEditSubtaskTemplate(task) {
 /**
  * This function adds a new subtask to the list and updates the display.
  */
-// function addEditedSubtask(task) {
-//     let existingSubtasks = task.subtasks;
-
-//     console.log(existingSubtasks);
-//     let subtaskInput = document.getElementById('subtaskInput');
-//     let addedSubtask = document.getElementById('subtasks');
-
-//     console.log(existingSubtasks);
-//     if (subtaskInput.value !== '') {
-//         existingSubtasks.push({
-//             task: subtaskInput.value,
-//             checked: false
-//         });
-//     }
-//     addedSubtask.innerHTML = '';
-
-//     for (let i = 0; i < existingSubtasks.length; i++) {
-//         const element = existingSubtasks[i].task;
-//         addedSubtask.innerHTML += getAddSubtaskTemplate(i, element);
-//     }
-//     closeSubtask();
-// }
 function addEditedSubtask(task) {
+    /**
+     * Get the subtask input and the element to display added subtasks.
+     */
+    let subtaskInput = document.getElementById('subtaskInput');
+    let addedSubtask = document.getElementById('subtasks');
     let existingSubtasks = [];
 
     // Subtasks mit einer for-Schleife auslesen
@@ -144,7 +127,6 @@ function addEditedSubtask(task) {
             existingSubtasks.push(task.subtasks[key]);
         }
     }
-
     console.log(existingSubtasks);
 
     if (subtaskInput.value !== '') {
@@ -161,24 +143,24 @@ function addEditedSubtask(task) {
     }
     closeSubtask();
 }
-function addSubtask() {
-    /**
-     * Get the subtask input and the element to display added subtasks.
-     */
-    let subtaskInput = document.getElementById('subtaskInput');
-    let addedSubtask = document.getElementById('subtasks');
+// function addSubtask() {
+//     /**
+//      * Get the subtask input and the element to display added subtasks.
+//      */
+//     let subtaskInput = document.getElementById('subtaskInput');
+//     let addedSubtask = document.getElementById('subtasks');
 
-    if (subtaskInput.value !== '') {
-        subtasks.push(subtaskInput.value);
-    }
-    addedSubtask.innerHTML = '';
+//     if (subtaskInput.value !== '') {
+//         subtasks.push(subtaskInput.value);
+//     }
+//     addedSubtask.innerHTML = '';
 
-    for (let i = 0; i < subtasks.length; i++) {
-        const element = subtasks[i];
-        addedSubtask.innerHTML += getAddSubtaskTemplate(i, element);
-    }
-    closeSubtask();
-}
+//     for (let i = 0; i < subtasks.length; i++) {
+//         const element = subtasks[i];
+//         addedSubtask.innerHTML += getAddSubtaskTemplate(i, element);
+//     }
+//     closeSubtask();
+// }
 
 // function getSubtasks(subtasks) {
 //     console.log
