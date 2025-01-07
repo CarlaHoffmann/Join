@@ -155,7 +155,6 @@ async function addEditedSubtask(taskId, path) {
     // console.log(`task: ${subtaskInput.value}`);
 
     addedSubtask.innerHTML = '';
-
     for (let i = 0; i < existingSubtasks.length; i++) {
         const element = existingSubtasks[i];
         addedSubtask.innerHTML += getAddEditedSubtaskTemplate(i, element.task, element.checked);
