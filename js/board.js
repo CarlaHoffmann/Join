@@ -406,10 +406,10 @@ async function openEditTaskOverlay(task) {
                         <div class="labled-box">
                             <label class="form-label">
                                 Subtasks
-                                <div onclick="openEditSubtaskTemplate(${JSON.stringify(task.subtasks)})" id="subtask-input-wrapper">
+                                <div id="subtask-input-wrapper">
                                     <div id="subtask">
                                         <input id="subtaskInput" type="text" class="form-field pad-12-16" placeholder="Add new subtask">
-                                        <div id="subtask-buttons">
+                                        <div id="subtask-buttons" onclick="addNewSubtask(currentTask)">
                                             <img class="subtask-img symbol-hover icon-hover" src="./img/task/subtask.svg" alt="add subtask">
                                         </div>
                                     </div>
@@ -454,6 +454,80 @@ async function openEditTaskOverlay(task) {
     // categorySelection.textContent = task.category || 'Select task category';
 }
 
+
+function addNewSubtask(task) {
+    const subtaskInput = document.getElementById('subtaskInput');
+    const newSubtaskText = subtaskInput.value.trim();
+
+    if (newSubtaskText) {
+        // Subtask-Key generieren
+        const newSubtaskKey = `subtask-${Date.now()}`;
+
+        // Subtask zum aktuellen Task hinzufügen
+        task.subtasks[newSubtaskKey] = { task: newSubtaskText, checked: false };
+
+        // Subtask-HTML generieren und hinzufügen
+        const subtasksContainer = document.getElementById('subtasks');
+        const newSubtaskHTML = `
+            <div class="check">
+                <input type="checkbox" data-subtask-key="${newSubtaskKey}" onchange="toggleSubtask(event, '${task.id}', '${task.path}')">
+                <div>${newSubtaskText}</div>
+            </div>`;
+        subtasksContainer.insertAdjacentHTML('beforeend', newSubtaskHTML);
+
+        // Eingabefeld zurücksetzen
+        subtaskInput.value = '';
+
+        console.log(`Neuer Subtask hinzugefügt: ${newSubtaskText}`);
+    } else {
+        alert('Bitte einen gültigen Subtask-Text eingeben.');
+    }
+}
+
+
+// Funktion zum Speichern neuer Subtasks in der Datenbank
+async function saveTaskSubtasks(task) {
+    try {
+        // URL für das Speichern der Subtasks
+        const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks.json`;
+
+        // Subtasks in Firebase speichern
+        await fetch(url, {
+            method: 'PUT',
+            body: JSON.stringify(task.subtasks),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        console.log(`Subtasks für Task ${task.id} erfolgreich gespeichert.`);
+    } catch (error) {
+        console.error('Fehler beim Speichern der Subtasks:', error);
+    }
+}
+
+// Subtask-Status bei Änderungen aktualisieren
+function toggleSubtask(event, taskId, taskPath) {
+    const checkbox = event.target;
+    const subtaskKey = checkbox.dataset.subtaskKey;
+    const isChecked = checkbox.checked;
+
+    // Subtask-Status im Task-Objekt aktualisieren
+    currentTask.subtasks[subtaskKey].checked = isChecked;
+
+    // Subtask-Änderungen speichern
+    saveTaskSubtasks(currentTask);
+}
+
+
+// Toggle-Funktion für Subtasks
+function toggleSubtask(event, taskId, taskPath) {
+    const checkbox = event.target;
+    const subtaskKey = checkbox.dataset.subtaskKey;
+    const isChecked = checkbox.checked;
+
+    currentTask.subtasks[subtaskKey].checked = isChecked;
+
+    saveTaskSubtasks(currentTask); // Subtask-Status direkt speichern
+}
 
 /**
  * Schließt das Bearbeitungs-Overlay.
@@ -588,9 +662,19 @@ async function openTaskOverlay(task) {
 
 function closeTaskOverlay() {
     const overlayContainer = document.getElementById('taskOverlayContainer');
+
+    // Speichern der aktuellen Task-Daten inklusive Subtasks
+    if (currentTask) {
+        saveTaskSubtasks(currentTask).then(() => {
+            // Nach Speichern die Board-Ansicht aktualisieren
+            loadTasks();
+        });
+    }
+
     overlayContainer.classList.add('d-none');
     overlayContainer.innerHTML = ''; // Inhalt löschen
 }
+
 
 
 let updatedSubtasksWithOverlay = [];
@@ -846,6 +930,8 @@ async function updateOverlay(taskId, taskStatus) {
         console.error('Fehler beim Aktualisieren des Overlays:', error);
     }
 }
+
+
 
 
 // Funktion, um Subtasks rekursiv zu löschen
