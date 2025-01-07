@@ -161,6 +161,24 @@ function addEditedSubtask(task) {
     }
     closeSubtask();
 }
+function addSubtask() {
+    /**
+     * Get the subtask input and the element to display added subtasks.
+     */
+    let subtaskInput = document.getElementById('subtaskInput');
+    let addedSubtask = document.getElementById('subtasks');
+
+    if (subtaskInput.value !== '') {
+        subtasks.push(subtaskInput.value);
+    }
+    addedSubtask.innerHTML = '';
+
+    for (let i = 0; i < subtasks.length; i++) {
+        const element = subtasks[i];
+        addedSubtask.innerHTML += getAddSubtaskTemplate(i, element);
+    }
+    closeSubtask();
+}
 
 // function getSubtasks(subtasks) {
 //     console.log
