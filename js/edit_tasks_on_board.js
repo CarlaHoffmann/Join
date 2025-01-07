@@ -93,8 +93,8 @@ function getPriorityClassEdit(priority) {
 /**
  * Updates the subtask buttons to show the open state and adds an event listener for outside clicks.
  */
-function openEditSubtaskTemplate(task) {
-    console.log(task);
+function openEditSubtaskTemplate() {
+    // console.log(task);
     let subtaskButtons = document.getElementById('subtask-buttons');
     subtaskButtons.innerHTML = `
         <div id="opened-subtask-icons">
@@ -102,7 +102,7 @@ function openEditSubtaskTemplate(task) {
                 <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt="">
             </div>
             <div><img src="./img/task/vector-3.svg" alt="seperator"></div>
-            <div class="opened-subtask-icon-box icon-hover"  onclick="addEditedSubtask(${JSON.stringify(task)})">
+            <div class="opened-subtask-icon-box icon-hover"  onclick="addEditedSubtask()">
                 <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt="">
             </div>
         </div>
@@ -110,26 +110,17 @@ function openEditSubtaskTemplate(task) {
     document.addEventListener('click', closeSubtaskOnOutsideClick);
 }
 
-// let existingSubtasks = [];
 /**
  * This function adds a new subtask to the list and updates the display.
  */
-function addEditedSubtask(task) {
+function addEditedSubtask() {
     /**
      * Get the subtask input and the element to display added subtasks.
      */
     let subtaskInput = document.getElementById('subtaskInput');
     let addedSubtask = document.getElementById('subtasks');
-    
-
-    // Subtasks mit einer for-Schleife auslesen
-    for (let key in task) {
-        if (task.subtasks.hasOwnProperty(key)) {
-            subtasks.push(task[key]);
-            console.log(task[key]);
-        }
-    }
-    console.log(subtaskInput.value);
+    let existingSubtasks = document.getElementById('subtasks');
+    console.log(existingSubtasks);
 
     if (subtaskInput.value !== '') {
         subtasks.push(subtaskInput.value);
@@ -138,14 +129,43 @@ function addEditedSubtask(task) {
 
     for (let i = 0; i < subtasks.length; i++) {
         const element = subtasks[i];
-        addedSubtask.innerHTML += getAddSubtaskTemplate(i, element);
+        addedSubtask.innerHTML += getAddEditedSubtaskTemplate(i, element, 'false');
     }
     closeSubtask();
 }
 
-// function getSubtasks(subtasks) {
-//     console.log
-// }
+function getAddEditedSubtaskTemplate(i, element, x) {
+    return `
+        <div id="subtask${i}">
+            <div onclick="editEditedSubtask(${i, element, x})" class="subtask-box" value="${x}">
+                <div>• ${element}</div>
+                <div class="added-subtask-icons">
+                    <div><img onclick="editEditedSubtask(${i, element, x})" class="icon-hover" src="./img/task/subtask_add_pen.svg" alt=""></div>
+                    <div><img src="./img/task/vector-3.svg" alt=""></div>
+                    <div><img onclick="deleteSubtask(${i})" class="icon-hover"  src="./img/task/subtask_add_bin.svg" alt=""></div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function editEditedSubtask(index, element, x) {
+    console.log(index);
+    /**
+     * Get the subtask element and its current text.
+     */
+    let subtaskElement = document.getElementById(`subtask${index}`);
+    let currentText = subtasks[index];
+
+    subtaskElement.innerHTML = editSubtaskTemplate(index, currentText);
+
+    /**
+     * Focus the input field and set the cursor to the end.
+     */
+    let input = subtaskElement.querySelector('.edit-subtask-input');
+    input.focus();
+    input.setSelectionRange(input.value.length, input.value.length);
+}
 
 
 async function saveEditedTask(task) {
