@@ -93,8 +93,7 @@ function getPriorityClassEdit(priority) {
 /**
  * Updates the subtask buttons to show the open state and adds an event listener for outside clicks.
  */
-function openEditSubtaskTemplate() {
-    // console.log(task);
+function openEditSubtaskTemplate(taskId, path) {
     let subtaskButtons = document.getElementById('subtask-buttons');
     subtaskButtons.innerHTML = `
         <div id="opened-subtask-icons">
@@ -102,7 +101,7 @@ function openEditSubtaskTemplate() {
                 <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt="">
             </div>
             <div><img src="./img/task/vector-3.svg" alt="seperator"></div>
-            <div class="opened-subtask-icon-box icon-hover"  onclick="addEditedSubtask()">
+            <div class="opened-subtask-icon-box icon-hover"  onclick="addEditedSubtask('${taskId}', '${path}')">
                 <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt="">
             </div>
         </div>
@@ -113,40 +112,144 @@ function openEditSubtaskTemplate() {
 /**
  * This function adds a new subtask to the list and updates the display.
  */
-function addEditedSubtask() {
-    /**
-     * Get the subtask input and the element to display added subtasks.
-     */
+// async function addEditedSubtask(taskId, path) {
+//     /**
+//      * Get the subtask input and the element to display added subtasks.
+//      */
+//     let subtaskInput = document.getElementById('subtaskInput');
+//     let addedSubtask = document.getElementById('subtasks');
+//     let existingSubtasks = await getExistingSubtasks(taskId, path);
+//     console.log(existingSubtasks);
+//     // subtasks.push(existingSubtasks);
+//     subtasks = [...existingSubtasks];
+
+//     if (subtaskInput.value !== '') {
+//         subtasks.push(subtaskInput.value);
+//     }
+//     console.log(subtasks);
+//     addedSubtask.innerHTML = '';
+
+//     for (let i = 0; i < subtasks.length; i++) {
+//         const element = subtasks[i];
+//         addedSubtask.innerHTML += getAddEditedSubtaskTemplate(i, element, 'false');
+//     }
+//     closeSubtask();
+// }
+async function addEditedSubtask(taskId, path) {
     let subtaskInput = document.getElementById('subtaskInput');
     let addedSubtask = document.getElementById('subtasks');
-    let existingSubtasks = document.getElementById('subtasks');
+    let existingSubtasks = await getExistingSubtasks(taskId, path);
     console.log(existingSubtasks);
 
     if (subtaskInput.value !== '') {
-        subtasks.push(subtaskInput.value);
+        existingSubtasks.push({
+            index: existingSubtasks.length,
+            task: subtaskInput.value,
+            checked: false
+        });
     }
+    console.log(`index: ${existingSubtasks.length}`);
+    console.log(`task: ${subtaskInput.value}`);
+
     addedSubtask.innerHTML = '';
 
-    for (let i = 0; i < subtasks.length; i++) {
-        const element = subtasks[i];
-        addedSubtask.innerHTML += getAddEditedSubtaskTemplate(i, element, 'false');
+    for (let i = 0; i < existingSubtasks.length; i++) {
+        const element = existingSubtasks[i];
+        addedSubtask.innerHTML += getAddEditedSubtaskTemplate(i, element.task, element.checked);
     }
     closeSubtask();
 }
 
-function getAddEditedSubtaskTemplate(i, element, x) {
+// function getAddEditedSubtaskTemplate(i, element, x) {
+//     return `
+//         <div id="subtask${i}">
+//             <div onclick="editEditedSubtask(${i}, '${element}', '${x}')" class="subtask-box" value="${x}">
+//                 <div>• ${element}</div>
+//                 <div class="added-subtask-icons">
+//                     <div><img onclick="editEditedSubtask(${i}, '${element}', '${x}')" class="icon-hover" src="./img/task/subtask_add_pen.svg" alt=""></div>
+//                     <div><img src="./img/task/vector-3.svg" alt=""></div>
+//                     <div><img onclick="deleteSubtask(${i})" class="icon-hover"  src="./img/task/subtask_add_bin.svg" alt=""></div>
+//                 </div>
+//             </div>
+//         </div>
+//     `;
+// }
+function getAddEditedSubtaskTemplate(i, element, checked) {
     return `
         <div id="subtask${i}">
-            <div onclick="editEditedSubtask(${i, element, x})" class="subtask-box" value="${x}">
+            <div onclick="editEditedSubtask(${i}, '${element}', ${checked})" class="subtask-box" value="${checked}">
                 <div>• ${element}</div>
                 <div class="added-subtask-icons">
-                    <div><img onclick="editEditedSubtask(${i, element, x})" class="icon-hover" src="./img/task/subtask_add_pen.svg" alt=""></div>
+                    <div><img onclick="editEditedSubtask(${i}, '${element}', ${checked})" class="icon-hover" src="./img/task/subtask_add_pen.svg" alt=""></div>
                     <div><img src="./img/task/vector-3.svg" alt=""></div>
                     <div><img onclick="deleteSubtask(${i})" class="icon-hover"  src="./img/task/subtask_add_bin.svg" alt=""></div>
                 </div>
             </div>
         </div>
     `;
+}
+
+// async function getExistingSubtasks(taskId) {
+
+//     for (let i = 0; i < subtasks.length; i++) {
+//         const element = subtasks[i];
+//         existingSubtasks += (i, element, 'false');
+//     }
+//     return existingSubtasks;
+// }
+// async function getExistingSubtasks(taskId, path) {  
+//     console.log(path);
+//     try {
+//         const url = `${base_url}/tasks/${path}/${taskId}.json`;
+//         const response = await fetch(url);
+//       if (!response.ok) {
+//         throw new Error('Netzwerkantwort war nicht ok');
+//       }
+//       const subtasksData = await response.json();
+//       const existingSubtasks = [];
+  
+//       if (subtasksData) {
+//         Object.keys(subtasksData).forEach((key, index) => {
+//           const subtask = subtasksData[key];
+//           existingSubtasks.push({
+//             index: index,
+//             task: subtask.task,
+//             checked: subtask.checked || false
+//           });
+//         });
+//       }
+  
+//       return existingSubtasks;
+//     } catch (error) {
+//       console.error("Fehler beim Abrufen der Subtasks:", error);
+//       return [];
+//     }
+//   }
+async function getExistingSubtasks(taskId, path) {
+    try {
+        const url = `${base_url}/tasks/${path}/${taskId}/subtasks.json`;
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Netzwerkantwort war nicht ok');
+        }
+        const subtasksData = await response.json();
+        const existingSubtasks = [];
+
+        if (subtasksData) {
+            Object.entries(subtasksData).forEach(([key, subtask], index) => {
+                existingSubtasks.push({
+                    index: index,
+                    task: subtask.task,
+                    checked: subtask.checked || false
+                });
+            });
+        }
+
+        return existingSubtasks;
+    } catch (error) {
+        console.error("Fehler beim Abrufen der Subtasks:", error);
+        return [];
+    }
 }
 
 function editEditedSubtask(index, element, x) {

@@ -406,7 +406,7 @@ async function openEditTaskOverlay(task) {
                         <div class="labled-box">
                             <label class="form-label">
                                 Subtasks
-                                <div onclick="openEditSubtaskTemplate()" id="subtask-input-wrapper">
+                                <div onclick="openEditSubtaskTemplate('${task.id}', '${task.path}')" id="subtask-input-wrapper">
                                     <div id="subtask">
                                         <input id="subtaskInput" type="text" class="form-field pad-12-16" placeholder="Add new subtask">
                                         <div id="subtask-buttons">
@@ -484,7 +484,7 @@ async function saveEditedTask(task) {
 
 async function openTaskOverlay(task) {
     currentTask = task; // Task global speichern
-
+    // console.log(currentTask);
     const overlayContainer = document.getElementById('taskOverlayContainer');
 
     // Farben für Kontakte abrufen
