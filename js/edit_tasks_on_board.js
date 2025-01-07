@@ -110,7 +110,7 @@ function openEditSubtaskTemplate(task) {
     document.addEventListener('click', closeSubtaskOnOutsideClick);
 }
 
-let existingSubtasks = [];
+// let existingSubtasks = [];
 /**
  * This function adds a new subtask to the list and updates the display.
  */
@@ -125,21 +125,19 @@ function addEditedSubtask(task) {
     // Subtasks mit einer for-Schleife auslesen
     for (let key in task) {
         if (task.subtasks.hasOwnProperty(key)) {
-            existingSubtasks.push(task[key]);
+            subtasks.push(task[key]);
+            console.log(task[key]);
         }
     }
     console.log(subtaskInput.value);
 
     if (subtaskInput.value !== '') {
-        existingSubtasks.push({
-            task: subtaskInput.value,
-            checked: false
-        });
+        subtasks.push(subtaskInput.value);
     }
     addedSubtask.innerHTML = '';
 
-    for (let i = 0; i < existingSubtasks.length; i++) {
-        const element = existingSubtasks[i].task;
+    for (let i = 0; i < subtasks.length; i++) {
+        const element = subtasks[i];
         addedSubtask.innerHTML += getAddSubtaskTemplate(i, element);
     }
     closeSubtask();
@@ -151,20 +149,22 @@ function addEditedSubtask(task) {
 
 
 async function saveEditedTask(task) {
-    // const submitButton = document.querySelector('.submit-button');
+    const submitButton = document.querySelector('.submit-button');
+    // console.log(task.key);
 
-    // if (submitButton) {
-    //     submitButton.addEventListener('click', async function(event) {
-            // event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
+    if (submitButton) {
+        submitButton.addEventListener('click', async function(event) {
+            event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
 
             if (validateForm()) {
                 await createEditTask(task.path, task.id);
                 console.log('Form is valid. Submitting...');
                 // openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})
                 openTaskOverlay(task);
+                console.log(task);
             }
-        // });
-    // } 
+        });
+    } 
     else {
         console.error('Submit button not found');
     }

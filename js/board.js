@@ -406,7 +406,7 @@ async function openEditTaskOverlay(task) {
                         <div class="labled-box">
                             <label class="form-label">
                                 Subtasks
-                                <div onclick="openEditSubtaskTemplate(${JSON.stringify(task.subtasks)})" id="subtask-input-wrapper">
+                                <div onclick="openEditSubtaskTemplate(${JSON.stringify(task)})" id="subtask-input-wrapper">
                                     <div id="subtask">
                                         <input id="subtaskInput" type="text" class="form-field pad-12-16" placeholder="Add new subtask">
                                         <div id="subtask-buttons">
