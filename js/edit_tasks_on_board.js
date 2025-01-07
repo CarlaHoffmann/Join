@@ -102,7 +102,7 @@ function openEditSubtaskTemplate(task) {
                 <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt="">
             </div>
             <div><img src="./img/task/vector-3.svg" alt="seperator"></div>
-            <div class="opened-subtask-icon-box icon-hover"  onclick="addEditedSubtask(${task})">
+            <div class="opened-subtask-icon-box icon-hover"  onclick="addEditedSubtask(${JSON.stringify(task)})">
                 <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt="">
             </div>
         </div>
@@ -110,6 +110,7 @@ function openEditSubtaskTemplate(task) {
     document.addEventListener('click', closeSubtaskOnOutsideClick);
 }
 
+let existingSubtasks = [];
 /**
  * This function adds a new subtask to the list and updates the display.
  */
@@ -119,15 +120,15 @@ function addEditedSubtask(task) {
      */
     let subtaskInput = document.getElementById('subtaskInput');
     let addedSubtask = document.getElementById('subtasks');
-    let existingSubtasks = [];
+    
 
     // Subtasks mit einer for-Schleife auslesen
-    for (let key in task.subtasks) {
+    for (let key in task) {
         if (task.subtasks.hasOwnProperty(key)) {
-            existingSubtasks.push(task.subtasks[key]);
+            existingSubtasks.push(task[key]);
         }
     }
-    console.log(existingSubtasks);
+    console.log(subtaskInput.value);
 
     if (subtaskInput.value !== '') {
         existingSubtasks.push({
@@ -143,24 +144,6 @@ function addEditedSubtask(task) {
     }
     closeSubtask();
 }
-// function addSubtask() {
-//     /**
-//      * Get the subtask input and the element to display added subtasks.
-//      */
-//     let subtaskInput = document.getElementById('subtaskInput');
-//     let addedSubtask = document.getElementById('subtasks');
-
-//     if (subtaskInput.value !== '') {
-//         subtasks.push(subtaskInput.value);
-//     }
-//     addedSubtask.innerHTML = '';
-
-//     for (let i = 0; i < subtasks.length; i++) {
-//         const element = subtasks[i];
-//         addedSubtask.innerHTML += getAddSubtaskTemplate(i, element);
-//     }
-//     closeSubtask();
-// }
 
 // function getSubtasks(subtasks) {
 //     console.log
