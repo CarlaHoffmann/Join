@@ -138,18 +138,21 @@ function openEditSubtaskTemplate(taskId, path) {
 async function addEditedSubtask(taskId, path) {
     let subtaskInput = document.getElementById('subtaskInput');
     let addedSubtask = document.getElementById('subtasks');
+
+    let newSubtask = subtaskInput.value;
+
     let existingSubtasks = await getExistingSubtasks(taskId, path);
     console.log(existingSubtasks);
 
     if (subtaskInput.value !== '') {
         existingSubtasks.push({
             index: existingSubtasks.length,
-            task: subtaskInput.value,
+            task: newSubtask,
             checked: false
         });
     }
     console.log(`index: ${existingSubtasks.length}`);
-    console.log(`task: ${subtaskInput.value}`);
+    // console.log(`task: ${subtaskInput.value}`);
 
     addedSubtask.innerHTML = '';
 
