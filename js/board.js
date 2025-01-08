@@ -278,16 +278,16 @@ async function openEditTaskOverlay(task) {
     selectedContacts = task.contacts;
 
     // Subtasks aus dem task-Objekt laden
-    let currentSubtasks = [];
+    // let currentSubtasks = [];
     Object.keys(task.subtasks).forEach(key => {
-        currentSubtasks.push({
+        subtasks.push({
             task: task.subtasks[key].task,
             checked: task.subtasks[key].checked
         });
     });
 
     // Subtasks-HTML generieren
-    const subtasksHTML = currentSubtasks.map((subtask, index) => {
+    const subtasksHTML = subtasks.map((subtask, index) => {
         return getAddEditedSubtaskTemplate(index, subtask.task, subtask.checked);
     }).join('');
 

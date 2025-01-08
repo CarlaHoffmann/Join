@@ -216,7 +216,7 @@ function replaceSubtask(index) {
     let newText = input.value.trim();
 
     if (newText !== '') {
-        subtasks[index] = newText;
+        // subtasks[index] = newText;
         updateSubtaskDisplay();
     } else {
         deleteSubtask(index);
@@ -241,6 +241,7 @@ function updateSubtaskDisplay() {
      */
     let addedSubtask = document.getElementById('subtasks');
     addedSubtask.innerHTML = '';
+    console.log(subtasks);
 
     for (let i = 0; i < subtasks.length; i++) {
         const element = subtasks[i];

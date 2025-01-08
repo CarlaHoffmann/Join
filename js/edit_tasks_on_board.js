@@ -121,20 +121,15 @@ function addEditedSubtask(task) {
     let newSubtask = subtaskInput.value.trim();
     console.log(newSubtask);
 
-    existingSubtasks = getExistingSubtasks(task.subtasks);
+    // Aktualisiere existingSubtasks nur, wenn es leer ist
+    if (existingSubtasks.length === 0) {
+        existingSubtasks = getExistingSubtasks(task.subtasks);
+    }
     console.log(existingSubtasks);
-    // let length = existingSubtasks.length;
 
-    // if (newSubtask) {
-    //     existingSubtasks.push({
-    //         // index: length,
-    //         task: newSubtask,
-    //         checked: false
-    //     });
-    // }
     if (newSubtask) {
         // Prüfen, ob die neue Task bereits existiert
-        const taskExists = existingSubtasks.some(subtask => subtask.task === newSubtask);
+        const taskExists = existingSubtasks.some(subtask => subtask.task.toLowerCase() === newSubtask.toLowerCase());
         if (!taskExists) {
             existingSubtasks.push({
                 task: newSubtask,
@@ -169,30 +164,21 @@ function getAddEditedSubtaskTemplate(i, element, checked) {
     `;
 }
 
-// async function getExistingSubtasks(subtasks) {
-//     const existingSubtasks = [];
-//     if(subtasks) {
-//         subtasks.forEach(element => {
-//             existingSubtasks.push({
-//                 // index: index,
-//                 task: subtask.task,
-//                 checked: subtask.checked || false
-//             });
-//         });
-//     }
-//     return existingSubtasks;
-// }
 function getExistingSubtasks(subtasks) {
-    // const existingSubtasks = [];
+    const newSubtask = [];
     if (subtasks) {
         subtasks.forEach(element => {
-            existingSubtasks.push({
-                task: element.task,
-                checked: element.checked || false
-            });
+            // Prüfe, ob die Subtask bereits existiert
+            const taskExists = newSubtask.some(subtask => subtask.task.toLowerCase() === element.task.toLowerCase());
+            if (!taskExists) {
+                newSubtask.push({
+                    task: element.task,
+                    checked: element.checked || false
+                });
+            }
         });
     }
-    return existingSubtasks;
+    return newSubtask;
 }
 
 function editEditedSubtask(index, text, checked) {
@@ -213,116 +199,3 @@ function editEditedSubtask(index, text, checked) {
     input.focus();
     input.setSelectionRange(input.value.length, input.value.length);
 }
-
-
-async function saveEditedTask(task) {
-    const submitButton = document.querySelector('.submit-button');
-    // console.log(task.key);
-
-    if (submitButton) {
-        submitButton.addEventListener('click', async function(event) {
-            event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
-
-            if (validateForm()) {
-                await createEditTask(task.path, task.id);
-                console.log('Form is valid. Submitting...');
-                // openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})
-                openTaskOverlay(task);
-                console.log(task);
-            }
-        });
-    } 
-    else {
-        console.error('Submit button not found');
-    }
-};
-
-async function createEditTask(path, id) {
-    let task = {
-        title: takeTitle(),
-        description: takeDescription(),
-        contacts: takeContacts(),
-        date: takeDate(),
-        prio: takePrio(),
-        category: takeCatergory(),
-        subtasks: takeSubtask(),
-    };
-
-    try {
-        await postEditData(task, path, id);
-        showTaskAddedOverlay();
-        await loadTasks();
-
-    } catch (error) {
-        console.error("Error during task creation or loading:", error);
-    } finally {
-        await openTaskOverlay(task);
-    }
-}
-
-
-async function postEditData(taskData, path, id) {
-    console.log(taskData);
-    try {
-        let response = await fetch(`${task_base_url}/tasks/${path}/${id}.json`, {
-            method: "PUT",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(taskData)
-        });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        let result = await response.json();
-        // console.log("Task successfully added:", result);
-        return result;
-    } catch (error) {
-        console.error("Error posting data:", error);
-    }
-}
-
-
-function takeTitle() {
-    let title = document.getElementById('title');
-    return title.value;
-}
-
-function takeDescription() {
-    let description = document.getElementById('description');
-    return description.value;
-}
-
-function takeContacts() {
-    return selectedContacts;
-}
-
-function takeDate() {
-    let date = document.getElementById('datepicker');
-    return date.value;
-}
-
-function takePrio() {
-    let activeButton = document.querySelector('.prio-button.active-button');
-    return activeButton.id.replace('prio', '');
-}
-
-function takeCatergory() {
-    let category = document.getElementById('category-selection');
-    return category.innerHTML;
-}
-
-function takeSubtask() {
-    if (subtasks.length > 0) {
-        const formattedSubtasks = subtasks.map((subtask) => {
-            return {
-                task: subtask,
-                checked: false
-            };
-        });
-        return formattedSubtasks;
-    } else {
-        // console.log("Keine Subtasks vorhanden");
-        return [];
-    }
-}
-
-
