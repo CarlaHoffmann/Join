@@ -245,7 +245,7 @@ function updateSubtaskDisplay() {
     console.log(subtasks);
 
     for (let i = 0; i < subtasks.length; i++) {
-        const element = subtasks[i];
+        const element = subtasks[i].task;
         addedSubtask.innerHTML += updateSubtaskDisplayTemplate(i, element);
     }
 }
