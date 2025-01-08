@@ -296,16 +296,20 @@ h1 {
 }
 
 @media(max-width:680px) {
-    body {
+    /* body {
         font-size: 16px;
-    }
+    } */
     .form-box-outer {
-        width: 100vw;
+        width: 100%;
         height: calc(100vh - 160px);
         bottom: 80px;
         padding-left: 16px;
         padding-right: 16px;
     }
+
+    /* .upper-form {
+        width: calc(100vw - 64px);
+    } */
 
     .fill-in-part {
         height: calc(900px - 312px);
@@ -330,9 +334,9 @@ h1 {
         gap: 20px;
     }
 
-    .title {
+    /* .title {
         width: calc(100vw - 32px) !important;
-    }
+    } */
 
     .prio-button {
         height: 41px;
@@ -349,6 +353,31 @@ h1 {
 
     .width-440 {
         box-sizing: border-box;
+        /* width: calc(100vw - 32px); */
+    }
+}
+/* 
+@media(max-width: 680px) {
+    .title {
+        width: calc(100vw - 64px) !important;
+    }
+
+    .width-440 {
+        width: calc(100vw - 64px);
+    }
+} */
+
+@media(max-width: 500px) {
+    .clear-button, .submit-button {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .title {
+        width: calc(100vw - 32px) !important;
+    }
+
+    .width-440 {
         width: calc(100vw - 32px);
     }
 }

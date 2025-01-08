@@ -213,10 +213,15 @@
 
 @media(max-width: 680px) {
   #overlay-content {
-    width: 360px;
+    width: 472px;
   }
 }
 
+@media(max-width: 500px) {
+  #overlay-content {
+    width: calc(100vw - 32px);
+  }
+}
 
 
 /* Board - Dialog add Task */
