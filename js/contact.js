@@ -383,11 +383,11 @@ function showContactAddedOverlay() {
  */
 function startEditOrAddAnimation(operation){
     if(operation === 'add'){
-        document.querySelector('#addContactBoxOverlay').classList.add('show');
+        document.querySelector('#addContactBox').classList.add('show');
         document.querySelector('#addContactBoxOverlay').classList.remove('hidden');
     }
     if(operation === 'edit'){
-        document.querySelector('#editContactBoxOverlay').classList.add('show');
+        document.querySelector('#editContactBox').classList.add('show');
         document.querySelector('#editContactBoxOverlay').classList.remove('hidden');
     }
 }

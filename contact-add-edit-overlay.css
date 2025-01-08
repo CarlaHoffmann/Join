@@ -9,10 +9,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
-#editContactBoxOverlay.show, #addContactBoxOverlay.show {
-    display: flex;
+#editContactBox.show, #addContactBox.show {
     animation: slide 0.65s ease forwards;
 }
 
