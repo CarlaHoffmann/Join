@@ -93,7 +93,7 @@ function getPriorityClassEdit(priority) {
 /**
  * Updates the subtask buttons to show the open state and adds an event listener for outside clicks.
  */
-function openEditSubtaskTemplate(taskId, path) {
+function openEditSubtaskTemplate(task) {
     let subtaskButtons = document.getElementById('subtask-buttons');
     subtaskButtons.innerHTML = `
         <div id="opened-subtask-icons">
@@ -101,7 +101,7 @@ function openEditSubtaskTemplate(taskId, path) {
                 <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt="">
             </div>
             <div><img src="./img/task/vector-3.svg" alt="seperator"></div>
-            <div class="opened-subtask-icon-box icon-hover"  onclick="addEditedSubtask('${taskId}', '${path}')">
+            <div class="opened-subtask-icon-box icon-hover"  onclick="addEditedSubtask(${JSON.stringify(task).replace(/"/g, '&quot;')})">
                 <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt="">
             </div>
         </div>
@@ -109,26 +109,40 @@ function openEditSubtaskTemplate(taskId, path) {
     document.addEventListener('click', closeSubtaskOnOutsideClick);
 }
 
+
+let existingSubtasks = [];
 /**
  * This function adds a new subtask to the list and updates the display.
  */
-async function addEditedSubtask(taskId, path) {
+function addEditedSubtask(task) {
     let subtaskInput = document.getElementById('subtaskInput');
     let addedSubtask = document.getElementById('subtasks');
 
-    let newSubtask = subtaskInput.value;
+    let newSubtask = subtaskInput.value.trim();
     console.log(newSubtask);
 
-    let existingSubtasks = await getExistingSubtasks(taskId, path);
+    existingSubtasks = getExistingSubtasks(task.subtasks);
     console.log(existingSubtasks);
     // let length = existingSubtasks.length;
 
-    if (newSubtask !== '') {
-        existingSubtasks.push({
-            // index: length,
-            task: newSubtask,
-            checked: false
-        });
+    // if (newSubtask) {
+    //     existingSubtasks.push({
+    //         // index: length,
+    //         task: newSubtask,
+    //         checked: false
+    //     });
+    // }
+    if (newSubtask) {
+        // Prüfen, ob die neue Task bereits existiert
+        const taskExists = existingSubtasks.some(subtask => subtask.task === newSubtask);
+        if (!taskExists) {
+            existingSubtasks.push({
+                task: newSubtask,
+                checked: false
+            });
+        } else {
+            console.log("Task already exists:", newSubtask);
+        }
     }
     console.log(existingSubtasks);
 
@@ -155,31 +169,30 @@ function getAddEditedSubtaskTemplate(i, element, checked) {
     `;
 }
 
-async function getExistingSubtasks(taskId, path) {
-    try {
-        const url = `${base_url}/tasks/${path}/${taskId}/subtasks.json`;
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error('Netzwerkantwort war nicht ok');
-        }
-        const subtasksData = await response.json();
-        const existingSubtasks = [];
-
-        if (subtasksData) {
-            Object.entries(subtasksData).forEach(([key, subtask], index) => {
-                existingSubtasks.push({
-                    // index: index,
-                    task: subtask.task,
-                    checked: subtask.checked || false
-                });
+// async function getExistingSubtasks(subtasks) {
+//     const existingSubtasks = [];
+//     if(subtasks) {
+//         subtasks.forEach(element => {
+//             existingSubtasks.push({
+//                 // index: index,
+//                 task: subtask.task,
+//                 checked: subtask.checked || false
+//             });
+//         });
+//     }
+//     return existingSubtasks;
+// }
+function getExistingSubtasks(subtasks) {
+    // const existingSubtasks = [];
+    if (subtasks) {
+        subtasks.forEach(element => {
+            existingSubtasks.push({
+                task: element.task,
+                checked: element.checked || false
             });
-        }
-
-        return existingSubtasks;
-    } catch (error) {
-        console.error("Fehler beim Abrufen der Subtasks:", error);
-        return [];
+        });
     }
+    return existingSubtasks;
 }
 
 function editEditedSubtask(index, text, checked) {
