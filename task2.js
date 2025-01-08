@@ -191,7 +191,7 @@ function editSubtask(index) {
      * Get the subtask element and its current text.
      */
     let subtaskElement = document.getElementById(`subtask${index}`);
-    let currentText = subtasks[index];
+    let currentText = subtasks[index].task; //evtl ohne .task?????
 
     subtaskElement.innerHTML = editSubtaskTemplate(index, currentText, 'false');
 

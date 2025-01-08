@@ -35,6 +35,7 @@ async function createEditTask(path, id) {
         await postEditData(task, path, id);
         showTaskAddedOverlay();
         // await loadTasks();
+        subtasks = [];
 
     } catch (error) {
         console.error("Error during task creation or loading:", error);
@@ -98,6 +99,7 @@ function takeSubtask() {
         const formattedSubtasks = subtasks.map((subtask) => {
             return subtask;
         });
+        
         return formattedSubtasks;
     } else {
         // console.log("Keine Subtasks vorhanden");

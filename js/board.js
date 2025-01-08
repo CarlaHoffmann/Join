@@ -587,23 +587,6 @@ async function openTaskOverlay(task) {
 }
 
 
-function closeTaskOverlay() {
-    const overlayContainer = document.getElementById('taskOverlayContainer');
-    overlayContainer.classList.add('d-none');
-    overlayContainer.innerHTML = ''; // Inhalt löschen
-}
-
-
-let updatedSubtasksWithOverlay = [];
-function updateSubtasksWithOverlay(task) {
-    updatedSubtasksWithOverlay = Object.keys(task.subtasks).map(key => ({
-        key,
-        task: task.subtasks[key].task,
-        checked: task.subtasks[key].checked
-    }));
-    console.log(updatedSubtasksWithOverlay);
-}
-
 //new
 async function saveOverlayChanges(taskId, taskStatus) {
     const titleElement = document.getElementById('title');
@@ -825,6 +808,8 @@ async function saveTaskSubtasks(task) {
     } catch (error) {
         console.error('Error saving subtasks:', error);
     }
+    subtasks = [];
+    console.log(subtasks);
 }
 
 
