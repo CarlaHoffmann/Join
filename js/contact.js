@@ -375,8 +375,8 @@ function showContactAddedOverlay() {
 }
 /**
  * Toggles the visibility of an overlay element for adding or editing a contact.
- * Depending on the specified operation, the appropriate overlay is shown
- * by adding the "show" class and removing the "hidden" class.
+ * Depending on the specified operation, the appropriate box is shown
+ * by adding the "show" class and removing the "hidden" class from overlay.
  * @param {string} operation - The type of operation to perform. 
  *                              Use "add" to display the "Add Contact" overlay, 
  *                              or "edit" to display the "Edit Contact" overlay.
