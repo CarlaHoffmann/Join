@@ -188,9 +188,9 @@ function editEditedSubtask(index, text, checked) {
      */
     let subtaskElement = document.getElementById(`subtask${index}`);
     // let currentText = subtasks[index];
-    let currentText = text;
+    // let currentText = text;
 
-    subtaskElement.innerHTML = editSubtaskTemplate(index, currentText);
+    subtaskElement.innerHTML = editSubtaskTemplate(index, text, checked);
 
     /**
      * Focus the input field and set the cursor to the end.

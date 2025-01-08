@@ -193,7 +193,7 @@ function editSubtask(index) {
     let subtaskElement = document.getElementById(`subtask${index}`);
     let currentText = subtasks[index];
 
-    subtaskElement.innerHTML = editSubtaskTemplate(index, currentText);
+    subtaskElement.innerHTML = editSubtaskTemplate(index, currentText, 'false');
 
     /**
      * Focus the input field and set the cursor to the end.
@@ -214,6 +214,7 @@ function replaceSubtask(index) {
     let subtaskElement = document.getElementById(`subtask${index}`);
     let input = subtaskElement.querySelector('.edit-subtask-input');
     let newText = input.value.trim();
+    console.log(subtasks);
 
     if (newText !== '') {
         // subtasks[index] = newText;

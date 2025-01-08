@@ -285,6 +285,7 @@ async function openEditTaskOverlay(task) {
             checked: task.subtasks[key].checked
         });
     });
+    console.log(subtasks);
 
     // Subtasks-HTML generieren
     const subtasksHTML = subtasks.map((subtask, index) => {

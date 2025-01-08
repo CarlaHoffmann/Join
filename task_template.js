@@ -79,10 +79,10 @@ function getAddSubtaskTemplate(i, element) {
  * @param {string} currentText - The current text of the subtask.
  * @returns {string} The HTML template for editing the subtask.
  */
-function editSubtaskTemplate(index, currentText) {
+function editSubtaskTemplate(index, currentText, checked) {
     return `
         <div class="edit-subtask-wrapper">
-            <input type="text" class="edit-subtask-input" value="${currentText}">
+            <input type="text" class="edit-subtask-input" checked="${checked}" value="${currentText}">
             <div class="edit-subtask-icons">
                 <div><img onclick="deleteSubtask(${index})" class="icon-hover"  src="./img/task/subtask_add_bin.svg" alt="Delete"></div>
                 <div><img src="./img/task/vector-3.svg" alt="Separator"></div>
