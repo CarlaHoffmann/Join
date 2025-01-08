@@ -123,7 +123,7 @@ async function addEditedSubtask(taskId, path) {
     console.log(existingSubtasks);
     // let length = existingSubtasks.length;
 
-    if (subtaskInput.value !== '') {
+    if (newSubtask !== '') {
         existingSubtasks.push({
             // index: length,
             task: newSubtask,
@@ -182,13 +182,14 @@ async function getExistingSubtasks(taskId, path) {
     }
 }
 
-function editEditedSubtask(index, element, x) {
+function editEditedSubtask(index, text, checked) {
     console.log(index);
     /**
      * Get the subtask element and its current text.
      */
     let subtaskElement = document.getElementById(`subtask${index}`);
-    let currentText = subtasks[index];
+    // let currentText = subtasks[index];
+    let currentText = text;
 
     subtaskElement.innerHTML = editSubtaskTemplate(index, currentText);
 
