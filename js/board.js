@@ -469,7 +469,7 @@ async function saveEditedTask(task) {
     try {
         const taskId = task.id;
         const taskStatus = task.path;
-
+        
         // Änderungen speichern
         await saveOverlayChanges(taskId, taskStatus);
 
@@ -596,8 +596,10 @@ async function saveOverlayChanges(taskId, taskStatus) {
     const categoryElement = document.getElementById('category-selection');
     const contactsElements = selectedContacts;
 
-    const subtasksContainer = document.getElementById("subtasks");
-    const subtaskElements = subtasksContainer.querySelectorAll(".check");
+    // const subtasksContainer = document.getElementById("subtasks");
+    // const subtaskElements = subtasksContainer.querySelectorAll(".check");
+    const subtaskElements = subtasks;
+    console.log(subtaskElements);
 
     if (!titleElement || !descriptionElement || !dueDateElement || !prioButton || !categoryElement) {
         console.error('Ein oder mehrere erforderliche Elemente fehlen.');
@@ -689,7 +691,7 @@ function addSubtaskListeners(task) {
         // Optional: Fortschrittsanzeige aktualisieren
         // updateTaskProgress(task);
 
-        loadTasks();
+        // loadTasks(); // evtl. wieder rein
     };
 
     // Eventlistener hinzufügen

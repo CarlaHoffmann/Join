@@ -182,7 +182,7 @@ function getExistingSubtasks(subtasks) {
 }
 
 function editEditedSubtask(index, text, checked) {
-    console.log(index);
+    console.log(index, text, checked);
     /**
      * Get the subtask element and its current text.
      */

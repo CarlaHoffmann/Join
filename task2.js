@@ -214,10 +214,12 @@ function replaceSubtask(index) {
     let subtaskElement = document.getElementById(`subtask${index}`);
     let input = subtaskElement.querySelector('.edit-subtask-input');
     let newText = input.value.trim();
+
     console.log(subtasks);
 
     if (newText !== '') {
-        // subtasks[index] = newText;
+        subtasks[index].task = newText;
+        console.log(subtasks);
         updateSubtaskDisplay();
     } else {
         deleteSubtask(index);
