@@ -35,7 +35,7 @@ async function createEditTask(path, id) {
         await postEditData(task, path, id);
         showTaskAddedOverlay();
         // await loadTasks();
-        subtasks = [];
+        currentSubtasks = [];
 
     } catch (error) {
         console.error("Error during task creation or loading:", error);
@@ -93,10 +93,10 @@ function takeCatergory() {
 }
 
 function takeSubtask() {
-    subtasks = existingSubtasks;
+    currentSubtasks = existingSubtasks;
     existingSubtasks = [];
-    if (subtasks.length > 0) {
-        const formattedSubtasks = subtasks.map((subtask) => {
+    if (currentSubtasks.length > 0) {
+        const formattedSubtasks = currentSubtasks.map((subtask) => {
             return subtask;
         });
         

@@ -280,15 +280,15 @@ async function openEditTaskOverlay(task) {
     // Subtasks aus dem task-Objekt laden
     // let currentSubtasks = [];
     Object.keys(task.subtasks).forEach(key => {
-        subtasks.push({
+        currentSubtasks.push({
             task: task.subtasks[key].task,
             checked: task.subtasks[key].checked
         });
     });
-    console.log(subtasks);
+    console.log(currentSubtasks);
 
     // Subtasks-HTML generieren
-    const subtasksHTML = subtasks.map((subtask, index) => {
+    const subtasksHTML = currentSubtasks.map((subtask, index) => {
         return getAddEditedSubtaskTemplate(index, subtask.task, subtask.checked);
     }).join('');
 
@@ -469,9 +469,9 @@ async function saveEditedTask(task) {
     try {
         const taskId = task.id;
         const taskStatus = task.path;
-        console.log(subtasks, task);
+        console.log(currentSubtasks, task);
         
-        subtasks = getExistingSubtasks(task.subtasks);
+        currentSubtasks = getExistingSubtasks(task.subtasks);
         // Änderungen speichern
         await saveOverlayChanges(taskId, taskStatus);
 
@@ -812,8 +812,8 @@ async function saveTaskSubtasks(task) {
     } catch (error) {
         console.error('Error saving subtasks:', error);
     }
-    subtasks = [];
-    console.log(subtasks);
+    currentSubtasks = [];
+    console.log(currentSubtasks);
 }
 
 
@@ -851,7 +851,7 @@ async function deleteSubtasks(parentPath) {
         const data = await response.json();
 
         // Überprüfen, ob Subtasks existieren
-        if (data && data.subtasks) {
+        if (data && data.currentSubtasks) {
             const subtasks = Object.keys(data.subtasks);
 
             for (const subtaskId of subtasks) {

@@ -124,7 +124,7 @@ function categorySelected(category) {
 /**
  * This array stores the list of subtasks.
  */
-let subtasks = [];
+let currentSubtasks = [];
 
 /**
  * This function closes the subtask input field and resets its view to the original state.
@@ -171,12 +171,13 @@ function addSubtask() {
     let addedSubtask = document.getElementById('subtasks');
 
     if (subtaskInput.value !== '') {
-        subtasks.push(subtaskInput.value);
+        currentSubtasks.push(subtaskInput.value);
     }
+    console.log(currentSubtasks);
     addedSubtask.innerHTML = '';
 
-    for (let i = 0; i < subtasks.length; i++) {
-        const element = subtasks[i];
+    for (let i = 0; i < currentSubtasks.length; i++) {
+        const element = currentSubtasks[i];
         addedSubtask.innerHTML += getAddSubtaskTemplate(i, element);
     }
     closeSubtask();
@@ -186,12 +187,13 @@ function addSubtask() {
  * This function edits an existing subtask by replacing its content with an input field.
  * @param {number} index - The index of the subtask to edit.
  */
-function editSubtask(index) {
+function editSubtask(index, currentText) {
     /**
      * Get the subtask element and its current text.
      */
     let subtaskElement = document.getElementById(`subtask${index}`);
-    let currentText = subtasks[index].task; //evtl ohne .task?????
+    console.log(subtaskElement);
+    // let currentText = currentSubtasks[index].task; //evtl ohne .task?????
 
     subtaskElement.innerHTML = editSubtaskTemplate(index, currentText, 'false');
 
@@ -215,11 +217,11 @@ function replaceSubtask(index) {
     let input = subtaskElement.querySelector('.edit-subtask-input');
     let newText = input.value.trim();
 
-    console.log(subtasks);
+    console.log(currentSubtasks);
 
     if (newText !== '') {
-        subtasks[index].task = newText;
-        console.log(subtasks);
+        currentSubtasks[index] = newText;
+        console.log(currentSubtasks);
         updateSubtaskDisplay();
     } else {
         deleteSubtask(index);
@@ -231,7 +233,7 @@ function replaceSubtask(index) {
  * @param {number} index - The index of the subtask to delete.
  */
 function deleteSubtask(index) {
-    subtasks.splice(index, 1);
+    currentSubtasks.splice(index, 1);
     updateSubtaskDisplay();
 }
 
@@ -244,10 +246,10 @@ function updateSubtaskDisplay() {
      */
     let addedSubtask = document.getElementById('subtasks');
     addedSubtask.innerHTML = '';
-    console.log(subtasks);
+    console.log(currentSubtasks);
 
-    for (let i = 0; i < subtasks.length; i++) {
-        const element = subtasks[i].task;
+    for (let i = 0; i < currentSubtasks.length; i++) {
+        const element = currentSubtasks[i];
         addedSubtask.innerHTML += updateSubtaskDisplayTemplate(i, element);
     }
 }
@@ -386,7 +388,7 @@ function clearForm() {
 
     resetCategory();
 
-    subtasks = [];
+    currentSubtasks = [];
     updateSubtaskDisplay();
 
     const errorMessages = document.querySelectorAll('.error-message');
