@@ -469,7 +469,9 @@ async function saveEditedTask(task) {
     try {
         const taskId = task.id;
         const taskStatus = task.path;
+        console.log(subtasks, task);
         
+        subtasks = getExistingSubtasks(task.subtasks);
         // Änderungen speichern
         await saveOverlayChanges(taskId, taskStatus);
 

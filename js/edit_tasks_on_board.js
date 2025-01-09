@@ -111,6 +111,7 @@ function openEditSubtaskTemplate(task) {
 
 
 let existingSubtasks = [];
+let currentSubtasks = [];
 /**
  * This function adds a new subtask to the list and updates the display.
  */
@@ -125,13 +126,20 @@ function addEditedSubtask(task) {
     if (existingSubtasks.length === 0) {
         existingSubtasks = getExistingSubtasks(task.subtasks);
     }
+    currentSubtasks = [];
+    currentSubtasks = document.getElementById('subtasks');
     console.log(existingSubtasks);
+    subtasks = [];
+    subtasks.push(existingSubtasks);
+    subtasks.push(currentSubtasks);
+
+    console.log(subtasks);
 
     if (newSubtask) {
         // Prüfen, ob die neue Task bereits existiert
-        const taskExists = existingSubtasks.some(subtask => subtask.task.toLowerCase() === newSubtask.toLowerCase());
+        const taskExists = subtasks.some(subtask => subtask.task.toLowerCase() === newSubtask.toLowerCase());
         if (!taskExists) {
-            existingSubtasks.push({
+            subtasks.push({
                 task: newSubtask,
                 checked: false
             });
