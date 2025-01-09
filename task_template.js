@@ -61,10 +61,10 @@ function openSubtaskTemplate() {
 function getAddSubtaskTemplate(i, element) {
     return `
         <div id="subtask${i}">
-            <div onclick="editSubtask(${i}, '${element}')" class="subtask-box" value="${element}">
+            <div onclick="editSubtask(${i})" class="subtask-box" value="${element}">
                 <div>• ${element}</div>
                 <div class="added-subtask-icons">
-                    <div><img onclick="editSubtask(${i}, '${element}')" class="icon-hover" src="./img/task/subtask_add_pen.svg" alt=""></div>
+                    <div><img onclick="editSubtask(${i})" class="icon-hover" src="./img/task/subtask_add_pen.svg" alt=""></div>
                     <div><img src="./img/task/vector-3.svg" alt=""></div>
                     <div><img onclick="deleteSubtask(${i})" class="icon-hover"  src="./img/task/subtask_add_bin.svg" alt=""></div>
                 </div>

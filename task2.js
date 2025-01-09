@@ -171,13 +171,16 @@ function addSubtask() {
     let addedSubtask = document.getElementById('subtasks');
 
     if (subtaskInput.value !== '') {
-        currentSubtasks.push(subtaskInput.value);
+        currentSubtasks.push({
+            task: subtaskInput.value,
+            checked: false
+        });
     }
     console.log(currentSubtasks);
     addedSubtask.innerHTML = '';
 
     for (let i = 0; i < currentSubtasks.length; i++) {
-        const element = currentSubtasks[i];
+        const element = currentSubtasks[i].task;
         addedSubtask.innerHTML += getAddSubtaskTemplate(i, element);
     }
     closeSubtask();
@@ -187,13 +190,13 @@ function addSubtask() {
  * This function edits an existing subtask by replacing its content with an input field.
  * @param {number} index - The index of the subtask to edit.
  */
-function editSubtask(index, currentText) {
+function editSubtask(index) {
     /**
      * Get the subtask element and its current text.
      */
     let subtaskElement = document.getElementById(`subtask${index}`);
     console.log(subtaskElement);
-    // let currentText = currentSubtasks[index].task; //evtl ohne .task?????
+    let currentText = currentSubtasks[index].task;
 
     subtaskElement.innerHTML = editSubtaskTemplate(index, currentText, 'false');
 
@@ -220,7 +223,7 @@ function replaceSubtask(index) {
     console.log(currentSubtasks);
 
     if (newText !== '') {
-        currentSubtasks[index] = newText;
+        currentSubtasks[index].task = newText;
         console.log(currentSubtasks);
         updateSubtaskDisplay();
     } else {
@@ -249,7 +252,7 @@ function updateSubtaskDisplay() {
     console.log(currentSubtasks);
 
     for (let i = 0; i < currentSubtasks.length; i++) {
-        const element = currentSubtasks[i];
+        const element = currentSubtasks[i].task;
         addedSubtask.innerHTML += updateSubtaskDisplayTemplate(i, element);
     }
 }

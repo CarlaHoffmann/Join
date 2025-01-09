@@ -128,28 +128,28 @@ function addEditedSubtask(task) {
 
     console.log(existingSubtasks);
     currentSubtasks = [];
-    currentSubtasks.push(existingSubtasks);
-    currentSubtasks.push(currentSubtasks);
+    currentSubtasks = existingSubtasks;
+    // currentSubtasks.push(currentSubtasks);
 
     console.log(currentSubtasks);
 
     if (newSubtask) {
         // Prüfen, ob die neue Task bereits existiert
-        const taskExists = currentSubtasks.some(subtask => subtask.task === newSubtask);
-        if (!taskExists) {
+        // const taskExists = currentSubtasks.some(subtask => subtask.task === newSubtask);
+        // if (!taskExists) {
             currentSubtasks.push({
                 task: newSubtask,
                 checked: false
             });
         } else {
             console.log("Task already exists:", newSubtask);
-        }
+        // }
     }
-    console.log(existingSubtasks);
+    console.log(currentSubtasks);
 
     addedSubtask.innerHTML = '';
-    for (let i = 0; i < existingSubtasks.length; i++) {
-        const element = existingSubtasks[i];
+    for (let i = 0; i < currentSubtasks.length; i++) {
+        const element = currentSubtasks[i];
         addedSubtask.innerHTML += getAddEditedSubtaskTemplate(i, element.task, element.checked);
     }
     closeSubtask();

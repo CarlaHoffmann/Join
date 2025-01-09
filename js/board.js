@@ -465,24 +465,6 @@ function closeEditTaskOverlay(task) {
 }
 
 
-async function saveEditedTask(task) {
-    try {
-        const taskId = task.id;
-        const taskStatus = task.path;
-        console.log(currentSubtasks, task);
-        
-        currentSubtasks = getExistingSubtasks(task.subtasks);
-        // Änderungen speichern
-        await saveOverlayChanges(taskId, taskStatus);
-
-        // Overlay direkt mit aktuellen Daten aktualisieren
-        // openTaskOverlay(task); //muss wieder rein
-
-        // console.log('Overlay erfolgreich aktualisiert.');
-    } catch (error) {
-        // console.error('Fehler beim Validieren und Aktualisieren der Task:', error);
-    }
-}
 
 
 async function openTaskOverlay(task) {
@@ -589,75 +571,6 @@ async function openTaskOverlay(task) {
 }
 
 
-//new
-async function saveOverlayChanges(taskId, taskStatus) {
-    const titleElement = document.getElementById('title');
-    const descriptionElement = document.getElementById('description');
-    const dueDateElement = document.getElementById('datepicker');
-    const prioButton = document.querySelector('.prio-button.active-button');
-    const categoryElement = document.getElementById('category-selection');
-    const contactsElements = selectedContacts;
-
-    // const subtasksContainer = document.getElementById("subtasks");
-    // const subtaskElements = subtasksContainer.querySelectorAll(".check");
-    const subtaskElements = subtasks;
-    console.log(subtaskElements);
-
-    if (!titleElement || !descriptionElement || !dueDateElement || !prioButton || !categoryElement) {
-        console.error('Ein oder mehrere erforderliche Elemente fehlen.');
-        return;
-    }
-
-    // Subtasks-Daten sammeln
-    const subtasksData = {};
-    subtaskElements.forEach(subtaskElement => {
-        const subtaskKey = subtaskElement.querySelector("input[type='checkbox']").dataset.subtaskKey;
-        const subtaskTask = subtaskElement.querySelector("div").textContent;
-        const isChecked = subtaskElement.querySelector("input[type='checkbox']").checked;
-
-        // Hinzufügen oder Aktualisieren des Subtasks
-        subtasksData[subtaskKey] = {
-            task: subtaskTask,
-            checked: isChecked
-        };
-    });
-    console.log(subtasksData);
-
-    // Task-Daten aktualisieren
-    const updatedTask = {
-        title: titleElement.value,
-        description: descriptionElement.value,
-        date: dueDateElement.value,
-        prio: prioButton.id.replace('prio', ''),
-        category: categoryElement.textContent.trim(),
-        contacts: contactsElements,
-        subtasks: subtasksData
-    };
-    console.log(updatedTask);
-
-    try {
-        // URL für das Aktualisieren der bestehenden Task
-        const url = `${base_url}/tasks/${taskStatus}/${taskId}.json`;
-        const response = await fetch(url, {
-            method: 'PUT', // Wichtig: PUT überschreibt die bestehende Aufgabe
-            body: JSON.stringify(updatedTask),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error: ${response.status}`);
-        }
-
-        // console.log('Task erfolgreich gespeichert:', updatedTask);
-
-        // Board aktualisieren
-        // await loadTasks();
-    } catch (error) {
-        // console.error("Fehler beim Aktualisieren der Aufgabe:", error);
-    }
-}
 
 
 // Globale Variable für die Listener-Funktion
@@ -783,7 +696,7 @@ function addOverlaySubtask() {
 
 // }
 //new
-function closeTaskOverlay() {
+async function closeTaskOverlay() {
     const overlayContainer = document.getElementById('taskOverlayContainer');
 
     // Speichern der Subtasks
@@ -794,6 +707,7 @@ function closeTaskOverlay() {
     overlayContainer.classList.add('d-none');
     overlayContainer.innerHTML = ''; // Inhalt löschen
     // removeSubtaskListeners();
+    await loadTasks();
 }
 
 // new
