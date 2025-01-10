@@ -3,6 +3,19 @@ body {
     background-color: #f1f1f1;
 }
 
+#taskOverlay.show {
+    animation: slide 0.65s ease forwards;
+}
+
+@keyframes slide {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
 .okBtnContainer {
     display: flex;
     justify-content: end;

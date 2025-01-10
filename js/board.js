@@ -515,6 +515,16 @@ async function toggleSubtaskStatus(path, taskId, subtaskKey) {
 
 
 
+
+// Animation
+function startTaskOverlayAnimation() {
+    let taskOverlayContainer = document.getElementById('taskOverlayContainer');
+    let taskOverlay = document.getElementById('taskOverlay');
+
+    taskOverlayContainer.classList.remove('d-none');
+    taskOverlay.classList.add('show');
+}
+
 async function openTaskOverlay(task) {
     currentTask = task; // Task global speichern
     const overlayContainer = document.getElementById('taskOverlayContainer');
@@ -550,7 +560,7 @@ async function openTaskOverlay(task) {
         }
 
     overlayContainer.innerHTML = `
-    <div class="taskOverlay">
+    <div id="taskOverlay" class="taskOverlay">
         <div class="taskSelect">
             <div class="taskContainer" style="background-color: ${getCategoryColor(task.category)}">${task.category}</div>
             <div class="close" onclick="closeTaskOverlay()">
@@ -621,7 +631,12 @@ async function openTaskOverlay(task) {
     // Event Listener für die Subtasks hinzufügen
     addSubtaskListeners(task);
 
-    overlayContainer.classList.remove('d-none');
+    // Überprüfen Sie, ob das DOM aktualisiert wurde
+    requestAnimationFrame(() => {
+        if (document.getElementById('taskOverlay')) {
+            startTaskOverlayAnimation();
+        }
+    });
 }
 
 
