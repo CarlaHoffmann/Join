@@ -295,7 +295,7 @@ async function openEditTaskOverlay(task) {
     overlayContainer.innerHTML = `
     <div class="taskOverlay">
         <!-- Schließen-Button -->
-        <div class="close" onclick="closeTaskOverlay()">
+        <div class="close" onclick="closeTaskOverlayAnimation()">
             <img src="assets/img/add_task/close.svg" alt="Close" />
         </div>
 
@@ -525,6 +525,22 @@ function startTaskOverlayAnimation() {
     taskOverlay.classList.add('show');
 }
 
+function closeTaskOverlayAnimation() {
+    let taskOverlay = document.getElementById('taskOverlay');
+    let taskOverlayContainer = document.getElementById('taskOverlayContainer');
+    taskOverlay.classList.remove('show');
+    console.log('Before adding hide class:', taskOverlay.classList);
+    taskOverlay.classList.add('hide');
+    console.log('After adding hide class:', taskOverlay.classList);
+    
+    // Warten Sie, bis die Animation abgeschlossen ist, bevor Sie das Element ausblenden
+    // taskOverlay.addEventListener('animationend', function() {
+        // taskOverlay.classList.remove('show', 'hide');
+    taskOverlayContainer.classList.add('d-none');
+    // }, {once: true});
+    closeTaskOverlay();
+}
+
 async function openTaskOverlay(task) {
     currentTask = task; // Task global speichern
     const overlayContainer = document.getElementById('taskOverlayContainer');
@@ -563,7 +579,7 @@ async function openTaskOverlay(task) {
     <div id="taskOverlay" class="taskOverlay">
         <div class="taskSelect">
             <div class="taskContainer" style="background-color: ${getCategoryColor(task.category)}">${task.category}</div>
-            <div class="close" onclick="closeTaskOverlay()">
+            <div class="close" onclick="closeTaskOverlayAnimation()">
                 <img src="assets/img/add_task/close.svg" alt="Close" />
             </div>
         </div>
@@ -773,7 +789,7 @@ async function closeTaskOverlay() {
         saveTaskSubtasks(currentTask);
     }
     
-    overlayContainer.classList.add('d-none');
+    // overlayContainer.classList.add('d-none');
     overlayContainer.innerHTML = ''; // Inhalt löschen
     // removeSubtaskListeners();
     await loadTasks();

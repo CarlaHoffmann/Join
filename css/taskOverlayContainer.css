@@ -16,6 +16,19 @@ body {
     }
 }
 
+#taskOverlay.hide {
+    animation: slideOut 0.65s ease forwards;
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
 .okBtnContainer {
     display: flex;
     justify-content: end;
