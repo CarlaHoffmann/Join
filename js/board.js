@@ -945,12 +945,11 @@ function addSearchTask() {
                 category.includes(searchValue) ||
                 participantMatch;
 
-            // Task anzeigen, wenn ein Treffer gefunden wurde
             if (match) {
-                task.style.display = "block";
-                noResultFound = false;
+                task.style.visibility = "visible";
+                task.style.display = "";
             } else {
-                task.style.display = "none"; // Task ausblenden
+                task.style.visibility = "hidden";
             }
         });
     });

@@ -49,7 +49,6 @@ async function getInitials() {
             handleNoLoggedInUser();
         }
     } catch (error) {
-        console.error("Fehler beim Abrufen der Initialen:", error);
     }
 }
 
