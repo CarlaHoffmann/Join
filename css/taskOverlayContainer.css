@@ -151,6 +151,8 @@ body {
     font-weight: 700;
     line-height: 73.2px;
     word-wrap: break-word;
+    max-height: 180px;
+    overflow-y: auto;
 }
 
 
