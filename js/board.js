@@ -532,20 +532,22 @@ async function openTaskOverlay(task) {
     }).join('');
 
     // Subtasks-HTML generieren (Checkbox durch SVG ersetzt)
-    const subtasksHTML = Object.keys(task.subtasks || {}).map(key => {
-        const subtask = task.subtasks[key];
-        const svgIcon = subtask.checked
-            ? 'assets/img/board/checked_button.svg'
-            : 'assets/img/board/check_button.svg';
-
-        return `
-            <div class="check" data-subtask-key="${key}">
-                <img src="${svgIcon}" class="subtask-checkbox-icon" alt="Subtask Status" 
-                 onclick="toggleSubtaskStatus('${task.path}', '${task.id}', '${key}', ${!subtask.checked})">
-            <div>${subtask.task}</div>
-        </div>`;
-    }).join('');
-
+    let subtasksHTML = '';
+    for (const key in task.subtasks || {}) {
+        if (Object.hasOwnProperty.call(task.subtasks, key)) {
+            const subtask = task.subtasks[key];
+            const svgIcon = subtask.checked
+                ? 'assets/img/board/checked_button.svg'
+                : 'assets/img/board/check_button.svg';
+    
+            subtasksHTML += `
+                <div class="check" data-subtask-key="${key}">
+                    <img src="${svgIcon}" class="subtask-checkbox-icon" alt="Subtask Status" 
+                         onclick="toggleSubtaskStatus('${task.path}', '${task.id}', '${key}', ${!subtask.checked})">
+                    <div class="subtask-text">${subtask.task}</div>
+                </div>`;
+            }
+        }
 
     overlayContainer.innerHTML = `
     <div class="taskOverlay">

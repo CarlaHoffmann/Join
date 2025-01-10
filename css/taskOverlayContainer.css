@@ -24,8 +24,25 @@ body {
     align-items: center;
     margin: 5px 0;
     cursor: pointer;
+    padding-left: 8px;
 }
 
+.check:hover {
+    background-color: #f0f0f0; 
+    border-radius: 4px;
+  }
+
+  .check div {
+    padding: 2px 4px; /* Optional: etwas Padding für bessere Optik */
+    transition: background-color 0.3s ease; /* Sanfter Übergang */
+  }
+
+.subtask-checkbox-icon {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    margin: 4px;
+}
 
 /* OVERLAY
 .task-overlay-content{

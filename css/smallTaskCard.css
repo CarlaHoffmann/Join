@@ -9,10 +9,10 @@
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
+  justify-content: space-between; /* Platz zwischen den Abschnitten */
   gap: 12px;
   margin-top: 10px;
 }
-
 
 /* Task type badge */
 .task-type {
@@ -56,6 +56,7 @@
   border-radius: 4px;
   overflow: hidden;
   position: relative;
+  width: 128px;
 }
 
 .progress-bar {
@@ -71,6 +72,7 @@
 
 /* Members and priority section */
 .members-section {
+  margin-top: auto; /* Schiebt die members-section ans Ende */
   display: flex;
   justify-content: space-between;
   align-items: center;

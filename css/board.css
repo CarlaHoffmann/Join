@@ -1,23 +1,11 @@
 
 
-/*  .wrapped_maxWidth {
-  width: 100%;
-  display: flex;
-  flex-direction: row-reverse;
-  overflow: hidden;
-  position: relative;
-}
-*/
-
-
-
-
 .main_maxWidth {
   max-width: 1300px;
 }
 
 .right_section {
-  margin-left: 300px; /* Verschiebt den gesamten Bereich nach rechts */
+  margin-left: 300px; 
   margin-top: 160px;
   box-sizing: border-box; 
 }
@@ -33,21 +21,6 @@
 .subtask-icon {
   width: 20px;
   height: 20px;
-}
-
-
-.progress {
-  width: 100%;
-  background-color: #f1f1f1;
-  border-radius: 8px;
-  overflow: hidden;
-  height: 8px;
-}
-
-.progress-bar {
-  height: 100%;
-  background-color: #29ABE2;
-  transition: width 0.3s ease; /* Sanfter Übergang */
 }
 
 
@@ -118,19 +91,7 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-/*
-#overlay-content {
-  width: 1050px;
-  height: 850px;
-  background-color: #ffffff;
-  border-radius: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background-color: red;
-}
-*/
+
 
 /* Technisches Task-Design */
 .taskOverlay {
@@ -518,28 +479,6 @@
   width: 230px;
 }
 
-.progress-section {
-  display: flex;
-  align-items: center;
-  width: 220px;
-  height: 16px;
-  gap: 16px;
-  margin: 16px 0;
-}
-
-.progress {
-  height: 8px;
-  border-radius: 8px;
-  background-color: var(--backgroundgrey);
-  width: 60%;
-}
-
-.progress-bar {
-  height: 8px;
-  border-radius: 8px;
-  background-color: var(--fontColorMail);
-}
-
 .amount-subtask {
   font-size: 12px;
   width: 40%;
@@ -697,81 +636,6 @@
   gap: 4px;
 }
 
-.subtasks:hover {
-  background-color: var(--backgroundgrey);
-  border-radius: 6px;
-}
-
-.subtask-checkbox {
-  width: 19px;
-  height: 19px;
-  background-image: url(/assets/img/board/check_button.svg);
-  background-repeat: no-repeat;
-  cursor: pointer;
-}
-
-.subtasks:hover .subtask-checkbox {
-  background-color: var(--fontGrey);
-  border-radius: 5px;
-}
-
-.subtask-checkbox-checked {
-  width: 19px;
-  height: 19px;
-  background-image: url(/assets/img/board/checked_button.svg);
-  background-repeat: no-repeat;
-  cursor: pointer;
-}
-
-.container-subtasks p {
-  font-size: 16px;
-  line-height: 19.2px;
-}
-
-.subtasks {
-  display: flex;
-  align-items: center;
-  margin-top: 8px;
-  gap: 16px;
-  padding: 0 16px;
-  /* width: 100%; */
-}
-
-.container-delete-edit {
-  display: flex;
-  justify-content: end;
-  margin-top: 24px;
-  gap: 8px;
-}
-
-.delete {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  gap: 8px;
-}
-
-.edit {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  padding-left: 6px;
-  gap: 8px;
-}
-
-.border-left {
-  border-left: 0.1px solid var(--backgroundSpacer);
-}
-
-
-
-.delete-edit-icon2 {
-  display: flex;
-}
-
-.d-none {
-  display: none;
-}
 
 .task-box-big.edit-mode {
   overflow-y: hidden;
