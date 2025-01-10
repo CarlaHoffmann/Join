@@ -1,9 +1,9 @@
 <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Weißer Kreis als Hintergrund -->
-  <circle cx="100" cy="100" r="100" fill="white"/>
+  <circle cx="100" cy="100" r="200" fill="white"/>
 
   <!-- Originalgrafik, vertikal und horizontal zentriert -->
-  <g transform="translate(42, 32) scale(1.7)">
+  <g transform="translate(100, 8) scale(1.5)">
     <path d="M21.6725 0H-0.4854V25.4923H21.6725V0Z" fill="#2A3647"/>
     <path d="M-0.4858 46.2251H21.6721V82.1779C21.7733 90.8292 19.3112 99.3153 14.5986 106.557C9.9455 113.594 -0.037 121.966 -16.6554 121.966C-34.7566 121.966 -45.3071 113.406 -51 108.715L-37.0235 91.4743C-31.467 96.0112 -26.115 99.7435 -16.5701 99.7435C-9.3433 99.7435 -6.4628 96.7988 -4.7753 94.2307C-2.4814 90.6637 -1.2948 86.4923 -1.3665 82.2464L-0.4858 46.2251Z" fill="#2A3647"/>
     <path d="M-11.7865 30.1318H-33.9443V52.3884H-11.7865V30.1318Z" fill="#29ABE2"/>
