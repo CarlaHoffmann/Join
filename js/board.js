@@ -493,21 +493,24 @@ async function toggleSubtaskStatus(path, taskId, subtaskKey) {
         const newStatus = !currentStatus;
 
         // Subtask-Daten in der Datenbank aktualisieren
-        const url = `${base_url}/tasks/${path}/${taskId}/subtasks/${subtaskKey}.json`;
-        const updatedSubtask = { checked: newStatus };
+        // const url = `${base_url}/tasks/${path}/${taskId}/subtasks/${subtaskKey}.json`;
+        // const updatedSubtask = { checked: newStatus };
 
-        await fetch(url, {
-            method: 'PATCH',
-            body: JSON.stringify(updatedSubtask),
-            headers: { 'Content-Type': 'application/json' },
-        });
+        // await fetch(url, {
+        //     method: 'PATCH',
+        //     body: JSON.stringify(updatedSubtask),
+        //     headers: { 'Content-Type': 'application/json' },
+        // });
 
-        console.log(`Subtask ${subtaskKey} updated to: ${newStatus}`);
+        // console.log(`Subtask ${subtaskKey} updated to: ${newStatus}`);
 
         // Aktualisierung des Icons im DOM
         subtaskElement.src = newStatus
             ? 'assets/img/board/checked_button.svg'
             : 'assets/img/board/check_button.svg';
+        console.log(currentTask);
+        currentTask.subtasks[subtaskKey].checked = newStatus;
+        console.log(currentTask);
     } catch (error) {
         console.error('Error toggling subtask status:', error);
     }
@@ -786,8 +789,9 @@ async function closeTaskOverlay() {
 
     // Speichern der Subtasks
     if (currentTask) {
-        saveTaskSubtasks(currentTask);
+        await saveTaskSubtasks(currentTask);
     }
+    console.log(currentTask);
     
     overlayContainer.classList.add('d-none');
     overlayContainer.innerHTML = ''; // Inhalt löschen
@@ -838,9 +842,9 @@ async function updateOverlay(taskId, taskStatus) {
 
 
 // Funktion, um Subtasks rekursiv zu löschen
-async function deleteSubtasks(parentPath) {
+async function deleteSubtasks(path, id) {
     try {
-        const url = `${base_url}/tasks/${parentPath}.json`;
+        const url = `${base_url}/tasks/${path}/${id}/subtasks.json`;
         const response = await fetch(url);
 
         if (!response.ok) {
@@ -848,22 +852,18 @@ async function deleteSubtasks(parentPath) {
         }
 
         const data = await response.json();
+        console.log(data);
 
-        // Überprüfen, ob Subtasks existieren
-        if (data && data.currentSubtasks) {
-            const subtasks = Object.keys(data.subtasks);
-
-            for (const subtaskId of subtasks) {
-                // Rekursive Löschung von Subtasks
-                await deleteSubtasks(`${parentPath}/subtasks/${subtaskId}`);
-                const subtaskUrl = `${base_url}/tasks/${parentPath}/subtasks/${subtaskId}.json`;
-                await fetch(subtaskUrl, { method: 'DELETE' });
-            }
+        for (let index = 0; index < data.length; index++) {
+            // const element = array[index];
+            const subtaskUrl = `${base_url}/tasks/${path}/${id}/subtasks/${index}.json`;
+            await fetch(subtaskUrl, { method: 'DELETE' });
         }
     } catch (error) {
         console.error("Fehler beim Löschen der Subtasks:", error);
     }
 }
+
 
 // Überarbeitete Hauptfunktion zum Löschen von Tasks
 async function deleteTask(taskId) {
@@ -875,7 +875,7 @@ async function deleteTask(taskId) {
             const parentColumnId = taskElement.parentElement.id.replace("Tasks", "");
 
             // Rekursive Löschung aller Subtasks
-            await deleteSubtasks(`${parentColumnId}/${taskId}`);
+            await deleteSubtasks(parentColumnId, taskId);
 
             // Löschen des Haupttasks aus Firebase
             const url = `${base_url}/tasks/${parentColumnId}/${taskId}.json`;
