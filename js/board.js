@@ -789,7 +789,7 @@ async function closeTaskOverlay() {
         saveTaskSubtasks(currentTask);
     }
     
-    // overlayContainer.classList.add('d-none');
+    overlayContainer.classList.add('d-none');
     overlayContainer.innerHTML = ''; // Inhalt löschen
     // removeSubtaskListeners();
     await loadTasks();
