@@ -295,7 +295,7 @@ async function openEditTaskOverlay(task) {
     overlayContainer.innerHTML = `
     <div class="taskOverlay">
         <!-- Schließen-Button -->
-        <div class="close" onclick="closeTaskOverlayAnimation()">
+        <div class="close" onclick="closeTaskOverlay()">
             <img src="assets/img/add_task/close.svg" alt="Close" />
         </div>
 
@@ -579,7 +579,7 @@ async function openTaskOverlay(task) {
     <div id="taskOverlay" class="taskOverlay">
         <div class="taskSelect">
             <div class="taskContainer" style="background-color: ${getCategoryColor(task.category)}">${task.category}</div>
-            <div class="close" onclick="closeTaskOverlayAnimation()">
+            <div class="close" onclick="closeTaskOverlay()">
                 <img src="assets/img/add_task/close.svg" alt="Close" />
             </div>
         </div>
