@@ -16,8 +16,7 @@
 /* Description */
 .description {
     box-sizing: border-box;
-    height: 120px;
-    padding: 18px 16px;
+    height: 100px;
     resize: vertical;
     font-family: "Inter", sans-serif;
 }

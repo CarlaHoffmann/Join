@@ -293,19 +293,38 @@ async function openEditTaskOverlay(task) {
     }).join('');
 
     overlayContainer.innerHTML = `
-        <div class="taskOverlay">
-            <div class="scroll-container fill-in-part-edit">
-                <div class="add-task-edit-form">
-                    <div class="close" onclick="closeTaskOverlay()"><img src="assets/img/add_task/close.svg" alt="Close" /></div>
+    <div class="taskOverlay">
+        <!-- Schließen-Button -->
+        <div class="close" onclick="closeTaskOverlay()">
+            <img src="assets/img/add_task/close.svg" alt="Close" />
+        </div>
 
-                    <div id="add-task-first" class="width-440-edit">
-                        <div class="labled-box">
-                            <label class="form-label">
-                                <div>Title<span class="red-asterisk">*</span></div>
-                                <div id="titel-wrapper">
-                                    <input type="text" id="title" class="form-field margin-bottom title-edit" placeholder="Enter a title" minlength="3" required value="${task.title}">
-                                    <div id="title-error" class="error-message d-none">This field is required.</div>
-                                    <div id="title-minlength-error" class="error-message d-none">Please enter at least 3 characters.</div>
+        <!-- Scrollbarer Bereich -->
+        <div class="scroll-container fill-in-part-edit">
+            <div class="add-task-edit-form">
+                
+                <!-- Erster Abschnitt -->
+                <div id="add-task-first" class="width-440-edit">
+                    <div class="labled-box">
+                        <label class="form-label">
+                            <div>
+                                Title<span class="red-asterisk">*</span>
+                            </div>
+                            <div id="titel-wrapper">
+                                <input 
+                                    type="text" 
+                                    id="title" 
+                                    class="form-field margin-bottom title-edit" 
+                                    placeholder="Enter a title" 
+                                    minlength="3" 
+                                    required 
+                                    value="${task.title}">
+                                <div id="title-error" class="error-message d-none">
+                                    This field is required.
+                                </div>
+                                <div id="title-minlength-error" class="error-message d-none">
+                                    Please enter at least 3 characters.
+                                </div>
                                 </div>
                             </label>
                         </div>
@@ -464,32 +483,65 @@ function closeEditTaskOverlay(task) {
     openTaskOverlay(task);
 }
 
+async function toggleSubtaskStatus(path, taskId, subtaskKey) {
+    try {
+        // Abrufen des aktuellen Status des Subtasks
+        const subtaskElement = document.querySelector(`.check[data-subtask-key="${subtaskKey}"] img`);
+        const currentStatus = subtaskElement.src.includes('checked_button.svg'); // true = checked
+
+        // Neuer Status ist das Gegenteil des aktuellen Status
+        const newStatus = !currentStatus;
+
+        // Subtask-Daten in der Datenbank aktualisieren
+        const url = `${base_url}/tasks/${path}/${taskId}/subtasks/${subtaskKey}.json`;
+        const updatedSubtask = { checked: newStatus };
+
+        await fetch(url, {
+            method: 'PATCH',
+            body: JSON.stringify(updatedSubtask),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        console.log(`Subtask ${subtaskKey} updated to: ${newStatus}`);
+
+        // Aktualisierung des Icons im DOM
+        subtaskElement.src = newStatus
+            ? 'assets/img/board/checked_button.svg'
+            : 'assets/img/board/check_button.svg';
+    } catch (error) {
+        console.error('Error toggling subtask status:', error);
+    }
+}
 
 
 
 async function openTaskOverlay(task) {
     currentTask = task; // Task global speichern
-    // console.log(currentTask);
     const overlayContainer = document.getElementById('taskOverlayContainer');
 
     // Farben für Kontakte abrufen
     const contactColors = await getContactColors([task]);
     const contactsHTML = task.contacts.map((contact, index) => {
-    const contactColor = contactColors[0][index];
-    const initials = getContactInitials(contact);
-    return `
-        <div class="assigned-contact">
-            <div class="contact-initial" style="background-color: ${contactColor};">${initials}</div>
-            <span class="contact-name">${contact}</span>
-        </div>`;
+        const contactColor = contactColors[0][index];
+        const initials = getContactInitials(contact);
+        return `
+            <div class="assigned-contact">
+                <div class="contact-initial" style="background-color: ${contactColor};">${initials}</div>
+                <span class="contact-name">${contact}</span>
+            </div>`;
     }).join('');
 
-    // Subtasks-HTML generieren
+    // Subtasks-HTML generieren (Checkbox durch SVG ersetzt)
     const subtasksHTML = Object.keys(task.subtasks || {}).map(key => {
-    const subtask = task.subtasks[key];
-    return `
-        <div class="check">
-            <input type="checkbox" data-subtask-key="${key}" ${subtask.checked ? 'checked' : ''}>
+        const subtask = task.subtasks[key];
+        const svgIcon = subtask.checked
+            ? 'assets/img/board/checked_button.svg'
+            : 'assets/img/board/check_button.svg';
+
+        return `
+            <div class="check" data-subtask-key="${key}">
+                <img src="${svgIcon}" class="subtask-checkbox-icon" alt="Subtask Status" 
+                 onclick="toggleSubtaskStatus('${task.path}', '${task.id}', '${key}', ${!subtask.checked})">
             <div>${subtask.task}</div>
         </div>`;
     }).join('');
@@ -848,10 +900,24 @@ function addSearchTask() {
         tasks.forEach(task => {
             const title = task.querySelector(".task-title").textContent.toLowerCase();
             const description = task.querySelector(".task-description").textContent.toLowerCase();
+            const category = task.querySelector(".task-type").textContent.toLowerCase();
+            const participants = Array.from(
+                task.querySelectorAll(".members-section .contact-name")
+            ).map(contact => contact.textContent.toLowerCase());
 
-            // Überprüfen, ob der Task-Titel oder die Beschreibung den Suchbegriff enthält
-            if (title.includes(searchValue) || description.includes(searchValue)) {
-                task.style.display = "block"; // Task anzeigen
+            // Überprüfen, ob der Suchbegriff in Titel, Beschreibung, Kategorie oder Teilnehmern enthalten ist
+            const participantMatch = participants.some(participant =>
+                participant.includes(searchValue)
+            );
+            const match =
+                title.includes(searchValue) ||
+                description.includes(searchValue) ||
+                category.includes(searchValue) ||
+                participantMatch;
+
+            // Task anzeigen, wenn ein Treffer gefunden wurde
+            if (match) {
+                task.style.display = "block";
                 noResultFound = false;
             } else {
                 task.style.display = "none"; // Task ausblenden
@@ -864,6 +930,7 @@ function addSearchTask() {
     noSearchResult.style.display = noResultFound ? "block" : "none"; // Nachricht ein-/ausblenden
     document.getElementById("delete-search").classList.toggle("d-none", !searchValue); // Löschen-Icon ein-/ausblenden
 }
+
 
 // Suchfeld zurücksetzen
 function deleteSearch() {
