@@ -787,9 +787,12 @@ function addOverlaySubtask() {
 async function closeTaskOverlay() {
     const overlayContainer = document.getElementById('taskOverlayContainer');
 
-    // Speichern der Subtasks
-    if (currentTask) {
+    // Überprüfen, ob currentTask existiert und nicht leer ist
+    if (currentTask && Object.keys(currentTask).length > 0) {
+        // Speichern der Subtasks
         await saveTaskSubtasks(currentTask);
+    } else {
+        console.log("Keine aktuellen Task-Daten zum Speichern vorhanden.");
     }
     console.log(currentTask);
     
@@ -845,20 +848,13 @@ async function updateOverlay(taskId, taskStatus) {
 async function deleteSubtasks(path, id) {
     try {
         const url = `${base_url}/tasks/${path}/${id}/subtasks.json`;
-        const response = await fetch(url);
+        const response = await fetch(url, { method: 'DELETE' });
 
         if (!response.ok) {
             throw new Error(`HTTP-Error: ${response.status}`);
         }
 
-        const data = await response.json();
-        console.log(data);
-
-        for (let index = 0; index < data.length; index++) {
-            // const element = array[index];
-            const subtaskUrl = `${base_url}/tasks/${path}/${id}/subtasks/${index}.json`;
-            await fetch(subtaskUrl, { method: 'DELETE' });
-        }
+        console.log("Alle Subtasks wurden gelöscht");
     } catch (error) {
         console.error("Fehler beim Löschen der Subtasks:", error);
     }
@@ -887,6 +883,7 @@ async function deleteTask(taskId) {
             // Überprüfen, ob Placeholder angezeigt werden muss
             updatePlaceholders();
 
+            currentTask = [];
             // Schließe das Overlay
             closeTaskOverlay();
 
