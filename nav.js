@@ -17,18 +17,19 @@ function toggleHelpMenu() {
  * A link is considered active if its path is contained within the current URL path.
  */
 function activeLink() {
-    // Retrieve and normalize the current path
-    const currentPath = window.location.pathname.replace(/^\/|\/$/g, '');
+    // Retrieve the current path without file extension
+    const currentPath = window.location.pathname.replace(/^\/|\/$/g, '').replace(/\.html$/, '');
 
     // Iterate through all links in the sidebar and mobile navigation
     const links = document.querySelectorAll('#sidebar a, #mobileNav a');
+    // const links = document.querySelectorAll('#sidebarNavigation a, #info-sidebar a, #mobileNav a');
 
     links.forEach(link => {
-        // Retrieve and normalize the href attribute of the link
-        const linkPath = link.getAttribute('href').replace(/^\/|\/$/g, '');
+        // Retrieve the href attribute of the link without file extension
+        const linkPath = link.getAttribute('href').replace(/\.html$/, '');
 
-        // Check if the current path includes the link's path
-        if (currentPath.includes(linkPath)) {
+        // Check if the current path exactly matches the link's path
+        if (currentPath === linkPath) {
             link.classList.add('active-link'); // Add the active link class
         } else {
             link.classList.remove('active-link'); // Remove the active link class from other links
@@ -142,8 +143,11 @@ async function logOut() {
     window.location.href = './logIn.html';
 }
 
-/** Initialize active link highlighting on page load */
-window.onload = activeLink;
+/** Initialize active link for navigation highlighting on page load */
+// window.onload = activeLink;
+window.onload = function() {
+    requestAnimationFrame(activeLink);
+};
 
 /** Fetch initials when DOM content is fully loaded */
 document.addEventListener('DOMContentLoaded', () => {
