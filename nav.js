@@ -144,7 +144,6 @@ async function logOut() {
 }
 
 /** Initialize active link for navigation highlighting on page load */
-// window.onload = activeLink;
 window.onload = function() {
     requestAnimationFrame(activeLink);
 };
