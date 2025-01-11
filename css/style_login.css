@@ -80,8 +80,8 @@ a {
 
 #signup-linking-desktop {
   position: absolute;
-  top: 67px;
-  right: 32px;
+  top: 60px;
+  right: 50px;
 }
 
 #signup-linking-mobile {
@@ -199,8 +199,8 @@ a {
 
 .imglogo {
   position: absolute;
-  top: 80px;
-  left: 77px;
+  top: 50px;
+  left: 50px;
 }
   
 /* .logo-login {
@@ -278,7 +278,7 @@ a {
 }
 
 .arrow_signUp {
-  margin-left: -100px;
+  margin-left: -180px;
 }
 
 .arrow_signUp:hover {
@@ -407,9 +407,18 @@ input:hover,
   justify-content: center;
 }
 
-.style_checkbox {
-  height: 16px;
+.checkbox-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.checkbox-icon {
+  width: 100%;
+  height: 100%;
 }
   
 .password-error {

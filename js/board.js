@@ -917,15 +917,16 @@ const searchField = document.querySelector('#searchField');
 
 
 
-// Suchfunktion
 function addSearchTask() {
     const searchValue = document.getElementById("searchField").value.toLowerCase(); // Suchwert abrufen
     const tasksContainers = document.querySelectorAll(".tasks-container"); // Alle Task-Container abrufen
+    const userList = document.querySelectorAll("#user-list .user-card"); // Alle Benutzerkarten abrufen
     let noResultFound = true; // Status, ob ein Ergebnis gefunden wurde
 
-    // Alle Tasks in allen Containern durchsuchen
+    // Tasks durchsuchen
     tasksContainers.forEach(container => {
-        const tasks = container.querySelectorAll(".task-card"); // Alle Task-Karten abrufen
+        const tasks = Array.from(container.querySelectorAll(".task-card")); // Alle Task-Karten abrufen
+        let taskMatch = false;
 
         tasks.forEach(task => {
             const title = task.querySelector(".task-title").textContent.toLowerCase();
@@ -935,10 +936,10 @@ function addSearchTask() {
                 task.querySelectorAll(".members-section .contact-name")
             ).map(contact => contact.textContent.toLowerCase());
 
-            // Überprüfen, ob der Suchbegriff in Titel, Beschreibung, Kategorie oder Teilnehmern enthalten ist
             const participantMatch = participants.some(participant =>
                 participant.includes(searchValue)
             );
+
             const match =
                 title.includes(searchValue) ||
                 description.includes(searchValue) ||
@@ -948,18 +949,37 @@ function addSearchTask() {
             if (match) {
                 task.style.visibility = "visible";
                 task.style.display = "";
+                taskMatch = true;
             } else {
                 task.style.visibility = "hidden";
+                task.style.display = "none";
             }
         });
+
+        if (taskMatch) noResultFound = false;
     });
+
+    // Benutzer durchsuchen
+    let userMatch = false;
+    userList.forEach(user => {
+        const userName = user.querySelector(".user-name").textContent.toLowerCase();
+        if (userName.includes(searchValue)) {
+            user.style.visibility = "visible";
+            user.style.display = "";
+            userMatch = true;
+        } else {
+            user.style.visibility = "hidden";
+            user.style.display = "none";
+        }
+    });
+
+    if (userMatch) noResultFound = false;
 
     // Keine Ergebnisse gefunden
     const noSearchResult = document.getElementById("no-search-result");
     noSearchResult.style.display = noResultFound ? "block" : "none"; // Nachricht ein-/ausblenden
     document.getElementById("delete-search").classList.toggle("d-none", !searchValue); // Löschen-Icon ein-/ausblenden
 }
-
 
 // Suchfeld zurücksetzen
 function deleteSearch() {

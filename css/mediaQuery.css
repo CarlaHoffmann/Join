@@ -257,6 +257,11 @@
 }
 
 @media (max-width: 680px) {
+  #headerLogo {
+    width: 20px;
+    display: block; /* Überschreibt "hidden", falls display: none gesetzt ist */
+  }
+
   .arrow_signUp {
     margin: 0;
     position: absolute;

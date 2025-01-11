@@ -13,6 +13,8 @@
 
     <script defer src="./js/signUp.js"></script>
     <script defer src="./js/script.js"></script>
+    <script defer src="./login.js"></script>
+
 </head>
 
 <body onload="setPreviousPageParams()" class="display-fc">
@@ -56,8 +58,8 @@
                                 <img src="img/login/visibility_off.svg" alt="" id="notSee" class="hidden">
                                 <img src="img/login/visibility.svg" alt="" id="lock" class="hidden">
                             </a>
-
                         </div>
+                        
                         <div id="confirmPasswordButten" class="input-container">
                             <input id="confirmPassword" placeholder="Password" type="password" class="input-with-image"
                                 onclick="changeConfirmPassword()" required>
@@ -75,9 +77,13 @@
                     </div>
 
                     <div class="accept_box">
-                        <input type="checkbox" class="style_checkbox" required> <span class="gray"> I accept the
-                        </span><a href="privacyPolicy.html" class="link-checkbox" target="_blank">Privacy policy</a>
+                        <div class="checkbox-container" onclick="toggleCheckbox(this)">
+                            <img src="assets/img/general/check_button.svg" alt="Checkbox" class="checkbox-icon">
+                        </div>
+                        <span class="gray"> I accept the</span>
+                        <a href="privacyPolicy.html" class="link-checkbox" target="_blank">Privacy policy</a>
                     </div>
+                    
 
                     <div>
                         <button id="signupButton" class="button-login-blue button-p text_login_btn mobile_login_btn hover">Sign up</button>

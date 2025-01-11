@@ -10,41 +10,67 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    animation: fadeOut 0.5s ease-in 2s forwards; /* Overlay verschwindet während der Animation */
 }
 
 /* Logo-Animation */
 #animatedLogo {
     position: absolute;
-    width: 150px; 
-    height: auto;
-    animation: logoPauseAndMove 1.5s ease-in-out forwards; 
-    
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    height: 50vh;
+    object-fit: contain;
+    object-position: center;
+    z-index: 1000;
+    animation: logoAnimation 1.5s ease-in-out 0.8s forwards;
 }
 
 /* Header-Logo Styling */
 #headerLogo {
     display: none;
-    width: 101px;
-    height: 122px;
     position: absolute;
     top: 50px;
     left: 50px;
+    width: 100px;
+    height: 120px;
 }
 
 /* Keyframes für die Logo-Bewegung */
-@keyframes logoPauseAndMove {
+@keyframes logoAnimation {
     0% {
-        transform: translate(-50%, -50%) scale(3);
+        opacity: 1; /* Logo wird sichtbar */
+        position: absolute;
         top: 50%;
         left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+        width: 60vw;
+        height: 60vh;
     }
+
     20% {
-        transform: translate(-50%, -50%) scale(3);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
     }
+
     100% {
-        transform: translate(0, 0) scale(1); /* Wandert nach oben links und wird kleiner */
+        position: absolute;
         top: 50px;
         left: 50px;
+        transform: translate(0, 0) scale(1);
+        width: 100px;
+        height: 121px;
+    }
+}
+
+/* Overlay-Ausblendung */
+@keyframes fadeOut {
+    from {
+        opacity: 1; /* Voll sichtbar */
+    }
+    to {
+        opacity: 0; /* Komplett transparent */
     }
 }

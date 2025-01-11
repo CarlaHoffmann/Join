@@ -1,56 +1,43 @@
-// function animationWindow() {
-//     const overlay = document.getElementById('overlay');
-//     const animatedLogo = document.getElementById('animatedLogo');
-//     const headerLogo = document.getElementById('headerLogo');
 
-//     // Prüfen, ob die Animation bereits abgespielt wurde
-//     if (!sessionStorage.getItem('animationPlayed')) {
-//         // Starten der Animation
-//         animatedLogo.addEventListener('animationend', () => {
-//             overlay.style.display = 'none'; // Verstecke Overlay
-//             headerLogo.src = animatedLogo.src; // Logo in den Header transferieren
-//             headerLogo.style.display = 'block'; // Header-Logo sichtbar machen
-//         });
-
-//         // Markieren, dass die Animation abgespielt wurde
-//         sessionStorage.setItem('animationPlayed', 'true');
-//     } else {
-//         // Wenn die Animation bereits abgespielt wurde
-//         overlay.style.display = 'none'; // Verstecke das Overlay
-//         headerLogo.src = animatedLogo.src; // Header-Logo setzen
-//         headerLogo.style.display = 'block'; // Header-Logo sichtbar machen
-//     }
-// }
-
-
-
-
-/**
- * This function manages the animation window on page load. 
- * It checks if the animation has already been played and updates the UI accordingly.
- */
 function animationWindow() {
     const overlay = document.getElementById('overlay');
     const animatedLogo = document.getElementById('animatedLogo');
     const headerLogo = document.getElementById('headerLogo');
 
-    if (!sessionStorage.getItem('animationPlayed')) {
-
+    // Überprüfen, ob die Seite neu geladen wurde
+    if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+        // Animation abspielen, da die Seite neu geladen wurde
         animatedLogo.addEventListener('animationend', () => {
             overlay.style.display = 'none'; // Verstecke Overlay
             headerLogo.src = animatedLogo.src; // Logo in den Header transferieren
             headerLogo.style.display = 'block'; // Header-Logo sichtbar machen
-            sessionStorage.setItem('animationPlayed', 'true');
         });
     } else {
+        // Überspringe die Animation bei Navigation
         overlay.style.display = 'none'; // Verstecke das Overlay
         headerLogo.src = animatedLogo.src; // Header-Logo setzen
         headerLogo.style.display = 'block'; // Header-Logo sichtbar machen
     }
 }
 
-/** Trigger the animation window function on page load */
-window.onload = animationWindow;
+// Aufruf der Funktion bei Seiten-Laden
+document.addEventListener('DOMContentLoaded', animationWindow);
+
+
+function toggleCheckbox(element) {
+    const img = element.querySelector('.checkbox-icon');
+    const isChecked = img.getAttribute('src') === 'assets/img/general/checked_button.svg';
+
+    // Toggle Zustand
+    if (isChecked) {
+        img.setAttribute('src', 'assets/img/general/check_button.svg'); // Inaktiv setzen
+        element.dataset.checked = "false"; // Zustand speichern (optional)
+    } else {
+        img.setAttribute('src', 'assets/img/general/checked_button.svg'); // Aktiv setzen
+        element.dataset.checked = "true"; // Zustand speichern (optional)
+    }
+}
+
 
 /**
  * Base URL for the Firebase Realtime Database.

@@ -1,5 +1,16 @@
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
+
+document.addEventListener("DOMContentLoaded", () => {
+    const logo = document.getElementById("animatedLogo");
+
+    // Entferne und füge die Animation wieder hinzu, um sie zurückzusetzen
+    logo.classList.remove("animate");
+    void logo.offsetWidth; // Trigger a DOM reflow
+    logo.classList.add("animate");
+});
+
+
 // Fügt einen neuen Benutzer hinzu, überprüft E-Mail und zeigt Fehler an
 async function addUser() {
     document.getElementById('mailError').classList.add('hidden');

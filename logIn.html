@@ -18,11 +18,11 @@
     
 </head>
 
-<body onload="animationWindow(); setPreviousPageParams()">
+<body onload="setPreviousPageParams()">
     <!-- Overlay mit animiertem Logo -->
     <div id="overlay">
-        <div id="logoAnimation">
-            <img src="/img/login/Logo for Favicon construction.svg" alt="Logo" id="animatedLogo">
+        <div>
+            <img src="/img/login/Logo for Favicon construction.svg" alt="Logo" id="animatedLogo" class="animate">
         </div>
     </div>
     <header>
@@ -77,7 +77,9 @@
 
                                 <!-- Remember Me -->
                                 <div class="accept_box">
-                                    <input type="checkbox" class="style_checkbox">
+                                    <div class="checkbox-container" onclick="toggleCheckbox(this)">
+                                        <img src="assets/img/general/check_button.svg" alt="Checkbox" class="checkbox-icon">
+                                    </div>
                                     <span class="gray">Remember me</span>
                                 </div>
                             </div>
