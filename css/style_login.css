@@ -202,19 +202,12 @@ a {
   top: 50px;
   left: 50px;
 }
-  
-/* .logo-login {
-  height: 100vh;
-  background-color: var(--white);
-} */
 
 .frame153 {
-  padding: 48px 115px;
+  padding: 48px 88px;
   gap: 32px;
   border-radius: 30px;
   background-color: var(--white);
-  /* width: 652px; */
-  /* width: 598px; */
   height: auto;
 }
 
@@ -312,6 +305,8 @@ a {
   border: 3px solid;
   border-top: 150px;
   border-color: var(--lightblue);
+  width: 150px;
+  margin: 0 auto;
 }
 
 .link-checkbox {

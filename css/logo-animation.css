@@ -23,7 +23,7 @@
     object-fit: contain;
     object-position: center;
     z-index: 1000;
-    animation: logoAnimation 1.5s ease-in-out 0.8s forwards;
+    animation: logoAnimation 1.2s ease-in-out 0.8s forwards;
 }
 
 /* Header-Logo Styling */
@@ -39,13 +39,11 @@
 /* Keyframes für die Logo-Bewegung */
 @keyframes logoAnimation {
     0% {
-        opacity: 1; /* Logo wird sichtbar */
-        position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) scale(1);
-        width: 60vw;
-        height: 60vh;
+        width: 50vw;
+        height: 50vh;
     }
 
     20% {
@@ -68,9 +66,9 @@
 /* Overlay-Ausblendung */
 @keyframes fadeOut {
     from {
-        opacity: 1; /* Voll sichtbar */
+        opacity: 5; /* Voll sichtbar */
     }
     to {
-        opacity: 0; /* Komplett transparent */
+        opacity: 1; /* Komplett transparent */
     }
 }
