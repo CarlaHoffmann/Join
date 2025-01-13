@@ -4,7 +4,6 @@
 }
 
 .title {
-    padding: 12px 21px;
     box-sizing: border-box;
     width: 440px;
 }
@@ -19,6 +18,7 @@
     height: 100px;
     resize: vertical;
     font-family: "Inter", sans-serif;
+    padding: 18px 16px;
 }
 
 .description::placeholder {
