@@ -6,10 +6,10 @@ const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebaseda
 
 
 /**
- * Manages the animation of the overlay and logo based on page reload or navigation type.
+ * Manages the animation of the overlay and logo based on page load or navigation type.
  * 
- * - Plays the animation if the page is reloaded.
- * - Skips the animation and directly displays the header logo on navigation.
+ * - Always plays the animation when the page or login.js is loaded.
+ * - Skips the animation and directly displays the header logo if it's already loaded (no animation on page navigation).
  * - Transfers the animated logo to the header once the animation ends.
  * 
  * @function animationWindow
@@ -20,34 +20,30 @@ function animationWindow() {
     const animatedLogo = document.getElementById('animatedLogo');
     const headerLogo = document.getElementById('headerLogo');
 
-    const isMobile = window.innerWidth <= 768; // Check for mobile view
+    const isMobile = window.innerWidth <= 768;
 
-    // Mobile View: Logo changes during animation
     if (isMobile) {
-        animatedLogo.src = 'assets/img/general/logo.svg'; // Initial logo for mobile
+        animatedLogo.src = 'assets/img/general/logo.svg'; 
 
-        // When the animation ends, switch to the favicon logo in the header
         animatedLogo.addEventListener('animationend', () => {
-            animatedLogo.src = 'assets/img/general/logo_favicon.svg'; // Change logo on animation end
-            headerLogo.src = animatedLogo.src; // Set the favicon logo in the header
+            animatedLogo.src = 'assets/img/general/logo_favicon.svg';
+            headerLogo.src = animatedLogo.src;
             headerLogo.style.display = 'block';
-            overlay.style.display = 'none'; // Hide the overlay
+            overlay.style.display = 'none';
         });
     } else {
         // Desktop View: Standard logo animation
-        if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
-            animatedLogo.addEventListener('animationend', () => {
-                overlay.style.display = 'none'; // Hide the overlay
-                headerLogo.src = animatedLogo.src;
-                headerLogo.style.display = 'block';
-            });
-        } else {
+        animatedLogo.addEventListener('animationend', () => {
             overlay.style.display = 'none';
             headerLogo.src = animatedLogo.src;
             headerLogo.style.display = 'block';
-        }
+        });
     }
 }
+
+// Call the animation function when the page is loaded
+document.addEventListener('DOMContentLoaded', animationWindow);
+
 
 
 

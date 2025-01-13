@@ -63,7 +63,6 @@
     }
 }
 
-/* Änderungen für die mobile Ansicht */
 @media screen and (max-width: 768px) {
     #overlay {
         background: #2A3647; /* Hintergrundfarbe für mobile Geräte */
@@ -83,3 +82,4 @@
         opacity: 1; /* Komplett transparent */
     }
 }
+
