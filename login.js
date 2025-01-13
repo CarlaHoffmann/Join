@@ -20,18 +20,35 @@ function animationWindow() {
     const animatedLogo = document.getElementById('animatedLogo');
     const headerLogo = document.getElementById('headerLogo');
 
-    if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
+    const isMobile = window.innerWidth <= 768; // Check for mobile view
+
+    // Mobile View: Logo changes during animation
+    if (isMobile) {
+        animatedLogo.src = 'assets/img/general/logo.svg'; // Initial logo for mobile
+
+        // When the animation ends, switch to the favicon logo in the header
         animatedLogo.addEventListener('animationend', () => {
+            animatedLogo.src = 'assets/img/general/logo_favicon.svg'; // Change logo on animation end
+            headerLogo.src = animatedLogo.src; // Set the favicon logo in the header
+            headerLogo.style.display = 'block';
+            overlay.style.display = 'none'; // Hide the overlay
+        });
+    } else {
+        // Desktop View: Standard logo animation
+        if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
+            animatedLogo.addEventListener('animationend', () => {
+                overlay.style.display = 'none'; // Hide the overlay
+                headerLogo.src = animatedLogo.src;
+                headerLogo.style.display = 'block';
+            });
+        } else {
             overlay.style.display = 'none';
             headerLogo.src = animatedLogo.src;
             headerLogo.style.display = 'block';
-        });
-    } else {
-        overlay.style.display = 'none';
-        headerLogo.src = animatedLogo.src;
-        headerLogo.style.display = 'block';
+        }
     }
 }
+
 
 
 /**

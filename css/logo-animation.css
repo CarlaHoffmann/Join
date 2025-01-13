@@ -1,10 +1,11 @@
+/* Overlay Styling */
 #overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: #F0F0F0;
+    background: #F0F0F0; /* Standard für Desktop */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,6 +60,17 @@
         transform: translate(0, 0) scale(1);
         width: 100px;
         height: 121px;
+    }
+}
+
+/* Änderungen für die mobile Ansicht */
+@media screen and (max-width: 768px) {
+    #overlay {
+        background: #2A3647; /* Hintergrundfarbe für mobile Geräte */
+    }
+
+    #animatedLogo {
+        content: url('assets/img/general/logo.svg'); /* Initiales Logo in der mobilen Ansicht */
     }
 }
 
