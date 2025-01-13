@@ -1,29 +1,50 @@
+/**
+ * Base URL for the Firebase Realtime Database.
+ * @constant {string}
+ */
+const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
+
+/**
+ * Manages the animation of the overlay and logo based on page reload or navigation type.
+ * 
+ * - Plays the animation if the page is reloaded.
+ * - Skips the animation and directly displays the header logo on navigation.
+ * - Transfers the animated logo to the header once the animation ends.
+ * 
+ * @function animationWindow
+ * @returns {void}
+ */
 function animationWindow() {
     const overlay = document.getElementById('overlay');
     const animatedLogo = document.getElementById('animatedLogo');
     const headerLogo = document.getElementById('headerLogo');
 
-    // Überprüfen, ob die Seite neu geladen wurde
     if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
-        // Animation abspielen, da die Seite neu geladen wurde
         animatedLogo.addEventListener('animationend', () => {
-            overlay.style.display = 'none'; // Verstecke Overlay
-            headerLogo.src = animatedLogo.src; // Logo in den Header transferieren
-            headerLogo.style.display = 'block'; // Header-Logo sichtbar machen
+            overlay.style.display = 'none';
+            headerLogo.src = animatedLogo.src;
+            headerLogo.style.display = 'block';
         });
     } else {
-        // Überspringe die Animation bei Navigation
-        overlay.style.display = 'none'; // Verstecke das Overlay
-        headerLogo.src = animatedLogo.src; // Header-Logo setzen
-        headerLogo.style.display = 'block'; // Header-Logo sichtbar machen
+        overlay.style.display = 'none';
+        headerLogo.src = animatedLogo.src;
+        headerLogo.style.display = 'block';
     }
 }
 
 
-// Aufruf der Funktion bei Seiten-Laden
+/**
+ * Toggles the state of a checkbox by updating its icon and associated data attribute.
+ * 
+ * - Changes the `src` attribute of the checkbox icon based on the current state.
+ * - Updates the `data-checked` attribute to reflect the checkbox's state.
+ * 
+ * @function toggleCheckbox
+ * @param {Element} element - The checkbox container element that contains the icon to toggle.
+ * @returns {void}
+ */
 document.addEventListener('DOMContentLoaded', animationWindow);
-
 
 function toggleCheckbox(element) {
     const img = element.querySelector('.checkbox-icon');
@@ -31,20 +52,13 @@ function toggleCheckbox(element) {
 
     // Toggle Zustand
     if (isChecked) {
-        img.setAttribute('src', 'assets/img/general/check_button.svg'); // Inaktiv setzen
-        element.dataset.checked = "false"; // Zustand speichern (optional)
+        img.setAttribute('src', 'assets/img/general/check_button.svg');
+        element.dataset.checked = "false";
     } else {
-        img.setAttribute('src', 'assets/img/general/checked_button.svg'); // Aktiv setzen
-        element.dataset.checked = "true"; // Zustand speichern (optional)
+        img.setAttribute('src', 'assets/img/general/checked_button.svg');
+        element.dataset.checked = "true";
     }
 }
-
-
-/**
- * Base URL for the Firebase Realtime Database.
- * @constant {string}
- */
-const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
 /**
  * This asynchronous function handles user login with an existing email and password.
