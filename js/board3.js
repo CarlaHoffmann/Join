@@ -327,7 +327,7 @@ async function openTaskOverlay(task) {
         <div class="headline">${task.title}</div>
 
         <!-- Beschreibung -->
-        <div class="description">${task.description}</div>
+        <div class="description-overlay">${task.description}</div>
 
         <!-- Due Date und Priority untereinander -->
         <div class="task-info-wrapper">

@@ -110,7 +110,7 @@ body {
     padding: 48px 24px 48px 24px;
     border-radius: 30px;
     justify-content: space-between;
-    gap: 15px;
+    gap: 24px;
     box-sizing: border-box;
     background-color: white;
 }
@@ -155,7 +155,6 @@ body {
     overflow-y: auto;
 }
 
-
 .datePriority {
     width: 130px;
     color: rgb(7, 79, 202);
@@ -170,8 +169,8 @@ body {
 .task-info-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 12px; /* Abstand zwischen Due Date und Priority */
-    margin: 15px 0;
+    gap: 24px; /* Abstand zwischen Due Date und Priority */
+    margin: 0;
 }
 
 /* Info-Bereich einzeln */
@@ -345,11 +344,18 @@ body {
 }
 */
 
+@media (max-width: 680px) {
+    .task-info-wrapper {
+        gap: 16px;
+    }
+}
+
 /* Media Queries */
 @media (max-width: 600px) {
     .taskOverlay {
         width: 80%; 
         padding: 40px 20px;
+        gap: 16px;
     }
 
     .headline {
