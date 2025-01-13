@@ -26,7 +26,7 @@ function animationWindow() {
         animatedLogo.src = 'assets/img/general/logo.svg'; 
 
         animatedLogo.addEventListener('animationend', () => {
-            animatedLogo.src = 'assets/img/general/logo_favicon.svg';
+            animatedLogo.src = 'img/login/Logo for Favicon construction.svg';
             headerLogo.src = animatedLogo.src;
             headerLogo.style.display = 'block';
             overlay.style.display = 'none';
