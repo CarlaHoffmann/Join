@@ -9,10 +9,11 @@
     <!-- Scripts -->
     <script src="./js/script.js"></script>
     <script src="/js/board.js"></script>
-    <!-- <script src="./login.js"></script> -->
+    <script src="/js/board2.js"></script>
+    <script src="/js/board3.js"></script>
+
     <script src="./js/add_tasks.js"></script>
     <script src="./nav.js"></script>
-    <!-- <script src="task_firebase.js"></script> -->
     <script src="task_firebase_submit.js"></script>
     <script src="task_template.js"></script>
     <script src="task1.js"></script>
@@ -20,8 +21,6 @@
     <script src="/js/edit_tasks_on_board.js"></script>
     <script src="/js/save_task_on_board.js"></script>
 
-
-    <!-- Stylesheets -->
     <link rel="icon" href="/img/general/logo_favicon.svg" />
     <link rel="stylesheet" href="./css/colors.css" />
     <link rel="stylesheet" href="./css/board.css" />
@@ -35,7 +34,7 @@
 
 
 
-    
+
 
 </head>
 
@@ -45,16 +44,11 @@
         <div class="nav-bar" w3-include-html="nav.html"></div>
     </header>
 
-
-    
-
     <!-- Add Task Overlay -->
     <div id="task-overlay"></div>
-    
+
     <!-- Edit Task Overlay -->
     <div id="taskOverlayContainer" class="overlay-container d-none"></div>
-
-
 
     <!-- Board Section -->
     <div class="right_section flex_dir_c">
@@ -106,17 +100,19 @@
 
                             <!-- <img src="/assets/img/add_task/plus button.svg" alt="Add Task Icon" class="column-icon" onclick="addTask()" /> -->
 
-                            <svg class="column-icon" onclick="addTask()" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
-                                <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                                </svg>
-                                
+                            <svg class="column-icon" onclick="addTask()" width="24" height="25" viewBox="0 0 24 25"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2" />
+                                <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+                                <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+
                         </div>
                         <div id="toDoTasks" class="tasks-container"></div>
                         <div id="toDoPlaceholder" class="placeholder">No tasks To do</div>
                     </div>
-                
+
                     <!-- In Progress Column -->
                     <div id="column-progress" class="board-column"
                         ondrop="drop(event, 'progress'); removeHighlightEnd('column-progress')"
@@ -124,16 +120,18 @@
                         ondragover="allowDrop(event); highlight('column-progress')">
                         <div class="column-header">
                             <h2 class="text_board_headline">In Progress</h2>
-                            <svg class="column-icon" onclick="addTask()" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
-                                <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                                </svg>
+                            <svg class="column-icon" onclick="addTask()" width="24" height="25" viewBox="0 0 24 25"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2" />
+                                <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+                                <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
                         </div>
                         <div id="progressTasks" class="tasks-container"></div>
                         <div id="progressPlaceholder" class="placeholder">No tasks In progress</div>
                     </div>
-                
+
                     <!-- Await Feedback Column -->
                     <div id="column-feedback" class="board-column"
                         ondrop="drop(event, 'feedback'); removeHighlightEnd('column-feedback')"
@@ -141,15 +139,18 @@
                         ondragover="allowDrop(event); highlight('column-feedback')">
                         <div class="column-header">
                             <h2 class="text_board_headline">Await Feedback</h2>
-                            <svg class="column-icon" onclick="addTask()" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
-                                <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                                </svg>                        </div>
+                            <svg class="column-icon" onclick="addTask()" width="24" height="25" viewBox="0 0 24 25"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2" />
+                                <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+                                <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                        </div>
                         <div id="feedbackTasks" class="tasks-container"></div>
                         <div id="feedbackPlaceholder" class="placeholder">No tasks Await feedback</div>
                     </div>
-                
+
                     <!-- Done Column -->
                     <div id="column-done" class="board-column"
                         ondrop="drop(event, 'done'); removeHighlightEnd('column-done')"
@@ -162,11 +163,11 @@
                         <div id="donePlaceholder" class="placeholder">No tasks Done</div>
                     </div>
                 </div>
-                
+
         </section>
     </div>
 
-    
+
 </body>
 
 </html>
