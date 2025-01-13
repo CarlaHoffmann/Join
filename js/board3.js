@@ -46,7 +46,7 @@ async function openEditTaskOverlay(task) {
                                 <input 
                                     type="text" 
                                     id="title" 
-                                    class="form-field margin-bottom title-edit" 
+                                    class="form-field margin-bottom title-edit pad-12-16" 
                                     placeholder="Enter a title" 
                                     minlength="3" 
                                     required 
