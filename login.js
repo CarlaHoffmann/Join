@@ -74,33 +74,90 @@ function toggleCheckbox(element) {
 }
 
 /**
- * This asynchronous function handles user login with an existing email and password.
+ * Handles the login process for an existing user.
+ * Loads users, checks credentials, and manages the login flow.
+ * @async
+ * @function
+ * @throws {Error} If there's an error during the login process
  */
 async function existingMailLogIn() {
     try {
         const users = await loadUsers();
-        let mail = document.getElementById('email').value.toLowerCase();
-        let password = document.getElementById('password').value;
-
-        // Find user by E-Mail
-        let user = users.find(u => u.mail === mail);
+        const { mail, password } = getLoginCredentials();
+        const user = findUserByEmail(users, mail);
 
         if (user) {
-            // if password fits, save user
-            if (user.password === password) {
-                let name = user.name;
-                await saveUser(name, mail);
-                window.location.href = './summary.html';
-            } else {
-                document.getElementById('loginErrorPassword').classList.remove('hidden');
-                document.getElementById('passwordButten').classList.add('input-border');
-            }
+            await handleUserLogin(user, password);
         } else {
-            document.getElementById('loginErrorPassword').classList.remove('hidden');
+            showLoginError();
         }
     } catch (error) {
         console.error("Fehler beim Anmelden:", error);
     }
+}
+
+/**
+ * Retrieves login credentials from the input fields.
+ * @function
+ * @returns {{mail: string, password: string}} An object containing the email and password
+ */
+function getLoginCredentials() {
+    const mail = document.getElementById('email').value.toLowerCase();
+    const password = document.getElementById('password').value;
+    return { mail, password };
+}
+
+/**
+ * Finds a user by their email address in the users array.
+ * @function
+ * @param {Array} users - The array of user objects
+ * @param {string} email - The email address to search for
+ * @returns {Object|undefined} The user object if found, undefined otherwise
+ */
+function findUserByEmail(users, email) {
+    return users.find(u => u.mail === email);
+}
+
+/**
+ * Handles the login process for a specific user.
+ * Checks the password, saves the user if correct, and manages redirection or error display.
+ * @async
+ * @function
+ * @param {Object} user - The user object
+ * @param {string} password - The password to check
+ */
+async function handleUserLogin(user, password) {
+    if (user.password === password) {
+        await saveUser(user.name, user.mail);
+        redirectToSummary();
+    } else {
+        showPasswordError();
+    }
+}
+
+/**
+ * Redirects the user to the summary page.
+ * @function
+ */
+function redirectToSummary() {
+    window.location.href = './summary.html';
+}
+
+/**
+ * Displays an error message for incorrect password.
+ * @function
+ */
+function showPasswordError() {
+    document.getElementById('loginErrorPassword').classList.remove('hidden');
+    document.getElementById('passwordButten').classList.add('input-border');
+}
+
+/**
+ * Displays a general login error message.
+ * @function
+ */
+function showLoginError() {
+    document.getElementById('loginErrorPassword').classList.remove('hidden');
 }
 
 /**
