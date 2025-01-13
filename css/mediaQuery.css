@@ -236,6 +236,19 @@
   }
 }
 
+@media (max-width: 900px) {
+  .frame153-signup {
+    padding: 32px 16px;
+  }
+
+  .arrow_signUp {
+    margin: 0;
+    position: absolute;
+    left: 0px;
+    top: 16px;
+  }
+}
+
 @media (max-width: 680px) {
   .arrow_signUp {
     margin: 0;
@@ -251,9 +264,9 @@
     padding: 32px 16px;
   }
 
-  .frame153-signup {
+  /* .frame153-signup {
     padding: 32px 16px;
-  }
+  } */
 
   .input-container {
     width: 364px;
