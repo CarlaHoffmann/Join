@@ -344,17 +344,15 @@ body {
 }
 */
 
-@media (max-width: 680px) {
-    .task-info-wrapper {
-        gap: 16px;
-    }
-}
-
 /* Media Queries */
 @media (max-width: 600px) {
     .taskOverlay {
-        width: 80%; 
+        width: calc(100vw - 32px); 
         padding: 40px 20px;
+        gap: 16px;
+    }
+
+    .task-info-wrapper {
         gap: 16px;
     }
 
