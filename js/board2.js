@@ -165,6 +165,15 @@ async function closeTaskOverlay() {
 }
 
 
+
+
+function closeEditOverlay() {
+    const overlayContainer = document.getElementById('taskOverlayContainer');
+    overlayContainer.classList.add('d-none');
+    overlayContainer.innerHTML = '';
+}
+
+
 /**
  * Saves the updated subtasks of a task to the database.
  * 

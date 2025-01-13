@@ -27,7 +27,7 @@ async function openEditTaskOverlay(task) {
     overlayContainer.innerHTML = `
     <div class="taskOverlay">
         <!-- Schließen-Button -->
-        <div class="close" onclick="closeTaskOverlay()">
+        <div class="close" onclick="closeEditOverlay()">
             <img src="assets/img/add_task/close.svg" alt="Close" />
         </div>
 
