@@ -23,10 +23,10 @@ function animationWindow() {
     const isMobile = window.innerWidth <= 768;
 
     if (isMobile) {
-        animatedLogo.src = 'assets/img/general/logo.svg'; 
+        animatedLogo.src = './assets/img/general/logo.svg'; 
 
         animatedLogo.addEventListener('animationend', () => {
-            animatedLogo.src = 'img/login/login-logo.svg';
+            animatedLogo.src = './assets/img/login/login-logo.svg';
             headerLogo.src = animatedLogo.src;
             headerLogo.style.display = 'block';
             overlay.style.display = 'none';
