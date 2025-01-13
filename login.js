@@ -5,7 +5,7 @@ function animationWindow() {
     const headerLogo = document.getElementById('headerLogo');
 
     // Überprüfen, ob die Seite neu geladen wurde
-    if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+    if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
         // Animation abspielen, da die Seite neu geladen wurde
         animatedLogo.addEventListener('animationend', () => {
             overlay.style.display = 'none'; // Verstecke Overlay
@@ -19,6 +19,7 @@ function animationWindow() {
         headerLogo.style.display = 'block'; // Header-Logo sichtbar machen
     }
 }
+
 
 // Aufruf der Funktion bei Seiten-Laden
 document.addEventListener('DOMContentLoaded', animationWindow);
