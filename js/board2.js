@@ -294,51 +294,40 @@ const searchField = document.querySelector('#searchField');
 
 
 /**
- * Searches for tasks and users matching the search input and updates their visibility.
- * 
- * - Tasks are searched by title, description, category, and participants.
- * - Users are searched by name.
- * - Displays a "no results" message if no matches are found.
- * 
- * @function addSearchTask
- * @returns {void}
- */
-/**
- * Performs a search for tasks and users based on the input value and displays matching results.
- * 
- * @function addSearchTask
- * @returns {void}
+ * Filters tasks and users based on search input.
+ * Matches search text with task titles, descriptions, types, or assigned members, as well as user names.
+ * Displays "no results" message if no match is found.
  */
 function addSearchTask() {
     const searchValue = document.getElementById("searchField").value.toLowerCase();
-    const tasksContainers = document.querySelectorAll(".tasks-container");
-    const userList = document.querySelectorAll("#user-list .user-card");
+    const noResult = !filterElements(".tasks-container .task-card", searchValue, ['task-title', 'task-description', 'task-type'], ".members-section .contact-name")
+                   & !filterElements("#user-list .user-card", searchValue, ['user-name']);
 
-    let noResultFound = true;
-
-    tasksContainers.forEach(container => {
-        container.querySelectorAll(".task-card").forEach(task => {
-            const match = ['task-title', 'task-description', 'task-type']
-                .some(className => task.querySelector(`.${className}`).textContent.toLowerCase().includes(searchValue)) ||
-                Array.from(task.querySelectorAll(".members-section .contact-name"))
-                    .some(contact => contact.textContent.toLowerCase().includes(searchValue));
-
-            task.style.visibility = match ? "visible" : "hidden";
-            task.style.display = match ? "" : "none";
-            if (match) noResultFound = false;
-        });
-    });
-
-    userList.forEach(user => {
-        const userName = user.querySelector(".user-name").textContent.toLowerCase();
-        const match = userName.includes(searchValue);
-        user.style.visibility = match ? "visible" : "hidden";
-        user.style.display = match ? "" : "none";
-        if (match) noResultFound = false;
-    });
-
-    document.getElementById("no-search-result").style.display = noResultFound ? "block" : "none";
+    document.getElementById("no-search-result").style.display = noResult ? "block" : "none";
     document.getElementById("delete-search").classList.toggle("d-none", !searchValue);
+}
+
+/**
+ * Filters elements by matching inner text of specific child elements or additional selectors.
+ * @param {string} selector - Parent element selector for filtering.
+ * @param {string} searchValue - Lowercase search string for matching.
+ * @param {string[]} childClasses - List of child class names to match text content.
+ * @param {string} [extraSelector] - Additional selector for secondary matches.
+ * @returns {boolean} - True if any element matches the search value, false otherwise.
+ */
+function filterElements(selector, searchValue, childClasses, extraSelector) {
+    let found = false;
+
+    document.querySelectorAll(selector).forEach(element => {
+        const match = childClasses.some(cls => element.querySelector(`.${cls}`)?.textContent.toLowerCase().includes(searchValue)) ||
+                      Array.from(element.querySelectorAll(extraSelector || "")).some(el => el.textContent.toLowerCase().includes(searchValue));
+
+        element.style.visibility = match ? "visible" : "hidden";
+        element.style.display = match ? "" : "none";
+        if (match) found = true;
+    });
+
+    return found;
 }
 
 
