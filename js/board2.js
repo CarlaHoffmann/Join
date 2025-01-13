@@ -216,28 +216,6 @@ async function updateOverlay(taskId, taskStatus) {
 
 
 /**
- * Deletes all subtasks for a given task from the database.
- * 
- * @async
- * @function deleteSubtasks
- * @param {string} path - The database path for the task.
- * @param {string} id - The ID of the task whose subtasks are to be deleted.
- * @returns {Promise<void>} Resolves when the subtasks are successfully deleted.
- */
-// async function deleteSubtasks(path, id) {
-//     try {
-//         const url = `${base_url}/tasks/${path}/${id}/subtasks.json`;
-//         const response = await fetch(url, { method: 'DELETE' });
-
-//         if (!response.ok) {
-//             throw new Error(`HTTP-Error: ${response.status}`);
-//         }
-//     } catch (error) {
-//     }
-// }
-
-
-/**
  * Deletes a task and its subtasks from the database and removes it from the UI.
  * 
  * @async
@@ -251,8 +229,6 @@ async function deleteTask(taskId) {
         try {
             const taskElement = document.getElementById(`task-${taskId}`);
             const parentColumnId = taskElement.parentElement.id.replace("Tasks", "");
-
-            // await deleteSubtasks(parentColumnId, taskId);
 
             const url = `${base_url}/tasks/${parentColumnId}/${taskId}.json`;
             await fetch(url, { method: 'DELETE' });
