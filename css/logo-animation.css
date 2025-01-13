@@ -31,9 +31,6 @@
 
 /* Header-Logo Styling */
 #headerLogo {
-    position: absolute;
-    top: 50px;
-    left: 50px;
     animation: headerLogoFadeIn 1.5s forwards; 
 }
 

@@ -3,12 +3,6 @@
   font-family: "Inter", sans-serif;
 }
 
-.imglogo {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-}
-
 .logIn-page {
   background: rgb(246, 247, 248);
   width: 100vw;
@@ -18,7 +12,13 @@
   justify-content: center;
   overflow: hidden;
 }
-  
+
+.headerLogo {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+
 .signUp-page {
   background: rgb(246, 247, 248);
   width: 100vw;

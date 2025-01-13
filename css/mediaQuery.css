@@ -218,19 +218,10 @@
 }
 
 @media(max-width: 1024px) {
-  #headerLogo {
+  .headerLogo {
     top: 37px;
     left: 38px;
   }
-
-  .imglogo {
-    top: 37px;
-    left: 38px;
-  }
-
-  /* .frame153-signup {
-    padding: 32px 16px;
-  } */
 }
 
 @media (min-width: 900px) {
