@@ -68,13 +68,13 @@ function returncontactDetailsMenuTemplate(key) {
         <div id="options-menu" class="options-menu hidden">
             <!-- Edit Option -->
             <div onclick="toggleView('editContactBoxOverlay', '${key}', true); startEditOrAddAnimation('edit')" class="option-item">
-                <img src="img/contact/edit.svg" alt="Edit">
+                <img src="./assets/img/contact/edit.svg" alt="Edit">
                 <span>Edit</span>
             </div>
 
             <!-- Delete Option -->
             <div onclick="deleteContact('${key}')" class="option-item">
-                <img src="img/contact/delete.svg" alt="Delete">
+                <img src="./assets/img/contact/delete.svg" alt="Delete">
                 <span>Delete</span>
             </div>
         </div>

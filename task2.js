@@ -140,7 +140,7 @@ function closeSubtask() {
      * Reset the view to the original state.
      */
     subtaskButtons.innerHTML = `
-        <img class="subtask-img symbol-hover icon-hover" src="./img/task/subtask.svg" alt="add subtask">
+        <img class="subtask-img symbol-hover icon-hover" src="./assets/img/task/subtask.svg" alt="add subtask">
     `;
     subtaskInput.value = '';
     document.removeEventListener('click', closeSubtaskOnOutsideClick);

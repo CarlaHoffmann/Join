@@ -11,21 +11,21 @@ function getButtonContent(priority, isActive) {
             return `
                 <p>Urgent</p>
                 <div class="double-arrow-up">
-                    <img src="./img/task/prio_high${activeStatus}.svg" alt="">
+                    <img src="./assets/img/task/prio_high${activeStatus}.svg" alt="">
                 </div>
             `;
         case '2':
             return `
                 <p>Medium</p>
                 <div class="double-line">
-                    <img src="./img/task/prio_med${activeStatus}.svg" alt="">
+                    <img src="./assets/img/task/prio_med${activeStatus}.svg" alt="">
                 </div>
             `;
         case '3':
             return `
                 <p>Low</p>
                 <div class="double-arrow-down">
-                    <img src="./img/task/prio_low${activeStatus}.svg" alt="">
+                    <img src="./assets/img/task/prio_low${activeStatus}.svg" alt="">
                 </div>
             `;
         default:
@@ -41,11 +41,11 @@ function openSubtaskTemplate() {
     subtaskButtons.innerHTML = `
         <div id="opened-subtask-icons">
             <div class="opened-subtask-icon-box icon-hover" onclick="closeSubtask()">
-                <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt="">
+                <img class="opened-subtask-img symbol-hover" src="./assets/img/task/subtask_close.svg" alt="">
             </div>
-            <div><img src="./img/task/vector-3.svg" alt="seperator"></div>
+            <div><img src="./assets/img/task/vector-3.svg" alt="seperator"></div>
             <div class="opened-subtask-icon-box icon-hover"  onclick="addSubtask()">
-                <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt="">
+                <img class="opened-subtask-img symbol-hover" src="./assets/img/task/subtask_check.svg" alt="">
             </div>
         </div>
     `;
@@ -64,9 +64,9 @@ function getAddSubtaskTemplate(i, element) {
             <div onclick="editSubtask(${i})" class="subtask-box" value="${element}">
                 <div>• ${element}</div>
                 <div class="added-subtask-icons">
-                    <div><img onclick="editSubtask(${i})" class="icon-hover" src="./img/task/subtask_add_pen.svg" alt=""></div>
-                    <div><img src="./img/task/vector-3.svg" alt=""></div>
-                    <div><img onclick="deleteSubtask(${i})" class="icon-hover"  src="./img/task/subtask_add_bin.svg" alt=""></div>
+                    <div><img onclick="editSubtask(${i})" class="icon-hover" src="./assets/img/task/subtask_add_pen.svg" alt=""></div>
+                    <div><img src="./assets/img/task/vector-3.svg" alt=""></div>
+                    <div><img onclick="deleteSubtask(${i})" class="icon-hover"  src="./assets/img/task/subtask_add_bin.svg" alt=""></div>
                 </div>
             </div>
         </div>
@@ -84,9 +84,9 @@ function editSubtaskTemplate(index, currentText, checked) {
         <div class="edit-subtask-wrapper">
             <input type="text" class="edit-subtask-input" checked="${checked}" value="${currentText}">
             <div class="edit-subtask-icons">
-                <div><img onclick="deleteSubtask(${index})" class="icon-hover"  src="./img/task/subtask_add_bin.svg" alt="Delete"></div>
-                <div><img src="./img/task/vector-3.svg" alt="Separator"></div>
-                <div><img onclick="replaceSubtask(${index})" class="icon-hover"  src="./img/task/subtask_check.svg" alt="Confirm"></div>
+                <div><img onclick="deleteSubtask(${index})" class="icon-hover"  src="./assets/img/task/subtask_add_bin.svg" alt="Delete"></div>
+                <div><img src="./assets/img/task/vector-3.svg" alt="Separator"></div>
+                <div><img onclick="replaceSubtask(${index})" class="icon-hover"  src="./assets/img/task/subtask_check.svg" alt="Confirm"></div>
             </div>
         </div>
     `;
@@ -104,9 +104,9 @@ function updateSubtaskDisplayTemplate(i, element) {
             <div onclick="editSubtask(${i})" class="subtask-box">
                 <div>• ${element}</div>
                 <div class="added-subtask-icons">
-                    <div><img onclick="editSubtask(${i})" class="icon-hover"  src="./img/task/subtask_add_pen.svg" alt="Edit"></div>
-                    <div><img src="./img/task/vector-3.svg" alt="Separator"></div>
-                    <div><img onclick="deleteSubtask(${i})" class="icon-hover"  src="./img/task/subtask_add_bin.svg" alt="Delete"></div>
+                    <div><img onclick="editSubtask(${i})" class="icon-hover"  src="./assets/img/task/subtask_add_pen.svg" alt="Edit"></div>
+                    <div><img src="./assets/img/task/vector-3.svg" alt="Separator"></div>
+                    <div><img onclick="deleteSubtask(${i})" class="icon-hover"  src="./assets/img/task/subtask_add_bin.svg" alt="Delete"></div>
                 </div>
             </div>
         </div>

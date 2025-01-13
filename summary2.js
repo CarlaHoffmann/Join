@@ -19,7 +19,7 @@ function updateWithTasks(elements, tasks, earliestDate) {
  */
 function updateWithoutTasks(elements) {
     elements.color.classList.add(getSymbolColor(1));
-    elements.image.src = "./img/summary/prio_high.svg";
+    elements.image.src = "./assets/img/summary/prio_high.svg";
     elements.counter.innerHTML = "0";
     elements.prio.innerHTML = "Urgent";
     elements.date.innerHTML = "No upcoming Deadline";
@@ -46,10 +46,10 @@ function getSymbolColor(prio) {
  */
 function getSymbol(prio) {
     switch(prio) {
-        case "1": return "./img/summary/prio_high.svg";
-        case "2": return "./img/summary/prio_mid.svg";
-        case "3": return "./img/summary/prio_low.svg";
-        default: return "./img/summary/prio_high.svg";
+        case "1": return "./assets/img/summary/prio_high.svg";
+        case "2": return "./assets/img/summary/prio_mid.svg";
+        case "3": return "./assets/img/summary/prio_low.svg";
+        default: return "./assets/img/summary/prio_high.svg";
     }
 }
 
