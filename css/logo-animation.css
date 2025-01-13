@@ -59,7 +59,7 @@
 /* Keyframes für Content-Einblendung */
 @keyframes fadeInContent {
     0% {
-        opacity: 0; 
+        opacity: 5; 
     }
     100% {
         opacity: 1;

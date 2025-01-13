@@ -226,15 +226,11 @@
 
 @media(max-width: 1024px) {
   #headerLogo {
-    width: 64px;
-    height: 78px;
     top: 37px;
     left: 38px;
   }
 
   .imglogo {
-    width: 64px;
-    height: 78px;
     top: 37px;
     left: 38px;
   }
@@ -257,11 +253,6 @@
 }
 
 @media (max-width: 680px) {
-  #headerLogo {
-    width: 20px;
-    display: block; /* Überschreibt "hidden", falls display: none gesetzt ist */
-  }
-
   .arrow_signUp {
     margin: 0;
     position: absolute;
