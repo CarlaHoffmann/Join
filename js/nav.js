@@ -12,6 +12,26 @@ function toggleHelpMenu() {
     helpMenu.classList.toggle('d-none');
 }
 
+
+
+function initializeNavigation() {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupNavigation);
+    } else {
+        setupNavigation();
+    }
+}
+
+function setupNavigation() {
+    // Warten auf w3.includeHTML()
+    if (typeof w3 !== 'undefined' && typeof w3.includeHTML === 'function') {
+        w3.includeHTML(activeLink);
+    } else {
+        console.error('w3.includeHTML is not available');
+        activeLink();
+    }
+}
+
 /**
  * Highlights the active link in the sidebar and mobile navigation.
  * A link is considered active if its path is contained within the current URL path.
@@ -35,7 +55,36 @@ function activeLink() {
             link.classList.remove('active-link'); // Remove the active link class from other links
         }
     });
+
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === 'childList') {
+                updateActiveLinks();
+            }
+        });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
 }
+
+
+function updateActiveLinks() {
+    // Der Inhalt Ihrer bestehenden activeLink-Funktion
+    const currentPath = window.location.pathname.replace(/^\/|\/$/g, '').replace(/\.html$/, '');
+    const links = document.querySelectorAll('#sidebar a, #mobileNav a');
+
+    links.forEach(link => {
+        const linkPath = link.getAttribute('href').replace(/\.html$/, '');
+        if (currentPath === linkPath) {
+            link.classList.add('active-link');
+        } else {
+            link.classList.remove('active-link');
+        }
+    });
+}
+
+
+initializeNavigation();
 
 /**
  * Fetches the user's initials and handles the display or redirection based on login status.
@@ -144,9 +193,9 @@ async function logOut() {
 }
 
 /** Initialize active link for navigation highlighting on page load */
-window.onload = function() {
-    requestAnimationFrame(activeLink);
-};
+// window.onload = function() {
+//     requestAnimationFrame(activeLink);
+// };
 
 /** Fetch initials when DOM content is fully loaded */
 document.addEventListener('DOMContentLoaded', () => {
