@@ -165,8 +165,9 @@ async function closeTaskOverlay() {
 }
 
 
-
-
+/**
+ * Closes the edit overlay.
+ */
 function closeEditOverlay() {
     const overlayContainer = document.getElementById('taskOverlayContainer');
     overlayContainer.classList.add('d-none');
