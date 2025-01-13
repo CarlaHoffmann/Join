@@ -20,10 +20,17 @@ function animationWindow() {
     const animatedLogo = document.getElementById('animatedLogo');
     const headerLogo = document.getElementById('headerLogo');
 
+    // Debugging: Zeige Status der Elemente
+    console.log({ overlay, animatedLogo, headerLogo });
+
+    if (!overlay || !animatedLogo || !headerLogo) {
+        console.error('Required DOM elements are missing.');
+        return;
+    }
     const isMobile = window.innerWidth <= 768;
 
     if (isMobile) {
-        animatedLogo.src = './assets/img/general/logo.svg'; 
+        animatedLogo.src = './assets/img/general/logo.svg';
 
         animatedLogo.addEventListener('animationend', () => {
             animatedLogo.src = './assets/img/login/login-logo.svg';
@@ -32,7 +39,6 @@ function animationWindow() {
             overlay.style.display = 'none';
         });
     } else {
-        // Desktop View: Standard logo animation
         animatedLogo.addEventListener('animationend', () => {
             overlay.style.display = 'none';
             headerLogo.src = animatedLogo.src;

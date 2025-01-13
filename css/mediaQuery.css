@@ -203,13 +203,6 @@
   .join-logo {
     background-color: #2A3647;
   }
-
-  .img-animaschen {
-    height: 121.97px;
-    width: 100.03px;
-    background: url(../assets/img/logIn_SignUp/Capa2.svg);
-    background-repeat: no-repeat;
-  }
 }
 
 @media (max-width: 500px) {
