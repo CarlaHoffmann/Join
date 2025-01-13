@@ -5,12 +5,16 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #F0F0F0; /* Standard für Desktop */
+    background: #F0F0F0;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    opacity: 1; 
+    animation: fadeOutOverlay 1.5s ease-in-out forwards;
 }
+
+
 
 /* Logo-Animation */
 #animatedLogo {
@@ -23,17 +27,17 @@
     object-fit: contain;
     object-position: center;
     z-index: 1000;
-    animation: logoAnimation 1.5s ease-in-out 0.8s forwards;
+    animation: logoAnimation 1.5s ease-in-out 0.5s forwards;
 }
 
 /* Header-Logo Styling */
 #headerLogo {
-    display: none;
     position: absolute;
     top: 50px;
     left: 50px;
     width: 100px;
     height: 120px;
+    animation: headerLogoFadeIn 1.5s forwards; 
 }
 
 /* Keyframes für die Logo-Bewegung */
@@ -46,40 +50,42 @@
         height: 50vh;
     }
 
-    20% {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(1);
-    }
-
     100% {
-        position: absolute;
         top: 50px;
         left: 50px;
         transform: translate(0, 0) scale(1);
         width: 100px;
-        height: 121px;
+        height: 120px;
+    }
+}
+
+/* Keyframes für Content-Einblendung */
+@keyframes fadeInContent {
+    0% {
+        opacity: 0; 
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+/* Keyframes für Header-Logo-Einblendung */
+@keyframes headerLogoFadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }
 
 @media screen and (max-width: 768px) {
     #overlay {
-        background: #2A3647; /* Hintergrundfarbe für mobile Geräte */
+        background: #2A3647;
     }
 
     #animatedLogo {
-        content: url('assets/img/general/logo.svg'); /* Initiales Logo in der mobilen Ansicht */
+        content: url('assets/img/general/logo.svg');
     }
 }
-
-/* Overlay-Ausblendung */
-@keyframes fadeOut {
-    from {
-        opacity: 2; /* Voll sichtbar */
-    }
-    to {
-        opacity: 1; /* Komplett transparent */
-    }
-}
-
