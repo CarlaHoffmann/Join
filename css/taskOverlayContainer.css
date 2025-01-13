@@ -51,6 +51,7 @@ body {
     margin: 5px 0;
     cursor: pointer;
     padding-left: 8px;
+    max-width: fit-content;
 }
 
 .check:hover {
