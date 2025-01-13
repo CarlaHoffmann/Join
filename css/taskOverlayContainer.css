@@ -57,12 +57,12 @@ body {
 .check:hover {
     background-color: #f0f0f0; 
     border-radius: 4px;
-  }
+}
 
-  .check div {
-    padding: 2px 4px; /* Optional: etwas Padding für bessere Optik */
-    transition: background-color 0.3s ease; /* Sanfter Übergang */
-  }
+.check div {
+    padding: 2px 4px;
+    transition: background-color 0.3s ease;
+}
 
 .subtask-checkbox-icon {
     cursor: pointer;
@@ -71,20 +71,11 @@ body {
     margin: 4px;
 }
 
-/* OVERLAY
-.task-overlay-content{
-    display:flex;
-    flex-direction: column;
-    gap:21px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: 730px;
-    padding-right: 8px;
-}
-*/
+/* OVERLAY*/
 .task-head {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .close-button-box {
     width: 32px;
@@ -94,15 +85,15 @@ body {
     justify-content: center;
     align-items: center;
 }
- .close-button {
+
+.close-button {
     width: 20px;
     height: 20px;
- }
- .close-button-box:hover {
-    background-color: #D1D1D1;
- }
+}
 
- 
+.close-button-box:hover {
+    background-color: #D1D1D1;
+}
 
 .taskOverlay {
     width: 525px;
@@ -116,14 +107,11 @@ body {
     background-color: white;
 }
 
-
-
 /* Scrollbalkens */
 ::-webkit-scrollbar {
     /* width: 5px; */
     width: 0px;
 }
-
 
 ::-webkit-scrollbar-thumb {
     background: #f1f1f1;
@@ -136,7 +124,6 @@ body {
     align-items: center;
 }
 
-
 .taskContainer {
     border-radius: 8px;
     box-sizing: border-box;
@@ -145,7 +132,6 @@ body {
     font-size: 23px;
     background-color: #1FD7C1;
 }
-
 
 .headline {
     font-size: 61px;
@@ -192,7 +178,6 @@ body {
     font-size: 19px;
 }
 
-
 .priority-container {
     display: flex;
     align-items: center;
@@ -203,7 +188,6 @@ body {
     width: 20px; 
     height: 20px;
 }
-
 
 .assigned {
     display: flex;
@@ -248,7 +232,6 @@ body {
     font-size: 19px;
 }
 
-
 /* BUTTON */
 .deleteEditBtnContainer {
     display: flex;
@@ -256,8 +239,6 @@ body {
     gap: 10px;
     padding-right: 16px;
 }
-
-
 
 .assigned-contact {
     display: flex;
@@ -276,10 +257,6 @@ body {
     color: white;
     margin-right: 8px; /* Abstand zwischen Initialen und Namen */
 }
-
-
-
-/*
 
 /* Container für Delete- und Edit-Icons */
 .deleteEditBtnContainer {
@@ -329,7 +306,6 @@ body {
     color: #29ABE2; 
 }
 
-
 /* Vertikale Trennlinie */
 .vertical-line {
     width: 1px;
@@ -337,13 +313,6 @@ body {
     background-color: #d3d3d3; /* Hellgrau */
     margin: 0 10px; /* Abstand zu den Buttons */
 }
-
-
-/*
-.contact-name {
-    font-size: 16px;
-}
-*/
 
 /* Media Queries */
 @media (max-width: 600px) {
@@ -362,17 +331,3 @@ body {
         line-height: 1.2;
     }
 }
-
-/*
-@media (max-width: 1025px) {
-    .taskOverlay{
-        height: 750px;
-    }
-}
-
-@media (max-width: 525px) {
-    .taskOverlay{
-        height: 600px;
-    }
-}
-*/
