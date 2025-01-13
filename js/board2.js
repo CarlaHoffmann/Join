@@ -166,12 +166,23 @@ async function closeTaskOverlay() {
 
 
 /**
- * Closes the edit overlay.
+ * Closes the edit overlay for a task.
+ * 
+ * This function performs the following actions:
+ * 1. Retrieves the task overlay container element.
+ * 2. Adds the 'd-none' class to hide the overlay.
+ * 3. Clears the inner HTML of the overlay container.
+ * 4. Resets the currentSubtasks array to an empty array.
+ * 
+ * @function
+ * @name closeEditOverlay
+ * @returns {void}
  */
 function closeEditOverlay() {
     const overlayContainer = document.getElementById('taskOverlayContainer');
     overlayContainer.classList.add('d-none');
     overlayContainer.innerHTML = '';
+    currentSubtasks = [];
 }
 
 
