@@ -1,5 +1,3 @@
-// config.js
-
 /**
  * Firebase Base URL for accessing the Realtime Database.
  * This URL is used to interact with the Firebase Realtime Database
