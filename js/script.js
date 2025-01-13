@@ -4,32 +4,10 @@
  * @function addTask
  * @returns {void}
  */
-function addTask() {
-    let container = document.getElementById('task-overlay'); 
-    container.innerHTML = addTaskHTML();
-}
-
-
-/**
- * Sets a query parameter (`containsLinks`) on all links in the document based on the presence of `.links` in `.top_side_menu`.
- * 
- * @function setPreviousPageParams
- * @returns {void}
- */
-let userMail;
-function setPreviousPageParams() {
-    let containsLinks = document.querySelector('.top_side_menu')?.contains(document.querySelector('.links')) || false;
-    let links = document.querySelectorAll('a');
-
-    links.forEach(link => {
-        try {
-            let url = new URL(link.href);
-            url.searchParams.set('containsLinks', containsLinks);
-            link.href = url.toString();
-        } catch (error) {
-        }
-    });
-}
+// function addTask() {
+//     let container = document.getElementById('task-overlay'); 
+//     container.innerHTML = addTaskHTML();
+// }
 
 
 /**
@@ -39,10 +17,12 @@ function setPreviousPageParams() {
  * @param {string} param - The name of the query parameter to retrieve.
  * @returns {string|null} The value of the query parameter, or `null` if it is not present.
  */
-function getQueryParam(param) {
-    let urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
-}
+// function getQueryParam(param) {
+//     let urlParams = new URLSearchParams(window.location.search);
+//     return urlParams.get(param);
+// }
+
+
 
 
 /**
@@ -70,10 +50,9 @@ async function includeHTML() {
             element.innerHTML = 'Page not found';
         }
     }
-    loadTemplateFunctions();
-    setPreviousPageParams();
+    // loadTemplateFunctions();
+    // setPreviousPageParams();
 }
-
 
 /**
  * Loads and executes template-specific functions based on the current page.
@@ -85,16 +64,40 @@ async function includeHTML() {
  * @function loadTemplateFunctions
  * @returns {void}
  */
-function loadTemplateFunctions() {
-    changeClassToActive();
-    checkUser();
-    loadUser();
-    if (window.location.pathname == '/privacyPolicy.html' || window.location.pathname == '/legalNotice.html' || window.location.pathname == '/Join/legalNotice.html' || window.location.pathname == '/Join/privacyPolicy.html') {
-        if (!isUserLoggedIn()) {
-        removeElements();
-        }
-    }
-}
+// function loadTemplateFunctions() {
+//     changeClassToActive();
+//     checkUser();
+//     loadUser();
+//     if (window.location.pathname == '/privacyPolicy.html' || window.location.pathname == '/legalNotice.html' || window.location.pathname == '/Join/legalNotice.html' || window.location.pathname == '/Join/privacyPolicy.html') {
+//         if (!isUserLoggedIn()) {
+//         removeElements();
+//         }
+//     }
+// }
+
+/**
+ * Sets a query parameter (`containsLinks`) on all links in the document based on the presence of `.links` in `.top_side_menu`.
+ * 
+ * @function setPreviousPageParams
+ * @returns {void}
+ */
+// let userMail;
+// function setPreviousPageParams() {
+//     let containsLinks = document.querySelector('.top_side_menu')?.contains(document.querySelector('.links')) || false;
+//     let links = document.querySelectorAll('a');
+
+//     links.forEach(link => {
+//         try {
+//             let url = new URL(link.href);
+//             url.searchParams.set('containsLinks', containsLinks);
+//             link.href = url.toString();
+//         } catch (error) {
+//         }
+//     });
+// }
+
+
+
 
 
 /**
@@ -103,9 +106,9 @@ function loadTemplateFunctions() {
  * @function isUserLoggedIn
  * @returns {boolean} `true` if `userMail` exists in local storage, otherwise `false`.
  */
-function isUserLoggedIn() {
-    return localStorage.getItem('userMail') !== null;
-}
+// function isUserLoggedIn() {
+//     return localStorage.getItem('userMail') !== null;
+// }
 
 
 /**
@@ -114,15 +117,15 @@ function isUserLoggedIn() {
  * @function changeClassToActive
  * @returns {void}
  */
-function changeClassToActive() {
-    let activePage = window.location.pathname;
-    let menuLinks = document.querySelectorAll('.active_link');
-    menuLinks.forEach(link => {
-        if (link.href.includes(`${activePage}`)) {
-            link.classList.add('activeLink');
-        }
-    })
-}
+// function changeClassToActive() {
+//     let activePage = window.location.pathname;
+//     let menuLinks = document.querySelectorAll('.active_link');
+//     menuLinks.forEach(link => {
+//         if (link.href.includes(`${activePage}`)) {
+//             link.classList.add('activeLink');
+//         }
+//     })
+// }
 
 
 /**
@@ -134,18 +137,18 @@ function changeClassToActive() {
  * @function checkUser
  * @returns {void}
  */
-function checkUser() {
-    let userMail = localStorage.getItem('userMail');
-    let previousPage = document.referrer;
-    let currentPage = window.location.pathname;
-    let dependingPages = ['/privacy.html', '/legal_notice.html', '/Join/privacy.html', '/Join/legal_notice.html'];
-    if (dependingPages.includes(currentPage) && (previousPage.includes('/index.html') || previousPage.includes('/signup.html') || dependingPages.some(page => previousPage.includes(page)))) {
-        return;
-    }
-    if (userMail === null ) {
-        window.location.href = './index.html';
-    } 
-}
+// function checkUser() {
+//     let userMail = localStorage.getItem('userMail');
+//     let previousPage = document.referrer;
+//     let currentPage = window.location.pathname;
+//     let dependingPages = ['/privacy.html', '/legal_notice.html', '/Join/privacy.html', '/Join/legal_notice.html'];
+//     if (dependingPages.includes(currentPage) && (previousPage.includes('/index.html') || previousPage.includes('/signup.html') || dependingPages.some(page => previousPage.includes(page)))) {
+//         return;
+//     }
+//     if (userMail === null ) {
+//         window.location.href = './index.html';
+//     } 
+// }
 
 
 /**
@@ -155,9 +158,9 @@ function checkUser() {
  * @param {Event} event - The event object to stop propagation for.
  * @returns {void}
  */
-function doNotClose(event) {
-    event.stopPropagation();
-}
+// function doNotClose(event) {
+//     event.stopPropagation();
+// }
 
 
 /**
@@ -170,9 +173,9 @@ function doNotClose(event) {
  * @param {Element} element - The DOM element to retrieve the `display` style for.
  * @returns {string} The value of the `display` style property.
  */
-function proveElementStyle(element) {
-    return element.currentStyle ? element.currentStyle.display : getComputedStyle(element).display;
-}
+// function proveElementStyle(element) {
+//     return element.currentStyle ? element.currentStyle.display : getComputedStyle(element).display;
+// }
 
 
 /**
@@ -182,11 +185,11 @@ function proveElementStyle(element) {
  * @param {Element} element - The DOM element to measure.
  * @returns {number} The width of the element in pixels.
  */
-function proveElementWidth(element) {
-    let elementWidth = element;
-    let rect = elementWidth.getBoundingClientRect();
-    return rect.width;
-}
+// function proveElementWidth(element) {
+//     let elementWidth = element;
+//     let rect = elementWidth.getBoundingClientRect();
+//     return rect.width;
+// }
 
 
 /**
@@ -200,12 +203,12 @@ function proveElementWidth(element) {
  * @param {number} time - The delay in milliseconds before toggling the `showClassDialog` class.
  * @returns {void}
  */
-function showDialog(classDialogBg, classD_none, classDialog, showClassDialog, time) {
-    document.querySelector(`${classDialogBg}`).classList.toggle(`${classD_none}`);
-    setTimeout(function() {
-        document.querySelector(`${classDialog}`).classList.toggle(`${showClassDialog}`);
-    }, time);
-}
+// function showDialog(classDialogBg, classD_none, classDialog, showClassDialog, time) {
+//     document.querySelector(`${classDialogBg}`).classList.toggle(`${classD_none}`);
+//     setTimeout(function() {
+//         document.querySelector(`${classDialog}`).classList.toggle(`${showClassDialog}`);
+//     }, time);
+// }
 
 
 /**
@@ -223,15 +226,15 @@ function showDialog(classDialogBg, classD_none, classDialog, showClassDialog, ti
  * @param {number} time - The delay in milliseconds before toggling the background visibility.
  * @returns {void}
  */
-function closeDialog(classDialog, showClassDialog, classDialogBg, classD_none, time) {
-    document.querySelector(`${classDialog}`).classList.remove(`${showClassDialog}`);
-    setTimeout(function() {
-        document.querySelector(`${classDialogBg}`).classList.add(`${classD_none}`);
-    }, time);
-    if (window.location.pathname == '/board.html') {
-        clearDialogAddTask();
-    }
-}
+// function closeDialog(classDialog, showClassDialog, classDialogBg, classD_none, time) {
+//     document.querySelector(`${classDialog}`).classList.remove(`${showClassDialog}`);
+//     setTimeout(function() {
+//         document.querySelector(`${classDialogBg}`).classList.add(`${classD_none}`);
+//     }, time);
+//     if (window.location.pathname == '/board.html') {
+//         clearDialogAddTask();
+//     }
+// }
 
 
 /**
@@ -241,9 +244,9 @@ function closeDialog(classDialog, showClassDialog, classDialogBg, classD_none, t
  * @param {string} container - The CSS selector for the element whose `href` will be set.
  * @returns {void}
  */
-function setReferrer(container) {
-    document.querySelector(container).href = document.referrer;
-}
+// function setReferrer(container) {
+//     document.querySelector(container).href = document.referrer;
+// }
 
 
 /**
@@ -256,22 +259,22 @@ function setReferrer(container) {
  * @function removeElements
  * @returns {void}
  */
-function removeElements() {
-    let previousPage = document.referrer;
-    let containsLinks = getQueryParam('containsLinks') === 'true';
+// function removeElements() {
+//     let previousPage = document.referrer;
+//     let containsLinks = getQueryParam('containsLinks') === 'true';
 
-    if (previousPage.includes('/index.html') || previousPage.includes('/signup.html') || !containsLinks) {
-        ['.links'].forEach(classes => {
-            let element = document.querySelector(classes);
-            if (element) {
-                element.remove();
-            }
-        });
-        document.querySelector('#profileHeader').remove();
-        document.querySelector('#side_menu').remove();
-        document.querySelector('#main_container').style.height = "calc(100vh - 80px)";
-    }
-}
+//     if (previousPage.includes('/index.html') || previousPage.includes('/signup.html') || !containsLinks) {
+//         ['.links'].forEach(classes => {
+//             let element = document.querySelector(classes);
+//             if (element) {
+//                 element.remove();
+//             }
+//         });
+//         document.querySelector('#profileHeader').remove();
+//         document.querySelector('#side_menu').remove();
+//         document.querySelector('#main_container').style.height = "calc(100vh - 80px)";
+//     }
+// }
 
 
 /**
@@ -296,17 +299,17 @@ function loadUser() {
  * - `name` {string}: The user's name.
  * - `letters` {string}: The user's initials.
  */
-async function getUserInfos() {
-        let guestMail = '"guest@mail.com"';
-        let name = 'Guest';
-        let letters = 'G';
-        loadUser();
-        if (userMail !== guestMail && userMail !== null) {
-            contacts = Object.entries(await loadData('contacts'));
-            let formattedUserMail = userMail.replace(/"/g, '');
-            let currentIndex = contacts.findIndex(contact => contact[1].mail === formattedUserMail);
-                name = contacts[currentIndex][1].name;
-                letters = contacts[currentIndex][1].letters;
-        }
-        return { name, letters };
-    }
+// async function getUserInfos() {
+//         let guestMail = '"guest@mail.com"';
+//         let name = 'Guest';
+//         let letters = 'G';
+//         loadUser();
+//         if (userMail !== guestMail && userMail !== null) {
+//             contacts = Object.entries(await loadData('contacts'));
+//             let formattedUserMail = userMail.replace(/"/g, '');
+//             let currentIndex = contacts.findIndex(contact => contact[1].mail === formattedUserMail);
+//                 name = contacts[currentIndex][1].name;
+//                 letters = contacts[currentIndex][1].letters;
+//         }
+//         return { name, letters };
+//     }

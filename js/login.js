@@ -44,9 +44,6 @@ function animationWindow() {
 // Call the animation function when the page is loaded
 document.addEventListener('DOMContentLoaded', animationWindow);
 
-
-
-
 /**
  * Toggles the state of a checkbox by updating its icon and associated data attribute.
  * 
