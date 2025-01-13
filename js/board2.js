@@ -224,17 +224,17 @@ async function updateOverlay(taskId, taskStatus) {
  * @param {string} id - The ID of the task whose subtasks are to be deleted.
  * @returns {Promise<void>} Resolves when the subtasks are successfully deleted.
  */
-async function deleteSubtasks(path, id) {
-    try {
-        const url = `${base_url}/tasks/${path}/${id}/subtasks.json`;
-        const response = await fetch(url, { method: 'DELETE' });
+// async function deleteSubtasks(path, id) {
+//     try {
+//         const url = `${base_url}/tasks/${path}/${id}/subtasks.json`;
+//         const response = await fetch(url, { method: 'DELETE' });
 
-        if (!response.ok) {
-            throw new Error(`HTTP-Error: ${response.status}`);
-        }
-    } catch (error) {
-    }
-}
+//         if (!response.ok) {
+//             throw new Error(`HTTP-Error: ${response.status}`);
+//         }
+//     } catch (error) {
+//     }
+// }
 
 
 /**
@@ -252,7 +252,7 @@ async function deleteTask(taskId) {
             const taskElement = document.getElementById(`task-${taskId}`);
             const parentColumnId = taskElement.parentElement.id.replace("Tasks", "");
 
-            await deleteSubtasks(parentColumnId, taskId);
+            // await deleteSubtasks(parentColumnId, taskId);
 
             const url = `${base_url}/tasks/${parentColumnId}/${taskId}.json`;
             await fetch(url, { method: 'DELETE' });
