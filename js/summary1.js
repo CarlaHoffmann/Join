@@ -19,15 +19,21 @@ async function initSummary() {
  * This asynchronous function displays a greeting overlay and updates the greeting name based on the logged-in user.
  */
 async function getGreetingOverlay() {
-    const greeting = document.getElementsByClassName('greeting')[0];
-    const greetName = document.getElementsByClassName('greet-name')[0];
+    const greetingOverlay = document.getElementsByClassName('greeting')[0];
+    const greetNameOverlay = document.getElementsByClassName('greet-name')[0];
+    const greeting = document.getElementsByClassName('greeting')[1];
+    const greetName = document.getElementsByClassName('greet-name')[1];
     const overlay = document.getElementById('greeting-overlay');
 
     if (isReferrerValid()) {
         try {
             const user = await getLoggedInUser();
-            updateGreeting(greeting, greetName, user);
-            showGreetingOverlay(overlay);
+            if(window.innerWidth <= 1275) {
+                updateGreeting(greetingOverlay, greetNameOverlay, user);
+                showGreetingOverlay(overlay);
+            } else {
+                updateGreeting(greeting, greetName, user);
+            }
         } catch (error) {
             console.error("Fehler beim Abrufen des Benutzers:", error);
         }
