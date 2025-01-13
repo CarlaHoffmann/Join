@@ -110,7 +110,7 @@ async function createContact() {
         name: takeName(),
         mail: takeMail(),
         password: takePassword(),
-        color: getColor()
+        color: returnColor()
     }
     await getLoggedIn();
     await postData(contact);
@@ -167,19 +167,19 @@ function takePassword() {
  * @function getColor
  * @returns {string} The randomly selected color in `rgba` format.
  */
-function getColor() {
-    const rgbaColorArrays = [
-        [255,122,0],
-        [147,39,255],
-        [110, 82, 255],
-        [252, 113, 255],
-        [255, 187, 43],
-        [31,215,193]
-    ];
-    const random = Math.floor(Math.random() * ((rgbaColorArrays.length-1) - 0 + 1)) + 0;
-    const randomColor = 'rgba(' + rgbaColorArrays[random] + ')';
-    return randomColor; 
-}
+// function getColor() {
+//     const rgbaColorArrays = [
+//         [255,122,0],
+//         [147,39,255],
+//         [110, 82, 255],
+//         [252, 113, 255],
+//         [255, 187, 43],
+//         [31,215,193]
+//     ];
+//     const random = Math.floor(Math.random() * ((rgbaColorArrays.length-1) - 0 + 1)) + 0;
+//     const randomColor = 'rgba(' + rgbaColorArrays[random] + ')';
+//     return randomColor; 
+// }
 
 
 /**

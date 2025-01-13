@@ -319,7 +319,7 @@ async function openTaskOverlay(task) {
         <div class="taskSelect">
             <div class="taskContainer" style="background-color: ${getCategoryColor(task.category)}">${task.category}</div>
             <div class="close" onclick="closeTaskOverlay()">
-                <img src="assets/img/add_task/close.svg" alt="Close" />
+                <img src="./assets/img/add_task/close.svg" alt="Close" />
             </div>
         </div>
 

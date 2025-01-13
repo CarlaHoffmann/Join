@@ -158,11 +158,11 @@ function openEditSubtaskTemplate(task) {
     subtaskButtons.innerHTML = `
         <div id="opened-subtask-icons">
             <div class="opened-subtask-icon-box icon-hover" onclick="closeSubtask()">
-                <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_close.svg" alt="">
+                <img class="opened-subtask-img symbol-hover" src="./assets/img/task/subtask_close.svg" alt="">
             </div>
-            <div><img src="./img/task/vector-3.svg" alt="seperator"></div>
+            <div><img src="./assets/img/task/vector-3.svg" alt="seperator"></div>
             <div class="opened-subtask-icon-box icon-hover"  onclick="addEditedSubtask(${JSON.stringify(task).replace(/"/g, '&quot;')})">
-                <img class="opened-subtask-img symbol-hover" src="./img/task/subtask_check.svg" alt="">
+                <img class="opened-subtask-img symbol-hover" src="./assets/img/task/subtask_check.svg" alt="">
             </div>
         </div>
     `;
@@ -233,9 +233,9 @@ function getAddEditedSubtaskTemplate(i, element, checked) {
             <div onclick="editEditedSubtask(${i}, '${element}', ${checked})" class="subtask-box" value="${checked}">
                 <div>• ${element}</div>
                 <div class="added-subtask-icons">
-                    <div><img onclick="editEditedSubtask(${i}, '${element}', ${checked})" class="icon-hover" src="./img/task/subtask_add_pen.svg" alt=""></div>
-                    <div><img src="./img/task/vector-3.svg" alt=""></div>
-                    <div><img onclick="deleteSubtask(${i})" class="icon-hover"  src="./img/task/subtask_add_bin.svg" alt=""></div>
+                    <div><img onclick="editEditedSubtask(${i}, '${element}', ${checked})" class="icon-hover" src="./assets/img/task/subtask_add_pen.svg" alt=""></div>
+                    <div><img src="./assets/img/task/vector-3.svg" alt=""></div>
+                    <div><img onclick="deleteSubtask(${i})" class="icon-hover"  src="./assets/img/task/subtask_add_bin.svg" alt=""></div>
                 </div>
             </div>
         </div>
