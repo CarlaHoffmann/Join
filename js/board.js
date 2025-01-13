@@ -137,7 +137,6 @@ async function displayTasks(taskArray, containerId) {
 }
 
 
-
 /**
  * Retrieves contact colors for each contact in the provided tasks.
  * 
