@@ -15,7 +15,6 @@
 }
 
 
-
 /* Logo-Animation */
 #animatedLogo {
     position: absolute;
@@ -35,8 +34,6 @@
     position: absolute;
     top: 50px;
     left: 50px;
-    width: 100px;
-    height: 120px;
     animation: headerLogoFadeIn 1.5s forwards; 
 }
 
