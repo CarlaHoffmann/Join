@@ -248,8 +248,14 @@
         width: 396px;
         height: calc(100vh - 40px);
     }
+
+    #editContactBoxHeader, #addContactBoxHeader {
+        height: 242px;
+        padding: 30px 24px;
+    }
+
     .input-fields {
-        height: 100px;
+        height: 140px;
         overflow-y: scroll;
     }
 }
