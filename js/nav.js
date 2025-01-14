@@ -99,7 +99,15 @@ function showNav() {
     mobileNav.classList.remove('d-none');
 }
 
-
+/**
+ * Initializes the navigation setup process.
+ * This function checks if the document is still loading and sets up
+ * an event listener for the DOMContentLoaded event if necessary.
+ * If the document is already loaded, it immediately calls setupNavigation.
+ *
+ * @function
+ * @name initializeNavigation
+ */
 function initializeNavigation() {
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', setupNavigation);
@@ -108,6 +116,15 @@ function initializeNavigation() {
     }
 }
 
+/**
+ * Sets up the navigation by including HTML content and activating links.
+ * This function checks for the availability of w3.includeHTML().
+ * If available, it uses w3.includeHTML() to include HTML content and then calls activeLink.
+ * If w3.includeHTML() is not available, it logs an error and directly calls activeLink.
+ *
+ * @function
+ * @name setupNavigation
+ */
 function setupNavigation() {
     // Warten auf w3.includeHTML()
     if (typeof w3 !== 'undefined' && typeof w3.includeHTML === 'function') {
@@ -123,30 +140,36 @@ function setupNavigation() {
  * A link is considered active if its path is contained within the current URL path.
  */
 function activeLink() {
-    updateActiveLinks();
-
-    observer.observe(document.body, { childList: true, subtree: true });
-}
-
-
-function updateActiveLinks() {
-    // Der Inhalt Ihrer bestehenden activeLink-Funktion
+    // Retrieve the current path without file extension
     const currentPath = window.location.pathname.replace(/^\/|\/$/g, '').replace(/\.html$/, '');
+
+    // // Iterate through all links in the sidebar and mobile navigation
     const links = document.querySelectorAll('#sidebar a, #mobileNav a');
 
     links.forEach(link => {
+        // Retrieve the href attribute of the link without file extension
         const linkPath = link.getAttribute('href').replace(/\.html$/, '');
+
+        // Check if the current path exactly matches the link's path
         if (currentPath.includes(linkPath)) {
-            link.classList.add('active-link');
+            link.classList.add('active-link'); // Add the active link class
         } else {
-            link.classList.remove('active-link');
+            link.classList.remove('active-link'); // Remove the active link class from other links
         }
     });
 }
 
-
+/**
+ * Initiates the navigation setup process.
+ * This function call starts the initialization of the navigation system.
+ * It triggers the process of setting up event listeners or immediately
+ * setting up the navigation, depending on the document's ready state.
+ *
+ * @function
+ * @name initializeNavigation
+ * @see initializeNavigation
+ */
 initializeNavigation();
-
 
 /**
  * This asynchronous function logs out the user by clearing their session in Firebase.
@@ -166,11 +189,6 @@ async function logOut() {
     }
     window.location.href = './logIn.html';
 }
-
-/** Initialize active link for navigation highlighting on page load */
-// window.onload = function() {
-//     requestAnimationFrame(activeLink);
-// };
 
 /** Fetch initials when DOM content is fully loaded */
 document.addEventListener('DOMContentLoaded', () => {
