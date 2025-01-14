@@ -1,20 +1,28 @@
-
 :root {
-    --menuButtonDarkblue: #2A3647;
-    --activeClickMenuBlue: #091031;
-    --hoverMenuBlue: #2A3D59;
-    --lightblue: #29ABE2;
+    /* Grundfarben */
+    --white: #ffffff;
+    --black: #000000;
+    --grey: #A8A8A8;
+    --lightgrey: #F0F0F0;
+    --fontGrey: #CDCDCD;
+
+    /* Hintergrundfarben */
     --backgroundblue: #F5F7F8;
     --backgroundgrey: #F5F5F5;
     --backgroundSpacer: #D1D1D1;
     --backgroundHoverArrow: #EEEEEE;
+
+    /* Menüfarben */
+    --menuButtonDarkblue: #2A3647;
+    --activeClickMenuBlue: #091031;
+    --hoverMenuBlue: #2A3D59;
+
+    /* Prioritätsfarben */
     --prioUrgent: #FF3D00;
-    --prioMedium: #ffa800;
+    --prioMedium: #FFA800;
     --prioLow: #7AE229;
-    --white: #ffffff;
-    --black: #000000;
-    --grey: #A8A8A8;
-    --fontGrey: #CDCDCD;
+
+    /* Tag-Farben */
     --tagOrange: #FF7A00;
     --tagPink: #FF5EB3;
     --tagPurple: #6E52FF;
@@ -27,12 +35,13 @@
     --tagYellow: #FFC701;
     --tagBlue: #0038FF;
     --tagGreen: #C3FF2B;
-    --taglightYellow: #FFE62B;
+    --tagLightYellow: #FFE62B;
     --tagRed: #FF4646;
     --tagMediumYellow: #FFBB2B;
+
+    /* Sonstige Farben */
+    --lightblue: #29ABE2;
     --fontColorMail: #007CEE;
     --errorPink: #FF8190;
     --errorRed: #FF001F;
-    --lightgrey: #F0F0F0;
 }
-
