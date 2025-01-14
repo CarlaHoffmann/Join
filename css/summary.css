@@ -298,6 +298,7 @@ body {
     .outer-box {
         display: flex;
         justify-content: center;
+        overflow: hidden;
     }
 
     #summary-page {
