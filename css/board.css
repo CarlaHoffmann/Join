@@ -1,5 +1,3 @@
-
-
 .main_maxWidth {
   max-width: 1300px;
 }
@@ -23,8 +21,6 @@
   height: 20px;
 }
 
-
-
 .overlay-input {
   width: 100%;
   padding: 8px;
@@ -46,7 +42,6 @@
   font-size: 16px;
   margin-bottom: 10px;
 }
-
 
 .placeholder {
   display: none; 
@@ -76,7 +71,6 @@
     z-index: 1000;
 }
 
-
 /* Vollbild-Overlay */
 #board-add-task-overlay {
   width: 100vw;
@@ -90,8 +84,6 @@
   z-index: 1000;
   background-color: rgba(0, 0, 0, 0.3);
 }
-
-
 
 /* Technisches Task-Design */
 .taskOverlay {
@@ -112,10 +104,6 @@
   width: 20px;
   height: 20px;
 }
-
-/* Restliche Stile bleiben unverändert */
-
-
 
 /* Task-Karte wird geneigt */
 .task-card.dragging {
@@ -139,8 +127,6 @@
   margin-bottom: 16px;
 }
 
-
-
 #board-add-task-overlay {
   width: 100vw;
   height: 100vh;
@@ -153,7 +139,6 @@
   z-index: 1000;
   background-color: rgba(0, 0, 0, 0.3);
 }
-
 
 #overlay-content {
   width: 1050px;
@@ -183,7 +168,6 @@
     width: calc(100vw - 32px);
   }
 }
-
 
 /* Board - Dialog add Task */
 .dialog_addTask_bg {
@@ -222,8 +206,6 @@
   display: flex;
   justify-content: space-between;
 }
-
-
 
 .content-board {
   margin: 60px 20px 100px;
@@ -305,7 +287,6 @@
   outline: none;
   box-shadow: none; 
 }
-
 
 .search-container {
   border-right: 1px solid var(--grey);
@@ -392,7 +373,7 @@
   width: 24px;
   height: 24px;
   cursor: pointer;
-  transition: stroke 0.3s ease; /* Sanfter Übergang */
+  transition: stroke 0.3s ease;
 }
 
 .column-icon:hover rect,

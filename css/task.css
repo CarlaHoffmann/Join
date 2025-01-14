@@ -335,16 +335,6 @@ h1 {
         box-sizing: border-box;
     }
 }
-/* 
-@media(max-width: 680px) {
-    .title {
-        width: calc(100vw - 64px) !important;
-    }
-
-    .width-440 {
-        width: calc(100vw - 64px);
-    }
-} */
 
 @media(max-width: 500px) {
     .clear-button, .submit-button {

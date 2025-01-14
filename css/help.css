@@ -22,7 +22,7 @@ body {
 }
 
 .scroll-container::-webkit-scrollbar {
-    display: none; /* Chrome, Safari und Edge */
+    display: none; 
 }
 
 a {
