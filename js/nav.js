@@ -124,32 +124,6 @@ function setupNavigation() {
  */
 function activeLink() {
     updateActiveLinks();
-    // Retrieve the current path without file extension
-    // const currentPath = window.location.pathname.replace(/^\/|\/$/g, '').replace(/\.html$/, '');
-
-    // // Iterate through all links in the sidebar and mobile navigation
-    // const links = document.querySelectorAll('#sidebar a, #mobileNav a');
-    // // const links = document.querySelectorAll('#sidebarNavigation a, #info-sidebar a, #mobileNav a');
-
-    // links.forEach(link => {
-    //     // Retrieve the href attribute of the link without file extension
-    //     const linkPath = link.getAttribute('href').replace(/\.html$/, '');
-
-    //     // Check if the current path exactly matches the link's path
-    //     if (currentPath === linkPath) {
-    //         link.classList.add('active-link'); // Add the active link class
-    //     } else {
-    //         link.classList.remove('active-link'); // Remove the active link class from other links
-    //     }
-    // });
-
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.type === 'childList') {
-                updateActiveLinks();
-            }
-        });
-    });
 
     observer.observe(document.body, { childList: true, subtree: true });
 }
@@ -162,7 +136,7 @@ function updateActiveLinks() {
 
     links.forEach(link => {
         const linkPath = link.getAttribute('href').replace(/\.html$/, '');
-        if (currentPath === linkPath) {
+        if (currentPath.includes(linkPath)) {
             link.classList.add('active-link');
         } else {
             link.classList.remove('active-link');
