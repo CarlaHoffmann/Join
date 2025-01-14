@@ -20,11 +20,7 @@ function animationWindow() {
     const animatedLogo = document.getElementById('animatedLogo');
     const headerLogo = document.getElementById('headerLogo');
 
-    // Debugging: Zeige Status der Elemente
-    console.log({ overlay, animatedLogo, headerLogo });
-
     if (!overlay || !animatedLogo || !headerLogo) {
-        console.error('Required DOM elements are missing.');
         return;
     }
     const isMobile = window.innerWidth <= 768;

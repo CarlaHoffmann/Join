@@ -95,13 +95,13 @@ a {
   align-items: center;
 }
 
-.display-fcc {
+.form-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.display-fccc {
+.flex-column-center {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -196,7 +196,7 @@ a {
   gap: 32px;
 }
 
-.frame153 {
+.form-wrapper {
   padding: 48px 88px;
   gap: 32px;
   border-radius: 30px;
@@ -204,7 +204,7 @@ a {
   height: auto;
 }
 
-.frame153-signup {
+.form-wrapper-signup {
   padding: 48px 88px;
   gap: 32px;
   border-radius: 30px;
