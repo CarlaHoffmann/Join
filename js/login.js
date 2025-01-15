@@ -120,78 +120,77 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-
-    function handleValidation({ emailValue, passwordValue, confirmPasswordValue, isSignUp }) {
-        let isValid = true;
-
-        // Validate Email
-        if (!validateEmail(emailValue)) {
-            displayError(emailContainer, emailError);
-            hideValid(emailContainer);
-            isValid = false;
-        } else {
-            hideError(emailContainer, emailError);
-            displayValid(emailContainer);
-        }
-
-        // Validate Password
-        if (passwordValue.length < 6) {
-            displayError(passwordContainer, passwordError);
-            hideValid(passwordContainer);
-            isValid = false;
-        } else {
-            hideError(passwordContainer, passwordError);
-            displayValid(passwordContainer);
-        }
-
-        // Validate Confirm Password (if sign-up)
-        if (isSignUp && confirmPasswordValue !== passwordValue) {
-            displayError(confirmPasswordContainer, confirmPasswordError);
-            hideValid(confirmPasswordContainer);
-            isValid = false;
-        } else if (isSignUp) {
-            hideError(confirmPasswordContainer, confirmPasswordError);
-            displayValid(confirmPasswordContainer);
-        }
-
-        return isValid;
-    }
-
-    function createErrorMessage(message) {
-        const error = document.createElement("span");
-        error.className = "error-message";
-        error.textContent = message;
-        return error;
-    }
-
-    function attachErrorMessage(container, errorElement) {
-        container.parentNode.insertBefore(errorElement, container.nextSibling);
-    }
-
-    function displayError(container, errorElement) {
-        container.classList.add("input-border");
-        errorElement.style.display = "block";
-    }
-
-    function hideError(container, errorElement) {
-        container.classList.remove("input-border");
-        errorElement.style.display = "none";
-    }
-
-    function displayValid(container) {
-        container.classList.add("valid-input");
-    }
-
-    function hideValid(container) {
-        container.classList.remove("valid-input");
-    }
-
-    function validateEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
 });
 
+function handleValidation({ emailValue, passwordValue, confirmPasswordValue, isSignUp }) {
+    let isValid = true;
+
+    // Validate Email
+    if (!validateEmail(emailValue)) {
+        displayError(emailContainer, emailError);
+        hideValid(emailContainer);
+        isValid = false;
+    } else {
+        hideError(emailContainer, emailError);
+        displayValid(emailContainer);
+    }
+
+    // Validate Password
+    if (passwordValue.length < 6) {
+        displayError(passwordContainer, passwordError);
+        hideValid(passwordContainer);
+        isValid = false;
+    } else {
+        hideError(passwordContainer, passwordError);
+        displayValid(passwordContainer);
+    }
+
+    // Validate Confirm Password (if sign-up)
+    if (isSignUp && confirmPasswordValue !== passwordValue) {
+        displayError(confirmPasswordContainer, confirmPasswordError);
+        hideValid(confirmPasswordContainer);
+        isValid = false;
+    } else if (isSignUp) {
+        hideError(confirmPasswordContainer, confirmPasswordError);
+        displayValid(confirmPasswordContainer);
+    }
+
+    return isValid;
+}
+
+function createErrorMessage(message) {
+    const error = document.createElement("span");
+    error.className = "error-message";
+    error.textContent = message;
+    return error;
+}
+
+function attachErrorMessage(container, errorElement) {
+    container.parentNode.insertBefore(errorElement, container.nextSibling);
+}
+
+function displayError(container, errorElement) {
+    container.classList.add("input-border");
+    errorElement.style.display = "block";
+}
+
+function hideError(container, errorElement) {
+    container.classList.remove("input-border");
+    errorElement.style.display = "none";
+}
+
+function displayValid(container) {
+    container.classList.add("valid-input");
+}
+
+function hideValid(container) {
+    container.classList.remove("valid-input");
+}
+
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
 
 
 /**
