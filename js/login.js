@@ -72,6 +72,118 @@ function toggleCheckbox(element) {
     }
 }
 
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Elements for Login and Sign-Up
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const confirmPasswordInput = document.getElementById("confirmPassword"); // Optional for login
+    const loginButton = document.getElementById("login_button_color");
+    const signUpButton = document.getElementById("signupButton");
+    const emailContainer = document.getElementById("emailContainer");
+    const passwordContainer = document.getElementById("passwordButten");
+    const confirmPasswordContainer = document.getElementById("confirmPasswordButten");
+
+    // Error messages
+    const emailError = createErrorMessage("Check your email. Please try again.");
+    const passwordError = createErrorMessage("Check your password. Please try again.");
+    const confirmPasswordError = createErrorMessage("Check your email and password. Please try again.");
+
+    // Attach error messages
+    attachErrorMessage(emailContainer, emailError);
+    attachErrorMessage(passwordContainer, passwordError);
+    if (confirmPasswordContainer) {
+        attachErrorMessage(confirmPasswordContainer, confirmPasswordError);
+    }
+
+    // Event Listeners for Login and Sign-Up
+    if (loginButton) {
+        loginButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            handleValidation({
+                emailValue: emailInput.value.trim(),
+                passwordValue: passwordInput.value.trim(),
+                confirmPasswordValue: null,
+                isSignUp: false,
+            });
+        });
+    }
+
+    if (signUpButton) {
+        signUpButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            handleValidation({
+                emailValue: emailInput.value.trim(),
+                passwordValue: passwordInput.value.trim(),
+                confirmPasswordValue: confirmPasswordInput?.value.trim(),
+                isSignUp: true,
+            });
+        });
+    }
+
+    function handleValidation({ emailValue, passwordValue, confirmPasswordValue, isSignUp }) {
+        let isValid = true;
+
+        // Validate Email
+        if (!validateEmail(emailValue)) {
+            displayError(emailContainer, emailError);
+            isValid = false;
+        } else {
+            hideError(emailContainer, emailError);
+        }
+
+        // Validate Password
+        if (passwordValue.length < 6) {
+            displayError(passwordContainer, passwordError);
+            isValid = false;
+        } else {
+            hideError(passwordContainer, passwordError);
+        }
+
+        // Validate Confirm Password (if sign-up)
+        if (isSignUp && confirmPasswordValue !== passwordValue) {
+            displayError(confirmPasswordContainer, confirmPasswordError);
+            isValid = false;
+        } else if (isSignUp) {
+            hideError(confirmPasswordContainer, confirmPasswordError);
+        }
+
+        if (isValid) {
+            alert(isSignUp ? "Sign-up successful!" : "Login successful!");
+        }
+    }
+
+    function createErrorMessage(message) {
+        const error = document.createElement("span");
+        error.className = "error-message";
+        error.textContent = message;
+        return error;
+    }
+
+    function attachErrorMessage(container, errorElement) {
+        container.parentNode.insertBefore(errorElement, container.nextSibling);
+    }
+
+    function displayError(container, errorElement) {
+        container.classList.add("input-border");
+        errorElement.style.display = "block";
+    }
+
+    function hideError(container, errorElement) {
+        container.classList.remove("input-border");
+        errorElement.style.display = "none";
+    }
+
+    function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+});
+
+
+
+
+
 /**
  * Handles the login process for an existing user.
  * Loads users, checks credentials, and manages the login flow.

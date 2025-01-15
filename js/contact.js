@@ -249,7 +249,7 @@ async function toggleView(elementId, key=null, edit=false){
         document.getElementById('changedEmail').value = user.mail;
         document.getElementById('changedPhone').value = user.phone;
     }
-};
+}
 
 /**
  * Closes the edit contact overlay by adding the 'hidden' class to the edit contact box element.

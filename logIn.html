@@ -21,7 +21,6 @@
 <body>
 
     <div class="logIn-page">
-        <!-- Overlay mit animiertem Logo -->
         <div id="overlay">
             <img src="./assets/img/login/login-logo.svg" alt="Logo" id="animatedLogo" class="animate">
         </div>
@@ -35,7 +34,6 @@
         </div>
 
         <div class="login-content">
-            <!-- Login Form -->
             <div class="form-container">
                 <div class="form-wrapper flex-column-center">
                     <div class="header_LogIn">
@@ -43,32 +41,29 @@
                         <div class="vector_login"></div>
                     </div>
 
-                    <form onsubmit="existingMailLogIn(); return false;" class="form-gap">
+                    <form class="form-gap">
                         <div>
                             <div class="flex-column-center gap-20">
-                                <!-- Email Input -->
-                                <div id="emailContainer" class="input-container">
-                                    <input id="email" placeholder="Email" type="email" class="input-with-image b-img-email"
-                                        onclick="changeEmail()" required>
-                                    <img src="./assets/img/general/mail.svg" alt="Email Icon">
+                                <div>
+                                    <div id="emailContainer" class="input-container">
+                                        <input id="email" placeholder="Email" type="email" class="input-with-image b-img-email" required>
+                                        <img src="./assets/img/general/mail.svg" alt="Email Icon">
+                                    </div>
+
                                 </div>
 
-                                <!-- Password Input -->
-                                <div id="passwordButten" class="input-container">
-                                    <input id="password" placeholder="Password" type="password" class="input-with-image" onclick="changePassword()" required>
-                                    <img src="./assets/img/login/lock.png" alt="Lock Icon" id="passwordLock" class="password_lock">
-                                    <a role="button" class="password_butten" onclick="togglePasswordVisibility()">
-                                        <img src="./assets/img/login/visibility_off.svg" alt="Visibility Off" id="unlock" class="hidden">
-                                        <img src="./assets/img/login/visibility.svg" alt="Visibility On" id="lock" class="hidden">
-                                    </a>
+                                <div>
+                                    <div id="passwordButten" class="input-container">
+                                        <input id="password" placeholder="Password" type="password" class="input-with-image" required>
+                                        <img src="./assets/img/login/lock.png" alt="Lock Icon" id="passwordLock" class="password_lock">
+                                        <a role="button" class="password_butten" onclick="togglePasswordVisibility()">
+                                            <img src="./assets/img/login/visibility_off.svg" alt="Visibility Off" id="unlock" class="hidden">
+                                            <img src="./assets/img/login/visibility.svg" alt="Visibility On" id="lock" class="hidden">
+                                        </a>
+                                    </div>
+                                    
                                 </div>
 
-                                <!-- Error Messages -->
-                                <span id="loginError" class="password-error hidden">Wrong password Ups! Try again.</span>
-                                <span id="loginErrorPassword" class="password-error hidden">Ups! Your password does not
-                                    exist.</span>
-
-                                <!-- Remember Me -->
                                 <div class="accept_box">
                                     <div class="checkbox-container" onclick="toggleCheckbox(this)">
                                         <img src="./assets/img/general/check_button.svg" alt="Checkbox" class="checkbox-icon">
@@ -78,10 +73,8 @@
                             </div>
                         </div>
 
-                        <!-- Buttons -->
                         <div class="gap logIn-btns">
-                            <button id="login_button_color"
-                                class="button-login-blue button-p text_login_btn mobile_login_btn hover">Log in</button>
+                            <button id="login_button_color" class="button-login-blue button-p text_login_btn mobile_login_btn hover">Log in</button>
                             <div id="guest-login">
                                 <p onclick="guestLogin()" class="button-login-white button-p text_login_btn mobile_login_btn">
                                     Guest Log in</p>
@@ -98,15 +91,14 @@
                 </a>
             </div>
 
-            <!-- Footer -->
             <footer class="login-footer gap gray">
-                <a href="./privacyPolicy.html" id="privacyPolicy" class="pointer-color link_visited">Privacy
-                    policy</a>
-                <a href="./legalNotice.html" id="legalNotice" class="pointer-color link_visited">Legal
-                    notice</a>
+                <a href="./privacyPolicy.html" id="privacyPolicy" class="pointer-color link_visited">Privacy policy</a>
+                <a href="./legalNotice.html" id="legalNotice" class="pointer-color link_visited">Legal notice</a>
             </footer>
         </div>
     </div>
+
+
 </body>
 
 </html>
