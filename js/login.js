@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Error messages
     const emailError = createErrorMessage("Check your email. Please try again.");
     const passwordError = createErrorMessage("Check your password. Please try again.");
-    const confirmPasswordError = createErrorMessage("Your passwords don't match. Please try again.");
+    const confirmPasswordError = createErrorMessage("Check your email and password. Please try again.");
 
     // Attach error messages
     attachErrorMessage(emailContainer, emailError);
@@ -121,14 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    /**
-     * Handles validation for both login and sign-up forms.
-     * @param {Object} params - Object containing validation parameters.
-     * @param {string} params.emailValue - The email value to validate.
-     * @param {string} params.passwordValue - The password value to validate.
-     * @param {string} [params.confirmPasswordValue] - The confirm password value to validate (for sign-up).
-     * @param {boolean} params.isSignUp - Whether the validation is for sign-up.
-     */
     function handleValidation({ emailValue, passwordValue, confirmPasswordValue, isSignUp }) {
         let isValid = true;
 
@@ -161,61 +153,33 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    /**
-     * Creates an error message element to display below input fields.
-     * @param {string} message - The error message to display.
-     * @returns {HTMLElement} - A span element containing the error message.
-     */
     function createErrorMessage(message) {
         const error = document.createElement("span");
         error.className = "error-message";
-        error.style.color = "red";
-        error.style.marginTop = "8px";
-        error.style.fontSize = "14px";
         error.textContent = message;
-        error.style.display = "none";
         return error;
     }
 
-    /**
-     * Attaches an error message element below a specified container.
-     * @param {HTMLElement} container - The input container to attach the error message to.
-     * @param {HTMLElement} errorElement - The error message element to attach.
-     */
     function attachErrorMessage(container, errorElement) {
         container.parentNode.insertBefore(errorElement, container.nextSibling);
     }
 
-    /**
-     * Displays an error message and highlights the input container.
-     * @param {HTMLElement} container - The input container to highlight.
-     * @param {HTMLElement} errorElement - The error message element to display.
-     */
     function displayError(container, errorElement) {
         container.classList.add("input-border");
         errorElement.style.display = "block";
     }
 
-    /**
-     * Hides an error message and removes the highlight from the input container.
-     * @param {HTMLElement} container - The input container to unhighlight.
-     * @param {HTMLElement} errorElement - The error message element to hide.
-     */
     function hideError(container, errorElement) {
         container.classList.remove("input-border");
         errorElement.style.display = "none";
     }
 
-    /**
-     * Validates an email address format using a regular expression.
-     * @param {string} email - The email address to validate.
-     * @returns {boolean} - Returns true if the email is valid, false otherwise.
-     */
     function validateEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     }
 });
+
 
 
 
