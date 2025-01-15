@@ -38,15 +38,8 @@ function clearAddContactFields(){
  * @returns {Promise<void>} A promise that resolves when the contact is successfully added.
  */
 
-document.getElementById('phone').onkeydown = ()=>{
-    let phone = document.getElementById('phone').value;
-    let matchPhonePattern = phonePattern.test(phone);
-    if(!matchPhonePattern){
-
-    }
-}
-
 async function addContact(){
+    let fields = [document.getElementById('name'), document.getElementById('email'), document.getElementById('phone')];
     let name = document.getElementById('name').value;
     let mail = document.getElementById('email').value;
     let phone = document.getElementById('phone').value;
@@ -66,12 +59,21 @@ async function addContact(){
         clearAddContactFields();
         showContactAddedOverlay();
         loadContactData();
+        document.getElementById("wrong-mail-error-message").style.display="none";
+        fields.forEach(element => {
+            console.log(element);
+            element.style.display="none";    
+        });
     } else{
         if(!notEmpty){
-            alert("Leider wurden nicht alle Felder ausgefüllt!");
+            fields.forEach(element => {
+                if(element.value === ""){
+                    document.getElementById(element.id + "-error-message").style.display="flex";
+                }    
+            });
         }
         if(!(emailRegex.test(mail))){
-            alert("Kein gültiges Email-Format!");
+            document.getElementById("email-error-message").style.display="flex";
         }
     }
 }
