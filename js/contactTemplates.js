@@ -127,6 +127,5 @@ function returnContactList(){
                 </div>
             </div>
         `;
-        console.log(lettersArray);
     }
 }
