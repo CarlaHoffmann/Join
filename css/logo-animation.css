@@ -79,6 +79,6 @@
     }
 
     #animatedLogo {
-        content: url('assets/img/general/logo.svg');
+        content: url('./assets/img/general/logo.svg');
     }
 }
