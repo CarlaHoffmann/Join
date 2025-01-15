@@ -37,6 +37,15 @@ function clearAddContactFields(){
  * @function addContact
  * @returns {Promise<void>} A promise that resolves when the contact is successfully added.
  */
+
+document.getElementById('phone').onkeydown = ()=>{
+    let phone = document.getElementById('phone').value;
+    let matchPhonePattern = phonePattern.test(phone);
+    if(!matchPhonePattern){
+
+    }
+}
+
 async function addContact(){
     let name = document.getElementById('name').value;
     let mail = document.getElementById('email').value;
@@ -49,11 +58,22 @@ async function addContact(){
         'name':name,
         'password':'pw',
     }
-    await createNewContact('/users', uploadData);
-    closeAddOverlay();
-    clearAddContactFields();
-    showContactAddedOverlay();
-    loadContactData();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let notEmpty = name!== "" && mail !== "" && phone !== "";
+    if(notEmpty && emailRegex.test(mail)){
+        await createNewContact('/users', uploadData);
+        closeAddOverlay();
+        clearAddContactFields();
+        showContactAddedOverlay();
+        loadContactData();
+    } else{
+        if(!notEmpty){
+            alert("Leider wurden nicht alle Felder ausgefüllt!");
+        }
+        if(!(emailRegex.test(mail))){
+            alert("Kein gültiges Email-Format!");
+        }
+    }
 }
 
 /**

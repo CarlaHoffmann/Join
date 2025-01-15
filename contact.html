@@ -86,18 +86,18 @@
                     onsubmit="event.preventDefault(); addContact()">
                     <div class="input-fields">
                         <div class="input-container">
-                            <input required id="name" placeholder="Name" type="text"
+                            <input id="name" placeholder="Name" type="text"
                                 class="addField input-with-image">
                             <img src="./assets/img/general/person.svg" alt="Person Icon" class="input-icon">
                         </div>
                         <div class="input-container">
-                            <input required id="email" placeholder="Email" type="email"
+                            <input id="email" placeholder="Email" type="text"
                                 class="addField input-with-image">
                             <img src="./assets/img/general/mail.svg" alt="Mail Icon" class="input-icon">
                         </div>
                         <div class="input-container">
                             <input required id="phone" placeholder="Phone" type="text"
-                                class="addField input-with-image">
+                                class="addField input-with-image" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                             <img src="./assets/img/contact/call.svg" alt="Phone Icon" class="input-icon">
                         </div>
                     </div>
