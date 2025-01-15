@@ -19,6 +19,18 @@
   left: 50px;
 }
 
+.input-border {
+  border: 0.5px solid red !important;
+}
+
+.password-error {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  color: red;
+}
+
+
 .signUp-page {
   background: rgb(246, 247, 248);
   width: 100vw;

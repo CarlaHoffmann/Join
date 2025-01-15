@@ -72,6 +72,154 @@ function toggleCheckbox(element) {
     }
 }
 
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Elements for Login and Sign-Up
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const confirmPasswordInput = document.getElementById("confirmPassword"); // Optional for login
+    const loginButton = document.getElementById("login_button_color");
+    const signUpButton = document.getElementById("signupButton");
+    const emailContainer = document.getElementById("emailContainer");
+    const passwordContainer = document.getElementById("passwordButten");
+    const confirmPasswordContainer = document.getElementById("confirmPasswordButten");
+
+    // Error messages
+    const emailError = createErrorMessage("Check your email. Please try again.");
+    const passwordError = createErrorMessage("Check your password. Please try again.");
+    const confirmPasswordError = createErrorMessage("Your passwords don't match. Please try again.");
+
+    // Attach error messages
+    attachErrorMessage(emailContainer, emailError);
+    attachErrorMessage(passwordContainer, passwordError);
+    if (confirmPasswordContainer) {
+        attachErrorMessage(confirmPasswordContainer, confirmPasswordError);
+    }
+
+    // Event Listeners for Login and Sign-Up
+    if (loginButton) {
+        loginButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            handleValidation({
+                emailValue: emailInput.value.trim(),
+                passwordValue: passwordInput.value.trim(),
+                confirmPasswordValue: null,
+                isSignUp: false,
+            });
+        });
+    }
+
+    if (signUpButton) {
+        signUpButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            handleValidation({
+                emailValue: emailInput.value.trim(),
+                passwordValue: passwordInput.value.trim(),
+                confirmPasswordValue: confirmPasswordInput?.value.trim(),
+                isSignUp: true,
+            });
+        });
+    }
+
+    /**
+     * Handles validation for both login and sign-up forms.
+     * @param {Object} params - Object containing validation parameters.
+     * @param {string} params.emailValue - The email value to validate.
+     * @param {string} params.passwordValue - The password value to validate.
+     * @param {string} [params.confirmPasswordValue] - The confirm password value to validate (for sign-up).
+     * @param {boolean} params.isSignUp - Whether the validation is for sign-up.
+     */
+    function handleValidation({ emailValue, passwordValue, confirmPasswordValue, isSignUp }) {
+        let isValid = true;
+
+        // Validate Email
+        if (!validateEmail(emailValue)) {
+            displayError(emailContainer, emailError);
+            isValid = false;
+        } else {
+            hideError(emailContainer, emailError);
+        }
+
+        // Validate Password
+        if (passwordValue.length < 6) {
+            displayError(passwordContainer, passwordError);
+            isValid = false;
+        } else {
+            hideError(passwordContainer, passwordError);
+        }
+
+        // Validate Confirm Password (if sign-up)
+        if (isSignUp && confirmPasswordValue !== passwordValue) {
+            displayError(confirmPasswordContainer, confirmPasswordError);
+            isValid = false;
+        } else if (isSignUp) {
+            hideError(confirmPasswordContainer, confirmPasswordError);
+        }
+
+        if (isValid) {
+            alert(isSignUp ? "Sign-up successful!" : "Login successful!");
+        }
+    }
+
+    /**
+     * Creates an error message element to display below input fields.
+     * @param {string} message - The error message to display.
+     * @returns {HTMLElement} - A span element containing the error message.
+     */
+    function createErrorMessage(message) {
+        const error = document.createElement("span");
+        error.className = "error-message";
+        error.style.color = "red";
+        error.style.marginTop = "8px";
+        error.style.fontSize = "14px";
+        error.textContent = message;
+        error.style.display = "none";
+        return error;
+    }
+
+    /**
+     * Attaches an error message element below a specified container.
+     * @param {HTMLElement} container - The input container to attach the error message to.
+     * @param {HTMLElement} errorElement - The error message element to attach.
+     */
+    function attachErrorMessage(container, errorElement) {
+        container.parentNode.insertBefore(errorElement, container.nextSibling);
+    }
+
+    /**
+     * Displays an error message and highlights the input container.
+     * @param {HTMLElement} container - The input container to highlight.
+     * @param {HTMLElement} errorElement - The error message element to display.
+     */
+    function displayError(container, errorElement) {
+        container.classList.add("input-border");
+        errorElement.style.display = "block";
+    }
+
+    /**
+     * Hides an error message and removes the highlight from the input container.
+     * @param {HTMLElement} container - The input container to unhighlight.
+     * @param {HTMLElement} errorElement - The error message element to hide.
+     */
+    function hideError(container, errorElement) {
+        container.classList.remove("input-border");
+        errorElement.style.display = "none";
+    }
+
+    /**
+     * Validates an email address format using a regular expression.
+     * @param {string} email - The email address to validate.
+     * @returns {boolean} - Returns true if the email is valid, false otherwise.
+     */
+    function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+});
+
+
+
+
 /**
  * Handles the login process for an existing user.
  * Loads users, checks credentials, and manages the login flow.
