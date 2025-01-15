@@ -22,7 +22,7 @@
 /* General Error Styles */
 .error-message {
   color: red;
-  margin-top: 8px;
+  /* margin-top: 8px; */
   font-size: 14px;
   display: none;
 }
