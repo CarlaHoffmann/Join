@@ -104,10 +104,10 @@ function returncontactDetailsMenuTemplate(key) {
  * returnContactList();
  */
 function returnContactList(){
+    let lettersArray = [];
     for (let i = 0; i < usersArray.length; i++) {
         let user = usersArray[i];
         let firstUserLetter = getNameInitials(user.name)[0].toLowerCase();
-        let lettersArray = [];
         let letterExists = lettersArray.includes(firstUserLetter);
         if (!letterExists) {
             lettersArray.push(firstUserLetter);
