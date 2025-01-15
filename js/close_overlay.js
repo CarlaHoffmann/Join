@@ -29,5 +29,8 @@ function closeOverlayOnOutsideClick(event, box, overlay) {
         if(box === 'overlay-content') {
             closeOverlay();
         }
+        if(box === 'taskOverlay') {
+            closeTaskOverlay();
+        }
     }
 }

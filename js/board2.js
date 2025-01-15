@@ -162,6 +162,7 @@ async function closeTaskOverlay() {
     overlayContainer.classList.add('d-none');
     overlayContainer.innerHTML = '';
     await loadTasks();
+    currentSubtasks = [];
 }
 
 
@@ -178,12 +179,12 @@ async function closeTaskOverlay() {
  * @name closeEditOverlay
  * @returns {void}
  */
-function closeEditOverlay() {
-    const overlayContainer = document.getElementById('taskOverlayContainer');
-    overlayContainer.classList.add('d-none');
-    overlayContainer.innerHTML = '';
-    currentSubtasks = [];
-}
+// function closeEditOverlay() {
+//     const overlayContainer = document.getElementById('taskOverlayContainer');
+//     overlayContainer.classList.add('d-none');
+//     overlayContainer.innerHTML = '';
+//     currentSubtasks = [];
+// }
 
 
 /**
