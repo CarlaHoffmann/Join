@@ -34,7 +34,7 @@
 
 /* General Input Styling (optional) */
 .input-container {
-  margin-bottom: 16px;
+  margin-top: 16px;
   display: flex;
   align-items: center;
   border: 1px solid #ccc;
@@ -257,9 +257,6 @@ a {
   gap: 32px;
 }
 
-.gap-20 {
-  gap: 20px;
-}
 
 .form-gap {
   display: flex;
@@ -459,6 +456,7 @@ input:hover,
   display: flex;
   gap: 8px;
   align-items: center;
+  margin-top: 20px;
 }
 
 .accept_box {
