@@ -215,6 +215,9 @@ async function createNewContact(path = "", data={}){
 async function toggleView(elementId, key=null, edit=false){
     editKey = key;
     document.getElementById(elementId).classList.remove('hidden');
+    if(elementId === 'AddContactBoxOverlay') {
+        document.addEventListener('click', closeAddContactOnOutsideClick);
+    }
 
     if(edit){
         const editLink = base_url + "users" + "/" + editKey;
@@ -227,7 +230,7 @@ async function toggleView(elementId, key=null, edit=false){
         document.getElementById('changedEmail').value = user.mail;
         document.getElementById('changedPhone').value = user.phone;
     }
-};
+}
 
 /**
  * Closes the edit contact overlay by adding the 'hidden' class to the edit contact box element.
@@ -241,6 +244,7 @@ function closeEditOverlay(){
  */
 function closeAddOverlay(){
     document.getElementById('addContactBoxOverlay').classList.add('hidden');
+    document.removeEventListener('click', closeAddContactOnOutsideClick);
 }
 
 /**
