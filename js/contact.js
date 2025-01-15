@@ -235,9 +235,6 @@ async function createNewContact(path = "", data={}){
 async function toggleView(elementId, key=null, edit=false){
     editKey = key;
     document.getElementById(elementId).classList.remove('hidden');
-    if(elementId === 'AddContactBoxOverlay') {
-        document.addEventListener('click', closeAddContactOnOutsideClick);
-    }
 
     if(edit){
         const editLink = base_url + "users" + "/" + editKey;
@@ -264,7 +261,6 @@ function closeEditOverlay(){
  */
 function closeAddOverlay(){
     document.getElementById('addContactBoxOverlay').classList.add('hidden');
-    document.removeEventListener('click', closeAddContactOnOutsideClick);
 }
 
 /**
