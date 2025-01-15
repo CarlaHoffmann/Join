@@ -466,3 +466,10 @@ hr {
 .option-item:hover img {
     filter: brightness(0) invert(1);
 }
+.error-message{
+    display:none;
+    color: red;
+    top: 52px;
+    left: 0;
+    font-size: 12px;
+}

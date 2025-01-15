@@ -91,16 +91,19 @@
                                 class="addField input-with-image">
                             <img src="./assets/img/general/person.svg" alt="Person Icon" class="input-icon">
                         </div>
+                        <span id="name-error-message" class="error-message">Bitte fülle das Feld aus.</span>
                         <div class="input-container">
                             <input id="email" placeholder="Email" type="text"
                                 class="addField input-with-image">
                             <img src="./assets/img/general/mail.svg" alt="Mail Icon" class="input-icon">
                         </div>
+                        <span id="email-error-message" class="error-message">Bitte fülle das Feld aus.</span>
                         <div class="input-container">
-                            <input required id="phone" placeholder="Phone" type="text"
+                            <input id="phone" placeholder="Phone" type="text"
                                 class="addField input-with-image" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                             <img src="./assets/img/contact/call.svg" alt="Phone Icon" class="input-icon">
                         </div>
+                        <span id="phone-error-message" class="error-message">Bitte fülle das Feld aus.</span>
                     </div>
                     <div class="add-form-buttons">
                         <button type="reset" class="clear-button form-button hover-button">
