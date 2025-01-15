@@ -72,7 +72,7 @@ function toggleCheckbox(element) {
     }
 }
 
-
+// new
 document.addEventListener("DOMContentLoaded", () => {
     // Elements for Login and Sign-Up
     const emailInput = document.getElementById("email");
@@ -146,10 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
             isValid = false;
         } else if (isSignUp) {
             hideError(confirmPasswordContainer, confirmPasswordError);
-        }
-
-        if (isValid) {
-            alert(isSignUp ? "Sign-up successful!" : "Login successful!");
         }
     }
 

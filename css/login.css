@@ -19,43 +19,21 @@
   left: 50px;
 }
 
+
+.form-group, .signUp-formfields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+ 
 /* General Error Styles */
 .error-message {
   color: red;
-  /* margin-top: 8px; */
   font-size: 14px;
   display: none;
+  margin-top: -10px
 }
 
-/* Input Field with Error */
-.input-border {
-  border: 2px solid red;
-}
-
-/* General Input Styling (optional) */
-.input-container {
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 8px;
-  background-color: #fff;
-}
-
-.input-container input {
-  border: none;
-  outline: none;
-  flex: 1;
-  font-size: 16px;
-  padding: 8px;
-}
-
-.input-container img {
-  width: 20px;
-  height: 20px;
-  margin-left: 8px;
-}
 
 /* Button Styles */
 button {
@@ -90,7 +68,6 @@ button:hover {
   margin-top: 16px;
 }
 
-
 .signUp-page {
   background: rgb(246, 247, 248);
   width: 100vw;
@@ -102,13 +79,7 @@ button:hover {
   overflow: hidden;
 }
 
-.signUp-formfields {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-}
-  
+
 a {
   text-decoration: none;
   color: var(--grey);
@@ -384,10 +355,12 @@ a {
   display: flex;
   align-items: center;
   border: 1px solid var(--backgroundSpacer);
-  padding: 12px 21px;
   border-radius: 10px;
   background-color: var(--white);
-  width: 422px;
+  width: 482px;
+  height: 48px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
   
 .input-container_border {
