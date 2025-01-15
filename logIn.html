@@ -15,7 +15,7 @@
 
     <script defer src="./js/login.js"></script>
     <!-- <script defer src="./js/script.js"></script> -->
-    
+
 </head>
 
 <body>
@@ -44,28 +44,34 @@
                     <form class="form-gap">
                         <div>
                             <div class="flex-column-center gap-20">
- 
+
 
                                 <div class="form-group">
                                     <div id="emailContainer" class="input-container">
-                                        <input id="email" placeholder="Email" type="email" class="input-with-image b-img-email" required>
+                                        <input id="email" placeholder="Email" type="email"
+                                            class="input-with-image b-img-email" required>
                                         <img src="./assets/img/general/mail.svg" alt="Email Icon">
                                     </div>
-                                
+
                                     <div id="passwordButten" class="input-container">
-                                        <input id="password" placeholder="Password" type="password" class="input-with-image" required>
-                                        <img src="./assets/img/login/lock.png" alt="Lock Icon" id="passwordLock" class="password_lock">
-                                        <a role="button" class="password_butten" onclick="togglePasswordVisibility()">
-                                            <img src="./assets/img/login/visibility_off.svg" alt="Visibility Off" id="unlock" class="hidden">
-                                            <img src="./assets/img/login/visibility.svg" alt="Visibility On" id="lock" class="hidden">
+                                        <input id="password" placeholder="Password" type="password"
+                                            class="input-with-image" required>
+                                        <img src="./assets/img/login/lock.png" alt="Lock Icon" id="passwordLock"
+                                            class="password_lock">
+                      
+                                        <a class="password_butten" onclick="togglePasswordVisibility()">
+                                            <img src="./assets/img/login/visibility_off.svg" alt="Visibility Off" id="unlock" class="password_show">
+                                            <img src="./assets/img/login/visibility.svg" alt="Visibility On" id="lock" class="hidden password_hide">
                                         </a>
+                                        
                                     </div>
                                 </div>
 
 
                                 <div class="accept_box">
                                     <div class="checkbox-container" onclick="toggleCheckbox(this)">
-                                        <img src="./assets/img/general/check_button.svg" alt="Checkbox" class="checkbox-icon">
+                                        <img src="./assets/img/general/check_button.svg" alt="Checkbox"
+                                            class="checkbox-icon">
                                     </div>
                                     <span class="gray">Remember me</span>
                                 </div>
@@ -73,13 +79,16 @@
                         </div>
 
                         <div class="gap logIn-btns">
-                            <button id="login_button_color" class="button-login-blue button-p text_login_btn mobile_login_btn hover">Log in</button>
+                            <button id="login_button_color"
+                                class="button-login-blue button-p text_login_btn mobile_login_btn hover">Log in</button>
                             <div id="guest-login">
-                                <p onclick="guestLogin()" class="button-login-white button-p text_login_btn mobile_login_btn">
+                                <p onclick="guestLogin()"
+                                    class="button-login-white button-p text_login_btn mobile_login_btn">
                                     Guest Log in</p>
                             </div>
                         </div>
                     </form>
+                    
                 </div>
             </div>
 

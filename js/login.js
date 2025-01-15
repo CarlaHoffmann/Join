@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Error messages
     const emailError = createErrorMessage("Check your email. Please try again.");
     const passwordError = createErrorMessage("Check your password. Please try again.");
-    const confirmPasswordError = createErrorMessage("Check your email and password. Please try again.");
+    const confirmPasswordError = createErrorMessage("Passwords do not match. Please try again.");
 
     // Attach error messages
     attachErrorMessage(emailContainer, emailError);
@@ -127,26 +127,34 @@ document.addEventListener("DOMContentLoaded", () => {
         // Validate Email
         if (!validateEmail(emailValue)) {
             displayError(emailContainer, emailError);
+            hideValid(emailContainer);
             isValid = false;
         } else {
             hideError(emailContainer, emailError);
+            displayValid(emailContainer);
         }
 
         // Validate Password
         if (passwordValue.length < 6) {
             displayError(passwordContainer, passwordError);
+            hideValid(passwordContainer);
             isValid = false;
         } else {
             hideError(passwordContainer, passwordError);
+            displayValid(passwordContainer);
         }
 
         // Validate Confirm Password (if sign-up)
         if (isSignUp && confirmPasswordValue !== passwordValue) {
             displayError(confirmPasswordContainer, confirmPasswordError);
+            hideValid(confirmPasswordContainer);
             isValid = false;
         } else if (isSignUp) {
             hideError(confirmPasswordContainer, confirmPasswordError);
+            displayValid(confirmPasswordContainer);
         }
+
+        return isValid;
     }
 
     function createErrorMessage(message) {
@@ -170,13 +178,19 @@ document.addEventListener("DOMContentLoaded", () => {
         errorElement.style.display = "none";
     }
 
+    function displayValid(container) {
+        container.classList.add("valid-input");
+    }
+
+    function hideValid(container) {
+        container.classList.remove("valid-input");
+    }
+
     function validateEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     }
 });
-
-
 
 
 
@@ -359,14 +373,18 @@ function changeEmail() {
  * This function toggles the visibility of the password input field between text and password types.
  */
 function togglePasswordVisibility() {
-    var x = document.getElementById("password");
-    if (x.type === "password") {
-      x.type = "text";
-      document.getElementById('lock').classList.remove('hidden');
-      document.getElementById('unlock').classList.add('hidden');
+    const passwordField = document.getElementById("password");
+    const visibilityOn = document.getElementById("lock");
+    const visibilityOff = document.getElementById("unlock");
+
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        visibilityOn.classList.remove("hidden");
+        visibilityOff.classList.add("hidden");
     } else {
-      x.type = "password";
-      document.getElementById('lock').classList.add('hidden');
-      document.getElementById('unlock').classList.remove('hidden');
+        passwordField.type = "password";
+        visibilityOn.classList.add("hidden");
+        visibilityOff.classList.remove("hidden");
     }
 }
+

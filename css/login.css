@@ -228,6 +228,9 @@ a {
   gap: 32px;
 }
 
+.hidden {
+  display: none;
+}
 
 .form-gap {
   display: flex;
@@ -388,6 +391,11 @@ input {
 .input-container:hover {
   border: 1px solid var(--lightblue);
 }
+
+.valid-input {
+  border-color: var(--lightblue) !important;
+}
+
   
 .password_lock,
 .password_show,
@@ -451,6 +459,8 @@ input:hover,
   width: 100%;
   height: 100%;
 }
+
+
   
 .password-error {
   flex: 1;
