@@ -26,5 +26,8 @@ function closeOverlayOnOutsideClick(event, box, overlay) {
         if(box === 'editContactBox') {
             closeEditOverlay();
         }
+        if(box === 'overlay-content') {
+            closeOverlay();
+        }
     }
 }

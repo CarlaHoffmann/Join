@@ -22,7 +22,7 @@ function addTask() {
     } else {
         let overlay = document.getElementById('task-overlay');
         overlay.innerHTML = `
-            <div id="board-add-task-overlay">
+            <div onclick="closeOverlayOnOutsideClick(event, 'overlay-content', 'board-add-task-overlay')" id="board-add-task-overlay">
                 
                 <div id="overlay-content">
                     <div class="form-box">
