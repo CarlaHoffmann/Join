@@ -1,9 +1,14 @@
-function closeAddContactOnOutsideClick(event) {
+function closeOverlayOnOutsideClick(event, box, overlay) {
     event.stopPropagation();
-    let addContactBox = document.getElementById('addContactBox');
-    let addContactBoxOverlay = document.getElementById('addContactBoxOverlay');
+    let ContactBox = document.getElementById(box);
+    let BoxOverlay = document.getElementById(overlay);
     
-    if (addContactBoxOverlay.contains(event.target) && !addContactBox.contains(event.target)) {
-        closeAddOverlay();
+    if (BoxOverlay.contains(event.target) && !ContactBox.contains(event.target)) {
+        if(box === 'addContactBox') {
+            closeAddOverlay();
+        }
+        if(box === 'editContactBox') {
+            closeEditOverlay();
+        }
     }
 }
