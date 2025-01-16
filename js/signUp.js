@@ -10,30 +10,41 @@ const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedataba
 
 async function handleSignUpClick(event) {
     event.preventDefault(); // Verhindert das Standard-Submit-Event
-
-    if (validateSignUp()) {
+    const users = await loadUsers();
+    if (validateSignUp(users)) {
         await createContact();
         console.log('User is valid. Submitting...');
     }
 }
 
-async function validateSignUp() {
-    let isValid = true;
-    isValid = await checkExistingMail() && isValid;
-    isValid = checkSignUpPassword() && isValid;
-    return isValid;
+// function validateSignUp(users) {
+//     let isValid = true;
+//     isValid = checkExistingMail(users) && isValid;
+//     isValid = checkSignUpPassword() && isValid;
+//     return isValid;
+// }
+async function validateSignUp(users) {
+    // Zuerst E-Mail überprüfen
+    
+    const isEmailValid = checkExistingMail(users);
+    if (!isEmailValid) {
+        return false; // Wenn E-Mail ungültig ist, hier abbrechen
+    }
+    
+    // Nur wenn E-Mail gültig ist, Passwort überprüfen
+    return checkSignUpPassword();
 }
 
-async function checkExistingMail() {
+function checkExistingMail(users) {
     let mailError = document.getElementById('mail-error');
     try {
-        const users = await loadUsers();
-        const mailIsValid = validateEmail();
+        // const users = await loadUsers();
+        const mailIsValid = validateSignUpEmail();
         
         if (mailIsValid) {
             const user = findUserByEmail(users); // Pass email to the function
             if (user) {
-                mailError.innerHTML = "This email is already registered. Please use a different email.";
+                mailError.innerHTML = "Check your email and password. Please try again.";
                 return false;
             } else {
                 mailError.innerHTML = ""; // Clear error message if email is valid and not registered
@@ -44,6 +55,22 @@ async function checkExistingMail() {
             return false;
         }
     } catch (error) {
+        return false;
+    }
+}
+
+function validateSignUpEmail() {
+    const emailInput = document.getElementById("email").value; // Get the value, not the element
+    const errorContainer = document.getElementById("mail-Error");
+    const emailError = `<span class="error-message">Check your email. Please try again.</span>`;
+    // const emailError = "Check your email. Please try again.";
+    let test = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput);
+    
+    if(emailInput !== '' && test) {
+        errorContainer.innerHTML = ''; // Clear any existing error message
+        return true;
+    } else {
+        errorContainer.innerHTML = emailError;
         return false;
     }
 }
