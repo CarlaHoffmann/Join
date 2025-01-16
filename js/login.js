@@ -4,7 +4,6 @@
  */
 const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
-
 /**
  * Manages the animation of the overlay and logo based on page load or navigation type.
  * 
