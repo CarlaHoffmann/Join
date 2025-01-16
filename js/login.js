@@ -300,3 +300,36 @@ function togglePasswordVisibility() {
         seeIcon.classList.add("hidden");
     }
 }
+
+
+/**
+ * Manages user login with success message and animation handling.
+ */
+async function handleUserLogin(user) {
+    const passwordInput = document.getElementById("password").value;
+    const errorContainer = document.getElementById("passwordError");
+    const successMessage = document.getElementById("successMessage");
+    const successOverlay = document.getElementById("successOverlay");
+    const passwordError = `<span class="error-message">Check your password. Please try again.</span>`;
+
+    if (user.password === passwordInput) {
+        await saveUser(user.name, user.mail);
+
+        successOverlay.classList.add("show");
+        successMessage.style.display = "block";
+
+        setTimeout(() => {
+            successMessage.classList.add("hide"); 
+            successOverlay.classList.remove("show");
+
+            setTimeout(() => {
+                successMessage.style.display = "none"; 
+                successOverlay.classList.remove("show");
+                redirectToSummary();
+            }, 1000); 
+        }, 1000); // visible 2 sec
+    } else {
+        errorContainer.innerHTML = passwordError;
+    }
+}
+

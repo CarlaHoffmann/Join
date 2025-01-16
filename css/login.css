@@ -165,41 +165,8 @@ a {
   position: fixed;
 }
 
-.login_successful {
-  position: absolute;
-  bottom: -100px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  font-weight: 700;
-  background-color: var(--menuButtonDarkblue);
-  color: var(--white);
-  border-radius: 20px;
-  padding: 25px;
-  border: none;
-  font-size: 20px;
-}
 
-@keyframes moveSpan {
-  0% {
-    bottom: -100px;
-  }
-  100% {
-    bottom: 30%;
-  }
-}
-
-.animate {
-  display: block;
-  animation: moveSpan 2s linear forwards;
-}
-
-.show {
-  display: block;
-  bottom: 100px;
-  animation: slideIn 0.5s forwards;
-}
-
+/*
 @keyframes slideIn {
   from {
     bottom: -100px;
@@ -208,6 +175,7 @@ a {
     bottom: 50%;
   }
 }
+*/
   
 .cover-button {
     visibility: hidden;
@@ -463,8 +431,6 @@ input:hover,
   height: 100%;
 }
 
-
-  
 .password-error {
   flex: 1;
   color: var(--errorPink);
@@ -481,4 +447,73 @@ footer a {
 
 .pointer-color:hover {
   color: var(--lightblue);
+}
+
+
+/* Login successful Animation */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 999;
+  opacity: 0; 
+  visibility: hidden;
+  transition: opacity 1s ease-in-out, visibility 1s ease-in-out; 
+}
+
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.overlay.hide {
+  opacity: 0; 
+  visibility: hidden;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -55%); 
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%); 
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+}
+
+.login_successful {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-weight: 700;
+  background-color: var(--menuButtonDarkblue);
+  color: var(--white);
+  border-radius: 20px;
+  padding: 25px;
+  border: none;
+  font-size: 20px;
+  z-index: 1000;
+  opacity: 0; 
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.login_successful.hide {
+  animation: fadeOut 1s ease-in-out forwards;
 }
