@@ -16,7 +16,7 @@ body {
     }
 }
 
-#taskOverlay.hide {
+#taskOverlay.hide #editTaskOverlay.hide {
     animation: slideOut 0.65s ease forwards;
 }
 
