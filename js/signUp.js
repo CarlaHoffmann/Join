@@ -8,6 +8,13 @@
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
 
+function handleSignUpClick(event) {
+    event.preventDefault(); // Verhindert das Standard-Submit-Event
+    existingMailLogIn(); // Ruft die Login-Funktion auf
+}
+
+
+
 /**
  * Handles the user sign-up process by validating email and managing error messages.
  * 
