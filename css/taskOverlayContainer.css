@@ -204,7 +204,7 @@ body {
 }
 
 .userContainer {
-    max-height: 161px;
+    max-height: 140px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
