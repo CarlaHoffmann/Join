@@ -61,18 +61,18 @@ function checkExistingMail(users) {
 
 function validateSignUpEmail() {
     const emailInput = document.getElementById("email").value; // Get the value, not the element
-    // const errorContainer = document.getElementById("mail-error");
-    // const emailError = `<span class="error-message">Check your email. Please try again.</span>`;
+    const errorContainer = document.getElementById("mail-error");
+    const emailError = `<span class="error-message">Check your email. Please try again.</span>`;
     // const emailError = "Check your email. Please try again.";
     let test = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput);
     
-    // if(emailInput !== '' && test) {
-    //     errorContainer.innerHTML = ''; // Clear any existing error message
-    //     return true;
-    // } else {
-    //     errorContainer.innerHTML = emailError;
+    if(emailInput !== '' && test) {
+        errorContainer.innerHTML = ''; // Clear any existing error message
+        return true;
+    } else {
+        errorContainer.innerHTML = emailError;
         return false;
-    // }
+    }
 }
 
 function checkSignUpPassword() {
