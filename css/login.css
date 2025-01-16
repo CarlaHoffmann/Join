@@ -93,10 +93,6 @@ a {
   color: var(--grey);
 }
 
-.hidden {
-  display: none;
-}
-
 .display-f {
   display: flex;
 }
@@ -226,10 +222,6 @@ a {
   
 .gap {
   gap: 32px;
-}
-
-.hidden {
-  display: none;
 }
 
 .form-gap {
@@ -386,6 +378,7 @@ input {
   cursor: pointer;
   width: 20px;
   height: 20px;
+  /*background-color: rebeccapurple;*/
 }
 
 .input-container:hover {
@@ -396,14 +389,24 @@ input {
   border-color: var(--lightblue) !important;
 }
 
-  
-.password_lock,
+.passwordLock,
 .password_show,
 .password_hide {
   width: 20px;
   height: 20px;
 }
   
+.hidden {
+  display: none;
+  outline: 1px solid red; /* Nur zum Testen */
+}
+
+.hidden {
+  display: none;
+}
+
+
+
 .password_hide {
   display: none;
 }

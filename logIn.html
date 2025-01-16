@@ -44,27 +44,22 @@
                     <form class="form-gap">
                         <div>
                             <div class="flex-column-center gap-20">
-
-
                                 <div class="form-group">
                                     <div id="emailContainer" class="input-container">
                                         <input id="email" placeholder="Email" type="email"
                                             class="input-with-image b-img-email" required>
                                         <img src="./assets/img/general/mail.svg" alt="Email Icon">
                                     </div>
-
+                                    
                                     <div id="passwordButten" class="input-container">
-                                        <input id="password" placeholder="Password" type="password"
-                                            class="input-with-image" required>
-                                        <img src="./assets/img/login/lock.png" alt="Lock Icon" id="passwordLock"
-                                            class="password_lock">
-                      
-                                        <a class="password_butten" onclick="togglePasswordVisibility()">
-                                            <img src="./assets/img/login/visibility_off.svg" alt="Visibility Off" id="unlock" class="password_show">
-                                            <img src="./assets/img/login/visibility.svg" alt="Visibility On" id="lock" class="hidden password_hide">
+                                        <input id="password" placeholder="Password" type="password" class="input-with-image" required oninput="handlePasswordInput()">
+                                        <img src="./assets/img/login/lock.png" alt="Lock Icon" id="passwordLock" class="password_lock">
+                                        <a role="button" class="password_butten hidden" id="visibilityButton" onclick="togglePasswordVisibility()">
+                                            <img src="./assets/img/login/visibility_off.svg" alt="Hide Password" id="notSee">
+                                            <img src="./assets/img/login/visibility.svg" alt="Show Password" id="see" class="hidden">
                                         </a>
-                                        
                                     </div>
+                                    
                                 </div>
 
 

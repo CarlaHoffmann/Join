@@ -120,7 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-});
 
 function handleValidation({ emailValue, passwordValue, confirmPasswordValue, isSignUp }) {
     let isValid = true;
@@ -192,6 +191,7 @@ function validateEmail(email) {
     return emailRegex.test(email);
 }
 
+});
 
 /**
  * Handles the login process for an existing user.
@@ -222,8 +222,8 @@ async function existingMailLogIn() {
  * @returns {{mail: string, password: string}} An object containing the email and password
  */
 function getLoginCredentials() {
-    const mail = document.getElementById('email').value.toLowerCase();
-    const password = document.getElementById('password').value;
+    const mail = document.getElementById('email').value.trim().toLowerCase(); // Leerzeichen entfernen, Kleinschreibung erzwingen
+    const password = document.getElementById('password').value.trim(); // Leerzeichen entfernen
     return { mail, password };
 }
 
@@ -235,7 +235,21 @@ function getLoginCredentials() {
  * @returns {Object|undefined} The user object if found, undefined otherwise
  */
 function findUserByEmail(users, email) {
+    console.log("Zu suchende E-Mail:", email);
     return users.find(u => u.mail === email);
+}
+
+async function handleUserLogin(user, password) {
+    console.log("Eingegebenes Passwort:", password);
+    console.log("Gespeichertes Passwort:", user.password);
+    if (user.password === password) {
+        console.log("Passwort korrekt!");
+        await saveUser(user.name, user.mail);
+        redirectToSummary();
+    } else {
+        console.error("Passwort falsch!");
+        showPasswordError();
+    }
 }
 
 /**
@@ -368,22 +382,43 @@ function changeEmail() {
     document.getElementById('passwordButten').classList.remove('password_container_border');
 }
 
-/**
- * This function toggles the visibility of the password input field between text and password types.
- */
-function togglePasswordVisibility() {
-    const passwordField = document.getElementById("password");
-    const visibilityOn = document.getElementById("lock");
-    const visibilityOff = document.getElementById("unlock");
 
-    if (passwordField.type === "password") {
-        passwordField.type = "text";
-        visibilityOn.classList.remove("hidden");
-        visibilityOff.classList.add("hidden");
+/**
+ * Handles the visibility of the lock and visibility icons based on input content.
+ */
+function handlePasswordInput() {
+    const passwordInput = document.getElementById("password");
+    const lockIcon = document.getElementById("passwordLock");
+    const visibilityButton = document.getElementById("visibilityButton");
+
+    if (passwordInput.value.trim() !== "") {
+        // Hide the lock icon and show the visibility toggle
+        lockIcon.style.display = "none";
+        visibilityButton.classList.remove("hidden");
     } else {
-        passwordField.type = "password";
-        visibilityOn.classList.add("hidden");
-        visibilityOff.classList.remove("hidden");
+        // Show the lock icon and hide the visibility toggle
+        lockIcon.style.display = "block";
+        visibilityButton.classList.add("hidden");
     }
 }
+
+/**
+ * Toggles the visibility of the password input field.
+ */
+function togglePasswordVisibility() {
+    const passwordInput = document.getElementById("password");
+    const notSeeIcon = document.getElementById("notSee");
+    const seeIcon = document.getElementById("see");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        notSeeIcon.classList.add("hidden");
+        seeIcon.classList.remove("hidden");
+    } else {
+        passwordInput.type = "password";
+        notSeeIcon.classList.remove("hidden");
+        seeIcon.classList.add("hidden");
+    }
+}
+
 
