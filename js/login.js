@@ -72,7 +72,8 @@ function toggleCheckbox(element) {
     }
 }
 
-
+// function logIn() {
+    
 document.addEventListener("DOMContentLoaded", () => {
     // Elements for Login and Sign-Up
     const emailInput = document.getElementById("email");
@@ -89,10 +90,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const passwordError = createErrorMessage("Check your password. Please try again.");
     const confirmPasswordError = createErrorMessage("Your passwords don't match. Please try again.");
 
-    // Attach error messages
-    attachErrorMessage(emailContainer, emailError);
-    attachErrorMessage(passwordContainer, passwordError);
-    if (confirmPasswordContainer) attachErrorMessage(confirmPasswordContainer, confirmPasswordError);
+    // // Attach error messages
+    // attachErrorMessage(emailContainer, emailError);
+    // attachErrorMessage(passwordContainer, passwordError);
+    // if (confirmPasswordContainer) attachErrorMessage(confirmPasswordContainer, confirmPasswordError);
 
     // Event Listeners for Login and Sign-Up
     loginButton?.addEventListener("click", (e) => {
@@ -104,109 +105,121 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         handleValidation(emailInput.value.trim(), passwordInput.value.trim(), confirmPasswordInput?.value.trim(), true);
     });
-
-    /**
-     * Handles validation for login and sign-up forms.
-     * @param {string} email - The email input value.
-     * @param {string} password - The password input value.
-     * @param {string|null} confirmPassword - The confirm password input value (if sign-up).
-     * @param {boolean} isSignUp - Indicates if it's a sign-up operation.
-     */
-    function handleValidation(email, password, confirmPassword, isSignUp) {
-        // Email validation bleibt bestehen
-        validateField(validateEmail(email), emailContainer, emailError);
-    
-        if (isSignUp) {
-            // Passwort-Längenprüfung entfernt
-            validateField(password !== '', passwordContainer, passwordError); 
-            validateField(password === confirmPassword, confirmPasswordContainer, confirmPasswordError);
-        } else {
-            validateField(password !== '', passwordContainer, passwordError); // Nur prüfen, ob Passwort eingegeben wurde
-        }
-    }
-
-    /**
-     * Validates a field and displays appropriate feedback.
-     * @param {boolean} condition - Validation condition.
-     * @param {HTMLElement} container - The input container element.
-     * @param {HTMLElement} errorElement - The error message element.
-     */
-    function validateField(condition, container, errorElement) {
-        if (condition) {
-            hideError(container, errorElement);
-            displayValid(container);
-        } else {
-            displayError(container, errorElement);
-            hideValid(container);
-        }
-    }
-
-    /**
-     * Creates an error message element.
-     * @param {string} message - The error message text.
-     * @returns {HTMLElement} The created error message element.
-     */
-    function createErrorMessage(message) {
-        const error = document.createElement("span");
-        error.className = "error-message";
-        error.textContent = message;
-        return error;
-    }
-
-    /**
-     * Attaches an error message element after a container.
-     * @param {HTMLElement} container - The input container element.
-     * @param {HTMLElement} errorElement - The error message element.
-     */
-    function attachErrorMessage(container, errorElement) {
-        container.parentNode.insertBefore(errorElement, container.nextSibling);
-    }
-
-    /**
-     * Displays an error message.
-     * @param {HTMLElement} container - The input container element.
-     * @param {HTMLElement} errorElement - The error message element.
-     */
-    function displayError(container, errorElement) {
-        container.classList.add("input-border");
-        errorElement.style.display = "block";
-    }
-
-    /**
-     * Hides an error message.
-     * @param {HTMLElement} container - The input container element.
-     * @param {HTMLElement} errorElement - The error message element.
-     */
-    function hideError(container, errorElement) {
-        container.classList.remove("input-border");
-        errorElement.style.display = "none";
-    }
-
-    /**
-     * Highlights a valid input.
-     * @param {HTMLElement} container - The input container element.
-     */
-    function displayValid(container) {
-        container.classList.add("valid-input");
-    }
-
-    /**
-     * Removes the valid input highlight.
-     * @param {HTMLElement} container - The input container element.
-     */
-    function hideValid(container) {
-        container.classList.remove("valid-input");
-    }
-
-    /**
-     * Validates an email address format.
-     * @param {string} email - The email address to validate.
-     * @returns {boolean} True if the email is valid, false otherwise.
-     */
-    function validateEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
 });
+// }
+
+/**
+ * Handles validation for login and sign-up forms.
+ * @param {string} email - The email input value.
+ * @param {string} password - The password input value.
+ * @param {string|null} confirmPassword - The confirm password input value (if sign-up).
+ * @param {boolean} isSignUp - Indicates if it's a sign-up operation.
+ */
+function handleValidation(email, password, confirmPassword, isSignUp) {
+    const emailContainer = document.getElementById("emailContainer");
+    const emailError = createErrorMessage("Check your email. Please try again.");
+    const passwordContainer = document.getElementById("passwordButten");
+    const passwordError = createErrorMessage("Check your password. Please try again.");
+    const confirmPasswordContainer = document.getElementById("confirmPasswordButten");
+
+    // Attach error messages
+    attachErrorMessage(emailContainer, emailError);
+    attachErrorMessage(passwordContainer, passwordError);
+    if (confirmPasswordContainer) attachErrorMessage(confirmPasswordContainer, confirmPasswordError);
+
+    // Email validation bleibt bestehen
+    validateField(validateEmail(email), emailContainer, emailError);
+
+    if (isSignUp) {
+        // Passwort-Längenprüfung entfernt
+        validateField(password !== '', passwordContainer, passwordError); 
+        validateField(password === confirmPassword, confirmPasswordContainer, confirmPasswordError);
+    } else {
+        validateField(password !== '', passwordContainer, passwordError); // Nur prüfen, ob Passwort eingegeben wurde
+    }
+}
+
+/**
+ * Validates a field and displays appropriate feedback.
+ * @param {boolean} condition - Validation condition.
+ * @param {HTMLElement} container - The input container element.
+ * @param {HTMLElement} errorElement - The error message element.
+ */
+function validateField(condition, container, errorElement) {
+    if (condition) {
+        hideError(container, errorElement);
+        displayValid(container);
+    } else {
+        displayError(container, errorElement);
+        hideValid(container);
+    }
+}
+
+/**
+ * Creates an error message element.
+ * @param {string} message - The error message text.
+ * @returns {HTMLElement} The created error message element.
+ */
+function createErrorMessage(message) {
+    const error = document.createElement("span");
+    error.className = "error-message";
+    error.textContent = message;
+    return error;
+}
+
+/**
+ * Attaches an error message element after a container.
+ * @param {HTMLElement} container - The input container element.
+ * @param {HTMLElement} errorElement - The error message element.
+ */
+function attachErrorMessage(container, errorElement) {
+    container.parentNode.insertBefore(errorElement, container.nextSibling);
+}
+
+/**
+ * Displays an error message.
+ * @param {HTMLElement} container - The input container element.
+ * @param {HTMLElement} errorElement - The error message element.
+ */
+function displayError(container, errorElement) {
+    container.classList.add("input-border");
+    errorElement.style.display = "block";
+}
+
+/**
+ * Hides an error message.
+ * @param {HTMLElement} container - The input container element.
+ * @param {HTMLElement} errorElement - The error message element.
+ */
+function hideError(container, errorElement) {
+    container.classList.remove("input-border");
+    errorElement.style.display = "none";
+}
+
+/**
+ * Highlights a valid input.
+ * @param {HTMLElement} container - The input container element.
+ */
+function displayValid(container) {
+    container.classList.add("valid-input");
+}
+
+/**
+ * Removes the valid input highlight.
+ * @param {HTMLElement} container - The input container element.
+ */
+function hideValid(container) {
+    container.classList.remove("valid-input");
+}
+
+/**
+ * Validates an email address format.
+ * @param {string} email - The email address to validate.
+ * @returns {boolean} True if the email is valid, false otherwise.
+ */
+function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
 
 
 
@@ -364,18 +377,18 @@ async function guestLogin() {
 /**
  * This function changes the appearance of the password input field when focused.
  */
-function changePassword() {
-    document.getElementById('passwordButten').classList.add('password_container_border');
-    document.getElementById('emailContainer').classList.remove('password_container_border');
-    var x = document.getElementById("password");
-    if (x.type === "password") {
-        document.getElementById('passwordLock').classList.add('hidden');
-        document.getElementById('unlock').classList.remove('hidden');
-    } else {
-        document.getElementById('passwordLock').classList.add('hidden');
-        document.getElementById('unlock').classList.add('hidden');
-    }
-}
+// function changePassword() {
+//     document.getElementById('passwordButten').classList.add('password_container_border');
+//     document.getElementById('emailContainer').classList.remove('password_container_border');
+//     var x = document.getElementById("password");
+//     if (x.type === "password") {
+//         document.getElementById('passwordLock').classList.add('hidden');
+//         document.getElementById('unlock').classList.remove('hidden');
+//     } else {
+//         document.getElementById('passwordLock').classList.add('hidden');
+//         document.getElementById('unlock').classList.add('hidden');
+//     }
+// }
 
 /**
  * This function changes the appearance of the email input field when focused.
