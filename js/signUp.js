@@ -8,18 +8,18 @@
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
 
-function handleSignUpClick(event) {
+async function handleSignUpClick(event) {
     event.preventDefault(); // Verhindert das Standard-Submit-Event
 
     if (validateSignUp()) {
-        await createUser();
+        await createContact();
         console.log('User is valid. Submitting...');
     }
 }
 
-function validateSignUp() {
+async function validateSignUp() {
     let isValid = true;
-    isValid = checkExistingMail() && isValid;
+    isValid = await checkExistingMail() && isValid;
     isValid = checkSignUpPassword() && isValid;
     return isValid;
 }
@@ -58,13 +58,17 @@ function checkSignUpPassword() {
             return true;
         } else {
             passwordError2.innerHTML = "Your passwords don't match. Please try again.";
+            return false;
         }
     } else {
         passwordError1.innerHTML = "Please insert a password.";
+        return false;
     }
-    
-    
 }
+
+// async function createUser() {}
+
+
 
 
 /**
