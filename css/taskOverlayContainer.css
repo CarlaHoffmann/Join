@@ -45,6 +45,12 @@ body {
     margin-right: 10px;
 }
 
+.subtasks-box {
+    max-height: 170px;
+    overflow-y: auto;
+}
+
+
 .check {
     display: flex;
     align-items: center;

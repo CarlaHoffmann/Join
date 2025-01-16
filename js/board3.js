@@ -168,7 +168,7 @@ async function openEditTaskOverlay(task) {
                                     </div>
                                 </div>
                             </label>
-                            <div>
+                            <div class="subtasks-box"
                                 <div id="subtasks">
                                     ${subtasksHTML}
                                 </div>
@@ -359,7 +359,7 @@ async function openTaskOverlay(task) {
                 <!-- Subtasks -->
                 <div>
                     <span class="info-label">Subtasks:</span>
-                    <div>${subtasksHTML}</div>
+                    <div class="subtasks-box">${subtasksHTML}</div>
                 </div>
 
                 <!-- Delete and Edit Buttons -->
