@@ -11,7 +11,7 @@ const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedataba
 async function handleSignUpClick(event) {
     event.preventDefault(); // Verhindert das Standard-Submit-Event
     const users = await loadUsers();
-    if (validateSignUp(users)) {
+    if (validateSignUp(users) === true) {
         await createContact();
         console.log('User is valid. Submitting...');
     }
@@ -25,7 +25,7 @@ async function handleSignUpClick(event) {
 // }
 async function validateSignUp(users) {
     // Zuerst E-Mail überprüfen
-    
+
     const isEmailValid = checkExistingMail(users);
     if (!isEmailValid) {
         return false; // Wenn E-Mail ungültig ist, hier abbrechen
@@ -61,18 +61,18 @@ function checkExistingMail(users) {
 
 function validateSignUpEmail() {
     const emailInput = document.getElementById("email").value; // Get the value, not the element
-    const errorContainer = document.getElementById("mail-Error");
-    const emailError = `<span class="error-message">Check your email. Please try again.</span>`;
+    // const errorContainer = document.getElementById("mail-error");
+    // const emailError = `<span class="error-message">Check your email. Please try again.</span>`;
     // const emailError = "Check your email. Please try again.";
     let test = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput);
     
-    if(emailInput !== '' && test) {
-        errorContainer.innerHTML = ''; // Clear any existing error message
-        return true;
-    } else {
-        errorContainer.innerHTML = emailError;
+    // if(emailInput !== '' && test) {
+    //     errorContainer.innerHTML = ''; // Clear any existing error message
+    //     return true;
+    // } else {
+    //     errorContainer.innerHTML = emailError;
         return false;
-    }
+    // }
 }
 
 function checkSignUpPassword() {
