@@ -222,8 +222,8 @@ async function existingMailLogIn() {
  * @returns {{mail: string, password: string}} An object containing the email and password
  */
 function getLoginCredentials() {
-    const mail = document.getElementById('email').value.trim().toLowerCase(); // Leerzeichen entfernen, Kleinschreibung erzwingen
-    const password = document.getElementById('password').value.trim(); // Leerzeichen entfernen
+    const mail = document.getElementById('email').value.toLowerCase();
+    const password = document.getElementById('password').value;
     return { mail, password };
 }
 
@@ -235,21 +235,7 @@ function getLoginCredentials() {
  * @returns {Object|undefined} The user object if found, undefined otherwise
  */
 function findUserByEmail(users, email) {
-    console.log("Zu suchende E-Mail:", email);
     return users.find(u => u.mail === email);
-}
-
-async function handleUserLogin(user, password) {
-    console.log("Eingegebenes Passwort:", password);
-    console.log("Gespeichertes Passwort:", user.password);
-    if (user.password === password) {
-        console.log("Passwort korrekt!");
-        await saveUser(user.name, user.mail);
-        redirectToSummary();
-    } else {
-        console.error("Passwort falsch!");
-        showPasswordError();
-    }
 }
 
 /**
@@ -420,5 +406,3 @@ function togglePasswordVisibility() {
         seeIcon.classList.add("hidden");
     }
 }
-
-
