@@ -222,6 +222,11 @@ function hideValid(container) {
 // }
 
 
+function handleLoginClick(event) {
+    event.preventDefault(); // Verhindert das Standard-Submit-Event
+    existingMailLogIn(); // Ruft die Login-Funktion auf
+}
+
 
 /**
  * Handles the login process for an existing user.
