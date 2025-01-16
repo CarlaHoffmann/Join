@@ -85,9 +85,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const confirmPasswordContainer = document.getElementById("confirmPasswordButten");
 
     // Error messages
-    const emailError = createErrorMessage("Invalid email. Please try again.");
-    const passwordError = createErrorMessage("Password must be at least 6 characters long.");
-    const confirmPasswordError = createErrorMessage("Passwords do not match.");
+    const emailError = createErrorMessage("Check your email. Please try again.");
+    const passwordError = createErrorMessage("Check your password. Please try again.");
+    const confirmPasswordError = createErrorMessage("Your passwords don't match. Please try again.");
 
     // Attach error messages
     attachErrorMessage(emailContainer, emailError);
@@ -113,11 +113,15 @@ document.addEventListener("DOMContentLoaded", () => {
      * @param {boolean} isSignUp - Indicates if it's a sign-up operation.
      */
     function handleValidation(email, password, confirmPassword, isSignUp) {
+        // Email validation bleibt bestehen
         validateField(validateEmail(email), emailContainer, emailError);
-        validateField(password.length >= 6, passwordContainer, passwordError);
-
+    
         if (isSignUp) {
+            // Passwort-Längenprüfung entfernt
+            validateField(password !== '', passwordContainer, passwordError); 
             validateField(password === confirmPassword, confirmPasswordContainer, confirmPasswordError);
+        } else {
+            validateField(password !== '', passwordContainer, passwordError); // Nur prüfen, ob Passwort eingegeben wurde
         }
     }
 
