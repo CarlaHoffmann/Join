@@ -18,6 +18,11 @@ function closeOverlayOnOutsideClick(event, box, overlay) {
     event.stopPropagation();
     let ContactBox = document.getElementById(box);
     let BoxOverlay = document.getElementById(overlay);
+
+    if (!ContactBox || !BoxOverlay) {
+        console.error('One or both elements not found:', box, overlay);
+        return; // Funktion beenden, wenn ein Element fehlt
+    }
     
     if (BoxOverlay.contains(event.target) && !ContactBox.contains(event.target)) {
         if(box === 'addContactBox') {
@@ -29,8 +34,9 @@ function closeOverlayOnOutsideClick(event, box, overlay) {
         if(box === 'overlay-content') {
             closeOverlay();
         }
-        if(box === 'taskOverlay') {
-            closeTaskOverlay();
+        if(box === 'taskOverlay'||'editTaskOverlay') {
+            // closeTaskOverlay();
+            closeTaskOverlayAnimation(box);
         }
     }
 }
