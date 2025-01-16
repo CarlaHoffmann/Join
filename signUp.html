@@ -33,7 +33,7 @@
                     </div>
                 </div>
 
-                
+
                 <form onsubmit="addUser(); return false;" class="flex-column-center gap">
                     <div class="signUp-formfields">
                         <div id="nameContainer" class="input-container">
@@ -53,7 +53,8 @@
 
                         <div>
                             <div id="passwordButten" class="input-container">
-                                <input id="password" placeholder="Password" type="password" class="input-with-image" onclick="changePassword()" required>
+                                <input id="password" placeholder="Password" type="password" class="input-with-image"
+                                    onclick="changePassword()" required>
                                 <img src="./assets/img/login/lock.png" alt="" id="passwordLock" class="password_lock">
                                 <a role="button" class="password_butten" onclick="togglePasswordVisibility()">
                                     <img src="./assets/img/login/visibility_off.svg" alt="" id="notSee" class="hidden">
@@ -65,8 +66,8 @@
 
                         <div>
                             <div id="confirmPasswordButten" class="input-container">
-                                <input id="confirmPassword" placeholder="Password" type="password" class="input-with-image"
-                                    onclick="changeConfirmPassword()" required>
+                                <input id="confirmPassword" placeholder="Password" type="password"
+                                    class="input-with-image" onclick="changeConfirmPassword()" required>
                                 <img src="./assets/img/login/lock.png" alt="" id="confirmPasswordLock"
                                     class="password_lock">
                                 <a role="button" class="password_butten" onclick="toggleConfirmPasswordVisibility()">
@@ -77,9 +78,10 @@
                             </div>
                             <div id="pw-error-2" class="error-message"></div>
                         </div>
-                
+
                         <span id="singupError" class="password-error hidden">Ups! Your password don´t match</span>
-                        <span id="mailError" class="password-error hidden">Ups! The email Address is already taken.</span>
+                        <span id="mailError" class="password-error hidden">Ups! The email Address is already
+                            taken.</span>
                     </div>
 
                     <div class="accept_box">
@@ -89,15 +91,19 @@
                         <span class="gray"> I accept the</span>
                         <a href="privacyPolicy.html" class="link-checkbox" target="_blank">Privacy policy</a>
                     </div>
-                    
+
 
                     <div>
-                        <button onclick="handleSignUpClick(event)" id="signupButton" class="button-login-blue button-p text_login_btn mobile_login_btn hover">Sign up</button>
+                        <button onclick="handleSignUpClick(event)" id="signupButton"
+                            class="button-login-blue button-p text_login_btn mobile_login_btn hover">Sign up</button>
                     </div>
 
                 </form>
-                
-                <span id="successMessage" class="login_successful hidden">You Signed Up successfully</span>
+
+                <div id="successOverlay" class="overlay"></div>
+                <div id="successMessage" class="login_successful" style="display: none;">
+                    You Signed Up Successfully
+                </div>
             </div>
         </div>
 
