@@ -25,10 +25,10 @@ async function openEditTaskOverlay(task) {
     }).join('');
 
     overlayContainer.innerHTML = `
-    <div onclick="closeOverlayOnOutsideClick(event, 'editTaskOverlay', 'editTaskOverlayBackground')" id="editTaskOverlayBackground" class="overlay-container d-none">
+    <div onclick="closeOverlayOnOutsideClick(event, 'editTaskOverlay', 'editTaskOverlayBackground')" id="editTaskOverlayBackground" class="overlay-container">
         <div id="editTaskOverlay" class="taskOverlay">
             <!-- Schließen-Button -->
-            <div class="close" onclick="closeEditOverlay()">
+            <div class="close" onclick="closeTaskOverlay()">
                 <img src="./assets/img/add_task/close.svg" alt="Close" />
             </div>
 
@@ -266,14 +266,16 @@ function startTaskOverlayAnimation() {
  * @function closeTaskOverlayAnimation
  * @returns {void}
  */
-function closeTaskOverlayAnimation() {
-    let taskOverlay = document.getElementById('taskOverlay');
-    let taskOverlayContainer = document.getElementById('taskOverlayContainer');
-    taskOverlay.classList.remove('show');
-    taskOverlay.classList.add('hide');
+function closeTaskOverlayAnimation(overlayBox) {
+    let overlay = document.getElementById(overlayBox);
+    // let taskOverlayContainer = document.getElementById('taskOverlayContainer');
+    if(overlay.classList.contains('show')) {
+        overlay.classList.remove('show');
+    }
+    overlay.classList.add('hide');
 
-    taskOverlayContainer.classList.add('d-none');
-    closeTaskOverlay();
+    // taskOverlayContainer.classList.add('d-none');
+    setTimeout(closeTaskOverlay, 400);
 }
 
 
@@ -318,7 +320,7 @@ async function openTaskOverlay(task) {
         }
     }
     overlayContainer.innerHTML = `
-        <div onclick="closeOverlayOnOutsideClick(event, 'taskOverlay', 'openTaskOverlayBackground')" id="openTaskOverlayBackground" class="overlay-container d-none">
+        <div onclick="closeOverlayOnOutsideClick(event, 'taskOverlay', 'openTaskOverlayBackground')" id="openTaskOverlayBackground" class="overlay-container">
             <div id="taskOverlay" class="taskOverlay">
                 <div class="taskSelect">
                     <div class="taskContainer" style="background-color: ${getCategoryColor(task.category)}">${task.category}</div>
