@@ -9,9 +9,11 @@
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Platz zwischen den Abschnitten */
+  justify-content: space-between;
   gap: 12px;
   margin-top: 10px;
+  overflow: hidden;
+  box-sizing: border-box; 
 }
 
 /* Task type badge */

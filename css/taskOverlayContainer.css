@@ -204,17 +204,19 @@ body {
 }
 
 .userContainer {
-    max-height: 140px;
+    max-height: 160px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 20px;
     color: black;
+    margin-left: 15px;
+    margin-top: 15px;
 }
 
 .userContainer div {
     box-sizing: border-box;
-    padding: 7px 16px;
+    /*padding: 7px 16px;*/
 }
 
 .user {
@@ -249,7 +251,7 @@ body {
 .assigned-contact {
     display: flex;
     align-items: center;
-    margin-bottom: 8px; /* Optional, Abstand zwischen den Kontakten */
+    gap: 10px;
 }
 
 .contact-initial {

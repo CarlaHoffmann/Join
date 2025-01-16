@@ -729,7 +729,11 @@
   text-align: center;
   font-size: 12px;
   margin-top: 8px;
+}
 
+.description-overlay {
+  background-color: red;
+  overflow-y: auto;
 }
 
 /*Zum Task Edit Overlay*/
