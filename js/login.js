@@ -111,32 +111,32 @@ function toggleCheckbox(element) {
  * @param {string|null} confirmPassword - The confirm password input value (if sign-up).
  * @param {boolean} isSignUp - Indicates if it's a sign-up operation.
  */
-function handleValidation(email, password, confirmPassword, isSignUp) {
-    const emailContainer = document.getElementById("emailContainer");
-    const emailError = createErrorMessage("Check your email. Please try again.");
-    const passwordContainer = document.getElementById("passwordButten");
-    const passwordError = createErrorMessage("Check your password. Please try again.");
-    const confirmPasswordContainer = document.getElementById("confirmPasswordButten");
+// function handleValidation(email, password, confirmPassword, isSignUp) {
+//     const emailContainer = document.getElementById("emailContainer");
+//     const emailError = createErrorMessage("Check your email. Please try again.");
+//     const passwordContainer = document.getElementById("passwordButten");
+//     const passwordError = createErrorMessage("Check your password. Please try again.");
+//     const confirmPasswordContainer = document.getElementById("confirmPasswordButten");
 
-    // Attach error messages
-    attachErrorMessage(emailContainer, emailError);
-    attachErrorMessage(passwordContainer, passwordError);
-    if (confirmPasswordContainer) attachErrorMessage(confirmPasswordContainer, confirmPasswordError);
+//     // Attach error messages
+//     attachErrorMessage(emailContainer, emailError);
+//     attachErrorMessage(passwordContainer, passwordError);
+//     if (confirmPasswordContainer) attachErrorMessage(confirmPasswordContainer, confirmPasswordError);
 
-    if(validateEmail(email)) {
+//     if(validateEmail(email)) {
 
-    }
-    // Email validation bleibt bestehen
-    validateField(validateEmail(email), emailContainer, emailError);
+//     }
+//     // Email validation bleibt bestehen
+//     validateField(validateEmail(email), emailContainer, emailError);
 
-    if (isSignUp) {
-        // Passwort-Längenprüfung entfernt
-        validateField(password !== '', passwordContainer, passwordError); 
-        validateField(password === confirmPassword, confirmPasswordContainer, confirmPasswordError);
-    // } else {
-    //     validateField(password !== '', passwordContainer, passwordError); // Nur prüfen, ob Passwort eingegeben wurde
-    }
-}
+//     if (isSignUp) {
+//         // Passwort-Längenprüfung entfernt
+//         validateField(password !== '', passwordContainer, passwordError); 
+//         validateField(password === confirmPassword, confirmPasswordContainer, confirmPasswordError);
+//     // } else {
+//     //     validateField(password !== '', passwordContainer, passwordError); // Nur prüfen, ob Passwort eingegeben wurde
+//     }
+// }
 
 /**
  * Validates a field and displays appropriate feedback.
