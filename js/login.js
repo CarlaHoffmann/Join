@@ -159,57 +159,57 @@ function validateField(condition, container, errorElement) {
  * @param {string} message - The error message text.
  * @returns {HTMLElement} The created error message element.
  */
-function createErrorMessage(message) {
-    const error = document.createElement("span");
-    error.className = "error-message";
-    error.textContent = message;
-    return error;
-}
+// function createErrorMessage(message) {
+//     const error = document.createElement("span");
+//     error.className = "error-message";
+//     error.textContent = message;
+//     return error;
+// }
 
 /**
  * Attaches an error message element after a container.
  * @param {HTMLElement} container - The input container element.
  * @param {HTMLElement} errorElement - The error message element.
  */
-function attachErrorMessage(container, errorElement) {
-    container.parentNode.insertBefore(errorElement, container.nextSibling);
-}
+// function attachErrorMessage(container, errorElement) {
+//     container.parentNode.insertBefore(errorElement, container.nextSibling);
+// }
 
 /**
  * Displays an error message.
  * @param {HTMLElement} container - The input container element.
  * @param {HTMLElement} errorElement - The error message element.
  */
-function displayError(container, errorElement) {
-    container.classList.add("input-border");
-    errorElement.style.display = "block";
-}
+// function displayError(container, errorElement) {
+//     container.classList.add("input-border");
+//     errorElement.style.display = "block";
+// }
 
 /**
  * Hides an error message.
  * @param {HTMLElement} container - The input container element.
  * @param {HTMLElement} errorElement - The error message element.
  */
-function hideError(container, errorElement) {
-    container.classList.remove("input-border");
-    errorElement.style.display = "none";
-}
+// function hideError(container, errorElement) {
+//     container.classList.remove("input-border");
+//     errorElement.style.display = "none";
+// }
 
 /**
  * Highlights a valid input.
  * @param {HTMLElement} container - The input container element.
  */
-function displayValid(container) {
-    container.classList.add("valid-input");
-}
+// function displayValid(container) {
+//     container.classList.add("valid-input");
+// }
 
 /**
  * Removes the valid input highlight.
  * @param {HTMLElement} container - The input container element.
  */
-function hideValid(container) {
-    container.classList.remove("valid-input");
-}
+// function hideValid(container) {
+//     container.classList.remove("valid-input");
+// }
 
 /**
  * Validates an email address format.
@@ -330,18 +330,18 @@ function redirectToSummary() {
  * Displays an error message for incorrect password.
  * @function
  */
-function showPasswordError() {
-    document.getElementById('loginErrorPassword').classList.remove('hidden');
-    document.getElementById('passwordButten').classList.add('input-border');
-}
+// function showPasswordError() {
+//     document.getElementById('loginErrorPassword').classList.remove('hidden');
+//     document.getElementById('passwordButten').classList.add('input-border');
+// }
 
 /**
  * Displays a general login error message.
  * @function
  */
-function showLoginError() {
-    document.getElementById('loginErrorPassword').classList.remove('hidden');
-}
+// function showLoginError() {
+//     document.getElementById('loginErrorPassword').classList.remove('hidden');
+// }
 
 /**
  * This asynchronous function loads all users from Firebase.
