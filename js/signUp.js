@@ -10,9 +10,61 @@ const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedataba
 
 function handleSignUpClick(event) {
     event.preventDefault(); // Verhindert das Standard-Submit-Event
-    existingMailLogIn(); // Ruft die Login-Funktion auf
+
+    if (validateSignUp()) {
+        await createUser();
+        console.log('User is valid. Submitting...');
+    }
 }
 
+function validateSignUp() {
+    let isValid = true;
+    isValid = checkExistingMail() && isValid;
+    isValid = checkSignUpPassword() && isValid;
+    return isValid;
+}
+
+async function checkExistingMail() {
+    let mailError = document.getElementById('mail-error');
+    try {
+        const users = await loadUsers();
+        const mailIsValid = validateEmail();
+        
+        if (mailIsValid) {
+            const user = findUserByEmail(users); // Pass email to the function
+            if (user) {
+                mailError.innerHTML = "This email is already registered. Please use a different email.";
+                return false;
+            } else {
+                mailError.innerHTML = ""; // Clear error message if email is valid and not registered
+                return true;
+            }
+        } else {
+            mailError.innerHTML = "Please enter a valid email address.";
+            return false;
+        }
+    } catch (error) {
+        return false;
+    }
+}
+
+function checkSignUpPassword() {
+    let password1 = document.getElementById('password').value;
+    let password2 = document.getElementById('confirmPassword').value;
+    let passwordError1 = document.getElementById('pw-error-1');
+    let passwordError2 = document.getElementById('pw-error-2');
+    if(password1 != '') {
+        if(password1 === password2) {
+            return true;
+        } else {
+            passwordError2.innerHTML = "Your passwords don't match. Please try again.";
+        }
+    } else {
+        passwordError1.innerHTML = "Please insert a password.";
+    }
+    
+    
+}
 
 
 /**

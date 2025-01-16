@@ -42,31 +42,40 @@
                             <img src="./assets/img/general/person.png" alt="">
                         </div>
 
-                        <div id="emailContainer" class="input-container">
-                            <input id="email" placeholder="Email" type="email" class="input-with-image b-img-email"
-                                onclick="changeEmail()" required>
-                            <img src="./assets/img/general/mail.svg" alt="">
+                        <div>
+                            <div id="emailContainer" class="input-container">
+                                <input id="email" placeholder="Email" type="email" class="input-with-image b-img-email"
+                                    onclick="changeEmail()" required>
+                                <img src="./assets/img/general/mail.svg" alt="">
+                            </div>
+                            <div id="mail-error" class="error-message"></div>
                         </div>
 
-                        <div id="passwordButten" class="input-container">
-                            <input id="password" placeholder="Password" type="password" class="input-with-image" onclick="changePassword()" required>
-                            <img src="./assets/img/login/lock.png" alt="" id="passwordLock" class="password_lock">
-                            <a role="button" class="password_butten" onclick="togglePasswordVisibility()">
-                                <img src="./assets/img/login/visibility_off.svg" alt="" id="notSee" class="hidden">
-                                <img src="./assets/img/login/visibility.svg" alt="" id="lock" class="hidden">
-                            </a>
+                        <div>
+                            <div id="passwordButten" class="input-container">
+                                <input id="password" placeholder="Password" type="password" class="input-with-image" onclick="changePassword()" required>
+                                <img src="./assets/img/login/lock.png" alt="" id="passwordLock" class="password_lock">
+                                <a role="button" class="password_butten" onclick="togglePasswordVisibility()">
+                                    <img src="./assets/img/login/visibility_off.svg" alt="" id="notSee" class="hidden">
+                                    <img src="./assets/img/login/visibility.svg" alt="" id="lock" class="hidden">
+                                </a>
+                            </div>
+                            <div id="pw-error-1" class="error-message"></div>
                         </div>
 
-                        <div id="confirmPasswordButten" class="input-container">
-                            <input id="confirmPassword" placeholder="Password" type="password" class="input-with-image"
-                                onclick="changeConfirmPassword()" required>
-                            <img src="./assets/img/login/lock.png" alt="" id="confirmPasswordLock"
-                                class="password_lock">
-                            <a role="button" class="password_butten" onclick="toggleConfirmPasswordVisibility()">
-                                <img src="./assets/img/login/visibility_off.svg" alt="" id="notSeeConfirm"
-                                    class="hidden">
-                                <img src="./assets/img/login/visibility.svg" alt="" id="seeConfirm" class="hidden">
-                            </a>
+                        <div>
+                            <div id="confirmPasswordButten" class="input-container">
+                                <input id="confirmPassword" placeholder="Password" type="password" class="input-with-image"
+                                    onclick="changeConfirmPassword()" required>
+                                <img src="./assets/img/login/lock.png" alt="" id="confirmPasswordLock"
+                                    class="password_lock">
+                                <a role="button" class="password_butten" onclick="toggleConfirmPasswordVisibility()">
+                                    <img src="./assets/img/login/visibility_off.svg" alt="" id="notSeeConfirm"
+                                        class="hidden">
+                                    <img src="./assets/img/login/visibility.svg" alt="" id="seeConfirm" class="hidden">
+                                </a>
+                            </div>
+                            <div id="pw-error-2" class="error-message"></div>
                         </div>
                 
                         <span id="singupError" class="password-error hidden">Ups! Your password don´t match</span>
