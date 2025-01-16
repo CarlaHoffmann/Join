@@ -72,12 +72,12 @@ function toggleCheckbox(element) {
     }
 }
 
-// new
+
 document.addEventListener("DOMContentLoaded", () => {
     // Elements for Login and Sign-Up
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
-    const confirmPasswordInput = document.getElementById("confirmPassword"); // Optional for login
+    const confirmPasswordInput = document.getElementById("confirmPassword");
     const loginButton = document.getElementById("login_button_color");
     const signUpButton = document.getElementById("signupButton");
     const emailContainer = document.getElementById("emailContainer");
@@ -85,113 +85,126 @@ document.addEventListener("DOMContentLoaded", () => {
     const confirmPasswordContainer = document.getElementById("confirmPasswordButten");
 
     // Error messages
-    const emailError = createErrorMessage("Check your email. Please try again.");
-    const passwordError = createErrorMessage("Check your password. Please try again.");
-    const confirmPasswordError = createErrorMessage("Passwords do not match. Please try again.");
+    const emailError = createErrorMessage("Invalid email. Please try again.");
+    const passwordError = createErrorMessage("Password must be at least 6 characters long.");
+    const confirmPasswordError = createErrorMessage("Passwords do not match.");
 
     // Attach error messages
     attachErrorMessage(emailContainer, emailError);
     attachErrorMessage(passwordContainer, passwordError);
-    if (confirmPasswordContainer) {
-        attachErrorMessage(confirmPasswordContainer, confirmPasswordError);
-    }
+    if (confirmPasswordContainer) attachErrorMessage(confirmPasswordContainer, confirmPasswordError);
 
     // Event Listeners for Login and Sign-Up
-    if (loginButton) {
-        loginButton.addEventListener("click", (e) => {
-            e.preventDefault();
-            handleValidation({
-                emailValue: emailInput.value.trim(),
-                passwordValue: passwordInput.value.trim(),
-                confirmPasswordValue: null,
-                isSignUp: false,
-            });
-        });
+    loginButton?.addEventListener("click", (e) => {
+        e.preventDefault();
+        handleValidation(emailInput.value.trim(), passwordInput.value.trim(), null, false);
+    });
+
+    signUpButton?.addEventListener("click", (e) => {
+        e.preventDefault();
+        handleValidation(emailInput.value.trim(), passwordInput.value.trim(), confirmPasswordInput?.value.trim(), true);
+    });
+
+    /**
+     * Handles validation for login and sign-up forms.
+     * @param {string} email - The email input value.
+     * @param {string} password - The password input value.
+     * @param {string|null} confirmPassword - The confirm password input value (if sign-up).
+     * @param {boolean} isSignUp - Indicates if it's a sign-up operation.
+     */
+    function handleValidation(email, password, confirmPassword, isSignUp) {
+        validateField(validateEmail(email), emailContainer, emailError);
+        validateField(password.length >= 6, passwordContainer, passwordError);
+
+        if (isSignUp) {
+            validateField(password === confirmPassword, confirmPasswordContainer, confirmPasswordError);
+        }
     }
 
-    if (signUpButton) {
-        signUpButton.addEventListener("click", (e) => {
-            e.preventDefault();
-            handleValidation({
-                emailValue: emailInput.value.trim(),
-                passwordValue: passwordInput.value.trim(),
-                confirmPasswordValue: confirmPasswordInput?.value.trim(),
-                isSignUp: true,
-            });
-        });
+    /**
+     * Validates a field and displays appropriate feedback.
+     * @param {boolean} condition - Validation condition.
+     * @param {HTMLElement} container - The input container element.
+     * @param {HTMLElement} errorElement - The error message element.
+     */
+    function validateField(condition, container, errorElement) {
+        if (condition) {
+            hideError(container, errorElement);
+            displayValid(container);
+        } else {
+            displayError(container, errorElement);
+            hideValid(container);
+        }
     }
 
-function handleValidation({ emailValue, passwordValue, confirmPasswordValue, isSignUp }) {
-    let isValid = true;
-
-    // Validate Email
-    if (!validateEmail(emailValue)) {
-        displayError(emailContainer, emailError);
-        hideValid(emailContainer);
-        isValid = false;
-    } else {
-        hideError(emailContainer, emailError);
-        displayValid(emailContainer);
+    /**
+     * Creates an error message element.
+     * @param {string} message - The error message text.
+     * @returns {HTMLElement} The created error message element.
+     */
+    function createErrorMessage(message) {
+        const error = document.createElement("span");
+        error.className = "error-message";
+        error.textContent = message;
+        return error;
     }
 
-    // Validate Password
-    if (passwordValue.length < 6) {
-        displayError(passwordContainer, passwordError);
-        hideValid(passwordContainer);
-        isValid = false;
-    } else {
-        hideError(passwordContainer, passwordError);
-        displayValid(passwordContainer);
+    /**
+     * Attaches an error message element after a container.
+     * @param {HTMLElement} container - The input container element.
+     * @param {HTMLElement} errorElement - The error message element.
+     */
+    function attachErrorMessage(container, errorElement) {
+        container.parentNode.insertBefore(errorElement, container.nextSibling);
     }
 
-    // Validate Confirm Password (if sign-up)
-    if (isSignUp && confirmPasswordValue !== passwordValue) {
-        displayError(confirmPasswordContainer, confirmPasswordError);
-        hideValid(confirmPasswordContainer);
-        isValid = false;
-    } else if (isSignUp) {
-        hideError(confirmPasswordContainer, confirmPasswordError);
-        displayValid(confirmPasswordContainer);
+    /**
+     * Displays an error message.
+     * @param {HTMLElement} container - The input container element.
+     * @param {HTMLElement} errorElement - The error message element.
+     */
+    function displayError(container, errorElement) {
+        container.classList.add("input-border");
+        errorElement.style.display = "block";
     }
 
-    return isValid;
-}
+    /**
+     * Hides an error message.
+     * @param {HTMLElement} container - The input container element.
+     * @param {HTMLElement} errorElement - The error message element.
+     */
+    function hideError(container, errorElement) {
+        container.classList.remove("input-border");
+        errorElement.style.display = "none";
+    }
 
-function createErrorMessage(message) {
-    const error = document.createElement("span");
-    error.className = "error-message";
-    error.textContent = message;
-    return error;
-}
+    /**
+     * Highlights a valid input.
+     * @param {HTMLElement} container - The input container element.
+     */
+    function displayValid(container) {
+        container.classList.add("valid-input");
+    }
 
-function attachErrorMessage(container, errorElement) {
-    container.parentNode.insertBefore(errorElement, container.nextSibling);
-}
+    /**
+     * Removes the valid input highlight.
+     * @param {HTMLElement} container - The input container element.
+     */
+    function hideValid(container) {
+        container.classList.remove("valid-input");
+    }
 
-function displayError(container, errorElement) {
-    container.classList.add("input-border");
-    errorElement.style.display = "block";
-}
-
-function hideError(container, errorElement) {
-    container.classList.remove("input-border");
-    errorElement.style.display = "none";
-}
-
-function displayValid(container) {
-    container.classList.add("valid-input");
-}
-
-function hideValid(container) {
-    container.classList.remove("valid-input");
-}
-
-function validateEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
+    /**
+     * Validates an email address format.
+     * @param {string} email - The email address to validate.
+     * @returns {boolean} True if the email is valid, false otherwise.
+     */
+    function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
 });
+
+
 
 /**
  * Handles the login process for an existing user.
@@ -370,7 +383,9 @@ function changeEmail() {
 
 
 /**
- * Handles the visibility of the lock and visibility icons based on input content.
+ * Handles changes in the password input field.
+ * Displays or hides the lock icon and the visibility toggle button 
+ * depending on whether the input field contains text.
  */
 function handlePasswordInput() {
     const passwordInput = document.getElementById("password");
@@ -378,11 +393,9 @@ function handlePasswordInput() {
     const visibilityButton = document.getElementById("visibilityButton");
 
     if (passwordInput.value.trim() !== "") {
-        // Hide the lock icon and show the visibility toggle
         lockIcon.style.display = "none";
         visibilityButton.classList.remove("hidden");
     } else {
-        // Show the lock icon and hide the visibility toggle
         lockIcon.style.display = "block";
         visibilityButton.classList.add("hidden");
     }
@@ -390,6 +403,8 @@ function handlePasswordInput() {
 
 /**
  * Toggles the visibility of the password input field.
+ * Switches between masked (password) and unmasked (text) input types
+ * and updates the visibility icons accordingly.
  */
 function togglePasswordVisibility() {
     const passwordInput = document.getElementById("password");
