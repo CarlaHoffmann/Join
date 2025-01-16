@@ -41,16 +41,19 @@
                         <div class="vector_login"></div>
                     </div>
 
-                    <form onsubmit="existingMailLogIn(); return false;" class="form-gap">
-                        <div>
-                            <div class="flex-column-center gap-20">
-                                <div class="form-group">
+                    <form class="form-gap">
+                        <div class="flex-column-center gap-20">
+                            <div class="form-group">
+                                <div>
                                     <div id="emailContainer" class="input-container">
                                         <input id="email" placeholder="Email" type="email"
                                             class="input-with-image b-img-email" onclick="changeEmail()" required>
                                         <img src="./assets/img/general/mail.svg" alt="Email Icon">
                                     </div>
-                                    
+                                    <div id="emailError" class="error-message"></div>
+                                </div>
+                                
+                                <div>
                                     <div id="passwordButten" class="input-container">
                                         <input id="password" placeholder="Password" type="password" class="input-with-image" required oninput="handlePasswordInput()">
                                         <img src="./assets/img/login/lock.png" alt="Lock Icon" id="passwordLock" class="password_lock">
@@ -59,22 +62,24 @@
                                             <img src="./assets/img/login/visibility.svg" alt="Show Password" id="see" class="hidden">
                                         </a>
                                     </div>
-                                    
+                                    <div id="passwordError"></div>
                                 </div>
+                                
+                            </div>
 
 
-                                <div class="accept_box">
-                                    <div class="checkbox-container" onclick="toggleCheckbox(this)">
-                                        <img src="./assets/img/general/check_button.svg" alt="Checkbox"
-                                            class="checkbox-icon">
-                                    </div>
-                                    <span class="gray">Remember me</span>
+                            <div class="accept_box">
+                                <div class="checkbox-container" onclick="toggleCheckbox(this)">
+                                    <img src="./assets/img/general/check_button.svg" alt="Checkbox"
+                                        class="checkbox-icon">
                                 </div>
+                                <span class="gray">Remember me</span>
                             </div>
                         </div>
+                        
 
                         <div class="gap logIn-btns">
-                            <button id="login_button_color"
+                            <button onclick="existingMailLogIn()" id="login_button_color"
                                 class="button-login-blue button-p text_login_btn mobile_login_btn hover">Log in</button>
                             <div id="guest-login">
                                 <p onclick="guestLogin()"

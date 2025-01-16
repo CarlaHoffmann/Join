@@ -56,8 +56,6 @@ document.addEventListener('DOMContentLoaded', animationWindow);
  * @param {Element} element - The checkbox container element that contains the icon to toggle.
  * @returns {void}
  */
-document.addEventListener('DOMContentLoaded', animationWindow);
-
 function toggleCheckbox(element) {
     const img = element.querySelector('.checkbox-icon');
     const isChecked = img.getAttribute('src') === 'assets/img/general/checked_button.svg';
@@ -72,41 +70,39 @@ function toggleCheckbox(element) {
     }
 }
 
-// function logIn() {
     
-document.addEventListener("DOMContentLoaded", () => {
-    // Elements for Login and Sign-Up
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
-    const confirmPasswordInput = document.getElementById("confirmPassword");
-    const loginButton = document.getElementById("login_button_color");
-    const signUpButton = document.getElementById("signupButton");
-    const emailContainer = document.getElementById("emailContainer");
-    const passwordContainer = document.getElementById("passwordButten");
-    const confirmPasswordContainer = document.getElementById("confirmPasswordButten");
+// document.addEventListener("DOMContentLoaded", () => {
+//     // Elements for Login and Sign-Up
+//     const emailInput = document.getElementById("email");
+//     const passwordInput = document.getElementById("password");
+//     const confirmPasswordInput = document.getElementById("confirmPassword");
+//     const loginButton = document.getElementById("login_button_color");
+//     const signUpButton = document.getElementById("signupButton");
+//     const emailContainer = document.getElementById("emailContainer");
+//     const passwordContainer = document.getElementById("passwordButten");
+//     const confirmPasswordContainer = document.getElementById("confirmPasswordButten");
 
-    // Error messages
-    const emailError = createErrorMessage("Check your email. Please try again.");
-    const passwordError = createErrorMessage("Check your password. Please try again.");
-    const confirmPasswordError = createErrorMessage("Your passwords don't match. Please try again.");
+//     // Error messages
+//     const emailError = createErrorMessage("Check your email. Please try again.");
+//     const passwordError = createErrorMessage("Check your password. Please try again.");
+//     const confirmPasswordError = createErrorMessage("Your passwords don't match. Please try again.");
 
-    // // Attach error messages
-    // attachErrorMessage(emailContainer, emailError);
-    // attachErrorMessage(passwordContainer, passwordError);
-    // if (confirmPasswordContainer) attachErrorMessage(confirmPasswordContainer, confirmPasswordError);
+//     // // Attach error messages
+//     // attachErrorMessage(emailContainer, emailError);
+//     // attachErrorMessage(passwordContainer, passwordError);
+//     // if (confirmPasswordContainer) attachErrorMessage(confirmPasswordContainer, confirmPasswordError);
 
-    // Event Listeners for Login and Sign-Up
-    loginButton?.addEventListener("click", (e) => {
-        e.preventDefault();
-        handleValidation(emailInput.value.trim(), passwordInput.value.trim(), null, false);
-    });
+//     // Event Listeners for Login and Sign-Up
+//     loginButton?.addEventListener("click", (e) => {
+//         e.preventDefault();
+//         handleValidation(emailInput.value.trim(), passwordInput.value.trim(), null, false);
+//     });
 
-    signUpButton?.addEventListener("click", (e) => {
-        e.preventDefault();
-        handleValidation(emailInput.value.trim(), passwordInput.value.trim(), confirmPasswordInput?.value.trim(), true);
-    });
-});
-// }
+//     signUpButton?.addEventListener("click", (e) => {
+//         e.preventDefault();
+//         handleValidation(emailInput.value.trim(), passwordInput.value.trim(), confirmPasswordInput?.value.trim(), true);
+//     });
+// });
 
 /**
  * Handles validation for login and sign-up forms.
@@ -127,6 +123,9 @@ function handleValidation(email, password, confirmPassword, isSignUp) {
     attachErrorMessage(passwordContainer, passwordError);
     if (confirmPasswordContainer) attachErrorMessage(confirmPasswordContainer, confirmPasswordError);
 
+    if(validateEmail(email)) {
+
+    }
     // Email validation bleibt bestehen
     validateField(validateEmail(email), emailContainer, emailError);
 
@@ -134,8 +133,8 @@ function handleValidation(email, password, confirmPassword, isSignUp) {
         // Passwort-Längenprüfung entfernt
         validateField(password !== '', passwordContainer, passwordError); 
         validateField(password === confirmPassword, confirmPasswordContainer, confirmPasswordError);
-    } else {
-        validateField(password !== '', passwordContainer, passwordError); // Nur prüfen, ob Passwort eingegeben wurde
+    // } else {
+    //     validateField(password !== '', passwordContainer, passwordError); // Nur prüfen, ob Passwort eingegeben wurde
     }
 }
 
@@ -217,9 +216,10 @@ function hideValid(container) {
  * @param {string} email - The email address to validate.
  * @returns {boolean} True if the email is valid, false otherwise.
  */
-function validateEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
+// function validateEmail(email) {
+//     console.log(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+//     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+// }
 
 
 
@@ -233,16 +233,38 @@ function validateEmail(email) {
 async function existingMailLogIn() {
     try {
         const users = await loadUsers();
-        const { mail, password } = getLoginCredentials();
-        const user = findUserByEmail(users, mail);
+        const mailIsTrue = validateEmail();
+        // const { mail, password } = getLoginCredentials();
+        if(!mailIsTrue) {
+            return;
+        }
+        
+        const user = findUserByEmail(users);
 
         if (user) {
-            await handleUserLogin(user, password);
+            await handleUserLogin(user);
         } else {
             showLoginError();
         }
     } catch (error) {
-        console.error("Fehler beim Anmelden:", error);
+        // console.error("Fehler beim Anmelden:", error);
+    }
+}
+
+
+function validateEmail() {
+    const emailInput = document.getElementById("email").value; // Get the value, not the element
+    const errorContainer = document.getElementById("emailError");
+    const emailError = `<span class="error-message">Check your email. Please try again.</span>`;
+    // const emailError = "Check your email. Please try again.";
+    let test = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput);
+    
+    if(emailInput !== '' && test) {
+        errorContainer.innerHTML = ''; // Clear any existing error message
+        return true;
+    } else {
+        errorContainer.innerHTML = emailError;
+        return false;
     }
 }
 
@@ -264,7 +286,8 @@ function getLoginCredentials() {
  * @param {string} email - The email address to search for
  * @returns {Object|undefined} The user object if found, undefined otherwise
  */
-function findUserByEmail(users, email) {
+function findUserByEmail(users) {
+    const email = document.getElementById("email").value;
     return users.find(u => u.mail === email);
 }
 
@@ -276,12 +299,17 @@ function findUserByEmail(users, email) {
  * @param {Object} user - The user object
  * @param {string} password - The password to check
  */
-async function handleUserLogin(user, password) {
-    if (user.password === password) {
+async function handleUserLogin(user) {
+    const passwordInput = document.getElementById("password").value;
+    const errorContainer = document.getElementById("passwordError");
+    const passwordError = `<span class="error-message">Check your password. Please try again.</span>`;
+    // const passwordError = "Check your password. Please try again.";
+    if (user.password === passwordInput) {
         await saveUser(user.name, user.mail);
         redirectToSummary();
     } else {
-        showPasswordError();
+        // showPasswordError();
+        errorContainer.innerHTML = passwordError;
     }
 }
 
@@ -346,7 +374,7 @@ async function saveUser(name, mail) {
         }
         let result = await response.json();
         console.log("Guest logged in:", result);
-        localStorage.setItem('currentUser', mail);
+        // localStorage.setItem('currentUser', mail);
     } catch (error) {
         console.error("Fehler beim Speichern des Benutzers:", error);
     }
