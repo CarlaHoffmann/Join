@@ -342,7 +342,7 @@ async function openTaskOverlay(task) {
                         <span class="info-value">${task.date}</span>
                     </div>
                     <div class="task-info">
-                        <span class="info-label">Priority:</span>
+                        <span class="info-label">Priority:&nbsp;&nbsp;</span>
                         <span class="info-value priority-container">
                             ${getPrioText(task.prio)}
                             <img src="${getPrioImage(task.prio)}" alt="Priority Icon" class="priority-icon">
