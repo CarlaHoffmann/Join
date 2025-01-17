@@ -241,7 +241,18 @@ async function toggleSubtaskStatus(path, taskId, subtaskKey) {
             ? 'assets/img/board/checked_button.svg'
             : 'assets/img/board/check_button.svg';
         currentTask.subtasks[subtaskKey].checked = newStatus;
+
+        const url = `${base_url}/tasks/${path}/${taskId}/subtasks/${subtaskKey}.json`;
+        await fetch(url, {
+            method: 'PUT',
+            body: JSON.stringify({ ...currentTask.subtasks[subtaskKey], checked: newStatus }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        // Anzeige aktualisieren
+        loadTasks();
     } catch (error) {
+        console.error("Fehler beim Aktualisieren des Subtask-Status:", error);
     }
 }
 

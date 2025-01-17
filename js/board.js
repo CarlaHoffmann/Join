@@ -90,14 +90,13 @@ async function displayTasks(taskArray, containerId) {
     const tasks = document.getElementById(containerId);
     const placeholder = document.getElementById(containerId.replace("Tasks", "Placeholder"));
 
-    // Farben für die Kontakte abrufen
     const contactColors = await getContactColors(taskArray);
 
     tasks.innerHTML = taskArray.map((task, taskIndex) => {
         const completedSubtasks = task.subtasks.filter(subtask => subtask.checked).length;
         const totalSubtasks = task.subtasks.length;
-        const subtasksText = `${completedSubtasks} von ${totalSubtasks} Subtasks`;
         const progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
+        const subtasksText = totalSubtasks > 0 ? `${completedSubtasks} von ${totalSubtasks} Subtasks` : "";
 
         const contactsHTML = task.contacts.map((contact, contactIndex) => {
             const contactColor = contactColors[taskIndex][contactIndex];
@@ -107,6 +106,15 @@ async function displayTasks(taskArray, containerId) {
 
         const prio = getPrio(task.prio);
 
+        // Fortschrittsanzeige und Subtasks ausblenden, wenn keine Subtasks existieren
+        const progressBarHTML = totalSubtasks > 0 ? `
+            <div class="progress-section">
+                <div class="progress">
+                    <div class="progress-bar" style="width: ${progressPercentage}%;"></div>
+                </div>
+                <p class="subtasks">${subtasksText}</p>
+            </div>` : '';
+
         return `
             <div id="task-${task.id}" class="task-card" draggable="true" 
                 onclick="openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})"
@@ -114,12 +122,7 @@ async function displayTasks(taskArray, containerId) {
                 <div class="task-type" style="background-color: ${getCategoryColor(task.category)}">${task.category}</div>
                 <h3 class="task-title">${task.title}</h3>
                 <p class="task-description">${task.description}</p>
-                <div class="progress-section">
-                    <div class="progress">
-                        <div class="progress-bar" style="width: ${progressPercentage}%;"></div>
-                    </div>
-                    <p class="subtasks">${subtasksText}</p>
-                </div>
+                ${progressBarHTML}
                 <div class="members-section">
                     <div class="members">${contactsHTML}</div>
                     <div class="priority">
@@ -130,9 +133,9 @@ async function displayTasks(taskArray, containerId) {
         `;
     }).join('');
 
-    // Placeholder-Logik
     placeholder.style.display = taskArray.length === 0 ? "block" : "none";
 }
+
 
 
 /**

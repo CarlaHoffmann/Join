@@ -135,14 +135,22 @@ function setOverlayPriority(priority) {
  * @function addOverlaySubtask
  * @returns {void}
  */
-function addOverlaySubtask() {
-    const newSubtask = document.getElementById('newSubtaskInput').value.trim();
-    if (newSubtask) {
-        const subtasksList = document.getElementById('overlaySubtasks');
-        subtasksList.innerHTML += `<li>${newSubtask}</li>`;
-        document.getElementById('newSubtaskInput').value = '';
-    }
+async function addOverlaySubtask() {
+    const input = document.getElementById('newSubtaskInput');
+    const newSubtask = input.value.trim();
+    if (!newSubtask) return;
+
+    const url = `${base_url}/tasks/${currentTask.path}/${currentTask.id}/subtasks.json`;
+    await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify({ task: newSubtask, checked: false }),
+        headers: { 'Content-Type': 'application/json' },
+    });
+
+    input.value = '';
+    loadTasks();
 }
+
 
 
 /**
