@@ -8,21 +8,62 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  overflow: auto;
+  /* overflow: hidden; */
+}
+
+.headline-container {
+  max-width: 1056px;
+  width: calc(100vw - 232px - 112px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* padding-left: 64px; */
+  /* padding-right: 64px; */
+  padding-top: 80px;
+}
+
+.text_board_headline {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
 }
 
 
+.column-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: stroke 0.3s ease;
+}
 
+.column-icon:hover rect,
+.column-icon:hover path {
+  stroke: #29ABE2; 
+  transition: stroke 0.2s ease;
+}
+
+
+.search-icon {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+.board-column-highlight {
+  border: dashed 1px var(--grey);
+  border-radius: 24px;
+}
 
 .board-columns {
-  width: 1208px;
+  max-width: 1208px;
+  /* width: calc(100vw - 232px - 92px); */
+  height: 588px;
   display: flex;
   padding-left: 64px;
   padding-right: 64px;
   justify-content: space-between;
   /*flex-wrap: wrap;*/
   margin-top: 50px;
-  height: 100%;
   gap: 24px;
 }
 
@@ -131,7 +172,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /*margin-bottom: 16px;*/
+  padding-bottom: 16px;
 }
 
 #board-add-task-overlay {
@@ -215,8 +256,8 @@
 }
 
 .content-board {
-  /* margin: 60px 20px 100px;
-  height: calc(100% - 60px - 100px); */
+  /* margin: 60px 20px 100px; */
+  /* height: calc(100% - 60px - 100px); */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -356,47 +397,7 @@
   display: none;
 }
 
-.headline-container {
-  width: 1056px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  /* padding-left: 64px; */
-  /* padding-right: 64px; */
-  padding-top: 80px;
-}
 
-.text_board_headline {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 24px;
-}
-
-
-.column-icon {
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  transition: stroke 0.3s ease;
-}
-
-.column-icon:hover rect,
-.column-icon:hover path {
-  stroke: #29ABE2; 
-  transition: stroke 0.2s ease;
-}
-
-
-.search-icon {
-  cursor: pointer;
-  width: 18px;
-  height: 18px;
-}
-
-.board-column-highlight {
-  border: dashed 1px var(--grey);
-  border-radius: 24px;
-}
 
 
 /* Board Task */
@@ -764,18 +765,4 @@
 .title-edit {
   box-sizing: border-box;
   width: 440px;
-}
-
-@media(max-width: 680px) {
-  .add-task-edit-form {
-    width: 440px;
-  }
-}
-@media(max-width: 600px) {
-  .add-task-edit-form {
-    width: 100%;
-  }
-  .title-edit {
-    width: 100%;
-  }
 }
