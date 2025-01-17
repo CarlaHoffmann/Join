@@ -46,7 +46,7 @@ body {
 }
 
 .subtasks-box {
-    max-height: 170px;
+    max-height: 80px;
     overflow-y: auto;
 }
 
@@ -204,7 +204,7 @@ body {
 }
 
 .userContainer {
-    max-height: 160px;
+    max-height: 90px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
