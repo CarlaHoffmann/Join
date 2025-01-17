@@ -87,18 +87,6 @@
 }
 
 /* Technisches Task-Design */
-.taskOverlay {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 48px 24px 48px 24px;
-  border-radius: 30px;
-  justify-content: space-between;
-  gap: 15px;
-  box-sizing: border-box;
-  background-color: white;
-}
-
 /* Schließen-Button */
 .close img {
   cursor: pointer;
