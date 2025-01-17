@@ -37,7 +37,7 @@
 
 @media (max-width: 1136px) {
   .tasks-container {
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     width: 100%;
     display: flex;
     overflow-x: auto;
