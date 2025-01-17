@@ -11,7 +11,7 @@
   display: block;
 }
 
-@media (max-width: 1423px) {
+@media (max-width: 1440px) {
   .tasks-container {
     overflow-y: hidden;
     width: 100%;
@@ -25,6 +25,7 @@
     width: calc(100vw - 232px);
     flex-direction: column;
     flex-wrap: nowrap;
+    overflow-y: scroll;
   }
 
   .board-column {
@@ -158,6 +159,15 @@
     height: calc(100vh - 160px);
     width: 100vw;
     bottom: 80px;
+  }
+
+  .headline-container {
+    width: calc(100vw - 128px);
+  }
+
+  .board-columns {
+    padding: 0;
+    width: calc(100vw - 128px);
   }
 
   .arrow_signUp {
