@@ -106,6 +106,45 @@
   }
 }
 
+@media (max-width: 1200px) {
+  /* sign-up */
+  .join-logo {
+    background-color: #2A3647;
+  }
+}
+
+@media(max-width: 1024px) {
+  .headerLogo {
+    top: 50px;
+    left: 50px;
+  }
+}
+
+@media (min-width: 900px) {
+  .mobile-login {
+    display: none;
+    height: 80px;
+  }
+
+  .butten-mobile {
+    display: none;
+    width: 150px;
+  }
+}
+
+@media (max-width: 900px) {
+  .form-wrapper-signup {
+    padding: 32px 16px;
+  }
+
+  .arrow_signUp {
+    margin: 0;
+    position: absolute;
+    left: 0px;
+    top: 16px;
+  }
+}
+
 @media (max-width: 840px), (max-height: 800px) {
   .outer-box {
       display: flex;
@@ -114,22 +153,107 @@
   }
 }
 
-@media(max-width: 680px) {
+@media (max-width: 680px) {
   .outer-box {
-      height: calc(100vh - 160px);
-      width: 100vw;
-      bottom: 80px;
+    height: calc(100vh - 160px);
+    width: 100vw;
+    bottom: 80px;
+  }
+
+  .arrow_signUp {
+    margin: 0;
+    position: absolute;
+    left: 0px;
+    top: 16px;
+  }
+  .right_section {
+    margin-left: 0px;
+  }
+
+  .form-wrapper {
+    padding: 32px 16px;
+  }
+
+  .input-container {
+    width: 364px;
+  }
+
+  .form-container {
+    padding: 16px;
+  }
+
+  .accept_box {
+    height: 16px;
+  }
+
+  .logIn-btns {
+    flex-direction: column;
+    gap: 21px;
+    width: fit-content;
+  }
+
+  #login_button_color {
+    width: 100%;
+  }
+
+  #signup-linking-desktop {
+    display: none;
+  }
+
+  #signup-linking-mobile {
+    display: flex;
+    position: absolute;
+    bottom: 80px;
+  }
+
+  .add-task-edit-form {
+    width: 440px;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-height: 800px) and (max-width: 680px) {
+  .logIn-page {
+    height: 800px;
+    overflow-y: auto;
+  }
+
+  .signUp-page {
+    height: 800px;
+    overflow-y: auto;
+  }
+
+  #signup-linking-mobile {
+    display: flex;
+    position: relative;
+    top: 0px;
+  }
+
+  .login-footer {
+    position: relative;
+    top: 10px;
+  }
+}
+
+@media(max-width: 600px) {
+  .add-task-edit-form {
+    width: 100%;
+  }
+  .title-edit {
+    width: 100%;
+  }
+}
+
+@media(max-width: 500px) {
   h1 {
     margin-bottom: 16px;
     font-size: 61px;
     font-weight: 700;
     line-height: 73.2px;
   }
-
+  
+  h1 {
+    font-size: 40px;
+  }
 
 
   .board-columns {
@@ -208,108 +332,13 @@
   .buttonPrio_edit {
     width: 100% !important;
   }
-}
-
-@media (max-width: 1200px) {
-  /* sign-up */
-  .join-logo {
-    background-color: #2A3647;
-  }
-}
-
-@media (max-width: 500px) {
-  h1 {
-    font-size: 40px;
-  }
-
+  
   .content {
     margin-left: 16px;
     margin-right: 16px;
     margin-top: 40px;
   }
-}
 
-@media(max-width: 1024px) {
-  .headerLogo {
-    top: 50px;
-    left: 50px;
-  }
-}
-
-@media (min-width: 900px) {
-  .mobile-login {
-    display: none;
-    height: 80px;
-  }
-
-  .butten-mobile {
-    display: none;
-    width: 150px;
-  }
-}
-
-@media (max-width: 900px) {
-  .form-wrapper-signup {
-    padding: 32px 16px;
-  }
-
-  .arrow_signUp {
-    margin: 0;
-    position: absolute;
-    left: 0px;
-    top: 16px;
-  }
-}
-
-@media (max-width: 680px) {
-  .arrow_signUp {
-    margin: 0;
-    position: absolute;
-    left: 0px;
-    top: 16px;
-  }
-  .right_section {
-    margin-left: 0px;
-  }
-
-  .form-wrapper {
-    padding: 32px 16px;
-  }
-
-  .input-container {
-    width: 364px;
-  }
-
-  .form-container {
-    padding: 16px;
-  }
-
-  .accept_box {
-    height: 16px;
-  }
-
-  .logIn-btns {
-    flex-direction: column;
-    gap: 21px;
-    width: fit-content;
-  }
-
-  #login_button_color {
-    width: 100%;
-  }
-
-  #signup-linking-desktop {
-    display: none;
-  }
-
-  #signup-linking-mobile {
-    display: flex;
-    position: absolute;
-    bottom: 80px;
-  }
-}
-
-@media(max-width: 500px) {
   .input-container {
     width: 264px;
   }
@@ -326,42 +355,5 @@
 
   .input-with-image {
     width: 200px;
-  }
-}
-
-@media (max-height: 800px) and (max-width: 680px) {
-  .logIn-page {
-    height: 800px;
-    overflow-y: auto;
-  }
-
-  .signUp-page {
-    height: 800px;
-    overflow-y: auto;
-  }
-
-  #signup-linking-mobile {
-    display: flex;
-    position: relative;
-    top: 0px;
-  }
-
-  .login-footer {
-    position: relative;
-    top: 10px;
-  }
-}
-
-@media(max-width: 680px) {
-  .add-task-edit-form {
-    width: 440px;
-  }
-}
-@media(max-width: 600px) {
-  .add-task-edit-form {
-    width: 100%;
-  }
-  .title-edit {
-    width: 100%;
   }
 }
