@@ -327,7 +327,7 @@ async function handleUserLogin(user) {
                 successOverlay.classList.remove("show");
                 redirectToSummary();
             }, ); 
-        }, 2000); // visible 2 sec
+        }, 1800); // visible 2 sec
     } else {
         errorContainer.innerHTML = passwordError;
     }
