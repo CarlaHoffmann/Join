@@ -11,9 +11,9 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 10px;
-  overflow: hidden;
-  box-sizing: border-box; 
+  margin-top: 24px;
+  /*overflow: hidden;
+  box-sizing: border-box;*/
 }
 
 /* Task type badge */

@@ -45,7 +45,7 @@
 
 .placeholder {
   display: none; 
-  max-width: 252px;
+  /*max-width: 252px;*/
   background-color: #E7E7E7;
   color: #a0a0a0;
   font-size: 1rem;
@@ -53,7 +53,8 @@
   padding: 15px 0;
   border: 2px dashed #d1d1d1; 
   border-radius: 10px;
-  margin: 10px 0; 
+  margin-bottom: 24px;
+  margin-top: 24px;
 }
 
 
@@ -124,7 +125,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  /*margin-bottom: 16px;*/
 }
 
 #board-add-task-overlay {
@@ -220,18 +221,19 @@
 }
 
 .board-column {
-  width: 280px;
+  width: 252px;
   margin-bottom: 24px;
-  padding: 8px;
 }
 
 .d-flex-start {
   display: flex;
+  padding-left: 64px;
+  padding-right: 64px;
   justify-content: space-between;
   /*flex-wrap: wrap;*/
-  margin-top: 16px;
-  gap: 8px;
+  margin-top: 50px;
   height: 100%;
+  gap: 24px;
 }
 
 .board-search-add {
@@ -360,6 +362,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-left: 64px;
+  padding-right: 64px;
 }
 
 .text_board_headline {
@@ -448,7 +452,7 @@
 }
 
 .tasks-container {
-  width: 280px;
+  width: 252px;
 }
 
 .task-description {
@@ -732,7 +736,6 @@
 }
 
 .description-overlay {
-  background-color: red;
   overflow-y: auto;
 }
 
