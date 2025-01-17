@@ -249,7 +249,6 @@ async function toggleSubtaskStatus(path, taskId, subtaskKey) {
             headers: { 'Content-Type': 'application/json' },
         });
 
-        // Anzeige aktualisieren
         loadTasks();
     } catch (error) {
         console.error("Fehler beim Aktualisieren des Subtask-Status:", error);

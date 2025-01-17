@@ -106,7 +106,6 @@ async function displayTasks(taskArray, containerId) {
 
         const prio = getPrio(task.prio);
 
-        // Fortschrittsanzeige und Subtasks ausblenden, wenn keine Subtasks existieren
         const progressBarHTML = totalSubtasks > 0 ? `
             <div class="progress-section">
                 <div class="progress">
