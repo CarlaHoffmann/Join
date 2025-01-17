@@ -449,6 +449,12 @@
   font-weight: 400;
   line-height: 19.2px;
   color: #a8a8a8;
+  display: -webkit-box; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;  
+  -webkit-line-clamp: 2;  
+  height: calc(1.2em 3);          
 }
 
 .amount-subtask {
