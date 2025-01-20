@@ -10,11 +10,33 @@ const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedataba
 
 async function handleSignUpClick(event) {
     event.preventDefault(); // Verhindert das Standard-Submit-Event
-    if()
-    const users = await loadUsers();
-    if (validateSignUp(users) === true) {
-        await createContact();
-        console.log('User is valid. Submitting...');
+    const checkboxContainer = document.getElementById('checkbox-container');
+    const isChecked = checkboxContainer.getAttribute('data-checked') === 'true';
+    console.log(isChecked);
+    if(isChecked) {
+        const users = await loadUsers();
+        if (validateSignUp(users) === true) {
+            await createContact();
+            console.log('User is valid. Submitting...');
+        }
+    } else {
+        console.error('Please accept Privacy Policy');
+    }
+}
+
+function toggleCheckboxPrivacyPolicy(element) {
+    const img = element.querySelector('.checkbox-icon');
+    const isChecked = img.getAttribute('src') === 'assets/img/general/checked_button.svg';
+
+    // Toggle Zustand
+    if (isChecked) {
+        img.setAttribute('src', 'assets/img/general/check_button.svg');
+        element.dataset.checked = "false";
+        // element.setAttribute('value', 'false');
+    } else {
+        img.setAttribute('src', 'assets/img/general/checked_button.svg');
+        element.dataset.checked = "true";
+        // element.setAttribute('value', 'true');
     }
 }
 
