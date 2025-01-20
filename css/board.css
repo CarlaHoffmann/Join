@@ -57,7 +57,7 @@
 .board-columns {
   max-width: 1208px;
   /* width: calc(100vw - 232px - 92px); */
-  height: 588px;
+  /* height: 588px; */
   display: flex;
   padding-left: 64px;
   padding-right: 64px;
