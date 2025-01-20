@@ -10,6 +10,7 @@ const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedataba
 
 async function handleSignUpClick(event) {
     event.preventDefault(); // Verhindert das Standard-Submit-Event
+    if()
     const users = await loadUsers();
     if (validateSignUp(users) === true) {
         await createContact();
@@ -500,13 +501,13 @@ async function handleUserSignUp(user) {
  * @function successful
  * @returns {void}
  */
-function successful() {
-    let signupButton = document.getElementById('signupButton');
-    let successMessage = document.getElementById('successMessage');
-    signupButton.classList.add('cover-button');
-    successMessage.classList.remove('hidden');
-    successMessage.classList.add('show');
-    setTimeout(() => {
-        window.location.href = './summary.html';
-    }, 1500);
-}
+// function successful() {
+//     let signupButton = document.getElementById('signupButton');
+//     let successMessage = document.getElementById('successMessage');
+//     signupButton.classList.add('cover-button');
+//     successMessage.classList.remove('hidden');
+//     successMessage.classList.add('show');
+//     setTimeout(() => {
+//         window.location.href = './summary.html';
+//     }, 1500);
+// }
