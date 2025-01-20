@@ -17,12 +17,6 @@ async function handleSignUpClick(event) {
     }
 }
 
-// function validateSignUp(users) {
-//     let isValid = true;
-//     isValid = checkExistingMail(users) && isValid;
-//     isValid = checkSignUpPassword() && isValid;
-//     return isValid;
-// }
 async function validateSignUp(users) {
     // Zuerst E-Mail überprüfen
 
@@ -448,5 +442,36 @@ function toggleConfirmPasswordVisibility() {
       x.type = "password";
       document.getElementById('seeConfirm').classList.add('hidden');
       document.getElementById('notSeeConfirm').classList.remove('hidden');
+    }
+}
+
+
+
+
+async function handleUserSignUp(user) {
+    const passwordInput = document.getElementById("password").value;
+    const errorContainer = document.getElementById("passwordError");
+    const successMessage = document.getElementById("successMessage");
+    const successOverlay = document.getElementById("successOverlay");
+    const passwordError = `<span class="error-message">Check your password. Please try again.</span>`;
+
+    if (user.password === passwordInput) {
+        await saveUser(user.name, user.mail);
+
+        successOverlay.classList.add("show");
+        successMessage.style.display = "block";
+
+        setTimeout(() => {
+            successMessage.classList.add("hide"); 
+            successOverlay.classList.remove("show");
+
+            setTimeout(() => {
+                successMessage.style.display = "none"; 
+                successOverlay.classList.remove("show");
+                redirectToSummary();
+            },); 
+        }, 1600); // visible 2 sec
+    } else {
+        errorContainer.innerHTML = passwordError;
     }
 }

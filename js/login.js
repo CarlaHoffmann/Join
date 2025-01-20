@@ -315,19 +315,19 @@ async function handleUserLogin(user) {
     if (user.password === passwordInput) {
         await saveUser(user.name, user.mail);
 
-        successOverlay.classList.add("show");
-        successMessage.style.display = "block";
+        // successOverlay.classList.add("show");
+        // successMessage.style.display = "block";
 
-        setTimeout(() => {
-            successMessage.classList.add("hide"); 
-            successOverlay.classList.remove("show");
+        // setTimeout(() => {
+        //     successMessage.classList.add("hide"); 
+        //     successOverlay.classList.remove("show");
 
-            setTimeout(() => {
-                successMessage.style.display = "none"; 
-                successOverlay.classList.remove("show");
+        //     setTimeout(() => {
+        //         successMessage.style.display = "none"; 
+        //         successOverlay.classList.remove("show");
                 redirectToSummary();
-            },); 
-        }, 1600); // visible 2 sec
+        //     },); 
+        // }, 1600); // visible 2 sec
     } else {
         errorContainer.innerHTML = passwordError;
     }
