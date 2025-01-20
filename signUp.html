@@ -54,11 +54,11 @@
                         <div>
                             <div id="passwordButten" class="input-container">
                                 <input id="password" placeholder="Password" type="password" class="input-with-image"
-                                    onclick="changePassword()" required>
+                                oninput="handlePasswordInputSignUp()" required>
                                 <img src="./assets/img/login/lock.png" alt="" id="passwordLock" class="password_lock">
-                                <a role="button" class="password_butten" onclick="togglePasswordVisibility()">
-                                    <img src="./assets/img/login/visibility_off.svg" alt="" id="notSee" class="hidden">
-                                    <img src="./assets/img/login/visibility.svg" alt="" id="lock" class="hidden">
+                                <a role="button" id="visibilityButton" class="password_butten hidden" onclick="togglePasswordVisibility()">
+                                    <img src="./assets/img/login/visibility_off.svg" alt="" id="notSee">
+                                    <img src="./assets/img/login/visibility.svg" alt="" id="see" class="hidden">
                                 </a>
                             </div>
                             <div id="pw-error-1" class="error-message"></div>
@@ -66,13 +66,11 @@
 
                         <div>
                             <div id="confirmPasswordButten" class="input-container">
-                                <input id="confirmPassword" placeholder="Password" type="password"
-                                    class="input-with-image" onclick="changeConfirmPassword()" required>
-                                <img src="./assets/img/login/lock.png" alt="" id="confirmPasswordLock"
-                                    class="password_lock">
-                                <a role="button" class="password_butten" onclick="toggleConfirmPasswordVisibility()">
-                                    <img src="./assets/img/login/visibility_off.svg" alt="" id="notSeeConfirm"
-                                        class="hidden">
+                                <input id="confirmPassword" placeholder="Password" type="password" class="input-with-image" 
+                                oninput="handleConfirmPasswordInputSignUp()" required>
+                                <img src="./assets/img/login/lock.png" alt="" id="confirmPasswordLock" class="password_lock">
+                                <a role="button" id="confirmVisibilityButton" class="password_butten hidden" onclick="toggleConfirmPasswordVisibility()">
+                                    <img src="./assets/img/login/visibility_off.svg" alt="" id="notSeeConfirm">
                                     <img src="./assets/img/login/visibility.svg" alt="" id="seeConfirm" class="hidden">
                                 </a>
                             </div>

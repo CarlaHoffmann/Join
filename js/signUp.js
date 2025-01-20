@@ -292,26 +292,7 @@ async function getLoggedIn() {
     }
 }
 
-/**
- * Displays a success message and redirects to the summary page after a delay.
- * 
- * - Adds a cover effect to the sign-up button.
- * - Shows the success message by toggling the appropriate classes.
- * - Redirects the user to the summary page after 1.5 seconds.
- * 
- * @function successful
- * @returns {void}
- */
-function successful() {
-    let signupButton = document.getElementById('signupButton');
-    let successMessage = document.getElementById('successMessage');
-    signupButton.classList.add('cover-button');
-    successMessage.classList.remove('hidden');
-    successMessage.classList.add('show');
-    setTimeout(() => {
-        window.location.href = './summary.html';
-    }, 1500);
-}
+
 
 
 /**
@@ -323,12 +304,13 @@ function successful() {
  * @function changeName
  * @returns {void}
  */
-function changeName() {
-    document.getElementById('nameContainer').classList.add('password_container_border');
-    document.getElementById('emailContainer').classList.remove('password_container_border');
-    document.getElementById('passwordButten').classList.remove('password_container_border');
-    document.getElementById('confirmPasswordButten').classList.remove('password_container_border');
-}
+//Was macht diese Funktion??
+// function changeName() { 
+//     document.getElementById('nameContainer').classList.add('password_container_border');
+//     document.getElementById('emailContainer').classList.remove('password_container_border');
+//     document.getElementById('passwordButten').classList.remove('password_container_border');
+//     document.getElementById('confirmPasswordButten').classList.remove('password_container_border');
+// }
 
 /**
  * Changes the border styling of the email input container and resets the styling of other containers.
@@ -339,11 +321,43 @@ function changeName() {
  * @function changeEmail
  * @returns {void}
  */
-function changeEmail() {
-    document.getElementById('nameContainer').classList.remove('password_container_border');
-    document.getElementById('emailContainer').classList.add('password_container_border');
-    document.getElementById('passwordButten').classList.remove('password_container_border');
-    document.getElementById('confirmPasswordButten').classList.remove('password_container_border');
+//Was macht diese Funktion??
+// function changeEmail() { 
+//     document.getElementById('nameContainer').classList.remove('password_container_border');
+//     document.getElementById('emailContainer').classList.add('password_container_border');
+//     document.getElementById('passwordButten').classList.remove('password_container_border');
+//     document.getElementById('confirmPasswordButten').classList.remove('password_container_border');
+// }
+
+
+
+
+function handlePasswordInputSignUp() {
+    const passwordInput = document.getElementById("password");
+    const lockIcon = document.getElementById("passwordLock");
+    const visibilityButton = document.getElementById("visibilityButton");
+
+    if (passwordInput.value.trim() !== "") {
+        lockIcon.style.display = "none";
+        visibilityButton.classList.remove("hidden");
+    } else {
+        lockIcon.style.display = "block";
+        visibilityButton.classList.add("hidden");
+    }
+}
+
+function handleConfirmPasswordInputSignUp() {
+    const passwordInput = document.getElementById("confirmPassword");
+    const lockIcon = document.getElementById("confirmPasswordLock");
+    const visibilityButton = document.getElementById("confirmVisibilityButton");
+
+    if (passwordInput.value.trim() !== "") {
+        lockIcon.style.display = "none";
+        visibilityButton.classList.remove("hidden");
+    } else {
+        lockIcon.style.display = "block";
+        visibilityButton.classList.add("hidden");
+    }
 }
 
 /**
@@ -371,7 +385,6 @@ function changePassword() {
     }
 }
 
-
 /**
  * Changes the border styling of the confirm password input container and manages visibility toggles for the confirm password field.
  * 
@@ -389,7 +402,7 @@ function changeConfirmPassword() {
     document.getElementById('confirmPasswordButten').classList.add('password_container_border');
     var x = document.getElementById("confirmPassword");
     if (x.type === "password") {
-        document.getElementById('confirmpPasswordLock').classList.add('hidden');
+        document.getElementById('confirmPasswordLock').classList.add('hidden'); 
         document.getElementById('notSeeConfirm').classList.remove('hidden');
     } else {
         document.getElementById('passwordLock').classList.add('hidden');
@@ -447,7 +460,7 @@ function toggleConfirmPasswordVisibility() {
 
 
 
-
+// anpassen für SignUp
 async function handleUserSignUp(user) {
     const passwordInput = document.getElementById("password").value;
     const errorContainer = document.getElementById("passwordError");
@@ -474,4 +487,25 @@ async function handleUserSignUp(user) {
     } else {
         errorContainer.innerHTML = passwordError;
     }
+}
+
+/**
+ * Displays a success message and redirects to the summary page after a delay.
+ * 
+ * - Adds a cover effect to the sign-up button.
+ * - Shows the success message by toggling the appropriate classes.
+ * - Redirects the user to the summary page after 1.5 seconds.
+ * 
+ * @function successful
+ * @returns {void}
+ */
+function successful() {
+    let signupButton = document.getElementById('signupButton');
+    let successMessage = document.getElementById('successMessage');
+    signupButton.classList.add('cover-button');
+    successMessage.classList.remove('hidden');
+    successMessage.classList.add('show');
+    setTimeout(() => {
+        window.location.href = './summary.html';
+    }, 1500);
 }
