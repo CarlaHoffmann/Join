@@ -61,7 +61,6 @@ async function addContact(){
         loadContactData();
         document.getElementById("wrong-mail-error-message").style.display="none";
         fields.forEach(element => {
-            console.log(element);
             element.style.display="none";    
         });
     } else{
