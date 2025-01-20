@@ -1,4 +1,12 @@
 /* General styles */
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
 /* Standard-Zustand für Tasks */
 .task-card {
   background-color: #ffffff;

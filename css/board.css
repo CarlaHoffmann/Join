@@ -104,7 +104,7 @@
 }
 
 .placeholder {
-  display: none; 
+  /* display: none;  */
   /*max-width: 252px;*/
   background-color: #E7E7E7;
   color: #a0a0a0;

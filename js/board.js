@@ -40,6 +40,8 @@ async function loadTasks() {
  * @returns {Promise<void>} Resolves when tasks are loaded and displayed.
  */
 async function loadTaskData(path, containerId) {
+    const placeholder = document.getElementById(containerId.replace("Tasks", "Placeholder"));
+    console.log(placeholder);
     try {
         const url = `${base_url}/tasks/${path}.json`;
         const response = await fetch(url);
@@ -49,8 +51,17 @@ async function loadTaskData(path, containerId) {
         }
 
         const data = await response.json();
-        const taskArray = processTasks(data, path);
-        displayTasks(taskArray, containerId);
+        console.log(data);
+        if(data) {
+            placeholder.classList.add('hide');
+            console.log(placeholder);
+            const taskArray = processTasks(data, path);
+            displayTasks(taskArray, containerId);
+        } else {
+            placeholder.classList.add('show');
+            console.log(placeholder);
+        }
+        // updatePlaceholders();
     } catch (error) {
         // Error handling can be implemented here or logged elsewhere if needed
     }
@@ -66,7 +77,9 @@ async function loadTaskData(path, containerId) {
  * @returns {Array<Object>} An array of processed task objects with additional properties.
  */
 function processTasks(tasks, status) {
-    if (!tasks) return [];
+    if (!tasks) {
+        return [];
+    }
     return Object.keys(tasks).map(key => ({
         path: status,
         id: key,
@@ -88,7 +101,7 @@ function processTasks(tasks, status) {
  */
 async function displayTasks(taskArray, containerId) {
     const tasks = document.getElementById(containerId);
-    const placeholder = document.getElementById(containerId.replace("Tasks", "Placeholder"));
+    
 
     const contactColors = await getContactColors(taskArray);
 
@@ -132,7 +145,7 @@ async function displayTasks(taskArray, containerId) {
         `;
     }).join('');
 
-    placeholder.style.display = taskArray.length === 0 ? "block" : "none";
+    // placeholder.style.display = taskArray.length === 0 ? "block" : "none";    
 }
 
 

@@ -285,10 +285,18 @@ function updatePlaceholders() {
     columns.forEach(column => {
         const tasksContainer = document.getElementById(column + "Tasks");
         const placeholder = document.getElementById(column + "Placeholder");
-        if (tasksContainer.childElementCount === 0) {
-            placeholder.style.display = "block";
+        if (tasksContainer.contains('task-card')) {
+            // placeholder.style.display = "block";
+            if(placeholder.contains('hide')) {
+                placeholder.classList.remove('hide');
+            }
+            placeholder.classList.add('show');
         } else {
-            placeholder.style.display = "none";
+            // placeholder.style.display = "none";
+            if(placeholder.contains('show')) {
+                placeholder.classList.remove('show');
+            }
+            placeholder.classList.add('hide');
         }
     });
 }
