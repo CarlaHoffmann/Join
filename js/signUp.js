@@ -37,6 +37,7 @@ function checkExistingMail(users) {
         
         if (mailIsValid) {
             const user = findUserByEmail(users); // Pass email to the function
+            console.log(user);
             if (user) {
                 mailError.innerHTML = "Check your email and password. Please try again.";
                 return false;
