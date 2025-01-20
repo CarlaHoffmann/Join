@@ -245,6 +245,14 @@
 }
 
 @media(max-width: 600px) {
+  .headline-container {
+    width: calc(100vw - 32px);
+  }
+
+  .board-columns {
+    width: calc(100vw - 32px);
+  }
+
   .add-task-edit-form {
     width: 100%;
   }
@@ -254,6 +262,10 @@
 }
 
 @media(max-width: 500px) {
+  .headline-container {
+    padding-top: 0;
+  }
+
   h1 {
     margin-bottom: 16px;
     font-size: 61px;
