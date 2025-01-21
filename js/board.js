@@ -83,62 +83,27 @@ function processTasks(tasks, status) {
 
 
 /**
- * Displays a list of tasks in the specified container with progress, contacts, and priority information.
+ * Displays a list of tasks in the specified container.
  * 
  * @async
  * @function displayTasks
- * @param {Array<Object>} taskArray - An array of task objects to be displayed.
- * @param {string} containerId - The ID of the container where tasks will be rendered.
+ * @param {Array<Object>} taskArray - Array of task objects to be displayed.
+ * @param {string} containerId - ID of the container where tasks will be rendered.
  * @returns {Promise<void>}
  */
 async function displayTasks(taskArray, containerId) {
     const tasks = document.getElementById(containerId);
-    console.log(containerId);
-
     const contactColors = await getContactColors(taskArray);
-    // getEmptyTaskField(containerId);
-    
-    tasks.innerHTML = taskArray.map((task, taskIndex) => {
-        const completedSubtasks = task.subtasks.filter(subtask => subtask.checked).length;
-        const totalSubtasks = task.subtasks.length;
-        const progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
-        const subtasksText = totalSubtasks > 0 ? `${completedSubtasks} von ${totalSubtasks} Subtasks` : "";
+    let taskHTML = "";
 
-        const contactsHTML = task.contacts.map((contact, contactIndex) => {
-            const contactColor = contactColors[taskIndex][contactIndex];
-            const initials = getContactInitials(contact);
-            return `<div class="member" style="background-color: ${contactColor}">${initials}</div>`;
-        }).join('');
+    for (let i = 0; i < taskArray.length; i++) {
+        taskHTML += taskTemplate(taskArray[i], contactColors[i]);
+    }
 
-        const prio = getPrio(task.prio);
-
-        const progressBarHTML = totalSubtasks > 0 ? `
-            <div class="progress-section">
-                <div class="progress">
-                    <div class="progress-bar" style="width: ${progressPercentage}%;"></div>
-                </div>
-                <p class="subtasks">${subtasksText}</p>
-            </div>` : '';
-
-        return `
-            <div id="task-${task.id}" class="task-card" draggable="true" 
-                onclick="openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})"
-                ondragstart="drag(event)" ondragend="dragEnd(event)">
-                <div class="task-type" style="background-color: ${getCategoryColor(task.category)}">${task.category}</div>
-                <h3 class="task-title">${task.title}</h3>
-                <p class="task-description">${task.description}</p>
-                ${progressBarHTML}
-                <div class="members-section">
-                    <div class="members">${contactsHTML}</div>
-                    <div class="priority">
-                        <img src="./assets/img/add_task/prio_${prio}.svg" alt="${prio} icon">
-                    </div>
-                </div>
-            </div>
-        `;
-    }).join('');
-
+    tasks.innerHTML = taskHTML;
 }
+
+
 
 // function getEmptyTaskField() {
 //     const tasks = document.getElementById(containerId);

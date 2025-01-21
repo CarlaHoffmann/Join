@@ -1,3 +1,67 @@
+/**
+ * Generates an HTML template for a task.
+ * 
+ * @function taskTemplate
+ * @param {Object} task - The task object containing task details.
+ * @param {Array<string>} contactColors - Array of colors for the task's contacts.
+ * @returns {string} The HTML string for the task.
+ */
+function taskTemplate(task, contactColors) {
+    const completedSubtasks = task.subtasks.filter(subtask => subtask.checked).length;
+    const totalSubtasks = task.subtasks.length;
+    const progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
+    const subtasksText = totalSubtasks > 0 ? `${completedSubtasks} von ${totalSubtasks} Subtasks` : "";
+
+    const contactsHTML = task.contacts.map((contact, index) => `
+        <div class="member" style="background-color: ${contactColors[index]}">
+            ${getContactInitials(contact)}
+        </div>`).join('');
+
+    const progressBarHTML = totalSubtasks > 0 ? `
+        <div class="progress-section">
+            <div class="progress">
+                <div class="progress-bar" style="width: ${progressPercentage}%;"></div>
+            </div>
+            <p class="subtasks">${subtasksText}</p>
+        </div>` : '';
+
+    return `
+        <div id="task-${task.id}" class="task-card" draggable="true"
+            onclick="openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})"
+            ondragstart="drag(event)" ondragend="dragEnd(event)">
+            <div class="task-type" style="background-color: ${getCategoryColor(task.category)}">
+                ${task.category}
+            </div>
+            <h3 class="task-title">${task.title}</h3>
+            <p class="task-description">${task.description}</p>
+            ${progressBarHTML}
+            <div class="members-section">
+                <div class="members">${contactsHTML}</div>
+                <div class="priority">
+                    <img src="./assets/img/add_task/prio_${getPrio(task.prio)}.svg" alt="${getPrio(task.prio)} icon">
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+
+/**
+ * Generates an HTML template for the task overlay, including task details, 
+ * subtasks, contacts, and action buttons (edit and delete).
+ * 
+ * @function openTaskOverlayTemplate
+ * @param {Object} task - The task object containing details to display.
+ * @param {string} task.id - The unique identifier of the task.
+ * @param {string} task.category - The category of the task.
+ * @param {string} task.title - The title of the task.
+ * @param {string} task.description - The description of the task.
+ * @param {string} task.date - The due date of the task.
+ * @param {string} task.prio - The priority level of the task.
+ * @param {string} contactsHTML - The HTML for displaying assigned contacts.
+ * @param {string} subtasksHTML - The HTML for displaying subtasks.
+ * @returns {string} The generated HTML string for the task overlay.
+ */
 function openTaskOverlayTemplate(task, contactsHTML, subtasksHTML) {
     return `
         <div onclick="closeOverlayOnOutsideClick(event, 'taskOverlay', 'openTaskOverlayBackground')" id="openTaskOverlayBackground" class="overlay-container">
@@ -72,6 +136,23 @@ function openTaskOverlayTemplate(task, contactsHTML, subtasksHTML) {
     `;
 }
 
+
+/**
+ * Generates an HTML template for the edit task overlay, including input fields 
+ * for editing task details such as title, description, due date, priority, category, 
+ * assigned contacts, and subtasks.
+ * 
+ * @function openEditTaskOverlayTemplate
+ * @param {Object} task - The task object containing details to prefill in the form.
+ * @param {string} task.id - The unique identifier of the task.
+ * @param {string} task.title - The title of the task.
+ * @param {string} task.description - The description of the task.
+ * @param {string} task.date - The due date of the task in "dd/mm/yyyy" format.
+ * @param {string} task.category - The category of the task (e.g., "Technical Task").
+ * @param {string} task.prio - The priority level of the task (e.g., "1" for high, "3" for low).
+ * @param {string} subtasksHTML - The pre-rendered HTML for displaying subtasks.
+ * @returns {string} The generated HTML string for the edit task overlay.
+ */
 function openEditTaskOverlayTemplate(task, subtasksHTML) {
     return `
     <div onclick="closeOverlayOnOutsideClick(event, 'editTaskOverlay', 'editTaskOverlayBackground')" id="editTaskOverlayBackground" class="overlay-container">
