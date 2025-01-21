@@ -171,20 +171,72 @@ async function loadContactData(){
 
 loadContactData();
 
-/**
- * Deletes a contact by its key, updates the contact list, and clears the contact details overlay.
- * It also calls the function to handle the deletion process in the database or data structure.
+
+/** 
+ * Deletes a contact and removes them from all associated tasks.
+ * Updates the database and the UI to reflect the changes.
  * 
  * @async
  * @param {string} key - The unique identifier of the contact to be deleted.
  */
-async function deleteContact(key){
-    updateDeletedContact(key);
-    const contactDetails = document.getElementById('contactDetails');
-    contactDetails.innerHTML = '';
+async function deleteContact(key) {
+    try {
+        const contactUrl = `${base_url}/users/${key}.json`;
+        const contactResponse = await fetch(contactUrl);
+        const contact = await contactResponse.json();
+        if (!contact) {
+            console.error('Contact not found.');
+            return;
+        }
 
-    closeDetailsOverlay();
+        await fetch(contactUrl, { method: 'DELETE' });
+        await removeContactFromTasks(contact.name);
+
+        contactDetails.innerHTML = '';
+        closeDetailsOverlay();
+        await loadContactData();
+        await loadTasks();
+
+    } catch (error) {
+    }
 }
+
+
+/**
+ * Removes a contact from all tasks where they are assigned.
+ * 
+ * @async
+ * @param {string} contactName - The name of the contact to be removed.
+ */
+async function removeContactFromTasks(contactName) {
+    try {
+        const tasksUrl = `${base_url}/tasks.json`;
+        const tasksResponse = await fetch(tasksUrl);
+        const tasksData = await tasksResponse.json();
+
+        if (!tasksData) {
+            return;
+        }
+
+        for (const [status, tasks] of Object.entries(tasksData)) {
+            for (const [taskId, task] of Object.entries(tasks)) {
+
+                if (task.contacts && task.contacts.includes(contactName)) {
+                    task.contacts = task.contacts.filter(name => name !== contactName);
+
+                    const taskUrl = `${base_url}/tasks/${status}/${taskId}.json`;
+                    await fetch(taskUrl, {
+                        method: 'PUT',
+                        body: JSON.stringify(task),
+                        headers: { 'Content-Type': 'application/json' },
+                    });
+                }
+            }
+        }
+    } catch (error) {
+    }
+}
+
 
 /**
  * Deletes a contact from the Firebase database by its unique key and updates the contact list.
@@ -249,195 +301,5 @@ async function toggleView(elementId, key=null, edit=false){
         document.getElementById('changedName').value = user.name;
         document.getElementById('changedEmail').value = user.mail;
         document.getElementById('changedPhone').value = user.phone;
-    }
-}
-
-/**
- * Closes the edit contact overlay by adding the 'hidden' class to the edit contact box element.
- */
-function closeEditOverlay(){
-    document.getElementById('editContactForm').reset();
-    document.getElementById('editContactBoxOverlay').classList.add('hidden');
-    resetErrors();
-}
-
-/**
- * Closes the add contact overlay by adding the 'hidden' class to the add contact box element.
- */
-function closeAddOverlay(){
-    document.getElementById('addContactForm').reset();
-    document.getElementById('addContactBoxOverlay').classList.add('hidden');
-    resetErrors();
-}
-
-/**
- * Edits a contact by updating its details and then fetching the updated user data to display.
- * 
- * @async
- * @returns {Promise<void>} A promise that resolves once the contact details have been updated and displayed.
- */
-async function editContact() {
-    await updateEditedContact();
-    const response = await fetch(`${base_url}/users/${editKey}.json`);
-    const user = await response.json();
-}
-
-/**
- * Updates contact details based on edited form data.
- * 
- * @async
- * @function updateEditedContact
- * @throws {Error} If form fields are empty or HTTP request fails
- * @returns {Promise<Object>} Updated contact data
- */
-async function updateEditedContact() {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const [name, email, phone] = ['changedName', 'changedEmail', 'changedPhone'].map(id => document.getElementById(id).value.trim());
-    const notEmpty = name !== "" && email !== "" && phone !== "";
-    if(notEmpty && emailRegex.test(email)){
-        const editLink = `${base_url}users/${editKey}`;
-        const userResponse = await fetch(`${editLink}.json`);
-        const user = await userResponse.json();
-        const data = { ...user, mail: email, name, phone };
-        const response = await fetch(`${editLink}.json`, {
-            method: 'PUT', headers: { "Content-Type": "application/json" }, body: JSON.stringify(data),
-        });
-        loadContactData();
-        contactDetails.innerHTML = '';
-        closeEditOverlay();
-        let updatedUser = await response.json();
-        showContactDetails(editKey, updatedUser.name, updatedUser.mail, updatedUser.phone, updatedUser.color);
-        return updatedUser;
-    } else{
-        if(!notEmpty){
-            const fields = document.querySelectorAll('#editContactForm .input-fields input');
-            fields.forEach(element => {
-                if(element.value === ""){
-                    document.getElementById(element.id + "-error-message").style.display="flex";
-                }
-            });
-        }
-        if(!(emailRegex.test(email))){
-            document.getElementById("changedEmail-error-message").innerHTML = "Wrong Email Format";
-            document.getElementById("changedEmail-error-message").style.display="flex";
-        }
-    }
-}
-
-
-/**
- * Closes the contact details overlay by removing the 'contactDetailBox' class 
- * and resetting the selected contact state.
- * It also removes the 'selected' class from all contacts to clear the selection.
- */
-function closeDetailsOverlay() {
-    let contactDetailBoxOverlayOverlay = document.getElementById('contactDetailBox');
-    contactDetailBoxOverlayOverlay.classList.remove('contactDetailBox');
-
-    document.querySelectorAll('.contact').forEach(contact => {
-        contact.classList.remove('selected');
-    });
-}
-
-/**
- * Toggles the visibility of the control menu and the active state of the control circle.
- * It adds/removes the 'hidden' class to the control menu and the 'active' class to 
- * the mobile control circle element to show/hide the menu and change its state.
- */
-function openControlMenu() {
-    let controlMenu = document.getElementById('options-menu');
-    let circleControl = document.querySelector('.circle-edit-mobile-control');
-
-    controlMenu.classList.remove('hidden');
-    circleControl.classList.add('active'); 
-    setTimeout(() => {
-        controlMenu.classList.add('active');
-    }, 10);
-
-    document.addEventListener('click', handleClickOutside);
-}
-
-/**
- * Closes the control menu by hiding it and resetting its position.
- * The function removes the "active" class, adds the "hidden" class to the menu,
- * and ensures a smooth transition effect before fully resetting its position.
- * Also removes the click event listener for handling clicks outside the menu.
- */
-function closeControlMenu() {
-    let controlMenu = document.getElementById('options-menu');
-    let circleControl = document.querySelector('.circle-edit-mobile-control');
-    
-    controlMenu.classList.remove('active');
-    controlMenu.classList.add('hidden');
-
-    setTimeout(() => {
-        circleControl.classList.remove('active');
-        controlMenu.style.transform = "translateX(100%)";
-    }, 600);
-
-    document.removeEventListener('click', handleClickOutside);
-}
-
-
-/**
- * Handles click events outside the control menu and circle control.
- * If the clicked element is not inside the control menu or the circle control,
- * the function triggers the `closeControlMenu` function to hide the menu.
- *
- * @param {MouseEvent} event - The click event object containing details about the event.
- */
-function handleClickOutside(event) {
-    const controlMenu = document.getElementById('options-menu');
-    const circleControl = document.querySelector('.circle-edit-mobile-control');
-    if (!controlMenu.contains(event.target) && !circleControl.contains(event.target)) {
-        closeControlMenu();
-    }
-}
-
-/**
- * Displays a confirmation overlay when a contact is added.
- * The overlay is shown with a small delay to allow for animation, and automatically hides 
- * after 3 seconds. The 'show' and 'hidden' classes are used to control the visibility and 
- * animation of the overlay.
- */
-function showContactAddedOverlay() {
-    const overlay = document.getElementById('contact-added-overlay');
-    overlay.classList.remove('hidden');
-    setTimeout(() => {
-        overlay.classList.add('show');
-    }, 10);
-    setTimeout(() => {
-        overlay.classList.remove('show');
-        setTimeout(() => {
-            overlay.classList.add('hidden');
-        }, 300);
-    }, 3000);
-}
-/**
- * Toggles the visibility of an overlay element for adding or editing a contact.
- * Depending on the specified operation, the appropriate box is shown
- * by adding the "show" class and removing the "hidden" class from overlay.
- * @param {string} operation - The type of operation to perform. 
- *                              Use "add" to display the "Add Contact" overlay, 
- *                              or "edit" to display the "Edit Contact" overlay.
- */
-function startEditOrAddAnimation(operation){
-    if(operation === 'add'){
-        document.querySelector('#addContactBox').classList.add('show');
-        document.querySelector('#addContactBoxOverlay').classList.remove('hidden');
-    }
-    if(operation === 'edit'){
-        document.querySelector('#editContactBox').classList.add('show');
-        document.querySelector('#editContactBoxOverlay').classList.remove('hidden');
-    }
-}
-
-/**
- * hides error messages
- */
-function resetErrors(){
-    const error = document.getElementsByClassName('error-message');
-    for(i=0;i<error.length;i++){
-        error[i].style.display='none';
     }
 }
