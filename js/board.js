@@ -37,7 +37,6 @@ async function loadTasks() {
  */
 async function loadTaskData(path, containerId) {
     const placeholder = document.getElementById(containerId.replace("Tasks", "Placeholder"));
-    console.log(placeholder);
     try {
         const url = `${base_url}/tasks/${path}.json`;
         const response = await fetch(url);
@@ -47,15 +46,12 @@ async function loadTaskData(path, containerId) {
         }
 
         const data = await response.json();
-        console.log(data);
         if(data) {
             placeholder.classList.add('hide');
-            console.log(placeholder);
             const taskArray = processTasks(data, path);
             displayTasks(taskArray, containerId);
         } else {
             placeholder.classList.add('show');
-            console.log(placeholder);
         }
         // updatePlaceholders();
     } catch (error) {
