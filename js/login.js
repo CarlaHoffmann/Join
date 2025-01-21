@@ -190,27 +190,6 @@ function redirectToSummary() {
 }
 
 /**
-<<<<<<< Updated upstream
-
-=======
- * Displays an error message for incorrect password.
- * @function
- */
-// function showPasswordError() {
-//     document.getElementById('loginErrorPassword').classList.remove('hidden');
-//     document.getElementById('passwordButten').classList.add('input-border');
-// }
-
-/**
- * Displays a general login error message.
- * @function
- */
-// function showLoginError() {
-//     document.getElementById('loginErrorPassword').classList.remove('hidden');
-// }
-
-/**
->>>>>>> Stashed changes
  * This asynchronous function loads all users from Firebase.
  * @returns {Array<Object>} An array of user objects containing name, email, and password.
  */
