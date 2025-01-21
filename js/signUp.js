@@ -19,10 +19,11 @@ async function handleSignUpClick(event) {
         const usableData = validateSignUp(users);
         console.log(usableData);
         if (usableData === true) {
-            // if(await createContact()) {
-            //     showSuccessMessage();
-            //     await getLoggedIn();
-            // }
+            let contact = await createContact();
+            if(contact) {
+                showSuccessMessage();
+                await getLoggedIn();
+            }
 
             console.log('User is valid. Submitting...');
         }
@@ -55,7 +56,6 @@ async function loadUsers() {
     }
 }
 
-
 function validateSignUp(users) {
     let nameError = document.getElementById('name-error');
     const userName = document.getElementById('name');
@@ -75,7 +75,6 @@ function validateSignUp(users) {
         return;
     }
 }
-
 
 function checkExistingMail(users) {
     let mailError = document.getElementById('mail-error');
@@ -147,79 +146,6 @@ function checkSignUpPassword() {
     }
 }
 
-// async function createUser() {}
-
-
-
-
-
-
-
-/**
- * Handles the user sign-up process by validating email and managing error messages.
- * 
- * - Hides any previous error messages related to mail and sign-up.
- * - Calls `existingMailSignUp` to check if the email is already in use.
- * 
- * @async
- * @function addUser
- * @returns {void}
- */
-// async function addUser() {
-//     document.getElementById('mailError').classList.add('hidden');
-//     document.getElementById('singupError').classList.add('hidden');
-//     existingMailSignUp();
-// }
-
-
-/**
- * Checks if the email entered during sign-up already exists in the system.
- * 
- * - Retrieves the list of users and compares the entered email with the existing ones.
- * - If the email is not found, proceeds to the next step (`matchPassword`).
- * - If the email is already registered, displays an error message.
- * 
- * @async
- * @function existingMailSignUp
- * @returns {void}
- */
-// async function existingMailSignUp() {
-//     const users = Object.entries(await loadUsers());
-//     let email = document.getElementById('email').value.toLowerCase();
-//     let user = users.find(u => u[1].mail == email);            
-//     if (user === undefined) {  
-//         matchPassword();
-//     } else {
-//         document.getElementById('mailError').classList.remove('hidden');  
-//     }
-// }
-
-
-
-
-/**
- * Compares the entered password with the confirmation password and handles errors or proceeds to create a new user.
- * 
- * - Checks if the password and confirmation password match.
- * - If they don't match, displays an error and highlights the confirmation password field.
- * - If they match, proceeds to create the contact and show a success message.
- * 
- * @function matchPassword
- * @returns {void}
- */
-// async function matchPassword() {
-//     var password = document.getElementById('password').value;
-//     var confirmPassword = document.getElementById('confirmPassword').value;
-//     if (password != confirmPassword) {
-//         document.getElementById('singupError').classList.remove('hidden');        
-//         document.getElementById('confirmPassword').classList.add('input-border');
-//     } else {
-//         createContact();
-//         successful();
-//     }
-// }
-
-
 /**
  * Creates a new contact by gathering the input data and saving it to the system.
  * 
@@ -239,8 +165,8 @@ async function createContact() {
         color: returnColor()
     }
     await postData(contact);
+    return true;
 }
-
 
 /**
  * Retrieves the value of the name input field.
@@ -252,7 +178,7 @@ async function createContact() {
  */
 function takeName() {
     let name = document.getElementById('name');
-    signUpName = name;
+    // signUpName = name;
     return name.value;
 }
 
@@ -333,46 +259,6 @@ async function getLoggedIn() {
     }
 }
 
-
-
-
-/**
- * Changes the border styling of the name input container and resets the styling of other containers.
- * 
- * - Adds a border style to the name container.
- * - Removes the border style from the email, password, and confirm password containers.
- * 
- * @function changeName
- * @returns {void}
- */
-//Was macht diese Funktion??
-// function changeName() { 
-//     document.getElementById('nameContainer').classList.add('password_container_border');
-//     document.getElementById('emailContainer').classList.remove('password_container_border');
-//     document.getElementById('passwordButten').classList.remove('password_container_border');
-//     document.getElementById('confirmPasswordButten').classList.remove('password_container_border');
-// }
-
-/**
- * Changes the border styling of the email input container and resets the styling of other containers.
- * 
- * - Adds a border style to the email container.
- * - Removes the border style from the name, password, and confirm password containers.
- * 
- * @function changeEmail
- * @returns {void}
- */
-//Was macht diese Funktion??
-// function changeEmail() { 
-//     document.getElementById('nameContainer').classList.remove('password_container_border');
-//     document.getElementById('emailContainer').classList.add('password_container_border');
-//     document.getElementById('passwordButten').classList.remove('password_container_border');
-//     document.getElementById('confirmPasswordButten').classList.remove('password_container_border');
-// }
-
-
-
-
 function handlePasswordInputSignUp() {
     const passwordInput = document.getElementById("password");
     const lockIcon = document.getElementById("passwordLock");
@@ -400,58 +286,6 @@ function handleConfirmPasswordInputSignUp() {
         visibilityButton.classList.add("hidden");
     }
 }
-
-
-
-/**
- * Changes the border styling of the password input container and manages visibility toggles for the password field.
- * 
- * - Adds a border style to the password container.
- * - Removes the border style from the name, email, and confirm password containers.
- * - Toggles visibility of the password (password field becomes visible if it was hidden).
- * 
- * @function changePassword
- * @returns {void}
- */
-// function changePassword() {
-//     document.getElementById('nameContainer').classList.remove('password_container_border');
-//     document.getElementById('emailContainer').classList.remove('password_container_border');
-//     document.getElementById('passwordButten').classList.add('password_container_border');
-//     document.getElementById('confirmPasswordButten').classList.remove('password_container_border');
-//     var x = document.getElementById("password");
-//     if (x.type === "password") {
-//         document.getElementById('passwordLock').classList.add('hidden');
-//         document.getElementById('notSee').classList.remove('hidden');
-//     } else {
-//         document.getElementById('passwordLock').classList.add('hidden');
-//         document.getElementById('notSee').classList.add('hidden');
-//     }
-// }
-
-/**
- * Changes the border styling of the confirm password input container and manages visibility toggles for the confirm password field.
- * 
- * - Adds a border style to the confirm password container.
- * - Removes the border style from the name, email, and password containers.
- * - Toggles visibility of the confirm password (password field becomes visible if it was hidden).
- * 
- * @function changeConfirmPassword
- * @returns {void}
- */
-// function changeConfirmPassword() {
-//     document.getElementById('nameContainer').classList.remove('password_container_border');
-//     document.getElementById('emailContainer').classList.remove('password_container_border');
-//     document.getElementById('passwordButten').classList.remove('password_container_border');
-//     document.getElementById('confirmPasswordButten').classList.add('password_container_border');
-//     var x = document.getElementById("confirmPassword");
-//     if (x.type === "password") {
-//         document.getElementById('confirmPasswordLock').classList.add('hidden'); 
-//         document.getElementById('notSeeConfirm').classList.remove('hidden');
-//     } else {
-//         document.getElementById('passwordLock').classList.add('hidden');
-//         document.getElementById('notSeeConfirm').classList.add('hidden');
-//     }
-// }
 
 /**
  * Toggles the visibility of the password field between "password" and "text".
@@ -516,19 +350,8 @@ function toggleCheckboxPrivacyPolicy(element) {
     }
 }
 
-
-
 // anpassen für SignUp
 async function showSuccessMessage() {
-    // const passwordInput = document.getElementById("password").value;
-    // const errorContainer = document.getElementById("passwordError");
-    // const successMessage = document.getElementById("successMessage");
-    // const successOverlay = document.getElementById("successOverlay");
-    // const passwordError = `<span class="error-message">Check your password. Please try again.</span>`;
-
-    // if (user.password === passwordInput) {
-    //     await saveUser(user.name, user.mail);
-
         successOverlay.classList.add("show");
         successMessage.style.display = "block";
 
@@ -542,28 +365,4 @@ async function showSuccessMessage() {
                 redirectToSummary();
             },); 
         }, 1600); // visible 2 sec
-    // } else {
-    //     errorContainer.innerHTML = passwordError;
-    // }
 }
-
-/**
- * Displays a success message and redirects to the summary page after a delay.
- * 
- * - Adds a cover effect to the sign-up button.
- * - Shows the success message by toggling the appropriate classes.
- * - Redirects the user to the summary page after 1.5 seconds.
- * 
- * @function successful
- * @returns {void}
- */
-// function successful() {
-//     let signupButton = document.getElementById('signupButton');
-//     let successMessage = document.getElementById('successMessage');
-//     signupButton.classList.add('cover-button');
-//     successMessage.classList.remove('hidden');
-//     successMessage.classList.add('show');
-//     setTimeout(() => {
-//         window.location.href = './summary.html';
-//     }, 1500);
-// }
