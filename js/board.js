@@ -285,6 +285,7 @@ async function drop(event, newStatus) {
 
     await moveTaskData(oldStatus, newStatus, taskKey, taskData);
     updateTaskElement(taskElement, newStatus, taskKey);
+    loadTasks()
 }
 
 
@@ -393,28 +394,3 @@ function highlight(columnId) {
 }
 
 
-/**
- * Removes the "highlight-column" class from a column when the drag leaves the area.
- * 
- * @function removeHighlightLeave
- * @param {string} columnId - The ID of the column to remove the highlight from.
- * @returns {void}
- */
-function removeHighlightLeave(columnId) {
-    const column = document.getElementById(columnId);
-    if (column) {
-        column.classList.remove("highlight-column");
-    }
-}
-
-
-/**
- * Removes the highlight from a column at the end of a drag operation.
- * 
- * @function removeHighlightEnd
- * @param {string} columnId - The ID of the column to remove the highlight from.
- * @returns {void}
- */
-function removeHighlightEnd(columnId) {
-    removeHighlightLeave(columnId);
-}

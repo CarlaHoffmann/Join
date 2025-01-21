@@ -10,6 +10,8 @@
     <script src="./js/board.js"></script>
     <script src="./js/board2.js"></script>
     <script src="./js/board3.js"></script>
+    <script src="./js/board_template.js"></script>
+
 
     <script src="./js/add_tasks.js"></script>
     <script src="./js/nav.js"></script>
@@ -78,9 +80,8 @@
             <div id="no-search-result" class="no-search-result d-none">
                 <p>Sorry, no task found</p>
             </div>
-
+            <!-- Board Columns -->
             <div class="board-columns">
-                <!-- Board Columns -->
                 <!-- To Do Column -->
                 <div id="column-toDo" class="board-column"
                     ondrop="drop(event, 'toDo'); removeHighlightEnd('column-toDo')"
@@ -89,21 +90,18 @@
                     <div class="column-header">
                         <h2 class="text_board_headline">To Do</h2>
 
-                        <!-- <img src="/assets/img/add_task/plus button.svg" alt="Add Task Icon" class="column-icon" onclick="addTask()" /> -->
-
                         <svg class="column-icon" onclick="addTask()" width="24" height="25" viewBox="0 0 24 25"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2" />
                             <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                            <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2"
-                                stroke-linecap="round" />
+                            <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
                         </svg>
 
                     </div>
                     <div id="toDoTasks" class="tasks-container">
                         <div id="toDoPlaceholder" class="placeholder">No tasks To do</div>
                     </div>
-                    
+
                 </div>
 
                 <!-- In Progress Column -->
@@ -117,14 +115,13 @@
                             fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2" />
                             <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                            <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2"
-                                stroke-linecap="round" />
+                            <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
                         </svg>
                     </div>
                     <div id="progressTasks" class="tasks-container">
                         <div id="progressPlaceholder" class="placeholder">No tasks In progress</div>
                     </div>
-                    
+
                 </div>
 
                 <!-- Await Feedback Column -->
@@ -138,14 +135,13 @@
                             fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2" />
                             <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                            <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2"
-                                stroke-linecap="round" />
+                            <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
                         </svg>
                     </div>
                     <div id="feedbackTasks" class="tasks-container">
                         <div id="feedbackPlaceholder" class="placeholder">No tasks Await feedback</div>
                     </div>
-                    
+
                 </div>
 
                 <!-- Done Column -->
@@ -159,7 +155,7 @@
                     <div id="doneTasks" class="tasks-container">
                         <div id="donePlaceholder" class="placeholder">No tasks Done</div>
                     </div>
-                    
+
                 </div>
             </div>
     </section>

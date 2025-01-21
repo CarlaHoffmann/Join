@@ -60,7 +60,6 @@ function getPriorityClass(priority) {
         case 1: return 'urgent';
         case 2: return 'med';
         case 3: return 'low';
-        // default: return 'med';
     }
 }
 
@@ -85,7 +84,7 @@ function setMediumPriority() {
     if (mediumButton) {
         activateButton(mediumButton, 2);
     } else {
-        console.error('Medium priority button not found');
+        return;
     }
 }
 
@@ -111,7 +110,6 @@ function categorySelected(category) {
      * Transfer the text of the selected entry into the field.
      */
     categorySelection.textContent = category; 
-
     errorMessage.classList.add('d-none');
 
     /**
@@ -151,9 +149,6 @@ function closeSubtask() {
  * @param {Event} event - The click event.
  */
 function closeSubtaskOnOutsideClick(event) {
-    /**
-     * Get the subtask wrapper element.
-     */
     let subtaskWrapper = document.getElementById('subtask-input-wrapper');
     if (!subtaskWrapper.contains(event.target)) {
         closeSubtask();
@@ -176,7 +171,7 @@ function addSubtask() {
             checked: false
         });
     }
-    console.log(currentSubtasks);
+
     addedSubtask.innerHTML = '';
 
     for (let i = 0; i < currentSubtasks.length; i++) {
@@ -195,9 +190,7 @@ function editSubtask(index) {
      * Get the subtask element and its current text.
      */
     let subtaskElement = document.getElementById(`subtask${index}`);
-    console.log(subtaskElement);
     let currentText = currentSubtasks[index].task;
-
     subtaskElement.innerHTML = editSubtaskTemplate(index, currentText, 'false');
 
     /**
@@ -220,11 +213,8 @@ function replaceSubtask(index) {
     let input = subtaskElement.querySelector('.edit-subtask-input');
     let newText = input.value.trim();
 
-    console.log(currentSubtasks);
-
     if (newText !== '') {
         currentSubtasks[index].task = newText;
-        console.log(currentSubtasks);
         updateSubtaskDisplay();
     } else {
         deleteSubtask(index);
@@ -249,7 +239,6 @@ function updateSubtaskDisplay() {
      */
     let addedSubtask = document.getElementById('subtasks');
     addedSubtask.innerHTML = '';
-    console.log(currentSubtasks);
 
     for (let i = 0; i < currentSubtasks.length; i++) {
         const element = currentSubtasks[i].task;
@@ -270,11 +259,10 @@ function initializeValidation() {
 
             if (validateForm()) {
                 await createTask();
-                console.log('Form is valid. Submitting...');
             }
         });
     } else {
-        console.error('Submit button not found');
+        return;
     }
 };
 

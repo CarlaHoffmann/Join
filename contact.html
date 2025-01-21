@@ -15,14 +15,16 @@
     <script src="./js/returnColor.js"></script>
     <script src="./js/close_overlay.js"></script>
 </head>
+
 <body>
     <div class="nav-bar" w3-include-html="nav.html"></div>
 
     <div id="contactContent">
         <!--contacts-->
         <div id="contacts">
-            <button id="addContactButton" onclick="toggleView('addContactBoxOverlay'); startEditOrAddAnimation('add')"><span>Add new contact</span><img
-                    src="./assets/img/contact/person_add.svg"></button>
+            <button id="addContactButton"
+                onclick="toggleView('addContactBoxOverlay'); startEditOrAddAnimation('add')"><span>Add new
+                    contact</span><img src="./assets/img/contact/person_add.svg"></button>
             <section id="contactList">
             </section>
         </div>
@@ -62,7 +64,8 @@
     </div>
 
     <!--add contact box-->
-    <div onclick="closeOverlayOnOutsideClick(event, 'addContactBox', 'addContactBoxOverlay')" id="addContactBoxOverlay" class="hidden">
+    <div onclick="closeOverlayOnOutsideClick(event, 'addContactBox', 'addContactBoxOverlay')" id="addContactBoxOverlay"
+        class="hidden">
         <div id="addContactBox">
             <div class="close-button-box" onclick="closeAddOverlay()">
                 <img src="./assets/img/contact/close.svg" class="desktop-only close-button">
@@ -87,24 +90,22 @@
                     <div class="input-fields">
                         <div>
                             <div class="input-container">
-                                <input id="name" placeholder="Name" type="text"
-                                    class="addField input-with-image">
+                                <input id="name" placeholder="Name" type="text" class="addField input-with-image">
                                 <img src="./assets/img/general/person.svg" alt="Person Icon" class="input-icon">
                             </div>
                             <span id="name-error-message" class="error-message">This field is required.</span>
                         </div>
                         <div>
                             <div class="input-container">
-                                <input id="email" placeholder="Email" type="text"
-                                    class="addField input-with-image">
+                                <input id="email" placeholder="Email" type="text" class="addField input-with-image">
                                 <img src="./assets/img/general/mail.svg" alt="Mail Icon" class="input-icon">
                             </div>
                             <span id="email-error-message" class="error-message">This field is required.</span>
                         </div>
                         <div>
                             <div class="input-container">
-                                <input id="phone" placeholder="Phone" type="text"
-                                    class="addField input-with-image" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                <input id="phone" placeholder="Phone" type="text" class="addField input-with-image"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                 <img src="./assets/img/contact/call.svg" alt="Phone Icon" class="input-icon">
                             </div>
                             <span id="phone-error-message" class="error-message">This field is required.</span>
@@ -127,7 +128,8 @@
         </div>
     </div>
     <!--edit contact box-->
-    <div onclick="closeOverlayOnOutsideClick(event, 'editContactBox', 'editContactBoxOverlay')" id="editContactBoxOverlay" class="hidden">
+    <div onclick="closeOverlayOnOutsideClick(event, 'editContactBox', 'editContactBoxOverlay')"
+        id="editContactBoxOverlay" class="hidden">
         <div id="editContactBox">
             <div class="close-button-box" onclick="closeEditOverlay()">
                 <img src="./assets/img/contact/close.svg" class="desktop-only close-button">

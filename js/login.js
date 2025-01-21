@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', animationWindow);
  * @param {Element} element - The checkbox container element that contains the icon to toggle.
  * @returns {void}
  */
-//wird benutzt?
 function toggleCheckbox(element) {
     const img = element.querySelector('.checkbox-icon');
     const isChecked = img.getAttribute('src') === './assets/img/general/checked_button.svg';
@@ -70,21 +69,14 @@ function toggleCheckbox(element) {
     }
 }
 
+
 /**
- * Validates a field and displays appropriate feedback.
- * @param {boolean} condition - Validation condition.
- * @param {HTMLElement} container - The input container element.
- * @param {HTMLElement} errorElement - The error message element.
+ * Handles the login button click event, preventing default form submission and initiating login logic.
+ * 
+ * @function handleLoginClick
+ * @param {Event} event - The click event triggered by the login button.
+ * @returns {void}
  */
-// function validateField(condition, container, errorElement) {
-//     if (condition) {
-//         hideError(container, errorElement);
-//         displayValid(container);
-//     } else {
-//         displayError(container, errorElement);
-//         hideValid(container);
-//     }
-// }
 
 function handleLoginClick(event) {
     event.preventDefault(); // Verhindert das Standard-Submit-Event
@@ -102,11 +94,11 @@ async function existingMailLogIn() {
     try {
         const users = await loadUsers();
         const mailIsTrue = validateEmail();
-        // const { mail, password } = getLoginCredentials();
-        if(!mailIsTrue) {
+
+        if (!mailIsTrue) {
             return;
         }
-        
+
         const user = findUserByEmail(users);
 
         if (user) {
@@ -115,26 +107,37 @@ async function existingMailLogIn() {
             showLoginError();
         }
     } catch (error) {
-        // console.error("Fehler beim Anmelden:", error);
     }
 }
 
 
+/**
+ * Validates the email input and displays an error message if the email is invalid.
+ * 
+ * @function validateEmail
+ * @returns {boolean} - Returns `true` if the email is valid, otherwise `false`.
+ * 
+ * @description
+ * - Checks if the email input is non-empty and matches a standard email format using a regex pattern.
+ * - Clears any existing error message if the email is valid.
+ * - Displays an error message in the `emailError` container if the email is invalid.
+ */
 function validateEmail() {
     const emailInput = document.getElementById("email").value; // Get the value, not the element
     const errorContainer = document.getElementById("emailError");
     const emailError = `<span class="error-message">Check your email. Please try again.</span>`;
     // const emailError = "Check your email. Please try again.";
     let test = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput);
-    
-    if(emailInput !== '' && test) {
-        errorContainer.innerHTML = ''; // Clear any existing error message
+
+    if (emailInput !== '' && test) {
+        errorContainer.innerHTML = ''; 
         return true;
     } else {
         errorContainer.innerHTML = emailError;
         return false;
     }
 }
+
 
 /**
  * Retrieves login credentials from the input fields.
@@ -176,21 +179,23 @@ async function handleUserLogin(user) {
         await saveUser(user.name, user.mail);
         redirectToSummary();
     } else {
-        // showPasswordError();
         errorContainer.innerHTML = passwordError;
     }
 }
 
+
 /**
  * Redirects the user to the summary page.
- * @function
+ * 
+ * @function redirectToSummary
+ * @returns {void}
  */
 function redirectToSummary() {
     window.location.href = './summary.html';
 }
 
-/**
 
+/**
  * This asynchronous function loads all users from Firebase.
  * @returns {Array<Object>} An array of user objects containing name, email, and password.
  */
@@ -201,13 +206,12 @@ async function loadUsers() {
 
         // create an Array with user objects
         const usersArray = Object.values(users).map(userData => ({ name: userData.name, mail: userData.mail, password: userData.password }));
-        console.log(usersArray);
         return usersArray;
     } catch (error) {
-        console.error("Fehler beim Laden der Benutzer:", error);
         return [];
     }
 }
+
 
 /**
  * This asynchronous function saves the logged-in user's data to Firebase.
@@ -216,42 +220,48 @@ async function loadUsers() {
  */
 async function saveUser(name, mail) {
     try {
-        let response = await fetch(log_base_url + "/loggedIn/" + ".json",{
+        let response = await fetch(log_base_url + "/loggedIn/" + ".json", {
             method: "PUT",
-            headers: {"Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: name })
         });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         let result = await response.json();
-        console.log("Guest logged in:", result);
-        // localStorage.setItem('currentUser', mail);
     } catch (error) {
-        console.error("Fehler beim Speichern des Benutzers:", error);
     }
 }
 
+
 /**
- * This asynchronous function logs in a guest user and redirects to the summary page.
+ * Logs in a guest user by sending a "Guest" user entry to the database and redirects to the summary page.
+ * 
+ * @async
+ * @function guestLogin
+ * @returns {Promise<void>}
+ * 
+ * @description
+ * - Sends a `PUT` request to update the "loggedIn" entry with the guest user's information.
+ * - Redirects to the summary page (`summary.html`) upon successful request completion.
+ * - Handles errors silently without displaying them to the user.
  */
 async function guestLogin() {
     try {
-        let response = await fetch(log_base_url + "/loggedIn/" + ".json",{
+        let response = await fetch(log_base_url + "/loggedIn/" + ".json", {
             method: "PUT",
-            headers: {"Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: "Guest" })
         });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         let result = await response.json();
-        console.log("Guest logged in:", result);
     } catch (error) {
-        console.error("Error Guest:", error);
     }
     window.location.href = './summary.html';
 }
+
 
 /**
  * This function changes the appearance of the email input field when focused.
@@ -263,9 +273,14 @@ function changeEmail() {
 
 
 /**
- * Handles changes in the password input field.
- * Displays or hides the lock icon and the visibility toggle button 
- * depending on whether the input field contains text.
+ * Handles the password input field's state, toggling the lock icon and visibility button based on the input value.
+ * 
+ * @function handlePasswordInput
+ * @returns {void}
+ * 
+ * @description
+ * - Hides the lock icon and shows the visibility toggle button when the password input field is not empty.
+ * - Displays the lock icon and hides the visibility toggle button when the password input field is empty.
  */
 function handlePasswordInput() {
     const passwordInput = document.getElementById("password");
@@ -281,10 +296,16 @@ function handlePasswordInput() {
     }
 }
 
+
 /**
- * Toggles the visibility of the password input field.
- * Switches between masked (password) and unmasked (text) input types
- * and updates the visibility icons accordingly.
+ * Toggles the visibility of the password field and updates the visibility icons.
+ * 
+ * @function togglePasswordVisibility
+ * @returns {void}
+ * 
+ * @description
+ * - Changes the `type` attribute of the password input field between "password" and "text".
+ * - Toggles the visibility of the "not see" and "see" icons accordingly.
  */
 function togglePasswordVisibility() {
     const passwordInput = document.getElementById("password");
@@ -301,36 +322,3 @@ function togglePasswordVisibility() {
         seeIcon.classList.add("hidden");
     }
 }
-
-
-/**
- * Manages user login with success message and animation handling.
- */
-// async function handleUserLogin(user) {
-//     const passwordInput = document.getElementById("password").value;
-//     const errorContainer = document.getElementById("passwordError");
-//     const successMessage = document.getElementById("successMessage");
-//     const successOverlay = document.getElementById("successOverlay");
-//     const passwordError = `<span class="error-message">Check your password. Please try again.</span>`;
-
-//     if (user.password === passwordInput) {
-//         await saveUser(user.name, user.mail);
-
-//         // successOverlay.classList.add("show");
-//         // successMessage.style.display = "block";
-
-//         // setTimeout(() => {
-//         //     successMessage.classList.add("hide"); 
-//         //     successOverlay.classList.remove("show");
-
-//         //     setTimeout(() => {
-//         //         successMessage.style.display = "none"; 
-//         //         successOverlay.classList.remove("show");
-//                 redirectToSummary();
-//         //     },); 
-//         // }, 1600); // visible 2 sec
-//     } else {
-//         errorContainer.innerHTML = passwordError;
-//     }
-// }
-

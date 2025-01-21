@@ -33,7 +33,6 @@ async function loadContacts() {
 
         return contactsArray;
     } catch (error) {
-        console.error("Fehler beim Laden der Kontakte:", error);
         return [];
     }
 }
@@ -82,7 +81,6 @@ async function getUser() {
 
         return { name: loggedInData.name };
     } catch (error) {
-        console.error("Fehler beim Abrufen des Benutzers:", error);
         return null;
     }
 }
@@ -91,9 +89,9 @@ async function getUser() {
 * Purpose: Toggles the selection status of a contact when its label is clicked.
 */
 function handleContactClick(event) {
-    event.stopPropagation(); // Verhindert die Ausbreitung des Events
+    event.stopPropagation();
     const checkbox = event.currentTarget.querySelector('input[type="checkbox"]');
-    toggleContact({ target: checkbox }); // Aktualisiere den Kontaktstatus
+    toggleContact({ target: checkbox }); 
 }
 
 /** This function toggles the selection status of a contact.
@@ -158,7 +156,6 @@ async function getContactColor(contactName) {
         }
         return '#000000'; /** Standard, if no color can be found*/
     } catch (error) {
-        console.error("Fehler beim Abrufen der Kontaktfarbe:", error);
         return '#000000'; /** Standard color if not found*/
     }
 }
@@ -192,7 +189,7 @@ function initializeDatePicker() {
     if (datepicker) {
         setupEventListeners(datepicker, warningDialog);
     } else {
-        console.error("Das Element mit der ID 'datepicker' wurde nicht gefunden.");
+        return;
     }
 }
 

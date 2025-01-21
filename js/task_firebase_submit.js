@@ -36,7 +36,7 @@ async function postData(taskData) {
         // Task successfully added
         return result;
     } catch (error) {
-        console.error("Error posting data:", error);
+        return;
     }
 }
 
@@ -112,10 +112,8 @@ function takeCatergory() {
 // }
 function takeSubtask() {
     if (currentSubtasks.length > 0) {
-        console.log(currentSubtasks);
         return currentSubtasks;
     } else {
-        // console.log("Keine Subtasks vorhanden");
         return [];
     }
 }
