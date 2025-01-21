@@ -285,6 +285,7 @@ async function drop(event, newStatus) {
 
     await moveTaskData(oldStatus, newStatus, taskKey, taskData);
     updateTaskElement(taskElement, newStatus, taskKey);
+    loadTasks()
 }
 
 
