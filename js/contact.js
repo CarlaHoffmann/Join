@@ -61,7 +61,7 @@ async function addContact(){
         loadContactData();
         document.getElementById("wrong-mail-error-message").style.display="none";
         fields.forEach(element => {
-            element.style.display="none";    
+            document.getElementById(element.id + "-error-message").style.display="none";    
         });
     } else{
         if(!notEmpty){
@@ -72,6 +72,7 @@ async function addContact(){
             });
         }
         if(!(emailRegex.test(mail))){
+            document.getElementById("email-error-message").innerHTML = "Wrong Email Format";
             document.getElementById("email-error-message").style.display="flex";
         }
     }
@@ -156,7 +157,8 @@ function sortUsers(usersArray){
 async function loadContactData(){
     let response = await fetch(base_url + ".json");
     let responseToJson = await response.json();
-    let users = await responseToJson.users;
+    let users = 
+    await responseToJson.users;
     usersArray = Object.values(users);
     let keys = Object.keys(users);
     for(let i = 0; i < usersArray.length; i++){
@@ -254,14 +256,18 @@ async function toggleView(elementId, key=null, edit=false){
  * Closes the edit contact overlay by adding the 'hidden' class to the edit contact box element.
  */
 function closeEditOverlay(){
+    document.getElementById('editContactForm').reset();
     document.getElementById('editContactBoxOverlay').classList.add('hidden');
+    resetErrors();
 }
 
 /**
  * Closes the add contact overlay by adding the 'hidden' class to the add contact box element.
  */
 function closeAddOverlay(){
+    document.getElementById('addContactForm').reset();
     document.getElementById('addContactBoxOverlay').classList.add('hidden');
+    resetErrors();
 }
 
 /**
@@ -275,7 +281,6 @@ async function editContact() {
     
     const response = await fetch(`${base_url}/users/${editKey}.json`);
     const user = await response.json();
-    console.log(user);
     
     showContactDetails(editKey, user.name, user.mail, user.phone, user.color);
 }
@@ -289,20 +294,37 @@ async function editContact() {
  * @returns {Promise<Object>} Updated contact data
  */
 async function updateEditedContact() {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const [name, email, phone] = ['changedName', 'changedEmail', 'changedPhone'].map(id => document.getElementById(id).value.trim());
-    if (!name || !email || !phone) return alert("Bitte füllen Sie alle Felder aus.");
-    const editLink = `${base_url}users/${editKey}`;
-    const userResponse = await fetch(`${editLink}.json`);
-    if (!userResponse.ok) throw new Error(`HTTP error! status: ${userResponse.status}`);
-    const user = await userResponse.json();
-    const data = { ...user, mail: email, name, phone };
-    const response = await fetch(`${editLink}.json`, {
-        method: 'PUT', headers: { "Content-Type": "application/json" }, body: JSON.stringify(data),
-    });
-    loadContactData();
-    contactDetails.innerHTML = '';
-    closeEditOverlay();
-    return await response.json();
+    const notEmpty = name !== "" && email !== "" && phone !== "";
+    if(notEmpty && emailRegex.test(email)){
+        const editLink = `${base_url}users/${editKey}`;
+        const userResponse = await fetch(`${editLink}.json`);
+        //if (!userResponse.ok) throw new Error(`HTTP error! status: ${userResponse.status}`);
+        const user = await userResponse.json();
+        const data = { ...user, mail: email, name, phone };
+        const response = await fetch(`${editLink}.json`, {
+            method: 'PUT', headers: { "Content-Type": "application/json" }, body: JSON.stringify(data),
+        });
+        loadContactData();
+        contactDetails.innerHTML = '';
+        closeEditOverlay();
+        return await response.json();
+    } else{
+        console.log("else fall");
+        if(!notEmpty){
+            const fields = document.querySelectorAll('#editContactForm .input-fields input');
+            fields.forEach(element => {
+                if(element.value === ""){
+                    document.getElementById(element.id + "-error-message").style.display="flex";
+                }
+            });
+        }
+        if(!(emailRegex.test(email))){
+            document.getElementById("changedEmail-error-message").innerHTML = "Wrong Email Format";
+            document.getElementById("changedEmail-error-message").style.display="flex";
+        }
+    }
 }
 
 
@@ -410,5 +432,15 @@ function startEditOrAddAnimation(operation){
     if(operation === 'edit'){
         document.querySelector('#editContactBox').classList.add('show');
         document.querySelector('#editContactBoxOverlay').classList.remove('hidden');
+    }
+}
+
+/**
+ * hides error messages
+ */
+function resetErrors(){
+    const error = document.getElementsByClassName('error-message');
+    for(i=0;i<error.length;i++){
+        error[i].style.display='none';
     }
 }

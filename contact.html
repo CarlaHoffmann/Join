@@ -83,26 +83,32 @@
                     <img class="overlay-contact-img" src="./assets/img/contact/add-user.svg" alt="">
                 </div>
                 <form method="post" id="addContactForm" action="contact.html"
-                    onsubmit="event.preventDefault(); addContact()">
+                    onsubmit="event.preventDefault(); addContact()" onreset="resetErrors();">
                     <div class="input-fields">
-                        <div class="input-container">
-                            <input id="name" placeholder="Name" type="text"
-                                class="addField input-with-image">
-                            <img src="./assets/img/general/person.svg" alt="Person Icon" class="input-icon">
+                        <div>
+                            <div class="input-container">
+                                <input id="name" placeholder="Name" type="text"
+                                    class="addField input-with-image">
+                                <img src="./assets/img/general/person.svg" alt="Person Icon" class="input-icon">
+                            </div>
+                            <span id="name-error-message" class="error-message">This field is required.</span>
                         </div>
-                        <span id="name-error-message" class="error-message">Bitte fülle das Feld aus.</span>
-                        <div class="input-container">
-                            <input id="email" placeholder="Email" type="text"
-                                class="addField input-with-image">
-                            <img src="./assets/img/general/mail.svg" alt="Mail Icon" class="input-icon">
+                        <div>
+                            <div class="input-container">
+                                <input id="email" placeholder="Email" type="text"
+                                    class="addField input-with-image">
+                                <img src="./assets/img/general/mail.svg" alt="Mail Icon" class="input-icon">
+                            </div>
+                            <span id="email-error-message" class="error-message">This field is required.</span>
                         </div>
-                        <span id="email-error-message" class="error-message">Bitte fülle das Feld aus.</span>
-                        <div class="input-container">
-                            <input id="phone" placeholder="Phone" type="text"
-                                class="addField input-with-image" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                            <img src="./assets/img/contact/call.svg" alt="Phone Icon" class="input-icon">
+                        <div>
+                            <div class="input-container">
+                                <input id="phone" placeholder="Phone" type="text"
+                                    class="addField input-with-image" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                <img src="./assets/img/contact/call.svg" alt="Phone Icon" class="input-icon">
+                            </div>
+                            <span id="phone-error-message" class="error-message">This field is required.</span>
                         </div>
-                        <span id="phone-error-message" class="error-message">Bitte fülle das Feld aus.</span>
                     </div>
                     <div class="add-form-buttons">
                         <button type="reset" class="clear-button form-button hover-button">
@@ -142,22 +148,31 @@
                 </div>
 
                 <form method="post" id="editContactForm" action="contact.html"
-                    onsubmit="event.preventDefault(); editContact('${editKey}');">
+                    onsubmit="event.preventDefault(); editContact('${editKey}');" onreset="resetErrors()">
                     <div class="input-fields">
-                        <div class="input-container">
-                            <input required id="changedName" class="addField input-with-image" placeholder="Name"
-                                type="text">
-                            <img src="./assets/img/general/person.png" alt="Person Icon" class="input-icon">
+                        <div>
+                            <div class="input-container">
+                                <input id="changedName" class="addField input-with-image" placeholder="Name"
+                                    type="text">
+                                <img src="./assets/img/general/person.png" alt="Person Icon" class="input-icon">
+                            </div>
+                            <span id="changedName-error-message" class="error-message">This field is required.</span>
                         </div>
-                        <div class="input-container">
-                            <input required id="changedEmail" class="addField input-with-image" placeholder="Email"
-                                type="email">
-                            <img src="./assets/img/general/mail.svg" alt="Mail Icon" class="input-icon">
+                        <div>
+                            <div class="input-container">
+                                <input id="changedEmail" class="addField input-with-image" placeholder="Email"
+                                    type="text">
+                                <img src="./assets/img/general/mail.svg" alt="Mail Icon" class="input-icon">
+                            </div>
+                            <span id="changedEmail-error-message" class="error-message">This field is required.</span>
                         </div>
-                        <div class="input-container">
-                            <input required id="changedPhone" class="addField input-with-image" placeholder="Phone"
-                                type="text">
-                            <img src="./assets/img/contact/call.svg" alt="Phone Icon" class="input-icon">
+                        <div>
+                            <div class="input-container">
+                                <input id="changedPhone" class="addField input-with-image" placeholder="Phone"
+                                    type="text">
+                                <img src="./assets/img/contact/call.svg" alt="Phone Icon" class="input-icon">
+                            </div>
+                            <span id="changedPhone-error-message" class="error-message">This field is required.</span>
                         </div>
                     </div>
 
