@@ -583,7 +583,7 @@
   display: flex;
   align-items: center;
 }
-
+/*
 .member-big-task {
   display: flex;
   align-items: center;
@@ -743,7 +743,7 @@
 .description-overlay {
   height: 60px;
   overflow-y: auto;
-}
+}*/
 
 /*Zum Task Edit Overlay*/
 .add-task-edit-form {
