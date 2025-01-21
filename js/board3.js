@@ -288,7 +288,7 @@ function startTaskOverlayAnimation() {
  */
 function closeTaskOverlayAnimation(overlayBox) {
     let overlay = document.getElementById(overlayBox);
-    if(overlay.classList.contains('show')) {
+    if (overlay.classList.contains('show')) {
         overlay.classList.remove('show');
     }
     overlay.classList.add('hide');
