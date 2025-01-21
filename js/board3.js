@@ -184,3 +184,93 @@ async function openTaskOverlay(task) {
     });
 }
 
+
+/**
+ * Deletes a task by its ID after user confirmation and updates the UI.
+ *
+ * @async
+ * @function deleteTask
+ * @param {string} taskId - The unique ID of the task to delete.
+ * @returns {Promise<void>}
+ */
+async function deleteTask(taskId) {
+    const confirmDelete = await showCustomConfirm("Are you sure you want to delete this task?");
+    if (confirmDelete) {
+        try {
+            const taskElement = document.getElementById(`task-${taskId}`);
+            const parentColumnId = taskElement.parentElement.id.replace("Tasks", "");
+
+            const url = `${base_url}/tasks/${parentColumnId}/${taskId}.json`;
+            await fetch(url, { method: 'DELETE' });
+
+            taskElement.remove();
+
+            currentTask = [];
+            closeTaskOverlay();
+        } catch (error) {
+            console.error("Failed to delete task:", error);
+        }
+    }
+}
+
+/**
+ * Creates a custom confirmation dialog with an overlay and dialog box.
+ *
+ * @function createDialog
+ * @param {string} message - The message to display in the dialog.
+ * @returns {Object} - An object containing references to the created `overlay` and `dialog` elements.
+ */
+function createDialog(message) {
+    const overlay = document.body.appendChild(Object.assign(document.createElement("div"), { className: "overlay show" }));
+    const dialog = document.body.appendChild(Object.assign(document.createElement("div"), { className: "custom-confirm-dialog" }));
+    dialog.innerHTML = `
+        <p>${message}</p>
+        <div class="dialog-buttons">
+            <button class="dialog-button confirm">Yes</button>
+            <button class="dialog-button cancel">No</button>
+        </div>`;
+    return { overlay, dialog };
+}
+
+/**
+ * Adds event listeners to the dialog buttons and the overlay.
+ *
+ * @function addListeners
+ * @param {Object} elements - The elements containing the `overlay` and `dialog`.
+ * @param {Function} resolve - The resolve function of the Promise, used to return user selection.
+ */
+function addListeners(elements, resolve) {
+    for (const [selector, result] of [[".confirm", true], [".cancel", false]]) {
+        elements.dialog.querySelector(selector).addEventListener("click", () => resolve(result) || cleanup(elements));
+    }
+    elements.overlay.addEventListener("click", (e) => {
+        if (e.target === elements.overlay) resolve(false) || cleanup(elements);
+    });
+}
+
+/**
+ * Removes the overlay and dialog elements from the DOM.
+ *
+ * @function cleanup
+ * @param {Object} elements - The elements containing the `overlay` and `dialog`.
+ */
+function cleanup({ overlay, dialog }) {
+    overlay.remove();
+    dialog.remove();
+}
+
+/**
+ * Displays a custom confirmation dialog with a message.
+ *
+ * @function showCustomConfirm
+ * @param {string} message - The message to display in the dialog.
+ * @returns {Promise<boolean>} - Resolves to `true` if "Yes" is clicked, or `false` if "No" or outside the dialog is clicked.
+ */
+function showCustomConfirm(message) {
+    return new Promise((resolve) => {
+        const elements = createDialog(message);
+        addListeners(elements, resolve);
+    });
+}
+
+

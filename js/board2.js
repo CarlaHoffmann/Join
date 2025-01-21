@@ -230,35 +230,6 @@ async function updateOverlay(taskId, taskStatus) {
 
 
 /**
- * Deletes a task by its ID after user confirmation and updates the UI.
- * 
- * @async
- * @function deleteTask
- * @param {string} taskId - The unique ID of the task to delete.
- * @returns {Promise<void>}
- */
-async function deleteTask(taskId) {
-    const confirmDelete = confirm("Are you sure you want to delete this task?");
-    if (confirmDelete) {
-        try {
-            const taskElement = document.getElementById(`task-${taskId}`);
-            const parentColumnId = taskElement.parentElement.id.replace("Tasks", "");
-
-            const url = `${base_url}/tasks/${parentColumnId}/${taskId}.json`;
-            await fetch(url, { method: 'DELETE' });
-
-            taskElement.remove();
-
-            // updatePlaceholders();
-
-            currentTask = [];
-            closeTaskOverlay();
-        } catch (error) { }
-    }
-}
-
-
-/**
  * Updates the visibility of placeholders based on the presence of task cards in each column.
  * 
  * @function updatePlaceholders
