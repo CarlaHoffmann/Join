@@ -69,21 +69,6 @@ function toggleCheckbox(element) {
     }
 }
 
-/**
- * Validates a field and displays appropriate feedback.
- * @param {boolean} condition - Validation condition.
- * @param {HTMLElement} container - The input container element.
- * @param {HTMLElement} errorElement - The error message element.
- */
-// function validateField(condition, container, errorElement) {
-//     if (condition) {
-//         hideError(container, errorElement);
-//         displayValid(container);
-//     } else {
-//         displayError(container, errorElement);
-//         hideValid(container);
-//     }
-// }
 
 function handleLoginClick(event) {
     event.preventDefault(); // Verhindert das Standard-Submit-Event
