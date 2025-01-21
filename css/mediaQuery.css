@@ -221,6 +221,20 @@
   }
 }
 
+
+
+@media(max-width: 500px) {
+  #overlay-content {
+    width: calc(100vw - 32px);
+  }
+}
+
+@media(max-width: 680px) {
+  #overlay-content {
+    width: 472px;
+  }
+}
+
 @media (max-height: 800px) and (max-width: 680px) {
   .logIn-page {
     height: 800px;
@@ -377,5 +391,13 @@
 
   .input-with-image {
     width: 200px;
+  }
+}
+
+
+
+@media(max-width: 1275px) {
+  #overlay-content {
+    width: 500px;
   }
 }

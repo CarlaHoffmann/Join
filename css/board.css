@@ -3,12 +3,10 @@
   height: calc(100vh - 96px);
   background-color: #F6F7F8;
   display: flex;
-  /* align-items: ; */
   justify-content: center;
   position: absolute;
   right: 0;
   bottom: 0;
-  /* overflow: hidden; */
 }
 
 .headline-container {
@@ -17,8 +15,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* padding-left: 64px; */
-  /* padding-right: 64px; */
   padding-top: 80px;
 }
 
@@ -56,13 +52,10 @@
 
 .board-columns {
   max-width: 1208px;
-  /* width: calc(100vw - 232px - 92px); */
-  /* height: 588px; */
   display: flex;
   padding-left: 64px;
   padding-right: 64px;
   justify-content: space-between;
-  /*flex-wrap: wrap;*/
   margin-top: 50px;
   gap: 24px;
   overflow-y: hidden;
@@ -104,8 +97,6 @@
 }
 
 .placeholder {
-  /* display: none;  */
-  /*max-width: 252px;*/
   background-color: #E7E7E7;
   color: #a0a0a0;
   font-size: 1rem;
@@ -116,7 +107,6 @@
   margin-bottom: 24px;
   margin-top: 24px;
 }
-
 
 /* Placeholder - no task */
   .overlay-container {
@@ -146,7 +136,6 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-/* Technisches Task-Design */
 /* Schließen-Button */
 .close img {
   cursor: pointer;
@@ -194,23 +183,6 @@
   background-color: #FFFFFF;
 }
 
-@media(max-width: 1275px) {
-  #overlay-content {
-    width: 500px;
-  }
-}
-
-@media(max-width: 680px) {
-  #overlay-content {
-    width: 472px;
-  }
-}
-
-@media(max-width: 500px) {
-  #overlay-content {
-    width: calc(100vw - 32px);
-  }
-}
 
 /* Board - Dialog add Task */
 .dialog_addTask_bg {
@@ -583,167 +555,6 @@
   display: flex;
   align-items: center;
 }
-/*
-.member-big-task {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  font-size: 12px;
-  border: 2px solid var(--white);
-  border-radius: 100%;
-  color: var(--white);
-  font-weight: 400;
-}
-
-.container-member-big-task {
-  display: flex;
-  flex-direction: column;
-  margin-top: 8px;
-  gap: 16px;
-}
-
-.container-member-big-task p {
-  font-weight: 400;
-  font-size: 19px;
-}
-
-.container-letters-name {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.prio-icon {
-  margin-left: 8px;
-}
-
-.container-subtasks {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-
-.task-box-big.edit-mode {
-  overflow-y: hidden;
-}
-
-.scroll_EditTasks {
-    max-height: calc(50vh - 100px);
-    overflow-y: auto;
-}
-
-.scroll_EditTasks_pd{
-  margin-right: 10px;
-}
-
-.mainEditTasks {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 50px 16px 0;
-}
-
-.wrapper_close_edit_task {
-  position: fixed;
-  right: 50px;
-  top: 48px;
-  width: 32px;
-  height: 32px;
-  z-index: 1;
-}
-
-.wrapper_close_edit_task:hover {
-  background-color: #eeeeee;
-}
-
-.focus_editTask {
-  font-size: 20px;
-  width: 100%;
-  height: 48px;
-  border-radius: 10px;
-  padding: 12px 21px 12px 21px;
-  gap: 10px;
-  border: 1px solid var(--backgroundSpacer);
-  margin-top: 8px;
-  outline: none;
-}
-
-.focus_editTask_description {
-  font-size: 20px;
-  width: 100%;
-  height: 120px;
-  border-radius: 10px;
-  padding: 12px 21px 12px 21px;
-  gap: 10px;
-  border: 1px solid var(--backgroundSpacer);
-  margin-top: 8px;
-  outline: none;
-}
-
-.subtask_container_edit {
-  min-width: fit-content;
-}
-
-.focus_editTask_description:focus,
-.focus_editTask:focus {
-  border: 1px solid var(--lightblue);
-}
-
-.status_edit {
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  display: none;
-}
-
-.prio_edit {
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.prio_edit_text {
-  font-weight: bold;
-}
-
-.prio_edit_buttons {
-  margin-top: 8px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.edit_task_btn {
-  display: flex;
-  gap: 4px;
-  padding: 18px;
-  align-items: center;
-}
-
-.footer_edit_task {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.test {
-  padding-right: 10px;
-}
-
-.no-search-result {
-  color: red;
-  text-align: center;
-  font-size: 12px;
-  margin-top: 8px;
-}
-
-.description-overlay {
-  height: 60px;
-  overflow-y: auto;
-}*/
 
 /*Zum Task Edit Overlay*/
 .add-task-edit-form {
