@@ -1,21 +1,17 @@
 /**
- * Firebase Base URL for accessing the Realtime Database.
- * This URL is used to interact with the Firebase Realtime Database
- * for CRUD operations related to tasks, users, and other entities.
+ * The base URL for the Firebase Realtime Database.
  * 
- * @constant {string} base_url - The base URL for Firebase Realtime Database.
- * @example
- * // Example usage in an API call
- * const response = await fetch(`${base_url}/tasks/toDo.json`);
+ * @constant {string} base_url
  */
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app";
 
+
 /**
- * Loads tasks from the database and updates placeholders in the UI.
+ * Loads tasks for all columns from the database and updates placeholders.
  * 
  * @async
  * @function loadTasks
- * @returns {Promise<void>} Resolves when all tasks are loaded and placeholders are updated.
+ * @returns {Promise<void>}
  */
 async function loadTasks() {
     try {
@@ -31,13 +27,13 @@ async function loadTasks() {
 
 
 /**
- * Loads tasks for a specific column from the database and displays them in the UI.
+ * Loads task data from the database for a specific column and updates the UI.
  * 
  * @async
  * @function loadTaskData
- * @param {string} path - The database path for the task column.
- * @param {string} containerId - The ID of the container where tasks will be displayed.
- * @returns {Promise<void>} Resolves when tasks are loaded and displayed.
+ * @param {string} path - The path representing the task status (e.g., "toDo", "progress").
+ * @param {string} containerId - The ID of the container element where tasks will be displayed.
+ * @returns {Promise<void>}
  */
 async function loadTaskData(path, containerId) {
     const placeholder = document.getElementById(containerId.replace("Tasks", "Placeholder"));
@@ -69,12 +65,12 @@ async function loadTaskData(path, containerId) {
 
 
 /**
- * Processes tasks retrieved from the database, adding additional properties like contacts and subtasks.
+ * Processes tasks data from the database into an array of task objects.
  * 
  * @function processTasks
- * @param {Object} tasks - The tasks object retrieved from the database.
+ * @param {Object} tasks - The tasks data retrieved from the database.
  * @param {string} status - The status of the tasks (e.g., "toDo", "progress").
- * @returns {Array<Object>} An array of processed task objects with additional properties.
+ * @returns {Array<Object>} - An array of processed task objects, each containing path, id, and other task properties.
  */
 function processTasks(tasks, status) {
     if (!tasks) {
@@ -91,13 +87,13 @@ function processTasks(tasks, status) {
 
 
 /**
- * Displays tasks in the specified container and updates placeholders.
+ * Displays a list of tasks in the specified container with progress, contacts, and priority information.
  * 
  * @async
  * @function displayTasks
- * @param {Array<Object>} taskArray - Array of task objects to be displayed.
+ * @param {Array<Object>} taskArray - An array of task objects to be displayed.
  * @param {string} containerId - The ID of the container where tasks will be rendered.
- * @returns {Promise<void>} Resolves after the tasks are rendered and the placeholder is updated.
+ * @returns {Promise<void>}
  */
 async function displayTasks(taskArray, containerId) {
     const tasks = document.getElementById(containerId);
@@ -145,18 +141,17 @@ async function displayTasks(taskArray, containerId) {
         `;
     }).join('');
 
-    // placeholder.style.display = taskArray.length === 0 ? "block" : "none";    
 }
 
 
 
 /**
- * Retrieves contact colors for each contact in the provided tasks.
+ * Retrieves colors for contacts associated with tasks by querying the database.
  * 
  * @async
  * @function getContactColors
- * @param {Array<Object>} tasks - Array of task objects containing contacts.
- * @returns {Promise<Array<Array<string>>>} Resolves to an array of arrays, where each sub-array contains color codes for contacts in a task.
+ * @param {Array<Object>} tasks - An array of task objects containing contacts.
+ * @returns {Promise<Array<Array<string>>>} - A nested array of color codes for each task's contacts.
  */
 async function getContactColors(tasks) {
     const contactColors = [];
@@ -174,7 +169,6 @@ async function getContactColors(tasks) {
                 }
                 return '#000000';
             } catch (error) {
-                console.error("Fehler beim Abrufen der Kontaktfarbe:", error);
                 return '#000000'; 
             }
         }));
@@ -183,12 +177,13 @@ async function getContactColors(tasks) {
     return contactColors;
 }
 
+
 /**
- * Extracts the initials from a contact's name.
+ * Generates initials from a contact's name.
  * 
  * @function getContactInitials
  * @param {string} contact - The full name of the contact.
- * @returns {string} The initials of the contact in uppercase.
+ * @returns {string} - The initials derived from the contact's name.
  */
 function getContactInitials(contact) {
     let initials = contact.split(' ').map(word => word[0]).join('').toUpperCase();
@@ -201,7 +196,7 @@ function getContactInitials(contact) {
  * 
  * @function getCategoryColor
  * @param {string} category - The category of the task (e.g., "User Story", "Technical Task").
- * @returns {string} The hex color code associated with the category, or a default color if the category is not recognized.
+ * @returns {string} - The color code corresponding to the category.
  */
 function getCategoryColor(category) {
     if (category === 'User Story') {
@@ -215,11 +210,11 @@ function getCategoryColor(category) {
 
 
 /**
- * Returns the priority level as a string based on the priority code.
+ * Maps a priority level to its corresponding priority label.
  * 
  * @function getPrio
- * @param {string} priority - The priority code (e.g., "1" for urgent, "2" for medium, "3" for low).
- * @returns {string} The corresponding priority level ("urgent", "medium", or "low"). Defaults to "medium" if the code is unrecognized.
+ * @param {string} priority - The priority level (e.g., '1', '2', '3').
+ * @returns {string} - The priority label ('urgent', 'medium', 'low').
  */
 function getPrio(priority) {
     switch (priority) {
@@ -235,7 +230,7 @@ function getPrio(priority) {
  * Allows an element to be dropped by preventing the default dragover behavior.
  * 
  * @function allowDrop
- * @param {DragEvent} event - The drag event triggered when an item is dragged over a drop target.
+ * @param {DragEvent} event - The drag event.
  * @returns {void}
  */
 function allowDrop(event) {
@@ -244,10 +239,10 @@ function allowDrop(event) {
 
 
 /**
- * Handles the dragstart event by marking the task as being dragged and storing its ID.
+ * Initiates a drag operation for a task and marks it as "dragging."
  * 
  * @function drag
- * @param {DragEvent} event - The drag event triggered when a task starts being dragged.
+ * @param {DragEvent} event - The drag event.
  * @returns {void}
  */
 function drag(event) {
@@ -258,10 +253,10 @@ function drag(event) {
 
 
 /**
- * Handles the dragend event by removing the "dragging" class from the task.
+ * Handles the end of a drag operation by removing the "dragging" class from the task.
  * 
  * @function dragEnd
- * @param {DragEvent} event - The drag event triggered when a task is dropped or the drag ends.
+ * @param {DragEvent} event - The drag event.
  * @returns {void}
  */
 function dragEnd(event) {
@@ -271,13 +266,13 @@ function dragEnd(event) {
 
 
 /**
- * Handles the drop event by moving a task to a new status column and updating the database.
+ * Handles the drop event for a task, moving it to a new status and updating the database.
  * 
  * @async
  * @function drop
- * @param {DragEvent} event - The drop event triggered when a task is dropped onto a new status column.
- * @param {string} newStatus - The new status to which the task is being moved (e.g., "toDo", "done").
- * @returns {Promise<void>} Resolves after the task is successfully moved and the database is updated.
+ * @param {DragEvent} event - The drag event.
+ * @param {string} newStatus - The new status for the task (e.g., "toDo", "progress").
+ * @returns {Promise<void>}
  */
 async function drop(event, newStatus) {
     event.preventDefault();
@@ -315,7 +310,7 @@ async function drop(event, newStatus) {
 
 
 /**
- * Highlights a specified column by adding a CSS class.
+ * Highlights a column by adding a "highlight-column" class to it.
  * 
  * @function highlight
  * @param {string} columnId - The ID of the column to highlight.
@@ -330,7 +325,7 @@ function highlight(columnId) {
 
 
 /**
- * Removes the highlight from a specified column by removing a CSS class.
+ * Removes the "highlight-column" class from a column when the drag leaves the area.
  * 
  * @function removeHighlightLeave
  * @param {string} columnId - The ID of the column to remove the highlight from.
@@ -345,7 +340,7 @@ function removeHighlightLeave(columnId) {
 
 
 /**
- * Removes the highlight from a specified column by calling `removeHighlightLeave`.
+ * Removes the highlight from a column at the end of a drag operation.
  * 
  * @function removeHighlightEnd
  * @param {string} columnId - The ID of the column to remove the highlight from.
