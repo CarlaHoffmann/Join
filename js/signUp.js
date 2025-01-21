@@ -7,6 +7,7 @@
  */
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
+const signUpName = '';
 
 async function handleSignUpClick(event) {
     event.preventDefault(); // Verhindert das Standard-Submit-Event
@@ -15,42 +16,66 @@ async function handleSignUpClick(event) {
     console.log(isChecked);
     if(isChecked) {
         const users = await loadUsers();
-        if (validateSignUp(users) === true) {
-            await createContact();
+        const usableData = validateSignUp(users);
+        console.log(usableData);
+        if (usableData === true) {
+            // if(await createContact()) {
+            //     showSuccessMessage();
+            //     await getLoggedIn();
+            // }
+
             console.log('User is valid. Submitting...');
         }
     } else {
-        console.error('Please accept Privacy Policy');
+        alert('Please accept Privacy Policy');
     }
 }
 
-function toggleCheckboxPrivacyPolicy(element) {
-    const img = element.querySelector('.checkbox-icon');
-    const isChecked = img.getAttribute('src') === 'assets/img/general/checked_button.svg';
+/**
+ * Loads the list of users from the database and returns an array of user objects.
+ * 
+ * - Fetches the users from the Firebase database.
+ * - Maps the data into an array of user objects containing the user ID and name.
+ * - In case of an error (e.g., network failure), returns an empty array.
+ * 
+ * @async
+ * @function loadUsers
+ * @returns {Promise<Array<Object>>} A promise that resolves to an array of user objects with `id` and `name` properties.
+ */
+async function loadUsers() {
+    try {
+        const response = await fetch(`${base_url}/users.json`);
+        const users = await response.json();
 
-    // Toggle Zustand
-    if (isChecked) {
-        img.setAttribute('src', 'assets/img/general/check_button.svg');
-        element.dataset.checked = "false";
-        // element.setAttribute('value', 'false');
+        const contactsArray = Object.entries(users).map(([userId, userData]) => ({ id: userId, name: userData.name, mail: userData.mail }));
+        console.log(contactsArray);
+        return contactsArray;        
+    } catch (error) {
+        return [];
+    }
+}
+
+
+function validateSignUp(users) {
+    let nameError = document.getElementById('name-error');
+    const userName = document.getElementById('name');
+    if(userName.value != '') {
+        const isEmailValid = checkExistingMail(users);
+        if (!isEmailValid) {
+            return false; // Wenn E-Mail ungültig ist, hier abbrechen
+        }
+        // Nur wenn E-Mail gültig ist, Passwort überprüfen
+        let checkedPassword = checkSignUpPassword();
+        console.log(checkedPassword);
+        if(checkedPassword) {
+            return true;
+        }
     } else {
-        img.setAttribute('src', 'assets/img/general/checked_button.svg');
-        element.dataset.checked = "true";
-        // element.setAttribute('value', 'true');
+        nameError.innerHTML = "Please insert a name. Please try again.";
+        return;
     }
 }
 
-async function validateSignUp(users) {
-    // Zuerst E-Mail überprüfen
-
-    const isEmailValid = checkExistingMail(users);
-    if (!isEmailValid) {
-        return false; // Wenn E-Mail ungültig ist, hier abbrechen
-    }
-    
-    // Nur wenn E-Mail gültig ist, Passwort überprüfen
-    return checkSignUpPassword();
-}
 
 function checkExistingMail(users) {
     let mailError = document.getElementById('mail-error');
@@ -59,7 +84,7 @@ function checkExistingMail(users) {
         const mailIsValid = validateSignUpEmail();
         
         if (mailIsValid) {
-            const user = findUserByEmail(users); // Pass email to the function
+            const user = findSignUpUserByEmail(users); // Pass email to the function
             console.log(user);
             if (user) {
                 mailError.innerHTML = "Check your email and password. Please try again.";
@@ -93,6 +118,17 @@ function validateSignUpEmail() {
     }
 }
 
+function findSignUpUserByEmail(users) {
+    const email = document.getElementById("email").value;
+    let user = users.find(u => u.mail === email);
+    console.log(user);
+    if(user) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function checkSignUpPassword() {
     let password1 = document.getElementById('password').value;
     let password2 = document.getElementById('confirmPassword').value;
@@ -116,6 +152,9 @@ function checkSignUpPassword() {
 
 
 
+
+
+
 /**
  * Handles the user sign-up process by validating email and managing error messages.
  * 
@@ -126,11 +165,11 @@ function checkSignUpPassword() {
  * @function addUser
  * @returns {void}
  */
-async function addUser() {
-    document.getElementById('mailError').classList.add('hidden');
-    document.getElementById('singupError').classList.add('hidden');
-    existingMailSignUp();
-}
+// async function addUser() {
+//     document.getElementById('mailError').classList.add('hidden');
+//     document.getElementById('singupError').classList.add('hidden');
+//     existingMailSignUp();
+// }
 
 
 /**
@@ -144,40 +183,19 @@ async function addUser() {
  * @function existingMailSignUp
  * @returns {void}
  */
-async function existingMailSignUp() {
-    const users = Object.entries(await loadUsers());
-    let email = document.getElementById('email').value.toLowerCase();
-    let user = users.find(u => u[1].mail == email);            
-    if (user === undefined) {  
-        matchPassword();
-    } else {
-        document.getElementById('mailError').classList.remove('hidden');  
-    }
-}
+// async function existingMailSignUp() {
+//     const users = Object.entries(await loadUsers());
+//     let email = document.getElementById('email').value.toLowerCase();
+//     let user = users.find(u => u[1].mail == email);            
+//     if (user === undefined) {  
+//         matchPassword();
+//     } else {
+//         document.getElementById('mailError').classList.remove('hidden');  
+//     }
+// }
 
 
-/**
- * Loads the list of users from the database and returns an array of user objects.
- * 
- * - Fetches the users from the Firebase database.
- * - Maps the data into an array of user objects containing the user ID and name.
- * - In case of an error (e.g., network failure), returns an empty array.
- * 
- * @async
- * @function loadUsers
- * @returns {Promise<Array<Object>>} A promise that resolves to an array of user objects with `id` and `name` properties.
- */
-async function loadUsers() {
-    try {
-        const response = await fetch(`${base_url}/users.json`);
-        const users = await response.json();
 
-        const contactsArray = Object.entries(users).map(([userId, userData]) => ({ id: userId, name: userData.name }));
-        return contactsArray;        
-    } catch (error) {
-        return [];
-    }
-}
 
 /**
  * Compares the entered password with the confirmation password and handles errors or proceeds to create a new user.
@@ -189,17 +207,17 @@ async function loadUsers() {
  * @function matchPassword
  * @returns {void}
  */
-async function matchPassword() {
-    var password = document.getElementById('password').value;
-    var confirmPassword = document.getElementById('confirmPassword').value;
-    if (password != confirmPassword) {
-        document.getElementById('singupError').classList.remove('hidden');        
-        document.getElementById('confirmPassword').classList.add('input-border');
-    } else {
-        createContact();
-        successful();
-    }
-}
+// async function matchPassword() {
+//     var password = document.getElementById('password').value;
+//     var confirmPassword = document.getElementById('confirmPassword').value;
+//     if (password != confirmPassword) {
+//         document.getElementById('singupError').classList.remove('hidden');        
+//         document.getElementById('confirmPassword').classList.add('input-border');
+//     } else {
+//         createContact();
+//         successful();
+//     }
+// }
 
 
 /**
@@ -220,7 +238,6 @@ async function createContact() {
         password: takePassword(),
         color: returnColor()
     }
-    await getLoggedIn();
     await postData(contact);
 }
 
@@ -235,6 +252,7 @@ async function createContact() {
  */
 function takeName() {
     let name = document.getElementById('name');
+    signUpName = name;
     return name.value;
 }
 
@@ -250,7 +268,6 @@ function takeMail() {
     let mail = document.getElementById('email');
     return mail.value;
 }
-
 
 /**
  * Retrieves the value of the password input field.
@@ -384,6 +401,8 @@ function handleConfirmPasswordInputSignUp() {
     }
 }
 
+
+
 /**
  * Changes the border styling of the password input container and manages visibility toggles for the password field.
  * 
@@ -394,20 +413,20 @@ function handleConfirmPasswordInputSignUp() {
  * @function changePassword
  * @returns {void}
  */
-function changePassword() {
-    document.getElementById('nameContainer').classList.remove('password_container_border');
-    document.getElementById('emailContainer').classList.remove('password_container_border');
-    document.getElementById('passwordButten').classList.add('password_container_border');
-    document.getElementById('confirmPasswordButten').classList.remove('password_container_border');
-    var x = document.getElementById("password");
-    if (x.type === "password") {
-        document.getElementById('passwordLock').classList.add('hidden');
-        document.getElementById('notSee').classList.remove('hidden');
-    } else {
-        document.getElementById('passwordLock').classList.add('hidden');
-        document.getElementById('notSee').classList.add('hidden');
-    }
-}
+// function changePassword() {
+//     document.getElementById('nameContainer').classList.remove('password_container_border');
+//     document.getElementById('emailContainer').classList.remove('password_container_border');
+//     document.getElementById('passwordButten').classList.add('password_container_border');
+//     document.getElementById('confirmPasswordButten').classList.remove('password_container_border');
+//     var x = document.getElementById("password");
+//     if (x.type === "password") {
+//         document.getElementById('passwordLock').classList.add('hidden');
+//         document.getElementById('notSee').classList.remove('hidden');
+//     } else {
+//         document.getElementById('passwordLock').classList.add('hidden');
+//         document.getElementById('notSee').classList.add('hidden');
+//     }
+// }
 
 /**
  * Changes the border styling of the confirm password input container and manages visibility toggles for the confirm password field.
@@ -419,21 +438,20 @@ function changePassword() {
  * @function changeConfirmPassword
  * @returns {void}
  */
-function changeConfirmPassword() {
-    document.getElementById('nameContainer').classList.remove('password_container_border');
-    document.getElementById('emailContainer').classList.remove('password_container_border');
-    document.getElementById('passwordButten').classList.remove('password_container_border');
-    document.getElementById('confirmPasswordButten').classList.add('password_container_border');
-    var x = document.getElementById("confirmPassword");
-    if (x.type === "password") {
-        document.getElementById('confirmPasswordLock').classList.add('hidden'); 
-        document.getElementById('notSeeConfirm').classList.remove('hidden');
-    } else {
-        document.getElementById('passwordLock').classList.add('hidden');
-        document.getElementById('notSeeConfirm').classList.add('hidden');
-    }
-}
-
+// function changeConfirmPassword() {
+//     document.getElementById('nameContainer').classList.remove('password_container_border');
+//     document.getElementById('emailContainer').classList.remove('password_container_border');
+//     document.getElementById('passwordButten').classList.remove('password_container_border');
+//     document.getElementById('confirmPasswordButten').classList.add('password_container_border');
+//     var x = document.getElementById("confirmPassword");
+//     if (x.type === "password") {
+//         document.getElementById('confirmPasswordLock').classList.add('hidden'); 
+//         document.getElementById('notSeeConfirm').classList.remove('hidden');
+//     } else {
+//         document.getElementById('passwordLock').classList.add('hidden');
+//         document.getElementById('notSeeConfirm').classList.add('hidden');
+//     }
+// }
 
 /**
  * Toggles the visibility of the password field between "password" and "text".
@@ -482,18 +500,34 @@ function toggleConfirmPasswordVisibility() {
     }
 }
 
+function toggleCheckboxPrivacyPolicy(element) {
+    const img = element.querySelector('.checkbox-icon');
+    const isChecked = img.getAttribute('src') === 'assets/img/general/checked_button.svg';
+
+    // Toggle Zustand
+    if (isChecked) {
+        img.setAttribute('src', 'assets/img/general/check_button.svg');
+        element.dataset.checked = "false";
+        // element.setAttribute('value', 'false');
+    } else {
+        img.setAttribute('src', 'assets/img/general/checked_button.svg');
+        element.dataset.checked = "true";
+        // element.setAttribute('value', 'true');
+    }
+}
+
 
 
 // anpassen für SignUp
-async function handleUserSignUp(user) {
-    const passwordInput = document.getElementById("password").value;
-    const errorContainer = document.getElementById("passwordError");
-    const successMessage = document.getElementById("successMessage");
-    const successOverlay = document.getElementById("successOverlay");
-    const passwordError = `<span class="error-message">Check your password. Please try again.</span>`;
+async function showSuccessMessage() {
+    // const passwordInput = document.getElementById("password").value;
+    // const errorContainer = document.getElementById("passwordError");
+    // const successMessage = document.getElementById("successMessage");
+    // const successOverlay = document.getElementById("successOverlay");
+    // const passwordError = `<span class="error-message">Check your password. Please try again.</span>`;
 
-    if (user.password === passwordInput) {
-        await saveUser(user.name, user.mail);
+    // if (user.password === passwordInput) {
+    //     await saveUser(user.name, user.mail);
 
         successOverlay.classList.add("show");
         successMessage.style.display = "block";
@@ -508,9 +542,9 @@ async function handleUserSignUp(user) {
                 redirectToSummary();
             },); 
         }, 1600); // visible 2 sec
-    } else {
-        errorContainer.innerHTML = passwordError;
-    }
+    // } else {
+    //     errorContainer.innerHTML = passwordError;
+    // }
 }
 
 /**
