@@ -1,10 +1,18 @@
 /**
- * Opens the edit overlay for a specified task and populates it with task data.
+ * Opens the task editing overlay and populates it with the provided task details.
  * 
  * @async
  * @function openEditTaskOverlay
+ * @param {Event} event - The event that triggered the function.
  * @param {Object} task - The task object containing details to populate the overlay.
- * @returns {Promise<void>} Resolves when the overlay is successfully rendered and initialized.
+ * @param {string} task.title - The title of the task.
+ * @param {string} task.description - The description of the task.
+ * @param {Array<string>} task.contacts - The contacts assigned to the task.
+ * @param {Object} task.subtasks - Subtasks of the task, keyed by unique identifiers.
+ * @param {string} task.date - The due date of the task.
+ * @param {string} task.prio - The priority of the task (e.g., "1" for Urgent, "2" for Medium, "3" for Low).
+ * @param {string} task.category - The category of the task (e.g., "Technical Task", "User Story").
+ * @returns {void}
  */
 let currentTask = null;
 
@@ -208,7 +216,7 @@ async function openEditTaskOverlay(event, task) {
 
 
 /**
- * Closes the edit task overlay and reopens the task overlay for viewing the task.
+ * Closes the edit task overlay and reopens the task overlay with the given task details.
  * 
  * @function closeEditTaskOverlay
  * @param {Object} task - The task object to reopen in the task overlay.
@@ -221,14 +229,14 @@ function closeEditTaskOverlay(task) {
 
 
 /**
- * Toggles the status of a subtask and updates its visual representation in the UI.
+ * Toggles the completion status of a subtask and updates it in the database and UI.
  * 
  * @async
  * @function toggleSubtaskStatus
- * @param {string} path - The database path for the task containing the subtask.
- * @param {string} taskId - The ID of the task containing the subtask.
- * @param {string} subtaskKey - The key of the subtask to toggle.
- * @returns {Promise<void>} Resolves when the status is toggled and UI is updated.
+ * @param {string} path - The path representing the task's status (e.g., "toDo", "progress").
+ * @param {string} taskId - The unique ID of the task containing the subtask.
+ * @param {string} subtaskKey - The unique key of the subtask to toggle.
+ * @returns {Promise<void>}
  */
 async function toggleSubtaskStatus(path, taskId, subtaskKey) {
     try {
@@ -257,7 +265,7 @@ async function toggleSubtaskStatus(path, taskId, subtaskKey) {
 
 
 /**
- * Starts the task overlay animation by making the container visible and applying the animation class.
+ * Starts the animation for the task overlay by making it visible and adding the "show" animation class.
  * 
  * @function startTaskOverlayAnimation
  * @returns {void}
@@ -272,32 +280,38 @@ function startTaskOverlayAnimation() {
 
 
 /**
- * Closes the task overlay with an animation and hides the container.
+ * Closes the task overlay with an animation and invokes the close function after the animation ends.
  * 
  * @function closeTaskOverlayAnimation
+ * @param {string} overlayBox - The ID of the overlay element to animate and close.
  * @returns {void}
  */
 function closeTaskOverlayAnimation(overlayBox) {
     let overlay = document.getElementById(overlayBox);
-    // let taskOverlayContainer = document.getElementById('taskOverlayContainer');
     if(overlay.classList.contains('show')) {
         overlay.classList.remove('show');
     }
     overlay.classList.add('hide');
-
-    // taskOverlayContainer.classList.add('d-none');
     setTimeout(closeTaskOverlay, 400);
 }
 
 
-
 /**
- * Opens the task overlay for viewing the details of a specific task, including contacts, subtasks, and metadata.
+ * Opens the task overlay and populates it with the task details, including contacts and subtasks.
  * 
  * @async
  * @function openTaskOverlay
  * @param {Object} task - The task object containing the details to display in the overlay.
- * @returns {Promise<void>} Resolves when the overlay is populated and displayed.
+ * @param {string} task.title - The title of the task.
+ * @param {string} task.description - The description of the task.
+ * @param {Array<string>} task.contacts - An array of contacts assigned to the task.
+ * @param {Object} task.subtasks - An object of subtasks, keyed by unique identifiers.
+ * @param {string} task.date - The due date of the task.
+ * @param {string} task.prio - The priority level of the task.
+ * @param {string} task.category - The category of the task.
+ * @param {string} task.path - The current path of the task in the database.
+ * @param {string} task.id - The unique ID of the task.
+ * @returns {Promise<void>}
  */
 async function openTaskOverlay(task) {
     currentTask = task;
@@ -402,10 +416,8 @@ async function openTaskOverlay(task) {
         </div>
     `;
 
-    // Event Listener für die Subtasks hinzufügen
     addSubtaskListeners(task);
 
-    // Überprüfen Sie, ob das DOM aktualisiert wurde
     requestAnimationFrame(() => {
         if (document.getElementById('taskOverlay')) {
             startTaskOverlayAnimation();
