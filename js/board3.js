@@ -173,7 +173,7 @@ async function openTaskOverlay(task) {
                 </div>`;
         }
     }
-    overlayContainer.innerHTML = openTaskOverlayTemplate(task, contactsHTML);
+    overlayContainer.innerHTML = openTaskOverlayTemplate(task, contactsHTML, subtasksHTML);
 
     addSubtaskListeners(task);
 

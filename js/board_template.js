@@ -1,4 +1,4 @@
-function openTaskOverlayTemplate(task, contactsHTML) {
+function openTaskOverlayTemplate(task, contactsHTML, subtasksHTML) {
     return `
         <div onclick="closeOverlayOnOutsideClick(event, 'taskOverlay', 'openTaskOverlayBackground')" id="openTaskOverlayBackground" class="overlay-container">
             <div id="taskOverlay" class="taskOverlay">
