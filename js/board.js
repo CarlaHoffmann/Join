@@ -266,7 +266,7 @@ function dragEnd(event) {
 
 
 /**
- * Handles the drop event for a task, moving it to a new status and updating the database.
+ * Handles the drop event for a task, moving it to a new status and updating the database and UI.
  * 
  * @async
  * @function drop
@@ -276,37 +276,110 @@ function dragEnd(event) {
  */
 async function drop(event, newStatus) {
     event.preventDefault();
+
     const taskId = event.dataTransfer.getData("taskId");
     const taskElement = document.getElementById(taskId);
     if (!taskElement) return;
 
+    const taskData = await fetchTaskData(taskElement, taskId);
+    if (!taskData) return;
+
+    const { oldStatus, taskKey } = extractTaskInfo(taskElement, taskId);
+    const newTaskUrl = getTaskUrl(newStatus, taskKey);
+
+    await moveTaskData(oldStatus, newStatus, taskKey, taskData);
+    updateTaskElement(taskElement, newStatus, taskKey);
+}
+
+
+/**
+ * Fetches the task data from the database based on the task element and ID.
+ * 
+ * @async
+ * @function fetchTaskData
+ * @param {HTMLElement} taskElement - The task element being moved.
+ * @param {string} taskId - The ID of the task.
+ * @returns {Promise<Object|null>} - The task data or null if an error occurs.
+ */
+async function fetchTaskData(taskElement, taskId) {
+    try {
+        const response = await fetch(getTaskUrl(taskElement.parentElement.id.replace("Tasks", ""), taskId.replace('task-', '')));
+        if (!response.ok) throw new Error(`HTTP-Error: ${response.status}`);
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+
+/**
+ * Extracts task information, such as the old status and task key, from the task element and ID.
+ * 
+ * @function extractTaskInfo
+ * @param {HTMLElement} taskElement - The task element being moved.
+ * @param {string} taskId - The ID of the task.
+ * @returns {Object} - An object containing the old status and task key.
+ */
+function extractTaskInfo(taskElement, taskId) {
     const oldStatus = taskElement.parentElement.id.replace("Tasks", "");
     const taskKey = taskId.replace('task-', '');
-    const taskUrl = `${base_url}/tasks/${oldStatus}/${taskKey}.json`;
-    const newTaskUrl = `${base_url}/tasks/${newStatus}/${taskKey}.json`;
-    const container = document.getElementById(newStatus + "Tasks");
+    return { oldStatus, taskKey };
+}
 
+
+/**
+ * Constructs the URL for accessing task data in the database based on status and task key.
+ * 
+ * @function getTaskUrl
+ * @param {string} status - The status of the task (e.g., "toDo", "progress").
+ * @param {string} taskKey - The key of the task in the database.
+ * @returns {string} - The constructed URL.
+ */
+function getTaskUrl(status, taskKey) {
+    return `${base_url}/tasks/${status}/${taskKey}.json`;
+}
+
+
+/**
+ * Moves task data from the old status to the new status in the database.
+ * 
+ * @async
+ * @function moveTaskData
+ * @param {string} oldStatus - The current status of the task.
+ * @param {string} newStatus - The new status of the task.
+ * @param {string} taskKey - The key of the task in the database.
+ * @param {Object} taskData - The task data to be moved.
+ * @returns {Promise<void>}
+ */
+async function moveTaskData(oldStatus, newStatus, taskKey, taskData) {
     try {
-        const response = await fetch(taskUrl);
-        if (!response.ok) throw new Error(`HTTP-Error: ${response.status}`);
-        const taskData = await response.json();
-
-        await fetch(taskUrl, { method: 'DELETE' });
-
-        const putResponse = await fetch(newTaskUrl, {
+        await fetch(getTaskUrl(oldStatus, taskKey), { method: 'DELETE' });
+        const putResponse = await fetch(getTaskUrl(newStatus, taskKey), {
             method: 'PUT',
             body: JSON.stringify(taskData),
             headers: { 'Content-Type': 'application/json' }
         });
         if (!putResponse.ok) throw new Error(`HTTP-Error: ${putResponse.status}`);
-
-        taskElement.id = `task-${taskKey}`;
-        container.appendChild(taskElement);
-        updatePlaceholders();
     } catch (error) {
+        console.error(error);
     }
 }
 
+/**
+ * Updates the task element in the UI, moving it to the new column and updating placeholders.
+ * 
+ * @function updateTaskElement
+ * @param {HTMLElement} taskElement - The task element being moved.
+ * @param {string} newStatus - The new status of the task.
+ * @param {string} taskKey - The key of the task in the database.
+ * @returns {void}
+ */
+function updateTaskElement(taskElement, newStatus, taskKey) {
+    taskElement.id = `task-${taskKey}`;
+    document.getElementById(newStatus + "Tasks").appendChild(taskElement);
+    updatePlaceholders();
+}
 
 
 /**
