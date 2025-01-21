@@ -80,9 +80,8 @@
             <div id="no-search-result" class="no-search-result d-none">
                 <p>Sorry, no task found</p>
             </div>
-
+            <!-- Board Columns -->
             <div class="board-columns">
-                <!-- Board Columns -->
                 <!-- To Do Column -->
                 <div id="column-toDo" class="board-column"
                     ondrop="drop(event, 'toDo'); removeHighlightEnd('column-toDo')"
@@ -90,8 +89,6 @@
                     ondragover="allowDrop(event); highlight('column-toDo')">
                     <div class="column-header">
                         <h2 class="text_board_headline">To Do</h2>
-
-                        <!-- <img src="/assets/img/add_task/plus button.svg" alt="Add Task Icon" class="column-icon" onclick="addTask()" /> -->
 
                         <svg class="column-icon" onclick="addTask()" width="24" height="25" viewBox="0 0 24 25"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
