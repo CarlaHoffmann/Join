@@ -319,7 +319,7 @@ body {
     width: 1px;
     height: 24px;
     background-color: #d3d3d3; /* Hellgrau */
-    margin: 0 10px; /* Abstand zu den Buttons */
+    margin: 0 10px; 
 }
 
 /* Media Queries */
@@ -352,20 +352,20 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.6s ease-in, visibility 0.6s;
-  }
-  
-  .overlay.show {
+}
+
+.overlay.show {
     opacity: 1;
     visibility: visible;
-  }
-  
-  .overlay.hide {
+}
+
+.overlay.hide {
     opacity: 0;
     visibility: hidden;
-  }
-  
-  /* Dialog */
-  .custom-confirm-dialog {
+}
+
+/* Dialog */
+.custom-confirm-dialog {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -379,53 +379,48 @@ body {
     font-size: 20px;
     z-index: 10000;
     animation: fadeIn 0.8s ease-in-out forwards;
-  }
-  
-  .custom-confirm-dialog p {
+}
+
+.custom-confirm-dialog p {
     margin-bottom: 20px;
-  }
-  
-  /* Buttons nebeneinander */
-  .dialog-buttons {
+}
+
+/* Buttons nebeneinander */
+.dialog-buttons {
     display: flex;
     justify-content: center;
     gap: 20px;
-  }
-  
-  .dialog-button {
+}
+
+.dialog-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Abstand zwischen Icon und Text */
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
     border-radius: 10px;
     cursor: pointer;
     border: none;
-    transition: background-color 0.3s ease-in-out;
-  }
-    
-  .dialog-button.confirm:hover {
-    background-color: #29ABE2;
-    color: white;
-  }
-  
-  .dialog-button.cancel {
-    background-color: #ddd; /* Grau für "No" */
+    background-color: white;
     color: black;
-  }
-  
-  .dialog-button.cancel:hover {
-    background-color: #29ABE2;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.dialog-button img.dialog-icon {
+    width: 20px;
+    height: 20px;
+    filter: invert(0); /* Standardfarbe */
+    transition: filter 0.3s ease-in-out;
+}
+
+/* Hover-Effekt für Buttons */
+.dialog-button:hover {
+    background-color: #29ABE2; /* Blau beim Hover */
     color: white;
-  }
-  
-  /* Animationen */
-  @keyframes fadeIn {
-    from {
-      opacity: 0.3;
-      transform: translate(-50%, -60%);
-    }
-    to {
-      opacity: 1;
-      transform: translate(-50%, -50%);
-    }
-  }
-  
+}
+
+.dialog-button:hover img.dialog-icon {
+    filter: invert(1); /* Weiß beim Hover */
+}

@@ -226,8 +226,14 @@ function createDialog(message) {
     dialog.innerHTML = `
         <p>${message}</p>
         <div class="dialog-buttons">
-            <button class="dialog-button confirm">Yes</button>
-            <button class="dialog-button cancel">No</button>
+            <button class="dialog-button confirm">
+                <img src="assets/img/board/check.svg" alt="Yes" class="dialog-icon"/>
+                 Yes
+            </button>
+            <button class="dialog-button cancel">
+                <img src="assets/img/board/close.svg" alt="No" class="dialog-icon"/>
+                 No
+            </button>
         </div>`;
     return { overlay, dialog };
 }
