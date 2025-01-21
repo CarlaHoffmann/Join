@@ -36,7 +36,7 @@ async function loadTasks() {
  * @returns {Promise<void>}
  */
 async function loadTaskData(path, containerId) {
-    const placeholder = document.getElementById(containerId.replace("Tasks", "Placeholder"));
+    // const placeholder = document.getElementById(containerId.replace("Tasks", "Placeholder"));
     try {
         const url = `${base_url}/tasks/${path}.json`;
         const response = await fetch(url);
@@ -47,11 +47,11 @@ async function loadTaskData(path, containerId) {
 
         const data = await response.json();
         if(data) {
-            placeholder.classList.add('hide');
+            // placeholder.classList.add('hide');
             const taskArray = processTasks(data, path);
             displayTasks(taskArray, containerId);
-        } else {
-            placeholder.classList.add('show');
+        // } else {
+            // placeholder.classList.add('show');
         }
         // updatePlaceholders();
     } catch (error) {
@@ -93,10 +93,11 @@ function processTasks(tasks, status) {
  */
 async function displayTasks(taskArray, containerId) {
     const tasks = document.getElementById(containerId);
-    
+    console.log(containerId);
 
     const contactColors = await getContactColors(taskArray);
-
+    // getEmptyTaskField(containerId);
+    
     tasks.innerHTML = taskArray.map((task, taskIndex) => {
         const completedSubtasks = task.subtasks.filter(subtask => subtask.checked).length;
         const totalSubtasks = task.subtasks.length;
@@ -139,7 +140,21 @@ async function displayTasks(taskArray, containerId) {
 
 }
 
-
+// function getEmptyTaskField() {
+//     const tasks = document.getElementById(containerId);
+//     if(containerId === todoTasks) {
+//         tasks.innerHTML = `<div id="toDoPlaceholder" class="placeholder">No tasks To do</div>`;
+//     }
+//     if(containerId === progressTasks) {
+//         tasks.innerHTML = `<div id="progressPlaceholder" class="placeholder">No tasks In progress</div>`;
+//     }
+//     if(containerId === feedbackTasks) {
+//         tasks.innerHTML = `<div id="feedbackPlaceholder" class="placeholder">No tasks Await feedback</div>`;
+//     }
+//     if(containerId === doneTasks) {
+//         tasks.innerHTML = `<div id="donePlaceholder" class="placeholder">No tasks Done</div>`;
+//     }
+// }
 
 /**
  * Retrieves colors for contacts associated with tasks by querying the database.

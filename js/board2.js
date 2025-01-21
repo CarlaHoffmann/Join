@@ -277,8 +277,7 @@ function updatePlaceholders() {
         }
 
         if (tasksContainer.querySelector('.task-card')) {
-            // placeholder.style.display = "block";
-            // if(placeholder.contains('hide')) {
+            
                 placeholder.classList.remove('show');
             // }
             placeholder.classList.add('hide');
