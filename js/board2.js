@@ -1,10 +1,11 @@
-
-
 /**
- * Adds event listeners to subtask checkboxes to handle status updates.
+ * Adds change event listeners to subtask checkboxes in the task overlay, updating the database on changes.
  * 
  * @function addSubtaskListeners
- * @param {Object} task - The task object containing subtasks to update.
+ * @param {Object} task - The task object containing subtasks to be updated.
+ * @param {string} task.path - The path representing the task's status (e.g., "toDo", "done").
+ * @param {string} task.id - The unique ID of the task.
+ * @param {Object} task.subtasks - The subtasks object, where each subtask is keyed by a unique identifier.
  * @returns {void}
  */
 let subtaskListenerFunction;
@@ -35,7 +36,7 @@ function addSubtaskListeners(task) {
 
 
 /**
- * Removes event listeners from subtask checkboxes and resets the listener function.
+ * Removes change event listeners from all subtask checkboxes in the task overlay.
  * 
  * @function removeSubtaskListeners
  * @returns {void}
@@ -53,12 +54,13 @@ function removeSubtaskListeners() {
     subtaskListenerFunction = null;
 }
 
+
 /**
- * Returns the image path for the specified priority level.
+ * Returns the file path of the priority image corresponding to the given priority level.
  * 
  * @function getPrioImage
- * @param {string} prio - The priority level (e.g., "1" for urgent, "2" for medium, "3" for low).
- * @returns {string} The file path to the corresponding priority image.
+ * @param {string} prio - The priority level (e.g., '1', '2', '3').
+ * @returns {string} - The file path of the priority image.
  */
 function getPrioImage(prio) {
     switch (prio) {
@@ -75,11 +77,11 @@ function getPrioImage(prio) {
 
 
 /**
- * Returns the text representation for the specified priority level.
+ * Returns the priority text corresponding to the given priority level.
  * 
  * @function getPrioText
- * @param {string} prio - The priority level (e.g., "1" for urgent, "2" for medium, "3" for low).
- * @returns {string} The corresponding priority text.
+ * @param {string} prio - The priority level (e.g., '1', '2', '3').
+ * @returns {string} - The priority text ('Urgent', 'Medium', 'Low').
  */
 function getPrioText(prio) {
     switch (prio) {
@@ -96,7 +98,7 @@ function getPrioText(prio) {
 
 
 /**
- * Enables edit mode for a task overlay by making input fields editable and showing relevant buttons.
+ * Enables edit mode for the task overlay, allowing fields to be modified and new subtasks to be added.
  * 
  * @function enableEditMode
  * @returns {void}
@@ -116,10 +118,10 @@ function enableEditMode() {
 
 
 /**
- * Sets the priority for a task in the overlay by updating the active button and the hidden input field.
+ * Sets the priority of the task in the overlay and updates the UI.
  * 
  * @function setOverlayPriority
- * @param {string} priority - The priority level to set (e.g., "1" for urgent, "2" for medium, "3" for low).
+ * @param {string} priority - The priority level to set (e.g., "High", "Medium", "Low").
  * @returns {void}
  */
 function setOverlayPriority(priority) {
@@ -130,10 +132,11 @@ function setOverlayPriority(priority) {
 
 
 /**
- * Adds a new subtask to the overlay's subtask list if the input is not empty.
+ * Adds a new subtask to the current task and updates the task list.
  * 
+ * @async
  * @function addOverlaySubtask
- * @returns {void}
+ * @returns {Promise<void>}
  */
 async function addOverlaySubtask() {
     const input = document.getElementById('newSubtaskInput');
@@ -152,13 +155,12 @@ async function addOverlaySubtask() {
 }
 
 
-
 /**
- * Closes the task overlay, saves subtasks for the current task if available, and reloads tasks.
+ * Closes the task overlay, saves any changes to subtasks, and reloads tasks.
  * 
  * @async
  * @function closeTaskOverlay
- * @returns {Promise<void>} Resolves when the overlay is closed and tasks are reloaded.
+ * @returns {Promise<void>}
  */
 async function closeTaskOverlay() {
     const overlayContainer = document.getElementById('taskOverlayContainer');
@@ -175,33 +177,15 @@ async function closeTaskOverlay() {
 
 
 /**
- * Closes the edit overlay for a task.
- * 
- * This function performs the following actions:
- * 1. Retrieves the task overlay container element.
- * 2. Adds the 'd-none' class to hide the overlay.
- * 3. Clears the inner HTML of the overlay container.
- * 4. Resets the currentSubtasks array to an empty array.
- * 
- * @function
- * @name closeEditOverlay
- * @returns {void}
- */
-// function closeEditOverlay() {
-//     const overlayContainer = document.getElementById('taskOverlayContainer');
-//     overlayContainer.classList.add('d-none');
-//     overlayContainer.innerHTML = '';
-//     currentSubtasks = [];
-// }
-
-
-/**
- * Saves the updated subtasks of a task to the database.
+ * Saves updated subtasks for a specific task to the database.
  * 
  * @async
  * @function saveTaskSubtasks
- * @param {Object} task - The task object containing the updated subtasks.
- * @returns {Promise<void>} Resolves when the subtasks are successfully saved.
+ * @param {Object} task - The task object containing task details.
+ * @param {string} task.path - The path representing the task's status (e.g., "toDo", "done").
+ * @param {string} task.id - The unique ID of the task.
+ * @param {Array} task.subtasks - The array of updated subtasks to be saved.
+ * @returns {Promise<void>}
  */
 async function saveTaskSubtasks(task) {
     try {
@@ -221,13 +205,13 @@ async function saveTaskSubtasks(task) {
 
 
 /**
- * Updates the task overlay with the latest data from the database.
+ * Fetches task data by ID and status, then updates and opens the task overlay.
  * 
  * @async
  * @function updateOverlay
- * @param {string} taskId - The ID of the task to update.
- * @param {string} taskStatus - The status (column) of the task in the database.
- * @returns {Promise<void>} Resolves when the overlay is updated with the latest task data.
+ * @param {string} taskId - The unique ID of the task to update.
+ * @param {string} taskStatus - The current status of the task (e.g., "toDo", "done").
+ * @returns {Promise<void>}
  */
 async function updateOverlay(taskId, taskStatus) {
     try {
@@ -246,12 +230,12 @@ async function updateOverlay(taskId, taskStatus) {
 
 
 /**
- * Deletes a task and its subtasks from the database and removes it from the UI.
+ * Deletes a task by its ID after user confirmation and updates the UI.
  * 
  * @async
  * @function deleteTask
- * @param {string} taskId - The ID of the task to be deleted.
- * @returns {Promise<void>} Resolves when the task and its subtasks are successfully deleted.
+ * @param {string} taskId - The unique ID of the task to delete.
+ * @returns {Promise<void>}
  */
 async function deleteTask(taskId) {
     const confirmDelete = confirm("Are you sure you want to delete this task?");
@@ -275,7 +259,7 @@ async function deleteTask(taskId) {
 
 
 /**
- * Updates the visibility of placeholders in task columns based on the number of tasks.
+ * Updates the visibility of placeholders based on the presence of task cards in each column.
  * 
  * @function updatePlaceholders
  * @returns {void}
@@ -301,19 +285,20 @@ function updatePlaceholders() {
     });
 }
 
+
 /**
- * Selects the search field element from the DOM.
+ * Selects the search input field element.
  * 
- * @constant {Element} searchField - The input element for the search functionality.
+ * @constant {HTMLElement} searchField
  */
 const searchField = document.querySelector('#searchField');
 
 
-
 /**
- * Filters tasks and users based on search input.
- * Matches search text with task titles, descriptions, types, or assigned members, as well as user names.
- * Displays "no results" message if no match is found.
+ * Filters tasks and users based on the search input and updates the UI state.
+ * 
+ * @function addSearchTask
+ * @returns {void}
  */
 function addSearchTask() {
     const searchValue = document.getElementById("searchField").value.toLowerCase();
@@ -324,13 +309,16 @@ function addSearchTask() {
     document.getElementById("delete-search").classList.toggle("d-none", !searchValue);
 }
 
+
 /**
- * Filters elements by matching inner text of specific child elements or additional selectors.
- * @param {string} selector - Parent element selector for filtering.
- * @param {string} searchValue - Lowercase search string for matching.
- * @param {string[]} childClasses - List of child class names to match text content.
- * @param {string} [extraSelector] - Additional selector for secondary matches.
- * @returns {boolean} - True if any element matches the search value, false otherwise.
+ * Filters elements based on a search value and updates their visibility and display properties.
+ * 
+ * @function filterElements
+ * @param {string} selector - CSS selector for the elements to filter.
+ * @param {string} searchValue - The search term to match.
+ * @param {string[]} childClasses - Classes of child elements to check for matches.
+ * @param {string} [extraSelector] - Optional additional selector for child elements to include in the search.
+ * @returns {boolean} - Returns `true` if any matching elements are found, otherwise `false`.
  */
 function filterElements(selector, searchValue, childClasses, extraSelector) {
     let found = false;
@@ -348,9 +336,8 @@ function filterElements(selector, searchValue, childClasses, extraSelector) {
 }
 
 
-
 /**
- * Clears the search field, hides the delete icon and "no results" message, and displays all tasks.
+ * Clears the search input and resets task visibility and related UI elements.
  * 
  * @function deleteSearch
  * @returns {void}
