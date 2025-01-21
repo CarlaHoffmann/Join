@@ -169,7 +169,7 @@
                         <div>
                             <div class="input-container">
                                 <input id="changedPhone" class="addField input-with-image" placeholder="Phone"
-                                    type="text">
+                                    type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                 <img src="./assets/img/contact/call.svg" alt="Phone Icon" class="input-icon">
                             </div>
                             <span id="changedPhone-error-message" class="error-message">This field is required.</span>
