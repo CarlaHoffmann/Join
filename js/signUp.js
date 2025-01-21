@@ -19,7 +19,8 @@ async function handleSignUpClick(event) {
         const usableData = validateSignUp(users);
         console.log(usableData);
         if (usableData === true) {
-            if(await createContact()) {
+            let contact = await createContact();
+            if(contact) {
                 showSuccessMessage();
                 await getLoggedIn();
             }
@@ -164,6 +165,7 @@ async function createContact() {
         color: returnColor()
     }
     await postData(contact);
+    return true;
 }
 
 /**
