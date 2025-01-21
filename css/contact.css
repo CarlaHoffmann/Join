@@ -290,7 +290,8 @@ hr {
     display:flex;
     justify-content:flex-start;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
+    margin-top: 10px;
 }
 
 /* Container für Edit/Delete */
@@ -298,7 +299,7 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     cursor: pointer;
     transition: color 0.3s ease;
 }

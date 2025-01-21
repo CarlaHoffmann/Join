@@ -322,3 +322,52 @@ function togglePasswordVisibility() {
         seeIcon.classList.add("hidden");
     }
 }
+
+/**
+ * Saves the login credentials to local storage if "Remember Me" is checked.
+ * @function saveCredentials
+ */
+function saveCredentials() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const rememberMe = document.querySelector('.checkbox-container').dataset.checked === "true";
+
+    if (rememberMe) {
+        localStorage.setItem("rememberMe", JSON.stringify({ email, password }));
+    } else {
+        localStorage.removeItem("rememberMe");
+    }
+}
+
+/**
+ * Loads and autofills login credentials from local storage if "Remember Me" was previously selected.
+ * @function loadCredentials
+ */
+function loadCredentials() {
+    const savedCredentials = JSON.parse(localStorage.getItem("rememberMe"));
+
+    if (savedCredentials) {
+        document.getElementById("email").value = savedCredentials.email;
+        document.getElementById("password").value = savedCredentials.password;
+
+        const checkboxIcon = document.querySelector('.checkbox-icon');
+        checkboxIcon.src = './assets/img/general/checked_button.svg';
+        document.querySelector('.checkbox-container').dataset.checked = "true";
+    }
+}
+
+/**
+ * Modifies the handleLoginClick function to include saveCredentials.
+ * Handles the login button click event, preventing default form submission and initiating login logic.
+ * @function handleLoginClick
+ * @param {Event} event - The click event triggered by the login button.
+ * @returns {void}
+ */
+function handleLoginClick(event) {
+    event.preventDefault(); 
+    saveCredentials();      
+    existingMailLogIn();
+}
+
+// Load credentials on page load
+document.addEventListener("DOMContentLoaded", loadCredentials);
