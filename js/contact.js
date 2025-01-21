@@ -278,11 +278,8 @@ function closeAddOverlay(){
  */
 async function editContact() {
     await updateEditedContact();
-    
     const response = await fetch(`${base_url}/users/${editKey}.json`);
     const user = await response.json();
-    
-    showContactDetails(editKey, user.name, user.mail, user.phone, user.color);
 }
 
 /**
@@ -300,7 +297,6 @@ async function updateEditedContact() {
     if(notEmpty && emailRegex.test(email)){
         const editLink = `${base_url}users/${editKey}`;
         const userResponse = await fetch(`${editLink}.json`);
-        //if (!userResponse.ok) throw new Error(`HTTP error! status: ${userResponse.status}`);
         const user = await userResponse.json();
         const data = { ...user, mail: email, name, phone };
         const response = await fetch(`${editLink}.json`, {
@@ -309,9 +305,10 @@ async function updateEditedContact() {
         loadContactData();
         contactDetails.innerHTML = '';
         closeEditOverlay();
-        return await response.json();
+        let updatedUser = await response.json();
+        showContactDetails(editKey, updatedUser.name, updatedUser.mail, updatedUser.phone, updatedUser.color);
+        return updatedUser;
     } else{
-        console.log("else fall");
         if(!notEmpty){
             const fields = document.querySelectorAll('#editContactForm .input-fields input');
             fields.forEach(element => {
