@@ -28,6 +28,7 @@ function clearAddContactFields(){
     document.getElementById('phone').value = "";
 }
 
+
 /**
  * Adds a new contact by collecting form input values, generating a color, 
  * and uploading the data to the server. Also clears the form, updates the UI, 
@@ -38,45 +39,63 @@ function clearAddContactFields(){
  * @returns {Promise<void>} A promise that resolves when the contact is successfully added.
  */
 
-async function addContact(){
-    let fields = [document.getElementById('name'), document.getElementById('email'), document.getElementById('phone')];
-    let name = document.getElementById('name').value;
-    let mail = document.getElementById('email').value;
-    let phone = document.getElementById('phone').value;
-    let color = returnColor();
-    let uploadData = {
-        'phone':phone,
-        'color':color,
-        'mail':mail,
-        'name':name,
-        'password':'pw',
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    let notEmpty = name!== "" && mail !== "" && phone !== "";
-    if(notEmpty && emailRegex.test(mail)){
-        await createNewContact('/users', uploadData);
-        closeAddOverlay();
-        clearAddContactFields();
-        showContactAddedOverlay();
-        loadContactData();
-        document.getElementById("wrong-mail-error-message").style.display="none";
-        fields.forEach(element => {
-            document.getElementById(element.id + "-error-message").style.display="none";    
-        });
-    } else{
-        if(!notEmpty){
-            fields.forEach(element => {
-                if(element.value === ""){
-                    document.getElementById(element.id + "-error-message").style.display="flex";
-                }    
-            });
-        }
-        if(!(emailRegex.test(mail))){
-            document.getElementById("email-error-message").innerHTML = "Wrong Email Format";
-            document.getElementById("email-error-message").style.display="flex";
-        }
-    }
+/**
+ * Adds a new contact after validation, updates the database and UI.
+ * 
+ * @async
+ * @returns {Promise<void>}
+ */
+async function addContact() {
+    const fields = ['name', 'email', 'phone'].map(id => document.getElementById(id));
+    const [name, mail, phone] = fields.map(f => f.value.trim());
+    if (!validateContactFields(name, mail, phone)) return;
+
+    const uploadData = { name, mail, phone, color: returnColor(), password: 'pw' };
+    await createNewContact('/users', uploadData);
+
+    closeAddOverlay();
+    clearAddContactFields();
+    showContactAddedOverlay();
+    loadContactData();
+    resetErrorMessages(fields);
 }
+
+/**
+ * Validates input fields and shows error messages if validation fails.
+ * 
+ * @param {string} name - Contact's name.
+ * @param {string} mail - Contact's email.
+ * @param {string} phone - Contact's phone.
+ * @returns {boolean} True if validation passes, false otherwise.
+ */
+function validateContactFields(name, mail, phone) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const fields = { name, mail, phone };
+    let isValid = true;
+
+    Object.entries(fields).forEach(([id, value]) => {
+        const error = document.getElementById(`${id}-error-message`);
+        if (!value || (id === 'mail' && !emailRegex.test(mail))) {
+            error.textContent = id === 'mail' ? "Wrong Email Format" : "This field is required";
+            error.style.display = "flex";
+            isValid = false;
+        } else {
+            error.style.display = "none";
+        }
+    });
+
+    return isValid;
+}
+
+/**
+ * Resets error messages for input fields.
+ * 
+ * @param {HTMLElement[]} fields - Array of input elements.
+ */
+function resetErrorMessages(fields) {
+    fields.forEach(f => document.getElementById(`${f.id}-error-message`).style.display = "none");
+}
+
 
 /**
  * Extracts the initials from a given name.
@@ -104,7 +123,6 @@ function getNameInitials(name) {
  * @param {string} phone - The phone number of the contact.
  * @param {string} color - The background color associated with the contact.
  */
-
 function showContactDetails(key, name, email, phone, color) {
     const [details, overlay, menu] = ['contactDetails', 'contactDetailsOverlay', 'contactDetailsOverlayMenu'].map(id => document.getElementById(id));
     const template = returnContactDetailsTemplate(key, name, email, phone, color);
