@@ -33,7 +33,7 @@ async function openEditTaskOverlay(event, task) {
         return getAddEditedSubtaskTemplate(index, subtask.task, subtask.checked);
     }).join('');
 
-    overlayContainer.innerHTML = openEditTaskOverlayTemplate(task);
+    overlayContainer.innerHTML = openEditTaskOverlayTemplate(task, subtasksHTML);
 
     overlayContainer.classList.remove('d-none');
 

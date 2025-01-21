@@ -72,7 +72,7 @@ function openTaskOverlayTemplate(task, contactsHTML, subtasksHTML) {
     `;
 }
 
-function openEditTaskOverlayTemplate(task) {
+function openEditTaskOverlayTemplate(task, subtasksHTML) {
     return `
     <div onclick="closeOverlayOnOutsideClick(event, 'editTaskOverlay', 'editTaskOverlayBackground')" id="editTaskOverlayBackground" class="overlay-container">
         <div id="editTaskOverlay" class="taskOverlay">
