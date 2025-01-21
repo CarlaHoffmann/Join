@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', animationWindow);
  * @param {Element} element - The checkbox container element that contains the icon to toggle.
  * @returns {void}
  */
-//wird benutzt?
 function toggleCheckbox(element) {
     const img = element.querySelector('.checkbox-icon');
     const isChecked = img.getAttribute('src') === './assets/img/general/checked_button.svg';
