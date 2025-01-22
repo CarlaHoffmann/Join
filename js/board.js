@@ -103,24 +103,6 @@ async function displayTasks(taskArray, containerId) {
     tasks.innerHTML = taskHTML;
 }
 
-
-
-// function getEmptyTaskField() {
-//     const tasks = document.getElementById(containerId);
-//     if(containerId === todoTasks) {
-//         tasks.innerHTML = `<div id="toDoPlaceholder" class="placeholder">No tasks To do</div>`;
-//     }
-//     if(containerId === progressTasks) {
-//         tasks.innerHTML = `<div id="progressPlaceholder" class="placeholder">No tasks In progress</div>`;
-//     }
-//     if(containerId === feedbackTasks) {
-//         tasks.innerHTML = `<div id="feedbackPlaceholder" class="placeholder">No tasks Await feedback</div>`;
-//     }
-//     if(containerId === doneTasks) {
-//         tasks.innerHTML = `<div id="donePlaceholder" class="placeholder">No tasks Done</div>`;
-//     }
-// }
-
 /**
  * Retrieves colors for contacts associated with tasks by querying the database.
  * 
@@ -283,7 +265,6 @@ async function fetchTaskData(taskElement, taskId) {
         if (!response.ok) throw new Error(`HTTP-Error: ${response.status}`);
         return await response.json();
     } catch (error) {
-        console.error(error);
         return null;
     }
 }
@@ -338,7 +319,6 @@ async function moveTaskData(oldStatus, newStatus, taskKey, taskData) {
         });
         if (!putResponse.ok) throw new Error(`HTTP-Error: ${putResponse.status}`);
     } catch (error) {
-        console.error(error);
     }
 }
 
