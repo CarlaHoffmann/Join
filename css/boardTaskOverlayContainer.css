@@ -11,6 +11,7 @@ body {
     from {
         transform: translateX(100%);
     }
+
     to {
         transform: translateX(0);
     }
@@ -24,6 +25,7 @@ body {
     from {
         transform: translateX(0);
     }
+
     to {
         transform: translateX(100%);
     }
@@ -33,6 +35,7 @@ body {
     display: flex;
     justify-content: end;
 }
+
 .close {
     display: flex;
     justify-content: end;
@@ -61,7 +64,7 @@ body {
 }
 
 .check:hover {
-    background-color: #f0f0f0; 
+    background-color: #f0f0f0;
     border-radius: 4px;
 }
 
@@ -83,6 +86,7 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+
 .close-button-box {
     width: 32px;
     height: 32px;
@@ -162,7 +166,8 @@ body {
 .task-info-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 24px; /* Abstand zwischen Due Date und Priority */
+    gap: 24px;
+    /* Abstand zwischen Due Date und Priority */
     margin: 0;
 }
 
@@ -176,7 +181,8 @@ body {
 .info-label {
     font-weight: bold;
     color: #2A3647;
-    min-width: 80px; /* Einheitliche Breite der Labels */
+    min-width: 80px;
+    /* Einheitliche Breite der Labels */
 }
 
 .info-value {
@@ -187,11 +193,11 @@ body {
 .priority-container {
     display: flex;
     align-items: center;
-    gap: 8px; 
+    gap: 8px;
 }
 
 .priority-icon {
-    width: 20px; 
+    width: 20px;
     height: 20px;
 }
 
@@ -263,7 +269,8 @@ body {
     justify-content: center;
     font-weight: bold;
     color: white;
-    margin-right: 8px; /* Abstand zwischen Initialen und Namen */
+    margin-right: 8px;
+    /* Abstand zwischen Initialen und Namen */
 }
 
 /* Container für Delete- und Edit-Icons */
@@ -275,13 +282,15 @@ body {
 
 /* Icons Styling */
 .icon-button {
-    width: 81px; /* Größe der Icons */
+    width: 81px;
+    /* Größe der Icons */
     cursor: pointer;
     transition: transform 0.2s ease;
 }
 
 .icon-button:hover {
-    transform: scale(1.1); /* Vergrößerung beim Hover */
+    transform: scale(1.1);
+    /* Vergrößerung beim Hover */
 }
 
 /* Vertikale Trennlinie */
@@ -295,37 +304,38 @@ body {
 .icon-text-button {
     display: flex;
     align-items: center;
-    gap: 8px; 
+    gap: 8px;
     cursor: pointer;
 }
 
 .icon-svg {
     width: 24px;
     height: 24px;
-    transition: stroke 0.3s ease; 
+    transition: stroke 0.3s ease;
 }
 
 /* Text und Icon Hover-Effekt */
 .icon-text-button:hover .icon-svg path {
-    stroke: #29ABE2; 
+    stroke: #29ABE2;
 }
 
 .icon-text-button:hover .icon-text {
-    color: #29ABE2; 
+    color: #29ABE2;
 }
 
 /* Vertikale Trennlinie */
 .vertical-line {
     width: 1px;
     height: 24px;
-    background-color: #d3d3d3; /* Hellgrau */
-    margin: 0 10px; 
+    background-color: #d3d3d3;
+    /* Hellgrau */
+    margin: 0 10px;
 }
 
 /* Media Queries */
 @media (max-width: 600px) {
     .taskOverlay {
-        width: calc(100vw - 32px); 
+        width: calc(100vw - 32px);
         padding: 40px 20px;
         gap: 16px;
     }
@@ -348,7 +358,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9999; 
+    z-index: 9999;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.6s ease-in, visibility 0.6s;
@@ -398,7 +408,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px; 
+    gap: 8px;
     padding: 15px 24px;
     border-radius: 10px;
     cursor: pointer;
@@ -416,7 +426,7 @@ body {
 
 /* Hover-Effekt für Buttons */
 .dialog-button:hover {
-    background-color: #29ABE2; 
+    background-color: #29ABE2;
     color: white;
     box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -427,22 +437,24 @@ body {
 
 @keyframes fadeIn {
     from {
-      opacity: 0.3;
-      transform: translate(-50%, -160%); 
+        opacity: 0.3;
+        transform: translate(-50%, -160%);
     }
+
     to {
-      opacity: 1;
-      transform: translate(-50%, -45%); 
+        opacity: 1;
+        transform: translate(-50%, -45%);
     }
-  }
-  
-  @keyframes fadeOut {
+}
+
+@keyframes fadeOut {
     from {
-      opacity: 1;
-      transform: translate(-50%, -50%);
+        opacity: 1;
+        transform: translate(-50%, -50%);
     }
+
     to {
-      opacity: 0.5;
-      transform: translate(-50%, -45%);
+        opacity: 0.5;
+        transform: translate(-50%, -45%);
     }
-  }
+}

@@ -24,17 +24,17 @@ header {
     position: fixed;
     width: 100vw;
     top: 0;
-    z-index:9;
+    z-index: 9;
     left: 0;
     box-shadow: 0px 4px 4px 0px #0000001A;
 }
 
 #headerText{
-    display:flex;
+    display: flex;
 }
 
 #navHeaderLogo{
-    display:none;
+    display: none;
 }
 
 #mobileNav{
@@ -43,10 +43,10 @@ header {
 }
 
 #headerControls{
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap:16px;
+    gap: 16px;
 }
 
 #help-link {
@@ -54,6 +54,11 @@ header {
     text-decoration: none;
     cursor: pointer;
     display: flex;
+}
+
+#help-link:hover {
+    transform: scale(1.2);
+    transition: transform 0.2s ease-in-out;
 }
 
 #first-letters {
@@ -71,6 +76,7 @@ header {
 
 #first-letters:hover {
     cursor: pointer;
+    background-color: #d1d1d1;
 }
 
 .help-menu {
@@ -79,7 +85,6 @@ header {
     right: 16px;
     padding: 16px;
     background-color: #2A3647;
-    /* color: #CDCDCD; */
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -105,6 +110,15 @@ header {
 
 .d-none {
     display: none !important;
+}
+
+#logo {
+    padding: 64px 0px 100px 0px; 
+}
+
+#logo img {
+    width: 100px;
+    height: auto;
 }
 
 #sidebar {
@@ -138,14 +152,14 @@ header {
     display:flex;
     flex-direction:column;
     justify-content:flex-start;
-    gap:20px;
+    gap: 15px;
 }
 
 .sideBarNavigation a{
     display:flex;
     justify-content:flex-start;
     align-items:center;
-    gap:8px;
+    gap: 8px;
     width: 232px;
     padding: 8px 56px;
 }
@@ -165,7 +179,7 @@ header {
 }
 
 #info-sidebar {
-    width: 232px;
+    /*width: 232px;*/
     display: flex;
     flex-direction: column;
     justify-content: end;
@@ -179,7 +193,8 @@ header {
 
 #info-sidebar a:hover{
     color: #29ABE2;
-    transform: scale(1.07); 
+    font-weight: bold;
+    transition: transform 0.2s font-size 0.2s ease-in-out;
 }
 
 .active-link {

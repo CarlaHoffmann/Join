@@ -108,6 +108,7 @@
 }
 
 @media (max-width: 1200px) {
+
   /* sign-up */
   .join-logo {
     background-color: #2A3647;
@@ -146,11 +147,12 @@
   }
 }
 
-@media (max-width: 840px), (max-height: 800px) {
+@media (max-width: 840px),
+(max-height: 800px) {
   .outer-box {
-      display: flex;
-      justify-content: center;
-      overflow: hidden;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
   }
 }
 
@@ -176,6 +178,7 @@
     left: 0px;
     top: 16px;
   }
+
   .right_section {
     margin-left: 0px;
   }
@@ -270,6 +273,7 @@
   .add-task-edit-form {
     width: 100%;
   }
+
   .title-edit {
     width: 100%;
   }
@@ -286,7 +290,7 @@
     font-weight: 700;
     line-height: 73.2px;
   }
-  
+
   h1 {
     font-size: 40px;
   }
@@ -368,7 +372,7 @@
   .buttonPrio_edit {
     width: 100% !important;
   }
-  
+
   .content {
     margin-left: 16px;
     margin-right: 16px;

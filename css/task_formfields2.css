@@ -30,7 +30,7 @@ button {
 .prio-button {
     flex: 1 1 0;
     width: 100%;
-    gap: 8px;    
+    gap: 8px;
     background-color: #FFFFFF;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
     min-width: 0;
@@ -101,12 +101,12 @@ button {
 
 #opened-category {
     position: absolute;
-    top: 0; 
-    left: 0; 
+    top: 0;
+    left: 0;
     width: 100%;
-    z-index: 1; 
-    background-color: #FFFFFF; 
-    border-radius: 10px; 
+    z-index: 1;
+    background-color: #FFFFFF;
+    border-radius: 10px;
 }
 
 .select-field {
@@ -129,7 +129,7 @@ button {
 }
 
 #category-selection:invalid {
-    color: #000000; 
+    color: #000000;
 }
 
 #category-selection:focus {
@@ -157,7 +157,7 @@ button {
 .error-message {
     position: absolute;
     color: red;
-    top: 52px; 
+    top: 52px;
     left: 0;
     font-size: 12px;
 }

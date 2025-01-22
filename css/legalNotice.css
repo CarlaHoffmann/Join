@@ -22,7 +22,8 @@ body {
 }
 
 .scroll-container::-webkit-scrollbar {
-    display: none; /* Chrome, Safari und Edge */
+    display: none;
+    /* Chrome, Safari und Edge */
 }
 
 .legalNotice-content {
@@ -69,7 +70,9 @@ body {
     gap: 24px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     margin: 0;
 }
 

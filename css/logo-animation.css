@@ -10,7 +10,7 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    opacity: 1; 
+    opacity: 1;
     animation: fadeOutOverlay 1.5s ease-in-out forwards;
 }
 
@@ -30,7 +30,7 @@
 
 /* Header-Logo Styling */
 #headerLogo {
-    animation: headerLogoFadeIn 1.5s forwards; 
+    animation: headerLogoFadeIn 1.5s forwards;
 }
 
 /* Keyframes für die Logo-Bewegung */
@@ -55,8 +55,9 @@
 /* Keyframes für Content-Einblendung */
 @keyframes fadeInContent {
     0% {
-        opacity: 5; 
+        opacity: 5;
     }
+
     100% {
         opacity: 1;
     }
@@ -68,6 +69,7 @@
     0% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }

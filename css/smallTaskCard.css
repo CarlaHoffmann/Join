@@ -86,7 +86,8 @@
 
 /* Members and priority section */
 .members-section {
-  margin-top: auto; /* Schiebt die members-section ans Ende */
+  margin-top: auto;
+  /* Schiebt die members-section ans Ende */
   display: flex;
   justify-content: space-between;
   align-items: center;

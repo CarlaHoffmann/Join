@@ -20,12 +20,13 @@
 }
 
 
-.form-group, .signUp-formfields {
+.form-group,
+.signUp-formfields {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
- 
+
 /* General Error Styles */
 .error-message {
   color: red;
@@ -85,7 +86,7 @@ a {
   text-decoration: none;
   color: var(--grey);
 }
-  
+
 .link_visited:visited {
   font-size: 16px;
   color: var(--grey);
@@ -97,7 +98,7 @@ a {
   color: var(--lightblue);
 }
 
-  
+
 .gray {
   color: var(--grey);
 }
@@ -162,7 +163,7 @@ a {
   justify-content: space-evenly;
   align-items: center;
 }
-  
+
 .padding {
   padding: 80px;
 }
@@ -186,18 +187,18 @@ a {
   }
 }
 */
-  
+
 .cover-button {
-    visibility: hidden;
-    background-color: var(--lightblue);
-    box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
+  visibility: hidden;
+  background-color: var(--lightblue);
+  box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .button_color {
-    background-color: var(--lightblue);
-    box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: var(--lightblue);
+  box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
 }
-  
+
 .form-gap {
   display: flex;
   flex-direction: column;
@@ -232,7 +233,7 @@ a {
   align-items: center;
   justify-content: center;
 }
-  
+
 .button-login-blue {
   font-weight: 700;
   background-color: var(--menuButtonDarkblue);
@@ -263,7 +264,7 @@ a {
   padding: 15px 24px;
   white-space: nowrap
 }
-  
+
 .arrow_header_signUp {
   display: flex;
   justify-content: center;
@@ -283,9 +284,9 @@ a {
 
 .text_login_btn {
   font-size: 21px;
-  font-weight: 700; 
+  font-weight: 700;
 }
-  
+
 .button-login-white:hover {
   border-color: var(--lightblue);
   color: var(--lightblue);
@@ -302,7 +303,7 @@ a {
   font-size: 61px;
   margin: 0;
 }
-  
+
 .vector_login {
   border: 3px solid;
   border-top: 150px;
@@ -331,7 +332,7 @@ a {
   padding-left: 20px;
   padding-right: 20px;
 }
-  
+
 .input-container_border {
   border: 1px solid var(--lightblue);
 }
@@ -369,10 +370,11 @@ input {
   width: 20px;
   height: 20px;
 }
-  
+
 .hidden {
   display: none;
-  outline: 1px solid red; /* Nur zum Testen */
+  outline: 1px solid red;
+  /* Nur zum Testen */
 }
 
 .hidden {
@@ -384,7 +386,7 @@ input {
 .password_hide {
   display: none;
 }
-  
+
 .input-border {
   border-color: var(--errorRed);
 }
@@ -403,7 +405,7 @@ input:hover,
 .pointer-color:hover {
   cursor: pointer;
 }
-  
+
 .rememberMe_box {
   align-self: baseline;
   padding-left: 48px;
@@ -456,9 +458,9 @@ input:hover,
   background-color: #F0F0F0;
   /*background-color: rgba(0, 0, 0, 0.5);*/
   z-index: 999;
-  opacity: 0; 
+  opacity: 0;
   visibility: hidden;
-  transition: opacity 0.6s ease-in, visibility; 
+  transition: opacity 0.6s ease-in, visibility;
 }
 
 .overlay.show {
@@ -467,18 +469,19 @@ input:hover,
 }
 
 .overlay.hide {
-  opacity: 0; 
+  opacity: 0;
   visibility: hidden;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0.3;
-    transform: translate(-50%, -160%); 
+    transform: translate(-50%, -160%);
   }
+
   to {
     opacity: 1;
-    transform: translate(-50%, -45%); 
+    transform: translate(-50%, -45%);
   }
 }
 
@@ -487,6 +490,7 @@ input:hover,
     opacity: 1;
     transform: translate(-50%, -50%);
   }
+
   to {
     opacity: 0.5;
     transform: translate(-50%, -45%);
@@ -507,7 +511,7 @@ input:hover,
   border: none;
   font-size: 20px;
   z-index: 1000;
-  opacity: 0; 
+  opacity: 0;
   animation: fadeIn 1s ease-in-out forwards;
 }
 
@@ -515,79 +519,3 @@ input:hover,
   animation: fadeIn 1.5s ease-in-out fade forwards;
 }
 
-
-
-/* Overlay 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.6s ease-in, visibility 0.6s ease-in;
-}
-
-.overlay.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Dialog Box 
-.dialog-box {
-  background-color: var(--menuButtonDarkblue, #29ABE2);
-  color: white;
-  padding: 30px 40px;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  animation: fadeIn 0.8s ease-in-out;
-}
-
-/* Message 
-.dialog-message {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-/* Button 
-.dialog-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 10px;
-  background-color: white;
-  color: var(--menuButtonDarkblue, #29ABE2);
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-.dialog-button:hover {
-  background-color: var(--menuButtonDarkblue, #29ABE2);
-  color: white;
-}
-
-/* Animation 
-@keyframes fadeIn {
-  from {
-      opacity: 0;
-      transform: scale(0.9);
-  }
-  to {
-      opacity: 1;
-      transform: scale(1);
-  }
-}
-
-*/

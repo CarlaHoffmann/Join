@@ -1,5 +1,5 @@
-.hidden{
-    display:none !important;
+.hidden {
+    display: none !important;
 }
 
 .show {
@@ -8,43 +8,43 @@
     transform: translateY(0);
 }
 
-h2{
-    font-size:61px;
+h2 {
+    font-size: 61px;
 }
 
-h3{
-    font-size:27px;
+h3 {
+    font-size: 27px;
 }
 
-.email{
-    color:#007CEE;
-    font-size:16px;
+.email {
+    color: #007CEE;
+    font-size: 16px;
 }
 
-#contactContent{
-    display:flex;
-    position:absolute;
+#contactContent {
+    display: flex;
+    position: absolute;
     right: 0;
     bottom: 0;
     height: calc(100vh - 96px);
     width: calc(100vw - 232px);
 }
 
-#addContactButton{
-    margin-top:22.5px;
-    height:56px;
-    width:352px;
+#addContactButton {
+    margin-top: 22.5px;
+    height: 56px;
+    width: 352px;
     background: #2A3647;
-    color:white;
-    border-radius:10px;
-    border:1px solid #2A3647;
-    cursor:pointer;
-    margin-bottom:15px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:16px;
-    font-size:21px;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid #2A3647;
+    cursor: pointer;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    font-size: 21px;
     padding: 12px;
 }
 
@@ -62,11 +62,11 @@ h3{
 }
 
 #contacts {
-    width:456px;
+    width: 456px;
     box-shadow: 4px 0px 6px 0px #0000001A;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     z-index: 1;
 }
 
@@ -74,7 +74,7 @@ h3{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width:100%;
+    width: 100%;
     overflow-y: scroll;
 }
 
@@ -93,18 +93,18 @@ h3{
 }
 
 hr {
-    width:100%;
-    height:0px;
+    width: 100%;
+    height: 0px;
     border: 1px solid #D1D1D1;
     border-radius: 2px;
 }
 
 .contact {
     height: 78px;
-    width:352px;
+    width: 352px;
     display: flex;
     align-items: center;
-    cursor:pointer;
+    cursor: pointer;
     gap: 35px;
     padding: 15px 24px;
     border-radius: 10px;
@@ -114,20 +114,20 @@ hr {
     background-color: #efefef;
 }
 
-.contactInformation{
-    display:flex;
-    flex-direction:column;
-    gap:5px;
+.contactInformation {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
-.contactInformationName{
-    font-size:20px;
+.contactInformationName {
+    font-size: 20px;
 }
 
 
-.contact div{
-    display:flex;
-    flex-direction:column;
+.contact div {
+    display: flex;
+    flex-direction: column;
 }
 
 .circle {
@@ -155,14 +155,14 @@ hr {
 
 #contactList::-webkit-scrollbar-thumb {
     background-color: #A8A8A8;
-    height: 53px; 
+    height: 53px;
     width: 0;
-    border: 8px solid white; 
-    border-radius: 12px; 
+    border: 8px solid white;
+    border-radius: 12px;
 }
- 
+
 #contactList::-webkit-scrollbar-thumb:hover {
-    background-color: #888; 
+    background-color: #888;
 }
 
 #contactDetailBox {
@@ -182,15 +182,16 @@ hr {
     display: flex;
     justify-content: space-between;
 }
-.contactViewHeader{
-    display:flex;
-    gap:30px;
-    align-items:center;
-    justify-content:center;
+
+.contactViewHeader {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
 }
 
-.contactViewHeader p{
-    font-size:27px;
+.contactViewHeader p {
+    font-size: 27px;
 }
 
 .back {
@@ -211,14 +212,15 @@ hr {
     transform: scale(1.1);
 }
 
-#contactView{
-    display:flex;
-    justify-content:flex-start;
-    align-items:flex-start;
-    padding-top:110px;
-    gap:30px;
+#contactView {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 110px;
+    gap: 30px;
     background-color: #F6F7F8;
-    width:calc(100vw - (232px + 456px)); /*232px Seitenleiste, 456px Kontaktliste, 17px Scrollbar*/
+    width: calc(100vw - (232px + 456px));
+    /*232px Seitenleiste, 456px Kontaktliste, 17px Scrollbar*/
     padding-left: 50px;
     flex-direction: column;
     transition: right 0.5s ease-in-out;
@@ -242,13 +244,14 @@ hr {
     0% {
         transform: translateX(100%);
     }
+
     100% {
         transform: translateX(0);
     }
 }
 
-.divider2{
-    display:none;
+.divider2 {
+    display: none;
 }
 
 .detailsBox {
@@ -257,45 +260,46 @@ hr {
     gap: 21px;
 }
 
-.contactHeader{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:54px;
-    font-size:47px;
+.contactHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 54px;
+    font-size: 47px;
 }
 
 .circleDetails {
-    color:white;
-    width:120px;
-    height:120px;
-    border:3px solid white;
+    color: white;
+    width: 120px;
+    height: 120px;
+    border: 3px solid white;
     border-radius: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.contactHeader span{
-    font-size:16px;
+.contactHeader span {
+    font-size: 16px;
 }
 
-.contactNameDetails{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
+.contactNameDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.contactItemControls{
-    display:flex;
-    justify-content:flex-start;
+.contactItemControls {
+    display: flex;
+    justify-content: flex-start;
     align-items: center;
     gap: 20px;
     margin-top: 10px;
 }
 
 /* Container für Edit/Delete */
-#editContainer, #deleteContainer {
+#editContainer,
+#deleteContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -311,7 +315,7 @@ hr {
 .icon-svg {
     width: 24px;
     height: 24px;
-    transition: stroke 0.3s ease; 
+    transition: stroke 0.3s ease;
 }
 
 /* Hover-effect for SVG */
@@ -320,25 +324,25 @@ hr {
 }
 
 .icon-text-button:hover span {
-    color: #29ABE2; 
+    color: #29ABE2;
 }
 
 .contactInformationTitle {
-    padding-top:20px;
-    padding-bottom:20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .contactFooter {
-    display:flex;
-    flex-direction:column;
-    gap:22px;
-    font-size:20px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    font-size: 20px;
 }
 
 .contactFooterInformation {
-    display:flex;
-    flex-direction:column;
-    gap:15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 /* control element */
@@ -351,7 +355,7 @@ hr {
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease; 
+    transition: background-color 0.3s ease;
     position: absolute;
     bottom: 32px;
     right: 16px;
@@ -394,8 +398,8 @@ hr {
 } */
 .options-menu {
     background-color: white;
-    border-radius: 20px 20px 0px 20px; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border-radius: 20px 20px 0px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     padding: 8px;
     width: 116px;
     height: 100px;
@@ -405,42 +409,46 @@ hr {
     position: absolute;
     bottom: 16px;
     right: 8px;
-    opacity: 0; /* Start mit unsichtbar */
-    transform: translateX(100%); /* Startposition außerhalb des Bildschirms */
+    opacity: 0;
+    /* Start mit unsichtbar */
+    transform: translateX(100%);
+    /* Startposition außerhalb des Bildschirms */
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 @keyframes slideIn {
     from {
-        opacity: 0; 
+        opacity: 0;
         transform: translateX(100%);
     }
+
     to {
-        opacity: 1; 
+        opacity: 1;
         transform: translateX(0);
     }
 }
 
 @keyframes slideOut {
     from {
-        opacity: 1; 
-        transform: translateX(0); 
+        opacity: 1;
+        transform: translateX(0);
     }
+
     to {
-        opacity: 0; 
-        transform: translateX(100%); 
+        opacity: 0;
+        transform: translateX(100%);
     }
 }
 
 .options-menu.active {
-    animation-name: slideIn; 
+    animation-name: slideIn;
     animation-duration: 0.4s;
     animation-fill-mode: forwards;
 }
 
 .options-menu.hidden {
-    animation-name: slideOut; 
-    animation-duration: 0.4s; 
+    animation-name: slideOut;
+    animation-duration: 0.4s;
     animation-fill-mode: forwards;
 }
 
@@ -449,8 +457,8 @@ hr {
     align-items: center;
     justify-content: flex-start;
     font-size: 16px;
-    gap: 8px; 
-    padding: 8px; 
+    gap: 8px;
+    padding: 8px;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease;
@@ -467,8 +475,9 @@ hr {
 .option-item:hover img {
     filter: brightness(0) invert(1);
 }
-.error-message{
-    display:none;
+
+.error-message {
+    display: none;
     color: red;
     top: 52px;
     left: 0;

@@ -8,9 +8,9 @@
     width: 440px;
 }
 
- .title::placeholder {
+.title::placeholder {
     color: #D1D1D1;
- }
+}
 
 /* Description */
 .description {
@@ -50,11 +50,11 @@
     border: none;
     border-radius: 10px;
     max-height: 250px;
-    overflow-y: auto; 
+    overflow-y: auto;
 }
 
 #contacts-to-select {
-    max-height: 200px; 
+    max-height: 200px;
     overflow-y: auto;
 }
 
@@ -71,7 +71,7 @@
     cursor: pointer;
 }
 
-.contact-label{
+.contact-label {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -156,4 +156,4 @@
 
 .date-input::placeholder {
     color: #D1D1D1;
-}  
+}

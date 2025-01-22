@@ -62,7 +62,8 @@ body {
 }
 
 .box:hover {
-    transform: scale(1.1); /* Leichte Vergrößerung beim Hover */
+    transform: scale(1.1);
+    /* Leichte Vergrößerung beim Hover */
 }
 
 #deadline-box:hover {
@@ -294,7 +295,8 @@ body {
     }
 }
 
-@media (max-width: 840px), (max-height: 800px) {
+@media (max-width: 840px),
+(max-height: 800px) {
     .outer-box {
         display: flex;
         justify-content: center;
@@ -305,7 +307,7 @@ body {
         padding-left: 0;
         padding-top: 0;
         gap: 36px;
-    }    
+    }
 
     #header-box {
         display: flex;
@@ -338,7 +340,8 @@ body {
         font-size: 47px;
     }
 
-    .description, .deadline-info {
+    .description,
+    .deadline-info {
         font-size: 14px;
     }
 
