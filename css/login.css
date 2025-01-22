@@ -87,8 +87,16 @@ a {
 }
   
 .link_visited:visited {
+  font-size: 16px;
   color: var(--grey);
+  transition: transform 0.2s ease, font-size 0.2s ease;
 }
+
+.pointer-color:hover {
+  font-weight: bold;
+  color: var(--lightblue);
+}
+
   
 .gray {
   color: var(--grey);
@@ -102,7 +110,7 @@ a {
   display: flex;
   justify-content: center;
   font-size: 16px;
-  width: 264px;
+  gap: 32px;
 }
 
 .display-fc {
@@ -146,6 +154,7 @@ a {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  gap: 20px;
 }
 
 .display-fsecc {
@@ -189,15 +198,11 @@ a {
     box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
 }
   
-.gap {
-  gap: 32px;
-}
-
 .form-gap {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 20px;
 }
 
 .form-wrapper {
@@ -409,7 +414,6 @@ input:hover,
   display: flex;
   gap: 8px;
   align-items: center;
-  margin-top: 20px;
 }
 
 .accept_box {
@@ -439,17 +443,8 @@ input:hover,
 
 .login-footer {
   position: absolute;
-  bottom: 8px;
+  bottom: 32px;
 }
-
-footer a {
-  padding: 8px;
-}
-
-.pointer-color:hover {
-  color: var(--lightblue);
-}
-
 
 /* Login successful Animation */
 .overlay {
