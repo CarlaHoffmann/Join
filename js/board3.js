@@ -1,4 +1,16 @@
 /**
+ * Removes the highlight from a column at the end of a drag operation.
+ * 
+ * @function removeHighlightEnd
+ * @param {string} columnId - The ID of the column to remove the highlight from.
+ * @returns {void}
+ */
+function removeHighlightEnd(columnId) {
+    removeHighlightLeave(columnId);
+}
+
+
+/**
  * Opens the task editing overlay and populates it with the provided task details.
  * 
  * @async
@@ -14,29 +26,75 @@
  * @param {string} task.category - The category of the task (e.g., "Technical Task", "User Story").
  * @returns {void}
  */
+
+
 let currentTask = null;
 
+// async function openEditTaskOverlay(event, task) {
+//     event.stopPropagation();
+//     const overlayContainer = document.getElementById('taskOverlayContainer');
+
+//     selectedContacts = task.contacts;
+
+//     Object.keys(task.subtasks).forEach(key => {
+//         currentSubtasks.push({
+//             task: task.subtasks[key].task,
+//             checked: task.subtasks[key].checked
+//         });
+//     });
+
+//     const subtasksHTML = currentSubtasks.map((subtask, index) => {
+//         return getAddEditedSubtaskTemplate(index, subtask.task, subtask.checked);
+//     }).join('');
+
+//     overlayContainer.innerHTML = openEditTaskOverlayTemplate(task, subtasksHTML);
+
+//     overlayContainer.classList.remove('d-none');
+
+//     updateEditContacts();
+//     initializeDatePicker();
+//     initializeEditPriority(task.prio);
+//     categorySelected(task.category);
+// }
 async function openEditTaskOverlay(event, task) {
     event.stopPropagation();
     const overlayContainer = document.getElementById('taskOverlayContainer');
 
-    selectedContacts = task.contacts;
+    prepareSelectedContacts(task);
+    prepareCurrentSubtasks(task);
 
+    const subtasksHTML = generateSubtasksHTML();
+
+    displayEditTaskOverlay(overlayContainer, task, subtasksHTML);
+    initializeEditTaskComponents(task);
+}
+
+function prepareSelectedContacts(task) {
+    selectedContacts = task.contacts;
+}
+
+function prepareCurrentSubtasks(task) {
+    currentSubtasks = [];
     Object.keys(task.subtasks).forEach(key => {
         currentSubtasks.push({
             task: task.subtasks[key].task,
             checked: task.subtasks[key].checked
         });
     });
+}
 
-    const subtasksHTML = currentSubtasks.map((subtask, index) => {
+function generateSubtasksHTML() {
+    return currentSubtasks.map((subtask, index) => {
         return getAddEditedSubtaskTemplate(index, subtask.task, subtask.checked);
     }).join('');
+}
 
-    overlayContainer.innerHTML = openEditTaskOverlayTemplate(task, subtasksHTML);
+function displayEditTaskOverlay(container, task, subtasksHTML) {
+    container.innerHTML = openEditTaskOverlayTemplate(task, subtasksHTML);
+    container.classList.remove('d-none');
+}
 
-    overlayContainer.classList.remove('d-none');
-
+function initializeEditTaskComponents(task) {
     updateEditContacts();
     initializeDatePicker();
     initializeEditPriority(task.prio);

@@ -282,7 +282,9 @@ function getExistingSubtasks(currentSubtasks) {
  */
 function editEditedSubtask(index, text, checked) {
     let subtaskElement = document.getElementById(`subtask${index}`);
-    subtaskElement.innerHTML = editSubtaskTemplate(index, text, checked);
+    if(subtaskElement) {
+        subtaskElement.innerHTML = editSubtaskTemplate(index, text, checked);
+    }
 
     let input = subtaskElement.querySelector('.edit-subtask-input');
     input.focus();
