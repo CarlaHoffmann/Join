@@ -251,12 +251,11 @@
   display: flex;
   align-items: center;
   border-radius: 10px;
-  background-color: var(--activeClickMenuBlue);
+  background-color: #2A3647;
   padding: 16px;
   width: 160px;
-  height: 48px;
+  height: 56px;
   cursor: pointer;
-  transition: 0.1s;
   gap: 4px;
 }
 
@@ -273,10 +272,14 @@
 }
 
 .add-task-button img {
-  width: 18.67px;
-  height: 18.67px;
-  top: 14.67px;
-  left: 118.67px;
+  width: 18px;
+  height: 18px;
+  top: 14px;
+  left: 118px;
+}
+
+.add-task-button:active {
+  background-color: #091931; 
 }
 
 .search-field {
@@ -284,7 +287,7 @@
   align-items: center;
   border: 1px solid var(--grey);
   background-color: var(--white);
-  height: 48px;
+  height: 56px;
   width: 312px;
   padding: 8px 16px 8px 16px;
   border-radius: 10px;
