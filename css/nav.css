@@ -182,21 +182,21 @@ header {
     transform: translateX(-1px);
 }
 
-
-#summary-link:hover svg,
-#task-link:hover svg,
-#board-link:hover svg,
-#contact-link:hover svg,
-#summary-link:hover span,
-#task-link:hover span,
-#board-link:hover span,
-#contact-link:hover span {
-    color: white;
-}
-
 .sideBarNavigation a.active-link:hover img,
 .sideBarNavigation a.active-link:hover span {
     transform: none;
+}
+
+/* SVG-Icons im aktiven Link */
+.sideBarNavigation a.active-link svg {
+    fill: white; /* Farbe des SVG wird weiß */
+    transition: fill 0.3s ease; /* Sanfter Übergang */
+}
+
+/* Text im aktiven Link */
+.sideBarNavigation a.active-link span {
+    color: white !important; /* Textfarbe bleibt weiß */
+    transition: color 0.3s ease; /* Sanfter Übergang */
 }
 
 #info-sidebar {
