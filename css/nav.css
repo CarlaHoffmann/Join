@@ -54,11 +54,11 @@ header {
     text-decoration: none;
     cursor: pointer;
     display: flex;
+    transition: transform 0.3s ease;
 }
 
-#help-link:hover {
+#help-link img:hover {
     transform: scale(1.2);
-    transition: transform 0.2s ease-in-out;
 }
 
 #first-letters {
@@ -76,7 +76,7 @@ header {
 
 #first-letters:hover {
     cursor: pointer;
-    background-color: #d1d1d1;
+    background-color: #0C2E621F;
 }
 
 .help-menu {
@@ -85,6 +85,7 @@ header {
     right: 16px;
     padding: 16px;
     background-color: #2A3647;
+    /* color: #CDCDCD; */
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -144,7 +145,6 @@ header {
 }
 
 .sidebar-element {
-    padding-top: 64px;
     padding-bottom: 64px;
 }
 
@@ -153,7 +153,7 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 15px;
+    gap: 20px;
 }
 
 .sideBarNavigation a {
@@ -169,9 +169,22 @@ header {
     background: #263c5c;
 }
 
-.sideBarNavigation a:hover img,
+
+.sideBarNavigation a:hover svg,
 .sideBarNavigation a:hover span {
     transform: translateX(-1px);
+}
+
+
+#summary-link:hover svg,
+#task-link:hover svg,
+#board-link:hover svg,
+#contact-link:hover svg,
+#summary-link:hover span,
+#task-link:hover span,
+#board-link:hover span,
+#contact-link:hover span {
+    color: white;
 }
 
 .sideBarNavigation a.active-link:hover img,
@@ -180,36 +193,43 @@ header {
 }
 
 #info-sidebar {
-    /*width: 232px;*/
+    width: 232px;
     display: flex;
     flex-direction: column;
     justify-content: end;
     flex-grow: 1;
-    gap: 4px;
+    gap: 8px;
 }
 
 #info-sidebar a {
+    font-size: 16px;
     padding: 8px 56px;
+    /*text-align: center;
+    font-weight: normal; */
+    transition: transform 1.3s ease-in;
+    /* Sanfte Übergangsanimation */
 }
 
 #info-sidebar a:hover {
     color: #29ABE2;
     font-weight: bold;
-    transition: transform 0.2s font-size 0.2s ease-in-out;
+    transform: scale(1.0);
+
 }
 
 .active-link {
     background-color: #091931;
-    color: #FFFFFF !important;
+    color: white !important;
 }
 
 .active-link:hover {
     background-color: #091931 !important;
-    color: #FFFFFF !important;
+    /*color: #FFFFFF !important;*/
 }
 
 #info-sidebar a.active-link:hover {
     transform: none;
+    font-weight: normal;
 }
 
 #mobileNav {
