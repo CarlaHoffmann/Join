@@ -219,7 +219,7 @@ header {
 
 .active-link {
     background-color: #091931;
-    color: white !important;
+    color: #CDCDCD !important;
 }
 
 .active-link:hover {
