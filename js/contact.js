@@ -29,52 +29,15 @@ function clearAddContactFields(){
 }
 
 /**
- * Adds a new contact by collecting form input values, generating a color, 
- * and uploading the data to the server. Also clears the form, updates the UI, 
-
-@@ -38,46 +39,64 @@ function clearAddContactFields(){
- * @returns {Promise<void>} A promise that resolves when the contact is successfully added.
- */
-async function addContact(){
-    let fields = [document.getElementById('name'), document.getElementById('email'), document.getElementById('phone')];
-    let name = document.getElementById('name').value;
-    let mail = document.getElementById('email').value;
-    let phone = document.getElementById('phone').value;
-    let color = returnColor();
-    let uploadData = {
-        'phone':phone,
-        'color':color,
-        'mail':mail,
-        'name':name,
-        'password':'pw',
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    let notEmpty = name!== "" && mail !== "" && phone !== "";
-    if(notEmpty && emailRegex.test(mail)){
-        await createNewContact('/users', uploadData);
-        closeAddOverlay();
-        clearAddContactFields();
-        showContactAddedOverlay();
-        loadContactData();
-        document.getElementById("email-error-message").style.display="none";
-        fields.forEach(element => {
-            document.getElementById(element.id + "-error-message").style.display="none";    
-        });
-    } else{
-        if(!notEmpty){
-            fields.forEach(element => {
-                if(element.value === ""){
-                    document.getElementById(element.id + "-error-message").style.display="flex";
-                }    
-            });
-        }
-        if(!(emailRegex.test(mail))){
-            document.getElementById("email-error-message").innerHTML = "Wrong Email Format";
-            document.getElementById("email-error-message").style.display="flex";
-        }
-    }
-}
-
+ * Asynchronous function to add a new contact.
+ * Validates input fields, creates a new contact if validation is successful,
+ * and displays error messages if validation fails.
+ * 
+ * @async
+ * @function addContact
+ * @returns {Promise<void>}
+ *
+ * */
 
 async function addContact() {
     const fields = ['name', 'email', 'phone'].map(id => document.getElementById(id));
@@ -94,6 +57,23 @@ async function addContact() {
         showErrorMessages(fields, notEmpty, emailRegex.test(mail));
     }
 }
+
+/**
+ * Displays error messages for invalid form fields.
+ * 
+ * @function showErrorMessages
+ * @param {HTMLElement[]} fields - Array of input field elements to check.
+ * @param {boolean} notEmpty - Flag indicating if all fields are non-empty.
+ * @param {boolean} validEmail - Flag indicating if the email is valid.
+ * 
+ * @description
+ * This function shows error messages for empty fields and invalid email format.
+ * It displays error messages next to the corresponding input fields.
+ * 
+ * @example
+ * // Call the function
+ * showErrorMessages([nameInput, emailInput, phoneInput], false, true);
+ */
 
 function showErrorMessages(fields, notEmpty, validEmail) {
     if (!notEmpty) {
