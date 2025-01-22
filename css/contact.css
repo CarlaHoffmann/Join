@@ -48,6 +48,18 @@ h3 {
     padding: 12px;
 }
 
+#addContactButton:hover {
+    background-color: #29ABE2;
+    border: 1px solid #29ABE2;
+}
+
+#addContactButton:active, 
+#addContactButton:focus {
+    background-color: #091931; 
+    border-color: #091931;
+    outline: none;
+}
+
 .capital-letter-box {
     width: 352px;
     padding: 17px 36px;
