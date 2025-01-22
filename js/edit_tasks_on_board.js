@@ -284,9 +284,9 @@ function editEditedSubtask(index, text, checked) {
     let subtaskElement = document.getElementById(`subtask${index}`);
     if(subtaskElement) {
         subtaskElement.innerHTML = editSubtaskTemplate(index, text, checked);
+        
+        let input = subtaskElement.querySelector('.edit-subtask-input');
+        input.focus();
+        input.setSelectionRange(input.value.length, input.value.length);
     }
-
-    let input = subtaskElement.querySelector('.edit-subtask-input');
-    input.focus();
-    input.setSelectionRange(input.value.length, input.value.length);
 }
