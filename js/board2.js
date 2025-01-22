@@ -255,18 +255,6 @@ function updatePlaceholders() {
 }
 
 
-// function loadPlaceholders() {
-//     const columns = ["toDo", "progress", "feedback", "done"];
-//     columns.forEach(column => {
-//         const tasksContainer = document.getElementById(column + "Tasks");
-//         // const placeholder = document.getElementById(column + "Placeholder");
-
-//         if (!tasksContainer.contains('task-card')) {
-//             getPlaceholder(column);
-//             return; // Skip this iteration if elements are not found
-//         }
-//     });
-// }
 
 function getPlaceholder(column) {
     const tasksContainer = document.getElementById(column + "Tasks");
