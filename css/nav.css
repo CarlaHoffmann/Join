@@ -182,21 +182,19 @@ header {
     transform: translateX(-1px);
 }
 
-.sideBarNavigation a.active-link:hover img,
+.sideBarNavigation a.active-link:hover svg,
 .sideBarNavigation a.active-link:hover span {
     transform: none;
 }
 
-/* SVG-Icons im aktiven Link */
 .sideBarNavigation a.active-link svg {
-    fill: white; /* Farbe des SVG wird weiß */
-    transition: fill 0.3s ease; /* Sanfter Übergang */
+    fill: white; 
+    transition: fill 0.3s ease;
 }
 
-/* Text im aktiven Link */
 .sideBarNavigation a.active-link span {
-    color: white !important; /* Textfarbe bleibt weiß */
-    transition: color 0.3s ease; /* Sanfter Übergang */
+    color: white !important;
+    transition: color 0.3s ease;
 }
 
 #info-sidebar {
