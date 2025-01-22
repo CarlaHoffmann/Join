@@ -83,7 +83,7 @@ header {
     position: absolute;
     top: 96px;
     right: 16px;
-    padding: 16px;
+    padding: 10px;
     background-color: #2A3647;
     /* color: #CDCDCD; */
     border-top-left-radius: 20px;
@@ -104,7 +104,14 @@ header {
 
 .help-menu div:hover {
     cursor: pointer;
+    background-color: #263c5c;
+
 }
+
+.help-menu a:hover {
+    background-color: #263c5c;
+}
+
 
 .mobile-visible {
     display: none;
