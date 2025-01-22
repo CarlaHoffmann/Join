@@ -229,33 +229,67 @@ async function updateOverlay(taskId, taskStatus) {
 }
 
 
-
+/**
+ * Updates placeholders for all task columns.
+ * Iterates through predefined columns and updates their placeholders.
+ */
 function updatePlaceholders() {
     const columns = ["toDo", "progress", "feedback", "done"];
-    columns.forEach(column => {
-        const tasksContainer = document.getElementById(column + "Tasks");
-        const placeholder = document.getElementById(column + "Placeholder");
-
-        const hasTaskCards = tasksContainer.querySelector('.task-card') !== null;
-        const hasPlaceholder = tasksContainer.querySelector("#" + column + "Placeholder") !== null;
-
-        if (hasTaskCards && hasPlaceholder) {
-            placeholder.classList.remove('show');
-            placeholder.classList.add('hide');
-        }
-        if(!hasTaskCards && hasPlaceholder) {
-            placeholder.classList.remove('hide');
-            placeholder.classList.add('show');
-        }
-        if (!hasTaskCards && !hasPlaceholder) {
-            getPlaceholder(column);
-            return; // Skip this iteration if elements are not found
-        }
-    });
+    columns.forEach(updateColumnPlaceholder);
 }
 
 
+/**
+ * Updates the placeholder for a specific task column.
+ * Checks for the presence of task cards and placeholders, then shows or hides the placeholder accordingly.
+ * 
+ * @param {string} column - The name of the column to update (e.g., "toDo", "progress", "feedback", "done").
+ */
+function updateColumnPlaceholder(column) {
+    const tasksContainer = document.getElementById(column + "Tasks");
+    const placeholder = document.getElementById(column + "Placeholder");
 
+    const hasTaskCards = tasksContainer.querySelector('.task-card') !== null;
+    const hasPlaceholder = tasksContainer.querySelector("#" + column + "Placeholder") !== null;
+
+    if (hasTaskCards && hasPlaceholder) {
+        hidePlaceholder(placeholder);
+    } else if (!hasTaskCards && hasPlaceholder) {
+        showPlaceholder(placeholder);
+    } else if (!hasTaskCards && !hasPlaceholder) {
+        getPlaceholder(column);
+    }
+}
+
+
+/**
+ * Hides a placeholder element by removing the 'show' class and adding the 'hide' class.
+ * 
+ * @param {HTMLElement} placeholder - The placeholder element to hide.
+ */
+function hidePlaceholder(placeholder) {
+    placeholder.classList.remove('show');
+    placeholder.classList.add('hide');
+}
+
+
+/**
+ * Shows a placeholder element by removing the 'hide' class and adding the 'show' class.
+ * 
+ * @param {HTMLElement} placeholder - The placeholder element to show.
+ */
+function showPlaceholder(placeholder) {
+    placeholder.classList.remove('hide');
+    placeholder.classList.add('show');
+}
+
+
+/**
+ * Creates and inserts a placeholder for a specific column.
+ * Clears the existing content of the tasks container and adds a new placeholder with appropriate text.
+ * 
+ * @param {string} column - The name of the column for which to create a placeholder (e.g., "toDo", "progress", "feedback", "done").
+ */
 function getPlaceholder(column) {
     const tasksContainer = document.getElementById(column + "Tasks");
     tasksContainer.innerHTML = '';
