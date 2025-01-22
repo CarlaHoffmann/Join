@@ -30,32 +30,7 @@ function removeHighlightEnd(columnId) {
 
 let currentTask = null;
 
-// async function openEditTaskOverlay(event, task) {
-//     event.stopPropagation();
-//     const overlayContainer = document.getElementById('taskOverlayContainer');
 
-//     selectedContacts = task.contacts;
-
-//     Object.keys(task.subtasks).forEach(key => {
-//         currentSubtasks.push({
-//             task: task.subtasks[key].task,
-//             checked: task.subtasks[key].checked
-//         });
-//     });
-
-//     const subtasksHTML = currentSubtasks.map((subtask, index) => {
-//         return getAddEditedSubtaskTemplate(index, subtask.task, subtask.checked);
-//     }).join('');
-
-//     overlayContainer.innerHTML = openEditTaskOverlayTemplate(task, subtasksHTML);
-
-//     overlayContainer.classList.remove('d-none');
-
-//     updateEditContacts();
-//     initializeDatePicker();
-//     initializeEditPriority(task.prio);
-//     categorySelected(task.category);
-// }
 async function openEditTaskOverlay(event, task) {
     event.stopPropagation();
     const overlayContainer = document.getElementById('taskOverlayContainer');
