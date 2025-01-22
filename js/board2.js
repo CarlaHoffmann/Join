@@ -393,15 +393,3 @@ function removeHighlightLeave(columnId) {
         column.classList.remove("highlight-column");
     }
 }
-
-
-/**
- * Removes the highlight from a column at the end of a drag operation.
- * 
- * @function removeHighlightEnd
- * @param {string} columnId - The ID of the column to remove the highlight from.
- * @returns {void}
- */
-function removeHighlightEnd(columnId) {
-    removeHighlightLeave(columnId);
-}

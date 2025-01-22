@@ -36,7 +36,6 @@ async function loadTasks() {
  * @returns {Promise<void>}
  */
 async function loadTaskData(path, containerId) {
-    // const placeholder = document.getElementById(containerId.replace("Tasks", "Placeholder"));
     try {
         const url = `${base_url}/tasks/${path}.json`;
         const response = await fetch(url);
@@ -47,13 +46,9 @@ async function loadTaskData(path, containerId) {
 
         const data = await response.json();
         if(data) {
-            // placeholder.classList.add('hide');
             const taskArray = processTasks(data, path);
             displayTasks(taskArray, containerId);
-        // } else {
-            // placeholder.classList.add('show');
         }
-        // updatePlaceholders();
     } catch (error) {
         // Error handling can be implemented here or logged elsewhere if needed
     }
