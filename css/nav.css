@@ -3,9 +3,9 @@
     box-sizing: border-box;
 }
 
-nav ul li a{
+nav ul li a {
     text-decoration: none;
-    color:#CDCDCD;
+    color: #CDCDCD;
 }
 
 body {
@@ -29,20 +29,20 @@ header {
     box-shadow: 0px 4px 4px 0px #0000001A;
 }
 
-#headerText{
+#headerText {
     display: flex;
 }
 
-#navHeaderLogo{
+#navHeaderLogo {
     display: none;
 }
 
-#mobileNav{
-    display: none; 
+#mobileNav {
+    display: none;
     /* Mobile Navigation ausblenden */
 }
 
-#headerControls{
+#headerControls {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -66,8 +66,8 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    width:48px;
-    height:48px;
+    width: 48px;
+    height: 48px;
     border: 3px solid black;
     color: #29ABE2;
     font-weight: 600;
@@ -81,7 +81,7 @@ header {
 
 .help-menu {
     position: absolute;
-    top :96px;
+    top: 96px;
     right: 16px;
     padding: 16px;
     background-color: #2A3647;
@@ -93,7 +93,8 @@ header {
     gap: 8px;
 }
 
-.help-menu a, .help-menu div {
+.help-menu a,
+.help-menu div {
     font-size: 16px;
     text-decoration: none;
     color: #CDCDCD;
@@ -113,7 +114,7 @@ header {
 }
 
 #logo {
-    padding: 64px 0px 100px 0px; 
+    padding: 64px 0px 100px 0px;
 }
 
 #logo img {
@@ -128,11 +129,11 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position:fixed;
-    left:0;
+    position: fixed;
+    left: 0;
     top: 0;
     z-index: 10;
-    height:100vh;
+    height: 100vh;
     transition: transform 0.3s ease;
 }
 
@@ -149,22 +150,22 @@ header {
 
 .sideBarNavigation {
     list-style: none;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     gap: 15px;
 }
 
-.sideBarNavigation a{
-    display:flex;
-    justify-content:flex-start;
-    align-items:center;
+.sideBarNavigation a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     gap: 8px;
     width: 232px;
     padding: 8px 56px;
 }
 
-.sideBarNavigation a:hover{
+.sideBarNavigation a:hover {
     background: #263c5c;
 }
 
@@ -191,7 +192,7 @@ header {
     padding: 8px 56px;
 }
 
-#info-sidebar a:hover{
+#info-sidebar a:hover {
     color: #29ABE2;
     font-weight: bold;
     transition: transform 0.2s font-size 0.2s ease-in-out;
@@ -212,7 +213,8 @@ header {
 }
 
 #mobileNav {
-    display: none; /* Standardmäßig ausblenden */
+    display: none;
+    /* Standardmäßig ausblenden */
 }
 
 /* Media Queries */
@@ -222,11 +224,12 @@ header {
         padding-right: 16px;
     }
 }
+
 @media (max-width: 680px) {
-    header{
-        height:80px;
-        width:100vw;
-        left:0;
+    header {
+        height: 80px;
+        width: 100vw;
+        left: 0;
         justify-content: space-between;
         padding-left: 16px;
         padding-right: 16px;
@@ -244,16 +247,17 @@ header {
         display: block;
     }
 
-    #headerText{
-        display:none;
+    #headerText {
+        display: none;
     }
 
-    #navHeaderLogo{
-        display:flex;
+    #navHeaderLogo {
+        display: flex;
     }
 
     #sidebar {
-        transform: translateX(-100%); /* Sidebar ausblenden */
+        transform: translateX(-100%);
+        /* Sidebar ausblenden */
     }
 
     #mobileNav {
@@ -266,16 +270,16 @@ header {
         justify-content: space-around;
         align-items: center;
         z-index: 1000;
-        height:80px;
+        height: 80px;
     }
 
-    #mobileNav a{
-        display:flex;
-        flex-direction:column;
+    #mobileNav a {
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        width:100%;
-        font-size:14px;
+        width: 100%;
+        font-size: 14px;
         height: 76px;
         width: 80px;
         padding-top: 8px;
@@ -286,11 +290,11 @@ header {
         border-radius: 16px;
     }
 
-    #mobileNav img{
-        height:32px;
+    #mobileNav img {
+        height: 32px;
     }
 
-    #content{
-        padding-top:80px;
+    #content {
+        padding-top: 80px;
     }
 }
