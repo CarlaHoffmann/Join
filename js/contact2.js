@@ -37,21 +37,16 @@ async function editContact() {
  * @returns {Promise<Object|void>} The updated user data or undefined if validation fails.
  */
 async function updateEditedContact() {
-    const [name, email, phone] = ['changedName', 'changedEmail', 'changedPhone']
-        .map(id => document.getElementById(id).value.trim());
-
+    const [name, email, phone] = ['changedName', 'changedEmail', 'changedPhone'].map(id => document.getElementById(id).value.trim());
     if (!validateEditForm(name, email, phone)) return;
-
     const editLink = `${base_url}users/${editKey}.json`;
     const user = await (await fetch(editLink)).json();
     const updatedData = { ...user, mail: email, name, phone };
-
     const response = await fetch(editLink, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedData),
     });
-
     const updatedUser = await response.json();
     loadContactData();
     closeEditOverlay();
@@ -72,7 +67,6 @@ async function updateEditedContact() {
 function validateEditForm(name, email, phone) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let isValid = true;
-
     ['changedName', 'changedEmail', 'changedPhone'].forEach(id => {
         const error = document.getElementById(`${id}-error-message`);
         if (!document.getElementById(id).value.trim()) {
@@ -82,7 +76,6 @@ function validateEditForm(name, email, phone) {
             error.style.display = "none";
         }
     });
-
     if (!emailRegex.test(email)) {
         document.getElementById("changedEmail-error-message").textContent = "Wrong Email Format";
         document.getElementById("changedEmail-error-message").style.display = "flex";
