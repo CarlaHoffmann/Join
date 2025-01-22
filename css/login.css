@@ -90,12 +90,12 @@ a {
 .link_visited:visited {
   font-size: 16px;
   color: var(--grey);
-  transition: transform 0.2s ease, font-size 0.2s ease;
 }
 
 .pointer-color:hover {
   font-weight: bold;
   color: var(--lightblue);
+  transition: transform 0.2s ease, font-size 0.2s ease;
 }
 
 
