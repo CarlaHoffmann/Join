@@ -98,7 +98,6 @@ async function existingMailLogIn() {
         if (!mailIsTrue) {
             return;
         }
-
         const user = findUserByEmail(users);
 
         if (user) {
