@@ -229,30 +229,61 @@ async function updateOverlay(taskId, taskStatus) {
 }
 
 
-/**
- * Updates the visibility of placeholders based on the presence of task cards in each column.
- * 
- * @function updatePlaceholders
- * @returns {void}
- */
+
 function updatePlaceholders() {
     const columns = ["toDo", "progress", "feedback", "done"];
     columns.forEach(column => {
         const tasksContainer = document.getElementById(column + "Tasks");
         const placeholder = document.getElementById(column + "Placeholder");
-        
-        if (!tasksContainer || !placeholder) {
-            return; // Skip this iteration if elements are not found
-        }
 
-        if (tasksContainer.querySelector('.task-card')) {
+        const hasTaskCards = tasksContainer.querySelector('.task-card') !== null;
+        const hasPlaceholder = tasksContainer.querySelector("#" + column + "Placeholder") !== null;
+
+        if (hasTaskCards && hasPlaceholder) {
             placeholder.classList.remove('show');
             placeholder.classList.add('hide');
-        } else {
+        }
+        if(!hasTaskCards && hasPlaceholder) {
             placeholder.classList.remove('hide');
             placeholder.classList.add('show');
         }
+        if (!hasTaskCards && !hasPlaceholder) {
+            getPlaceholder(column);
+            return; // Skip this iteration if elements are not found
+        }
     });
+}
+
+
+// function loadPlaceholders() {
+//     const columns = ["toDo", "progress", "feedback", "done"];
+//     columns.forEach(column => {
+//         const tasksContainer = document.getElementById(column + "Tasks");
+//         // const placeholder = document.getElementById(column + "Placeholder");
+
+//         if (!tasksContainer.contains('task-card')) {
+//             getPlaceholder(column);
+//             return; // Skip this iteration if elements are not found
+//         }
+//     });
+// }
+
+function getPlaceholder(column) {
+    const tasksContainer = document.getElementById(column + "Tasks");
+    tasksContainer.innerHTML = '';
+    // const tasks = document.getElementById(containerId);
+    if(column === 'toDo') {
+        tasksContainer.innerHTML = `<div id="toDoPlaceholder" class="placeholder show">No tasks To do</div>`;
+    }
+    if(column === 'progress') {
+        tasksContainer.innerHTML = `<div id="progressPlaceholder" class="placeholder show">No tasks In progress</div>`;
+    }
+    if(column === 'feedback') {
+        tasksContainer.innerHTML = `<div id="feedbackPlaceholder" class="placeholder show">No tasks Await feedback</div>`;
+    }
+    if(column === 'done') {
+        tasksContainer.innerHTML = `<div id="donePlaceholder" class="placeholder show">No tasks Done</div>`;
+    }
 }
 
 

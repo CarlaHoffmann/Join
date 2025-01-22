@@ -351,5 +351,3 @@ function highlight(columnId) {
         column.classList.add("highlight-column");
     }
 }
-
-
