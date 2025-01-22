@@ -88,7 +88,6 @@ async function toggleSubtaskStatus(path, taskId, subtaskKey) {
 
         loadTasks();
     } catch (error) {
-        console.error("Fehler beim Aktualisieren des Subtask-Status:", error);
     }
 }
 
