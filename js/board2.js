@@ -240,23 +240,16 @@ function updatePlaceholders() {
     columns.forEach(column => {
         const tasksContainer = document.getElementById(column + "Tasks");
         const placeholder = document.getElementById(column + "Placeholder");
-        console.log(tasksContainer, placeholder);
         
         if (!tasksContainer || !placeholder) {
-            console.error(`Container or placeholder for ${column} not found`);
             return; // Skip this iteration if elements are not found
         }
 
         if (tasksContainer.querySelector('.task-card')) {
-            
-                placeholder.classList.remove('show');
-            // }
+            placeholder.classList.remove('show');
             placeholder.classList.add('hide');
         } else {
-            // placeholder.style.display = "none";
-            // if(placeholder.contains('show')) {
-                placeholder.classList.remove('hide');
-            // }
+            placeholder.classList.remove('hide');
             placeholder.classList.add('show');
         }
     });
