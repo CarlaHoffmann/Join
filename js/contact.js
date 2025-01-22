@@ -28,64 +28,90 @@ function clearAddContactFields(){
     document.getElementById('phone').value = "";
 }
 
-
 /**
  * Adds a new contact by collecting form input values, generating a color, 
  * and uploading the data to the server. Also clears the form, updates the UI, 
- * and reloads contact data.
- * 
- * @async
- * @function addContact
+
+@@ -38,46 +39,64 @@ function clearAddContactFields(){
  * @returns {Promise<void>} A promise that resolves when the contact is successfully added.
  */
+async function addContact(){
+    let fields = [document.getElementById('name'), document.getElementById('email'), document.getElementById('phone')];
+    let name = document.getElementById('name').value;
+    let mail = document.getElementById('email').value;
+    let phone = document.getElementById('phone').value;
+    let color = returnColor();
+    let uploadData = {
+        'phone':phone,
+        'color':color,
+        'mail':mail,
+        'name':name,
+        'password':'pw',
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let notEmpty = name!== "" && mail !== "" && phone !== "";
+    if(notEmpty && emailRegex.test(mail)){
+        await createNewContact('/users', uploadData);
+        closeAddOverlay();
+        clearAddContactFields();
+        showContactAddedOverlay();
+        loadContactData();
+        document.getElementById("email-error-message").style.display="none";
+        fields.forEach(element => {
+            document.getElementById(element.id + "-error-message").style.display="none";    
+        });
+    } else{
+        if(!notEmpty){
+            fields.forEach(element => {
+                if(element.value === ""){
+                    document.getElementById(element.id + "-error-message").style.display="flex";
+                }    
+            });
+        }
+        if(!(emailRegex.test(mail))){
+            document.getElementById("email-error-message").innerHTML = "Wrong Email Format";
+            document.getElementById("email-error-message").style.display="flex";
+        }
+    }
+}
 
-/**
- * Adds a new contact after validation, updates the database and UI.
- * 
- * @async
- * @returns {Promise<void>}
- */
+
 async function addContact() {
     const fields = ['name', 'email', 'phone'].map(id => document.getElementById(id));
-    const [name, mail, phone] = fields.map(f => f.value.trim());
-    if (!validateContactFields(name, mail, phone)) return;
-
-    const uploadData = { name, mail, phone, color: returnColor(), password: 'pw' };
-    await createNewContact('/users', uploadData);
-
-    closeAddOverlay();
-    clearAddContactFields();
-    showContactAddedOverlay();
-    loadContactData();
-    resetErrorMessages(fields);
-}
-
-/**
- * Validates input fields and shows error messages if validation fails.
- * 
- * @param {string} name - Contact's name.
- * @param {string} mail - Contact's email.
- * @param {string} phone - Contact's phone.
- * @returns {boolean} True if validation passes, false otherwise.
- */
-function validateContactFields(name, mail, phone) {
+    const [name, mail, phone] = fields.map(field => field.value);
+    const color = returnColor();
+    const uploadData = { phone, color, mail, name, password: 'pw' };
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const fields = { name, mail, phone };
-    let isValid = true;
-
-    Object.entries(fields).forEach(([id, value]) => {
-        const error = document.getElementById(`${id}-error-message`);
-        if (!value || (id === 'mail' && !emailRegex.test(mail))) {
-            error.textContent = id === 'mail' ? "Wrong Email Format" : "This field is required";
-            error.style.display = "flex";
-            isValid = false;
-        } else {
-            error.style.display = "none";
-        }
-    });
-
-    return isValid;
+    const notEmpty = name && mail && phone;
+    if (notEmpty && emailRegex.test(mail)) {
+        await createNewContact('/users', uploadData);
+        closeAddOverlay();
+        clearAddContactFields();
+        showContactAddedOverlay();
+        loadContactData();
+        fields.forEach(el => document.getElementById(`${el.id}-error-message`).style.display = "none");
+    } else {
+        showErrorMessages(fields, notEmpty, emailRegex.test(mail));
+    }
 }
+
+function showErrorMessages(fields, notEmpty, validEmail) {
+    if (!notEmpty) {
+        fields.forEach(element => {
+            if (!element.value) {
+                document.getElementById(`${element.id}-error-message`).style.display = "flex";
+            }
+        });
+    }
+    if (!validEmail) {
+        const emailError = document.getElementById("email-error-message");
+        emailError.innerHTML = "Wrong Email Format";
+        emailError.style.display = "flex";
+    }
+    document.getElementById("email-error-message").style.display = validEmail ? "none" : "flex";
+}
+
+
 
 /**
  * Resets error messages for input fields.
