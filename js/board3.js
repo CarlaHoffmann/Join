@@ -11,26 +11,18 @@ function removeHighlightEnd(columnId) {
 
 
 /**
- * Opens the task editing overlay and populates it with the provided task details.
- * 
- * @async
- * @function openEditTaskOverlay
- * @param {Event} event - The event that triggered the function.
- * @param {Object} task - The task object containing details to populate the overlay.
- * @param {string} task.title - The title of the task.
- * @param {string} task.description - The description of the task.
- * @param {Array<string>} task.contacts - The contacts assigned to the task.
- * @param {Object} task.subtasks - Subtasks of the task, keyed by unique identifiers.
- * @param {string} task.date - The due date of the task.
- * @param {string} task.prio - The priority of the task (e.g., "1" for Urgent, "2" for Medium, "3" for Low).
- * @param {string} task.category - The category of the task (e.g., "Technical Task", "User Story").
- * @returns {void}
+ * Stores the currently selected task for editing.
+ * @type {Object|null}
  */
-
-
 let currentTask = null;
 
 
+/**
+ * Opens the edit task overlay and initializes its components.
+ * @async
+ * @param {Event} event - The event that triggered the function.
+ * @param {Object} task - The task object to be edited.
+ */
 async function openEditTaskOverlay(event, task) {
     event.stopPropagation();
     const overlayContainer = document.getElementById('taskOverlayContainer');
@@ -44,10 +36,20 @@ async function openEditTaskOverlay(event, task) {
     initializeEditTaskComponents(task);
 }
 
+
+/**
+ * Prepares the selected contacts for the task being edited.
+ * @param {Object} task - The task object containing contact information.
+ */
 function prepareSelectedContacts(task) {
     selectedContacts = task.contacts;
 }
 
+
+/**
+ * Prepares the current subtasks for the task being edited.
+ * @param {Object} task - The task object containing subtask information.
+ */
 function prepareCurrentSubtasks(task) {
     currentSubtasks = [];
     Object.keys(task.subtasks).forEach(key => {
@@ -58,17 +60,33 @@ function prepareCurrentSubtasks(task) {
     });
 }
 
+
+/**
+ * Generates HTML for the subtasks.
+ * @returns {string} HTML string representing the subtasks.
+ */
 function generateSubtasksHTML() {
     return currentSubtasks.map((subtask, index) => {
         return getAddEditedSubtaskTemplate(index, subtask.task, subtask.checked);
     }).join('');
 }
 
+
+/**
+ * Displays the edit task overlay in the specified container.
+ * @param {HTMLElement} container - The container element for the overlay.
+ * @param {Object} task - The task object being edited.
+ * @param {string} subtasksHTML - The HTML string for subtasks.
+ */
 function displayEditTaskOverlay(container, task, subtasksHTML) {
     container.innerHTML = openEditTaskOverlayTemplate(task, subtasksHTML);
     container.classList.remove('d-none');
 }
 
+/**
+ * Initializes various components of the edit task overlay.
+ * @param {Object} task - The task object being edited.
+ */
 function initializeEditTaskComponents(task) {
     updateEditContacts();
     initializeDatePicker();

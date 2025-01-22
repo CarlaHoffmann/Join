@@ -35,7 +35,6 @@ async function getGreetingOverlay() {
                 updateGreeting(greeting, greetName, user);
             }
         } catch (error) {
-            console.error("Fehler beim Abrufen des Benutzers:", error);
         }
     }
 }
@@ -110,7 +109,6 @@ async function getGreetingName() {
             greetName.innerHTML = loggedInData.name; 
         }
     } catch (error) {
-        console.error("Fehler beim Abrufen des Benutzers:", error);
     }
 }
 
@@ -128,7 +126,6 @@ async function countToDo() {
         let count = responseToJson ? Object.keys(responseToJson).length : 0;
         todoCounter.innerHTML = count;
     } catch (error) {
-        console.error("Fehler beim Abrufen der To-Do-Daten:", error);
         todoCounter.innerHTML = "-";
     }
 }
@@ -147,8 +144,6 @@ async function countTasksInProgress() {
         let count = responseToJson ? Object.keys(responseToJson).length : 0;
         progressCounter.innerHTML = count;
     } catch (error) {
-        console.error("Fehler beim Abrufen der In-Progress-Aufgaben:", error);
-        // Fehlerfall: "Fehler beim Laden der Aufgaben" anzeigen
         progressCounter.innerHTML = "-";
     }
 }
@@ -167,7 +162,6 @@ async function countAwaitingFeedback() {
         let count = responseToJson ? Object.keys(responseToJson).length : 0;
         feedbackCounter.innerHTML = count;
     } catch (error) {
-        console.error("Fehler beim Abrufen der Feedback-Aufgaben:", error);
         feedbackCounter.innerHTML = "-";
     }
 }
@@ -186,7 +180,6 @@ async function countDone() {
         let count = responseToJson ? Object.keys(responseToJson).length : 0;
         doneCounter.innerHTML = count;
     } catch (error) {
-        console.error("Fehler beim Abrufen der erledigten Aufgaben:", error);
         doneCounter.innerHTML = "Fehler beim Laden der Aufgaben";
     }
 }
@@ -241,7 +234,6 @@ async function fetchAllTasks(categories) {
                 allTasks = allTasks.concat(Object.values(tasks));
             }
         } catch (error) {
-            console.error(`Fehler beim Abrufen der Aufgaben für Kategorie ${category}:`, error);
         }
     }
     return allTasks;
@@ -317,8 +309,6 @@ function updateUI(tasks, earliestDate) {
         } else {
             updateWithoutTasks(elements);
         }
-    } else {
-        console.error("Eines oder mehrere erforderliche Elemente wurden nicht gefunden.");
     }
 }
 
