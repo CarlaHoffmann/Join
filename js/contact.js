@@ -203,7 +203,6 @@ async function deleteContact(key) {
         const contactResponse = await fetch(contactUrl);
         const contact = await contactResponse.json();
         if (!contact) {
-            console.error('Contact not found.');
             return;
         }
 
