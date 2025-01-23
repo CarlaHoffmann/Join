@@ -256,6 +256,7 @@
   height: 56px;
   cursor: pointer;
   gap: 4px;
+  transition: all 0.3s ease;
 }
 
 .add-task-button:hover {

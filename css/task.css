@@ -168,15 +168,18 @@ h1 {
 .clear-button {
     border: 1px solid #2A3647;
     background-color: #F6F7F8;
-    ;
     padding: 16px;
     display: flex;
     gap: 4px;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .clear-button:hover {
     border-color: #29ABE2;
     color: #29ABE2;
+    outline: 2px solid #29ABE2;
+    outline-offset: -2px;
 }
 
 .clear-button .icon-normal {
@@ -203,6 +206,7 @@ h1 {
     gap: 4px;
     font-size: 21px;
     font-weight: 700;
+    transition: all 0.3s ease;
 }
 
 .submit-button:hover {

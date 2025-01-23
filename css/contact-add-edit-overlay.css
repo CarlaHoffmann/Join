@@ -180,11 +180,15 @@
     padding: 16px;
     display: flex;
     gap: 4px;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .clear-button:hover {
     border-color: #29ABE2;
     color: #29ABE2;
+    outline: 2px solid #29ABE2;
+    outline-offset: -2px;
 }
 
 .clear-button .icon-normal {
@@ -211,6 +215,7 @@
     padding: 16px;
     display: flex;
     gap: 4px;
+    transition: all 0.3s ease;
 }
 
 .submit-button:hover {
