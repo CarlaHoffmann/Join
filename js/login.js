@@ -25,24 +25,21 @@ function animationWindow() {
         return;
     }
 
-    if(playAnimation) {
-        console.log(playAnimation);
-        if (isMobile) {
-            animatedLogo.src = './assets/img/general/logo.svg';
+    if (isMobile) {
+        animatedLogo.src = './assets/img/general/logo.svg';
 
-            animatedLogo.addEventListener('animationend', () => {
-                animatedLogo.src = './assets/img/login/login-logo.svg';
-                headerLogo.src = animatedLogo.src;
-                headerLogo.style.display = 'block';
-                overlay.style.display = 'none';
-            });
-        } else {
-            animatedLogo.addEventListener('animationend', () => {
-                overlay.style.display = 'none';
-                headerLogo.src = animatedLogo.src;
-                headerLogo.style.display = 'block';
-            });
-        }
+        animatedLogo.addEventListener('animationend', () => {
+            animatedLogo.src = './assets/img/login/login-logo.svg';
+            headerLogo.src = animatedLogo.src;
+            headerLogo.style.display = 'block';
+            overlay.style.display = 'none';
+        });
+    } else {
+        animatedLogo.addEventListener('animationend', () => {
+            overlay.style.display = 'none';
+            headerLogo.src = animatedLogo.src;
+            headerLogo.style.display = 'block';
+        });
     }
 }
 
