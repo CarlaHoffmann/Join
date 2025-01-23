@@ -438,8 +438,6 @@ input:hover,
   height: 100%;
 }
 
-
-
 .password-error {
   flex: 1;
   color: var(--errorPink);
@@ -449,6 +447,7 @@ input:hover,
   position: absolute;
   bottom: 32px;
 }
+
 
 /* Login successful Animation */
 .overlay {
@@ -475,30 +474,6 @@ input:hover,
   visibility: hidden;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0.3;
-    transform: translate(-50%, -160%);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate(-50%, -45%);
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-
-  to {
-    opacity: 0.5;
-    transform: translate(-50%, -45%);
-  }
-}
-
 .login_successful {
   position: fixed;
   top: 50%;
@@ -521,6 +496,7 @@ input:hover,
   animation: fadeIn 1.5s ease-in-out fade forwards;
 }
 
+
 /* Modal Overlay */
 .modal {
   position: fixed;
@@ -535,7 +511,7 @@ input:hover,
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease-in, visibility 0.3s;
+  transition: opacity 0.6s ease-in, visibility 0.6s;
 }
 
 .modal.show {
@@ -543,7 +519,11 @@ input:hover,
   visibility: visible;
 }
 
+
 .modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 422px;
   background-color: var(--menuButtonDarkblue);
   padding: 20px 30px;
@@ -555,6 +535,14 @@ input:hover,
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  transform: translate(-50%, -60%);
+  transition: opacity 0.6s ease-in, transform 0.6s ease-in;
+}
+
+.modal.show .modal-content {
+  opacity: 1;
+  transform: translate(-50%, -50%);
 }
 
 .modal span {
@@ -577,7 +565,6 @@ input:hover,
   text-decoration: underline;
 }
 
-
 .modal-button {
   margin-top: 20px;
   font-weight: 700;
@@ -589,7 +576,6 @@ input:hover,
   white-space: nowrap;
   font-size: 21px;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .modal-button:hover {
@@ -597,14 +583,8 @@ input:hover,
   color: var(--white);
 }
 
-@keyframes fadeIn {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
 
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+.modal.show .modal-content {
+  opacity: 1;
+  transform: translate(-50%, -50%);
 }
