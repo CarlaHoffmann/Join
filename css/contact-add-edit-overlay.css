@@ -135,7 +135,6 @@
     border: none;
     outline: none;
     flex: 1;
-    /* Das Eingabefeld nimmt den restlichen Platz ein */
     font-size: 16px;
     background-color: var(--white);
 }
@@ -175,9 +174,9 @@
 }
 
 .clear-button {
+    font-size: 21px;
     border: 1px solid #2A3647;
     background-color: #F6F7F8;
-    ;
     padding: 16px;
     display: flex;
     gap: 4px;
@@ -205,6 +204,8 @@
 }
 
 .submit-button {
+    font-size: 21px;
+    font-weight: 700;
     background-color: #2A3647;
     color: rgb(255, 255, 255);
     padding: 16px;
