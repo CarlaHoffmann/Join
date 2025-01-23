@@ -34,7 +34,7 @@ function closeOverlayOnOutsideClick(event, box, overlay) {
         if(box === 'overlay-content') {
             closeOverlay();
         }
-        if(box === 'taskOverlay'||'editTaskOverlay') {
+        if(box === 'taskOverlay'|| box === 'editTaskOverlay') {
             // closeTaskOverlay();
             closeTaskOverlayAnimation(box);
         }
