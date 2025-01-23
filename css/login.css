@@ -275,12 +275,16 @@ a {
 
 .arrow_signUp {
   margin-left: -140px;
+
 }
 
 .arrow_signUp:hover {
   border-radius: 42px;
   background-color: var(--backgroundHoverArrow);
+  transform: scale(1.2);
+
 }
+
 
 .text_login_btn {
   font-size: 21px;
@@ -437,6 +441,7 @@ input:hover,
   width: 100%;
   height: 100%;
 }
+
 
 .password-error {
   flex: 1;
