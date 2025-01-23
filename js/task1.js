@@ -12,6 +12,8 @@ async function openAssigned() {
     const loggedInUser = await getUser();
 
     const preparedContacts = await prepareContacts(contacts, loggedInUser);
+    console.log(preparedContacts);
+    console.log(loggedInUser);
     const contactsHTML = createContactsHTML(preparedContacts, selectedContacts, loggedInUser);
 
     contactsToSelect.innerHTML = contactsHTML;
@@ -39,16 +41,18 @@ async function loadContacts() {
 
 /** This function prepares the contacts array by sorting and positioning the logged-in user at the top.*/
 async function prepareContacts(contacts, loggedInUser) {
-    if (!loggedInUser) return contacts;
+    if (loggedInUser === 'Guest') {
+        return contacts.sort((a, b) => a.name.localeCompare(b.name));
+    } else {
+    // return contacts;
 
     const loggedInContactIndex = contacts.findIndex(contact => contact.name === loggedInUser.name);
-    if (loggedInContactIndex !== -1) {
+    console.log(loggedInContactIndex);
+    // if (loggedInContactIndex !== -1) {
         const [loggedInContact] = contacts.splice(loggedInContactIndex, 1); /** Remove the user from the array */
         contacts.sort((a, b) => a.name.localeCompare(b.name));
         return [loggedInContact, ...contacts]; /** Add it back at the beginning */
     }
-
-    return contacts.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 /** 
@@ -56,12 +60,16 @@ async function prepareContacts(contacts, loggedInUser) {
  */
 function createContactsHTML(contacts, selectedContacts, loggedInUser) {
     let contactsHTML = '';
+    // console.log(`contacts: ${contacts}`);
+    // console.log(`selectedContacts: ${selectedContacts}`);
+    // console.log(`loggedInUser: ${loggedInUser}`);
 
-    contacts.forEach((contact) => {
-        const isSelected = selectedContacts.includes(contact.name);
+    contacts.forEach((contact, index) => {
+        // console.log(`contact.name: ${contact.name}`);
+        const isSelected = selectedContacts.includes(contact.id);
         const isCurrentUser = loggedInUser.name !== 'Guest' && contact.name === loggedInUser.name;
         contactsHTML += `
-            <label onclick="handleContactClick(event)" for="${contact.id}" class="selection-name contact-label">
+            <label onclick="handleContactClick(event, ${index})" class="selection-name contact-label">
                 <div>${contact.name}${isCurrentUser ? ' (You)' : ''}</div>
                 <input type="checkbox" id="${contact.id}" value="${contact.name}" ${isSelected ? 'checked' : ''}>
             </label>
@@ -88,25 +96,27 @@ async function getUser() {
 /** This function handles the click event on a contact label.
 * Purpose: Toggles the selection status of a contact when its label is clicked.
 */
-function handleContactClick(event) {
+function handleContactClick(event, index) {
     event.stopPropagation();
     const checkbox = event.currentTarget.querySelector('input[type="checkbox"]');
-    toggleContact({ target: checkbox }); 
+    toggleContact({ target: checkbox }, index); 
 }
 
 /** This function toggles the selection status of a contact.
 * Purpose: Adds or removes a contact from the selectedContacts array based on the checkbox state.
 */
-function toggleContact(event) {
+function toggleContact(event, index) {
     const checkbox = event.target;
-    const contactName = checkbox.value;
+    // const contactName = checkbox.value;
+    const contactId = checkbox.id;
     
     if (checkbox.checked) {
-        if (!selectedContacts.includes(contactName)) {
-            selectedContacts.push(contactName);
+        if (!selectedContacts.includes(contactId)) {
+            selectedContacts.push(contactId);
         }
     } else {
-        selectedContacts = selectedContacts.filter(name => name !== contactName);
+        selectedContacts = selectedContacts.filter(id => id !== contactId);
+        console.log(selectedContacts);
     }
 }
 
@@ -120,13 +130,15 @@ async function updateSelectedContacts() {
     let contactInis = ''; /** Variable for collecting strings*/
 
     for (let i = 0; i < selectedContacts.length; i++) {
-        const contactName = selectedContacts[i];
+        const contactId = selectedContacts[i];
+
+        let contactName = await getContactName(contactId);
         let initials = contactName.split(' ').map(word => word[0]).join('');
         
         /** 
          * Get color of contacts
          */
-        let color = await getContactColor(contactName);
+        let color = await getContactColor(contactId); 
         
         /** 
          * Add HTML-String to collection
@@ -140,16 +152,33 @@ async function updateSelectedContacts() {
     contactInitials.innerHTML = contactInis;
 }
 
-/** 
- * This asynchronous function retrieves the color associated with a contact.
- */
-async function getContactColor(contactName) {
+async function getContactName(contactId) {
     try {
         const response = await fetch(`${task_base_url}/users.json`);
         const users = await response.json();
         
         for (let userId in users) {
-            if (users[userId].name === contactName) {
+            if (userId === contactId) {
+                const nameResponse = await fetch(`${task_base_url}/users/${userId}/name.json`);
+                return await nameResponse.json();
+            }
+        }
+        return 'no name'; /** Standard, if no name can be found*/
+    } catch (error) {
+        return ''; /** Standard name if not found*/
+    }
+}
+
+/** 
+ * This asynchronous function retrieves the color associated with a contact.
+ */
+async function getContactColor(contactId) {
+    try {
+        const response = await fetch(`${task_base_url}/users.json`);
+        const users = await response.json();
+        
+        for (let userId in users) {
+            if (userId === contactId) {
                 const colorResponse = await fetch(`${task_base_url}/users/${userId}/color.json`);
                 return await colorResponse.json();
             }
