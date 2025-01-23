@@ -60,12 +60,8 @@ async function prepareContacts(contacts, loggedInUser) {
  */
 function createContactsHTML(contacts, selectedContacts, loggedInUser) {
     let contactsHTML = '';
-    // console.log(`contacts: ${contacts}`);
-    // console.log(`selectedContacts: ${selectedContacts}`);
-    // console.log(`loggedInUser: ${loggedInUser}`);
 
     contacts.forEach((contact, index) => {
-        // console.log(`contact.name: ${contact.name}`);
         const isSelected = selectedContacts.includes(contact.id);
         const isCurrentUser = loggedInUser.name !== 'Guest' && contact.name === loggedInUser.name;
         contactsHTML += `

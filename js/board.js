@@ -45,6 +45,7 @@ async function loadTaskData(path, containerId) {
         }
 
         const data = await response.json();
+        console.log(data);
         if(data) {
             const taskArray = processTasks(data, path);
             displayTasks(taskArray, containerId);
@@ -88,6 +89,8 @@ function processTasks(tasks, status) {
  */
 async function displayTasks(taskArray, containerId) {
     const tasks = document.getElementById(containerId);
+    const contactName = await getContactNames(taskArray);
+
     const contactColors = await getContactColors(taskArray);
     let taskHTML = "";
 
@@ -96,6 +99,34 @@ async function displayTasks(taskArray, containerId) {
     }
 
     tasks.innerHTML = taskHTML;
+}
+
+
+
+async function getContactNames(tasks) {
+    const contactNames = [];
+    for (const task of tasks) {
+        const taskContactNames = await Promise.all(task.contacts.map(async contact => {
+            try {
+                const response = await fetch(`${task_base_url}/users.json`);
+                const users = await response.json();
+
+                console.log(contact);
+                for (let userId in users) {
+                    if (userId === contact) {
+                        const nameResponse = await fetch(`${task_base_url}/users/${userId}/name.json`);
+                        return await nameResponse.json();
+                    }
+                }
+                return '';
+            } catch (error) {
+                return 'nn'; 
+            }
+        }));
+        contactNames.push(taskContactNames);
+        console.log(contactNames);
+    }
+    return contactNames;
 }
 
 /**
@@ -115,7 +146,7 @@ async function getContactColors(tasks) {
                 const users = await response.json();
 
                 for (let userId in users) {
-                    if (users[userId].name === contact) {
+                    if (userId === contact) {
                         const colorResponse = await fetch(`${task_base_url}/users/${userId}/color.json`);
                         return await colorResponse.json();
                     }

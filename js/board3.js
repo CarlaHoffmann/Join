@@ -196,14 +196,16 @@ async function openTaskOverlay(task) {
     currentTask = task;
     const overlayContainer = document.getElementById('taskOverlayContainer');
 
+    const contactNames = await getContactNames([task]);
     const contactColors = await getContactColors([task]);
     const contactsHTML = task.contacts.map((contact, index) => {
+        const contactName = contactNames[0][index];
         const contactColor = contactColors[0][index];
-        const initials = getContactInitials(contact);
+        const initials = getContactInitials(contactName);
         return `
             <div class="assigned-contact">
                 <div class="contact-initial" style="background-color: ${contactColor};">${initials}</div>
-                <span class="contact-name">${contact}</span>
+                <span class="contact-name">${contactName}</span>
             </div>`;
     }).join('');
 
