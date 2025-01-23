@@ -94,22 +94,9 @@ function takeCatergory() {
 }
 
 /**
- * This function extracts and formats the subtasks.
- * @returns {Array<Object>} An array of formatted subtask objects, or an empty array if no subtasks are present.
+ * Retrieves the current subtasks.
+ * @returns {Array} An array of current subtasks if any exist, otherwise an empty array.
  */
-// function takeSubtask() {
-//     if (currentSubtasks.length > 0) {
-//         const formattedSubtasks = currentSubtasks.map((subtask) => {
-//             return {
-//                 task: subtask,
-//                 checked: false
-//             };
-//         });
-//         return formattedSubtasks;
-//     } else {
-//         return [];
-//     }
-// }
 function takeSubtask() {
     if (currentSubtasks.length > 0) {
         return currentSubtasks;

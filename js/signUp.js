@@ -365,11 +365,11 @@ function togglePasswordVisibility() {
     var x = document.getElementById("password");
     if (x.type === "password") {
       x.type = "text";
-      document.getElementById('lock').classList.remove('hidden');
+      document.getElementById('see').classList.remove('hidden');
       document.getElementById('notSee').classList.add('hidden');
     } else {
       x.type = "password";
-      document.getElementById('lock').classList.add('hidden');
+      document.getElementById('see').classList.add('hidden');
       document.getElementById('notSee').classList.remove('hidden');
     }
 }

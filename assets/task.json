@@ -6,7 +6,7 @@
     "done": {
       "-ODpvTNQjOj64To4fmBY": {
         "category": "Technical Task",
-        "contacts": ["Julia Hoffmann", "Hans Albert", "Anna Nikolaus"],
+        "contacts": ["-ODCMmQXtWwgHTlYwn76", "-ODCHmWXvWgfRTlZWn62", "-ODRDnBXvWgrPTlZWn45"],
         "date": "23/12/2024",
         "description": "Finalize the database schema and verify migrations.",
         "prio": "2",
@@ -19,7 +19,7 @@
       },
       "-OEEpeS4rZGCkkXS9Hds": {
         "category": "User Story",
-        "contacts": ["Michael Bauer", "Peter Pan", "Carla Müller", "Sven Neumann"],
+        "contacts": ["-ODRDnBXvWgrPTlZWn45", "-ODRKnDXuWgiHTlZYn87", "-ODCMmQXtWwgHTlYwn76", "-ODCHmWXvWgfRTlZWn62"],
         "date": "15/03/2025",
         "description": "Customer feedback integration finished.",
         "prio": "3",
@@ -34,7 +34,7 @@
     "feedback": {
       "-OEOYEqDrSlOG7MRKxpH": {
         "category": "User Story",
-        "contacts": ["Hans Albert", "Julia Hoffmann", "Sabine Müller"],
+        "contacts": ["-ODCNeBXuWgiHRjZXn73", "-ODRPXXO4HlT0geD6FBH", "-ODRKnDXuWgiHTlZYn87"],
         "date": "23/12/2024",
         "description": "Developing initial sprint planning draft.",
         "prio": "2",
@@ -48,7 +48,7 @@
       },
       "-OEYuNymSZJ7mX_3h8ZS": {
         "category": "Technical Task",
-        "contacts": ["Hans Albert", "Marie Meier", "Bastian Meier", "Peter Pan"],
+        "contacts": ["-ODRKnDXuWgiHTlZYn87", "-ODCNeBXuWgiHRjZXn73"],
         "date": "21/12/2024",
         "description": "Backend API testing required for new endpoints.",
         "prio": "2",
@@ -62,7 +62,7 @@
       },
       "-OEYuTUp3S42XR1Uwirn": {
         "category": "Technical Task",
-        "contacts": ["Anna Nikolaus", "-OHDix5dKjO92tVil2-Z", "Sabine Müller", "Carla Müller", "Sven Neumann"],
+        "contacts": ["-ODRPXXO4HlT0geD6FBH", "-ODRKnDXuWgiHTlZYn87"],
         "date": "21/12/2024",
         "description": "Ensure API integration aligns with specifications.",
         "prio": "1",
@@ -77,7 +77,7 @@
     "progress": {
       "-ODpvTNQjOj64To4fmBY2": {
         "category": "User Story",
-        "contacts": ["Bastian Meier", "Anna Nikolaus", "-OHDix5dKjO92tVil2-Z", "Julia Hoffmann"],
+        "contacts": ["-ODCNeBXuWgiHRjZXn73", "-ODRDnBXvWgrPTlZWn45", "-ODCMmQXtWwgHTlYwn76", "-ODRPXXO4HlT0geD6FBH"],
         "date": "24/12/2024",
         "description": "Refactoring code for scalability.",
         "prio": "1",
@@ -93,7 +93,7 @@
     "toDo": {
       "-OEYZACBT08UFkcWnDa7": {
         "category": "User Story",
-        "contacts": ["-OHHoT3hOMzEaMm-eTm8", "-OHHjyz54g34VorGDp-M", "-OHDix5dKjO92tVil2-Z", "Sabine Müller"],
+        "contacts": ["-OETAkjtEgHHZmTY3o_6", "-ODvVXTnXWwfvvzrK-cV", "-ODRPXXO4HlT0geD6FBH", "-ODRDnBXvWgrPTlZWn45"],
         "date": "22/11/2025",
         "description": "Setup the initial project repository.",
         "prio": "1",
@@ -106,7 +106,7 @@
       },
       "-OHINRnsKxAgQd1meNdV": {
         "category": "Technical Task",
-        "contacts": ["-OHDix5dKjO92tVil2-Z", "-OHDfeuo2ThOKTg5dO4S", "-OHINjUUqBAoozvNOC4p"],
+        "contacts": ["-ODvVXTnXWwfvvzrK-cV", "-OETAkjtEgHHZmTY3o_6", "-OEKLybOHCJPsvVMAYfx"],
         "date": "22/12/2024",
         "description": "Fix bugs in the main application flow.",
         "prio": "2",
