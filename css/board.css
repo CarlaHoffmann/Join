@@ -192,7 +192,6 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.2);
   inset: 0;
-  /* z-index: 1; */
 }
 
 .dialog_addTask {
@@ -279,7 +278,7 @@
 }
 
 .add-task-button:active {
-  background-color: #091931; 
+  background-color: #091931;
 }
 
 .search-field {
@@ -368,9 +367,6 @@
   display: none;
 }
 
-
-
-
 /* Board Task */
 .background-big-task {
   display: flex;
@@ -425,7 +421,6 @@
 
 .tasks-container {
   width: 252px;
-  /* height: 400px; */
   height: calc(100vh - 325px);
   overflow-y: scroll;
 }

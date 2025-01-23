@@ -201,6 +201,8 @@ h1 {
     padding: 16px;
     display: flex;
     gap: 4px;
+    font-size: 21px;
+    font-weight: 700;
 }
 
 .submit-button:hover {

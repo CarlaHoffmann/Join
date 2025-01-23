@@ -233,7 +233,6 @@ hr {
     gap: 30px;
     background-color: #F6F7F8;
     width: calc(100vw - (232px + 456px));
-    /*232px Seitenleiste, 456px Kontaktliste, 17px Scrollbar*/
     padding-left: 50px;
     flex-direction: column;
     transition: right 0.5s ease-in-out;
@@ -393,20 +392,6 @@ hr {
     display: none;
 }
 
-/* .options-menu {
-    background-color: white;
-    border-radius: 20px 20px 0px 20px; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    padding: 8px;
-    width: 116px;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: absolute;
-    bottom: 16px;
-    right: 8px;
-} */
 .options-menu {
     background-color: white;
     border-radius: 20px 20px 0px 20px;
@@ -421,9 +406,7 @@ hr {
     bottom: 16px;
     right: 8px;
     opacity: 0;
-    /* Start mit unsichtbar */
     transform: translateX(100%);
-    /* Startposition außerhalb des Bildschirms */
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
