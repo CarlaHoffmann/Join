@@ -551,17 +551,32 @@ input:hover,
   text-align: center;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal span {
-  font-size: 21px;
+  font-size: 20px;
+  font-weight: 400;
   margin: 0px;
 }
 
+.modal-content h2 {
+  margin-bottom: 20px;
+}
+
+
 .privacy-policy-text {
-  font-weight: bold;
   color: #29ABE2;
 }
+
+.privacy-policy-text:hover {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 
 .modal-button {
   margin-top: 20px;

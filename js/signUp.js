@@ -436,5 +436,5 @@ async function showSuccessMessage() {
                 successOverlay.classList.remove("show");
                 redirectToSummary();
             },); 
-        }, 1600); // visible 2 sec
+        }, 1600); 
 }
