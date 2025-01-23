@@ -45,7 +45,6 @@ async function loadTaskData(path, containerId) {
         }
 
         const data = await response.json();
-        console.log(data);
         if(data) {
             const taskArray = processTasks(data, path);
             displayTasks(taskArray, containerId);
@@ -95,7 +94,7 @@ async function displayTasks(taskArray, containerId) {
     let taskHTML = "";
 
     for (let i = 0; i < taskArray.length; i++) {
-        taskHTML += taskTemplate(taskArray[i], contactColors[i]);
+        taskHTML += taskTemplate(taskArray[i], contactName[i], contactColors[i]);
     }
 
     tasks.innerHTML = taskHTML;
@@ -111,7 +110,6 @@ async function getContactNames(tasks) {
                 const response = await fetch(`${task_base_url}/users.json`);
                 const users = await response.json();
 
-                console.log(contact);
                 for (let userId in users) {
                     if (userId === contact) {
                         const nameResponse = await fetch(`${task_base_url}/users/${userId}/name.json`);
@@ -124,7 +122,6 @@ async function getContactNames(tasks) {
             }
         }));
         contactNames.push(taskContactNames);
-        console.log(contactNames);
     }
     return contactNames;
 }

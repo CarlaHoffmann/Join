@@ -43,6 +43,7 @@ async function openEditTaskOverlay(event, task) {
  */
 function prepareSelectedContacts(task) {
     selectedContacts = task.contacts;
+    console.log(selectedContacts);
 }
 
 

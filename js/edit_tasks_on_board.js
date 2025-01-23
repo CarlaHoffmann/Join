@@ -74,10 +74,13 @@ async function updateEditContacts() {
     let contactInis = '';
 
     for (let i = 0; i < selectedContacts.length; i++) {
-        const contactName = selectedContacts[i];
+        const contactId = selectedContacts[i];
+
+        let contactName = await getContactName(contactId);
+        console.log(contactName);
         let initials = contactName.split(' ').map(word => word[0]).join('');
         
-        let color = await getContactColor(contactName);
+        let color = await getContactColor(contactId);
         
         contactInis += `<div class="contact-initial" style="background-color: ${color};">${initials}</div>`;
     }

@@ -6,7 +6,7 @@
  * @param {Array<string>} contactColors - Array of colors for the task's contacts.
  * @returns {string} The HTML string for the task.
  */
-function taskTemplate(task, contactColors) {
+function taskTemplate(task, contactNames, contactColors) {
     const completedSubtasks = task.subtasks.filter(subtask => subtask.checked).length;
     const totalSubtasks = task.subtasks.length;
     const progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
@@ -14,7 +14,7 @@ function taskTemplate(task, contactColors) {
 
     const contactsHTML = task.contacts.map((contact, index) => `
         <div class="member" style="background-color: ${contactColors[index]}">
-            ${getContactInitials(contact)}
+            ${getContactInitials(contactNames[index])}
         </div>`).join('');
 
     const progressBarHTML = totalSubtasks > 0 ? `
