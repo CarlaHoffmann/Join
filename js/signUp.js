@@ -16,25 +16,49 @@
 const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 const signUpName = '';
 
+/**
+ * Handles the sign-up button click event.
+ * Validates Privacy Policy, user input, and triggers account creation.
+ * 
+ * @async
+ * @function handleSignUpClick
+ * @param {Event} event - The click event triggered by the sign-up button.
+ * @returns {Promise<void>}
+ */
 async function handleSignUpClick(event) {
     event.preventDefault();
-    const checkboxContainer = document.getElementById('checkbox-container');
-    const isChecked = checkboxContainer.getAttribute('data-checked') === 'true';
-    if(isChecked) {
-        const users = await loadUsers();
-        const usableData = validateSignUp(users);
+    const isChecked = document.getElementById('checkbox-container').getAttribute('data-checked') === 'true';
+    const privacyModal = document.getElementById('privacy-modal');
 
-        if (usableData === true) {
-            let contact = await createContact();
-            if(contact) {
-                showSuccessMessage();
-                await getLoggedIn();
-            }
+    if (!isChecked) return privacyModal.classList.add('show');
+
+    const users = await loadUsers();
+    if (validateSignUp(users)) {
+        const contact = await createContact();
+        if (contact) {
+            showSuccessMessage();
+            await getLoggedIn();
         }
-    } else {
-        alert('Please accept Privacy Policy');
     }
 }
+
+/**
+ * Closes the privacy modal by removing the "show" class.
+ * 
+ * @function closeModal
+ * @returns {void}
+ */
+function closeModal() {
+    const privacyModal = document.getElementById('privacy-modal');
+    privacyModal.classList.remove('show');
+}
+
+/**
+ * Adds an event listener to the "close" button of the privacy modal.
+ * Triggers the closeModal function when clicked.
+ */
+document.getElementById('close-modal').addEventListener('click', closeModal);
+
 
 /**
  * Fetches the list of users from the database and converts it into an array of user objects.
