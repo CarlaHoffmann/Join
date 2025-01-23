@@ -175,9 +175,6 @@ initializeNavigation();
  * This asynchronous function logs out the user by clearing their session in Firebase.
  */
 async function logOut() {
-    // localStorage.removeItem('hasAnimationPlayed');
-    // localStorage.removeItem('animationPlayed');
-    localStorage.setItem('animationPlayed', 'false');
     try {
         let response = await fetch(`${nav_base_url}/loggedIn.json`,{
             method: "PUT",
