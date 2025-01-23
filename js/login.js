@@ -4,6 +4,7 @@
  */
 const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
+
 /**
  * Manages the animation of the overlay and logo based on page load or navigation type.
  * 
@@ -15,30 +16,39 @@ const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebaseda
  * @returns {void}
  */
 function animationWindow() {
-    const overlay = document.getElementById('overlay');
-    const animatedLogo = document.getElementById('animatedLogo');
-    const headerLogo = document.getElementById('headerLogo');
+    const hasAnimationPlayed = localStorage.getItem('animationPlayed');
 
-    if (!overlay || !animatedLogo || !headerLogo) {
-        return;
-    }
-    const isMobile = window.innerWidth <= 768;
+    if (!hasAnimationPlayed) {
+        const overlay = document.getElementById('overlay');
+        const animatedLogo = document.getElementById('animatedLogo');
+        const headerLogo = document.getElementById('headerLogo');
+        const isMobile = window.innerWidth <= 768;
 
-    if (isMobile) {
-        animatedLogo.src = './assets/img/general/logo.svg';
+        if (!overlay || !animatedLogo || !headerLogo) {
+            return;
+        }
 
-        animatedLogo.addEventListener('animationend', () => {
-            animatedLogo.src = './assets/img/login/login-logo.svg';
-            headerLogo.src = animatedLogo.src;
-            headerLogo.style.display = 'block';
-            overlay.style.display = 'none';
-        });
+        if (isMobile) {
+            animatedLogo.src = './assets/img/general/logo.svg';
+            animatedLogo.addEventListener('animationend', () => {
+                animatedLogo.src = './assets/img/login/login-logo.svg';
+                headerLogo.src = animatedLogo.src;
+                headerLogo.style.display = 'block';
+                overlay.style.display = 'none';
+            });
+        } else {
+            animatedLogo.addEventListener('animationend', () => {
+                overlay.style.display = 'none';
+                headerLogo.src = animatedLogo.src;
+                headerLogo.style.display = 'block';
+            });
+        }
+
+        localStorage.setItem('animationPlayed', 'true');
     } else {
-        animatedLogo.addEventListener('animationend', () => {
-            overlay.style.display = 'none';
-            headerLogo.src = animatedLogo.src;
-            headerLogo.style.display = 'block';
-        });
+        headerLogo.src = animatedLogo.src;
+        headerLogo.style.display = 'block';
+        overlay.style.display = 'none';
     }
 }
 
