@@ -62,7 +62,7 @@
       },
       "-OEYuTUp3S42XR1Uwirn": {
         "category": "Technical Task",
-        "contacts": ["Anna Nikolaus", "Michael Bauer", "Sabine Müller", "Carla Müller", "Sven Neumann"],
+        "contacts": ["Anna Nikolaus", "-OHDix5dKjO92tVil2-Z", "Sabine Müller", "Carla Müller", "Sven Neumann"],
         "date": "21/12/2024",
         "description": "Ensure API integration aligns with specifications.",
         "prio": "1",
@@ -77,7 +77,7 @@
     "progress": {
       "-ODpvTNQjOj64To4fmBY2": {
         "category": "User Story",
-        "contacts": ["Bastian Meier", "Anna Nikolaus", "Peter Pan", "Julia Hoffmann"],
+        "contacts": ["Bastian Meier", "Anna Nikolaus", "-OHDix5dKjO92tVil2-Z", "Julia Hoffmann"],
         "date": "24/12/2024",
         "description": "Refactoring code for scalability.",
         "prio": "1",
@@ -93,7 +93,7 @@
     "toDo": {
       "-OEYZACBT08UFkcWnDa7": {
         "category": "User Story",
-        "contacts": ["Peter Pan", "Carla Müller", "Hans Albert", "Sabine Müller"],
+        "contacts": ["-OHHoT3hOMzEaMm-eTm8", "-OHHjyz54g34VorGDp-M", "-OHDix5dKjO92tVil2-Z", "Sabine Müller"],
         "date": "22/11/2025",
         "description": "Setup the initial project repository.",
         "prio": "1",
