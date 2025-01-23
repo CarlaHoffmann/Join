@@ -153,6 +153,8 @@ header {
 
 .sidebar-element {
     padding-bottom: 64px;
+    padding-top: 64px;
+
 }
 
 .sideBarNavigation {
