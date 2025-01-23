@@ -330,11 +330,9 @@ hr {
     transition: stroke 0.3s ease;
 }
 
-/* Hover-effect for SVG */
 .icon-text-button:hover .icon-svg path {
-    stroke: #29ABE2;
+    fill: #29ABE2;
 }
-
 .icon-text-button:hover span {
     color: #29ABE2;
 }
