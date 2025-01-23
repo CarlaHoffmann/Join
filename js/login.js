@@ -16,20 +16,20 @@ const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebaseda
  * @returns {void}
  */
 function animationWindow() {
-    const hasAnimationPlayed = localStorage.getItem('animationPlayed');
+    const overlay = document.getElementById('overlay');
+    const animatedLogo = document.getElementById('animatedLogo');
+    const headerLogo = document.getElementById('headerLogo');
+    const isMobile = window.innerWidth <= 768;
 
-    if (!hasAnimationPlayed) {
-        const overlay = document.getElementById('overlay');
-        const animatedLogo = document.getElementById('animatedLogo');
-        const headerLogo = document.getElementById('headerLogo');
-        const isMobile = window.innerWidth <= 768;
+    if (!overlay || !animatedLogo || !headerLogo) {
+        return;
+    }
 
-        if (!overlay || !animatedLogo || !headerLogo) {
-            return;
-        }
-
+    if(playAnimation) {
+        console.log(playAnimation);
         if (isMobile) {
             animatedLogo.src = './assets/img/general/logo.svg';
+
             animatedLogo.addEventListener('animationend', () => {
                 animatedLogo.src = './assets/img/login/login-logo.svg';
                 headerLogo.src = animatedLogo.src;
@@ -43,12 +43,6 @@ function animationWindow() {
                 headerLogo.style.display = 'block';
             });
         }
-
-        localStorage.setItem('animationPlayed', 'true');
-    } else {
-        headerLogo.src = animatedLogo.src;
-        headerLogo.style.display = 'block';
-        overlay.style.display = 'none';
     }
 }
 
