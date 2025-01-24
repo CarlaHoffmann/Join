@@ -119,12 +119,14 @@ body {
 
 /* Scrollbalkens */
 ::-webkit-scrollbar {
-    width: 0px;
+    width: 10px; 
+    height: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
     background: #e7e7e7;
     border-radius: 8px;
+
 }
 
 ::-webkit-scrollbar-thumb:hover {
