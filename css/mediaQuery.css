@@ -362,6 +362,7 @@
   .taskOverlay {
     height: 100%;
     overflow-y: scroll;
+    border-radius: 0;
   }
 
   .headline {
