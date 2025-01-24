@@ -1,28 +1,39 @@
 /**
- * Generates an HTML template for a task.
- * 
- * @function taskTemplate
- * @param {Object} task - The task object containing task details.
- * @param {Array<string>} contactColors - Array of colors for the task's contacts.
- * @returns {string} The HTML string for the task.
+ * Creates an HTML template for a task card.
+ *
+ * @param {Object} task - Task details (title, description, category, subtasks, contacts).
+ * @param {Array<string>} contactNames - Contact names.
+ * @param {Array<string>} contactColors - Contact colors.
+ * @returns {string} HTML string for the task card.
+ *
+ * @example
+ * taskTemplate(task, ["Alice", "Bob"], ["#FF5733", "#33FF57"]);
  */
 function taskTemplate(task, contactNames, contactColors) {
     const completedSubtasks = task.subtasks.filter(subtask => subtask.checked).length;
     const totalSubtasks = task.subtasks.length;
-    const progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
-    const subtasksText = totalSubtasks > 0 ? `${completedSubtasks} von ${totalSubtasks} Subtasks` : "";
+    const progressPercentage = totalSubtasks ? (completedSubtasks / totalSubtasks) * 100 : 0;
 
-    const contactsHTML = task.contacts.map((contact, index) => `
+    const maxVisibleContacts = 3;
+    const visibleContacts = task.contacts.slice(0, maxVisibleContacts);
+    const hiddenContactsCount = Math.max(0, task.contacts.length - maxVisibleContacts);
+
+    const contactsHTML = visibleContacts.map((contact, index) => `
         <div class="member" style="background-color: ${contactColors[index]}">
             ${getContactInitials(contactNames[index])}
         </div>`).join('');
 
-    const progressBarHTML = totalSubtasks > 0 ? `
+    const hiddenContactsHTML = hiddenContactsCount ? `
+        <div class="member-users">
+            +${hiddenContactsCount}
+        </div>` : '';
+
+    const progressBarHTML = totalSubtasks ? `
         <div class="progress-section">
             <div class="progress">
                 <div class="progress-bar" style="width: ${progressPercentage}%;"></div>
             </div>
-            <p class="subtasks">${subtasksText}</p>
+            <p class="subtasks">${completedSubtasks} von ${totalSubtasks} Subtasks</p>
         </div>` : '';
 
     return `
@@ -36,7 +47,10 @@ function taskTemplate(task, contactNames, contactColors) {
             <p class="task-description">${task.description}</p>
             ${progressBarHTML}
             <div class="members-section">
-                <div class="members">${contactsHTML}</div>
+                <div class="members">
+                    ${contactsHTML}
+                    ${hiddenContactsHTML}
+                </div>
                 <div class="priority">
                     <img src="./assets/img/add_task/prio_${getPrio(task.prio)}.svg" alt="${getPrio(task.prio)} icon">
                 </div>
@@ -44,6 +58,7 @@ function taskTemplate(task, contactNames, contactColors) {
         </div>
     `;
 }
+
 
 
 /**

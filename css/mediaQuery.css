@@ -156,6 +156,24 @@
   }
 }
 
+/* Media Queries */
+@media (max-width: 600px) {
+  .taskOverlay {
+      width: calc(100vw - 32px);
+      padding: 40px 20px;
+      gap: 16px;
+  }
+
+  .task-info-wrapper {
+      gap: 16px;
+  }
+
+  .headline {
+      font-size: 45px;
+      line-height: 1.2;
+  }
+}
+
 @media (max-width: 680px) {
   .outer-box {
     height: calc(100vh - 160px);

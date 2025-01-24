@@ -328,6 +328,7 @@
   font-weight: 400;
   width: calc(100% - 16px);
   cursor: pointer;
+  color: #0038ff;
 }
 
 .container-search-icon {

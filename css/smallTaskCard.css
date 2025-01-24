@@ -84,10 +84,8 @@
   color: #1a1a1a;
 }
 
-/* Members and priority section */
 .members-section {
   margin-top: auto;
-  /* Schiebt die members-section ans Ende */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -95,8 +93,8 @@
 
 .members {
   display: flex;
-  border: white;
-  padding: -20px;
+  border: 2px solid white;
+  padding: 0; 
 }
 
 .member {
@@ -109,6 +107,19 @@
   align-items: center;
   color: #ffffff;
   font-size: 12px;
+  font-weight: 400;
+}
+
+.member-users {
+  width: 20px;
+  height: 20px;
+  background-color: #293647;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 10px;
   font-weight: 400;
 }
 
