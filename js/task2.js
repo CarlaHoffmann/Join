@@ -326,8 +326,6 @@ function validateDueDate() {
 function validateCategory() {
     const categorySelection = document.getElementById('category-selection');
     const errorMessage = document.getElementById('error-message');
-    console.log(categorySelection.innerHTML);
-    
     errorMessage.classList.add('d-none');
 
     if (categorySelection.innerHTML === 'Select task category') {
