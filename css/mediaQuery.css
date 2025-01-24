@@ -37,17 +37,11 @@
 
 @media (max-width: 1136px) {
   .tasks-container {
-    /* overflow-y: hidden; */
     width: 100%;
     display: flex;
     overflow-x: auto;
     height: unset;
   }
-
-  /* .board-columns {
-    flex-direction: column;
-    flex-wrap: nowrap;
-  } */
 
   .board-column {
     width: 100%;

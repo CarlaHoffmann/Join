@@ -5,6 +5,7 @@
     background-color: #F6F7F8;
     width: calc(100vw - 232px);
     height: calc(100vh - 96px);
+    padding: 0 64px;
     position: absolute;
     right: 0;
     bottom: 0;
@@ -21,7 +22,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    max-height: calc(900px - 280px);
+    max-height: calc(100vh - 380px);
     overflow-y: scroll;
 }
 
@@ -260,6 +261,12 @@ h1 {
 }
 
 @media(max-width: 1275px) {
+    /* .form-box-outer {
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+    } */
+
     .add-task-form {
         flex-direction: column;
     }
