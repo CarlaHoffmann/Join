@@ -12,12 +12,10 @@ async function openAssigned() {
     const loggedInUser = await getUser();
 
     const preparedContacts = await prepareContacts(contacts, loggedInUser);
-    console.log(preparedContacts);
-    console.log(loggedInUser);
     const contactsHTML = createContactsHTML(preparedContacts, selectedContacts, loggedInUser);
 
     contactsToSelect.innerHTML = contactsHTML;
-    contactDropDown.style.display = 'block';
+    contactDropDown.classList.remove('d-none');
 }
 
 /** 
@@ -44,11 +42,7 @@ async function prepareContacts(contacts, loggedInUser) {
     if (loggedInUser === 'Guest') {
         return contacts.sort((a, b) => a.name.localeCompare(b.name));
     } else {
-    // return contacts;
-
-    const loggedInContactIndex = contacts.findIndex(contact => contact.name === loggedInUser.name);
-    console.log(loggedInContactIndex);
-    // if (loggedInContactIndex !== -1) {
+        const loggedInContactIndex = contacts.findIndex(contact => contact.name === loggedInUser.name);
         const [loggedInContact] = contacts.splice(loggedInContactIndex, 1); /** Remove the user from the array */
         contacts.sort((a, b) => a.name.localeCompare(b.name));
         return [loggedInContact, ...contacts]; /** Add it back at the beginning */
@@ -61,11 +55,11 @@ async function prepareContacts(contacts, loggedInUser) {
 function createContactsHTML(contacts, selectedContacts, loggedInUser) {
     let contactsHTML = '';
 
-    contacts.forEach((contact, index) => {
+    contacts.forEach((contact) => {
         const isSelected = selectedContacts.includes(contact.id);
         const isCurrentUser = loggedInUser.name !== 'Guest' && contact.name === loggedInUser.name;
         contactsHTML += `
-            <label onclick="handleContactClick(event, ${index})" class="selection-name contact-label">
+            <label onclick="handleContactClick(event)" class="selection-name contact-label">
                 <div>${contact.name}${isCurrentUser ? ' (You)' : ''}</div>
                 <input type="checkbox" id="${contact.id}" value="${contact.name}" ${isSelected ? 'checked' : ''}>
             </label>
@@ -92,18 +86,17 @@ async function getUser() {
 /** This function handles the click event on a contact label.
 * Purpose: Toggles the selection status of a contact when its label is clicked.
 */
-function handleContactClick(event, index) {
+function handleContactClick(event) {
     event.stopPropagation();
     const checkbox = event.currentTarget.querySelector('input[type="checkbox"]');
-    toggleContact({ target: checkbox }, index); 
+    toggleContact({ target: checkbox }); 
 }
 
 /** This function toggles the selection status of a contact.
 * Purpose: Adds or removes a contact from the selectedContacts array based on the checkbox state.
 */
-function toggleContact(event, index) {
+function toggleContact(event) {
     const checkbox = event.target;
-    // const contactName = checkbox.value;
     const contactId = checkbox.id;
     
     if (checkbox.checked) {
@@ -112,7 +105,6 @@ function toggleContact(event, index) {
         }
     } else {
         selectedContacts = selectedContacts.filter(id => id !== contactId);
-        console.log(selectedContacts);
     }
 }
 
@@ -191,9 +183,20 @@ async function getContactColor(contactId) {
 function closeAssigned() {
     let contactDropDown = document.getElementById('contact-drop-down');
     let contactsToSelect = document.getElementById('contacts-to-select');
-    contactDropDown.style.display = 'none';
+    contactDropDown.classList.add('d-none');
     contactsToSelect.innerHTML = '';
     updateSelectedContacts();
+}
+
+function closeAssignedOnOutsideClick(event) {
+    event.stopPropagation();
+    let ContactBox = document.getElementById('contact-drop-down');
+    // let BoxOverlay = document.getElementById(overlay);
+
+    if (!ContactBox.contains('.d-none') && !ContactBox.contains(event.target)) {
+        closeAssigned();
+    }
+    return; // Funktion beenden, wenn ein Element fehlt
 }
 
 /** 
