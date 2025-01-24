@@ -9,7 +9,7 @@
  * @function openAssigned
  * @returns {Promise<void>} Resolves when the contacts are loaded and the dropdown is populated.
  */
-async function openAssigned() {
+async function openBoardAssigned() {
     let contactDropDown = document.getElementById('contact-drop-down');
     let contactsToSelect = document.getElementById('contacts-to-select');
 
@@ -20,8 +20,8 @@ async function openAssigned() {
     const contactsHTML = createEditContactsHTML(preparedContacts, selectedContacts, loggedInUser);
 
     contactsToSelect.innerHTML = contactsHTML;
-    contactDropDown.style.display = 'block';
-
+    contactDropDown.classList.remove('d-none');
+    document.addEventListener('click', closeAssignedOnOutsideClick);
     updateEditContacts();
 }
 
@@ -42,10 +42,10 @@ function createEditContactsHTML(contacts, taskContacts, loggedInUser) {
     let contactsHTML = '';
 
     contacts.forEach((contact) => {
-        const isSelected = taskContacts.includes(contact.name);
+        const isSelected = taskContacts.includes(contact.id);
         const isCurrentUser = loggedInUser.name !== 'Guest' && contact.name === loggedInUser.name;
         contactsHTML += `
-            <label onclick="handleContactClick(event)" for="${contact.id}" class="selection-name contact-label">
+            <label onclick="handleContactClick(event)" class="selection-name contact-label">
                 <div>${contact.name}${isCurrentUser ? ' (You)' : ''}</div>
                 <input type="checkbox" id="${contact.id}" value="${contact.name}" ${isSelected ? 'checked' : ''}>
             </label>
