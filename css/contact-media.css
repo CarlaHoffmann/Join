@@ -194,8 +194,16 @@
         height: 100%;
     }
 
+    .capital-letter-box {
+        width: 90%;
+    }
+
     .contact {
         width: 90%;
+    }
+
+    .contactInformation {
+        overflow-x: hidden;
     }
 
     #addContactButton {
