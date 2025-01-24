@@ -266,7 +266,7 @@ async function drop(event, newStatus) {
     if (!taskData) return;
 
     const { oldStatus, taskKey } = extractTaskInfo(taskElement, taskId);
-    const newTaskUrl = getTaskUrl(newStatus, taskKey);
+    // const newTaskUrl = getTaskUrl(newStatus, taskKey);
 
     await moveTaskData(oldStatus, newStatus, taskKey, taskData);
     updateTaskElement(taskElement, newStatus, taskKey);
