@@ -185,9 +185,7 @@ function openEditTaskOverlayTemplate(task, subtasksHTML) {
                     <div id="add-task-first" class="width-440-edit">
                         <div class="labled-box">
                             <label class="form-label">
-                                <div>
-                                    Title<span class="red-asterisk">*</span>
-                                </div>
+                                <div>Title<span class="red-asterisk">*</span></div>
                                 <div id="titel-wrapper">
                                     <input 
                                         type="text" 
@@ -197,12 +195,8 @@ function openEditTaskOverlayTemplate(task, subtasksHTML) {
                                         minlength="3" 
                                         required 
                                         value="${task.title}">
-                                    <div id="title-error" class="error-message d-none">
-                                        This field is required.
-                                    </div>
-                                    <div id="title-minlength-error" class="error-message d-none">
-                                        Please enter at least 3 characters.
-                                    </div>
+                                    <div id="title-error" class="error-message d-none">This field is required.</div>
+                                    <div id="title-minlength-error" class="error-message d-none">Please enter at least 3 characters.</div>
                                 </div>
                             </label>
                         </div>
@@ -218,10 +212,10 @@ function openEditTaskOverlayTemplate(task, subtasksHTML) {
                             <label class="form-label">
                                 Assigned to
                                 <div id="contact-selection" class="contact-selection">
-                                    <div onclick="openAssigned()" id="select-field" class="selection-field form-field pad-12-16">
+                                    <div onclick="openBoardAssigned()" id="select-field" class="selection-field form-field pad-12-16">
                                         <p>Select contacts to assign</p><img class="symbol-hover icon-hover" src="./assets/img/task/arrow_drop_downaa.svg" alt="">
                                     </div>
-                                    <div onclick="closeAssigned()" id="contact-drop-down" class="select-items" style="display: none;">
+                                    <div onclick="closeAssigned()" id="contact-drop-down" class="select-items d-none">
                                         <div id="contact-dropped-down" class="selection-field form-field pad-12-16 blue-border">
                                             <p>Select contacts to assign</p><img class="symbol-hover dropdown-icon-mirrored" src="./assets/img/task/arrow_drop_downaa.svg" alt="">
                                         </div>

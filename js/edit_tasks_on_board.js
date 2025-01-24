@@ -195,7 +195,6 @@ function addEditedSubtask(task) {
         existingSubtasks = getExistingSubtasks(task.subtasks);
     }
 
-    console.log(existingSubtasks);
     currentSubtasks = [];
     currentSubtasks = existingSubtasks;
 

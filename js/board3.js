@@ -43,7 +43,6 @@ async function openEditTaskOverlay(event, task) {
  */
 function prepareSelectedContacts(task) {
     selectedContacts = task.contacts;
-    console.log(selectedContacts);
 }
 
 
@@ -261,7 +260,6 @@ async function deleteTask(taskId) {
             currentTask = [];
             closeTaskOverlay();
         } catch (error) {
-            console.error("Failed to delete task:", error);
         }
     }
 }

@@ -20,8 +20,7 @@ function closeOverlayOnOutsideClick(event, box, overlay) {
     let BoxOverlay = document.getElementById(overlay);
 
     if (!ContactBox || !BoxOverlay) {
-        // console.error('One or both elements not found:', box, overlay);
-        return; // Funktion beenden, wenn ein Element fehlt
+        return;
     }
     
     if (BoxOverlay.contains(event.target) && !ContactBox.contains(event.target)) {
