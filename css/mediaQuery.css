@@ -358,6 +358,17 @@
   }
 }
 
+@media (max-height: 680px) and (max-width: 680px) {
+  .taskOverlay {
+    height: 100%;
+    overflow-y: scroll;
+  }
+
+  .headline {
+    min-height: 100px;
+  }
+}
+
 @media(max-width: 372px) {
   .arrow_signUp {
     left: -10px;
