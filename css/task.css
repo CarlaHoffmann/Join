@@ -309,7 +309,7 @@ h1 {
     }
 
     .scroll-container {
-        height: calc(100vh - 312px);
+        max-height: calc(100vh - 352px);
     }
 
     h1 {
