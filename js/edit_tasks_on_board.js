@@ -199,7 +199,6 @@ function addEditedSubtask(task) {
     currentSubtasks = existingSubtasks;
 
     if (newSubtask) {
-
             currentSubtasks.push({
                 task: newSubtask,
                 checked: false
