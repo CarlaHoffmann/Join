@@ -111,15 +111,15 @@
 }
 
 .member-users {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   background-color: #293647;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #ffffff;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 400;
 }
 
