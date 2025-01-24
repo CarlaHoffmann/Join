@@ -261,12 +261,6 @@ h1 {
 }
 
 @media(max-width: 1275px) {
-    /* .form-box-outer {
-        padding: 0;
-        justify-content: center;
-        align-items: center;
-    } */
-
     .add-task-form {
         flex-direction: column;
     }
