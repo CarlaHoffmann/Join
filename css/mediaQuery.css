@@ -150,21 +150,26 @@
   }
 }
 
-/* Media Queries */
-@media (max-width: 600px) {
-  .taskOverlay {
-      width: calc(100vw - 32px);
-      padding: 40px 20px;
-      gap: 16px;
+@media (max-height: 800px) and (max-width: 680px) {
+  .logIn-page {
+    height: 800px;
+    overflow-y: auto;
   }
 
-  .task-info-wrapper {
-      gap: 16px;
+  .signUp-page {
+    height: 800px;
+    overflow-y: auto;
   }
 
-  .headline {
-      font-size: 45px;
-      line-height: 1.2;
+  #signup-linking-mobile {
+    display: flex;
+    position: relative;
+    top: 0px;
+  }
+
+  .login-footer {
+    position: relative;
+    top: 10px;
   }
 }
 
@@ -176,12 +181,15 @@
   }
 
   .headline-container {
-    width: calc(100vw - 128px);
+    padding-top: 32px;
+    /* width: calc(100vw - 128px); */
+    width: calc(100vw - 32px);
   }
 
   .board-columns {
     padding: 0;
-    width: calc(100vw - 128px);
+    /* width: calc(100vw - 128px); */
+    width: calc(100vw - 32px);
   }
 
   .arrow_signUp {
@@ -234,53 +242,16 @@
   .add-task-edit-form {
     width: 440px;
   }
-}
 
-
-
-@media(max-width: 500px) {
-  #overlay-content {
-    width: calc(100vw - 32px);
-  }
-}
-
-@media(max-width: 680px) {
   #overlay-content {
     width: 472px;
   }
 }
 
-@media (max-height: 800px) and (max-width: 680px) {
-  .logIn-page {
-    height: 800px;
-    overflow-y: auto;
-  }
-
-  .signUp-page {
-    height: 800px;
-    overflow-y: auto;
-  }
-
-  #signup-linking-mobile {
-    display: flex;
-    position: relative;
-    top: 0px;
-  }
-
-  .login-footer {
-    position: relative;
-    top: 10px;
-  }
-}
-
 @media(max-width: 600px) {
-  .headline-container {
+  /* .headline-container {
     width: calc(100vw - 32px);
-  }
-
-  .board-columns {
-    width: calc(100vw - 32px);
-  }
+  } */
 
   .add-task-edit-form {
     width: 100%;
@@ -289,27 +260,36 @@
   .title-edit {
     width: 100%;
   }
+
+  .taskOverlay {
+    width: calc(100vw - 32px);
+    padding: 40px 20px;
+    gap: 16px;
+  }
+
+  .task-info-wrapper {
+    gap: 16px;
+  }
+
+  .headline {
+    font-size: 45px;
+    line-height: 1.2;
+  }
 }
 
 @media(max-width: 500px) {
-  .headline-container {
-    padding-top: 0;
-  }
-
   h1 {
-    margin-bottom: 16px;
-    font-size: 61px;
+    /* margin-bottom: 16px;
+    font-size: 61px; */
     font-weight: 700;
     line-height: 73.2px;
   }
 
-  h1 {
+  /* h1 {
     font-size: 40px;
-  }
-
+  } */
 
   .board-columns {
-    /* flex-direction: column; */
     align-items: center;
   }
 
@@ -322,12 +302,12 @@
   }
 
 
-  .content-board {
+  /* .content-board {
     margin-top: 32px;
     margin-left: 16px;
     margin-right: 16px;
     margin-bottom: 8px;
-  }
+  } */
 
   .task-description-big {
     font-size: 16px;
@@ -393,6 +373,10 @@
 
   .input-container {
     width: 264px;
+  }
+
+  #overlay-content {
+    width: calc(100vw - 32px);
   }
 }
 
