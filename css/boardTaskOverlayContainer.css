@@ -119,13 +119,16 @@ body {
 
 /* Scrollbalkens */
 ::-webkit-scrollbar {
-    /* width: 5px; */
     width: 0px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #f1f1f1;
+    background: #e7e7e7;
     border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #D1D1D1;
 }
 
 .taskSelect {
@@ -167,7 +170,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    /* Abstand zwischen Due Date und Priority */
     margin: 0;
 }
 
@@ -182,7 +184,6 @@ body {
     font-weight: bold;
     color: #2A3647;
     min-width: 80px;
-    /* Einheitliche Breite der Labels */
 }
 
 .info-value {
