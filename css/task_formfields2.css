@@ -216,6 +216,26 @@ button {
     margin-top: 4px;
     margin-bottom: 8px;
     min-height: 50px;
+    max-height: 100px;
+    overflow-y: scroll;
+}
+
+#subtasks::-webkit-scrollbar {
+    width: 8px;
+    height: 10px;
+}
+
+#subtasks::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#subtasks::-webkit-scrollbar-thumb {
+    background: #A8A8A8;
+    border-radius: 5px;
+}
+
+#subtasks::-webkit-scrollbar-thumb:hover {
+    background: #A8A8A8;
 }
 
 .subtask-box {
