@@ -3,7 +3,33 @@ const task_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebased
 
 let selectedContacts = [];
 
-/** This function opens the contact dropdown and populates it with contacts.*/
+/**
+ * Opens the assigned contacts dropdown and populates it with contacts.
+ * 
+ * This asynchronous function performs the following tasks:
+ * 1. Loads contacts from the server.
+ * 2. Retrieves the currently logged-in user.
+ * 3. Prepares the contacts data.
+ * 4. Generates HTML for the contacts list.
+ * 5. Displays the contacts dropdown.
+ * 6. Adds an event listener to close the dropdown when clicking outside.
+ * 
+ * @async
+ * @function openAssigned
+ * @returns {Promise<void>}
+ * 
+ * @throws {Error} If there's an issue loading contacts or user data.
+ * 
+ * @requires loadContacts - Function to fetch contacts from the server.
+ * @requires getUser - Function to get the currently logged-in user.
+ * @requires prepareContacts - Function to process and prepare contact data.
+ * @requires createContactsHTML - Function to generate HTML for contacts list.
+ * @requires selectedContacts - Array or object containing currently selected contacts.
+ * 
+ * @example
+ * // Usage
+ * await openAssigned();
+ */
 async function openAssigned() {
     let contactDropDown = document.getElementById('contact-drop-down');
     let contactsToSelect = document.getElementById('contacts-to-select');
@@ -16,6 +42,7 @@ async function openAssigned() {
 
     contactsToSelect.innerHTML = contactsHTML;
     contactDropDown.classList.remove('d-none');
+    document.addEventListener('click', closeAssignedOnOutsideClick);
 }
 
 /** 
@@ -140,6 +167,29 @@ async function updateSelectedContacts() {
     contactInitials.innerHTML = contactInis;
 }
 
+/**
+ * Retrieves the name of a contact based on their ID.
+ * 
+ * This asynchronous function performs the following steps:
+ * 1. Fetches all users from the server.
+ * 2. Searches for a user matching the provided contactId.
+ * 3. If found, fetches and returns the user's name.
+ * 4. If not found or in case of an error, returns a default value.
+ *
+ * @async
+ * @function getContactName
+ * @param {string} contactId - The ID of the contact whose name is to be retrieved.
+ * @returns {Promise<string>} The name of the contact if found, 'no name' if not found, or an empty string in case of an error.
+ * 
+ * @throws {Error} If there's an issue with the network requests. However, these errors are caught and handled internally.
+ * 
+ * @requires task_base_url - The base URL for API requests, expected to be defined in the outer scope.
+ * 
+ * @example
+ * // Usage
+ * const name = await getContactName('user123');
+ * console.log(name); // Outputs the user's name, 'no name', or ''
+ */
 async function getContactName(contactId) {
     try {
         const response = await fetch(`${task_base_url}/users.json`);
@@ -185,18 +235,37 @@ function closeAssigned() {
     let contactsToSelect = document.getElementById('contacts-to-select');
     contactDropDown.classList.add('d-none');
     contactsToSelect.innerHTML = '';
+    document.removeEventListener('click', closeAssignedOnOutsideClick);
     updateSelectedContacts();
 }
 
+/**
+ * Handles clicks outside the contact dropdown to close it.
+ * 
+ * This function is designed to be used as an event listener for click events.
+ * It checks if the click occurred outside the contact dropdown and closes it if so.
+ *
+ * @function closeAssignedOnOutsideClick
+ * @param {Event} event - The click event object.
+ * 
+ * @description
+ * 1. Stops the event propagation to prevent it from bubbling up the DOM tree.
+ * 2. Checks if the click target is outside the contact dropdown.
+ * 3. If the click is outside, it calls the closeAssigned function to close the dropdown.
+ *
+ * @requires closeAssigned - Function to close the contact dropdown.
+ * @requires document.getElementById - DOM method to get elements by their ID.
+ *
+ * @example
+ * // Usage as an event listener
+ * document.addEventListener('click', closeAssignedOnOutsideClick);
+ */
 function closeAssignedOnOutsideClick(event) {
     event.stopPropagation();
     let ContactBox = document.getElementById('contact-drop-down');
-    // let BoxOverlay = document.getElementById(overlay);
-
-    if (!ContactBox.contains('.d-none') && !ContactBox.contains(event.target)) {
+    if (!ContactBox.contains(event.target)) {
         closeAssigned();
     }
-    return; // Funktion beenden, wenn ein Element fehlt
 }
 
 /** 
