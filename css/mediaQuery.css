@@ -35,7 +35,7 @@
   }
 }
 
-@media (max-width: 1136px) {
+@media (max-width: 1044px) {
   .tasks-container {
     width: 100%;
     display: flex;
