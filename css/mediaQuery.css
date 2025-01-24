@@ -85,7 +85,6 @@
     align-items: baseline;
   }
 
-
   .text_board_headline {
     font-size: 27px;
   }
@@ -102,7 +101,6 @@
 }
 
 @media (max-width: 1200px) {
-
   /* sign-up */
   .join-logo {
     background-color: #2A3647;
@@ -182,13 +180,11 @@
 
   .headline-container {
     padding-top: 32px;
-    /* width: calc(100vw - 128px); */
     width: calc(100vw - 32px);
   }
 
   .board-columns {
     padding: 0;
-    /* width: calc(100vw - 128px); */
     width: calc(100vw - 32px);
   }
 
@@ -249,10 +245,6 @@
 }
 
 @media(max-width: 600px) {
-  /* .headline-container {
-    width: calc(100vw - 32px);
-  } */
-
   .add-task-edit-form {
     width: 100%;
   }
@@ -279,15 +271,9 @@
 
 @media(max-width: 500px) {
   h1 {
-    /* margin-bottom: 16px;
-    font-size: 61px; */
     font-weight: 700;
     line-height: 73.2px;
   }
-
-  /* h1 {
-    font-size: 40px;
-  } */
 
   .board-columns {
     align-items: center;
@@ -300,14 +286,6 @@
   .plus-button {
     cursor: pointer;
   }
-
-
-  /* .content-board {
-    margin-top: 32px;
-    margin-left: 16px;
-    margin-right: 16px;
-    margin-bottom: 8px;
-  } */
 
   .task-description-big {
     font-size: 16px;
@@ -393,8 +371,6 @@
     width: 200px;
   }
 }
-
-
 
 @media(max-width: 1275px) {
   #overlay-content {
