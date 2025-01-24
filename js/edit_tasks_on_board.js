@@ -77,7 +77,6 @@ async function updateEditContacts() {
         const contactId = selectedContacts[i];
 
         let contactName = await getContactName(contactId);
-        console.log(contactName);
         let initials = contactName.split(' ').map(word => word[0]).join('');
         
         let color = await getContactColor(contactId);
