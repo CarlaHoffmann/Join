@@ -119,8 +119,8 @@ body {
 
 /* Scrollbalkens */
 ::-webkit-scrollbar {
-    width: 10px; 
     height: 10px;
+    width: 0;
 }
 
 ::-webkit-scrollbar-thumb {
