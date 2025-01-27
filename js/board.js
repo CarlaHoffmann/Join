@@ -375,28 +375,32 @@ function highlight(columnId) {
     }
 }
 
+/**
+ * Moves a task to a specified column and closes the dropdown.
+* @param {string} taskId - The ID of the task to move.
+* @param {string} newStatus - The new status to move the task to (e.g., 'toDo', 'progress').
+*/
+async function moveTask(taskId, newStatus) {
+    const taskElement = document.getElementById(`task-${taskId}`);
+    const oldStatus = taskElement.parentElement.id.replace("Tasks", "");
+
+    const taskData = await fetchTaskData(taskElement, taskId);
+    if (!taskData) return;
+
+    await moveTaskData(oldStatus, newStatus, taskId, taskData); 
+    updateTaskElement(taskElement, newStatus, taskId);
+
+    // Automatisch das Dropdown schließen
+    const dropdownId = `dropdown-${taskId}`;
+    closeDropdown(dropdownId); 
+}
+
 
 /**
  * Toggles the visibility of the dropdown menu and updates the menu-circle color.
  *
  * @param {string} dropdownId - The ID of the dropdown menu to toggle.
  */
-// function toggleDropdown(dropdownId) {
-//     const dropdown = document.getElementById(dropdownId);
-//     const menuCircle = dropdown.parentElement; // Der umgebende .menu-circle
-
-//     if (dropdown.classList.contains('hidden')) {
-//         // Dropdown öffnen
-//         dropdown.classList.remove('hidden');
-//         menuCircle.classList.add('dropdown-active');
-//         document.addEventListener('click', dropdownId, closeDropdownMobileOnOutsideClick);
-//     } else {
-//         // Dropdown schließen
-//         dropdown.classList.add('hidden');
-//         menuCircle.classList.remove('dropdown-active');
-//         document.removeEventListener('click', dropdownId, closeDropdownMobileOnOutsideClick);
-//     }
-// }
 function toggleDropdown(dropdownId) {
     const dropdown = document.getElementById(dropdownId);
     const menuCircle = dropdown?.parentElement; // Der umgebende .menu-circle
@@ -414,6 +418,7 @@ function toggleDropdown(dropdownId) {
     }
 }
 
+
 /**
  * Closes the dropdown menu and removes the active state.
  *
@@ -430,6 +435,22 @@ function closeDropdown(dropdownId) {
     document.removeEventListener('click', (event) => closeDropdownMobileOnOutsideClick(event, dropdownId));
 }
 
+
+/**
+ * Closes the dropdown when a click occurs outside of it.
+ * 
+ * @param {Event} event - The click event object.
+ * @param {string} dropdownId - The ID of the dropdown element.
+ * 
+ * @description
+ * This function is typically used as an event listener for click events on the document.
+ * It checks if the click occurred outside the specified dropdown and closes it if so.
+ * 
+ * @example
+ * document.addEventListener('click', (event) => closeDropdownMobileOnOutsideClick(event, 'myDropdownId'));
+ * 
+ * @requires closeDropdown - A function that handles closing the dropdown.
+ */
 function closeDropdownMobileOnOutsideClick(event, dropdownId) {
     const dropdown = document.getElementById(dropdownId);
     if (dropdown && !dropdown.contains(event.target)) {

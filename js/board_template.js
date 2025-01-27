@@ -1,3 +1,34 @@
+/**
+ * Generates an HTML template for a task card.
+ *
+ * @param {Object} task - The task object containing task details.
+ * @param {string} task.id - Unique identifier for the task.
+ * @param {string} task.category - Category of the task.
+ * @param {string} task.title - Title of the task.
+ * @param {string} task.description - Description of the task.
+ * @param {Array} task.subtasks - Array of subtask objects.
+ * @param {Array} task.contacts - Array of contact IDs associated with the task.
+ * @param {string} task.prio - Priority of the task.
+ * @param {Array} contactNames - Array of contact names corresponding to task.contacts.
+ * @param {Array} contactColors - Array of colors for contact avatars.
+ * 
+ * @returns {string} HTML string representing the task card.
+ * 
+ * @description
+ * This function creates an HTML template for a task card, including:
+ * - Task category, title, and description
+ * - Subtask progress bar (if subtasks exist)
+ * - Contact avatars (up to 3 visible, with a count for additional contacts)
+ * - Task priority icon
+ * - Dropdown menu for moving the task between different states
+ * 
+ * The function also sets up event handlers for drag-and-drop functionality
+ * and for opening a detailed task overlay.
+ * 
+ * @requires getCategoryColor - Function to get the color for a task category.
+ * @requires getContactInitials - Function to get initials from a contact name.
+ * @requires getPrio - Function to get the priority text from a priority value.
+ */
 function taskTemplate(task, contactNames, contactColors) {
     const completedSubtasks = task.subtasks.filter(subtask => subtask.checked).length;
     const totalSubtasks = task.subtasks.length;
