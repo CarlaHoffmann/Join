@@ -207,13 +207,20 @@
     }
 
     #addContactButton {
-        height: 45px;
-        width: 45px;
-        padding: 3px;
-        border-radius: 25.5px;
-        position: fixed;
+        background: #2A3647;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease;
+        position: absolute;
+        bottom: 15px;
         right: 25px;
-        bottom: 80px;
+        font-size: 12px;
+        font-weight: 400;
     }
 
     #addContactButton span {
