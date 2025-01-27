@@ -132,14 +132,6 @@
 .task-header {
   display: flex;
   justify-content: space-between; 
-  align-items: center; 
-  margin-bottom: 8px;
-}
-
-.task-header {
-  display: flex;
-  justify-content: space-between; 
-  align-items: center; 
   margin-bottom: 8px;
 }
 
@@ -152,8 +144,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px; 
-  height: 30px;
+  width: 27px; 
+  height: 27px;
   background: #2A3647; 
   color: white; 
   border-radius: 50%; 
@@ -177,6 +169,10 @@
 .menu-circle.dropdown-active {
   background-color: #091931; 
   border-color: #091931; 
+}
+
+.menu-circle img {
+  height: 18px;
 }
 
 .dropdown-menu {
