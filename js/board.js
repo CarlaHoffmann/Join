@@ -374,3 +374,75 @@ function highlight(columnId) {
         column.classList.add("highlight-column");
     }
 }
+
+
+/**
+ * Initialisiert das Touch-Drag-and-Drop für Touch-Geräte.
+ */
+function initTouchDragAndDrop() {
+    const taskElements = document.querySelectorAll('.tasks-container .task');
+
+    taskElements.forEach(task => {
+        task.addEventListener('touchstart', touchStartHandler);
+        task.addEventListener('touchmove', touchMoveHandler);
+        task.addEventListener('touchend', touchEndHandler);
+    });
+}
+
+function touchStartHandler(event) {
+    const touch = event.targetTouches[0];
+    const taskElement = event.target;
+    taskElement.classList.add('dragging');
+    taskElement.style.position = 'absolute';
+    taskElement.style.zIndex = 1000;
+
+    // Set initial touch position
+    taskElement.dataset.touchStartX = touch.clientX;
+    taskElement.dataset.touchStartY = touch.clientY;
+
+    event.preventDefault(); // Verhindert, dass das Standardverhalten ausgeführt wird
+}
+
+function touchMoveHandler(event) {
+    const touch = event.targetTouches[0];
+    const taskElement = event.target;
+
+    // Berechne die neue Position des Elements
+    const deltaX = touch.clientX - taskElement.dataset.touchStartX;
+    const deltaY = touch.clientY - taskElement.dataset.touchStartY;
+
+    taskElement.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+    event.preventDefault(); // Verhindert Scrollen während des Draggens
+}
+
+function touchEndHandler(event) {
+    const taskElement = event.target;
+    taskElement.classList.remove('dragging');
+    taskElement.style.position = '';
+    taskElement.style.zIndex = '';
+    taskElement.style.transform = '';
+
+    // Find the drop target
+    const touch = event.changedTouches[0];
+    const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+    const newStatus = dropTarget.closest('.board-column')?.id.replace('column-', '');
+
+    if (newStatus) {
+        // Perform the drop logic
+        const taskId = taskElement.id.replace('task-', '');
+        const oldStatus = taskElement.parentElement.id.replace("Tasks", "");
+
+        // Call the existing drop logic
+        moveTaskData(oldStatus, newStatus, taskId, { /* task data */ })
+            .then(() => updateTaskElement(taskElement, newStatus, taskId));
+    }
+
+    event.preventDefault();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initTouchDragAndDrop();
+});
+
+
+

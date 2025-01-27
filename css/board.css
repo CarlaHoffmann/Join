@@ -1,3 +1,7 @@
+body {
+  touch-action: none; /* Verhindert Scrollen während Drag-Vorgängen */
+}
+
 .outer-box {
   width: calc(100vw - 232px);
   height: calc(100vh - 96px);
@@ -8,6 +12,12 @@
   position: absolute;
   right: 0;
   bottom: 0;
+}
+
+.dragging {
+  opacity: 0.7;
+  background-color: #f3f3f3; /* Beispiel für eine Hervorhebung */
+  transition: transform 0.1s ease-in-out;
 }
 
 .headline-container {
