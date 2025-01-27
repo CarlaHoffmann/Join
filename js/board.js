@@ -374,3 +374,51 @@ function highlight(columnId) {
         column.classList.add("highlight-column");
     }
 }
+
+
+/**
+ * Toggles the visibility of the dropdown menu.
+ *
+ * @param {string} dropdownId - The ID of the dropdown menu to toggle.
+ */
+function toggleDropdown(dropdownId) {
+    const dropdown = document.getElementById(dropdownId);
+    if (dropdown) {
+        dropdown.classList.toggle('hidden');
+    }
+}
+
+/**
+ * Moves a task to a specified column and closes the dropdown.
+ *
+ * @param {string} taskId - The ID of the task to move.
+ * @param {string} newStatus - The new status to move the task to (e.g., 'toDo', 'progress').
+ */
+async function moveTask(taskId, newStatus) {
+    const taskElement = document.getElementById(`task-${taskId}`);
+    const oldStatus = taskElement.parentElement.id.replace("Tasks", "");
+
+    const taskData = await fetchTaskData(taskElement, taskId);
+    if (!taskData) return;
+
+    await moveTaskData(oldStatus, newStatus, taskId, taskData); 
+    updateTaskElement(taskElement, newStatus, taskId);
+
+    // Automatisch das Dropdown schließen
+    const dropdownId = `dropdown-${taskId}`;
+    closeDropdown(dropdownId); 
+}
+
+
+
+/**
+ * Closes the dropdown menu and removes the active state.
+ *
+ * @param {string} dropdownId - The ID of the dropdown menu to close.
+ */
+function closeDropdown(dropdownId) {
+    const dropdown = document.getElementById(dropdownId);
+    if (dropdown && !dropdown.classList.contains('hidden')) {
+        dropdown.classList.add('hidden');
+    }
+}

@@ -1,14 +1,3 @@
-/**
- * Creates an HTML template for a task card.
- *
- * @param {Object} task - Task details (title, description, category, subtasks, contacts).
- * @param {Array<string>} contactNames - Contact names.
- * @param {Array<string>} contactColors - Contact colors.
- * @returns {string} HTML string for the task card.
- *
- * @example
- * taskTemplate(task, ["Alice", "Bob"], ["#FF5733", "#33FF57"]);
- */
 function taskTemplate(task, contactNames, contactColors) {
     const completedSubtasks = task.subtasks.filter(subtask => subtask.checked).length;
     const totalSubtasks = task.subtasks.length;
@@ -40,8 +29,21 @@ function taskTemplate(task, contactNames, contactColors) {
         <div id="task-${task.id}" class="task-card" draggable="true"
             onclick="openTaskOverlay(${JSON.stringify(task).replace(/"/g, '&quot;')})"
             ondragstart="drag(event)" ondragend="dragEnd(event)">
-            <div class="task-type" style="background-color: ${getCategoryColor(task.category)}">
-                ${task.category}
+            <div class="task-header">
+                <div class="task-type" style="background-color: ${getCategoryColor(task.category)}">
+                    ${task.category}
+                </div>
+                <div class="task-menu" onclick="event.stopPropagation();">
+                    <div class="menu-circle" onclick="toggleDropdown('dropdown-${task.id}')">
+                        <img src="./assets/img/board/more_vert@2x.svg" alt="More options">
+                        <div id="dropdown-${task.id}" class="dropdown-menu hidden">
+                            <button onclick="moveTask('${task.id}', 'toDo')">To Do</button>
+                            <button onclick="moveTask('${task.id}', 'progress')">Progress</button>
+                            <button onclick="moveTask('${task.id}', 'feedback')">Feedback</button>
+                            <button onclick="moveTask('${task.id}', 'done')">Done</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <h3 class="task-title">${task.title}</h3>
             <p class="task-description">${task.description}</p>
@@ -58,8 +60,6 @@ function taskTemplate(task, contactNames, contactColors) {
         </div>
     `;
 }
-
-
 
 /**
  * Generates an HTML template for the task overlay, including task details, 

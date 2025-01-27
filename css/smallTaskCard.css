@@ -127,3 +127,84 @@
   height: 17px;
   margin: 5px;
 }
+
+/* DropDown Menü */
+.task-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 8px;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 8px;
+}
+
+.task-menu {
+  position: relative;
+}
+
+.menu-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px; 
+  height: 30px;
+  background: #2A3647; 
+  color: white; 
+  border-radius: 50%;
+  border: 1px solid #2A3647; 
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.menu-circle:hover {
+  background-color: #29ABE2;
+  border-color: #29ABE2;
+}
+
+.menu-circle:active, 
+.menu-circle:focus {
+  background-color: #091931; 
+  border-color: #091931; 
+  outline: none;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 36px; 
+  right: 0;
+  padding: 10px;
+  background-color: #2A3647;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  z-index: 10;
+  min-width: 160px; 
+}
+
+/* Styling für die Buttons im Dropdown */
+.dropdown-menu button {
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  text-align: left;
+  color: #CDCDCD;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu button:hover {
+  background-color: #263c5c;
+}
+
+.hidden {
+  display: none;
+}
