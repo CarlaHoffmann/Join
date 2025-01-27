@@ -147,6 +147,7 @@
   position: relative;
 }
 
+/* Standardzustand des Menü-Kreises */
 .menu-circle {
   display: flex;
   justify-content: center;
@@ -155,7 +156,7 @@
   height: 30px;
   background: #2A3647; 
   color: white; 
-  border-radius: 50%;
+  border-radius: 50%; 
   border: 1px solid #2A3647; 
   cursor: pointer;
   transition: all 0.3s ease;
@@ -171,6 +172,11 @@
   background-color: #091931; 
   border-color: #091931; 
   outline: none;
+}
+
+.menu-circle.dropdown-active {
+  background-color: #091931; 
+  border-color: #091931; 
 }
 
 .dropdown-menu {

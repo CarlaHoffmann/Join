@@ -389,27 +389,24 @@ function toggleDropdown(dropdownId) {
 }
 
 /**
- * Moves a task to a specified column and closes the dropdown.
+ * Toggles the visibility of the dropdown menu and updates the menu-circle color.
  *
- * @param {string} taskId - The ID of the task to move.
- * @param {string} newStatus - The new status to move the task to (e.g., 'toDo', 'progress').
+ * @param {string} dropdownId - The ID of the dropdown menu to toggle.
  */
-async function moveTask(taskId, newStatus) {
-    const taskElement = document.getElementById(`task-${taskId}`);
-    const oldStatus = taskElement.parentElement.id.replace("Tasks", "");
+function toggleDropdown(dropdownId) {
+    const dropdown = document.getElementById(dropdownId);
+    const menuCircle = dropdown.parentElement; // Der umgebende .menu-circle
 
-    const taskData = await fetchTaskData(taskElement, taskId);
-    if (!taskData) return;
-
-    await moveTaskData(oldStatus, newStatus, taskId, taskData); 
-    updateTaskElement(taskElement, newStatus, taskId);
-
-    // Automatisch das Dropdown schließen
-    const dropdownId = `dropdown-${taskId}`;
-    closeDropdown(dropdownId); 
+    if (dropdown.classList.contains('hidden')) {
+        // Dropdown öffnen
+        dropdown.classList.remove('hidden');
+        menuCircle.classList.add('dropdown-active');
+    } else {
+        // Dropdown schließen
+        dropdown.classList.add('hidden');
+        menuCircle.classList.remove('dropdown-active');
+    }
 }
-
-
 
 /**
  * Closes the dropdown menu and removes the active state.
@@ -418,7 +415,10 @@ async function moveTask(taskId, newStatus) {
  */
 function closeDropdown(dropdownId) {
     const dropdown = document.getElementById(dropdownId);
+    const menuCircle = dropdown?.parentElement; // Der umgebende .menu-circle
+
     if (dropdown && !dropdown.classList.contains('hidden')) {
-        dropdown.classList.add('hidden');
+        dropdown.classList.add('hidden'); // Schließe das Dropdown
+        menuCircle?.classList.remove('dropdown-active'); // Entferne die aktive Klasse
     }
 }
