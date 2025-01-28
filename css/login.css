@@ -1,4 +1,4 @@
-* {
+body {
   margin: 0;
   font-family: "Inter", sans-serif;
 }
@@ -339,16 +339,14 @@ input {
   height: 20px;
 }
 
-.hidden {
+/* .hidden {
   display: none;
   outline: 1px solid red;
-}
+} */
 
 .hidden {
   display: none;
 }
-
-
 
 .password_hide {
   display: none;
@@ -416,8 +414,6 @@ input:hover,
   bottom: 32px;
 }
 
-
-
 .privacy-policy-text {
   color: #29ABE2;
 }
@@ -425,28 +421,4 @@ input:hover,
 .privacy-policy-text:hover {
   font-weight: bold;
   text-decoration: underline;
-}
-
-.modal-button {
-  margin-top: 20px;
-  font-weight: 700;
-  background-color: var(--white);
-  color: var(--menuButtonDarkblue);
-  border-radius: 8px;
-  padding: 15px 24px;
-  border: none;
-  white-space: nowrap;
-  font-size: 21px;
-  cursor: pointer;
-}
-
-.modal-button:hover {
-  background-color: var(--lightblue);
-  color: var(--white);
-}
-
-
-.modal.show .modal-content {
-  opacity: 1;
-  transform: translate(-50%, -50%);
 }
