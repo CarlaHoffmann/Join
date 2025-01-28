@@ -9,6 +9,7 @@
     <link rel="icon" type="image/x-icon" href="/img/">
     <link rel="stylesheet" href="./css/colors.css">
     <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/signUp.css">
     <link rel="stylesheet" href="./css/mediaQuery.css">
 
     <script src="./js/returnColor.js"></script>
@@ -107,15 +108,16 @@
             </div>
         </div>
 
-        <div id="successOverlay" class="overlay"></div>
-        <div id="successMessage" class="login_successful hidden">
-            You Signed Up Successfully
+        <div id="successOverlay" class="overlay hidden">
+            <div id="successMessage" class="login_successful">
+                You Signed Up Successfully
+            </div>
         </div>
 
         <div id="privacy-modal" class="modal hidden"> <div class="modal-content"> 
             <span class="modal-title"> Please accept the <a href="privacyPolicy.html" 
                 class="privacy-policy-text">Privacy Policy,</a> to proceed with the sign-up process.</span> 
-                <button id="close-modal" class="modal-button">OK</button> 
+                <button onclick="closeModal()" id="close-modal" class="modal-button">OK</button> 
             </div> 
         </div>
 

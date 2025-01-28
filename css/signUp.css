@@ -1,0 +1,105 @@
+/* Login successful Animation */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /*background-color: #F0F0F0;*/
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease-in, visibility;
+  }
+  
+  .overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .overlay.hide {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .login_successful {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-weight: 700;
+    background-color: var(--menuButtonDarkblue);
+    color: var(--white);
+    border-radius: 20px;
+    padding: 25px;
+    border: none;
+    font-size: 20px;
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+  }
+  
+  .login_successful.hide {
+    animation: fadeIn 1.5s ease-in-out fade forwards;
+  }
+  
+  
+  /* Modal Overlay */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease-in, visibility 0.6s;
+  }
+  
+  .modal.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  
+  .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 422px;
+    background-color: var(--menuButtonDarkblue);
+    padding: 20px 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translate(-50%, -60%);
+    transition: opacity 0.6s ease-in, transform 0.6s ease-in;
+  }
+  
+  .modal.show .modal-content {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  
+  .modal span {
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0px;
+  }
+  
+  .modal-content h2 {
+    margin-bottom: 20px;
+  }

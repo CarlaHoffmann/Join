@@ -20,8 +20,7 @@ async function handleSignUpClick(event) {
     event.preventDefault();
     const isChecked = document.getElementById('checkbox-container').getAttribute('data-checked') === 'true';
     const privacyModal = document.getElementById('privacy-modal');
-
-    if (!isChecked) return privacyModal.classList.add('show');
+    if (!isChecked) {return privacyModal.classList.add('show')};
 
     const users = await loadUsers();
     if (validateSignUp(users)) {
@@ -29,6 +28,7 @@ async function handleSignUpClick(event) {
         // if (contact) {
             showSuccessMessage();
             // await getLoggedIn();
+            // redirectToSummary();
         // }
     }
 }
@@ -43,12 +43,6 @@ function closeModal() {
     const privacyModal = document.getElementById('privacy-modal');
     privacyModal.classList.remove('show');
 }
-
-/**
- * Adds an event listener to the "close" button of the privacy modal.
- * Triggers the closeModal function when clicked.
- */
-document.getElementById('close-modal').addEventListener('click', closeModal);
 
 
 /**
@@ -455,7 +449,7 @@ async function showSuccessMessage() {
             setTimeout(() => {
                 successMessage.style.display = "none"; 
                 successOverlay.classList.remove("show");
-                redirectToSummary();
+                // redirectToSummary();
             },); 
         }, 1600); 
 }
