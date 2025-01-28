@@ -112,31 +112,59 @@ function validateSignUp(users) {
 
 
 /**
- * Checks if the email entered during sign-up already exists in the users database.
- * 
- * @function checkExistingMail
- * @param {Object} users - An object containing existing user data for validation.
- * @returns {boolean} - Returns `true` if the email does not exist and is valid, otherwise `false`.
+ * Validates the email input and displays an error message if invalid.
+ *
+ * @returns {boolean} True if the email is valid, otherwise false.
+ */
+function validateEmailAndShowError() {
+    const mailError = document.getElementById('mail-error');
+    const mailIsValid = validateSignUpEmail();
+
+    if (!mailIsValid) {
+        mailError.innerHTML = "Please enter a valid email address.";
+        return false;
+    }
+
+    mailError.innerHTML = ""; 
+    return true;
+}
+
+
+/**
+ * Checks if a user with the provided email exists and displays an error message if so.
+ *
+ * @param {Array} users - Array of user objects to search through.
+ * @returns {boolean} True if no user with the email exists, otherwise false.
+ */
+function findUserByEmailAndShowError(users) {
+    const mailError = document.getElementById('mail-error');
+    const user = findSignUpUserByEmail(users);
+
+    if (user) {
+        mailError.innerHTML = "Check your email and password. Please try again.";
+        return false;
+    }
+
+    mailError.innerHTML = ""; 
+    return true;
+}
+
+
+/**
+ * Checks if a given email is valid and does not already exist in the user list.
+ *
+ * @param {Array} users - Array of user objects to search through.
+ * @returns {boolean} True if the email is valid and does not exist, otherwise false.
  */
 function checkExistingMail(users) {
-    let mailError = document.getElementById('mail-error');
     try {
-        const mailIsValid = validateSignUpEmail();
-        
-        if (mailIsValid) {
-            const user = findSignUpUserByEmail(users); 
-            if (user) {
-                mailError.innerHTML = "Check your email and password. Please try again.";
-                return false;
-            } else {
-                mailError.innerHTML = "";
-                return true;
-            }
-        } else {
-            mailError.innerHTML = "Please enter a valid email address.";
+        if (!validateEmailAndShowError()) {
             return false;
         }
+
+        return findUserByEmailAndShowError(users);
     } catch (error) {
+        console.error("An error occurred while checking the email:", error);
         return false;
     }
 }
