@@ -20,6 +20,7 @@ async function getInitials() {
     try {
         const loggedInUser = await getNavUser();
         if (loggedInUser && loggedInUser.name) {
+            showNav();
             handleLoggedInUser(loggedInUser);
         } else {
             handleNoLoggedInUser();
@@ -34,7 +35,6 @@ async function getInitials() {
  * @param {string} user.name - The name of the logged-in user.
  */
 function handleLoggedInUser(user) {
-    showNav();
     const initials = calculateInitials(user.name);
     displayInitials(initials);
 }

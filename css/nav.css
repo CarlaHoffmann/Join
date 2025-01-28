@@ -37,11 +37,6 @@ header {
     display: none;
 }
 
-#mobileNav {
-    display: none;
-    /* Mobile Navigation ausblenden */
-}
-
 #headerControls {
     display: flex;
     align-items: center;
@@ -211,10 +206,7 @@ header {
 #info-sidebar a {
     font-size: 16px;
     padding: 8px 56px;
-    /*text-align: center;
-    font-weight: normal; */
     transition: transform 1.3s ease-in;
-    /* Sanfte Übergangsanimation */
 }
 
 #info-sidebar a:hover {
@@ -231,7 +223,6 @@ header {
 
 .active-link:hover {
     background-color: #091931 !important;
-    /*color: #FFFFFF !important;*/
 }
 
 #info-sidebar a.active-link:hover {
@@ -239,9 +230,8 @@ header {
     font-weight: normal;
 }
 
-#mobileNav {
+#mobileNavBar {
     display: none;
-    /* Standardmäßig ausblenden */
 }
 
 /* Media Queries */
@@ -287,17 +277,23 @@ header {
         /* Sidebar ausblenden */
     }
 
-    #mobileNav {
+    #mobileNavBar {
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
         background: #2A3647;
         display: flex;
-        justify-content: space-around;
-        align-items: center;
+
         z-index: 1000;
         height: 80px;
+    }
+
+    #mobileNav {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
     }
 
     #mobileNav a {
@@ -305,7 +301,7 @@ header {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 100%;
+        /* width: 100%; */
         font-size: 14px;
         height: 76px;
         width: 80px;
@@ -319,9 +315,5 @@ header {
 
     #mobileNav img {
         height: 32px;
-    }
-
-    #content {
-        padding-top: 80px;
     }
 }
