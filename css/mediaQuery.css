@@ -316,4 +316,8 @@
   .arrow_signUp {
     left: -10px;
   }
+
+  .search-field {
+    width: unset
+  }
 }
