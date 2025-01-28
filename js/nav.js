@@ -142,7 +142,12 @@ function setupNavigation() {
  */
 function activeLink() {
     const currentPath = window.location.pathname.replace(/^\/|\/$/g, '').replace(/\.html$/, '');
-    const links = document.querySelectorAll('#sidebar a, #mobileNav a, #noUserNavBar a');
+    let links;
+    if (window.innerWidth > 680) {
+        links = document.querySelectorAll('#sidebar a');
+    } else {
+        links = document.querySelectorAll('#mobileNav a, #noUserNavBar a');
+    }
 
     links.forEach(link => {
         const linkPath = link.getAttribute('href').replace(/\.html$/, '');
