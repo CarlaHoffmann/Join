@@ -80,7 +80,6 @@ header {
     right: 16px;
     padding: 10px;
     background-color: #2A3647;
-    /* color: #CDCDCD; */
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -233,7 +232,6 @@ header {
     display: none;
 }
 
-/* Media Queries */
 @media(max-width: 1275px) {
     header {
         padding-left: 268px;
@@ -273,7 +271,6 @@ header {
 
     #sidebar {
         transform: translateX(-100%);
-        /* Sidebar ausblenden */
     }
 
     #mobileNavBar {
@@ -300,7 +297,6 @@ header {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        /* width: 100%; */
         font-size: 14px;
         height: 76px;
         width: 80px;
@@ -343,10 +339,7 @@ header {
         display: flex;
         align-items: center;
         padding: 8px 12px;
-        /* background-color: #091931; */
         border-radius: 16px;
         cursor: pointer;
     }
-
-    /* .noUserButton:hover, .noUserInfoButton:hover {} */
 }
