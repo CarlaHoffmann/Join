@@ -452,8 +452,10 @@ function toggleCheckboxPrivacyPolicy(element) {
  * @returns {Promise<void>}
  */
 async function showSuccessMessage() {
+    let successOverlay = document.getElementById('successOverlay');
+    let successMessage = document.getElementById('successMessage');
         successOverlay.classList.add("show");
-        successMessage.style.display = "block";
+        successMessage.classList.remove("d-none");
 
         setTimeout(() => {
             successMessage.classList.add("hide"); 

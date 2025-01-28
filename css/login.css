@@ -19,7 +19,6 @@
   left: 50px;
 }
 
-
 .form-group,
 .signUp-formfields {
   display: flex;
@@ -27,32 +26,11 @@
   gap: 20px;
 }
 
-/* General Error Styles */
 .error-message {
   color: red;
   font-size: 14px;
-  /* display: none; */
-  /* margin-top: 5px */
 }
 
-/*
-/* Button Styles 
-button {
-  font-size: 16px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-  */
-
-/* Checkbox Container */
 .checkbox-container {
   display: flex;
   align-items: center;
@@ -65,7 +43,6 @@ button:hover {
   height: 16px;
 }
 
-/* General Spacing */
 .margin-top {
   margin-top: 16px;
 }
@@ -80,7 +57,6 @@ button:hover {
   align-items: center;
   overflow: hidden;
 }
-
 
 a {
   text-decoration: none;
