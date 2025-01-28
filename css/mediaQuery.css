@@ -114,13 +114,6 @@
   }
 }
 
-@media(max-width: 1024px) {
-  .headerLogo {
-    top: 50px;
-    left: 50px;
-  }
-}
-
 @media (min-width: 900px) {
   .mobile-login {
     display: none;
@@ -164,12 +157,6 @@
   .signUp-page {
     height: 800px;
     overflow-y: auto;
-  }
-
-  #signup-linking-mobile {
-    display: flex;
-    position: relative;
-    top: 0px;
   }
 
   .login-footer {
@@ -218,40 +205,13 @@
     margin-left: 0px;
   }
 
-  .form-wrapper {
-    padding: 32px 16px;
-  }
-
-  .input-container {
-    width: 364px;
-  }
-
-  .form-container {
-    padding: 16px;
-  }
-
   .accept_box {
     height: 16px;
   }
 
-  .logIn-btns {
-    flex-direction: column;
-    gap: 21px;
-    width: fit-content;
-  }
 
   #login_button_color {
     width: 100%;
-  }
-
-  #signup-linking-desktop {
-    display: none;
-  }
-
-  #signup-linking-mobile {
-    display: flex;
-    position: absolute;
-    bottom: 80px;
   }
 
   .add-task-edit-form {
@@ -369,10 +329,6 @@
     margin-top: 40px;
   }
 
-  .input-container {
-    width: 264px;
-  }
-
   #overlay-content {
     width: calc(100vw - 32px);
   }
@@ -389,10 +345,6 @@
 @media(max-width: 372px) {
   .arrow_signUp {
     left: -10px;
-  }
-
-  .input-container {
-    width: 224px;
   }
 
   .input-with-image {

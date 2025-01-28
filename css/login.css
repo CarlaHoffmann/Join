@@ -19,8 +19,9 @@ body {
   left: 50px;
 }
 
-.form-group,
+.logIn-formfields,
 .signUp-formfields {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -162,7 +163,7 @@ a {
   box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.form-gap {
+.form-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -170,6 +171,10 @@ a {
 }
 
 .form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   padding: 48px 88px;
   gap: 32px;
   border-radius: 30px;
@@ -397,7 +402,6 @@ input:hover,
   width: 100%;
   height: 100%;
 }
-
 
 .password-error {
   flex: 1;

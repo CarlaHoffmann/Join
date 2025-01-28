@@ -1,0 +1,84 @@
+@media(max-width: 1024px) {
+    .headerLogo {
+        top: 50px;
+        left: 50px;
+    }
+}
+
+@media (max-height: 900px), (max-width: 680px) {
+    .headerLogo {
+        top: 37px;
+        left: 38px;
+        width: 64px;
+        height: 78px;
+    }
+
+    #signup-linking-desktop {
+        display: none;
+    }
+
+    #signup-linking-mobile {
+        display: flex;
+        position: relative;
+        top: 0px;
+    }
+}
+
+@media (max-width: 900px) {
+    .form-wrapper {
+        padding: 16px 16px;
+    }
+}
+
+@media(max-width: 680px) {
+    .headerLogo {
+        top: 37px;
+        left: 38px;
+        width: 64px;
+        height: 78px;
+    }
+
+    .form-container {
+        /* padding: 16px; */
+        width: calc(100vw - 32px);
+    }
+
+    .form-wrapper {
+        width: calc(100vw - 32px);
+    }
+
+    .input-container {
+        max-width: 402px;
+        /* width: 364px; */
+        /* width: calc(100vw - 64px); */
+        width: 100%;
+    }
+    
+    #signup-linking-desktop {
+        display: none;
+    }
+
+    #signup-linking-mobile {
+        display: flex;
+        position: relative;
+        bottom: 80px;
+    }
+}
+
+/* @media (max-width: 500px) {
+    .input-container {
+        width: 264px;
+    }
+} */
+
+@media (max-width: 376px) {
+    .logIn-btns {
+        flex-direction: column;
+        gap: 21px;
+        width: fit-content;
+      }
+
+    /* .input-container {
+        width: 224px;
+    } */
+}
