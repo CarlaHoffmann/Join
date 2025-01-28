@@ -5,43 +5,71 @@
 const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
 
+
 /**
- * Manages the animation of the overlay and logo based on page load or navigation type.
- * 
- * - Always plays the animation when the page or login.js is loaded.
- * - Skips the animation and directly displays the header logo if it's already loaded (no animation on page navigation).
- * - Transfers the animated logo to the header once the animation ends.
- * 
- * @function animationWindow
- * @returns {void}
+ * Initializes the animation for the window based on screen size.
  */
 function animationWindow() {
-    const overlay = document.getElementById('overlay');
-    const animatedLogo = document.getElementById('animatedLogo');
-    const headerLogo = document.getElementById('headerLogo');
+    const elements = getAnimationElements();
+    if (!elementsAreValid(elements)) return;
+
     const isMobile = window.innerWidth <= 768;
 
-    if (!overlay || !animatedLogo || !headerLogo) {
-        return;
-    }
-
     if (isMobile) {
-        animatedLogo.src = './assets/img/general/logo.svg';
-
-        animatedLogo.addEventListener('animationend', () => {
-            animatedLogo.src = './assets/img/login/login-logo.svg';
-            headerLogo.src = animatedLogo.src;
-            headerLogo.style.display = 'block';
-            overlay.style.display = 'none';
-        });
+        handleMobileAnimation(elements);
     } else {
-        animatedLogo.addEventListener('animationend', () => {
-            overlay.style.display = 'none';
-            headerLogo.src = animatedLogo.src;
-            headerLogo.style.display = 'block';
-        });
+        handleDesktopAnimation(elements);
     }
 }
+
+/**
+ * Retrieves the necessary DOM elements for the animation.
+ * @returns {Object} - An object containing overlay, animatedLogo, and headerLogo elements.
+ */
+function getAnimationElements() {
+    return {
+        overlay: document.getElementById('overlay'),
+        animatedLogo: document.getElementById('animatedLogo'),
+        headerLogo: document.getElementById('headerLogo'),
+    };
+}
+
+/**
+ * Validates the presence of all required elements.
+ * @param {Object} elements - The DOM elements to validate.
+ * @returns {boolean} - True if all elements are valid, otherwise false.
+ */
+function elementsAreValid(elements) {
+    return Object.values(elements).every((el) => el !== null);
+}
+
+/**
+ * Handles the animation behavior for mobile devices.
+ * @param {Object} elements - The DOM elements for the animation.
+ */
+function handleMobileAnimation({ overlay, animatedLogo, headerLogo }) {
+    animatedLogo.src = './assets/img/general/logo.svg';
+
+    animatedLogo.addEventListener('animationend', () => {
+        animatedLogo.src = './assets/img/login/login-logo.svg';
+        headerLogo.src = animatedLogo.src;
+        headerLogo.style.display = 'block';
+        overlay.style.display = 'none';
+    });
+}
+
+/**
+ * Handles the animation behavior for desktop devices.
+ * @param {Object} elements - The DOM elements for the animation.
+ */
+function handleDesktopAnimation({ overlay, animatedLogo, headerLogo }) {
+    animatedLogo.addEventListener('animationend', () => {
+        overlay.style.display = 'none';
+        headerLogo.src = animatedLogo.src;
+        headerLogo.style.display = 'block';
+    });
+}
+
 
 // Call the animation function when the page is loaded
 document.addEventListener('DOMContentLoaded', animationWindow);

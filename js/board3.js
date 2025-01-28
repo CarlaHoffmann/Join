@@ -25,13 +25,12 @@ let currentTask = null;
  */
 async function openEditTaskOverlay(event, task) {
     event.stopPropagation();
+    
     const overlayContainer = document.getElementById('taskOverlayContainer');
-
     prepareSelectedContacts(task);
     prepareCurrentSubtasks(task);
 
     const subtasksHTML = generateSubtasksHTML();
-
     displayEditTaskOverlay(overlayContainer, task, subtasksHTML);
     initializeEditTaskComponents(task);
 }

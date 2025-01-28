@@ -1,39 +1,50 @@
-/**
- * Adds change event listeners to subtask checkboxes in the task overlay, updating the database on changes.
- * 
- * @function addSubtaskListeners
- * @param {Object} task - The task object containing subtasks to be updated.
- * @param {string} task.path - The path representing the task's status (e.g., "toDo", "done").
- * @param {string} task.id - The unique ID of the task.
- * @param {Object} task.subtasks - The subtasks object, where each subtask is keyed by a unique identifier.
- * @returns {void}
- */
 let subtaskListenerFunction;
 
+/**
+ * Adds event listeners to subtask checkboxes to handle updates when toggled.
+ * @param {Object} task - The task object containing subtasks and metadata.
+ */
 function addSubtaskListeners(task) {
     const overlayContainer = document.getElementById('taskOverlayContainer');
     const checkboxes = overlayContainer.querySelectorAll('input[type="checkbox"]');
 
-    subtaskListenerFunction = async (event) => {
-        const checkbox = event.target;
-        const subtaskKey = checkbox.dataset.subtaskKey;
-        const isChecked = checkbox.checked;
-
-        task.subtasks[subtaskKey].checked = isChecked;
-
-        const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskKey}.json`;
-        await fetch(url, {
-            method: 'PUT',
-            body: JSON.stringify(task.subtasks[subtaskKey]),
-            headers: { 'Content-Type': 'application/json' },
-        });
-    };
+    subtaskListenerFunction = (event) => handleSubtaskToggle(event, task);
 
     checkboxes.forEach((checkbox) => {
         checkbox.addEventListener('change', subtaskListenerFunction);
     });
 }
 
+/**
+ * Handles the toggle of a subtask checkbox, updates the task's state, 
+ * and sends the update to the database.
+ * @param {Event} event - The change event triggered by the checkbox.
+ * @param {Object} task - The task object containing subtasks and metadata.
+ */
+async function handleSubtaskToggle(event, task) {
+    const checkbox = event.target;
+    const subtaskKey = checkbox.dataset.subtaskKey;
+    const isChecked = checkbox.checked;
+
+    task.subtasks[subtaskKey].checked = isChecked;
+
+    await updateSubtaskInDatabase(task, subtaskKey);
+}
+
+/**
+ * Sends a PUT request to update a subtask in the database.
+ * @param {Object} task - The task object containing subtasks and metadata.
+ * @param {string} subtaskKey - The key of the subtask to update.
+ * @returns {Promise<void>}
+ */
+async function updateSubtaskInDatabase(task, subtaskKey) {
+    const url = `${base_url}/tasks/${task.path}/${task.id}/subtasks/${subtaskKey}.json`;
+    await fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify(task.subtasks[subtaskKey]),
+        headers: { 'Content-Type': 'application/json' },
+    });
+}
 
 /**
  * Removes change event listeners from all subtask checkboxes in the task overlay.
@@ -53,7 +64,6 @@ function removeSubtaskListeners() {
 
     subtaskListenerFunction = null;
 }
-
 
 /**
  * Returns the file path of the priority image corresponding to the given priority level.
@@ -75,7 +85,6 @@ function getPrioImage(prio) {
     }
 }
 
-
 /**
  * Returns the priority text corresponding to the given priority level.
  * 
@@ -96,7 +105,6 @@ function getPrioText(prio) {
     }
 }
 
-
 /**
  * Enables edit mode for the task overlay, allowing fields to be modified and new subtasks to be added.
  * 
@@ -116,7 +124,6 @@ function enableEditMode() {
     document.getElementById('saveTaskButton').classList.remove('d-none');
 }
 
-
 /**
  * Sets the priority of the task in the overlay and updates the UI.
  * 
@@ -129,7 +136,6 @@ function setOverlayPriority(priority) {
     document.getElementById(`prio${priority}`).classList.add('active-button');
     document.getElementById('overlayPriority').value = priority;
 }
-
 
 /**
  * Adds a new subtask to the current task and updates the task list.
@@ -154,7 +160,6 @@ async function addOverlaySubtask() {
     loadTasks();
 }
 
-
 /**
  * Closes the task overlay, saves any changes to subtasks, and reloads tasks.
  * 
@@ -174,7 +179,6 @@ async function closeTaskOverlay() {
     await loadTasks();
     currentSubtasks = [];
 }
-
 
 /**
  * Saves updated subtasks for a specific task to the database.
@@ -197,12 +201,10 @@ async function saveTaskSubtasks(task) {
             body: JSON.stringify(updatedSubtasks),
             headers: { 'Content-Type': 'application/json' },
         });
-
     } catch (error) {
     }
     currentSubtasks = [];
 }
-
 
 /**
  * Fetches task data by ID and status, then updates and opens the task overlay.
@@ -222,12 +224,10 @@ async function updateOverlay(taskId, taskStatus) {
             throw new Error(`HTTP error: ${response.status}`);
         }
         const updatedTask = await response.json();
-
         openTaskOverlay({ ...updatedTask, id: taskId, path: taskStatus });
     } catch (error) {
     }
 }
-
 
 /**
  * Updates placeholders for all task columns.
@@ -237,7 +237,6 @@ function updatePlaceholders() {
     const columns = ["toDo", "progress", "feedback", "done"];
     columns.forEach(updateColumnPlaceholder);
 }
-
 
 /**
  * Updates the placeholder for a specific task column.
@@ -261,7 +260,6 @@ function updateColumnPlaceholder(column) {
     }
 }
 
-
 /**
  * Hides a placeholder element by removing the 'show' class and adding the 'hide' class.
  * 
@@ -272,7 +270,6 @@ function hidePlaceholder(placeholder) {
     placeholder.classList.add('hide');
 }
 
-
 /**
  * Shows a placeholder element by removing the 'hide' class and adding the 'show' class.
  * 
@@ -282,7 +279,6 @@ function showPlaceholder(placeholder) {
     placeholder.classList.remove('hide');
     placeholder.classList.add('show');
 }
-
 
 /**
  * Creates and inserts a placeholder for a specific column.
@@ -308,14 +304,12 @@ function getPlaceholder(column) {
     }
 }
 
-
 /**
  * Selects the search input field element.
  * 
  * @constant {HTMLElement} searchField
  */
 const searchField = document.querySelector('#searchField');
-
 
 /**
  * Filters tasks and users based on the search input and updates the UI state.
@@ -331,7 +325,6 @@ function addSearchTask() {
     document.getElementById("no-search-result").style.display = noResult ? "block" : "none";
     document.getElementById("delete-search").classList.toggle("d-none", !searchValue);
 }
-
 
 /**
  * Filters elements based on a search value and updates their visibility and display properties.
@@ -358,7 +351,6 @@ function filterElements(selector, searchValue, childClasses, extraSelector) {
     return found;
 }
 
-
 /**
  * Clears the search input and resets task visibility and related UI elements.
  * 
@@ -378,7 +370,6 @@ function deleteSearch() {
         });
     });
 }
-
 
 /**
  * Removes the "highlight-column" class from a column when the drag leaves the area.

@@ -179,7 +179,6 @@ async function logOut() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
     } catch (error) {
-        console.error("Error logging out:", error);
     }
     window.location.href = './logIn.html';
 }

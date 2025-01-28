@@ -51,10 +51,8 @@ function createEditContactsHTML(contacts, taskContacts, loggedInUser) {
             </label>
         `;
     });
-
     return contactsHTML;
 }
-
 
 /**
  * Updates the displayed initials of selected contacts in the UI.
@@ -86,7 +84,6 @@ async function updateEditContacts() {
     contactInitials.innerHTML = contactInis;
 }
 
-
 /**
  * Initializes the edit priority by resetting all priority buttons and activating the selected priority button.
  * 
@@ -106,7 +103,6 @@ function initializeEditPriority(prio) {
         activateEditButton(prioButton, priority);
     }
 }
-
 
 /**
  * Activates the edit priority button by updating its styles and content.
@@ -144,7 +140,6 @@ function getPriorityClassEdit(priority) {
     }
 }
 
-
 /**
  * Opens the edit subtask template by displaying the relevant buttons and icons for the task.
  * 
@@ -171,7 +166,6 @@ function openEditSubtaskTemplate(task) {
     document.addEventListener('click', closeSubtaskOnOutsideClick);
 }
 
-
 /**
  * Adds a new subtask to the task and updates the displayed list of subtasks.
  * 
@@ -185,33 +179,56 @@ function openEditSubtaskTemplate(task) {
  */
 let existingSubtasks = [];
 
+/**
+ * Handles the addition of an edited subtask to the task.
+ * @param {Object} task - The task object containing existing subtasks.
+ */
 function addEditedSubtask(task) {
-    let subtaskInput = document.getElementById('subtaskInput');
-    let addedSubtask = document.getElementById('subtasks');
+    const subtaskInput = document.getElementById('subtaskInput');
+    const addedSubtask = document.getElementById('subtasks');
+    const newSubtask = subtaskInput.value.trim();
 
-    let newSubtask = subtaskInput.value.trim();
-
-    if (existingSubtasks.length === 0) {
-        existingSubtasks = getExistingSubtasks(task.subtasks);
-    }
-
-    currentSubtasks = [];
-    currentSubtasks = existingSubtasks;
+    initializeExistingSubtasks(task.subtasks);
 
     if (newSubtask) {
-            currentSubtasks.push({
-                task: newSubtask,
-                checked: false
-            });
-        } else {
+        addNewSubtask(newSubtask);
     }
 
-    addedSubtask.innerHTML = '';
-    for (let i = 0; i < currentSubtasks.length; i++) {
-        const element = currentSubtasks[i];
-        addedSubtask.innerHTML += getAddEditedSubtaskTemplate(i, element.task, element.checked);
-    }
+    renderSubtasks(addedSubtask);
     closeSubtask();
+}
+
+/**
+ * Initializes the `existingSubtasks` array if it hasn't been populated.
+ * @param {Array} subtasks - The list of existing subtasks from the task.
+ */
+function initializeExistingSubtasks(subtasks) {
+    if (existingSubtasks.length === 0) {
+        existingSubtasks = getExistingSubtasks(subtasks);
+    }
+    currentSubtasks = [...existingSubtasks];
+}
+
+/**
+ * Adds a new subtask to the `currentSubtasks` array.
+ * @param {string} newSubtask - The new subtask to add.
+ */
+function addNewSubtask(newSubtask) {
+    currentSubtasks.push({
+        task: newSubtask,
+        checked: false,
+    });
+}
+
+/**
+ * Renders the current subtasks in the DOM.
+ * @param {HTMLElement} container - The container element to render the subtasks in.
+ */
+function renderSubtasks(container) {
+    container.innerHTML = '';
+    currentSubtasks.forEach((subtask, index) => {
+        container.innerHTML += getAddEditedSubtaskTemplate(index, subtask.task, subtask.checked);
+    });
 }
 
 
