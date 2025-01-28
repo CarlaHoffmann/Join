@@ -1,23 +1,11 @@
-body {
-  touch-action: none; /* Verhindert Scrollen während Drag-Vorgängen */
-}
-
 .outer-box {
   width: calc(100vw - 232px);
   height: calc(100vh - 96px);
   background-color: #F6F7F8;
   display: flex;
-  /* padding-left: 64px;
-  padding-right: 64px; */
   position: absolute;
   right: 0;
   bottom: 0;
-}
-
-.dragging {
-  opacity: 0.7;
-  background-color: #f3f3f3; /* Beispiel für eine Hervorhebung */
-  transition: transform 0.1s ease-in-out;
 }
 
 .headline-container {
@@ -34,7 +22,6 @@ body {
   font-weight: 700;
   line-height: 24px;
 }
-
 
 .column-icon {
   width: 24px;
@@ -339,7 +326,7 @@ body {
   font-weight: 400;
   width: calc(100% - 16px);
   cursor: pointer;
-  color: #0038ff;
+  color: black;
 }
 
 .container-search-icon {
