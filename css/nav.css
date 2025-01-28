@@ -284,7 +284,7 @@ header {
         background: #2A3647;
         display: flex;
         padding: 0 16px;
-        z-index: 1000;
+        z-index: 3;
         height: 80px;
     }
 

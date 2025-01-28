@@ -98,6 +98,7 @@
     #addContactBox,
     #editContactBox {
         width: 396px;
+        max-height: 826px;
         height: calc(100vh - 160px);
         flex-direction: column;
     }
@@ -280,7 +281,7 @@
     #addContactBox,
     #editContactBox {
         width: 396px;
-        height: calc(100vh - 40px);
+        /* height: calc(100vh - 160px); */
     }
 
     #editContactBoxHeader,
