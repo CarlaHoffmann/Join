@@ -127,10 +127,6 @@
 }
 
 @media (max-width: 900px) {
-  .form-wrapper-signup {
-    padding: 32px 16px;
-  }
-
   .arrow_signUp {
     margin: 0;
     position: absolute;
@@ -145,23 +141,6 @@
     display: flex;
     justify-content: center;
     overflow: hidden;
-  }
-}
-
-@media (max-height: 800px) and (max-width: 680px) {
-  .logIn-page {
-    height: 800px;
-    overflow-y: auto;
-  }
-
-  .signUp-page {
-    height: 800px;
-    overflow-y: auto;
-  }
-
-  .login-footer {
-    position: relative;
-    top: 10px;
   }
 }
 
