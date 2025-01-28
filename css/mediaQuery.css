@@ -35,6 +35,20 @@
   }
 }
 
+@media(max-width: 1275px) {
+  #overlay-content {
+    width: 500px;
+  }
+}
+
+
+@media (max-width: 1200px) {
+  /* sign-up */
+  .join-logo {
+    background-color: #2A3647;
+  }
+}
+
 @media (max-width: 1044px) {
   .tasks-container {
     width: 100%;
@@ -100,13 +114,6 @@
   }
 }
 
-@media (max-width: 1200px) {
-  /* sign-up */
-  .join-logo {
-    background-color: #2A3647;
-  }
-}
-
 @media(max-width: 1024px) {
   .headerLogo {
     top: 50px;
@@ -168,6 +175,18 @@
   .login-footer {
     position: relative;
     top: 10px;
+  }
+}
+
+@media (max-height: 680px) and (max-width: 680px) {
+  .taskOverlay {
+    height: 100%;
+    overflow-y: scroll;
+    border-radius: 0;
+  }
+
+  .headline {
+    min-height: 100px;
   }
 }
 
@@ -241,6 +260,7 @@
 
   #overlay-content {
     width: 472px;
+    padding-top: 32px;
   }
 }
 
@@ -356,17 +376,13 @@
   #overlay-content {
     width: calc(100vw - 32px);
   }
-}
 
-@media (max-height: 680px) and (max-width: 680px) {
-  .taskOverlay {
-    height: 100%;
-    overflow-y: scroll;
-    border-radius: 0;
+  .title {
+    width: calc(100vw - 64px) !important;
   }
 
-  .headline {
-    min-height: 100px;
+  .width-440 {
+    width: calc(100vw - 64px);
   }
 }
 
@@ -381,11 +397,5 @@
 
   .input-with-image {
     width: 200px;
-  }
-}
-
-@media(max-width: 1275px) {
-  #overlay-content {
-    width: 500px;
   }
 }
