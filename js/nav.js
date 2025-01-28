@@ -67,9 +67,11 @@ function displayInitials(initials) {
  */
 function handleNoLoggedInUser() {
     const path = window.location.pathname;
+    const noUserNavBar = document.getElementById('noUserNavBar');
     if (!path.includes('privacyPolicy.html') && !path.includes('legalNotice.html')) {
         window.location.href = './logIn.html';
     }
+    noUserNavBar.classList.remove('d-none');
 }
 
 /**

@@ -140,7 +140,7 @@ header {
     transition: transform 0.3s ease;
 }
 
-#sidebar a {
+#sidebar a, .noUserNavBar a {
     color: #CDCDCD;
     text-decoration: none;
     font-size: 16px;
@@ -213,7 +213,6 @@ header {
     color: #29ABE2;
     font-weight: bold;
     transform: scale(1.0);
-
 }
 
 .active-link {
@@ -284,7 +283,7 @@ header {
         right: 0;
         background: #2A3647;
         display: flex;
-
+        padding: 0 16px;
         z-index: 1000;
         height: 80px;
     }
@@ -292,7 +291,7 @@ header {
     #mobileNav {
         width: 100%;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
     }
 
@@ -316,4 +315,32 @@ header {
     #mobileNav img {
         height: 32px;
     }
+
+    .noUserNavBar {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        color: #CDCDCD;
+        
+    }
+
+    .noUserNav {
+        display: flex;
+        gap: 5px;
+    }
+
+    .noUserButton, .noUserInfoButton {
+        height: 76px;
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        background-color: #091931;
+        border-radius: 16px;
+        cursor: pointer;
+    }
+
+    /* .noUserButton:hover, .noUserInfoButton:hover {} */
 }
