@@ -20,12 +20,19 @@ async function handleSignUpClick(event) {
     event.preventDefault();
     const isChecked = document.getElementById('checkbox-container').getAttribute('data-checked') === 'true';
     const privacyModal = document.getElementById('privacy-modal');
-    if (!isChecked) {return privacyModal.classList.add('show')};
+    if (!isChecked) {
+        privacyModal.classList.add('show');
+        return;
+    };
 
     const users = await loadUsers();
     if (validateSignUp(users)) {
-
-            showSuccessMessage();
+        const contact = await createContact();
+        if (contact) {
+            await showSuccessMessage();
+            await getLoggedIn();
+            redirectToSummary();
+        }
     }
 }
 

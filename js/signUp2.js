@@ -120,15 +120,20 @@ function toggleCheckboxPrivacyPolicy(element) {
  * @function showSuccessMessage
  * @returns {Promise<void>}
  */
-async function showSuccessMessage() {
-    let successOverlay = document.getElementById('successOverlay');
-    let successMessage = document.getElementById('successMessage');
+function showSuccessMessage() {
+    return new Promise((resolve) => {
+        let successOverlay = document.getElementById('successOverlay');
+        let successMessage = document.getElementById('successMessage');
 
-        successOverlay.classList.remove("hidden");
-        successOverlay.classList.add("show");
+        successOverlay.classList.remove('hidden');
+        successMessage.classList.add('show');
 
-        setTimeout(() => {
-            successMessage.classList.add("hidden"); 
-            successOverlay.classList.remove("show");
-        }, 3600); 
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                successMessage.classList.remove('show'); 
+                successOverlay.classList.add('hidden'); 
+                resolve();
+            }, 1600);
+        });
+    });
 }
