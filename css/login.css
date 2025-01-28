@@ -74,7 +74,6 @@ a {
   transition: transform 0.2s ease, font-size 0.2s ease;
 }
 
-
 .gray {
   color: var(--grey);
 }
@@ -152,18 +151,6 @@ a {
   position: fixed;
 }
 
-
-/*
-@keyframes slideIn {
-  from {
-    bottom: -100px;
-  }
-  to {
-    bottom: 50%;
-  }
-}
-*/
-
 .cover-button {
   visibility: hidden;
   background-color: var(--lightblue);
@@ -220,7 +207,6 @@ a {
   white-space: nowrap
 }
 
-/* a */
 .button-login-blue:hover {
   background-color: var(--lightblue);
   box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
@@ -336,7 +322,6 @@ input {
   cursor: pointer;
   width: 20px;
   height: 20px;
-  /*background-color: rebeccapurple;*/
 }
 
 .input-container:hover {
@@ -357,7 +342,6 @@ input {
 .hidden {
   display: none;
   outline: 1px solid red;
-  /* Nur zum Testen */
 }
 
 .hidden {

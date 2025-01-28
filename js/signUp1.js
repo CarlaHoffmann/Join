@@ -1,3 +1,6 @@
+const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
+const signUpName = '';
+
 /**
  * Handles the sign-up button click event, validating the user input and creating a new account.
  * 
@@ -13,18 +16,6 @@
  * - Creates a new user account if validation passes.
  * - Displays a success message and logs in the user upon successful account creation.
  */
-const base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
-const signUpName = '';
-
-/**
- * Handles the sign-up button click event.
- * Validates Privacy Policy, user input, and triggers account creation.
- * 
- * @async
- * @function handleSignUpClick
- * @param {Event} event - The click event triggered by the sign-up button.
- * @returns {Promise<void>}
- */
 async function handleSignUpClick(event) {
     event.preventDefault();
     const isChecked = document.getElementById('checkbox-container').getAttribute('data-checked') === 'true';
@@ -34,11 +25,11 @@ async function handleSignUpClick(event) {
 
     const users = await loadUsers();
     if (validateSignUp(users)) {
-        const contact = await createContact();
-        if (contact) {
+        // const contact = await createContact();
+        // if (contact) {
             showSuccessMessage();
-            await getLoggedIn();
-        }
+            // await getLoggedIn();
+        // }
     }
 }
 
@@ -455,7 +446,7 @@ async function showSuccessMessage() {
     let successOverlay = document.getElementById('successOverlay');
     let successMessage = document.getElementById('successMessage');
         successOverlay.classList.add("show");
-        successMessage.classList.remove("d-none");
+        successMessage.classList.remove("hidden");
 
         setTimeout(() => {
             successMessage.classList.add("hide"); 
