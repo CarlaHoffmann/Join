@@ -339,11 +339,6 @@ input {
   height: 20px;
 }
 
-/* .hidden {
-  display: none;
-  outline: 1px solid red;
-} */
-
 .hidden {
   display: none;
 }

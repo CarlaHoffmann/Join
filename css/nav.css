@@ -322,8 +322,14 @@ header {
         justify-content: space-between;
         align-items: center;
         font-size: 14px;
-        color: #CDCDCD;
-        
+        color: #CDCDCD;    
+    }
+
+    .loginNav {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
     }
 
     .noUserNav {
@@ -337,7 +343,7 @@ header {
         display: flex;
         align-items: center;
         padding: 8px 12px;
-        background-color: #091931;
+        /* background-color: #091931; */
         border-radius: 16px;
         cursor: pointer;
     }
