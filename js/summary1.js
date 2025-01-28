@@ -83,7 +83,6 @@ function showGreetingOverlay(overlay) {
         overlay.classList.remove('hidden');
         overlay.classList.add('show');
 
-        // Verstecke das Overlay nach 3 Sekunden
         setTimeout(function() {
             overlay.classList.remove('show');
             overlay.classList.add('hidden');

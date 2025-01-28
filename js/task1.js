@@ -169,24 +169,26 @@ async function updateSelectedContacts() {
 
 /**
  * Retrieves the name of a contact based on their ID.
- * 
- * This asynchronous function performs the following steps:
- * 1. Fetches all users from the server.
- * 2. Searches for a user matching the provided contactId.
- * 3. If found, fetches and returns the user's name.
- * 4. If not found or in case of an error, returns a default value.
  *
  * @async
  * @function getContactName
- * @param {string} contactId - The ID of the contact whose name is to be retrieved.
+ * @param {string} contactId - The unique identifier of the contact.
  * @returns {Promise<string>} The name of the contact if found, 'no name' if not found, or an empty string in case of an error.
- * 
- * @throws {Error} If there's an issue with the network requests. However, these errors are caught and handled internally.
- * 
- * @requires task_base_url - The base URL for API requests, expected to be defined in the outer scope.
- * 
+ *
+ * @description
+ * This function performs the following steps:
+ * 1. Fetches all users from the server.
+ * 2. Searches for a user matching the provided contactId.
+ * 3. If found, fetches and returns the user's name.
+ * 4. If not found, returns 'no name'.
+ * 5. In case of any error during the process, returns an empty string.
+ *
+ * @throws {Error} If there's a network error or issue with the fetch requests.
+ * However, these errors are caught and handled internally.
+ *
+ * @requires task_base_url - The base URL for the API requests, expected to be defined globally.
+ *
  * @example
- * // Usage
  * const name = await getContactName('user123');
  * console.log(name); // Outputs the user's name, 'no name', or ''
  */
@@ -201,9 +203,9 @@ async function getContactName(contactId) {
                 return await nameResponse.json();
             }
         }
-        return 'no name'; /** Standard, if no name can be found*/
+        return 'no name';
     } catch (error) {
-        return ''; /** Standard name if not found*/
+        return '';
     }
 }
 

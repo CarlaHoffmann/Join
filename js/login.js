@@ -126,7 +126,6 @@ function validateEmail() {
     const emailInput = document.getElementById("email").value; // Get the value, not the element
     const errorContainer = document.getElementById("emailError");
     const emailError = `<span class="error-message">Check your email. Please try again.</span>`;
-    // const emailError = "Check your email. Please try again.";
     let test = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput);
 
     if (emailInput !== '' && test) {
@@ -174,7 +173,6 @@ async function handleUserLogin(user) {
     const passwordInput = document.getElementById("password").value;
     const errorContainer = document.getElementById("passwordError");
     const passwordError = `<span class="error-message">Check your password. Please try again.</span>`;
-    // const passwordError = "Check your password. Please try again.";
     if (user.password === passwordInput) {
         await saveUser(user.name, user.mail);
         redirectToSummary();
@@ -204,7 +202,6 @@ async function loadUsers() {
         const response = await fetch(`${log_base_url}/users.json`);
         const users = await response.json();
 
-        // create an Array with user objects
         const usersArray = Object.values(users).map(userData => ({ name: userData.name, mail: userData.mail, password: userData.password }));
         return usersArray;
     } catch (error) {
@@ -369,5 +366,4 @@ function handleLoginClick(event) {
     existingMailLogIn();
 }
 
-// Load credentials on page load
 document.addEventListener("DOMContentLoaded", loadCredentials);

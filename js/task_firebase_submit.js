@@ -33,7 +33,6 @@ async function postData(taskData) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         let result = await response.json();
-        // Task successfully added
         return result;
     } catch (error) {
         return;

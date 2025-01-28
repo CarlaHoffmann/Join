@@ -126,7 +126,6 @@ function initializeNavigation() {
  * @name setupNavigation
  */
 function setupNavigation() {
-    // Warten auf w3.includeHTML()
     if (typeof w3 !== 'undefined' && typeof w3.includeHTML === 'function') {
         w3.includeHTML(activeLink);
     } else {
@@ -140,21 +139,16 @@ function setupNavigation() {
  * A link is considered active if its path is contained within the current URL path.
  */
 function activeLink() {
-    // Retrieve the current path without file extension
     const currentPath = window.location.pathname.replace(/^\/|\/$/g, '').replace(/\.html$/, '');
-
-    // // Iterate through all links in the sidebar and mobile navigation
     const links = document.querySelectorAll('#sidebar a, #mobileNav a');
 
     links.forEach(link => {
-        // Retrieve the href attribute of the link without file extension
         const linkPath = link.getAttribute('href').replace(/\.html$/, '');
 
-        // Check if the current path exactly matches the link's path
         if (currentPath.includes(linkPath)) {
-            link.classList.add('active-link'); // Add the active link class
+            link.classList.add('active-link');
         } else {
-            link.classList.remove('active-link'); // Remove the active link class from other links
+            link.classList.remove('active-link');
         }
     });
 }
