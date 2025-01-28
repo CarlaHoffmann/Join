@@ -21,7 +21,6 @@ async function loadTasks() {
         await loadTaskData('done', 'doneTasks');
         updatePlaceholders();
     } catch (error) {
-        // Error handling can be implemented here or logged elsewhere if needed
     }
 }
 
@@ -43,17 +42,14 @@ async function loadTaskData(path, containerId) {
         if (!response.ok) {
             throw new Error(`HTTP-Error: ${response.status}`);
         }
-
         const data = await response.json();
         if(data) {
             const taskArray = processTasks(data, path);
             displayTasks(taskArray, containerId);
         }
     } catch (error) {
-        // Error handling can be implemented here or logged elsewhere if needed
     }
 }
-
 
 /**
  * Processes tasks data from the database into an array of task objects.
@@ -75,7 +71,6 @@ function processTasks(tasks, status) {
         subtasks: tasks[key].subtasks ? Object.values(tasks[key].subtasks) : [],
     }));
 }
-
 
 /**
  * Displays a list of tasks in the specified container.
@@ -100,31 +95,67 @@ async function displayTasks(taskArray, containerId) {
     tasks.innerHTML = taskHTML;
 }
 
-
-
+/**
+ * Fetches the names of contacts associated with a list of tasks.
+ * @param {Array<Object>} tasks - An array of task objects containing contact IDs.
+ * @returns {Promise<Array<Array<string>>>} - A nested array of contact names for each task.
+ */
 async function getContactNames(tasks) {
     const contactNames = [];
-    for (const task of tasks) {
-        const taskContactNames = await Promise.all(task.contacts.map(async contact => {
-            try {
-                const response = await fetch(`${task_base_url}/users.json`);
-                const users = await response.json();
 
-                for (let userId in users) {
-                    if (userId === contact) {
-                        const nameResponse = await fetch(`${task_base_url}/users/${userId}/name.json`);
-                        return await nameResponse.json();
-                    }
-                }
-                return '';
-            } catch (error) {
-                return 'nn'; 
-            }
-        }));
+    for (const task of tasks) {
+        const taskContactNames = await fetchTaskContactNames(task.contacts);
         contactNames.push(taskContactNames);
     }
+
     return contactNames;
 }
+
+/**
+ * Fetches the names of contacts for a specific task.
+ * @param {Array<string>} contacts - An array of contact IDs associated with a task.
+ * @returns {Promise<Array<string>>} - An array of contact names.
+ */
+async function fetchTaskContactNames(contacts) {
+    return Promise.all(
+        contacts.map(async (contact) => {
+            try {
+                const users = await fetchAllUsers();
+
+                if (users[contact]) {
+                    return await fetchContactName(contact);
+                }
+
+                return '';
+            } catch (error) {
+                console.error(`Error fetching contact name for ID ${contact}:`, error);
+                return 'nn';
+            }
+        })
+    );
+}
+
+/**
+ * Fetches all users from the database.
+ * @returns {Promise<Object>} - An object containing all users with their IDs as keys.
+ */
+async function fetchAllUsers() {
+    const response = await fetch(`${task_base_url}/users.json`);
+    if (!response.ok) throw new Error(`Failed to fetch users: ${response.statusText}`);
+    return response.json();
+}
+
+/**
+ * Fetches the name of a specific contact by ID.
+ * @param {string} contactId - The ID of the contact.
+ * @returns {Promise<string>} - The name of the contact.
+ */
+async function fetchContactName(contactId) {
+    const response = await fetch(`${task_base_url}/users/${contactId}/name.json`);
+    if (!response.ok) throw new Error(`Failed to fetch contact name: ${response.statusText}`);
+    return response.json();
+}
+
 
 /**
  * Retrieves colors for contacts associated with tasks by querying the database.
@@ -158,7 +189,6 @@ async function getContactColors(tasks) {
     return contactColors;
 }
 
-
 /**
  * Generates initials from a contact's name.
  * 
@@ -170,7 +200,6 @@ function getContactInitials(contact) {
     let initials = contact.split(' ').map(word => word[0]).join('').toUpperCase();
     return initials;
 }
-
 
 /**
  * Returns the color associated with a given task category.
@@ -189,7 +218,6 @@ function getCategoryColor(category) {
     return '#000000';
 }
 
-
 /**
  * Maps a priority level to its corresponding priority label.
  * 
@@ -206,7 +234,6 @@ function getPrio(priority) {
     }
 }
 
-
 /**
  * Allows an element to be dropped by preventing the default dragover behavior.
  * 
@@ -217,7 +244,6 @@ function getPrio(priority) {
 function allowDrop(event) {
     event.preventDefault();
 }
-
 
 /**
  * Initiates a drag operation for a task and marks it as "dragging."
@@ -232,7 +258,6 @@ function drag(event) {
     event.dataTransfer.setData("taskId", task.id);
 }
 
-
 /**
  * Handles the end of a drag operation by removing the "dragging" class from the task.
  * 
@@ -244,7 +269,6 @@ function dragEnd(event) {
     const task = event.target;
     task.classList.remove("dragging"); // Markierung entfernen
 }
-
 
 /**
  * Handles the drop event for a task, moving it to a new status and updating the database and UI.
@@ -272,7 +296,6 @@ async function drop(event, newStatus) {
     updateTaskElement(taskElement, newStatus, taskKey);
 }
 
-
 /**
  * Fetches the task data from the database based on the task element and ID.
  * 
@@ -292,7 +315,6 @@ async function fetchTaskData(taskElement, taskId) {
     }
 }
 
-
 /**
  * Extracts task information, such as the old status and task key, from the task element and ID.
  * 
@@ -307,7 +329,6 @@ function extractTaskInfo(taskElement, taskId) {
     return { oldStatus, taskKey };
 }
 
-
 /**
  * Constructs the URL for accessing task data in the database based on status and task key.
  * 
@@ -319,7 +340,6 @@ function extractTaskInfo(taskElement, taskId) {
 function getTaskUrl(status, taskKey) {
     return `${base_url}/tasks/${status}/${taskKey}.json`;
 }
-
 
 /**
  * Moves task data from the old status to the new status in the database.
@@ -360,7 +380,6 @@ function updateTaskElement(taskElement, newStatus, taskKey) {
     updatePlaceholders();
 }
 
-
 /**
  * Highlights a column by adding a "highlight-column" class to it.
  * 
@@ -372,88 +391,5 @@ function highlight(columnId) {
     const column = document.getElementById(columnId);
     if (column) {
         column.classList.add("highlight-column");
-    }
-}
-
-/**
- * Moves a task to a specified column and closes the dropdown.
-* @param {string} taskId - The ID of the task to move.
-* @param {string} newStatus - The new status to move the task to (e.g., 'toDo', 'progress').
-*/
-async function moveTask(taskId, newStatus) {
-    const taskElement = document.getElementById(`task-${taskId}`);
-    const oldStatus = taskElement.parentElement.id.replace("Tasks", "");
-
-    const taskData = await fetchTaskData(taskElement, taskId);
-    if (!taskData) return;
-
-    await moveTaskData(oldStatus, newStatus, taskId, taskData); 
-    updateTaskElement(taskElement, newStatus, taskId);
-
-    // Automatisch das Dropdown schließen
-    const dropdownId = `dropdown-${taskId}`;
-    closeDropdown(dropdownId); 
-}
-
-
-/**
- * Toggles the visibility of the dropdown menu and updates the menu-circle color.
- *
- * @param {string} dropdownId - The ID of the dropdown menu to toggle.
- */
-function toggleDropdown(dropdownId) {
-    const dropdown = document.getElementById(dropdownId);
-    const menuCircle = dropdown?.parentElement; // Der umgebende .menu-circle
-
-    if (dropdown) {
-        if (dropdown.classList.contains('hidden')) {
-            // Dropdown öffnen
-            dropdown.classList.remove('hidden');
-            menuCircle?.classList.add('dropdown-active');
-            document.addEventListener('click', (event) => closeDropdownMobileOnOutsideClick(event, dropdownId));
-        } else {
-            // Dropdown schließen
-            closeDropdown(dropdownId);
-        }
-    }
-}
-
-
-/**
- * Closes the dropdown menu and removes the active state.
- *
- * @param {string} dropdownId - The ID of the dropdown menu to close.
- */
-function closeDropdown(dropdownId) {
-    const dropdown = document.getElementById(dropdownId);
-    const menuCircle = dropdown?.parentElement; // Der umgebende .menu-circle
-
-    if (dropdown && !dropdown.classList.contains('hidden')) {
-        dropdown.classList.add('hidden'); // Schließe das Dropdown
-        menuCircle?.classList.remove('dropdown-active'); // Entferne die aktive Klasse
-    }
-    document.removeEventListener('click', (event) => closeDropdownMobileOnOutsideClick(event, dropdownId));
-}
-
-
-/**
- * Closes the dropdown when a click occurs outside of it.
- * 
- * @param {Event} event - The click event object.
- * @param {string} dropdownId - The ID of the dropdown element.
- * 
- * @description
- * This function is typically used as an event listener for click events on the document.
- * It checks if the click occurred outside the specified dropdown and closes it if so.
- * 
- * @example
- * document.addEventListener('click', (event) => closeDropdownMobileOnOutsideClick(event, 'myDropdownId'));
- * 
- * @requires closeDropdown - A function that handles closing the dropdown.
- */
-function closeDropdownMobileOnOutsideClick(event, dropdownId) {
-    const dropdown = document.getElementById(dropdownId);
-    if (dropdown && !dropdown.contains(event.target)) {
-        closeDropdown(dropdownId);
     }
 }

@@ -9,13 +9,11 @@ function removeHighlightEnd(columnId) {
     removeHighlightLeave(columnId);
 }
 
-
 /**
  * Stores the currently selected task for editing.
  * @type {Object|null}
  */
 let currentTask = null;
-
 
 /**
  * Opens the edit task overlay and initializes its components.
@@ -25,7 +23,7 @@ let currentTask = null;
  */
 async function openEditTaskOverlay(event, task) {
     event.stopPropagation();
-    
+
     const overlayContainer = document.getElementById('taskOverlayContainer');
     prepareSelectedContacts(task);
     prepareCurrentSubtasks(task);
@@ -35,7 +33,6 @@ async function openEditTaskOverlay(event, task) {
     initializeEditTaskComponents(task);
 }
 
-
 /**
  * Prepares the selected contacts for the task being edited.
  * @param {Object} task - The task object containing contact information.
@@ -43,7 +40,6 @@ async function openEditTaskOverlay(event, task) {
 function prepareSelectedContacts(task) {
     selectedContacts = task.contacts;
 }
-
 
 /**
  * Prepares the current subtasks for the task being edited.
@@ -59,7 +55,6 @@ function prepareCurrentSubtasks(task) {
     });
 }
 
-
 /**
  * Generates HTML for the subtasks.
  * @returns {string} HTML string representing the subtasks.
@@ -69,7 +64,6 @@ function generateSubtasksHTML() {
         return getAddEditedSubtaskTemplate(index, subtask.task, subtask.checked);
     }).join('');
 }
-
 
 /**
  * Displays the edit task overlay in the specified container.
@@ -93,7 +87,6 @@ function initializeEditTaskComponents(task) {
     categorySelected(task.category);
 }
 
-
 /**
  * Closes the edit task overlay and reopens the task overlay with the given task details.
  * 
@@ -105,7 +98,6 @@ function closeEditTaskOverlay(task) {
     currentTask = null;
     openTaskOverlay(task);
 }
-
 
 /**
  * Toggles the completion status of a subtask and updates it in the database and UI.
@@ -121,9 +113,7 @@ async function toggleSubtaskStatus(path, taskId, subtaskKey) {
     try {
         const subtaskElement = document.querySelector(`.check[data-subtask-key="${subtaskKey}"] img`);
         const currentStatus = subtaskElement.src.includes('checked_button.svg');
-
         const newStatus = !currentStatus;
-
         subtaskElement.src = newStatus
             ? 'assets/img/board/checked_button.svg'
             : 'assets/img/board/check_button.svg';
@@ -135,12 +125,10 @@ async function toggleSubtaskStatus(path, taskId, subtaskKey) {
             body: JSON.stringify({ ...currentTask.subtasks[subtaskKey], checked: newStatus }),
             headers: { 'Content-Type': 'application/json' },
         });
-
         loadTasks();
     } catch (error) {
     }
 }
-
 
 /**
  * Starts the animation for the task overlay by making it visible and adding the "show" animation class.
@@ -155,7 +143,6 @@ function startTaskOverlayAnimation() {
     taskOverlayContainer.classList.remove('d-none');
     taskOverlay.classList.add('show');
 }
-
 
 /**
  * Closes the task overlay with an animation and invokes the close function after the animation ends.
@@ -172,7 +159,6 @@ function closeTaskOverlayAnimation(overlayBox) {
     overlay.classList.add('hide');
     setTimeout(closeTaskOverlay, 400);
 }
-
 
 /**
  * Opens the task overlay and populates it with the task details, including contacts and subtasks.
@@ -234,7 +220,6 @@ async function openTaskOverlay(task) {
         }
     });
 }
-
 
 /**
  * Deletes a task by its ID after user confirmation and updates the UI.
@@ -329,4 +314,79 @@ function showCustomConfirm(message) {
     });
 }
 
+/**
+ * Moves a task to a specified column and closes the dropdown.
+* @param {string} taskId - The ID of the task to move.
+* @param {string} newStatus - The new status to move the task to (e.g., 'toDo', 'progress').
+*/
+async function moveTask(taskId, newStatus) {
+    const taskElement = document.getElementById(`task-${taskId}`);
+    const oldStatus = taskElement.parentElement.id.replace("Tasks", "");
 
+    const taskData = await fetchTaskData(taskElement, taskId);
+    if (!taskData) return;
+
+    await moveTaskData(oldStatus, newStatus, taskId, taskData); 
+    updateTaskElement(taskElement, newStatus, taskId);
+
+    const dropdownId = `dropdown-${taskId}`;
+    closeDropdown(dropdownId); 
+}
+
+/**
+ * Toggles the visibility of the dropdown menu and updates the menu-circle color.
+ *
+ * @param {string} dropdownId - The ID of the dropdown menu to toggle.
+ */
+function toggleDropdown(dropdownId) {
+    const dropdown = document.getElementById(dropdownId);
+    const menuCircle = dropdown?.parentElement; // Der umgebende .menu-circle
+
+    if (dropdown) {
+        if (dropdown.classList.contains('hidden')) {
+            dropdown.classList.remove('hidden');
+            menuCircle?.classList.add('dropdown-active');
+            document.addEventListener('click', (event) => closeDropdownMobileOnOutsideClick(event, dropdownId));
+        } else {
+            closeDropdown(dropdownId);
+        }
+    }
+}
+
+/**
+ * Closes the dropdown menu and removes the active state.
+ *
+ * @param {string} dropdownId - The ID of the dropdown menu to close.
+ */
+function closeDropdown(dropdownId) {
+    const dropdown = document.getElementById(dropdownId);
+    const menuCircle = dropdown?.parentElement; // Der umgebende .menu-circle
+
+    if (dropdown && !dropdown.classList.contains('hidden')) {
+        dropdown.classList.add('hidden'); // Schließe das Dropdown
+        menuCircle?.classList.remove('dropdown-active'); // Entferne die aktive Klasse
+    }
+    document.removeEventListener('click', (event) => closeDropdownMobileOnOutsideClick(event, dropdownId));
+}
+
+/**
+ * Closes the dropdown when a click occurs outside of it.
+ * 
+ * @param {Event} event - The click event object.
+ * @param {string} dropdownId - The ID of the dropdown element.
+ * 
+ * @description
+ * This function is typically used as an event listener for click events on the document.
+ * It checks if the click occurred outside the specified dropdown and closes it if so.
+ * 
+ * @example
+ * document.addEventListener('click', (event) => closeDropdownMobileOnOutsideClick(event, 'myDropdownId'));
+ * 
+ * @requires closeDropdown - A function that handles closing the dropdown.
+ */
+function closeDropdownMobileOnOutsideClick(event, dropdownId) {
+    const dropdown = document.getElementById(dropdownId);
+    if (dropdown && !dropdown.contains(event.target)) {
+        closeDropdown(dropdownId);
+    }
+}
