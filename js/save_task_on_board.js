@@ -52,8 +52,6 @@ async function saveOverlayChanges(taskId, taskStatus, editedTask) {
     const dueDateElement = document.getElementById('datepicker');
     const prioButton = document.querySelector('.prio-button.active-button');
     const categoryElement = document.getElementById('category-selection');
-    const contactsElements = selectedContacts;
-    const subtaskElements = currentSubtasks;
 
     if (!titleElement || !descriptionElement || !dueDateElement || !prioButton || !categoryElement) {
         return;
@@ -76,5 +74,3 @@ async function saveOverlayChanges(taskId, taskStatus, editedTask) {
     } catch (error) {
     }
 }
-
-
