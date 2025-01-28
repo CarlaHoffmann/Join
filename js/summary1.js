@@ -19,11 +19,7 @@ async function initSummary() {
  * This asynchronous function displays a greeting overlay and updates the greeting name based on the logged-in user.
  */
 async function getGreetingOverlay() {
-    const greetingOverlay = document.getElementsByClassName('greeting')[0];
-    const greetNameOverlay = document.getElementsByClassName('greet-name')[0];
-    const greeting = document.getElementsByClassName('greeting')[1];
-    const greetName = document.getElementsByClassName('greet-name')[1];
-    const overlay = document.getElementById('greeting-overlay');
+    const {greetingOverlay, greetNameOverlay, greeting, greetName, overlay} = getGreetingElements();
 
     if (isReferrerValid()) {
         try {
@@ -37,6 +33,20 @@ async function getGreetingOverlay() {
         } catch (error) {
         }
     }
+}
+
+/**
+ * Retrieves DOM elements for greeting.
+ * @returns {Object} An object containing greeting-related DOM elements.
+ */
+function getGreetingElements() {
+    return {
+        greetingOverlay: document.getElementsByClassName('greeting')[0],
+        greetNameOverlay: document.getElementsByClassName('greet-name')[0],
+        greeting: document.getElementsByClassName('greeting')[1],
+        greetName: document.getElementsByClassName('greet-name')[1],
+        overlay: document.getElementById('greeting-overlay')
+    };
 }
 
 /**
