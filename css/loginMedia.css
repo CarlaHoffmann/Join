@@ -62,7 +62,6 @@
     }
 
     .form-container {
-        /* padding: 16px; */
         width: calc(100vw - 32px);
     }
 
@@ -74,6 +73,14 @@
         box-sizing: border-box;
         max-width: 402px;
         width: calc(100vw - 64px);
+    }
+    
+    .accept_box {
+        height: 16px;
+    }
+
+    #login_button {
+        width: 100%;
     }
     
     #signup-linking-desktop {
@@ -92,13 +99,13 @@
         margin-top: 72px;
     }
 
+    .input-with-image {
+        width: 200px;
+    }
+
     .logIn-btns {
         flex-direction: column;
         gap: 21px;
         width: fit-content;
       }
-
-    /* .input-container {
-        width: 224px;
-    } */
 }

@@ -115,15 +115,15 @@
 }
 
 @media (min-width: 900px) {
-  .mobile-login {
+  /* .mobile-login {
     display: none;
     height: 80px;
-  }
+  } */
 
-  .butten-mobile {
+  /* .butten-mobile {
     display: none;
     width: 150px;
-  }
+  } */
 }
 
 @media (max-width: 900px) {
@@ -182,15 +182,6 @@
 
   .right_section {
     margin-left: 0px;
-  }
-
-  .accept_box {
-    height: 16px;
-  }
-
-
-  #login_button_color {
-    width: 100%;
   }
 
   .add-task-edit-form {
@@ -324,9 +315,5 @@
 @media(max-width: 372px) {
   .arrow_signUp {
     left: -10px;
-  }
-
-  .input-with-image {
-    width: 200px;
   }
 }

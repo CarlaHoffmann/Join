@@ -371,22 +371,12 @@ input:hover,
   cursor: pointer;
 }
 
-.rememberMe_box {
-  align-self: baseline;
-  padding-left: 48px;
-}
-
-.accept_box,
-.rememberMe_box {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
 .accept_box {
   padding: 3px 4px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
 .checkbox-container {
