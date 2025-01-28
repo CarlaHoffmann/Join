@@ -137,18 +137,46 @@ function setupNavigation() {
 }
 
 /**
- * Highlights the active link in the sidebar and mobile navigation.
- * A link is considered active if its path is contained within the current URL path.
+ * Sets the active link in the navigation based on the current page.
+ * 
+ * This function determines the current page path, selects the appropriate
+ * navigation links based on screen width, and updates their active state.
  */
 function activeLink() {
-    const currentPath = window.location.pathname.replace(/^\/|\/$/g, '').replace(/\.html$/, '');
-    let links;
-    if (window.innerWidth > 680) {
-        links = document.querySelectorAll('#sidebar a');
-    } else {
-        links = document.querySelectorAll('#mobileNav a, #noUserNavBar a');
-    }
+    const currentPath = getCurrentPath();
+    const links = getNavigationLinks();
+    updateActiveLinks(links, currentPath);
+}
 
+/**
+ * Gets the current page path without leading/trailing slashes and file extension.
+ * 
+ * @returns {string} The cleaned current page path.
+ */
+function getCurrentPath() {
+    return window.location.pathname.replace(/^\/|\/$/g, '').replace(/\.html$/, '');
+}
+
+/**
+ * Selects navigation links based on screen width.
+ * 
+ * @returns {NodeList} A list of navigation link elements.
+ */
+function getNavigationLinks() {
+    if (window.innerWidth > 680) {
+        return document.querySelectorAll('#sidebar a');
+    } else {
+        return document.querySelectorAll('#mobileNav a, #noUserNavBar a');
+    }
+}
+
+/**
+ * Updates the active state of navigation links.
+ * 
+ * @param {NodeList} links - The list of navigation link elements.
+ * @param {string} currentPath - The current page path.
+ */
+function updateActiveLinks(links, currentPath) {
     links.forEach(link => {
         const linkPath = link.getAttribute('href').replace(/\.html$/, '');
 
