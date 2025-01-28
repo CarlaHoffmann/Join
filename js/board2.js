@@ -289,7 +289,6 @@ function showPlaceholder(placeholder) {
 function getPlaceholder(column) {
     const tasksContainer = document.getElementById(column + "Tasks");
     tasksContainer.innerHTML = '';
-    // const tasks = document.getElementById(containerId);
     if(column === 'toDo') {
         tasksContainer.innerHTML = `<div id="toDoPlaceholder" class="placeholder show">No tasks To do</div>`;
     }
@@ -347,7 +346,6 @@ function filterElements(selector, searchValue, childClasses, extraSelector) {
         element.style.display = match ? "" : "none";
         if (match) found = true;
     });
-
     return found;
 }
 

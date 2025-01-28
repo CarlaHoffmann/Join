@@ -24,12 +24,8 @@ async function handleSignUpClick(event) {
 
     const users = await loadUsers();
     if (validateSignUp(users)) {
-        // const contact = await createContact();
-        // if (contact) {
+
             showSuccessMessage();
-            // await getLoggedIn();
-            // redirectToSummary();
-        // }
     }
 }
 
@@ -118,7 +114,6 @@ function findUserByEmailAndShowError(users) {
         mailError.innerHTML = "Check your email and password. Please try again.";
         return false;
     }
-
     mailError.innerHTML = ""; 
     return true;
 }
@@ -135,7 +130,6 @@ function checkExistingMail(users) {
         if (!validateEmailAndShowError()) {
             return false;
         }
-
         return findUserByEmailAndShowError(users);
     } catch (error) {
         console.error("An error occurred while checking the email:", error);
@@ -166,7 +160,6 @@ function validateSignUpEmail() {
     }
 }
 
-
 /**
  * Finds a user in the database by their email during sign-up.
  * 
@@ -184,7 +177,6 @@ function findSignUpUserByEmail(users) {
         return false;
     }
 }
-
 
 /**
  * Validates the sign-up passwords, ensuring they are non-empty and match.
@@ -210,7 +202,6 @@ function checkSignUpPassword() {
     }
 }
 
-
 /**
  * Creates a new contact by collecting input data and posting it to the database.
  * 
@@ -228,7 +219,6 @@ async function createContact() {
     await postData(contact);
     return true;
 }
-
 
 /**
  * Retrieves the value of the name input field.
@@ -253,7 +243,6 @@ function takeMail() {
     return mail.value;
 }
 
-
 /**
  * Retrieves the value of the password input field.
  * 
@@ -264,7 +253,6 @@ function takePassword() {
     let password = document.getElementById('password');
     return password.value;
 }
-
 
 /**
  * Sends a new contact object to the database by posting it to the "users" collection.
@@ -291,7 +279,6 @@ async function postData(contact) {
     } catch (error) {
     }
 }
-
 
 /**
  * Sends the logged-in user's name to the database by updating the "loggedIn" entry.

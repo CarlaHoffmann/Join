@@ -182,8 +182,6 @@ async function logOut() {
     }
     window.location.href = './logIn.html';
 }
-
-/** Fetch initials when DOM content is fully loaded */
 document.addEventListener('DOMContentLoaded', () => {
     getInitials();
 });

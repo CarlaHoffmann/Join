@@ -121,11 +121,9 @@ async function fetchTaskContactNames(contacts) {
         contacts.map(async (contact) => {
             try {
                 const users = await fetchAllUsers();
-
                 if (users[contact]) {
                     return await fetchContactName(contact);
                 }
-
                 return '';
             } catch (error) {
                 console.error(`Error fetching contact name for ID ${contact}:`, error);
@@ -155,7 +153,6 @@ async function fetchContactName(contactId) {
     if (!response.ok) throw new Error(`Failed to fetch contact name: ${response.statusText}`);
     return response.json();
 }
-
 
 /**
  * Retrieves colors for contacts associated with tasks by querying the database.
@@ -285,12 +282,9 @@ async function drop(event, newStatus) {
     const taskId = event.dataTransfer.getData("taskId");
     const taskElement = document.getElementById(taskId);
     if (!taskElement) return;
-
     const taskData = await fetchTaskData(taskElement, taskId);
     if (!taskData) return;
-
     const { oldStatus, taskKey } = extractTaskInfo(taskElement, taskId);
-    // const newTaskUrl = getTaskUrl(newStatus, taskKey);
 
     await moveTaskData(oldStatus, newStatus, taskKey, taskData);
     updateTaskElement(taskElement, newStatus, taskKey);
