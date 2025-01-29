@@ -94,11 +94,14 @@ async function getNavUser() {
  */
 function showNav() {
     let header = document.getElementById('headerControls');
-    let sideNav = document.getElementById('sideBarNavigation');
-    let mobileNav = document.getElementById('mobileNav');
     header.classList.remove('d-none');
-    sideNav.classList.remove('d-none');
-    mobileNav.classList.remove('d-none');
+    if (window.innerWidth > 680) {
+        let sideNav = document.getElementById('sideBarNavigation');
+        sideNav.classList.remove('d-none');
+    } else {
+        let mobileNav = document.getElementById('mobileNav');
+        mobileNav.classList.remove('d-none');
+    }
 }
 
 /**
@@ -133,6 +136,21 @@ function setupNavigation() {
     } else {
         console.error('w3.includeHTML is not available');
         activeLink();
+    }
+}
+function setupNavigation() {
+    if (typeof w3 !== 'undefined' && typeof w3.includeHTML === 'function') {
+        w3.includeHTML(() => {
+            activeLink();
+            toggleSidebarVisibility();
+            // Event Listener für Fenstergrößenänderungen
+            window.addEventListener('resize', toggleSidebarVisibility);
+        });
+    } else {
+        console.error('w3.includeHTML is not available');
+        activeLink();
+        toggleSidebarVisibility();
+        window.addEventListener('resize', toggleSidebarVisibility);
     }
 }
 
@@ -178,6 +196,21 @@ function updateActiveLinks(links, currentPath) {
         }
     });
 }
+
+
+function toggleSidebarVisibility() {
+    const sidebar = document.getElementById('sideBarNavigation');
+    const mobileNav = document.getElementById('mobileNav');
+    
+    if (window.innerWidth > 680) {
+        sidebar.classList.remove('d-none');
+        mobileNav.classList.add('d-none');
+    } else {
+        sidebar.classList.add('d-none');
+        mobileNav.classList.remove('d-none');
+    }
+}
+
 
 /**
  * Initiates the navigation setup process.

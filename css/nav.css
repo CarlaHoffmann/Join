@@ -268,6 +268,7 @@ header {
 
     #sidebar {
         transform: translateX(-100%);
+        display: none;
     }
 
     #mobileNavBar {
@@ -278,7 +279,7 @@ header {
         background: #2A3647;
         display: flex;
         padding: 0 16px;
-        z-index: 3;
+        z-index: 9;
         height: 80px;
     }
 
