@@ -18,7 +18,6 @@ function closeOverlayOnOutsideClick(event, box, overlay) {
     event.stopPropagation();
     let ContactBox = document.getElementById(box);
     let BoxOverlay = document.getElementById(overlay);
-
     if (!ContactBox || !BoxOverlay) {
         return;
     }
