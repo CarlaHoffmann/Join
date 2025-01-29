@@ -78,5 +78,35 @@
     }
 }
 
+@media screen and (max-width: 680px) {
+    #animatedLogo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50vw;
+        height: 50vh;
+        object-fit: contain;
+        object-position: center;
+        z-index: 1000;
+        animation: logoAnimationSmallScreen 1.5s ease-in-out 0.5s forwards;
+    }
+}
 
+@keyframes logoAnimationSmallScreen {
+    0% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+        width: 50vw;
+        height: 50vh;
+    }
 
+    100% {
+        top: 37px;
+        left: 38px;
+        transform: translate(0, 0) scale(1);
+        width: 64px;
+        height: 78px;
+    }
+}

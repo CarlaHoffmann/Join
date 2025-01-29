@@ -42,7 +42,7 @@
         top: 10px;
     }
 }
-
+ 
 @media (max-width: 900px) {
     .form-wrapper {
         padding: 16px 16px;
