@@ -80,7 +80,6 @@ body {
     margin: 4px;
 }
 
-/* OVERLAY*/
 .task-head {
     display: flex;
     justify-content: space-between;
@@ -117,7 +116,6 @@ body {
     background-color: white;
 }
 
-/* Scrollbalkens */
 ::-webkit-scrollbar {
     height: 10px;
     width: 0;
@@ -167,7 +165,6 @@ body {
 
 }
 
-/* Wrapper für Info-Bereich */
 .task-info-wrapper {
     display: flex;
     flex-direction: column;
@@ -175,7 +172,6 @@ body {
     margin: 0;
 }
 
-/* Info-Bereich einzeln */
 .task-info {
     display: flex;
     align-items: center;
@@ -249,7 +245,6 @@ body {
     font-size: 19px;
 }
 
-/* BUTTON */
 .deleteEditBtnContainer {
     display: flex;
     justify-content: flex-end;
@@ -273,17 +268,14 @@ body {
     font-weight: bold;
     color: white;
     margin-right: 8px;
-    /* Abstand zwischen Initialen und Namen */
 }
 
-/* Container für Delete- und Edit-Icons */
 .deleteEditBtnContainer {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-/* Icons Styling */
 .icon-button {
     width: 81px;
     cursor: pointer;
@@ -353,7 +345,6 @@ body {
     visibility: hidden;
 }
 
-/* Dialog */
 .custom-confirm-dialog {
     position: fixed;
     top: 50%;
@@ -374,7 +365,6 @@ body {
     margin-bottom: 32px;
 }
 
-/* Buttons nebeneinander */
 .dialog-buttons {
     display: flex;
     justify-content: center;
@@ -403,7 +393,6 @@ body {
     transition: filter 0.3s ease-in-out;
 }
 
-/* Hover-Effekt für Buttons */
 .dialog-button:hover {
     background-color: #29ABE2;
     color: white;

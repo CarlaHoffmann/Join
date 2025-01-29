@@ -1,4 +1,3 @@
-/* Overlay Styling */
 #overlay {
     position: fixed;
     top: 0;
@@ -14,7 +13,6 @@
     animation: fadeOutOverlay 1.5s ease-in-out forwards;
 }
 
-/* Logo-Animation */
 #animatedLogo {
     position: absolute;
     top: 50%;
@@ -28,12 +26,10 @@
     animation: logoAnimation 1.5s ease-in-out 0.5s forwards;
 }
 
-/* Header-Logo Styling */
 #headerLogo {
     animation: headerLogoFadeIn 1.5s forwards;
 }
 
-/* Keyframes für die Logo-Bewegung */
 @keyframes logoAnimation {
     0% {
         top: 50%;
@@ -52,7 +48,6 @@
     }
 }
 
-/* Keyframes für Content-Einblendung */
 @keyframes fadeInContent {
     0% {
         opacity: 5;
@@ -63,8 +58,6 @@
     }
 }
 
-
-/* Keyframes für Header-Logo-Einblendung */
 @keyframes headerLogoFadeIn {
     0% {
         opacity: 0;

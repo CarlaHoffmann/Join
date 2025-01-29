@@ -107,7 +107,6 @@
   width: 100%;
 }
 
-/* Placeholder - no task */
 .overlay-container {
   position: fixed;
   top: 0;
@@ -121,7 +120,6 @@
   z-index: 1000;
 }
 
-/* Vollbild-Overlay */
 #board-add-task-overlay {
   width: 100vw;
   height: 100vh;
@@ -135,7 +133,6 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-/* Schließen-Button */
 .close img {
   cursor: pointer;
   width: 20px;
@@ -151,7 +148,6 @@
   z-index: 1000;
 }
 
-/* SVG Tasks-Icons */
 .column-header {
   display: flex;
   align-items: center;
@@ -183,8 +179,6 @@
   background-color: #FFFFFF;
 }
 
-
-/* Board - Dialog add Task */
 .dialog_addTask_bg {
   position: fixed;
   display: flex;

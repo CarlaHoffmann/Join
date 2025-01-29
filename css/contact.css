@@ -240,7 +240,6 @@ hr {
     overflow-x: hidden;
 }
 
-/*contact details with animation*/
 #contactDetails {
     background: #F6F7F8;
     transform: translateX(100%);
@@ -310,7 +309,6 @@ hr {
     margin-top: 10px;
 }
 
-/* Container für Edit/Delete */
 #editContainer,
 #deleteContainer {
     display: flex;
@@ -321,10 +319,6 @@ hr {
     transition: color 0.3s ease;
 }
 
-/*.icon-text-button:hover {
-    color: #29ABE2; 
-}
-*/
 .icon-svg {
     width: 24px;
     height: 24px;
@@ -356,7 +350,6 @@ hr {
     gap: 15px;
 }
 
-/* control element */
 .circle-edit-mobile-control {
     background: #2A3647;
     width: 56px;
@@ -386,7 +379,6 @@ hr {
     transition: background-color 0.3s ease;
 }
 
-/* Edit / Delete Menu */
 .hidden {
     display: none;
 }
