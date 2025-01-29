@@ -268,7 +268,7 @@ header {
 
     #sidebar {
         transform: translateX(-100%);
-        display: none;
+        display: none !important;
     }
 
     #mobileNavBar {
