@@ -142,14 +142,14 @@ function setupNavigation() {
     if (typeof w3 !== 'undefined' && typeof w3.includeHTML === 'function') {
         w3.includeHTML(() => {
             activeLink();
-            toggleSidebarVisibility();
+            // toggleSidebarVisibility();
             // Event Listener für Fenstergrößenänderungen
             window.addEventListener('resize', toggleSidebarVisibility);
         });
     } else {
         console.error('w3.includeHTML is not available');
         activeLink();
-        toggleSidebarVisibility();
+        // toggleSidebarVisibility();
         window.addEventListener('resize', toggleSidebarVisibility);
     }
 }
@@ -195,6 +195,7 @@ function updateActiveLinks(links, currentPath) {
             link.classList.remove('active-link');
         }
     });
+    toggleSidebarVisibility();
 }
 
 
