@@ -115,9 +115,8 @@ p {
     }
 
     .legalNotice-content {
-        margin-top: 48px;
-        margin-left: 16px;
-        margin-right: 16px;
+        margin: 0;
+        padding: 48px 16px;
     }
 
     .back {
