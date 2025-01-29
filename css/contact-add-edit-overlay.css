@@ -42,7 +42,6 @@
 #addContactBoxHeader,
 #editContactBoxHeader {
     height: 100%;
-    /* width: 100%; */
     background: #2A3647;
     flex-direction: column;
     display: flex;
@@ -116,7 +115,6 @@
     height: 202px;
 }
 
-/* Container für die Eingabefelder */
 .input-container {
     display: flex;
     align-items: center;
@@ -130,7 +128,6 @@
     border-color: #29ABE2
 }
 
-/* Eingabefelder mit Bild */
 .input-with-image {
     border: none;
     outline: none;
@@ -139,14 +136,12 @@
     background-color: var(--white);
 }
 
-/* Icons in input */
 .input-icon {
     width: 20px;
     height: 20px;
     margin-left: 10px;
 }
 
-/* Form buttons */
 .add-form-buttons,
 .edit-form-buttons {
     display: flex;
@@ -277,7 +272,6 @@
     align-items: center;
 }
 
-/* Banner */
 .contact-added-banner {
     display: flex;
     justify-content: center;

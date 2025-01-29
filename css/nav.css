@@ -99,13 +99,11 @@ header {
 .help-menu div:hover {
     cursor: pointer;
     background-color: #263c5c;
-
 }
 
 .help-menu a:hover {
     background-color: #263c5c;
 }
-
 
 .mobile-visible {
     display: none;
@@ -171,7 +169,6 @@ header {
 .sideBarNavigation a:hover {
     background: #263c5c;
 }
-
 
 .sideBarNavigation a:hover svg,
 .sideBarNavigation a:hover span {

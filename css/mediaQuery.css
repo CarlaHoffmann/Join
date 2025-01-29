@@ -41,7 +41,6 @@
   }
 }
 
-
 @media (max-width: 1200px) {
   /* sign-up */
   .join-logo {
@@ -112,18 +111,6 @@
   .dialog_addTask_bg {
     display: none !important;
   }
-}
-
-@media (min-width: 900px) {
-  /* .mobile-login {
-    display: none;
-    height: 80px;
-  } */
-
-  /* .butten-mobile {
-    display: none;
-    width: 150px;
-  } */
 }
 
 @media (max-width: 900px) {
