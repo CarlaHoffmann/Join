@@ -132,6 +132,7 @@
   color: #ffffff;
   font-size: 12px;
   font-weight: 400;
+  border: 1px solid var(--white)
 }
 
 .priority img {

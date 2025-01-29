@@ -351,7 +351,7 @@ function openEditTaskOverlayTemplate(task, subtasksHTML) {
                 </div>            
                 <div class="okBtnContainer">
                 <button onclick="saveEditedTask(${JSON.stringify(task).replace(/"/g, '&quot;')})" class="submit-button">
-                    OK <img src="./assets/img/add_task/check 2.svg" alt="OK Icon" class="button-icon">
+                    Ok <img src="./assets/img/add_task/check 2.svg" alt="OK Icon" class="button-icon">
                 </button>
             </div>
             </div>
