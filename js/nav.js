@@ -143,18 +143,9 @@ function setupNavigation() {
  * navigation links based on screen width, and updates their active state.
  */
 function activeLink() {
-    const currentPath = getCurrentPath();
+    const currentPath = window.location.pathname.replace(/^\/|\/$/g, '').replace(/\.html$/, '');
     const links = getNavigationLinks();
     updateActiveLinks(links, currentPath);
-}
-
-/**
- * Gets the current page path without leading/trailing slashes and file extension.
- * 
- * @returns {string} The cleaned current page path.
- */
-function getCurrentPath() {
-    return window.location.pathname.replace(/^\/|\/$/g, '').replace(/\.html$/, '');
 }
 
 /**
@@ -178,7 +169,7 @@ function getNavigationLinks() {
  */
 function updateActiveLinks(links, currentPath) {
     links.forEach(link => {
-        const linkPath = link.getAttribute('href').replace(/\.html$/, '');
+        const linkPath = link.getAttribute('href').replace(/^\.\//, '').replace(/\.html$/, '');
 
         if (currentPath.includes(linkPath)) {
             link.classList.add('active-link');
