@@ -130,14 +130,14 @@ function initializeNavigation() {
  * @function
  * @name setupNavigation
  */
-function setupNavigation() {
-    if (typeof w3 !== 'undefined' && typeof w3.includeHTML === 'function') {
-        w3.includeHTML(activeLink);
-    } else {
-        console.error('w3.includeHTML is not available');
-        activeLink();
-    }
-}
+// function setupNavigation() {
+//     if (typeof w3 !== 'undefined' && typeof w3.includeHTML === 'function') {
+//         w3.includeHTML(activeLink);
+//     } else {
+//         console.error('w3.includeHTML is not available');
+//         activeLink();
+//     }
+// }
 function setupNavigation() {
     if (typeof w3 !== 'undefined' && typeof w3.includeHTML === 'function') {
         w3.includeHTML(() => {
@@ -199,15 +199,15 @@ function updateActiveLinks(links, currentPath) {
 
 
 function toggleSidebarVisibility() {
-    const sidebar = document.getElementById('sideBarNavigation');
-    const mobileNav = document.getElementById('mobileNav');
+    const sidebar = document.getElementById('sidebar');
+    const mobileNavBar = document.getElementById('mobileNavBar');
     
     if (window.innerWidth > 680) {
         sidebar.classList.remove('d-none');
-        mobileNav.classList.add('d-none');
+        mobileNavBar.classList.add('d-none');
     } else {
         sidebar.classList.add('d-none');
-        mobileNav.classList.remove('d-none');
+        mobileNavBar.classList.remove('d-none');
     }
 }
 
