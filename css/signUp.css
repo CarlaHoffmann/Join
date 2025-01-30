@@ -74,7 +74,6 @@
     visibility: visible;
 }
   
-  
 .modal-content {
     position: absolute;
     top: 50%;
@@ -127,7 +126,6 @@
     background-color: var(--lightblue);
     color: var(--white);
 }
-  
   
 .modal.show .modal-content {
     opacity: 1;

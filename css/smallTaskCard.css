@@ -24,25 +24,6 @@
   color: #333;
 }
 
-/*
-.task-card:hover {
-  background-color: #2A3647;
-  color: #ffffff; /* Schriftfarbe wird weiß auf dunklem Hintergrund 
-}
-
-.task-card:hover a,
-.task-card:hover p,
-.task-card:hover h1,
-.task-card:hover h2,
-.task-card:hover h3,
-.task-card:hover h4,
-.task-card:hover h5,
-.task-card:hover h6,
-.task-card:hover span {
-  color: #ffffff;
-}
-*/
-
 .task-type {
   font-weight: 400;
   height: 27px;
