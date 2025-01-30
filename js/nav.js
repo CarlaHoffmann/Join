@@ -162,21 +162,8 @@ function setupNavigation() {
  */
 function activeLink() {
     const currentPath = window.location.pathname.replace(/^\/|\/$/g, '').replace(/\.html$/, '');
-    const links = getNavigationLinks();
+    const links = document.querySelectorAll('#sidebar a, #mobileNav a, #noUserNavBar a');
     updateActiveLinks(links, currentPath);
-}
-
-/**
- * Selects navigation links based on screen width.
- * 
- * @returns {NodeList} A list of navigation link elements.
- */
-function getNavigationLinks() {
-    if (window.innerWidth > 680) {
-        return document.querySelectorAll('#sidebar a');
-    } else {
-        return document.querySelectorAll('#mobileNav a, #noUserNavBar a');
-    }
 }
 
 /**

@@ -4,30 +4,13 @@ const task_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebased
 let selectedContacts = [];
 
 /**
- * Opens the assigned contacts dropdown and populates it with contacts.
- * 
- * This asynchronous function performs the following tasks:
- * 1. Loads contacts from the server.
- * 2. Retrieves the currently logged-in user.
- * 3. Prepares the contacts data.
- * 4. Generates HTML for the contacts list.
- * 5. Displays the contacts dropdown.
- * 6. Adds an event listener to close the dropdown when clicking outside.
+ * Opens and populates the contacts dropdown.
  * 
  * @async
- * @function openAssigned
- * @returns {Promise<void>}
- * 
- * @throws {Error} If there's an issue loading contacts or user data.
- * 
- * @requires loadContacts - Function to fetch contacts from the server.
- * @requires getUser - Function to get the currently logged-in user.
- * @requires prepareContacts - Function to process and prepare contact data.
- * @requires createContactsHTML - Function to generate HTML for contacts list.
- * @requires selectedContacts - Array or object containing currently selected contacts.
+ * @description Loads contacts, prepares dropdown, and sets up event handling
+ * @throws {Error} If contact or user loading fails
  * 
  * @example
- * // Usage
  * await openAssigned();
  */
 async function openAssigned() {
@@ -44,21 +27,6 @@ async function openAssigned() {
     contactDropDown.classList.remove('d-none');
     restoreActiveContacts();
     document.addEventListener('click', closeAssignedOnOutsideClick);
-}
-
-/**
- * Restores the active state for previously selected contacts.
- * 
- * Iterates through the `selectedContacts` array and applies the 
- * "active" class to the corresponding contact labels.
- */
-function restoreActiveContacts() {
-    selectedContacts.forEach(contactId => {
-        let contactLabel = document.getElementById(contactId)?.closest('.selection-name');
-        if (contactLabel) {
-            contactLabel.classList.add('active');
-        }
-    });
 }
 
 /** 
@@ -130,6 +98,21 @@ function createContactsHTML(contacts, selectedContacts, loggedInUser) {
     return contactsHTML;
 }
 
+/**
+ * Restores the active state for previously selected contacts.
+ * 
+ * Iterates through the `selectedContacts` array and applies the 
+ * "active" class to the corresponding contact labels.
+ */
+function restoreActiveContacts() {
+    selectedContacts.forEach(contactId => {
+        let contactLabel = document.getElementById(contactId)?.closest('.selection-name');
+        if (contactLabel) {
+            contactLabel.classList.add('active');
+        }
+    });
+}
+
 /** 
  * This asynchronous function retrieves the currently logged-in user from the Firebase Realtime Database.
  */
@@ -183,29 +166,15 @@ function toggleContact(event) {
 async function updateSelectedContacts() {
     let contactInitials = document.getElementById('selected-contacts');
     contactInitials.innerHTML = ''; 
-
-    let contactInis = ''; /** Variable for collecting strings*/
+    let contactInis = '';
 
     for (let i = 0; i < selectedContacts.length; i++) {
         const contactId = selectedContacts[i];
-
         let contactName = await getContactName(contactId);
         let initials = contactName.split(' ').map(word => word[0]).join('');
-        
-        /** 
-         * Get color of contacts
-         */
         let color = await getContactColor(contactId); 
-        
-        /** 
-         * Add HTML-String to collection
-         */
         contactInis += `<div class="contact-initial" style="background-color: ${color};">${initials}</div>`;
     }
-
-    /** 
-     * Add all contact-initials 
-    */
     contactInitials.innerHTML = contactInis;
 }
 
