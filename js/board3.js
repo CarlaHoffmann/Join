@@ -161,21 +161,10 @@ function closeTaskOverlayAnimation(overlayBox) {
 }
 
 /**
- * Opens the task overlay and populates it with the task details, including contacts and subtasks.
+ * Opens the task overlay with task details and dynamically inserts the required content.
  * 
- * @async
- * @function openTaskOverlay
- * @param {Object} task - The task object containing the details to display in the overlay.
- * @param {string} task.title - The title of the task.
- * @param {string} task.description - The description of the task.
- * @param {Array<string>} task.contacts - An array of contacts assigned to the task.
- * @param {Object} task.subtasks - An object of subtasks, keyed by unique identifiers.
- * @param {string} task.date - The due date of the task.
- * @param {string} task.prio - The priority level of the task.
- * @param {string} task.category - The category of the task.
- * @param {string} task.path - The current path of the task in the database.
- * @param {string} task.id - The unique ID of the task.
- * @returns {Promise<void>}
+ * @param {Object} task - The task object containing details like contacts and subtasks.
+ * @returns {Promise<void>} - A promise that resolves when the overlay is displayed.
  */
 async function openTaskOverlay(task) {
     currentTask = task;
@@ -183,33 +172,9 @@ async function openTaskOverlay(task) {
 
     const contactNames = await getContactNames([task]);
     const contactColors = await getContactColors([task]);
-    const contactsHTML = task.contacts.map((contact, index) => {
-        const contactName = contactNames[0][index];
-        const contactColor = contactColors[0][index];
-        const initials = getContactInitials(contactName);
-        return `
-            <div class="assigned-contact">
-                <div class="contact-initial" style="background-color: ${contactColor};">${initials}</div>
-                <span class="contact-name">${contactName}</span>
-            </div>`;
-    }).join('');
+    const contactsHTML = generateContactsHTML(task.contacts, contactNames[0], contactColors[0]);
+    const subtasksHTML = generateSubtasksHTML(task.subtasks, task.path, task.id);
 
-    let subtasksHTML = '';
-    for (const key in task.subtasks || {}) {
-        if (Object.hasOwnProperty.call(task.subtasks, key)) {
-            const subtask = task.subtasks[key];
-            const svgIcon = subtask.checked
-                ? 'assets/img/board/checked_button.svg'
-                : 'assets/img/board/check_button.svg';
-
-            subtasksHTML += `
-                <div class="check" data-subtask-key="${key}">
-                    <img src="${svgIcon}" class="subtask-checkbox-icon" alt="Subtask Status" 
-                         onclick="toggleSubtaskStatus('${task.path}', '${task.id}', '${key}', ${!subtask.checked})">
-                    <div class="subtask-text">${subtask.task}</div>
-                </div>`;
-        }
-    }
     overlayContainer.innerHTML = openTaskOverlayTemplate(task, contactsHTML, subtasksHTML);
 
     addSubtaskListeners(task);
@@ -249,28 +214,36 @@ async function deleteTask(taskId) {
 }
 
 /**
- * Creates a custom confirmation dialog with an overlay and dialog box.
- *
- * @function createDialog
+ * Creates a custom confirmation dialog with an overlay.
+ * 
  * @param {string} message - The message to display in the dialog.
- * @returns {Object} - An object containing references to the created `overlay` and `dialog` elements.
+ * @returns {Object} - An object containing the overlay and dialog elements.
  */
 function createDialog(message) {
-    const overlay = document.body.appendChild(Object.assign(document.createElement("div"), { className: "overlay show" }));
-    const dialog = document.body.appendChild(Object.assign(document.createElement("div"), { className: "custom-confirm-dialog" }));
-    dialog.innerHTML = `
-        <p>${message}</p>
-        <div class="dialog-buttons">
-            <button class="dialog-button confirm">
-                <img src="assets/img/board/check.svg" alt="Yes" class="dialog-icon"/>
-                 Yes
-            </button>
-            <button class="dialog-button cancel">
-                <img src="assets/img/board/close.svg" alt="No" class="dialog-icon"/>
-                 No
-            </button>
-        </div>`;
+    const overlay = createOverlay();
+    const dialog = createDialogElement(message);
     return { overlay, dialog };
+}
+
+/**
+ * Creates and appends an overlay to the document body.
+ * 
+ * @returns {HTMLElement} - The created overlay element.
+ */
+function createOverlay() {
+    return document.body.appendChild(Object.assign(document.createElement("div"), { className: "overlay show" }));
+}
+
+/**
+ * Creates and appends a dialog element with buttons.
+ * 
+ * @param {string} message - The message to display in the dialog.
+ * @returns {HTMLElement} - The created dialog element.
+ */
+function createDialogElement(message) {
+    const dialog = document.body.appendChild(Object.assign(document.createElement("div"), { className: "custom-confirm-dialog" }));
+    dialog.innerHTML = createDialogTemplate(message);
+    return dialog;
 }
 
 /**
