@@ -95,13 +95,10 @@ async function getNavUser() {
 function showNav() {
     let header = document.getElementById('headerControls');
     header.classList.remove('d-none');
-    if (window.innerWidth > 680) {
-        let sideNav = document.getElementById('sideBarNavigation');
-        sideNav.classList.remove('d-none');
-    } else {
-        let mobileNav = document.getElementById('mobileNav');
-        mobileNav.classList.remove('d-none');
-    }
+    let sideNav = document.getElementById('sideBarNavigation');
+    sideNav.classList.remove('d-none');
+    let mobileNav = document.getElementById('mobileNav');
+    mobileNav.classList.remove('d-none');
 }
 
 /**
