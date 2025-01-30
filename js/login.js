@@ -4,8 +4,6 @@
  */
 const log_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
 
-
-
 /**
  * Initializes the animation for the window based on screen size.
  */
@@ -98,7 +96,6 @@ function toggleCheckbox(element) {
     }
 }
 
-
 /**
  * Handles the login button click event, preventing default form submission and initiating login logic.
  * 
@@ -106,7 +103,6 @@ function toggleCheckbox(element) {
  * @param {Event} event - The click event triggered by the login button.
  * @returns {void}
  */
-
 function handleLoginClick(event) {
     event.preventDefault(); // Verhindert das Standard-Submit-Event
     existingMailLogIn(); // Ruft die Login-Funktion auf
@@ -123,7 +119,6 @@ async function existingMailLogIn() {
     try {
         const users = await loadUsers();
         const mailIsTrue = validateEmail();
-
         if (!mailIsTrue) {
             return;
         }
@@ -137,7 +132,6 @@ async function existingMailLogIn() {
     } catch (error) {
     }
 }
-
 
 /**
  * Validates the email input and displays an error message if the email is invalid.
@@ -164,7 +158,6 @@ function validateEmail() {
         return false;
     }
 }
-
 
 /**
  * Retrieves login credentials from the input fields.
@@ -209,7 +202,6 @@ async function handleUserLogin(user) {
     }
 }
 
-
 /**
  * Redirects the user to the summary page.
  * 
@@ -219,7 +211,6 @@ async function handleUserLogin(user) {
 function redirectToSummary() {
     window.location.href = './summary.html';
 }
-
 
 /**
  * This asynchronous function loads all users from Firebase.
@@ -236,7 +227,6 @@ async function loadUsers() {
         return [];
     }
 }
-
 
 /**
  * This asynchronous function saves the logged-in user's data to Firebase.
@@ -257,7 +247,6 @@ async function saveUser(name, mail) {
     } catch (error) {
     }
 }
-
 
 /**
  * Logs in a guest user by sending a "Guest" user entry to the database and redirects to the summary page.
@@ -287,7 +276,6 @@ async function guestLogin() {
     window.location.href = './summary.html';
 }
 
-
 /**
  * This function changes the appearance of the email input field when focused.
  */
@@ -295,7 +283,6 @@ function changeEmail() {
     document.getElementById('emailContainer').classList.add('password_container_border');
     document.getElementById('passwordButten').classList.remove('password_container_border');
 }
-
 
 /**
  * Handles the password input field's state, toggling the lock icon and visibility button based on the input value.
@@ -320,7 +307,6 @@ function handlePasswordInput() {
         visibilityButton.classList.add("hidden");
     }
 }
-
 
 /**
  * Toggles the visibility of the password field and updates the visibility icons.

@@ -135,21 +135,6 @@ function setupNavigation() {
         activeLink();
     }
 }
-// function setupNavigation() {
-//     if (typeof w3 !== 'undefined' && typeof w3.includeHTML === 'function') {
-//         w3.includeHTML(() => {
-//             activeLink();
-//             toggleSidebarVisibility();
-//             // Event Listener für Fenstergrößenänderungen
-//             window.addEventListener('resize', toggleSidebarVisibility);
-//         });
-//     } else {
-//         console.error('w3.includeHTML is not available');
-//         activeLink();
-//         toggleSidebarVisibility();
-//         window.addEventListener('resize', toggleSidebarVisibility);
-//     }
-// }
 
 /**
  * Sets the active link in the navigation based on the current page.
@@ -179,21 +164,7 @@ function updateActiveLinks(links, currentPath) {
             link.classList.remove('active-link');
         }
     });
-    // toggleSidebarVisibility();
 }
-
-// function toggleSidebarVisibility() {
-//     const sidebar = document.getElementById('sidebar');
-//     const mobileNavBar = document.getElementById('mobileNavBar');
-    
-//     if (window.innerWidth > 680) {
-//         sidebar.classList.remove('d-none');
-//         mobileNavBar.classList.add('d-none');
-//     } else {
-//         sidebar.classList.add('d-none');
-//         mobileNavBar.classList.remove('d-none');
-//     }
-// }
 
 /**
  * Initiates the navigation setup process.
