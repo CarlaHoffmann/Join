@@ -23,7 +23,6 @@ body {
 
 .scroll-container::-webkit-scrollbar {
     display: none;
-    /* Chrome, Safari und Edge */
 }
 
 .legalNotice-content {
