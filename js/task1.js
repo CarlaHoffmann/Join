@@ -253,25 +253,10 @@ function closeAssigned() {
 }
 
 /**
- * Handles clicks outside the contact dropdown to close it.
+ * Closes the assigned contacts dropdown when clicking outside.
  * 
- * This function is designed to be used as an event listener for click events.
- * It checks if the click occurred outside the contact dropdown and closes it if so.
- *
- * @function closeAssignedOnOutsideClick
  * @param {Event} event - The click event object.
- * 
- * @description
- * 1. Stops the event propagation to prevent it from bubbling up the DOM tree.
- * 2. Checks if the click target is outside the contact dropdown.
- * 3. If the click is outside, it calls the closeAssigned function to close the dropdown.
- *
- * @requires closeAssigned - Function to close the contact dropdown.
- * @requires document.getElementById - DOM method to get elements by their ID.
- *
- * @example
- * // Usage as an event listener
- * document.addEventListener('click', closeAssignedOnOutsideClick);
+ * @description Checks if the click is outside the contact dropdown and closes it if so.
  */
 function closeAssignedOnOutsideClick(event) {
     event.stopPropagation();
