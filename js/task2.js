@@ -13,7 +13,7 @@ function initializePriority() {
  */
 function priority(x, event) {
     if (event) {
-        event.preventDefault(); // Verhindert das Standardverhalten des Buttons, wenn ein Event übergeben wird
+        event.preventDefault();
     }
     const currentPrio = document.getElementById(`prio${x}`);
     const allPrios = document.querySelectorAll('.prio-button');
@@ -92,7 +92,7 @@ function setMediumPriority() {
 /** This function toggles the visibility of the category dropdown.*/
 function showCategory() {
     const dropdown = document.getElementById('opened-category');
-    dropdown.classList.toggle('d-none'); /** Toggle dropdown */
+    dropdown.classList.toggle('d-none'); 
 
     const categorySelection = document.getElementById('category-selection');
     categorySelection.textContent = "Select task category";
@@ -100,21 +100,12 @@ function showCategory() {
 
 /** This function handles the selection of a category from the dropdown.*/
 function categorySelected(category) {
-    /**
-     * Get the element with the ID "category-selection".
-     */
     const categorySelection = document.getElementById('category-selection');
     const errorMessage = document.getElementById('error-message');
 
-    /**
-     * Transfer the text of the selected entry into the field.
-     */
     categorySelection.textContent = category; 
     errorMessage.classList.add('d-none');
 
-    /**
-     * Close the dropdown menu after a selection is made
-     */
     document.getElementById('opened-category').classList.add('d-none'); 
 }
 
@@ -128,15 +119,9 @@ let currentSubtasks = [];
  * This function closes the subtask input field and resets its view to the original state.
  */
 function closeSubtask() {
-    /**
-     * Get the subtask buttons and input elements.
-     */
     let subtaskButtons = document.getElementById('subtask-buttons');
     let subtaskInput = document.getElementById('subtaskInput');
 
-    /**
-     * Reset the view to the original state.
-     */
     subtaskButtons.innerHTML = `
         <img class="subtask-img symbol-hover icon-hover" src="./assets/img/task/subtask.svg" alt="add subtask">
     `;
@@ -159,9 +144,6 @@ function closeSubtaskOnOutsideClick(event) {
  * This function adds a new subtask to the list and updates the display.
  */
 function addSubtask() {
-    /**
-     * Get the subtask input and the element to display added subtasks.
-     */
     let subtaskInput = document.getElementById('subtaskInput');
     let addedSubtask = document.getElementById('subtasks');
 
@@ -186,16 +168,10 @@ function addSubtask() {
  * @param {number} index - The index of the subtask to edit.
  */
 function editSubtask(index) {
-    /**
-     * Get the subtask element and its current text.
-     */
     let subtaskElement = document.getElementById(`subtask${index}`);
     let currentText = currentSubtasks[index].task;
     subtaskElement.innerHTML = editSubtaskTemplate(index, currentText, 'false');
 
-    /**
-     * Focus the input field and set the cursor to the end.
-     */
     let input = subtaskElement.querySelector('.edit-subtask-input');
     input.focus();
     input.setSelectionRange(input.value.length, input.value.length);
@@ -206,9 +182,6 @@ function editSubtask(index) {
  * @param {number} index - The index of the subtask to replace.
  */
 function replaceSubtask(index) {
-    /**
-     * Get the subtask element and its input field.
-     */
     let subtaskElement = document.getElementById(`subtask${index}`);
     let input = subtaskElement.querySelector('.edit-subtask-input');
     let newText = input.value.trim();
@@ -234,9 +207,6 @@ function deleteSubtask(index) {
  * This function updates the display of all subtasks after adding, editing, or deleting a subtask.
  */
 function updateSubtaskDisplay() {
-    /**
-     * Get the element to display the subtasks.
-     */
     let addedSubtask = document.getElementById('subtasks');
     addedSubtask.innerHTML = '';
 
@@ -255,7 +225,7 @@ function initializeValidation() {
 
     if (submitButton) {
         submitButton.addEventListener('click', async function(event) {
-            event.preventDefault(); /** Prevents the default form submission behavior*/
+            event.preventDefault();
 
             if (validateForm()) {
                 await createTask();
