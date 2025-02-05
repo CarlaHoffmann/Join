@@ -5,18 +5,12 @@
 let editKey = null;
 
 /**
- * @type {string}
- * @description basic url to firebase
- */
-const base_url = 'https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app/';
-
-/**
  * The following variables include references to HTMLElements
  */
 let contactList = document.getElementById('contactList');
 let contactDetails = document.getElementById('contactDetails');
-let addContactButton = document.getElementById('addContactButton');
-let addContactBoxOverlay = document.getElementById('addContactBoxOverlay');
+//let addContactButton = document.getElementById('addContactButton');
+//let addContactBoxOverlay = document.getElementById('addContactBoxOverlay');
 
 /**
  * Clears the input fields in the "Add Contact" form.
@@ -26,25 +20,6 @@ function clearAddContactFields(){
     document.getElementById('name').value = "";
     document.getElementById('email').value = "";
     document.getElementById('phone').value = "";
-}
-
-
-/**
- * Handles the addition of a new contact by validating input, saving data, and updating the UI.
- * @returns {Promise<void>}
- */
-async function addContact() {
-    const fields = getContactInputFields();
-    const [name, mail, phone] = fields.map(field => field.value);
-    const color = returnColor();
-    const uploadData = { phone, color, mail, name, password: 'pw' };
-
-    if (isValidContactInput(name, mail, phone)) {
-        await createNewContact('/users', uploadData);
-        handleSuccessfulContactAddition(fields);
-    } else {
-        showErrorMessages(fields, name && mail && phone, isValidEmail(mail));
-    }
 }
 
 /**
@@ -67,20 +42,7 @@ function isValidContactInput(name, mail, phone) {
     return name && mail && phone && emailRegex.test(mail);
 }
 
-/**
- * Creates a new contact by sending data to the server.
- * @param {string} endpoint - The API endpoint to send the data to.
- * @param {Object} data - The contact data to upload.
- * @returns {Promise<void>}
- */
-async function createNewContact(endpoint, data) {
-    const url = `${base_url}${endpoint}.json`;
-    await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-    });
-}
+
 
 /**
  * Handles UI updates and resets after a successful contact addition.
@@ -219,174 +181,220 @@ function showContactDetails(key, name, email, phone, color) {
     selected && selected.classList.add('selected');
 }
 
+
+
 /**
- * Displays the contact detail overlay by adding a specific CSS class to the overlay element.
+ * Populates the edit form with user data.
+ * @param {Object} user - The user data to populate the form with.
  */
-function showContactDetailOverlay() {
-    let contactDetailBoxOverlay = document.getElementById('contactDetailBox');
-    contactDetailBoxOverlay.classList.add('contactDetailBox');
+function populateEditForm(user) {
+    const changedImg = document.getElementById('changedImg');
+    changedImg.style.backgroundColor = user.color;
+    changedImg.textContent = getNameInitials(user.name);
+
+    document.getElementById('changedName').value = user.name;
+    document.getElementById('changedEmail').value = user.mail;
+    document.getElementById('changedPhone').value = user.phone;
+}
+
+
+/**
+ * Refreshes the UI after editing a contact.
+ * @param {string} key - The unique key for the user.
+ * @param {Object} updatedUser - The updated user data.
+ */
+function refreshUIAfterEdit(key, updatedUser) {
+    loadContactData();
+    closeEditOverlay();
+    showContactDetails(
+        key,
+        updatedUser.name,
+        updatedUser.mail,
+        updatedUser.phone,
+        updatedUser.color
+    );
 }
 
 /**
- * Sorts an array of users alphabetically by their name property.
- * The sorting is case-insensitive.
- * 
- * @param {Array} usersArray - The array of user objects to be sorted.
- * @param {Object} usersArray[] - The user object containing at least a `name` property.
- * @param {string} usersArray[].name - The name of the user, used for sorting.
+ * Validates the edit form fields (name, email, phone) and displays error messages if needed.
+ * @param {string} name - The entered name.
+ * @param {string} email - The entered email.
+ * @param {string} phone - The entered phone number.
+ * @returns {boolean} - True if all inputs are valid, false otherwise.
  */
-function sortUsers(usersArray){
-    usersArray.sort(function(a,b){
-        const nameA = a.name.toLowerCase();
-        const nameB = b.name.toLowerCase();
-        if(nameA < nameB){ //a before b
-            return -1;
-        } else if(nameA > nameB){ //b before a
-            return 1;
-        } else{ //same value
-            return 0;
+function validateEditForm(name, email, phone) {
+    let isValid = validateRequiredFields();
+    isValid = validateEmailFormat(email) && isValid; // Combine both validations
+    return isValid;
+}
+
+/**
+ * Validates that all required fields are filled.
+ * Displays error messages for empty fields.
+ * @returns {boolean} - True if all fields are filled, false otherwise.
+ */
+function validateRequiredFields() {
+    let isValid = true;
+
+    ['changedName', 'changedEmail', 'changedPhone'].forEach((id) => {
+        const input = document.getElementById(id).value.trim();
+        const error = document.getElementById(`${id}-error-message`);
+
+        if (!input) {
+            showError(error, "This field is required");
+            isValid = false;
+        } else {
+            hideError(error);
         }
     });
+
+    return isValid;
 }
 
 /**
- * Asynchronously loads contact data from a Firebase database, processes the data,
- * and populates the contact list with users' information, sorted alphabetically.
- * It also displays the appropriate letters for name initials and manages the UI elements.
- * 
- * @async
+ * Validates the email format using a regex pattern.
+ * Displays an error message for invalid email format.
+ * @param {string} email - The entered email.
+ * @returns {boolean} - True if the email format is valid, false otherwise.
  */
-async function loadContactData(){
-    let response = await fetch(base_url + ".json");
-    let responseToJson = await response.json();
-    let users = 
-    await responseToJson.users;
-    usersArray = Object.values(users);
-    let keys = Object.keys(users);
-    for(let i = 0; i < usersArray.length; i++){
-        usersArray[i].key = keys[i];
+function validateEmailFormat(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailError = document.getElementById("changedEmail-error-message");
+
+    if (!emailRegex.test(email)) {
+        showError(emailError, "Wrong Email Format");
+        return false;
     }
-    sortUsers(usersArray);
-    contactList.innerHTML = "";
-    returnContactList();
+
+    hideError(emailError);
+    return true;
 }
 
-loadContactData();
+/**
+ * Displays an error message.
+ * @param {HTMLElement} errorElement - The DOM element to display the error in.
+ * @param {string} message - The error message to display.
+ */
+function showError(errorElement, message) {
+    errorElement.textContent = message;
+    errorElement.style.display = "flex";
+}
 
 /**
- * Deletes a contact from the database and updates related tasks and UI.
- * @param {string} key - The unique key of the contact to delete.
- * @returns {Promise<void>}
+ * Hides an error message.
+ * @param {HTMLElement} errorElement - The DOM element to hide the error in.
  */
-async function deleteContact(key) {
-    try {
-        const contact = await fetchContact(key);
-        if (!contact) return;
+function hideError(errorElement) {
+    errorElement.style.display = "none";
+}
 
-        await deleteContactFromDatabase(key);
-        await removeContactFromTasks(contact.name);
 
-        clearContactDetails();
-        closeDetailsOverlay();
-        await refreshContactAndTaskData();
-    } catch (error) {
-        console.error("Error deleting contact:", error);
+
+/**
+ * Toggles the visibility of the control menu and the active state of the control circle.
+ * It adds/removes the 'hidden' class to the control menu and the 'active' class to 
+ * the mobile control circle element to show/hide the menu and change its state.
+ */
+function openControlMenu() {
+    let controlMenu = document.getElementById('options-menu');
+    let circleControl = document.querySelector('.circle-edit-mobile-control');
+
+    controlMenu.classList.remove('hidden');
+    circleControl.classList.add('active');
+    setTimeout(() => {
+        controlMenu.classList.add('active');
+    }, 10);
+
+    document.addEventListener('click', handleClickOutside);
+}
+
+/**
+ * Closes the control menu by hiding it and resetting its position.
+ * The function removes the "active" class, adds the "hidden" class to the menu,
+ * and ensures a smooth transition effect before fully resetting its position.
+ * Also removes the click event listener for handling clicks outside the menu.
+ */
+function closeControlMenu() {
+    let controlMenu = document.getElementById('options-menu');
+    let circleControl = document.querySelector('.circle-edit-mobile-control');
+
+    controlMenu.classList.remove('active');
+    controlMenu.classList.add('hidden');
+
+    setTimeout(() => {
+        circleControl.classList.remove('active');
+        controlMenu.style.transform = "translateX(100%)";
+    }, 600);
+
+    document.removeEventListener('click', handleClickOutside);
+}
+
+/**
+ * Prepares the updated user data by merging the existing user data with new inputs.
+ * @param {Object} user - The existing user data.
+ * @param {string} name - The updated name.
+ * @param {string} email - The updated email.
+ * @param {string} phone - The updated phone number.
+ * @returns {Object} - The prepared updated user data.
+ */
+function prepareUpdatedData(user, name, email, phone) {
+    return { ...user, name, mail: email, phone };
+}
+
+/**
+ * Retrieves input values for the edited contact from the DOM.
+ * @returns {Array<string>} - Array containing name, email, and phone values.
+ */
+function getEditedContactInput() {
+    return ['changedName', 'changedEmail', 'changedPhone'].map(
+        (id) => document.getElementById(id).value.trim()
+    );
+}
+
+/**
+ * Closes the edit contact overlay by adding the 'hidden' class to the edit contact box element.
+ */
+function closeEditOverlay() {
+    document.getElementById('editContactForm').reset();
+    document.getElementById('editContactBoxOverlay').classList.add('hidden');
+    resetErrors();
+}
+
+/**
+ * Closes the add contact overlay by adding the 'hidden' class to the add contact box element.
+ */
+function closeAddOverlay() {
+    document.getElementById('addContactForm').reset();
+    document.getElementById('addContactBoxOverlay').classList.add('hidden');
+    resetErrors();
+}
+
+
+/**
+ * Handles click events outside the control menu and circle control.
+ * If the clicked element is not inside the control menu or the circle control,
+ * the function triggers the `closeControlMenu` function to hide the menu.
+ *
+ * @param {MouseEvent} event - The click event object containing details about the event.
+ */
+function handleClickOutside(event) {
+    const controlMenu = document.getElementById('options-menu');
+    const circleControl = document.querySelector('.circle-edit-mobile-control');
+    if (!controlMenu.contains(event.target) && !circleControl.contains(event.target)) {
+        closeControlMenu();
     }
 }
 
-/**
- * Fetches a contact from the database by key.
- * @param {string} key - The unique key of the contact.
- * @returns {Promise<Object|null>} - The contact data or null if not found.
- */
-async function fetchContact(key) {
-    const contactUrl = `${base_url}/users/${key}.json`;
-    const response = await fetch(contactUrl);
-    return response.ok ? response.json() : null;
-}
+
+
+
 
 /**
- * Deletes a contact from the database by key.
- * @param {string} key - The unique key of the contact.
- * @returns {Promise<void>}
+ * hides error messages
  */
-async function deleteContactFromDatabase(key) {
-    const contactUrl = `${base_url}/users/${key}.json`;
-    await fetch(contactUrl, { method: 'DELETE' });
-}
-
-/**
- * Clears the contact details section in the UI.
- */
-function clearContactDetails() {
-    contactDetails.innerHTML = '';
-}
-
-/**
- * Refreshes the contact list and tasks in the UI.
- * @returns {Promise<void>}
- */
-async function refreshContactAndTaskData() {
-    await loadContactData();
-    await loadTasks();
-}
-
-/**
- * Removes a specific contact from all tasks where it is assigned.
- * @param {string} contactName - The name of the contact to remove.
- * @returns {Promise<void>}
- */
-async function removeContactFromTasks(contactName) {
-    try {
-        const tasksData = await fetchAllTasks();
-        if (!tasksData) return;
-
-        for (const [status, tasks] of Object.entries(tasksData)) {
-            for (const [taskId, task] of Object.entries(tasks)) {
-                await processTaskContacts(task, status, taskId, contactName);
-            }
-        }
-    } catch (error) {
+function resetErrors() {
+    const error = document.getElementsByClassName('error-message');
+    for (i = 0; i < error.length; i++) {
+        error[i].style.display = 'none';
     }
-}
-
-/**
- * Fetches all tasks from the database.
- * @returns {Promise<Object|null>} - The tasks data or null if no data exists.
- */
-async function fetchAllTasks() {
-    const tasksUrl = `${base_url}/tasks.json`;
-    const response = await fetch(tasksUrl);
-    return response.ok ? response.json() : null;
-}
-
-/**
- * Processes a single task to remove the specified contact if it exists.
- * @param {Object} task - The task object to process.
- * @param {string} status - The status of the task (e.g., "todo", "in-progress").
- * @param {string} taskId - The unique ID of the task.
- * @param {string} contactName - The name of the contact to remove.
- * @returns {Promise<void>}
- */
-async function processTaskContacts(task, status, taskId, contactName) {
-    if (task.contacts && task.contacts.includes(contactName)) {
-        task.contacts = task.contacts.filter(name => name !== contactName);
-        await updateTaskContacts(status, taskId, task);
-    }
-}
-
-/**
- * Updates a task's contacts in the database.
- * @param {string} status - The status of the task (e.g., "todo", "in-progress").
- * @param {string} taskId - The unique ID of the task.
- * @param {Object} updatedTask - The updated task object.
- * @returns {Promise<void>}
- */
-async function updateTaskContacts(status, taskId, updatedTask) {
-    const taskUrl = `${base_url}/tasks/${status}/${taskId}.json`;
-    await fetch(taskUrl, {
-        method: 'PUT',
-        body: JSON.stringify(updatedTask),
-        headers: { 'Content-Type': 'application/json' },
-    });
 }
