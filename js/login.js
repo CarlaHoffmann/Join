@@ -97,15 +97,16 @@ function toggleCheckbox(element) {
 }
 
 /**
+ * Modifies the handleLoginClick function to include saveCredentials.
  * Handles the login button click event, preventing default form submission and initiating login logic.
- * 
  * @function handleLoginClick
  * @param {Event} event - The click event triggered by the login button.
  * @returns {void}
  */
 function handleLoginClick(event) {
-    event.preventDefault(); // Verhindert das Standard-Submit-Event
-    existingMailLogIn(); // Ruft die Login-Funktion auf
+    event.preventDefault(); 
+    saveCredentials();      
+    existingMailLogIn();
 }
 
 /**
@@ -191,6 +192,25 @@ function findUserByEmail(users) {
  * @param {string} password - The password to check
  */
 async function handleUserLogin(user) {
+    let mailChecked = checkMail(user);
+    if(mailChecked) {
+        checkPW(user);
+    }
+}
+
+async function checkMail(user) {
+    const emailInput = document.getElementById("email").value;
+    const errorContainer = document.getElementById("emailError");
+    const emailError = `<span class="error-message">Check your email. Please try again.</span>`;
+    if (user.email === emailInput) {
+        // await saveUser(user.name, user.mail);
+        // redirectToSummary();
+        return true;
+    } else {
+        errorContainer.innerHTML = emailError;
+    }
+}
+async function checkPW(user) {
     const passwordInput = document.getElementById("password").value;
     const errorContainer = document.getElementById("passwordError");
     const passwordError = `<span class="error-message">Check your password. Please try again.</span>`;
@@ -365,19 +385,6 @@ function loadCredentials() {
         checkboxIcon.src = './assets/img/general/checked_button.svg';
         document.querySelector('.checkbox-container').dataset.checked = "true";
     }
-}
-
-/**
- * Modifies the handleLoginClick function to include saveCredentials.
- * Handles the login button click event, preventing default form submission and initiating login logic.
- * @function handleLoginClick
- * @param {Event} event - The click event triggered by the login button.
- * @returns {void}
- */
-function handleLoginClick(event) {
-    event.preventDefault(); 
-    saveCredentials();      
-    existingMailLogIn();
 }
 
 document.addEventListener("DOMContentLoaded", loadCredentials);

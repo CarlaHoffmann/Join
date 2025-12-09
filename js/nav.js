@@ -2,7 +2,7 @@
  * Base URL for the Firebase Realtime Database.
  * @constant {string}
  */
-const nav_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
+const nav_base_url = "https://join-eaf29-default-rtdb.europe-west1.firebasedatabase.app"
 
 /**
  * This function toggles the visibility of the help menu.
@@ -22,8 +22,8 @@ async function getInitials() {
         if (loggedInUser && loggedInUser.name) {
             showNav();
             handleLoggedInUser(loggedInUser);
-        } else {
-            handleNoLoggedInUser();
+        // } else {
+        //     handleNoLoggedInUser();
         }
     } catch (error) {
     }

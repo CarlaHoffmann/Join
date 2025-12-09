@@ -25,7 +25,7 @@ function sortUsers(usersArray){
     });
 }
 
-const base_url = 'https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app/';
+const base_url = 'https://join-eaf29-default-rtdb.europe-west1.firebasedatabase.app/';
 
 /**
  * Handles the addition of a new contact by validating input, saving data, and updating the UI.

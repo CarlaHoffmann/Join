@@ -1,4 +1,4 @@
-const task_base_url = "https://joinapp-28ae7-default-rtdb.europe-west1.firebasedatabase.app"
+const task_base_url = "https://join-eaf29-default-rtdb.europe-west1.firebasedatabase.app"
 /** This URL is used to connect to the Firebase Realtime Database. */
 
 let selectedContacts = [];
